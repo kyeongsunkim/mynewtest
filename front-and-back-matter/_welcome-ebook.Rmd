@@ -1,0 +1,19 @@
+# Front Matter {-}
+
+::: {.row}
+:::::: {.col-sm-6}
+This is `bs4/gitbook` output from the [`mytemplate`](https://github.com/kyeongsunkim/mynewtest) for [R Markdown](https://rmarkdown.rstudio.com). \
+For [PDF](_main.pdf) output, click the cover image. \
+Enjoy!
+
+::::::::: {.byline}
+Kyeong Sun Kim \
+1 September 2021
+:::::::::
+::::::
+
+:::::: {.col-sm-6 .thesis-cover}
+<a href="_main.pdf" target="_blank"><img src="templates/cover1.png" alt="Download PDF" class="img-fluid"/></a> 
+::::::
+:::
+
