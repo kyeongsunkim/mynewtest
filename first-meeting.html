@@ -4,21 +4,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>1 First Meeting | Uplift Resistance of Shallow Foundation: A Weekly Report</title>
+<title>1 First Meeting | ABAQUS™ Modelling: A Weekly Report</title>
 <meta name="author" content="Kyeong Sun Kim">
 <meta name="generator" content="bookdown 0.23 with bs4_book()">
-<meta property="og:title" content="1 First Meeting | Uplift Resistance of Shallow Foundation: A Weekly Report">
+<meta property="og:title" content="1 First Meeting | ABAQUS™ Modelling: A Weekly Report">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1 First Meeting | Uplift Resistance of Shallow Foundation: A Weekly Report">
+<meta name="twitter:title" content="1 First Meeting | ABAQUS™ Modelling: A Weekly Report">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="templates/bs4_style.css">
 <link rel="stylesheet" href="templates/corrections.css">
-<meta name="description" content="1.1 진행상황   1.1.1 Abaqus Modeling: 3D   1.1.1.1 Problems in Mesh Element distortion Partitioning Too many element number Too much computing time   1.1.2 Abaqus Modeling: 2D Axisymmetric   1.1.3...">
-<meta property="og:description" content="1.1 진행상황   1.1.1 Abaqus Modeling: 3D   1.1.1.1 Problems in Mesh Element distortion Partitioning Too many element number Too much computing time   1.1.2 Abaqus Modeling: 2D Axisymmetric   1.1.3...">
-<meta name="twitter:description" content="1.1 진행상황   1.1.1 Abaqus Modeling: 3D   1.1.1.1 Problems in Mesh Element distortion Partitioning Too many element number Too much computing time   1.1.2 Abaqus Modeling: 2D Axisymmetric   1.1.3...">
+<meta name="description" content="1.1 진행상황   1.1.1 Abaqus Modeling: 3D   1.1.1.1 Problems Contact Interface Element distortion Partitioning and meshing matter Computational difficulty   1.1.2 문헌조사  1.1.2.1 Interface Elements...">
+<meta property="og:description" content="1.1 진행상황   1.1.1 Abaqus Modeling: 3D   1.1.1.1 Problems Contact Interface Element distortion Partitioning and meshing matter Computational difficulty   1.1.2 문헌조사  1.1.2.1 Interface Elements...">
+<meta name="twitter:description" content="1.1 진행상황   1.1.1 Abaqus Modeling: 3D   1.1.1.1 Problems Contact Interface Element distortion Partitioning and meshing matter Computational difficulty   1.1.2 문헌조사  1.1.2.1 Interface Elements...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -28,7 +28,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title=""><p><code>Uplift Resistance of Shallow Foundation</code>:<br>
+        <a href="index.html" title=""><p><code>ABAQUS™</code> Modelling:<br>
 A Weekly Report</p></a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
@@ -67,48 +67,45 @@ A Weekly Report</p></a>
 <span class="header-section-number">1.1.1</span> Abaqus Modeling: 3D<a class="anchor" aria-label="anchor" href="#abaqus-modeling-3d"><i class="fas fa-link"></i></a>
 </h3>
 <!-- 1.1.1.1 -->
-<div id="problems-in-mesh" class="section level4" number="1.1.1.1">
+<div id="problems" class="section level4" number="1.1.1.1">
 <h4>
-<span class="header-section-number">1.1.1.1</span> Problems in Mesh<a class="anchor" aria-label="anchor" href="#problems-in-mesh"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1.1.1</span> Problems<a class="anchor" aria-label="anchor" href="#problems"><i class="fas fa-link"></i></a>
 </h4>
 <ul>
-<li>Element distortion</li>
-<li>Partitioning</li>
-<li>Too many element number</li>
-<li>Too much computing time</li>
+<li><p>Contact Interface</p></li>
+<li><p>Element distortion</p></li>
+<li><p>Partitioning and meshing matter</p></li>
+<li><p>Computational difficulty</p></li>
 </ul>
-<!-- 1.1.1.4 -->
-</div>
-</div>
-<div id="abaqus-modeling-2d-axisymmetric" class="section level3" number="1.1.2">
-<h3>
-<span class="header-section-number">1.1.2</span> Abaqus Modeling: 2D Axisymmetric<a class="anchor" aria-label="anchor" href="#abaqus-modeling-2d-axisymmetric"><i class="fas fa-link"></i></a>
-</h3>
 <!-- 1.2.1 -->
 </div>
-<div id="문헌조사" class="section level3" number="1.1.3">
+</div>
+<div id="문헌조사" class="section level3" number="1.1.2">
 <h3>
-<span class="header-section-number">1.1.3</span> 문헌조사<a class="anchor" aria-label="anchor" href="#%EB%AC%B8%ED%97%8C%EC%A1%B0%EC%82%AC"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1.2</span> 문헌조사<a class="anchor" aria-label="anchor" href="#%EB%AC%B8%ED%97%8C%EC%A1%B0%EC%82%AC"><i class="fas fa-link"></i></a>
 </h3>
-<div id="contact-elements" class="section level4" number="1.1.3.1">
+<div id="interface-elements" class="section level4" number="1.1.2.1">
 <h4>
-<span class="header-section-number">1.1.3.1</span> Contact Elements<a class="anchor" aria-label="anchor" href="#contact-elements"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1.2.1</span> Interface Elements<a class="anchor" aria-label="anchor" href="#interface-elements"><i class="fas fa-link"></i></a>
 </h4>
+<ul>
+<li>thickness = 25mm</li>
+</ul>
 <!-- 1.2.2 -->
 </div>
-<div id="beam-element-for-structure" class="section level4" number="1.1.3.2">
+<div id="beam-element-for-structure" class="section level4" number="1.1.2.2">
 <h4>
-<span class="header-section-number">1.1.3.2</span> Beam Element for Structure<a class="anchor" aria-label="anchor" href="#beam-element-for-structure"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1.2.2</span> Beam Element for Structure<a class="anchor" aria-label="anchor" href="#beam-element-for-structure"><i class="fas fa-link"></i></a>
 </h4>
 </div>
-<div id="pressure-loading" class="section level4" number="1.1.3.3">
+<div id="pressure-loading" class="section level4" number="1.1.2.3">
 <h4>
-<span class="header-section-number">1.1.3.3</span> Pressure Loading<a class="anchor" aria-label="anchor" href="#pressure-loading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1.2.3</span> Pressure Loading<a class="anchor" aria-label="anchor" href="#pressure-loading"><i class="fas fa-link"></i></a>
 </h4>
 </div>
-<div id="different-soil-tank-size" class="section level4" number="1.1.3.4">
+<div id="different-soil-tank-size" class="section level4" number="1.1.2.4">
 <h4>
-<span class="header-section-number">1.1.3.4</span> Different Soil Tank Size<a class="anchor" aria-label="anchor" href="#different-soil-tank-size"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1.2.4</span> Different Soil Tank Size<a class="anchor" aria-label="anchor" href="#different-soil-tank-size"><i class="fas fa-link"></i></a>
 </h4>
 <!-- SUBCHAPTER TWO-->
 <!-- 1.2 -->
@@ -124,19 +121,27 @@ A Weekly Report</p></a>
 <h3>
 <span class="header-section-number">1.2.1</span> Paramteric Study<a class="anchor" aria-label="anchor" href="#paramteric-study"><i class="fas fa-link"></i></a>
 </h3>
-<div id="phi" class="section level4" number="1.2.1.1">
+<div id="contact-friction-mu" class="section level4" number="1.2.1.1">
 <h4>
-<span class="header-section-number">1.2.1.1</span> phi<a class="anchor" aria-label="anchor" href="#phi"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.2.1.1</span> contact friction <span class="math inline">\(\mu\)</span><a class="anchor" aria-label="anchor" href="#contact-friction-mu"><i class="fas fa-link"></i></a>
 </h4>
 </div>
-<div id="elastic-modulus" class="section level4" number="1.2.1.2">
+<div id="phi" class="section level4" number="1.2.1.2">
 <h4>
-<span class="header-section-number">1.2.1.2</span> Elastic Modulus<a class="anchor" aria-label="anchor" href="#elastic-modulus"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.2.1.2</span> <span class="math inline">\(\phi\)</span><a class="anchor" aria-label="anchor" href="#phi"><i class="fas fa-link"></i></a>
 </h4>
 </div>
-<div id="flow-angle" class="section level4" number="1.2.1.3">
+<div id="elastic-modulus-e" class="section level4" number="1.2.1.3">
 <h4>
-<span class="header-section-number">1.2.1.3</span> Flow Angle<a class="anchor" aria-label="anchor" href="#flow-angle"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.2.1.3</span> Elastic Modulus E<a class="anchor" aria-label="anchor" href="#elastic-modulus-e"><i class="fas fa-link"></i></a>
+</h4>
+<ul>
+<li><span class="math inline">\(E_s = \frac{E}{50}\)</span></li>
+</ul>
+</div>
+<div id="flow-angle" class="section level4" number="1.2.1.4">
+<h4>
+<span class="header-section-number">1.2.1.4</span> Flow Angle<a class="anchor" aria-label="anchor" href="#flow-angle"><i class="fas fa-link"></i></a>
 </h4>
 </div>
 </div>
@@ -144,11 +149,9 @@ A Weekly Report</p></a>
 <h3>
 <span class="header-section-number">1.2.2</span> Including images<a class="anchor" aria-label="anchor" href="#including-images"><i class="fas fa-link"></i></a>
 </h3>
-<p>Code chunks are also used for including images, with <code>include_graphics</code> from the <code>knitr</code> package, as in Figure <a href="first-meeting.html#fig:oxford-logo">1.1</a></p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"figures/4_2A.png"</span><span class="op">)</span></code></pre></div>
+<p>Code chunks are also used for including images, with <code>include_graphics</code> from the <code>knitr</code> package, as in Figure <a href="first-meeting.html#fig:figure4-2A">1.1</a></p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:oxford-logo"></span>
+<span style="display:block;" id="fig:figure4-2A"></span>
 <img src="figures/4_2A.png" alt="figure 4-2A" width="100%"><p class="caption">
 Figure 1.1: figure 4-2A
 </p>
@@ -167,8 +170,7 @@ Figure 1.1: figure 4-2A
 <li>
 <a class="nav-link" href="#%EC%A7%84%ED%96%89%EC%83%81%ED%99%A9"><span class="header-section-number">1.1</span> 진행상황</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#abaqus-modeling-3d"><span class="header-section-number">1.1.1</span> Abaqus Modeling: 3D</a></li>
-<li><a class="nav-link" href="#abaqus-modeling-2d-axisymmetric"><span class="header-section-number">1.1.2</span> Abaqus Modeling: 2D Axisymmetric</a></li>
-<li><a class="nav-link" href="#%EB%AC%B8%ED%97%8C%EC%A1%B0%EC%82%AC"><span class="header-section-number">1.1.3</span> 문헌조사</a></li>
+<li><a class="nav-link" href="#%EB%AC%B8%ED%97%8C%EC%A1%B0%EC%82%AC"><span class="header-section-number">1.1.2</span> 문헌조사</a></li>
 </ul>
 </li>
 <li>
@@ -194,7 +196,7 @@ Figure 1.1: figure 4-2A
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong><p><code>Uplift Resistance of Shallow Foundation</code>:<br>
+    <p>"<strong><p><code>ABAQUS™</code> Modelling:<br>
 A Weekly Report</p></strong>" was written by Kyeong Sun Kim. </p>
   </div>
 
@@ -203,6 +205,34 @@ A Weekly Report</p></strong>" was written by Kyeong Sun Kim. </p>
   </div>
 
 </div></div>
-</footer>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
 </body>
 </html>

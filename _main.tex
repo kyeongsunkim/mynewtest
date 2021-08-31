@@ -84,56 +84,6 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
  
 % UL 1 Dec 2018, fix to include code in shaded environments
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-
-%UL set white space before and after code blocks
-\renewenvironment{Shaded}
-{
-  \vspace{10pt}%
-  \begin{snugshade}%
-}{%
-  \end{snugshade}%
-  \vspace{8pt}%
-}
 
 % User-included things with header_includes or in_header will appear here
 % kableExtra packages will appear here if you use library(kableExtra)
@@ -230,7 +180,7 @@
 
 %%%%% THESIS / TITLE PAGE INFORMATION
 % Everybody needs to complete the following:
-\title{\texttt{Uplift\ Resistance\ of\ Shallow\ Foundation}:\\
+\title{\texttt{ABAQUS™} Modelling:\\
 A Weekly Report}
 \author{Kyeong Sun Kim}
 \college{Civil and Environmental Engineering}
@@ -358,29 +308,31 @@ A Weekly Report}
 \hypertarget{abaqus-modeling-3d}{%
 \subsection{Abaqus Modeling: 3D}\label{abaqus-modeling-3d}}
 
-\hypertarget{problems-in-mesh}{%
-\subsubsection{Problems in Mesh}\label{problems-in-mesh}}
+\hypertarget{problems}{%
+\subsubsection{Problems}\label{problems}}
 
 \begin{itemize}
-\tightlist
+\item
+  Contact Interface
 \item
   Element distortion
 \item
-  Partitioning
+  Partitioning and meshing matter
 \item
-  Too many element number
-\item
-  Too much computing time
+  Computational difficulty
 \end{itemize}
-
-\hypertarget{abaqus-modeling-2d-axisymmetric}{%
-\subsection{Abaqus Modeling: 2D Axisymmetric}\label{abaqus-modeling-2d-axisymmetric}}
 
 \hypertarget{uxbb38uxd5ccuxc870uxc0ac}{%
 \subsection{문헌조사}\label{uxbb38uxd5ccuxc870uxc0ac}}
 
-\hypertarget{contact-elements}{%
-\subsubsection{Contact Elements}\label{contact-elements}}
+\hypertarget{interface-elements}{%
+\subsubsection{Interface Elements}\label{interface-elements}}
+
+\begin{itemize}
+\tightlist
+\item
+  thickness = 25mm
+\end{itemize}
 
 \hypertarget{beam-element-for-structure}{%
 \subsubsection{Beam Element for Structure}\label{beam-element-for-structure}}
@@ -397,11 +349,20 @@ A Weekly Report}
 \hypertarget{paramteric-study}{%
 \subsection{Paramteric Study}\label{paramteric-study}}
 
-\hypertarget{phi}{%
-\subsubsection{phi}\label{phi}}
+\hypertarget{contact-friction-mu}{%
+\subsubsection{\texorpdfstring{contact friction \(\mu\)}{contact friction \textbackslash mu}}\label{contact-friction-mu}}
 
-\hypertarget{elastic-modulus}{%
-\subsubsection{Elastic Modulus}\label{elastic-modulus}}
+\hypertarget{phi}{%
+\subsubsection{\texorpdfstring{\(\phi\)}{\textbackslash phi}}\label{phi}}
+
+\hypertarget{elastic-modulus-e}{%
+\subsubsection{Elastic Modulus E}\label{elastic-modulus-e}}
+
+\begin{itemize}
+\tightlist
+\item
+  \(E_s = \frac{E}{50}\)
+\end{itemize}
 
 \hypertarget{flow-angle}{%
 \subsubsection{Flow Angle}\label{flow-angle}}
@@ -409,13 +370,7 @@ A Weekly Report}
 \hypertarget{including-images}{%
 \subsection{Including images}\label{including-images}}
 
-Code chunks are also used for including images, with \texttt{include\_graphics} from the \texttt{knitr} package, as in Figure \ref{fig:oxford-logo}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"figures/4\_2A.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+Code chunks are also used for including images, with \texttt{include\_graphics} from the \texttt{knitr} package, as in Figure \ref{fig:figure4-2A}
 
 \begin{figure}[H]
 
@@ -423,7 +378,7 @@ Code chunks are also used for including images, with \texttt{include\_graphics} 
 
 }
 
-\caption{figure 4-2A}\label{fig:oxford-logo}
+\caption{figure 4-2A}\label{fig:figure4-2A}
 \end{figure}
 
 
