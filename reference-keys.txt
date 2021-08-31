@@ -3,10 +3,10 @@ first-meeting-932021
 진행상황
 abaqus-modeling-3d-관련
 mesh
-element-type
-computing-time
 section
 section-1
-section-2
 하고있는-일들
+문헌조사
+abaqus-model-running
+comparing-between-model-and-centrifuge-test
 including-images
