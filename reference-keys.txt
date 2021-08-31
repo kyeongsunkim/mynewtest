@@ -1,5 +1,5 @@
 fig:oxford-logo
-first-meeting-932021
+first-meeting
 진행상황
 abaqus-modeling-3d
 problems-in-mesh
