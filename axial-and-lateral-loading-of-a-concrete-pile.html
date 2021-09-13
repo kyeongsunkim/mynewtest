@@ -4,21 +4,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>4 Axial and Lateral Loading of a Concrete Pile | My Private FLAC3D Repository</title>
+<title>5 Axial and Lateral Loading of a Concrete Pile | My FLAC3D Notes</title>
 <meta name="author" content="Kyeong Sun Kim">
 <meta name="generator" content="bookdown 0.23 with bs4_book()">
-<meta property="og:title" content="4 Axial and Lateral Loading of a Concrete Pile | My Private FLAC3D Repository">
+<meta property="og:title" content="5 Axial and Lateral Loading of a Concrete Pile | My FLAC3D Notes">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="4 Axial and Lateral Loading of a Concrete Pile | My Private FLAC3D Repository">
+<meta name="twitter:title" content="5 Axial and Lateral Loading of a Concrete Pile | My FLAC3D Notes">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="templates/bs4_style.css">
 <link rel="stylesheet" href="templates/corrections.css">
-<meta name="description" content="4.1 Geometry, Grid, Zone   4.2 Group, Range   4.3 Constitutive Model   4.4 B.C. and I.C.   4.5 Step to Equilibrium   4.6 Support, Structure, Restore   4.7 Plot">
-<meta property="og:description" content="4.1 Geometry, Grid, Zone   4.2 Group, Range   4.3 Constitutive Model   4.4 B.C. and I.C.   4.5 Step to Equilibrium   4.6 Support, Structure, Restore   4.7 Plot">
-<meta name="twitter:description" content="4.1 Geometry, Grid, Zone   4.2 Group, Range   4.3 Constitutive Model   4.4 B.C. and I.C.   4.5 Step to Equilibrium   4.6 Support, Structure, Restore   4.7 Plot">
+<meta name="description" content="5.1 Problem Description  5.1.1 Problem Statement The pile is subjected to an axial load of 100 kN, and then the top of the pile is moved horizontally for a displacement of 4 cm. The goal is to...">
+<meta property="og:description" content="5.1 Problem Description  5.1.1 Problem Statement The pile is subjected to an axial load of 100 kN, and then the top of the pile is moved horizontally for a displacement of 4 cm. The goal is to...">
+<meta name="twitter:description" content="5.1 Problem Description  5.1.1 Problem Statement The pile is subjected to an axial load of 100 kN, and then the top of the pile is moved horizontally for a displacement of 4 cm. The goal is to...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -28,7 +28,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title=""><p>My Private <code>FLAC3D</code> Repository</p></a>
+        <a href="index.html" title=""><p>My <code>FLAC3D</code> Notes</p></a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -40,12 +40,15 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Pandoc Universal Documentation</a></li>
-<li><a class="" href="working-with-fish-in-flac3d.html"><span class="header-section-number">1</span> Working with FISH in FLAC3D</a></li>
-<li><a class="" href="using-python-with-flac3d.html"><span class="header-section-number">2</span> Using Python with FLAC3D</a></li>
-<li><a class="" href="illustrative-model-mechanics-of-flac3d.html"><span class="header-section-number">3</span> Illustrative Model – Mechanics of FLAC3D</a></li>
-<li><a class="active" href="axial-and-lateral-loading-of-a-concrete-pile.html"><span class="header-section-number">4</span> Axial and Lateral Loading of a Concrete Pile</a></li>
-<li><a class="" href="smooth-circular-footing-on-an-associated-mohr-coulomb-material.html"><span class="header-section-number">5</span> Smooth Circular Footing on an Associated Mohr-Coulomb Material</a></li>
+<li><a class="" href="index.html">This Pandoc Repository</a></li>
+<li><a class="" href="my-cumulative-literature-studies.html"><span class="header-section-number">1</span> My Cumulative Literature Studies</a></li>
+<li><a class="" href="template-name.html"><span class="header-section-number">2</span> Template: Name</a></li>
+<li><a class="" href="working-with-fish-in-flac3d.html"><span class="header-section-number">3</span> Working with FISH in FLAC3D</a></li>
+<li><a class="" href="using-python-with-flac3d.html"><span class="header-section-number">4</span> Using Python with FLAC3D</a></li>
+<li><a class="active" href="axial-and-lateral-loading-of-a-concrete-pile.html"><span class="header-section-number">5</span> Axial and Lateral Loading of a Concrete Pile</a></li>
+<li><a class="" href="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"><span class="header-section-number">6</span> Simulation of Pull-Tests for Fully Bonded Rock Reinforcement</a></li>
+<li><a class="" href="grid-generation.html"><span class="header-section-number">7</span> Grid Generation</a></li>
+<li><a class="" href="weekly-to-do-list.html"><span class="header-section-number">8</span> Weekly To Do List</a></li>
 </ul>
 
         <div class="book-extra">
@@ -53,69 +56,269 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="axial-and-lateral-loading-of-a-concrete-pile" class="section level1" number="4">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="axial-and-lateral-loading-of-a-concrete-pile" class="section level1" number="5">
 <h1>
-<span class="header-section-number">4</span> Axial and Lateral Loading of a Concrete Pile<a class="anchor" aria-label="anchor" href="#axial-and-lateral-loading-of-a-concrete-pile"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5</span> Axial and Lateral Loading of a Concrete Pile<a class="anchor" aria-label="anchor" href="#axial-and-lateral-loading-of-a-concrete-pile"><i class="fas fa-link"></i></a>
 </h1>
-<!-- CHAPTER 1-->
-<div id="geometry-grid-zone-2" class="section level2" number="4.1">
+<div id="problem-description-1" class="section level2" number="5.1">
 <h2>
-<span class="header-section-number">4.1</span> Geometry, Grid, Zone<a class="anchor" aria-label="anchor" href="#geometry-grid-zone-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1</span> Problem Description<a class="anchor" aria-label="anchor" href="#problem-description-1"><i class="fas fa-link"></i></a>
 </h2>
-<!-- CHAPTER 2-->
+<div id="problem-statement-1" class="section level3" number="5.1.1">
+<h3>
+<span class="header-section-number">5.1.1</span> Problem Statement<a class="anchor" aria-label="anchor" href="#problem-statement-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>The pile is subjected to an axial load of 100 kN,
+and then the top of the pile is moved horizontally for a displacement of 4 cm.
+The goal is to determine relation of axial loading to the ultimate bearing capacity.
+And, lateral load-deflection curve is calculated.</p>
+<ol style="list-style-type: decimal">
+<li>origin at the top of the pile, z upward.</li>
+<li>z=0: free surface</li>
+<li>z=-8: fixed in z-eirection</li>
+<li>x=+8, -8, y = 8: roller</li>
+<li>skin friction is modeled by placing an interface
+between pile concrete wall and clay.
+In it, fric angle of 20 and c=30kPa are assumed.</li>
+<li>toe interface is placed between pile tip and clay
+<em>note: Zone faces are separated in a previous command so that the gridpoints common to both will be separated as well.
+</em>note: include Figure of grid (geometry)</li>
+</ol>
 </div>
-<div id="group-range-2" class="section level2" number="4.2">
-<h2>
-<span class="header-section-number">4.2</span> Group, Range<a class="anchor" aria-label="anchor" href="#group-range-2"><i class="fas fa-link"></i></a>
-</h2>
-<!-- CHAPTER 3-->
+<div id="main-parameters-1" class="section level3" number="5.1.2">
+<h3>
+<span class="header-section-number">5.1.2</span> Main Parameters<a class="anchor" aria-label="anchor" href="#main-parameters-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Diameter = 0.6 m
+Length = 5 m
+Clay
+GWT = 5.5m</p>
 </div>
-<div id="constitutive-model-2" class="section level2" number="4.3">
-<h2>
-<span class="header-section-number">4.3</span> Constitutive Model<a class="anchor" aria-label="anchor" href="#constitutive-model-2"><i class="fas fa-link"></i></a>
-</h2>
-<!-- CHAPTER 4-->
 </div>
-<div id="b.c.-and-i.c.-2" class="section level2" number="4.4">
+<div id="modeling-procedure-1" class="section level2" number="5.2">
 <h2>
-<span class="header-section-number">4.4</span> B.C. and I.C.<a class="anchor" aria-label="anchor" href="#b.c.-and-i.c.-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2</span> Modeling Procedure<a class="anchor" aria-label="anchor" href="#modeling-procedure-1"><i class="fas fa-link"></i></a>
 </h2>
-<!-- CHAPTER 5-->
+<ol style="list-style-type: decimal">
+<li>equil. stress state under gravity load before install.
+1-1) water table is created at z=5.5
+1-2) wet density of clay is assigned below this water table.</li>
+<li>equil. stress state after installation.
+2-1) change properties of pile zones from those
+representing clay to those representing concrete.
+2-2) vertical equil. stress distribution at this equil. state is shown in
+*note: include Figure of contours of vertical stress at ini state incld. pile weight</li>
+<li>apply vertical velocity at top of pile
+“ramp” = boundary condition is increased linearly
+<em>note: critical timestep is controlled by high stiffness of concrete
+If velocity is sudden, inertial effects will dominate and renders difficulty to identification of steady state response of system
+table “ramp” is used to apply velocity to pile top gridpoints.
+</em>note: FISH FUNCTION vert_load calculates axial stress at the top of pile and stores value as a history
+For efficiency, gridpoints on cap surface are stored in symbol “cap” as a map
+<em>note: include plot of axial stress vs axial displ. at pile toe. ramp = (0,5e-8), step number = 30000
+</em>note: combined damping is used to remove kinetic energy for prescribed loading condition. This is because mass-adjustment process depends on velocity sign-changes..
+<em>note: FISH FUNCTION tot_reac monitors soil reaction along pile as a func of lateral displ. tot_reac creates tables of soil reaction (p) vs. lateral displ (y) at diff. locations along pile to generate p-y curve.
+</em>note: include Figure of p-y curve at 11 equidistant points along pile</li>
+</ol>
 </div>
-<div id="step-to-equilibrium-2" class="section level2" number="4.5">
+<div id="zones-3" class="section level2" number="5.3">
 <h2>
-<span class="header-section-number">4.5</span> Step to Equilibrium<a class="anchor" aria-label="anchor" href="#step-to-equilibrium-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.3</span> Zones<a class="anchor" aria-label="anchor" href="#zones-3"><i class="fas fa-link"></i></a>
 </h2>
-<!-- CHAPTER 6-->
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb11-2"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">model new</span></span>
+<span id="cb11-3"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">model title 'Axial and lateral loading of a concrete pile'</span></span>
+<span id="cb11-4"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">; create grid interactively from the extruder tool, </span></span>
+<span id="cb11-5"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">; exported to geometry.f3dat from State Record pane.</span></span>
+<span id="cb11-6"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">call 'geometry' suppress</span></span>
+<span id="cb11-7"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">zone generate from-extruder</span></span>
+<span id="cb11-8"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">; Reflect the grid to get a 1/2 space instead of a 1/4 space</span></span>
+<span id="cb11-9"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">zone reflect dip-direction 270 dip 90</span></span>
+<span id="cb11-10"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
 </div>
-<div id="support-structure-restore-2" class="section level2" number="4.6">
+<div id="groups-2" class="section level2" number="5.4">
 <h2>
-<span class="header-section-number">4.6</span> Support, Structure, Restore<a class="anchor" aria-label="anchor" href="#support-structure-restore-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4</span> Groups<a class="anchor" aria-label="anchor" href="#groups-2"><i class="fas fa-link"></i></a>
 </h2>
-<!-- CHAPTER 7-->
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb12-2"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">; Name intersections of things named in the two extruder views</span></span>
+<span id="cb12-3"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">zone group 'clay' range group 'clay-c' or 'clay-s' or 'wetclay-s'</span></span>
+<span id="cb12-4"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">zone group 'pile' range group 'pile-c' group 'pile-s' or 'remove-s'</span></span>
+<span id="cb12-5"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">zone group 'remove' range group 'remove-s' group 'pile-c' not ; </span></span>
+<span id="cb12-6"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">zone face group 'wall' internal range group 'wall-c' group 'pile'</span></span>
+<span id="cb12-7"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">zone face group 'base' internal range group 'base-s' group 'pile'</span></span>
+<span id="cb12-8"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">zone face skin ; Name far field boundaries</span></span>
+<span id="cb12-9"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">; Delete the area marked for removal</span></span>
+<span id="cb12-10"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">zone delete range group 'remove'</span></span>
+<span id="cb12-11"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">;</span></span>
+<span id="cb12-12"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">; setup interfaces</span></span>
+<span id="cb12-13"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">; separate using zone separate</span></span>
+<span id="cb12-14"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">; all at once so common nodes are separated</span></span>
+<span id="cb12-15"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">zone separate by-face new-side group 'iwall' slot 'int' ...</span></span>
+<span id="cb12-16"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co">     range group 'wall' or 'base'</span></span>
+<span id="cb12-17"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co">; Want two different interfaces for proper normal direction at corner</span></span>
+<span id="cb12-18"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co">zone interface 'side' create by-face range group 'wall' and 'iwall'</span></span>
+<span id="cb12-19"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co">zone interface 'base' create by-face range group 'base' and 'iwall'</span></span>
+<span id="cb12-20"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co">; Save initial geometric state</span></span>
+<span id="cb12-21"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co">model save 'geometry'</span></span>
+<span id="cb12-22"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
 </div>
-<div id="plot-2" class="section level2" number="4.7">
+<div id="properties-2" class="section level2" number="5.5">
 <h2>
-<span class="header-section-number">4.7</span> Plot<a class="anchor" aria-label="anchor" href="#plot-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5</span> Properties<a class="anchor" aria-label="anchor" href="#properties-2"><i class="fas fa-link"></i></a>
 </h2>
-<!-- CHAPTER 8-->
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb13-2"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">; Initialize gravity, pore-pressures, density, and stres state</span></span>
+<span id="cb13-3"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">model gravity 10</span></span>
+<span id="cb13-4"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">; water table information</span></span>
+<span id="cb13-5"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">zone water density 1000</span></span>
+<span id="cb13-6"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">zone water plane origin (0,0,-5.5) normal (0,0,-1)</span></span>
+<span id="cb13-7"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">zone initialize density 1230</span></span>
+<span id="cb13-8"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">zone initialize density 1550 range group 'wetclay-s' ; Wet density</span></span>
+<span id="cb13-9"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">; assign properties to the soil and interfaces - temporarily remove pile cap</span></span>
+<span id="cb13-10"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">zone cmodel assign mohr-coulomb ...</span></span>
+<span id="cb13-11"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">     range group 'clay'</span></span>
+<span id="cb13-12"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">zone property bulk 8.333e7  shear 3.846e7  cohesion 30000 fric 0 ...</span></span>
+<span id="cb13-13"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">     range group 'clay'</span></span>
+<span id="cb13-14"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">zone cmodel assign elastic                 range group 'pile'</span></span>
+<span id="cb13-15"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">zone property bulk 8.333e7  shear 3.846e7  range group 'pile'</span></span>
+<span id="cb13-16"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">zone cmodel assign null                    range group 'remove-s'</span></span>
+<span id="cb13-17"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">zone interface 'side' node property stiffness-normal 1e8 ...</span></span>
+<span id="cb13-18"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co">                           stiffness-shear 1e8 friction 20 cohesion 30000</span></span>
+<span id="cb13-19"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co">zone interface 'base' node property stiffness-normal 1e8 ...</span></span>
+<span id="cb13-20"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co">                           stiffness-shear 1e8 friction 20 cohesion 30000</span></span>
+<span id="cb13-21"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+</div>
+<div id="b.c.-and-i.c.-1" class="section level2" number="5.6">
+<h2>
+<span class="header-section-number">5.6</span> B.C. and I.C.<a class="anchor" aria-label="anchor" href="#b.c.-and-i.c.-1"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb14-2"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">; boundary and initial stress conditions</span></span>
+<span id="cb14-3"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">zone face apply velocity-normal 0 range group 'Bottom'</span></span>
+<span id="cb14-4"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">zone face apply velocity-normal 0 range group 'East' or 'West'</span></span>
+<span id="cb14-5"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">zone face apply velocity-normal 0 range group 'North' or 'South'</span></span>
+<span id="cb14-6"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">zone initialize-stress ratio 0.4286</span></span>
+<span id="cb14-7"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">zone interface 'side' node initialize-stresses</span></span>
+<span id="cb14-8"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">zone interface 'base' node initialize-stresses</span></span>
+<span id="cb14-9"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+</div>
+<div id="initial-equilibrium-1" class="section level2" number="5.7">
+<h2>
+<span class="header-section-number">5.7</span> Initial Equilibrium<a class="anchor" aria-label="anchor" href="#initial-equilibrium-1"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb15-2"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">; Solve to initial equilibrium</span></span>
+<span id="cb15-3"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">zone ratio local</span></span>
+<span id="cb15-4"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">model solve ratio 1e-4</span></span>
+<span id="cb15-5"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">model save 'initial'</span></span>
+<span id="cb15-6"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+</div>
+<div id="alterations-1" class="section level2" number="5.8">
+<h2>
+<span class="header-section-number">5.8</span> Alterations<a class="anchor" aria-label="anchor" href="#alterations-1"><i class="fas fa-link"></i></a>
+</h2>
+<div id="install-the-pile" class="section level3" number="5.8.1">
+<h3>
+<span class="header-section-number">5.8.1</span> install the pile<a class="anchor" aria-label="anchor" href="#install-the-pile"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb16-2"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">; install the pile</span></span>
+<span id="cb16-3"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">model restore 'initial'</span></span>
+<span id="cb16-4"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">zone cmodel assign elastic                          range group 'pile'</span></span>
+<span id="cb16-5"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">zone property bulk 13.9e9 shear 10.4e9 density 2500 range group 'pile'</span></span>
+<span id="cb16-6"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">model solve ratio 1e-4</span></span>
+<span id="cb16-7"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">model save 'install'</span></span>
+<span id="cb16-8"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+</div>
+<div id="vertical-loading" class="section level3" number="5.8.2">
+<h3>
+<span class="header-section-number">5.8.2</span> vertical loading<a class="anchor" aria-label="anchor" href="#vertical-loading"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb17-2"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">; vertical loading</span></span>
+<span id="cb17-3"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">zone initialize state 0</span></span>
+<span id="cb17-4"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">zone gridpoint initialize displacement (0,0,0)</span></span>
+<span id="cb17-5"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">zone gridpoint initialize velocity     (0,0,0) </span></span>
+<span id="cb17-6"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">table 'ramp' add ([global.step],0) ([global.step+30000],-5e-8) ...</span></span>
+<span id="cb17-7"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">      ([global.step+58000],-5e-8) ; Increase velocity applied to pile</span></span>
+<span id="cb17-8"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">                                  ; over 30,000 steps</span></span>
+<span id="cb17-9"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">zone face apply velocity-normal 1 table 'ramp' range group 'Top'</span></span>
+<span id="cb17-10"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">history interval 250</span></span>
+<span id="cb17-11"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">zone history name 'disp' displacement-z position (0,0,0)</span></span>
+<span id="cb17-12"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">call 'load'</span></span>
+<span id="cb17-13"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">fish history name 'load' @vert_load</span></span>
+<span id="cb17-14"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">zone mechanical damping combined</span></span>
+<span id="cb17-15"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">model step 58000</span></span>
+<span id="cb17-16"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co">model save 'vertical-loading'</span></span>
+<span id="cb17-17"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+</div>
+<div id="vertical-then-lateral-loading" class="section level3" number="5.8.3">
+<h3>
+<span class="header-section-number">5.8.3</span> vertical then lateral loading<a class="anchor" aria-label="anchor" href="#vertical-then-lateral-loading"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb18-2"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">; vertical loading then lateral loading</span></span>
+<span id="cb18-3"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">model restore 'install'</span></span>
+<span id="cb18-4"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">zone initialize state 0</span></span>
+<span id="cb18-5"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">zone gridpoint initialize displacement (0,0,0)</span></span>
+<span id="cb18-6"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">zone gridpoint initialize velocity     (0,0,0) </span></span>
+<span id="cb18-7"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">zone face apply stress-zz [-1.0e5/(math.pi*0.3*0.3)] range group 'Top'</span></span>
+<span id="cb18-8"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">model solve ratio 1e-4</span></span>
+<span id="cb18-9"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">model save 'lateral-load-start'</span></span>
+<span id="cb18-10"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">; apply lateral loading as x-velocity on cap</span></span>
+<span id="cb18-12"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">zone initialize state 0</span></span>
+<span id="cb18-13"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">zone gridpoint initialize displacement (0,0,0)</span></span>
+<span id="cb18-14"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">zone gridpoint initialize velocity     (0,0,0) </span></span>
+<span id="cb18-15"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co">zone face apply velocity-x 1e-7 range group 'Top'</span></span>
+<span id="cb18-16"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co">zone history name 'disp' displacement-x position 0,0,0</span></span>
+<span id="cb18-17"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co">call 'p-y' suppress ; Calculates p-y curve for pile, when tot_reac is called</span></span>
+<span id="cb18-18"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="co">@make_pydata        ; Generate p-y curve calculation data </span></span>
+<span id="cb18-19"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co">@output_structure   ; Sanity check of p-y curve data </span></span>
+<span id="cb18-20"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co">fish history name 'load' @tot_reac</span></span>
+<span id="cb18-21"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co">model step 416500</span></span>
+<span id="cb18-22"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="co">model save 'lateral-load'</span></span>
+<span id="cb18-23"><a href="axial-and-lateral-loading-of-a-concrete-pile.html#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+</div>
+</div>
+<div id="results-1" class="section level2" number="5.9">
+<h2>
+<span class="header-section-number">5.9</span> Results<a class="anchor" aria-label="anchor" href="#results-1"><i class="fas fa-link"></i></a>
+</h2>
+<!--------------------------------------------------->
+<!--------------------------------------------------->
+<!--------------------------------------------------->
 <div style="page-break-after: always;"></div>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="illustrative-model-mechanics-of-flac3d.html"><span class="header-section-number">3</span> Illustrative Model – Mechanics of FLAC3D</a></div>
-<div class="next"><a href="smooth-circular-footing-on-an-associated-mohr-coulomb-material.html"><span class="header-section-number">5</span> Smooth Circular Footing on an Associated Mohr-Coulomb Material</a></div>
+<div class="prev"><a href="using-python-with-flac3d.html"><span class="header-section-number">4</span> Using Python with FLAC3D</a></div>
+<div class="next"><a href="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"><span class="header-section-number">6</span> Simulation of Pull-Tests for Fully Bonded Rock Reinforcement</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#axial-and-lateral-loading-of-a-concrete-pile"><span class="header-section-number">4</span> Axial and Lateral Loading of a Concrete Pile</a></li>
-<li><a class="nav-link" href="#geometry-grid-zone-2"><span class="header-section-number">4.1</span> Geometry, Grid, Zone</a></li>
-<li><a class="nav-link" href="#group-range-2"><span class="header-section-number">4.2</span> Group, Range</a></li>
-<li><a class="nav-link" href="#constitutive-model-2"><span class="header-section-number">4.3</span> Constitutive Model</a></li>
-<li><a class="nav-link" href="#b.c.-and-i.c.-2"><span class="header-section-number">4.4</span> B.C. and I.C.</a></li>
-<li><a class="nav-link" href="#step-to-equilibrium-2"><span class="header-section-number">4.5</span> Step to Equilibrium</a></li>
-<li><a class="nav-link" href="#support-structure-restore-2"><span class="header-section-number">4.6</span> Support, Structure, Restore</a></li>
-<li><a class="nav-link" href="#plot-2"><span class="header-section-number">4.7</span> Plot</a></li>
+<li><a class="nav-link" href="#axial-and-lateral-loading-of-a-concrete-pile"><span class="header-section-number">5</span> Axial and Lateral Loading of a Concrete Pile</a></li>
+<li>
+<a class="nav-link" href="#problem-description-1"><span class="header-section-number">5.1</span> Problem Description</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#problem-statement-1"><span class="header-section-number">5.1.1</span> Problem Statement</a></li>
+<li><a class="nav-link" href="#main-parameters-1"><span class="header-section-number">5.1.2</span> Main Parameters</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#modeling-procedure-1"><span class="header-section-number">5.2</span> Modeling Procedure</a></li>
+<li><a class="nav-link" href="#zones-3"><span class="header-section-number">5.3</span> Zones</a></li>
+<li><a class="nav-link" href="#groups-2"><span class="header-section-number">5.4</span> Groups</a></li>
+<li><a class="nav-link" href="#properties-2"><span class="header-section-number">5.5</span> Properties</a></li>
+<li><a class="nav-link" href="#b.c.-and-i.c.-1"><span class="header-section-number">5.6</span> B.C. and I.C.</a></li>
+<li><a class="nav-link" href="#initial-equilibrium-1"><span class="header-section-number">5.7</span> Initial Equilibrium</a></li>
+<li>
+<a class="nav-link" href="#alterations-1"><span class="header-section-number">5.8</span> Alterations</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#install-the-pile"><span class="header-section-number">5.8.1</span> install the pile</a></li>
+<li><a class="nav-link" href="#vertical-loading"><span class="header-section-number">5.8.2</span> vertical loading</a></li>
+<li><a class="nav-link" href="#vertical-then-lateral-loading"><span class="header-section-number">5.8.3</span> vertical then lateral loading</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#results-1"><span class="header-section-number">5.9</span> Results</a></li>
 </ul>
 
       <div class="book-extra">
@@ -133,7 +336,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong><p>My Private <code>FLAC3D</code> Repository</p></strong>" was written by Kyeong Sun Kim. </p>
+    <p>"<strong><p>My <code>FLAC3D</code> Notes</p></strong>" was written by Kyeong Sun Kim. </p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -141,34 +344,6 @@
   </div>
 
 </div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
-</script>
+</footer>
 </body>
 </html>

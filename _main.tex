@@ -230,7 +230,7 @@
 
 %%%%% THESIS / TITLE PAGE INFORMATION
 % Everybody needs to complete the following:
-\title{My Private \texttt{FLAC3D} Repository}
+\title{My \texttt{FLAC3D} Notes}
 \author{Kyeong Sun Kim}
 \college{Civil and Environmental Engineering}
 
@@ -348,205 +348,866 @@
 % all your chapters and appendices will appear here
 \minitoc
 
+\newpage
+
+\hypertarget{template-name}{%
+\chapter{Template: Name}\label{template-name}}
+
+\hypertarget{problem-description}{%
+\section{Problem Description}\label{problem-description}}
+
+\hypertarget{problem-statement}{%
+\subsection{Problem Statement}\label{problem-statement}}
+
+\hypertarget{main-parameters}{%
+\subsection{Main Parameters}\label{main-parameters}}
+
+\hypertarget{modeling-procedure}{%
+\section{Modeling Procedure}\label{modeling-procedure}}
+
+\hypertarget{zones}{%
+\section{Zones}\label{zones}}
+
+\hypertarget{groups}{%
+\section{Groups}\label{groups}}
+
+\hypertarget{properties}{%
+\section{Properties}\label{properties}}
+
+\hypertarget{b.c.-and-i.c.}{%
+\section{B.C. and I.C.}\label{b.c.-and-i.c.}}
+
+\hypertarget{initial-equilibrium}{%
+\section{Initial Equilibrium}\label{initial-equilibrium}}
+
+\hypertarget{alterations}{%
+\section{Alterations}\label{alterations}}
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+\newpage
+
 \hypertarget{working-with-fish-in-flac3d}{%
 \chapter{\texorpdfstring{Working with \texttt{FISH} in \texttt{FLAC3D}}{Working with FISH in FLAC3D}}\label{working-with-fish-in-flac3d}}
 
-\minitoc 
+\hypertarget{zones-1}{%
+\section{Zones}\label{zones-1}}
+
+This is a test sentence.
+
+\hypertarget{groups-1}{%
+\section{Groups}\label{groups-1}}
+
 \newpage
 
 \hypertarget{using-python-with-flac3d}{%
-\chapter{\texorpdfstring{Using \texttt{Python} with \texttt{FLAC3D}}{Using Python with FLAC3D}}\label{using-python-with-flac3d}}
+\chapter{Using Python with FLAC3D}\label{using-python-with-flac3d}}
 
-\minitoc
+\hypertarget{zones-2}{%
+\section{Zones}\label{zones-2}}
 
-\hypertarget{geometry-grid-zone}{%
-\section{Geometry, Grid, Zone}\label{geometry-grid-zone}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{*note: it.zone.count() \# 1000}
+\CommentTok{*note: z = it.zone.find(1)}
+\CommentTok{*note: for z in it.zone.list():}
+\CommentTok{*note: z = it.zone.near((5,5,5))}
+\CommentTok{*note: z.pos()}
+\CommentTok{*note: z.vol()}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
 
-The \texttt{itasca} module defines functions and classes for interaction between \texttt{Python} and \texttt{FLAC3D}.
+\hypertarget{properties-1}{%
+\section{Properties}\label{properties-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{*note: z.props() or z.props()[\textquotesingle{}bulk\textquotesingle{}]}
+\CommentTok{*note: z.prop(\textquotesingle{}shear\textquotesingle{})}
+\CommentTok{*note: z.set\_prop(\textquotesingle{}bulk\textquotesingle{}, 8.5e9)}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{gridpoints}{%
+\section{Gridpoints}\label{gridpoints}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{*note: gp = it.gridpoint.near((2,2,2))}
+\CommentTok{*note: for gp in it.gridpoint.list():}
+\CommentTok{*note: total\_mass = gp.mass\_gravity()}
+\CommentTok{*note: z.vol()*z.density()*1000}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{structural-elements}{%
+\section{Structural Elements}\label{structural-elements}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{*note: it.structure.list()}
+\CommentTok{*note: it.structure.find(1)}
+\CommentTok{*note: it.structure.near((0,2,2))}
+\CommentTok{*note: it.structure.node.find(1)}
+\CommentTok{*note: s\_node.links()[0]}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{extra-variables}{%
+\section{Extra Variables}\label{extra-variables}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{*note: z.set\_extra(1, 1.23)}
+\CommentTok{*note: z.set\_extra(2, "a test string")}
+\CommentTok{*note: z.set\_extra(1, gp.pos())}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{groups-and-b.c.}{%
+\section{Groups and B.C.}\label{groups-and-b.c.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{*note: if z.group("default") == "lower":}
+\CommentTok{*note: gp.set\_fix(0, True)}
+\CommentTok{*note: gp.set\_fix(1, True)}
+\CommentTok{*note: gp.set\_force\_load((1e6,2e6,1e6))}
+\CommentTok{*note: it.zone.near((5,5,5)).stress()}
+\CommentTok{*note: it.zone.near((5,5,5)).strain()}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{parameteric-studies}{%
+\section{Parameteric Studies}\label{parameteric-studies}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{*note: for modulus in [6e9, 8e9, 10e9, 12e9]:}
+\CommentTok{it.command("""}
+\NormalTok{model restore }\StringTok{\textquotesingle{}before\_cycling\textquotesingle{}}
+\NormalTok{zone prop young \{\}}
+\NormalTok{model solve}
+\CommentTok{""".format(modulus))}
+\CommentTok{vertical\_disp = it.gridpoint.near((5,5,10)).disp\_z()}
+\CommentTok{print "\textasciitilde{}\textasciitilde{}\textasciitilde{}".format(modulus,vertical\_disp)}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{setting-fish-variables}{%
+\section{Setting FISH variables}\label{setting-fish-variables}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{"""}
 \CommentTok{import itasca as it}
-\CommentTok{it.command("python{-}reset{-}state false")}
+\CommentTok{it.command(\textquotesingle{}python{-}reset{-}state false\textquotesingle{})}
+\CommentTok{it.fish.set(\textquotesingle{}x\textquotesingle{}, 10)}
+\CommentTok{x = it.fish.get(\textquotesingle{}x\textquotesingle{}) yields 10}
 \CommentTok{"""}
 \end{Highlighting}
 \end{Shaded}
 
-The \texttt{it.command} function is used to issue a series of \texttt{FLAC3D} commands.
-
-The \texttt{it.zone.count} function creates 1000 zones
+\hypertarget{issuing-command}{%
+\subsection{Issuing Command}\label{issuing-command}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{"""}
-\CommentTok{it.zone.count() \# outputs 1000}
+\CommentTok{import itasca as it}
+\CommentTok{import numpy as np}
+
+\CommentTok{data = np.loadtext(\textquotesingle{}brick{-}data.txt\textquotesingle{})}
+\CommentTok{command\_template = ;;; }
+\CommentTok{zone create brick}
+\CommentTok{zone cmodel assign elastic}
+\CommentTok{zone property density \{density\} young \{young\} poisson \{poisson\}}
+\CommentTok{;;;}
+\CommentTok{density = data[0]}
+\CommentTok{young = data[1]}
+\CommentTok{poisson = data[2]}
+
+\CommentTok{command = command\_template.format(density=density, young=young, poisson=poisson)}
+\CommentTok{it.command(command)}
 \CommentTok{"""}
 \end{Highlighting}
 \end{Shaded}
 
-The \texttt{it.zone.find(1)} returns a Zone object with id 1. The object is assigned to the \texttt{Python} variable \(z\).
+\hypertarget{string}{%
+\section{String}\label{string}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{"""}
-\CommentTok{z = it.zone.find(1)}
-\CommentTok{print z \# outputs \textless{}itasca.zone.Zone object at 0x00000001B388600, ID : 1\textgreater{}}
-\CommentTok{z.pos() \# outputs vec3(( 5.00000e{-}01, 5.00000e{-}01, 5.00000e{-}01))}
+\CommentTok{"The value of x is \{:.2f\}".format(0.3872)}
+\CommentTok{"The value of x is \{:.2e\}".format(0.3872)}
+\CommentTok{"My name is Sasha"}
+\CommentTok{"My name is \{\}".format("Sasha")}
+\CommentTok{"My name is \{name\}".format(name="Sasha")}
 \CommentTok{"""}
 \end{Highlighting}
 \end{Shaded}
-
-The variable \(z\) is a Zone object (\texttt{FLAC3D} zone)
-
-\texttt{pos} method of this object returns the zone centroid.
-
-\texttt{for} statement is used to iterate over sequences of things,
-Loop over all \texttt{FLAC3D} zones.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{"""}
-\CommentTok{volume\_sum = 0.0}
-\CommentTok{for z in it.zone.list():}
-\CommentTok{  volume\_sum += z.vol()}
-\CommentTok{"""}
-\end{Highlighting}
-\end{Shaded}
-
-Check that the sum of the zone volumes is what we expect.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{"""}
-\CommentTok{print volume\_sum \# outputs 1000.0}
-\CommentTok{print z.vol() * it.zone.count()}
-\CommentTok{assert volume\_sum == z.vol() * it.zone.count() \# outputs 1000.0}
-\CommentTok{"""}
-\end{Highlighting}
-\end{Shaded}
-
-Let's find a zone near the center of the model
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{"""}
-\CommentTok{z = it.zone.near ((5,5,5))}
-\CommentTok{\#confirm position with pos method}
-\CommentTok{z.pos() \# outputs vec3(( 4.500000e+00, 4.500000e+00, 4.500000e+00))}
-\CommentTok{"""}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{group-range}{%
-\section{Group, Range}\label{group-range}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{"""}
-
-\CommentTok{"""}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{constitutive-model}{%
-\section{Constitutive Model}\label{constitutive-model}}
-
-\hypertarget{b.c.-and-i.c.}{%
-\section{B.C. and I.C.}\label{b.c.-and-i.c.}}
-
-\hypertarget{step-to-equilibrium}{%
-\section{Step to Equilibrium}\label{step-to-equilibrium}}
-
-\hypertarget{support-structure-restore}{%
-\section{Support, Structure, Restore}\label{support-structure-restore}}
-
-\hypertarget{plot}{%
-\section{Plot}\label{plot}}
-
-\newpage
-
-\hypertarget{illustrative-model-mechanics-of-flac3d}{%
-\chapter{\texorpdfstring{Illustrative Model -- Mechanics of \texttt{FLAC3D}}{Illustrative Model -- Mechanics of FLAC3D}}\label{illustrative-model-mechanics-of-flac3d}}
-
-\minitoc
-
-\hypertarget{geometry-grid-zone-1}{%
-\section{Geometry, Grid, Zone}\label{geometry-grid-zone-1}}
-
-\hypertarget{group-range-1}{%
-\section{Group, Range}\label{group-range-1}}
-
-\hypertarget{constitutive-model-1}{%
-\section{Constitutive Model}\label{constitutive-model-1}}
-
-\hypertarget{b.c.-and-i.c.-1}{%
-\section{B.C. and I.C.}\label{b.c.-and-i.c.-1}}
-
-\hypertarget{step-to-equilibrium-1}{%
-\section{Step to Equilibrium}\label{step-to-equilibrium-1}}
-
-\hypertarget{support-structure-restore-1}{%
-\section{Support, Structure, Restore}\label{support-structure-restore-1}}
-
-\hypertarget{plot-1}{%
-\section{Plot}\label{plot-1}}
 
 \newpage
 
 \hypertarget{axial-and-lateral-loading-of-a-concrete-pile}{%
 \chapter{Axial and Lateral Loading of a Concrete Pile}\label{axial-and-lateral-loading-of-a-concrete-pile}}
 
-\minitoc
+\hypertarget{problem-description-1}{%
+\section{Problem Description}\label{problem-description-1}}
 
-\hypertarget{geometry-grid-zone-2}{%
-\section{Geometry, Grid, Zone}\label{geometry-grid-zone-2}}
+\hypertarget{problem-statement-1}{%
+\subsection{Problem Statement}\label{problem-statement-1}}
 
-\hypertarget{group-range-2}{%
-\section{Group, Range}\label{group-range-2}}
+The pile is subjected to an axial load of 100 kN,
+and then the top of the pile is moved horizontally for a displacement of 4 cm.
+The goal is to determine relation of axial loading to the ultimate bearing capacity.
+And, lateral load-deflection curve is calculated.
 
-\hypertarget{constitutive-model-2}{%
-\section{Constitutive Model}\label{constitutive-model-2}}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  origin at the top of the pile, z upward.
+\item
+  z=0: free surface
+\item
+  z=-8: fixed in z-eirection
+\item
+  x=+8, -8, y = 8: roller
+\item
+  skin friction is modeled by placing an interface
+  between pile concrete wall and clay.
+  In it, fric angle of 20 and c=30kPa are assumed.
+\item
+  toe interface is placed between pile tip and clay
+  \emph{note: Zone faces are separated in a previous command so that the gridpoints common to both will be separated as well.
+  }note: include Figure of grid (geometry)
+\end{enumerate}
+
+\hypertarget{main-parameters-1}{%
+\subsection{Main Parameters}\label{main-parameters-1}}
+
+Diameter = 0.6 m
+Length = 5 m
+Clay
+GWT = 5.5m
+
+\hypertarget{modeling-procedure-1}{%
+\section{Modeling Procedure}\label{modeling-procedure-1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  equil. stress state under gravity load before install.
+  1-1) water table is created at z=5.5
+  1-2) wet density of clay is assigned below this water table.
+\item
+  equil. stress state after installation.
+  2-1) change properties of pile zones from those
+  representing clay to those representing concrete.
+  2-2) vertical equil. stress distribution at this equil. state is shown in
+  *note: include Figure of contours of vertical stress at ini state incld. pile weight
+\item
+  apply vertical velocity at top of pile
+  ``ramp'' = boundary condition is increased linearly
+  \emph{note: critical timestep is controlled by high stiffness of concrete
+  If velocity is sudden, inertial effects will dominate and renders difficulty to identification of steady state response of system
+  table ``ramp'' is used to apply velocity to pile top gridpoints.
+  }note: FISH FUNCTION vert\_load calculates axial stress at the top of pile and stores value as a history
+  For efficiency, gridpoints on cap surface are stored in symbol ``cap'' as a map
+  \emph{note: include plot of axial stress vs axial displ. at pile toe. ramp = (0,5e-8), step number = 30000
+  }note: combined damping is used to remove kinetic energy for prescribed loading condition. This is because mass-adjustment process depends on velocity sign-changes..
+  \emph{note: FISH FUNCTION tot\_reac monitors soil reaction along pile as a func of lateral displ. tot\_reac creates tables of soil reaction (p) vs.~lateral displ (y) at diff. locations along pile to generate p-y curve.
+  }note: include Figure of p-y curve at 11 equidistant points along pile
+\end{enumerate}
+
+\hypertarget{zones-3}{%
+\section{Zones}\label{zones-3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{model new}
+\CommentTok{model title \textquotesingle{}Axial and lateral loading of a concrete pile\textquotesingle{}}
+\CommentTok{; create grid interactively from the extruder tool, }
+\CommentTok{; exported to geometry.f3dat from State Record pane.}
+\CommentTok{call \textquotesingle{}geometry\textquotesingle{} suppress}
+\CommentTok{zone generate from{-}extruder}
+\CommentTok{; Reflect the grid to get a 1/2 space instead of a 1/4 space}
+\CommentTok{zone reflect dip{-}direction 270 dip 90}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{groups-2}{%
+\section{Groups}\label{groups-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{; Name intersections of things named in the two extruder views}
+\CommentTok{zone group \textquotesingle{}clay\textquotesingle{} range group \textquotesingle{}clay{-}c\textquotesingle{} or \textquotesingle{}clay{-}s\textquotesingle{} or \textquotesingle{}wetclay{-}s\textquotesingle{}}
+\CommentTok{zone group \textquotesingle{}pile\textquotesingle{} range group \textquotesingle{}pile{-}c\textquotesingle{} group \textquotesingle{}pile{-}s\textquotesingle{} or \textquotesingle{}remove{-}s\textquotesingle{}}
+\CommentTok{zone group \textquotesingle{}remove\textquotesingle{} range group \textquotesingle{}remove{-}s\textquotesingle{} group \textquotesingle{}pile{-}c\textquotesingle{} not ; }
+\CommentTok{zone face group \textquotesingle{}wall\textquotesingle{} internal range group \textquotesingle{}wall{-}c\textquotesingle{} group \textquotesingle{}pile\textquotesingle{}}
+\CommentTok{zone face group \textquotesingle{}base\textquotesingle{} internal range group \textquotesingle{}base{-}s\textquotesingle{} group \textquotesingle{}pile\textquotesingle{}}
+\CommentTok{zone face skin ; Name far field boundaries}
+\CommentTok{; Delete the area marked for removal}
+\CommentTok{zone delete range group \textquotesingle{}remove\textquotesingle{}}
+\CommentTok{;}
+\CommentTok{; setup interfaces}
+\CommentTok{; separate using zone separate}
+\CommentTok{; all at once so common nodes are separated}
+\CommentTok{zone separate by{-}face new{-}side group \textquotesingle{}iwall\textquotesingle{} slot \textquotesingle{}int\textquotesingle{} ...}
+\CommentTok{     range group \textquotesingle{}wall\textquotesingle{} or \textquotesingle{}base\textquotesingle{}}
+\CommentTok{; Want two different interfaces for proper normal direction at corner}
+\CommentTok{zone interface \textquotesingle{}side\textquotesingle{} create by{-}face range group \textquotesingle{}wall\textquotesingle{} and \textquotesingle{}iwall\textquotesingle{}}
+\CommentTok{zone interface \textquotesingle{}base\textquotesingle{} create by{-}face range group \textquotesingle{}base\textquotesingle{} and \textquotesingle{}iwall\textquotesingle{}}
+\CommentTok{; Save initial geometric state}
+\CommentTok{model save \textquotesingle{}geometry\textquotesingle{}}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{properties-2}{%
+\section{Properties}\label{properties-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{; Initialize gravity, pore{-}pressures, density, and stres state}
+\CommentTok{model gravity 10}
+\CommentTok{; water table information}
+\CommentTok{zone water density 1000}
+\CommentTok{zone water plane origin (0,0,{-}5.5) normal (0,0,{-}1)}
+\CommentTok{zone initialize density 1230}
+\CommentTok{zone initialize density 1550 range group \textquotesingle{}wetclay{-}s\textquotesingle{} ; Wet density}
+\CommentTok{; assign properties to the soil and interfaces {-} temporarily remove pile cap}
+\CommentTok{zone cmodel assign mohr{-}coulomb ...}
+\CommentTok{     range group \textquotesingle{}clay\textquotesingle{}}
+\CommentTok{zone property bulk 8.333e7  shear 3.846e7  cohesion 30000 fric 0 ...}
+\CommentTok{     range group \textquotesingle{}clay\textquotesingle{}}
+\CommentTok{zone cmodel assign elastic                 range group \textquotesingle{}pile\textquotesingle{}}
+\CommentTok{zone property bulk 8.333e7  shear 3.846e7  range group \textquotesingle{}pile\textquotesingle{}}
+\CommentTok{zone cmodel assign null                    range group \textquotesingle{}remove{-}s\textquotesingle{}}
+\CommentTok{zone interface \textquotesingle{}side\textquotesingle{} node property stiffness{-}normal 1e8 ...}
+\CommentTok{                           stiffness{-}shear 1e8 friction 20 cohesion 30000}
+\CommentTok{zone interface \textquotesingle{}base\textquotesingle{} node property stiffness{-}normal 1e8 ...}
+\CommentTok{                           stiffness{-}shear 1e8 friction 20 cohesion 30000}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{b.c.-and-i.c.-1}{%
+\section{B.C. and I.C.}\label{b.c.-and-i.c.-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{; boundary and initial stress conditions}
+\CommentTok{zone face apply velocity{-}normal 0 range group \textquotesingle{}Bottom\textquotesingle{}}
+\CommentTok{zone face apply velocity{-}normal 0 range group \textquotesingle{}East\textquotesingle{} or \textquotesingle{}West\textquotesingle{}}
+\CommentTok{zone face apply velocity{-}normal 0 range group \textquotesingle{}North\textquotesingle{} or \textquotesingle{}South\textquotesingle{}}
+\CommentTok{zone initialize{-}stress ratio 0.4286}
+\CommentTok{zone interface \textquotesingle{}side\textquotesingle{} node initialize{-}stresses}
+\CommentTok{zone interface \textquotesingle{}base\textquotesingle{} node initialize{-}stresses}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{initial-equilibrium-1}{%
+\section{Initial Equilibrium}\label{initial-equilibrium-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{; Solve to initial equilibrium}
+\CommentTok{zone ratio local}
+\CommentTok{model solve ratio 1e{-}4}
+\CommentTok{model save \textquotesingle{}initial\textquotesingle{}}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{alterations-1}{%
+\section{Alterations}\label{alterations-1}}
+
+\hypertarget{install-the-pile}{%
+\subsection{install the pile}\label{install-the-pile}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{; install the pile}
+\CommentTok{model restore \textquotesingle{}initial\textquotesingle{}}
+\CommentTok{zone cmodel assign elastic                          range group \textquotesingle{}pile\textquotesingle{}}
+\CommentTok{zone property bulk 13.9e9 shear 10.4e9 density 2500 range group \textquotesingle{}pile\textquotesingle{}}
+\CommentTok{model solve ratio 1e{-}4}
+\CommentTok{model save \textquotesingle{}install\textquotesingle{}}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{vertical-loading}{%
+\subsection{vertical loading}\label{vertical-loading}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{; vertical loading}
+\CommentTok{zone initialize state 0}
+\CommentTok{zone gridpoint initialize displacement (0,0,0)}
+\CommentTok{zone gridpoint initialize velocity     (0,0,0) }
+\CommentTok{table \textquotesingle{}ramp\textquotesingle{} add ([global.step],0) ([global.step+30000],{-}5e{-}8) ...}
+\CommentTok{      ([global.step+58000],{-}5e{-}8) ; Increase velocity applied to pile}
+\CommentTok{                                  ; over 30,000 steps}
+\CommentTok{zone face apply velocity{-}normal 1 table \textquotesingle{}ramp\textquotesingle{} range group \textquotesingle{}Top\textquotesingle{}}
+\CommentTok{history interval 250}
+\CommentTok{zone history name \textquotesingle{}disp\textquotesingle{} displacement{-}z position (0,0,0)}
+\CommentTok{call \textquotesingle{}load\textquotesingle{}}
+\CommentTok{fish history name \textquotesingle{}load\textquotesingle{} @vert\_load}
+\CommentTok{zone mechanical damping combined}
+\CommentTok{model step 58000}
+\CommentTok{model save \textquotesingle{}vertical{-}loading\textquotesingle{}}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{vertical-then-lateral-loading}{%
+\subsection{vertical then lateral loading}\label{vertical-then-lateral-loading}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{; vertical loading then lateral loading}
+\CommentTok{model restore \textquotesingle{}install\textquotesingle{}}
+\CommentTok{zone initialize state 0}
+\CommentTok{zone gridpoint initialize displacement (0,0,0)}
+\CommentTok{zone gridpoint initialize velocity     (0,0,0) }
+\CommentTok{zone face apply stress{-}zz [{-}1.0e5/(math.pi*0.3*0.3)] range group \textquotesingle{}Top\textquotesingle{}}
+\CommentTok{model solve ratio 1e{-}4}
+\CommentTok{model save \textquotesingle{}lateral{-}load{-}start\textquotesingle{}}
+
+\CommentTok{; apply lateral loading as x{-}velocity on cap}
+\CommentTok{zone initialize state 0}
+\CommentTok{zone gridpoint initialize displacement (0,0,0)}
+\CommentTok{zone gridpoint initialize velocity     (0,0,0) }
+\CommentTok{zone face apply velocity{-}x 1e{-}7 range group \textquotesingle{}Top\textquotesingle{}}
+\CommentTok{zone history name \textquotesingle{}disp\textquotesingle{} displacement{-}x position 0,0,0}
+\CommentTok{call \textquotesingle{}p{-}y\textquotesingle{} suppress ; Calculates p{-}y curve for pile, when tot\_reac is called}
+\CommentTok{@make\_pydata        ; Generate p{-}y curve calculation data }
+\CommentTok{@output\_structure   ; Sanity check of p{-}y curve data }
+\CommentTok{fish history name \textquotesingle{}load\textquotesingle{} @tot\_reac}
+\CommentTok{model step 416500}
+\CommentTok{model save \textquotesingle{}lateral{-}load\textquotesingle{}}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{results-1}{%
+\section{Results}\label{results-1}}
+
+\newpage
+
+\hypertarget{simulation-of-pull-tests-for-fully-bonded-rock-reinforcement}{%
+\chapter{Simulation of Pull-Tests for Fully Bonded Rock Reinforcement}\label{simulation-of-pull-tests-for-fully-bonded-rock-reinforcement}}
+
+\hypertarget{problem-description-2}{%
+\section{Problem Description}\label{problem-description-2}}
+
+\emph{note: FISH function force is used to sum the raction forces and
+monitor nodal displacement generated by the pull-test.
+}note: free length of bolt that extends out of block + larger diameter
+Perfectly plastic behavior of grout = max cohesion is exceeded.
++post-peak weakening of shear bond strength
+*note: bond strength softening of the grout is defined with keyword
+coupling-cohesion-table (see Rockbolt Behavior)
+The relation btw shear disp. and cohesion weakening is prescribed
+thru table cct. softening of friction of grout can alsoe be defined
+using keyword coupling-friction-table.
+
+\hypertarget{problem-statement-2}{%
+\subsection{Problem Statement}\label{problem-statement-2}}
+
+\hypertarget{main-parameters-2}{%
+\subsection{Main Parameters}\label{main-parameters-2}}
+
+\hypertarget{modeling-procedure-2}{%
+\section{Modeling Procedure}\label{modeling-procedure-2}}
+
+\hypertarget{zones-4}{%
+\section{Zones}\label{zones-4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{; ==================================================================}
+\CommentTok{;   Simulation of pull{-}test for grouted reinforcement}
+\CommentTok{;   using modified pile elements {-} Softening of cohesion}
+\CommentTok{; ==================================================================}
+\CommentTok{model new }
+\CommentTok{fish automatic{-}create off}
+\CommentTok{model title \textquotesingle{}Pull{-}test using modified pile elements {-} cohesion softening\textquotesingle{}}
+\CommentTok{; Create a single rock block and set its material properties.}
+\CommentTok{zone create brick size 4 4 6 point 1 (0.4,0,0) point 2 (0,0.4,0) ...}
+\CommentTok{                             point 3 (0,0,0.6)}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{groups-3}{%
+\section{Groups}\label{groups-3}}
+
+\hypertarget{properties-3}{%
+\section{Properties}\label{properties-3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{zone cmodel assign elastic}
+\CommentTok{zone property bulk 5e9 shear 3e9}
+\CommentTok{zone face apply velocity{-}normal 0.0 range position{-}z 0.6}
+\CommentTok{; Create a pile element and assign properties}
+\CommentTok{struct pile create by{-}line (0.2,0.2,0.1) (0.2,0.2,0.7) segments 12}
+\CommentTok{struct pile property rockbolt{-}flag on}
+\CommentTok{struct pile property young 200e9 poisson 0.25 cross{-}sectional{-}area 5e{-}4 ...}
+\CommentTok{                     perimeter 0.08}
+\CommentTok{struct pile property tensile{-}yield   2.25e5  ; ultimate tensile strength}
+\CommentTok{struct pile property moi{-}y 2.0e{-}8 moi{-}z 2.0e{-}8 moi{-}polar 4.0e{-}8 ; 0.25*pi*r\^{}4}
+\CommentTok{struct pile property coupling{-}cohesion{-}shear 1.75e5 ...}
+\CommentTok{                     coupling{-}stiffness{-}shear 1.12e7}
+\CommentTok{struct pile property coupling{-}cohesion{-}normal 1.75e5 ...}
+\CommentTok{                     coupling{-}stiffness{-}normal 1.12e7}
+\CommentTok{struct pile property coupling{-}cohesion{-}table \textquotesingle{}cct\textquotesingle{}}
+\CommentTok{; change in cohesion with relative shear displacement}
+\CommentTok{table \textquotesingle{}cct\textquotesingle{} add (0,1.75e5) (0.025,1.75e4)}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{b.c.-and-i.c.-2}{%
 \section{B.C. and I.C.}\label{b.c.-and-i.c.-2}}
 
-\hypertarget{step-to-equilibrium-2}{%
-\section{Step to Equilibrium}\label{step-to-equilibrium-2}}
+\hypertarget{initial-equilibrium-2}{%
+\section{Initial Equilibrium}\label{initial-equilibrium-2}}
 
-\hypertarget{support-structure-restore-2}{%
-\section{Support, Structure, Restore}\label{support-structure-restore-2}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{struct node fix velocity{-}x range position{-}z 0.7}
+\CommentTok{struct node initialize velocity{-}x 1e{-}6 local range position{-}z 0.7}
+\CommentTok{call \textquotesingle{}pileforce\textquotesingle{} suppress ; FISH function calculates reaction force on zones}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
 
-\hypertarget{plot-2}{%
-\section{Plot}\label{plot-2}}
+\hypertarget{alterations-2}{%
+\section{Alterations}\label{alterations-2}}
 
-\pagebreak
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{; Set up histories for monitoring model behavior}
+\CommentTok{history interval 10}
+\CommentTok{fish history name \textquotesingle{}force\textquotesingle{} @force}
+\CommentTok{struct node history name \textquotesingle{}disp\textquotesingle{} displacement{-}z position (0.2,0.2,0.7)}
+\CommentTok{; Achieve a total displacement of 4.0 cm}
+\CommentTok{model cycle 40000}
+\CommentTok{;}
+\CommentTok{model save \textquotesingle{}pull{-}5\textquotesingle{}}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
 
-\hypertarget{smooth-circular-footing-on-an-associated-mohr-coulomb-material}{%
-\chapter{Smooth Circular Footing on an Associated Mohr-Coulomb Material}\label{smooth-circular-footing-on-an-associated-mohr-coulomb-material}}
+\hypertarget{results-2}{%
+\section{Results}\label{results-2}}
 
-\minitoc
+\hypertarget{some-other-notes}{%
+\section{Some other notes}\label{some-other-notes}}
 
-\hypertarget{geometry-grid-zone-3}{%
-\section{Geometry, Grid, Zone}\label{geometry-grid-zone-3}}
+2.3. pull test with confinement ``Pulltest06.f3dat''
++modified pile logic.
+(see Behavior of Shear Coupling Springs) linear law is implemented
+whereby reinforcement shear strength is defined as constant
+(coupling-cohesion-shear)+ effective pressure\emph{perimeter}fric angle(coupling-friction-shear)
+This pressure dependence is activated automatically by issuing
+reinforcement properties(perimeter) and (coupling-friction-shear)
+2.4. pull test with confinement (user defined) ``Pulltest07.f3dat''
+*note: use of coupling-confining-table to define ``mean sigma\_c, confining stress''
 
-\hypertarget{group-range-3}{%
-\section{Group, Range}\label{group-range-3}}
+2.5. pull test with tensile rupture ``Pulltest08.f3dat''
+*note: tensile-yield, tensile-failure-strain: for limiting axial yield force and limiting axial strain for rockbolt
 
-\hypertarget{constitutive-model-3}{%
-\section{Constitutive Model}\label{constitutive-model-3}}
+\newpage
 
-\hypertarget{b.c.-and-i.c.-3}{%
-\section{B.C. and I.C.}\label{b.c.-and-i.c.-3}}
+\hypertarget{grid-generation}{%
+\chapter{Grid Generation}\label{grid-generation}}
 
-\hypertarget{step-to-equilibrium-3}{%
-\section{Step to Equilibrium}\label{step-to-equilibrium-3}}
+The intention of grid generation is to fit the model grid to the physical region under study
 
-\hypertarget{support-structure-restore-3}{%
-\section{Support, Structure, Restore}\label{support-structure-restore-3}}
+\hypertarget{primitive-shape}{%
+\section{Primitive Shape}\label{primitive-shape}}
 
-\hypertarget{plot-3}{%
-\section{Plot}\label{plot-3}}
+zones for grids
+-primitives (zone create) (zone reflect) (zone copy)
+
+-dimension
+-edge
+-fill
+-point
+-ratio
+-size
+
+-extrusions
+-building blocks
+(mutually exclusive)
+-3rd party tool Rhino and mesher Griddle
+
+selection of right mesh generation method
+and efficient deploymentis a critical part
+
+\emph{note: zone create generates primitive grid
+}note: zone gridpoint create puts gridpoints at specific locations
+\emph{note: zone gridpoint merge ensures separate primitives are connected properly
+}note: zone attach connects primitive meshes of different zone sizes.
+each shape has specific type of grid connectivity.
+
+keywords for zone create:
+brick, weidge, uniform-wedge, tetrahedron, pyramid, cylinder, degenerate-brick, radial-brick, radial-tunnel, radial-cylinder, cylindrical-shell, cylindrical-intersection, tunnel-intersection(parallelpiped-shaped tunnels)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{zone create radial{-}cylinder size 5 10 6 12 fill}
+\CommentTok{zone create radial{-}cylinder size 5 10 6 12 ratio 1 1 1 5}
+\CommentTok{each size is controlled by a ratio (geometric ratio of 1.2 times preceding zone)}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+ex) 5 along innder radius of cylindrical tunnel,
+10 along axis
+6 along circumference of tunnel
+12 between periphery of tunnel and outer boundary of moel
+*note: size keyword defines the number of zones in the grid.
+
+keywords for zone create
+-dimension
+-edge
+-fill
+-point (boundary dimensions)
+-ratio (coarser toward edge)
+-size
+
+\hypertarget{several-primitive-shapes-connected}{%
+\section{several primitive shapes connected:}\label{several-primitive-shapes-connected}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{zone create radial{-}cylinder size 5 10 6 12 rat 1 1 1 1.2 ...}
+\CommentTok{                           point 0 (0,0,0) point 1 (100,0,0) ...}
+\CommentTok{                           point 2 (0,200,0) point 3 (0,0,100)}
+\CommentTok{zone create radial{-}tunnel size 5 10 5 12 rat 1 1 1 1.2 ...}
+\CommentTok{                          point 0 (0,0,0) point 1 (0,0,{-}100) ...}
+\CommentTok{                          point 2 (0,200,0) point 3 (100,0,0)}
+\CommentTok{; here, model boundary dimensions are 100, 200, 100}
+\CommentTok{; boundary coord are defined using point keyword}
+
+\CommentTok{zone reflect dip 90 dip{-}direction 270 origin (0,0,0) }
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+this adds symmetric part
+*note: The symmetry plane is a vertical plane (located by the dip, dip-direction, and origin keywords) coincident with the x = 0 plane. Note that dip angle (dip) and dip direction (dip-direction) assume that x corresponds to ``East,'' y to ``North'', and z to ``Up.''
+
+third option, the zone gridpoint create command, is available to position single points in the model region.
+*note: zone gridpoint create is used for positioning reference points of primitives
+
+During execution of a zone create command, a check is made for each boundary gridpoint against the boundary gridpoints of zones that already exist.
+If two boundary gridpoints fall within a tolerance of 1 ? 10-7 (relative to the magnitude of the gridpoints position vector) of each other, they are assumed to be the same point,
+If it is discovered that some gridpoints don't match, the zone gridpoint merge command can be used to merge these gridpoints after the zone create command has been applied.
+
+(zone attach) - Two unequal sub-grids
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{zone create brick size 4 4 2 point 0 (0,0,0) point 1 (4,0,0) ...}
+\CommentTok{                             point 2 (0,4,0) point 3 (0,0,2)}
+\CommentTok{zone create brick size 8 8 4 point 0 (0,0,2) point 1 (4,0,2) ...}
+\CommentTok{                             point 2 (0,4,2) point 3 (0,0,4)}
+\CommentTok{zone attach by{-}face range position{-}z 2}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+(zone densify)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{zone create brick size 4 4 4}
+\CommentTok{zone densify segments 2 range position{-}x 2 4}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+the first two command lines can be changed to
+where zone densify segments 2 refines the upper zones (between the z-coordinate of 2 and 4) with the segment number of 2 on each edge.
+
+\hypertarget{structural-element-operation}{%
+\section{Structural Element Operation}\label{structural-element-operation}}
+
+Creating a liner in the service tunnel
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{; liner}
+\CommentTok{structure shell create by{-}face range cylinder ...}
+\CommentTok{                                     end{-}1 (0,0,{-}1) end{-}2 (0,50,{-}1) ...}
+\CommentTok{                                     radius 3}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+The liner contains 240 structural shell elements and is connected to the FLAC3D grid at 143 structural-node links. The grid with the liner is shown below.
+
+\hypertarget{densifying-grid-by-specifying-max-size-length}{%
+\section{Densifying grid by specifying max size length}\label{densifying-grid-by-specifying-max-size-length}}
+
+\hypertarget{densify-a-grid-by-specifying-the-maximum-size-length}{%
+\subsection{Densify a grid by specifying the maximum size length}\label{densify-a-grid-by-specifying-the-maximum-size-length}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{model new}
+\CommentTok{zone create brick size 4 4 4}
+\CommentTok{plot \textquotesingle{}Brick\textquotesingle{} export bitmap filename \textquotesingle{}densify3.png\textquotesingle{}}
+\CommentTok{;}
+\CommentTok{zone densify local maximum{-}length (0.5,0.5,0.4) range position{-}z 2 4}
+\CommentTok{zone attach by{-}face}
+\CommentTok{;}
+\CommentTok{plot \textquotesingle{}Brick\textquotesingle{} export bitmap filename \textquotesingle{}densify4.png\textquotesingle{}}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+note that in the local z-direction, the maximum size length is 0.4. FLAC3D densifies the maximum length in this direction to be 1/3 (= 0.4)
+The zone attach by-face command in this example is used to attach faces of sub-grids together rigidly to form a single grid
+
+Always use the zone attach by-face command after the zone densify command if there are different numbers of gridpoints along faces of different zones.
+
+\hypertarget{densify-a-grid-using-geometric-information}{%
+\subsection{Densify a grid using geometric information}\label{densify-a-grid-using-geometric-information}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{model new}
+\CommentTok{zone create brick size 10 10 10}
+\CommentTok{;}
+\CommentTok{geometry set "setA" polygon create ...}
+\CommentTok{                    by{-}positions (0,0,1) ( 5,0, 1) ( 5,10, 1) (0,10,1)}
+\CommentTok{geometry set "setA" polygon create ...}
+\CommentTok{                    by{-}positions (5,0,1) (10,0, 5) (10,10, 5) (5,10,1)}
+\CommentTok{geometry set "setB" polygon create ...}
+\CommentTok{                    by{-}positions (0,0,5) ( 5,0, 5) ( 5,10, 5) (0,10,5)}
+\CommentTok{geometry set "setB" polygon create ...}
+\CommentTok{                    by{-}positions (5,0,5) (10,0,10) (10,10,10) (5,10,5)}
+\CommentTok{plot \textquotesingle{}Brick2\textquotesingle{} export bitmap filename \textquotesingle{}densify5.png\textquotesingle{}}
+
+\CommentTok{zone densify segments 2 range geometry{-}space "setA" set "setB" count 1}
+\CommentTok{zone attach by{-}face}
+\CommentTok{;}
+\CommentTok{plot \textquotesingle{}Brick2\textquotesingle{} export bitmap filename \textquotesingle{}densify6.png\textquotesingle{}}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+\hypertarget{weekly-to-do-list}{%
+\chapter{Weekly To Do List}\label{weekly-to-do-list}}
+
+\hypertarget{done-uxad50uxc601uxd615-uxb17cuxbb38-english-edit}{%
+\section{1. (50\% done) 교영형 논문 English Edit}\label{done-uxad50uxc601uxd615-uxb17cuxbb38-english-edit}}
+
+This is a test sentence
+
+\hypertarget{uxd68cuxc758uxc790uxb8cc-ppt}{%
+\section{2. 회의자료 ppt}\label{uxd68cuxc758uxc790uxb8cc-ppt}}
+
+\hypertarget{uxc778uxbc1cuxacbduxc0ac-uxadf8uxb9bcuxc790uxb8cc}{%
+\subsection{-인발/경사 그림자료}\label{uxc778uxbc1cuxacbduxc0ac-uxadf8uxb9bcuxc790uxb8cc}}
+
+\hypertarget{uxc804uxb3c4piv-uxadf8uxb9bcuxc608uxc81c}{%
+\subsection{-전도/piv 그림예제}\label{uxc804uxb3c4piv-uxadf8uxb9bcuxc608uxc81c}}
+
+\hypertarget{uxc0acuxc774uxc988uxadfcuxc785uxbe44uxc9c1uxacbduxc0c1uxb300uxbc00uxb3c4uxbc30uxce58-uxc815uxb9acuxc790uxb8cc}{%
+\subsection{-사이즈,근입비,직경,상대밀도,배치 정리자료}\label{uxc0acuxc774uxc988uxadfcuxc785uxbe44uxc9c1uxacbduxc0c1uxb300uxbc00uxb3c4uxbc30uxce58-uxc815uxb9acuxc790uxb8cc}}
+
+\hypertarget{uxc790uxbb38uxacb0uxacfcuxbcf4uxace0uxc11c}{%
+\section{3. 자문결과보고서}\label{uxc790uxbb38uxacb0uxacfcuxbcf4uxace0uxc11c}}
+
+\hypertarget{flac3d}{%
+\section{4. FLAC3D}\label{flac3d}}
+
+\hypertarget{done--axial-and-lateral-loading-of-concrete-pile}{%
+\subsection{(done) -Axial and Lateral Loading of Concrete Pile}\label{done--axial-and-lateral-loading-of-concrete-pile}}
+
+\hypertarget{done--pull-tests-for-fully-bonded-rock}{%
+\subsection{(50\% done) -Pull-Tests for Fully Bonded Rock}\label{done--pull-tests-for-fully-bonded-rock}}
+
+\hypertarget{geogrid-pull-out-test}{%
+\subsection{-Geogrid Pull-out Test}\label{geogrid-pull-out-test}}
+
+\hypertarget{smooth-circular-footing-on-associated-mc-material}{%
+\subsection{-Smooth Circular Footing on Associated MC Material}\label{smooth-circular-footing-on-associated-mc-material}}
+
+\hypertarget{trans-file}{%
+\subsection{-Tran's file}\label{trans-file}}
+
+\hypertarget{done--strain-softening-studies}{%
+\subsection{(done) -strain-softening studies}\label{done--strain-softening-studies}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  pull-test pile element)
+\item
+  Strain-softening MC Model)
+\end{enumerate}
+
+\hypertarget{geoenv-hw-uxae30uxc220uxae30uxc0ac}{%
+\section{5. geoenv HW-기술기사}\label{geoenv-hw-uxae30uxc220uxae30uxc0ac}}
+
+\hypertarget{uxb808uxc9c8uxb9acuxc5b8uxc2a4-hw---seminar-uxc694uxc57d}{%
+\section{6. 레질리언스 HW - Seminar 요약}\label{uxb808uxc9c8uxb9acuxc5b8uxc2a4-hw---seminar-uxc694uxc57d}}
+
+\hypertarget{uxb3d9uxc5eduxd591-hw}{%
+\section{7. 동역햑 HW}\label{uxb3d9uxc5eduxd591-hw}}
 
 
 %%%%% REFERENCES

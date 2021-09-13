@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>7 Grid Generation | My FLAC3D Notes</title>
+<meta name="author" content="Kyeong Sun Kim">
+<meta name="generator" content="bookdown 0.23 with bs4_book()">
+<meta property="og:title" content="7 Grid Generation | My FLAC3D Notes">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="7 Grid Generation | My FLAC3D Notes">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="templates/bs4_style.css">
+<link rel="stylesheet" href="templates/corrections.css">
+<meta name="description" content="The intention of grid generation is to fit the model grid to the physical region under study  7.1 Primitive Shape zones for grids -primitives (zone create) (zone reflect) (zone copy) -dimension...">
+<meta property="og:description" content="The intention of grid generation is to fit the model grid to the physical region under study  7.1 Primitive Shape zones for grids -primitives (zone create) (zone reflect) (zone copy) -dimension...">
+<meta name="twitter:description" content="The intention of grid generation is to fit the model grid to the physical region under study  7.1 Primitive Shape zones for grids -primitives (zone create) (zone reflect) (zone copy) -dimension...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""><p>My <code>FLAC3D</code> Notes</p></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">This Pandoc Repository</a></li>
+<li><a class="" href="my-cumulative-literature-studies.html"><span class="header-section-number">1</span> My Cumulative Literature Studies</a></li>
+<li><a class="" href="template-name.html"><span class="header-section-number">2</span> Template: Name</a></li>
+<li><a class="" href="working-with-fish-in-flac3d.html"><span class="header-section-number">3</span> Working with FISH in FLAC3D</a></li>
+<li><a class="" href="using-python-with-flac3d.html"><span class="header-section-number">4</span> Using Python with FLAC3D</a></li>
+<li><a class="" href="axial-and-lateral-loading-of-a-concrete-pile.html"><span class="header-section-number">5</span> Axial and Lateral Loading of a Concrete Pile</a></li>
+<li><a class="" href="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"><span class="header-section-number">6</span> Simulation of Pull-Tests for Fully Bonded Rock Reinforcement</a></li>
+<li><a class="active" href="grid-generation.html"><span class="header-section-number">7</span> Grid Generation</a></li>
+<li><a class="" href="weekly-to-do-list.html"><span class="header-section-number">8</span> Weekly To Do List</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/ulyngs/oxforddown">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="grid-generation" class="section level1" number="7">
+<h1>
+<span class="header-section-number">7</span> Grid Generation<a class="anchor" aria-label="anchor" href="#grid-generation"><i class="fas fa-link"></i></a>
+</h1>
+<p>The intention of grid generation is to fit the model grid to the physical region under study</p>
+<div id="primitive-shape" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Primitive Shape<a class="anchor" aria-label="anchor" href="#primitive-shape"><i class="fas fa-link"></i></a>
+</h2>
+<p>zones for grids
+-primitives (zone create) (zone reflect) (zone copy)</p>
+<p>-dimension
+-edge
+-fill
+-point
+-ratio
+-size</p>
+<p>-extrusions
+-building blocks
+(mutually exclusive)
+-3rd party tool Rhino and mesher Griddle</p>
+<p>selection of right mesh generation method
+and efficient deploymentis a critical part</p>
+<p><em>note: zone create generates primitive grid
+</em>note: zone gridpoint create puts gridpoints at specific locations
+<em>note: zone gridpoint merge ensures separate primitives are connected properly
+</em>note: zone attach connects primitive meshes of different zone sizes.
+each shape has specific type of grid connectivity.</p>
+<p>keywords for zone create:
+brick, weidge, uniform-wedge, tetrahedron, pyramid, cylinder, degenerate-brick, radial-brick, radial-tunnel, radial-cylinder, cylindrical-shell, cylindrical-intersection, tunnel-intersection(parallelpiped-shaped tunnels)</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="grid-generation.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb23-2"><a href="grid-generation.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">zone create radial-cylinder size 5 10 6 12 fill</span></span>
+<span id="cb23-3"><a href="grid-generation.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">zone create radial-cylinder size 5 10 6 12 ratio 1 1 1 5</span></span>
+<span id="cb23-4"><a href="grid-generation.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">each size is controlled by a ratio (geometric ratio of 1.2 times preceding zone)</span></span>
+<span id="cb23-5"><a href="grid-generation.html#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+<p>ex) 5 along innder radius of cylindrical tunnel,
+10 along axis
+6 along circumference of tunnel
+12 between periphery of tunnel and outer boundary of moel
+*note: size keyword defines the number of zones in the grid.</p>
+<p>keywords for zone create
+-dimension
+-edge
+-fill
+-point (boundary dimensions)
+-ratio (coarser toward edge)
+-size</p>
+</div>
+<div id="several-primitive-shapes-connected" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> several primitive shapes connected:<a class="anchor" aria-label="anchor" href="#several-primitive-shapes-connected"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="grid-generation.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb24-2"><a href="grid-generation.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">zone create radial-cylinder size 5 10 6 12 rat 1 1 1 1.2 ...</span></span>
+<span id="cb24-3"><a href="grid-generation.html#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">                           point 0 (0,0,0) point 1 (100,0,0) ...</span></span>
+<span id="cb24-4"><a href="grid-generation.html#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">                           point 2 (0,200,0) point 3 (0,0,100)</span></span>
+<span id="cb24-5"><a href="grid-generation.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">zone create radial-tunnel size 5 10 5 12 rat 1 1 1 1.2 ...</span></span>
+<span id="cb24-6"><a href="grid-generation.html#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">                          point 0 (0,0,0) point 1 (0,0,-100) ...</span></span>
+<span id="cb24-7"><a href="grid-generation.html#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">                          point 2 (0,200,0) point 3 (100,0,0)</span></span>
+<span id="cb24-8"><a href="grid-generation.html#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">; here, model boundary dimensions are 100, 200, 100</span></span>
+<span id="cb24-9"><a href="grid-generation.html#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">; boundary coord are defined using point keyword</span></span>
+<span id="cb24-10"><a href="grid-generation.html#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="grid-generation.html#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">zone reflect dip 90 dip-direction 270 origin (0,0,0) </span></span>
+<span id="cb24-12"><a href="grid-generation.html#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+<p>this adds symmetric part
+*note: The symmetry plane is a vertical plane (located by the dip, dip-direction, and origin keywords) coincident with the x = 0 plane. Note that dip angle (dip) and dip direction (dip-direction) assume that x corresponds to “East,” y to “North,” and z to “Up.”</p>
+<p>third option, the zone gridpoint create command, is available to position single points in the model region.
+*note: zone gridpoint create is used for positioning reference points of primitives</p>
+<p>During execution of a zone create command, a check is made for each boundary gridpoint against the boundary gridpoints of zones that already exist.
+If two boundary gridpoints fall within a tolerance of 1 ? 10-7 (relative to the magnitude of the gridpoints position vector) of each other, they are assumed to be the same point,
+If it is discovered that some gridpoints don’t match, the zone gridpoint merge command can be used to merge these gridpoints after the zone create command has been applied.</p>
+<p>(zone attach) - Two unequal sub-grids</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="grid-generation.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb25-2"><a href="grid-generation.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">zone create brick size 4 4 2 point 0 (0,0,0) point 1 (4,0,0) ...</span></span>
+<span id="cb25-3"><a href="grid-generation.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">                             point 2 (0,4,0) point 3 (0,0,2)</span></span>
+<span id="cb25-4"><a href="grid-generation.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">zone create brick size 8 8 4 point 0 (0,0,2) point 1 (4,0,2) ...</span></span>
+<span id="cb25-5"><a href="grid-generation.html#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">                             point 2 (0,4,2) point 3 (0,0,4)</span></span>
+<span id="cb25-6"><a href="grid-generation.html#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">zone attach by-face range position-z 2</span></span>
+<span id="cb25-7"><a href="grid-generation.html#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+<p>(zone densify)</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="grid-generation.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb26-2"><a href="grid-generation.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">zone create brick size 4 4 4</span></span>
+<span id="cb26-3"><a href="grid-generation.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">zone densify segments 2 range position-x 2 4</span></span>
+<span id="cb26-4"><a href="grid-generation.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+<p>the first two command lines can be changed to
+where zone densify segments 2 refines the upper zones (between the z-coordinate of 2 and 4) with the segment number of 2 on each edge.</p>
+</div>
+<div id="structural-element-operation" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Structural Element Operation<a class="anchor" aria-label="anchor" href="#structural-element-operation"><i class="fas fa-link"></i></a>
+</h2>
+<p>Creating a liner in the service tunnel</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="grid-generation.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb27-2"><a href="grid-generation.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">; liner</span></span>
+<span id="cb27-3"><a href="grid-generation.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">structure shell create by-face range cylinder ...</span></span>
+<span id="cb27-4"><a href="grid-generation.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">                                     end-1 (0,0,-1) end-2 (0,50,-1) ...</span></span>
+<span id="cb27-5"><a href="grid-generation.html#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">                                     radius 3</span></span>
+<span id="cb27-6"><a href="grid-generation.html#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+<p>The liner contains 240 structural shell elements and is connected to the FLAC3D grid at 143 structural-node links. The grid with the liner is shown below.</p>
+</div>
+<div id="densifying-grid-by-specifying-max-size-length" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Densifying grid by specifying max size length<a class="anchor" aria-label="anchor" href="#densifying-grid-by-specifying-max-size-length"><i class="fas fa-link"></i></a>
+</h2>
+<div id="densify-a-grid-by-specifying-the-maximum-size-length" class="section level3" number="7.4.1">
+<h3>
+<span class="header-section-number">7.4.1</span> Densify a grid by specifying the maximum size length<a class="anchor" aria-label="anchor" href="#densify-a-grid-by-specifying-the-maximum-size-length"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="grid-generation.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb28-2"><a href="grid-generation.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">model new</span></span>
+<span id="cb28-3"><a href="grid-generation.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">zone create brick size 4 4 4</span></span>
+<span id="cb28-4"><a href="grid-generation.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">plot 'Brick' export bitmap filename 'densify3.png'</span></span>
+<span id="cb28-5"><a href="grid-generation.html#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co">;</span></span>
+<span id="cb28-6"><a href="grid-generation.html#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co">zone densify local maximum-length (0.5,0.5,0.4) range position-z 2 4</span></span>
+<span id="cb28-7"><a href="grid-generation.html#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">zone attach by-face</span></span>
+<span id="cb28-8"><a href="grid-generation.html#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co">;</span></span>
+<span id="cb28-9"><a href="grid-generation.html#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co">plot 'Brick' export bitmap filename 'densify4.png'</span></span>
+<span id="cb28-10"><a href="grid-generation.html#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+<p>note that in the local z-direction, the maximum size length is 0.4. FLAC3D densifies the maximum length in this direction to be 1/3 (= 0.4)
+The zone attach by-face command in this example is used to attach faces of sub-grids together rigidly to form a single grid</p>
+<p>Always use the zone attach by-face command after the zone densify command if there are different numbers of gridpoints along faces of different zones.</p>
+</div>
+<div id="densify-a-grid-using-geometric-information" class="section level3" number="7.4.2">
+<h3>
+<span class="header-section-number">7.4.2</span> Densify a grid using geometric information<a class="anchor" aria-label="anchor" href="#densify-a-grid-using-geometric-information"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="grid-generation.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb29-2"><a href="grid-generation.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">model new</span></span>
+<span id="cb29-3"><a href="grid-generation.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">zone create brick size 10 10 10</span></span>
+<span id="cb29-4"><a href="grid-generation.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">;</span></span>
+<span id="cb29-5"><a href="grid-generation.html#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">geometry set "setA" polygon create ...</span></span>
+<span id="cb29-6"><a href="grid-generation.html#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">                    by-positions (0,0,1) ( 5,0, 1) ( 5,10, 1) (0,10,1)</span></span>
+<span id="cb29-7"><a href="grid-generation.html#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co">geometry set "setA" polygon create ...</span></span>
+<span id="cb29-8"><a href="grid-generation.html#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co">                    by-positions (5,0,1) (10,0, 5) (10,10, 5) (5,10,1)</span></span>
+<span id="cb29-9"><a href="grid-generation.html#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co">geometry set "setB" polygon create ...</span></span>
+<span id="cb29-10"><a href="grid-generation.html#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co">                    by-positions (0,0,5) ( 5,0, 5) ( 5,10, 5) (0,10,5)</span></span>
+<span id="cb29-11"><a href="grid-generation.html#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co">geometry set "setB" polygon create ...</span></span>
+<span id="cb29-12"><a href="grid-generation.html#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co">                    by-positions (5,0,5) (10,0,10) (10,10,10) (5,10,5)</span></span>
+<span id="cb29-13"><a href="grid-generation.html#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="co">plot 'Brick2' export bitmap filename 'densify5.png'</span></span>
+<span id="cb29-14"><a href="grid-generation.html#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="grid-generation.html#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co">zone densify segments 2 range geometry-space "setA" set "setB" count 1</span></span>
+<span id="cb29-16"><a href="grid-generation.html#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co">zone attach by-face</span></span>
+<span id="cb29-17"><a href="grid-generation.html#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="co">;</span></span>
+<span id="cb29-18"><a href="grid-generation.html#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="co">plot 'Brick2' export bitmap filename 'densify6.png'</span></span>
+<span id="cb29-19"><a href="grid-generation.html#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+<!--------------------------------------------------->
+<!--------------------------------------------------->
+<!--------------------------------------------------->
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"><span class="header-section-number">6</span> Simulation of Pull-Tests for Fully Bonded Rock Reinforcement</a></div>
+<div class="next"><a href="weekly-to-do-list.html"><span class="header-section-number">8</span> Weekly To Do List</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#grid-generation"><span class="header-section-number">7</span> Grid Generation</a></li>
+<li><a class="nav-link" href="#primitive-shape"><span class="header-section-number">7.1</span> Primitive Shape</a></li>
+<li><a class="nav-link" href="#several-primitive-shapes-connected"><span class="header-section-number">7.2</span> several primitive shapes connected:</a></li>
+<li><a class="nav-link" href="#structural-element-operation"><span class="header-section-number">7.3</span> Structural Element Operation</a></li>
+<li>
+<a class="nav-link" href="#densifying-grid-by-specifying-max-size-length"><span class="header-section-number">7.4</span> Densifying grid by specifying max size length</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#densify-a-grid-by-specifying-the-maximum-size-length"><span class="header-section-number">7.4.1</span> Densify a grid by specifying the maximum size length</a></li>
+<li><a class="nav-link" href="#densify-a-grid-using-geometric-information"><span class="header-section-number">7.4.2</span> Densify a grid using geometric information</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/ulyngs/oxforddown/blob/master/01-how-to-use.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/ulyngs/oxforddown/edit/master/01-how-to-use.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong><p>My <code>FLAC3D</code> Notes</p></strong>" was written by Kyeong Sun Kim. </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
