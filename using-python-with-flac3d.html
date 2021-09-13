@@ -4,21 +4,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>4 Using Python with FLAC3D | My FLAC3D Notes</title>
+<title>2 Using Python with FLAC3D | My FLAC3D Notes</title>
 <meta name="author" content="Kyeong Sun Kim">
 <meta name="generator" content="bookdown 0.23 with bs4_book()">
-<meta property="og:title" content="4 Using Python with FLAC3D | My FLAC3D Notes">
+<meta property="og:title" content="2 Using Python with FLAC3D | My FLAC3D Notes">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="4 Using Python with FLAC3D | My FLAC3D Notes">
+<meta name="twitter:title" content="2 Using Python with FLAC3D | My FLAC3D Notes">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="templates/bs4_style.css">
 <link rel="stylesheet" href="templates/corrections.css">
-<meta name="description" content='4.1 Zones """ *note: it.zone.count() # 1000 *note: z = it.zone.find(1) *note: for z in it.zone.list(): *note: z = it.zone.near((5,5,5)) *note: z.pos() *note: z.vol() """  4.2 Properties """ *note:...'>
-<meta property="og:description" content='4.1 Zones """ *note: it.zone.count() # 1000 *note: z = it.zone.find(1) *note: for z in it.zone.list(): *note: z = it.zone.near((5,5,5)) *note: z.pos() *note: z.vol() """  4.2 Properties """ *note:...'>
-<meta name="twitter:description" content='4.1 Zones """ *note: it.zone.count() # 1000 *note: z = it.zone.find(1) *note: for z in it.zone.list(): *note: z = it.zone.near((5,5,5)) *note: z.pos() *note: z.vol() """  4.2 Properties """ *note:...'>
+<meta name="description" content='2.1 Zones """ *note: it.zone.count() # 1000 *note: z = it.zone.find(1) *note: for z in it.zone.list(): *note: z = it.zone.near((5,5,5)) *note: z.pos() *note: z.vol() """  2.2 Properties """ *note:...'>
+<meta property="og:description" content='2.1 Zones """ *note: it.zone.count() # 1000 *note: z = it.zone.find(1) *note: for z in it.zone.list(): *note: z = it.zone.near((5,5,5)) *note: z.pos() *note: z.vol() """  2.2 Properties """ *note:...'>
+<meta name="twitter:description" content='2.1 Zones """ *note: it.zone.count() # 1000 *note: z = it.zone.find(1) *note: for z in it.zone.list(): *note: z = it.zone.near((5,5,5)) *note: z.pos() *note: z.vol() """  2.2 Properties """ *note:...'>
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -40,15 +40,15 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">This Pandoc Repository</a></li>
-<li><a class="" href="my-cumulative-literature-studies.html"><span class="header-section-number">1</span> My Cumulative Literature Studies</a></li>
-<li><a class="" href="template-name.html"><span class="header-section-number">2</span> Template: Name</a></li>
-<li><a class="" href="working-with-fish-in-flac3d.html"><span class="header-section-number">3</span> Working with FISH in FLAC3D</a></li>
-<li><a class="active" href="using-python-with-flac3d.html"><span class="header-section-number">4</span> Using Python with FLAC3D</a></li>
-<li><a class="" href="axial-and-lateral-loading-of-a-concrete-pile.html"><span class="header-section-number">5</span> Axial and Lateral Loading of a Concrete Pile</a></li>
-<li><a class="" href="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"><span class="header-section-number">6</span> Simulation of Pull-Tests for Fully Bonded Rock Reinforcement</a></li>
-<li><a class="" href="grid-generation.html"><span class="header-section-number">7</span> Grid Generation</a></li>
-<li><a class="" href="weekly-to-do-list.html"><span class="header-section-number">8</span> Weekly To Do List</a></li>
+<li><a class="" href="index.html">This Pandoc</a></li>
+<li><a class="" href="working-with-fish-in-flac3d.html"><span class="header-section-number">1</span> Working with FISH in FLAC3D</a></li>
+<li><a class="active" href="using-python-with-flac3d.html"><span class="header-section-number">2</span> Using Python with FLAC3D</a></li>
+<li><a class="" href="axial-and-lateral-loading-of-a-concrete-pile.html"><span class="header-section-number">3</span> Axial and Lateral Loading of a Concrete Pile</a></li>
+<li><a class="" href="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"><span class="header-section-number">4</span> Simulation of Pull-Tests for Fully Bonded Rock Reinforcement</a></li>
+<li><a class="" href="grid-generation.html"><span class="header-section-number">5</span> Grid Generation</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="appendix-1.-template.html"><span class="header-section-number">A</span> Appendix 1. Template</a></li>
+<li><a class="" href="appendix-2.-weekly-to-do-list.html"><span class="header-section-number">B</span> Appendix 2. Weekly To Do List</a></li>
 </ul>
 
         <div class="book-extra">
@@ -56,13 +56,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="using-python-with-flac3d" class="section level1" number="4">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="using-python-with-flac3d" class="section level1" number="2">
 <h1>
-<span class="header-section-number">4</span> Using Python with FLAC3D<a class="anchor" aria-label="anchor" href="#using-python-with-flac3d"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2</span> Using Python with FLAC3D<a class="anchor" aria-label="anchor" href="#using-python-with-flac3d"><i class="fas fa-link"></i></a>
 </h1>
-<div id="zones-2" class="section level2" number="4.1">
+<div id="zones-1" class="section level2" number="2.1">
 <h2>
-<span class="header-section-number">4.1</span> Zones<a class="anchor" aria-label="anchor" href="#zones-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.1</span> Zones<a class="anchor" aria-label="anchor" href="#zones-1"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="using-python-with-flac3d.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb1-2"><a href="using-python-with-flac3d.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">*note: it.zone.count() # 1000</span></span>
@@ -73,9 +73,9 @@
 <span id="cb1-7"><a href="using-python-with-flac3d.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">*note: z.vol()</span></span>
 <span id="cb1-8"><a href="using-python-with-flac3d.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
 </div>
-<div id="properties-1" class="section level2" number="4.2">
+<div id="properties" class="section level2" number="2.2">
 <h2>
-<span class="header-section-number">4.2</span> Properties<a class="anchor" aria-label="anchor" href="#properties-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2</span> Properties<a class="anchor" aria-label="anchor" href="#properties"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="using-python-with-flac3d.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb2-2"><a href="using-python-with-flac3d.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">*note: z.props() or z.props()['bulk']</span></span>
@@ -83,9 +83,9 @@
 <span id="cb2-4"><a href="using-python-with-flac3d.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">*note: z.set_prop('bulk', 8.5e9)</span></span>
 <span id="cb2-5"><a href="using-python-with-flac3d.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
 </div>
-<div id="gridpoints" class="section level2" number="4.3">
+<div id="gridpoints" class="section level2" number="2.3">
 <h2>
-<span class="header-section-number">4.3</span> Gridpoints<a class="anchor" aria-label="anchor" href="#gridpoints"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3</span> Gridpoints<a class="anchor" aria-label="anchor" href="#gridpoints"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="using-python-with-flac3d.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb3-2"><a href="using-python-with-flac3d.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">*note: gp = it.gridpoint.near((2,2,2))</span></span>
@@ -94,9 +94,9 @@
 <span id="cb3-5"><a href="using-python-with-flac3d.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">*note: z.vol()*z.density()*1000</span></span>
 <span id="cb3-6"><a href="using-python-with-flac3d.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
 </div>
-<div id="structural-elements" class="section level2" number="4.4">
+<div id="structural-elements" class="section level2" number="2.4">
 <h2>
-<span class="header-section-number">4.4</span> Structural Elements<a class="anchor" aria-label="anchor" href="#structural-elements"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4</span> Structural Elements<a class="anchor" aria-label="anchor" href="#structural-elements"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="using-python-with-flac3d.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb4-2"><a href="using-python-with-flac3d.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">*note: it.structure.list()</span></span>
@@ -106,9 +106,9 @@
 <span id="cb4-6"><a href="using-python-with-flac3d.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">*note: s_node.links()[0]</span></span>
 <span id="cb4-7"><a href="using-python-with-flac3d.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
 </div>
-<div id="extra-variables" class="section level2" number="4.5">
+<div id="extra-variables" class="section level2" number="2.5">
 <h2>
-<span class="header-section-number">4.5</span> Extra Variables<a class="anchor" aria-label="anchor" href="#extra-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5</span> Extra Variables<a class="anchor" aria-label="anchor" href="#extra-variables"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="using-python-with-flac3d.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb5-2"><a href="using-python-with-flac3d.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">*note: z.set_extra(1, 1.23)</span></span>
@@ -116,9 +116,9 @@
 <span id="cb5-4"><a href="using-python-with-flac3d.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">*note: z.set_extra(1, gp.pos())</span></span>
 <span id="cb5-5"><a href="using-python-with-flac3d.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
 </div>
-<div id="groups-and-b.c." class="section level2" number="4.6">
+<div id="groups-and-b.c." class="section level2" number="2.6">
 <h2>
-<span class="header-section-number">4.6</span> Groups and B.C.<a class="anchor" aria-label="anchor" href="#groups-and-b.c."><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6</span> Groups and B.C.<a class="anchor" aria-label="anchor" href="#groups-and-b.c."><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="using-python-with-flac3d.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb6-2"><a href="using-python-with-flac3d.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">*note: if z.group("default") == "lower":</span></span>
@@ -129,9 +129,9 @@
 <span id="cb6-7"><a href="using-python-with-flac3d.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">*note: it.zone.near((5,5,5)).strain()</span></span>
 <span id="cb6-8"><a href="using-python-with-flac3d.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
 </div>
-<div id="parameteric-studies" class="section level2" number="4.7">
+<div id="parameteric-studies" class="section level2" number="2.7">
 <h2>
-<span class="header-section-number">4.7</span> Parameteric Studies<a class="anchor" aria-label="anchor" href="#parameteric-studies"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7</span> Parameteric Studies<a class="anchor" aria-label="anchor" href="#parameteric-studies"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="using-python-with-flac3d.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb7-2"><a href="using-python-with-flac3d.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">*note: for modulus in [6e9, 8e9, 10e9, 12e9]:</span></span>
@@ -144,9 +144,9 @@
 <span id="cb7-9"><a href="using-python-with-flac3d.html#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">print "~~~".format(modulus,vertical_disp)</span></span>
 <span id="cb7-10"><a href="using-python-with-flac3d.html#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
 </div>
-<div id="setting-fish-variables" class="section level2" number="4.8">
+<div id="setting-fish-variables" class="section level2" number="2.8">
 <h2>
-<span class="header-section-number">4.8</span> Setting FISH variables<a class="anchor" aria-label="anchor" href="#setting-fish-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8</span> Setting FISH variables<a class="anchor" aria-label="anchor" href="#setting-fish-variables"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="using-python-with-flac3d.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb8-2"><a href="using-python-with-flac3d.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">import itasca as it</span></span>
@@ -154,9 +154,9 @@
 <span id="cb8-4"><a href="using-python-with-flac3d.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">it.fish.set('x', 10)</span></span>
 <span id="cb8-5"><a href="using-python-with-flac3d.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">x = it.fish.get('x') yields 10</span></span>
 <span id="cb8-6"><a href="using-python-with-flac3d.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
-<div id="issuing-command" class="section level3" number="4.8.1">
+<div id="issuing-command" class="section level3" number="2.8.1">
 <h3>
-<span class="header-section-number">4.8.1</span> Issuing Command<a class="anchor" aria-label="anchor" href="#issuing-command"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8.1</span> Issuing Command<a class="anchor" aria-label="anchor" href="#issuing-command"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="using-python-with-flac3d.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb9-2"><a href="using-python-with-flac3d.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">import itasca as it</span></span>
@@ -177,9 +177,9 @@
 <span id="cb9-17"><a href="using-python-with-flac3d.html#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
 </div>
 </div>
-<div id="string" class="section level2" number="4.9">
+<div id="string" class="section level2" number="2.9">
 <h2>
-<span class="header-section-number">4.9</span> String<a class="anchor" aria-label="anchor" href="#string"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.9</span> String<a class="anchor" aria-label="anchor" href="#string"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="using-python-with-flac3d.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb10-2"><a href="using-python-with-flac3d.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">"The value of x is {:.2f}".format(0.3872)</span></span>
@@ -195,23 +195,23 @@
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="working-with-fish-in-flac3d.html"><span class="header-section-number">3</span> Working with FISH in FLAC3D</a></div>
-<div class="next"><a href="axial-and-lateral-loading-of-a-concrete-pile.html"><span class="header-section-number">5</span> Axial and Lateral Loading of a Concrete Pile</a></div>
+<div class="prev"><a href="working-with-fish-in-flac3d.html"><span class="header-section-number">1</span> Working with FISH in FLAC3D</a></div>
+<div class="next"><a href="axial-and-lateral-loading-of-a-concrete-pile.html"><span class="header-section-number">3</span> Axial and Lateral Loading of a Concrete Pile</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#using-python-with-flac3d"><span class="header-section-number">4</span> Using Python with FLAC3D</a></li>
-<li><a class="nav-link" href="#zones-2"><span class="header-section-number">4.1</span> Zones</a></li>
-<li><a class="nav-link" href="#properties-1"><span class="header-section-number">4.2</span> Properties</a></li>
-<li><a class="nav-link" href="#gridpoints"><span class="header-section-number">4.3</span> Gridpoints</a></li>
-<li><a class="nav-link" href="#structural-elements"><span class="header-section-number">4.4</span> Structural Elements</a></li>
-<li><a class="nav-link" href="#extra-variables"><span class="header-section-number">4.5</span> Extra Variables</a></li>
-<li><a class="nav-link" href="#groups-and-b.c."><span class="header-section-number">4.6</span> Groups and B.C.</a></li>
-<li><a class="nav-link" href="#parameteric-studies"><span class="header-section-number">4.7</span> Parameteric Studies</a></li>
+<li><a class="nav-link" href="#using-python-with-flac3d"><span class="header-section-number">2</span> Using Python with FLAC3D</a></li>
+<li><a class="nav-link" href="#zones-1"><span class="header-section-number">2.1</span> Zones</a></li>
+<li><a class="nav-link" href="#properties"><span class="header-section-number">2.2</span> Properties</a></li>
+<li><a class="nav-link" href="#gridpoints"><span class="header-section-number">2.3</span> Gridpoints</a></li>
+<li><a class="nav-link" href="#structural-elements"><span class="header-section-number">2.4</span> Structural Elements</a></li>
+<li><a class="nav-link" href="#extra-variables"><span class="header-section-number">2.5</span> Extra Variables</a></li>
+<li><a class="nav-link" href="#groups-and-b.c."><span class="header-section-number">2.6</span> Groups and B.C.</a></li>
+<li><a class="nav-link" href="#parameteric-studies"><span class="header-section-number">2.7</span> Parameteric Studies</a></li>
 <li>
-<a class="nav-link" href="#setting-fish-variables"><span class="header-section-number">4.8</span> Setting FISH variables</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#issuing-command"><span class="header-section-number">4.8.1</span> Issuing Command</a></li></ul>
+<a class="nav-link" href="#setting-fish-variables"><span class="header-section-number">2.8</span> Setting FISH variables</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#issuing-command"><span class="header-section-number">2.8.1</span> Issuing Command</a></li></ul>
 </li>
-<li><a class="nav-link" href="#string"><span class="header-section-number">4.9</span> String</a></li>
+<li><a class="nav-link" href="#string"><span class="header-section-number">2.9</span> String</a></li>
 </ul>
 
       <div class="book-extra">
