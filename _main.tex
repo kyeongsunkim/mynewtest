@@ -359,27 +359,24 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{"""}
-\CommentTok{; radial{-}cylinder}
+\OperatorTok{;}\NormalTok{ radial}\OperatorTok{{-}}\NormalTok{cylinder}
 
-\CommentTok{; create a radially graded mesh around cylindrical{-}shaped tunnel}
-\CommentTok{; 12 reference points, 4 size entries, 4 dimension entries, fill{-}able}
-\CommentTok{zone create radial{-}cylinder point 0 (0,0,0)  point 1 (40000,0,0) ...}
-\CommentTok{                            point 2 (0,7450,0) point 3 (0,0,40000) ...}
-\CommentTok{                            size 1000 7450 1570 40000 rat 1 1 1 1.2 ...}
-\CommentTok{                            fill group \textquotesingle{}shaft\textquotesingle{}}
-\CommentTok{zone reflect dip 90 dip{-}direction 90 origin (0,0,0)}
+\OperatorTok{;}\NormalTok{ create a radially graded mesh around cylindrical}\OperatorTok{{-}}\NormalTok{shaped tunnel}
+\OperatorTok{;} \DecValTok{12}\NormalTok{ reference points, }\DecValTok{4}\NormalTok{ size entries, }\DecValTok{4}\NormalTok{ dimension entries, fill}\OperatorTok{{-}}\NormalTok{able}
+\NormalTok{zone create radial}\OperatorTok{{-}}\NormalTok{cylinder point }\DecValTok{0}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)  point }\DecValTok{1}\NormalTok{ (}\DecValTok{40000}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                            point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{7450}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{40000}\NormalTok{) ...}
+\NormalTok{                            size }\DecValTok{1000} \DecValTok{7450} \DecValTok{1570} \DecValTok{40000}\NormalTok{ rat }\DecValTok{1} \DecValTok{1} \DecValTok{1} \FloatTok{1.2}\NormalTok{ ...}
+\NormalTok{                            fill group }\StringTok{\textquotesingle{}shaft\textquotesingle{}}
+\NormalTok{zone reflect dip }\DecValTok{90}\NormalTok{ dip}\OperatorTok{{-}}\NormalTok{direction }\DecValTok{90}\NormalTok{ origin (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
 
-\CommentTok{; radial{-}brick}
-\CommentTok{; create a radially graded mesh around brick}
-\CommentTok{; 15 reference points, 4 size entries, 3 dimension entries, fill{-}able}
-\CommentTok{zone create radial{-}cylinder point 0 (0,7450,0)  point 1 (40000,0,0) ...}
-\CommentTok{                            point 2 (0,20000,0) point 3 (0,0,40000) ...}
-\CommentTok{                            size 1000 12550 1570 40000 rat 1 1 1 1.2 ...}
-\CommentTok{                            fill group \textquotesingle{}brick\textquotesingle{}}
-\CommentTok{zone reflect dip 90 dip{-}direction 90 origin (0,0,0)}
-
-\CommentTok{"""}
+\OperatorTok{;}\NormalTok{ radial}\OperatorTok{{-}}\NormalTok{brick}
+\OperatorTok{;}\NormalTok{ create a radially graded mesh around brick}
+\OperatorTok{;} \DecValTok{15}\NormalTok{ reference points, }\DecValTok{4}\NormalTok{ size entries, }\DecValTok{3}\NormalTok{ dimension entries, fill}\OperatorTok{{-}}\NormalTok{able}
+\NormalTok{zone create radial}\OperatorTok{{-}}\NormalTok{cylinder point }\DecValTok{0}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{7450}\NormalTok{,}\DecValTok{0}\NormalTok{)  point }\DecValTok{1}\NormalTok{ (}\DecValTok{40000}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                            point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{20000}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{40000}\NormalTok{) ...}
+\NormalTok{                            size }\DecValTok{1000} \DecValTok{12550} \DecValTok{1570} \DecValTok{40000}\NormalTok{ rat }\DecValTok{1} \DecValTok{1} \DecValTok{1} \FloatTok{1.2}\NormalTok{ ...}
+\NormalTok{                            fill group }\StringTok{\textquotesingle{}brick\textquotesingle{}}
+\NormalTok{zone reflect dip }\DecValTok{90}\NormalTok{ dip}\OperatorTok{{-}}\NormalTok{direction }\DecValTok{90}\NormalTok{ origin (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
