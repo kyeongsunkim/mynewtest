@@ -180,13 +180,13 @@
 \fancyhead[RE]{\emph{\rightmark}} 
 
 % UL page number position 
-\fancyfoot[C]{\emph{\thepage}} %regular pages
-\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\emph{\thepage}}} %chapter pages
+\fancyfoot[R]{\emph{\thepage}} %regular pages
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[R]{\emph{\thepage}}} %chapter pages
 
 % JEM fix header on cleared pages for openright
 \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
    \hbox{}
-   \fancyfoot[C]{}
+   \fancyfoot[R]{}
    \newpage
    \if@twocolumn\hbox{}\newpage
    \fi
@@ -294,9 +294,9 @@
 % do.  Throughout, 0 = chapter; 1 = section; 2 = subsection; 3 = subsubsection, 4 = paragraph...
 
 % The level that gets a number:
-\setcounter{secnumdepth}{2}
+\setcounter{secnumdepth}{3}
 % The level that shows up in the ToC:
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{2}
 
 
 %%%%% ABSTRACT SEPARATE
@@ -350,6 +350,14 @@
 \minitoc
 
 \newpage
+
+\begin{savequote}
+There is grandeur in this view of life, with its several powers, having
+been originally breathed into a few forms or into one; and that, whilst
+this planet has gone cycling on according to the fixed law of gravity,
+from so simple a beginning endless forms most beautiful and most
+wonderful have been, and are being, evolved.
+\qauthor{Charles Darwin(1809-1882)}\end{savequote}
 
 \hypertarget{kaist-centrifuge-model}{%
 \chapter{KAIST Centrifuge Model}\label{kaist-centrifuge-model}}
