@@ -4,21 +4,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>1 KAIST Model | My FLAC3D Notes</title>
+<title>1 KAIST Model | FLAC3D Gitbook</title>
 <meta name="author" content="Kyeong Sun Kim">
 <meta name="generator" content="bookdown 0.23 with bs4_book()">
-<meta property="og:title" content="1 KAIST Model | My FLAC3D Notes">
+<meta property="og:title" content="1 KAIST Model | FLAC3D Gitbook">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1 KAIST Model | My FLAC3D Notes">
+<meta name="twitter:title" content="1 KAIST Model | FLAC3D Gitbook">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="templates/bs4_style.css">
 <link rel="stylesheet" href="templates/corrections.css">
-<meta name="description" content="1.1 Grid Generation ; radial-cylinder ; create a radially graded mesh around cylindrical-shaped tunnel ; 12 reference points, 4 size entries, 4 dimension entries, fill-able zone create...">
-<meta property="og:description" content="1.1 Grid Generation ; radial-cylinder ; create a radially graded mesh around cylindrical-shaped tunnel ; 12 reference points, 4 size entries, 4 dimension entries, fill-able zone create...">
-<meta name="twitter:description" content="1.1 Grid Generation ; radial-cylinder ; create a radially graded mesh around cylindrical-shaped tunnel ; 12 reference points, 4 size entries, 4 dimension entries, fill-able zone create...">
+<meta name="description" content='1.1 Initial Configuration import itasca as it import numpy as np np.set_printoptions(threshold=20) it.command("python-reset-state false") from itasca import zonearray as za from itasca import...'>
+<meta property="og:description" content='1.1 Initial Configuration import itasca as it import numpy as np np.set_printoptions(threshold=20) it.command("python-reset-state false") from itasca import zonearray as za from itasca import...'>
+<meta name="twitter:description" content='1.1 Initial Configuration import itasca as it import numpy as np np.set_printoptions(threshold=20) it.command("python-reset-state false") from itasca import zonearray as za from itasca import...'>
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -28,7 +28,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title=""><p>My <code>FLAC3D</code> Notes</p></a>
+        <a href="index.html" title=""><p><code>FLAC3D</code> Gitbook</p></a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -40,16 +40,14 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">This Pandoc</a></li>
+<li><a class="" href="index.html">Welcome</a></li>
 <li><a class="active" href="kaist-model.html"><span class="header-section-number">1</span> KAIST Model</a></li>
-<li><a class="" href="kaist-model-using-python.html"><span class="header-section-number">2</span> KAIST Model Using Python</a></li>
-<li><a class="" href="axial-and-lateral-loading-of-a-concrete-pile.html"><span class="header-section-number">3</span> Axial and Lateral Loading of a Concrete Pile</a></li>
-<li><a class="" href="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"><span class="header-section-number">4</span> Simulation of Pull-Tests for Fully Bonded Rock Reinforcement</a></li>
-<li><a class="" href="grid-generation-1.html"><span class="header-section-number">5</span> Grid Generation</a></li>
-<li><a class="" href="using-python-with-flac3d.html"><span class="header-section-number">6</span> Using Python with FLAC3D</a></li>
+<li><a class="" href="pull-tests.html"><span class="header-section-number">2</span> Pull-Tests</a></li>
+<li><a class="" href="grid.html"><span class="header-section-number">3</span> Grid</a></li>
+<li><a class="" href="python-with-flac3d.html"><span class="header-section-number">4</span> Python with FLAC3D</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="appendix-1.-template.html"><span class="header-section-number">A</span> Appendix 1. Template</a></li>
-<li><a class="" href="literature-compilation.html"><span class="header-section-number">B</span> Literature Compilation</a></li>
+<li><a class="" href="template.html"><span class="header-section-number">A</span> 1. Template</a></li>
+<li><a class="" href="reference-collective.html"><span class="header-section-number">B</span> Reference Collective</a></li>
 </ul>
 
         <div class="book-extra">
@@ -61,85 +59,304 @@
 <h1>
 <span class="header-section-number">1</span> KAIST Model<a class="anchor" aria-label="anchor" href="#kaist-model"><i class="fas fa-link"></i></a>
 </h1>
-<div id="grid-generation" class="section level2" number="1.1">
+<div id="initial-configuration" class="section level2" number="1.1">
 <h2>
-<span class="header-section-number">1.1</span> Grid Generation<a class="anchor" aria-label="anchor" href="#grid-generation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1</span> Initial Configuration<a class="anchor" aria-label="anchor" href="#initial-configuration"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="kaist-model.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> radial<span class="op">-</span>cylinder</span>
-<span id="cb1-2"><a href="kaist-model.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="kaist-model.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> create a radially graded mesh around cylindrical<span class="op">-</span>shaped tunnel</span>
-<span id="cb1-4"><a href="kaist-model.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> <span class="dv">12</span> reference points, <span class="dv">4</span> size entries, <span class="dv">4</span> dimension entries, fill<span class="op">-</span>able</span>
-<span id="cb1-5"><a href="kaist-model.html#cb1-5" aria-hidden="true" tabindex="-1"></a>zone create radial<span class="op">-</span>cylinder point <span class="dv">0</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)  point <span class="dv">1</span> (<span class="dv">40000</span>,<span class="dv">0</span>,<span class="dv">0</span>) ...</span>
-<span id="cb1-6"><a href="kaist-model.html#cb1-6" aria-hidden="true" tabindex="-1"></a>                            point <span class="dv">2</span> (<span class="dv">0</span>,<span class="dv">7450</span>,<span class="dv">0</span>) point <span class="dv">3</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">40000</span>) ...</span>
-<span id="cb1-7"><a href="kaist-model.html#cb1-7" aria-hidden="true" tabindex="-1"></a>                            size <span class="dv">1000</span> <span class="dv">7450</span> <span class="dv">1570</span> <span class="dv">40000</span> rat <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="fl">1.2</span> ...</span>
-<span id="cb1-8"><a href="kaist-model.html#cb1-8" aria-hidden="true" tabindex="-1"></a>                            fill group <span class="st">'shaft'</span></span>
-<span id="cb1-9"><a href="kaist-model.html#cb1-9" aria-hidden="true" tabindex="-1"></a>zone reflect dip <span class="dv">90</span> dip<span class="op">-</span>direction <span class="dv">90</span> origin (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
-<span id="cb1-10"><a href="kaist-model.html#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="kaist-model.html#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> radial<span class="op">-</span>brick</span>
-<span id="cb1-12"><a href="kaist-model.html#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> create a radially graded mesh around brick</span>
-<span id="cb1-13"><a href="kaist-model.html#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> <span class="dv">15</span> reference points, <span class="dv">4</span> size entries, <span class="dv">3</span> dimension entries, fill<span class="op">-</span>able</span>
-<span id="cb1-14"><a href="kaist-model.html#cb1-14" aria-hidden="true" tabindex="-1"></a>zone create radial<span class="op">-</span>cylinder point <span class="dv">0</span> (<span class="dv">0</span>,<span class="dv">7450</span>,<span class="dv">0</span>)  point <span class="dv">1</span> (<span class="dv">40000</span>,<span class="dv">0</span>,<span class="dv">0</span>) ...</span>
-<span id="cb1-15"><a href="kaist-model.html#cb1-15" aria-hidden="true" tabindex="-1"></a>                            point <span class="dv">2</span> (<span class="dv">0</span>,<span class="dv">20000</span>,<span class="dv">0</span>) point <span class="dv">3</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">40000</span>) ...</span>
-<span id="cb1-16"><a href="kaist-model.html#cb1-16" aria-hidden="true" tabindex="-1"></a>                            size <span class="dv">1000</span> <span class="dv">12550</span> <span class="dv">1570</span> <span class="dv">40000</span> rat <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="fl">1.2</span> ...</span>
-<span id="cb1-17"><a href="kaist-model.html#cb1-17" aria-hidden="true" tabindex="-1"></a>                            fill group <span class="st">'brick'</span></span>
-<span id="cb1-18"><a href="kaist-model.html#cb1-18" aria-hidden="true" tabindex="-1"></a>zone reflect dip <span class="dv">90</span> dip<span class="op">-</span>direction <span class="dv">90</span> origin (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span></code></pre></div>
-<div class="inline-figure"><img src="myfigureeeeee/radialbrick.PNG" width="100%"></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="kaist-model.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
+<span id="cb1-2"><a href="kaist-model.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="kaist-model.html#cb1-3" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(threshold<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb1-4"><a href="kaist-model.html#cb1-4" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"python-reset-state false"</span>)</span>
+<span id="cb1-5"><a href="kaist-model.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> zonearray <span class="im">as</span> za</span>
+<span id="cb1-6"><a href="kaist-model.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> gridpointarray <span class="im">as</span> gpa</span></code></pre></div>
 </div>
-<div id="groups" class="section level2" number="1.2">
+<div id="zones" class="section level2" number="1.2">
 <h2>
-<span class="header-section-number">1.2</span> Groups<a class="anchor" aria-label="anchor" href="#groups"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.2</span> Zones<a class="anchor" aria-label="anchor" href="#zones"><i class="fas fa-link"></i></a>
 </h2>
+<div class="inline-figure"><img src="myfigureeeeee/final-block.png" width="100%"></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="kaist-model.html#cb2-1" aria-hidden="true" tabindex="-1"></a>model new</span>
+<span id="cb2-2"><a href="kaist-model.html#cb2-2" aria-hidden="true" tabindex="-1"></a>zone create radial<span class="op">-</span>cylinder point <span class="dv">0</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) ...</span>
+<span id="cb2-3"><a href="kaist-model.html#cb2-3" aria-hidden="true" tabindex="-1"></a>                            point <span class="dv">1</span> (<span class="dv">40</span>,<span class="dv">0</span>,<span class="dv">0</span>) ...</span>
+<span id="cb2-4"><a href="kaist-model.html#cb2-4" aria-hidden="true" tabindex="-1"></a>                            point <span class="dv">2</span> (<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">0</span>) ...</span>
+<span id="cb2-5"><a href="kaist-model.html#cb2-5" aria-hidden="true" tabindex="-1"></a>                            point <span class="dv">3</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">40</span>) ...</span>
+<span id="cb2-6"><a href="kaist-model.html#cb2-6" aria-hidden="true" tabindex="-1"></a>                            point <span class="dv">4</span> (<span class="dv">40</span>,<span class="dv">10</span>,<span class="dv">0</span>) ...</span>
+<span id="cb2-7"><a href="kaist-model.html#cb2-7" aria-hidden="true" tabindex="-1"></a>                            point <span class="dv">5</span> (<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">40</span>) ...</span>
+<span id="cb2-8"><a href="kaist-model.html#cb2-8" aria-hidden="true" tabindex="-1"></a>                            point <span class="dv">6</span> (<span class="dv">40</span>,<span class="dv">0</span>,<span class="dv">40</span>) ...</span>
+<span id="cb2-9"><a href="kaist-model.html#cb2-9" aria-hidden="true" tabindex="-1"></a>                            point <span class="dv">7</span> (<span class="dv">40</span>,<span class="dv">10</span>,<span class="dv">40</span>) ...</span>
+<span id="cb2-10"><a href="kaist-model.html#cb2-10" aria-hidden="true" tabindex="-1"></a>                            point <span class="dv">8</span> (<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>) ...</span>
+<span id="cb2-11"><a href="kaist-model.html#cb2-11" aria-hidden="true" tabindex="-1"></a>                            point <span class="dv">9</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>) ...</span>
+<span id="cb2-12"><a href="kaist-model.html#cb2-12" aria-hidden="true" tabindex="-1"></a>                            point <span class="dv">10</span> (<span class="dv">1</span>,<span class="dv">10</span>,<span class="dv">0</span>) ...</span>
+<span id="cb2-13"><a href="kaist-model.html#cb2-13" aria-hidden="true" tabindex="-1"></a>                            point <span class="dv">11</span> (<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">1</span>) ...</span>
+<span id="cb2-14"><a href="kaist-model.html#cb2-14" aria-hidden="true" tabindex="-1"></a>                            size <span class="dv">10</span> <span class="dv">20</span> <span class="dv">26</span> <span class="dv">40</span> ...</span>
+<span id="cb2-15"><a href="kaist-model.html#cb2-15" aria-hidden="true" tabindex="-1"></a>                            rat <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="fl">1.5</span> ...</span>
+<span id="cb2-16"><a href="kaist-model.html#cb2-16" aria-hidden="true" tabindex="-1"></a>                            fill group <span class="st">"shaft"</span></span>
+<span id="cb2-17"><a href="kaist-model.html#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="kaist-model.html#cb2-18" aria-hidden="true" tabindex="-1"></a>zone group <span class="st">"plate"</span> <span class="bu">range</span> position<span class="op">-</span>x <span class="dv">0</span> <span class="fl">3.2</span> position<span class="op">-</span>y <span class="fl">8.5</span> <span class="dv">10</span> position<span class="op">-</span>z <span class="dv">0</span> <span class="fl">3.2</span></span></code></pre></div>
+<div class="inline-figure"><img src="myfigureeeeee/abc.PNG" width="100%"></div>
 </div>
-<div id="properties" class="section level2" number="1.3">
+<div id="group" class="section level2" number="1.3">
 <h2>
-<span class="header-section-number">1.3</span> Properties<a class="anchor" aria-label="anchor" href="#properties"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.3</span> Group<a class="anchor" aria-label="anchor" href="#group"><i class="fas fa-link"></i></a>
 </h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="kaist-model.html#cb3-1" aria-hidden="true" tabindex="-1"></a>zone group <span class="st">"plate"</span> <span class="bu">range</span> position<span class="op">-</span>x <span class="dv">0</span> <span class="fl">3.2</span> position<span class="op">-</span>y <span class="fl">8.5</span> <span class="dv">10</span> position<span class="op">-</span>z <span class="dv">0</span> <span class="fl">3.2</span></span></code></pre></div>
 </div>
-<div id="elements" class="section level2" number="1.4">
+<div id="constitutive-model" class="section level2" number="1.4">
 <h2>
-<span class="header-section-number">1.4</span> Elements<a class="anchor" aria-label="anchor" href="#elements"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.4</span> Constitutive Model<a class="anchor" aria-label="anchor" href="#constitutive-model"><i class="fas fa-link"></i></a>
 </h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="kaist-model.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Constitutive model and properties for soil</span></span>
+<span id="cb4-2"><a href="kaist-model.html#cb4-2" aria-hidden="true" tabindex="-1"></a>zone cmodel assign strain<span class="op">-</span>softening <span class="bu">range</span> group <span class="st">"Radial Cylinder1"</span></span>
+<span id="cb4-3"><a href="kaist-model.html#cb4-3" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> density <span class="dv">2500</span> bulk <span class="fl">2e8</span> shear <span class="fl">1e8</span> <span class="bu">range</span> group <span class="st">"Radial Cylinder1"</span></span>
+<span id="cb4-4"><a href="kaist-model.html#cb4-4" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> cohesion <span class="fl">2e6</span> friction <span class="dv">45</span> tension <span class="fl">2e5</span> dilation <span class="dv">10</span> <span class="bu">range</span> group <span class="st">"Radial Cylinder1"</span></span>
+<span id="cb4-5"><a href="kaist-model.html#cb4-5" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> table<span class="op">-</span>friction <span class="st">'fri'</span> table<span class="op">-</span>cohesion <span class="st">'coh'</span> table<span class="op">-</span>dilation <span class="st">'dil'</span> <span class="bu">range</span> group <span class="st">"Radial Cylinder1"</span></span>
+<span id="cb4-6"><a href="kaist-model.html#cb4-6" aria-hidden="true" tabindex="-1"></a>table <span class="st">'fri'</span> add (<span class="dv">0</span>, <span class="dv">45</span>) (<span class="fl">.05</span>, <span class="dv">42</span>) (<span class="fl">.1</span>, <span class="dv">40</span>) (<span class="dv">1</span>, <span class="dv">40</span>)</span>
+<span id="cb4-7"><a href="kaist-model.html#cb4-7" aria-hidden="true" tabindex="-1"></a>table <span class="st">'coh'</span> add (<span class="dv">0</span>,<span class="fl">2e6</span>) (<span class="fl">.05</span>,<span class="fl">1e6</span>) (<span class="fl">.1</span>,<span class="fl">5e5</span>) (<span class="dv">1</span>,<span class="fl">5e5</span>) </span>
+<span id="cb4-8"><a href="kaist-model.html#cb4-8" aria-hidden="true" tabindex="-1"></a>table <span class="st">'dil'</span> add (<span class="dv">0</span>, <span class="dv">10</span>) (<span class="fl">.05</span>,  <span class="dv">3</span>) (<span class="fl">.1</span>,  <span class="dv">0</span>) </span></code></pre></div>
+<div class="inline-figure"><img src="myfigureeeeee/concrete-properties.PNG" width="100%"></div>
+<p>#Constitutive model and properties for shaft and plate
+zone cmodel assign elastic range group ‘shaft’
+zone property bulk 8.333e7 shear 3.846e7 range group ‘shaft’
+zone cmodel assign elastic range group ‘plate’
+zone property bulk 8.333e7 shear 3.846e7 range group ‘plate’</p>
+<pre><code>
+&lt;img src="myfigureeeeee/d.PNG" width="100%" /&gt;
+
+## Soil-Structure Interface
+
+## Boundary Conditions
+
+## Initial Equilibrium
+
+## Alterations
+
+## Results
+
+
+&lt;!---------------------------------------------------&gt;
+&lt;!---------------------------------------------------&gt;
+&lt;!---------------------------------------------------&gt;
+\newpage
+
+# Axial Concrete Pile
+
+
+## Problem Description
+### Problem Statement
+The pile is subjected to an axial load of 100 kN,
+and then the top of the pile is moved horizontally for a displacement of 4 cm.
+The goal is to determine relation of axial loading to the ultimate bearing capacity.
+And, lateral load-deflection curve is calculated.
+
+1) origin at the top of the pile, z upward.
+2) z=0: free surface
+3) z=-8: fixed in z-eirection
+4) x=+8, -8, y = 8: roller
+5) skin friction is modeled by placing an interface
+between pile concrete wall and clay.
+In it, fric angle of 20 and c=30kPa are assumed.
+6) toe interface is placed between pile tip and clay
+*note: Zone faces are separated in a previous command so that the gridpoints common to both will be separated as well.* \
+*note: include Figure of grid (geometry)*
+
+### Main Parameters
+Diameter = 0.6 m \
+Length = 5  \
+Clay \
+GWT = 5.5m \
+
+## Modeling Procedure
+1) equil. stress state under gravity load before install. \
+1-1) water table is created at z=5.5 \
+1-2) wet density of clay is assigned below this water table. \
+2) equil. stress state after installation. \
+2-1) change properties of pile zones from those  \
+representing clay to those representing concrete. \
+2-2) vertical equil. stress distribution at this equil. state is shown in \
+*note: include Figure of contours of vertical stress at ini state incld. pile weight* \
+3) apply vertical velocity at top of pile \
+"ramp" = boundary condition is increased linearly \
+*note: critical timestep is controlled by high stiffness of concrete* \
+If velocity is sudden, inertial effects will dominate and renders difficulty to identification of steady state response of system \
+table "ramp" is used to apply velocity to pile top gridpoints. \
+*note: FISH FUNCTION vert_load calculates axial stress at the top of pile and stores value as a history* \
+For efficiency, gridpoints on cap surface are stored in symbol "cap" as a map \
+*note: include plot of axial stress vs axial displ. at pile toe. ramp = (0,5e-8), step number = 30000* \
+*note: combined damping is used to remove kinetic energy for prescribed loading condition. This is because mass-adjustment process depends on velocity sign-changes..* \
+*note: FISH FUNCTION tot_reac monitors soil reaction along pile as a func of lateral displ. tot_reac creates tables of soil reaction (p) vs. lateral displ (y) at diff. locations along pile to generate p-y curve.* \
+*note: include Figure of p-y curve at 11 equidistant points along pile* \
+
+## Zones
+
+```python
+model new
+model title 'Axial and lateral loading of a concrete pile'
+; create grid interactively from the extruder tool, 
+; exported to geometry.f3dat from State Record pane.
+call 'geometry' suppress
+zone generate from-extruder
+; Reflect the grid to get a 1/2 space instead of a 1/4 space
+zone reflect dip-direction 270 dip 90</code></pre>
 </div>
-<div id="b.c.-and-i.c." class="section level2" number="1.5">
+<div id="groups" class="section level2" number="1.5">
 <h2>
-<span class="header-section-number">1.5</span> B.C. and I.C.<a class="anchor" aria-label="anchor" href="#b.c.-and-i.c."><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5</span> Groups<a class="anchor" aria-label="anchor" href="#groups"><i class="fas fa-link"></i></a>
 </h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="kaist-model.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Name intersections of things named <span class="kw">in</span> the two extruder views</span>
+<span id="cb6-2"><a href="kaist-model.html#cb6-2" aria-hidden="true" tabindex="-1"></a>zone group <span class="st">'clay'</span> <span class="bu">range</span> group <span class="st">'clay-c'</span> <span class="kw">or</span> <span class="st">'clay-s'</span> <span class="kw">or</span> <span class="st">'wetclay-s'</span></span>
+<span id="cb6-3"><a href="kaist-model.html#cb6-3" aria-hidden="true" tabindex="-1"></a>zone group <span class="st">'pile'</span> <span class="bu">range</span> group <span class="st">'pile-c'</span> group <span class="st">'pile-s'</span> <span class="kw">or</span> <span class="st">'remove-s'</span></span>
+<span id="cb6-4"><a href="kaist-model.html#cb6-4" aria-hidden="true" tabindex="-1"></a>zone group <span class="st">'remove'</span> <span class="bu">range</span> group <span class="st">'remove-s'</span> group <span class="st">'pile-c'</span> <span class="kw">not</span> <span class="op">;</span> </span>
+<span id="cb6-5"><a href="kaist-model.html#cb6-5" aria-hidden="true" tabindex="-1"></a>zone face group <span class="st">'wall'</span> internal <span class="bu">range</span> group <span class="st">'wall-c'</span> group <span class="st">'pile'</span></span>
+<span id="cb6-6"><a href="kaist-model.html#cb6-6" aria-hidden="true" tabindex="-1"></a>zone face group <span class="st">'base'</span> internal <span class="bu">range</span> group <span class="st">'base-s'</span> group <span class="st">'pile'</span></span>
+<span id="cb6-7"><a href="kaist-model.html#cb6-7" aria-hidden="true" tabindex="-1"></a>zone face skin <span class="op">;</span> Name far field boundaries</span>
+<span id="cb6-8"><a href="kaist-model.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Delete the area marked <span class="cf">for</span> removal</span>
+<span id="cb6-9"><a href="kaist-model.html#cb6-9" aria-hidden="true" tabindex="-1"></a>zone delete <span class="bu">range</span> group <span class="st">'remove'</span></span>
+<span id="cb6-10"><a href="kaist-model.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
+<span id="cb6-11"><a href="kaist-model.html#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> setup interfaces</span>
+<span id="cb6-12"><a href="kaist-model.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> separate using zone separate</span>
+<span id="cb6-13"><a href="kaist-model.html#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> <span class="bu">all</span> at once so common nodes are separated</span>
+<span id="cb6-14"><a href="kaist-model.html#cb6-14" aria-hidden="true" tabindex="-1"></a>zone separate by<span class="op">-</span>face new<span class="op">-</span>side group <span class="st">'iwall'</span> slot <span class="st">'int'</span> ...</span>
+<span id="cb6-15"><a href="kaist-model.html#cb6-15" aria-hidden="true" tabindex="-1"></a>     <span class="bu">range</span> group <span class="st">'wall'</span> <span class="kw">or</span> <span class="st">'base'</span></span>
+<span id="cb6-16"><a href="kaist-model.html#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Want two different interfaces <span class="cf">for</span> proper normal direction at corner</span>
+<span id="cb6-17"><a href="kaist-model.html#cb6-17" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'side'</span> create by<span class="op">-</span>face <span class="bu">range</span> group <span class="st">'wall'</span> <span class="kw">and</span> <span class="st">'iwall'</span></span>
+<span id="cb6-18"><a href="kaist-model.html#cb6-18" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'base'</span> create by<span class="op">-</span>face <span class="bu">range</span> group <span class="st">'base'</span> <span class="kw">and</span> <span class="st">'iwall'</span></span>
+<span id="cb6-19"><a href="kaist-model.html#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Save initial geometric state</span>
+<span id="cb6-20"><a href="kaist-model.html#cb6-20" aria-hidden="true" tabindex="-1"></a>model save <span class="st">'geometry'</span></span></code></pre></div>
 </div>
-<div id="initial-equilibrium" class="section level2" number="1.6">
+<div id="properties" class="section level2" number="1.6">
 <h2>
-<span class="header-section-number">1.6</span> Initial Equilibrium<a class="anchor" aria-label="anchor" href="#initial-equilibrium"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6</span> Properties<a class="anchor" aria-label="anchor" href="#properties"><i class="fas fa-link"></i></a>
 </h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="kaist-model.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Initialize gravity, pore<span class="op">-</span>pressures, density, <span class="kw">and</span> stres state</span>
+<span id="cb7-2"><a href="kaist-model.html#cb7-2" aria-hidden="true" tabindex="-1"></a>model gravity <span class="dv">10</span></span>
+<span id="cb7-3"><a href="kaist-model.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> water table information</span>
+<span id="cb7-4"><a href="kaist-model.html#cb7-4" aria-hidden="true" tabindex="-1"></a>zone water density <span class="dv">1000</span></span>
+<span id="cb7-5"><a href="kaist-model.html#cb7-5" aria-hidden="true" tabindex="-1"></a>zone water plane origin (<span class="dv">0</span>,<span class="dv">0</span>,<span class="op">-</span><span class="fl">5.5</span>) normal (<span class="dv">0</span>,<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb7-6"><a href="kaist-model.html#cb7-6" aria-hidden="true" tabindex="-1"></a>zone initialize density <span class="dv">1230</span></span>
+<span id="cb7-7"><a href="kaist-model.html#cb7-7" aria-hidden="true" tabindex="-1"></a>zone initialize density <span class="dv">1550</span> <span class="bu">range</span> group <span class="st">'wetclay-s'</span> <span class="op">;</span> Wet density</span>
+<span id="cb7-8"><a href="kaist-model.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> assign properties to the soil <span class="kw">and</span> interfaces <span class="op">-</span> temporarily remove pile cap</span>
+<span id="cb7-9"><a href="kaist-model.html#cb7-9" aria-hidden="true" tabindex="-1"></a>zone cmodel assign mohr<span class="op">-</span>coulomb ...</span>
+<span id="cb7-10"><a href="kaist-model.html#cb7-10" aria-hidden="true" tabindex="-1"></a>     <span class="bu">range</span> group <span class="st">'clay'</span></span>
+<span id="cb7-11"><a href="kaist-model.html#cb7-11" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">8.333e7</span>  shear <span class="fl">3.846e7</span>  cohesion <span class="dv">30000</span> fric <span class="dv">0</span> ...</span>
+<span id="cb7-12"><a href="kaist-model.html#cb7-12" aria-hidden="true" tabindex="-1"></a>     <span class="bu">range</span> group <span class="st">'clay'</span></span>
+<span id="cb7-13"><a href="kaist-model.html#cb7-13" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic                 <span class="bu">range</span> group <span class="st">'pile'</span></span>
+<span id="cb7-14"><a href="kaist-model.html#cb7-14" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">8.333e7</span>  shear <span class="fl">3.846e7</span>  <span class="bu">range</span> group <span class="st">'pile'</span></span>
+<span id="cb7-15"><a href="kaist-model.html#cb7-15" aria-hidden="true" tabindex="-1"></a>zone cmodel assign null                    <span class="bu">range</span> group <span class="st">'remove-s'</span></span>
+<span id="cb7-16"><a href="kaist-model.html#cb7-16" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'side'</span> node <span class="bu">property</span> stiffness<span class="op">-</span>normal <span class="fl">1e8</span> ...</span>
+<span id="cb7-17"><a href="kaist-model.html#cb7-17" aria-hidden="true" tabindex="-1"></a>                           stiffness<span class="op">-</span>shear <span class="fl">1e8</span> friction <span class="dv">20</span> cohesion <span class="dv">30000</span></span>
+<span id="cb7-18"><a href="kaist-model.html#cb7-18" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'base'</span> node <span class="bu">property</span> stiffness<span class="op">-</span>normal <span class="fl">1e8</span> ...</span>
+<span id="cb7-19"><a href="kaist-model.html#cb7-19" aria-hidden="true" tabindex="-1"></a>                           stiffness<span class="op">-</span>shear <span class="fl">1e8</span> friction <span class="dv">20</span> cohesion <span class="dv">30000</span></span></code></pre></div>
 </div>
-<div id="alterations" class="section level2" number="1.7">
+<div id="b.c.-and-i.c." class="section level2" number="1.7">
 <h2>
-<span class="header-section-number">1.7</span> Alterations<a class="anchor" aria-label="anchor" href="#alterations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.7</span> B.C. and I.C.<a class="anchor" aria-label="anchor" href="#b.c.-and-i.c."><i class="fas fa-link"></i></a>
 </h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="kaist-model.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> boundary <span class="kw">and</span> initial stress conditions</span>
+<span id="cb8-2"><a href="kaist-model.html#cb8-2" aria-hidden="true" tabindex="-1"></a>zone face <span class="bu">apply</span> velocity<span class="op">-</span>normal <span class="dv">0</span> <span class="bu">range</span> group <span class="st">'Bottom'</span></span>
+<span id="cb8-3"><a href="kaist-model.html#cb8-3" aria-hidden="true" tabindex="-1"></a>zone face <span class="bu">apply</span> velocity<span class="op">-</span>normal <span class="dv">0</span> <span class="bu">range</span> group <span class="st">'East'</span> <span class="kw">or</span> <span class="st">'West'</span></span>
+<span id="cb8-4"><a href="kaist-model.html#cb8-4" aria-hidden="true" tabindex="-1"></a>zone face <span class="bu">apply</span> velocity<span class="op">-</span>normal <span class="dv">0</span> <span class="bu">range</span> group <span class="st">'North'</span> <span class="kw">or</span> <span class="st">'South'</span></span>
+<span id="cb8-5"><a href="kaist-model.html#cb8-5" aria-hidden="true" tabindex="-1"></a>zone initialize<span class="op">-</span>stress ratio <span class="fl">0.4286</span></span>
+<span id="cb8-6"><a href="kaist-model.html#cb8-6" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'side'</span> node initialize<span class="op">-</span>stresses</span>
+<span id="cb8-7"><a href="kaist-model.html#cb8-7" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'base'</span> node initialize<span class="op">-</span>stresses</span></code></pre></div>
 </div>
-<div id="results" class="section level2" number="1.8">
+<div id="initial-equilibrium" class="section level2" number="1.8">
 <h2>
-<span class="header-section-number">1.8</span> Results<a class="anchor" aria-label="anchor" href="#results"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.8</span> Initial Equilibrium<a class="anchor" aria-label="anchor" href="#initial-equilibrium"><i class="fas fa-link"></i></a>
 </h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="kaist-model.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Solve to initial equilibrium</span>
+<span id="cb9-2"><a href="kaist-model.html#cb9-2" aria-hidden="true" tabindex="-1"></a>zone ratio local</span>
+<span id="cb9-3"><a href="kaist-model.html#cb9-3" aria-hidden="true" tabindex="-1"></a>model solve ratio <span class="fl">1e-4</span></span>
+<span id="cb9-4"><a href="kaist-model.html#cb9-4" aria-hidden="true" tabindex="-1"></a>model save <span class="st">'initial'</span></span></code></pre></div>
+</div>
+<div id="alterations" class="section level2" number="1.9">
+<h2>
+<span class="header-section-number">1.9</span> Alterations<a class="anchor" aria-label="anchor" href="#alterations"><i class="fas fa-link"></i></a>
+</h2>
+<div id="install-the-pile" class="section level3" number="1.9.1">
+<h3>
+<span class="header-section-number">1.9.1</span> install the pile<a class="anchor" aria-label="anchor" href="#install-the-pile"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="kaist-model.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> install the pile</span>
+<span id="cb10-2"><a href="kaist-model.html#cb10-2" aria-hidden="true" tabindex="-1"></a>model restore <span class="st">'initial'</span></span>
+<span id="cb10-3"><a href="kaist-model.html#cb10-3" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic                          <span class="bu">range</span> group <span class="st">'pile'</span></span>
+<span id="cb10-4"><a href="kaist-model.html#cb10-4" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">13.9e9</span> shear <span class="fl">10.4e9</span> density <span class="dv">2500</span> <span class="bu">range</span> group <span class="st">'pile'</span></span>
+<span id="cb10-5"><a href="kaist-model.html#cb10-5" aria-hidden="true" tabindex="-1"></a>model solve ratio <span class="fl">1e-4</span></span>
+<span id="cb10-6"><a href="kaist-model.html#cb10-6" aria-hidden="true" tabindex="-1"></a>model save <span class="st">'install'</span></span></code></pre></div>
+</div>
+<div id="vertical-loading" class="section level3" number="1.9.2">
+<h3>
+<span class="header-section-number">1.9.2</span> vertical loading<a class="anchor" aria-label="anchor" href="#vertical-loading"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="kaist-model.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> vertical loading</span>
+<span id="cb11-2"><a href="kaist-model.html#cb11-2" aria-hidden="true" tabindex="-1"></a>zone initialize state <span class="dv">0</span></span>
+<span id="cb11-3"><a href="kaist-model.html#cb11-3" aria-hidden="true" tabindex="-1"></a>zone gridpoint initialize displacement (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb11-4"><a href="kaist-model.html#cb11-4" aria-hidden="true" tabindex="-1"></a>zone gridpoint initialize velocity     (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) </span>
+<span id="cb11-5"><a href="kaist-model.html#cb11-5" aria-hidden="true" tabindex="-1"></a>table <span class="st">'ramp'</span> add ([<span class="kw">global</span>.step],<span class="dv">0</span>) ([<span class="kw">global</span>.step<span class="op">+</span><span class="dv">30000</span>],<span class="op">-</span><span class="fl">5e-8</span>) ...</span>
+<span id="cb11-6"><a href="kaist-model.html#cb11-6" aria-hidden="true" tabindex="-1"></a>      ([<span class="kw">global</span>.step<span class="op">+</span><span class="dv">58000</span>],<span class="op">-</span><span class="fl">5e-8</span>) <span class="op">;</span> Increase velocity applied to pile</span>
+<span id="cb11-7"><a href="kaist-model.html#cb11-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="op">;</span> over <span class="dv">30</span>,<span class="dv">000</span> steps</span>
+<span id="cb11-8"><a href="kaist-model.html#cb11-8" aria-hidden="true" tabindex="-1"></a>zone face <span class="bu">apply</span> velocity<span class="op">-</span>normal <span class="dv">1</span> table <span class="st">'ramp'</span> <span class="bu">range</span> group <span class="st">'Top'</span></span>
+<span id="cb11-9"><a href="kaist-model.html#cb11-9" aria-hidden="true" tabindex="-1"></a>history interval <span class="dv">250</span></span>
+<span id="cb11-10"><a href="kaist-model.html#cb11-10" aria-hidden="true" tabindex="-1"></a>zone history name <span class="st">'disp'</span> displacement<span class="op">-</span>z position (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb11-11"><a href="kaist-model.html#cb11-11" aria-hidden="true" tabindex="-1"></a>call <span class="st">'load'</span></span>
+<span id="cb11-12"><a href="kaist-model.html#cb11-12" aria-hidden="true" tabindex="-1"></a>fish history name <span class="st">'load'</span> <span class="op">@</span>vert_load</span>
+<span id="cb11-13"><a href="kaist-model.html#cb11-13" aria-hidden="true" tabindex="-1"></a>zone mechanical damping combined</span>
+<span id="cb11-14"><a href="kaist-model.html#cb11-14" aria-hidden="true" tabindex="-1"></a>model step <span class="dv">58000</span></span>
+<span id="cb11-15"><a href="kaist-model.html#cb11-15" aria-hidden="true" tabindex="-1"></a>model save <span class="st">'vertical-loading'</span></span></code></pre></div>
+</div>
+<div id="vertical-then-lateral-loading" class="section level3" number="1.9.3">
+<h3>
+<span class="header-section-number">1.9.3</span> vertical then lateral loading<a class="anchor" aria-label="anchor" href="#vertical-then-lateral-loading"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="kaist-model.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> vertical loading then lateral loading</span>
+<span id="cb12-2"><a href="kaist-model.html#cb12-2" aria-hidden="true" tabindex="-1"></a>model restore <span class="st">'install'</span></span>
+<span id="cb12-3"><a href="kaist-model.html#cb12-3" aria-hidden="true" tabindex="-1"></a>zone initialize state <span class="dv">0</span></span>
+<span id="cb12-4"><a href="kaist-model.html#cb12-4" aria-hidden="true" tabindex="-1"></a>zone gridpoint initialize displacement (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb12-5"><a href="kaist-model.html#cb12-5" aria-hidden="true" tabindex="-1"></a>zone gridpoint initialize velocity     (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) </span>
+<span id="cb12-6"><a href="kaist-model.html#cb12-6" aria-hidden="true" tabindex="-1"></a>zone face <span class="bu">apply</span> stress<span class="op">-</span>zz [<span class="op">-</span><span class="fl">1.0e5</span><span class="op">/</span>(math.pi<span class="op">*</span><span class="fl">0.3</span><span class="op">*</span><span class="fl">0.3</span>)] <span class="bu">range</span> group <span class="st">'Top'</span></span>
+<span id="cb12-7"><a href="kaist-model.html#cb12-7" aria-hidden="true" tabindex="-1"></a>model solve ratio <span class="fl">1e-4</span></span>
+<span id="cb12-8"><a href="kaist-model.html#cb12-8" aria-hidden="true" tabindex="-1"></a>model save <span class="st">'lateral-load-start'</span></span>
+<span id="cb12-9"><a href="kaist-model.html#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="kaist-model.html#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> <span class="bu">apply</span> lateral loading <span class="im">as</span> x<span class="op">-</span>velocity on cap</span>
+<span id="cb12-11"><a href="kaist-model.html#cb12-11" aria-hidden="true" tabindex="-1"></a>zone initialize state <span class="dv">0</span></span>
+<span id="cb12-12"><a href="kaist-model.html#cb12-12" aria-hidden="true" tabindex="-1"></a>zone gridpoint initialize displacement (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb12-13"><a href="kaist-model.html#cb12-13" aria-hidden="true" tabindex="-1"></a>zone gridpoint initialize velocity     (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) </span>
+<span id="cb12-14"><a href="kaist-model.html#cb12-14" aria-hidden="true" tabindex="-1"></a>zone face <span class="bu">apply</span> velocity<span class="op">-</span>x <span class="fl">1e-7</span> <span class="bu">range</span> group <span class="st">'Top'</span></span>
+<span id="cb12-15"><a href="kaist-model.html#cb12-15" aria-hidden="true" tabindex="-1"></a>zone history name <span class="st">'disp'</span> displacement<span class="op">-</span>x position <span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span></span>
+<span id="cb12-16"><a href="kaist-model.html#cb12-16" aria-hidden="true" tabindex="-1"></a>call <span class="st">'p-y'</span> suppress <span class="op">;</span> Calculates p<span class="op">-</span>y curve <span class="cf">for</span> pile, when tot_reac <span class="kw">is</span> called</span>
+<span id="cb12-17"><a href="kaist-model.html#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="at">@make_pydata</span>        <span class="op">;</span> Generate p<span class="op">-</span>y curve calculation data </span>
+<span id="cb12-18"><a href="kaist-model.html#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="at">@output_structure</span>   <span class="op">;</span> Sanity check of p<span class="op">-</span>y curve data </span>
+<span id="cb12-19"><a href="kaist-model.html#cb12-19" aria-hidden="true" tabindex="-1"></a>fish history name <span class="st">'load'</span> <span class="op">@</span>tot_reac</span>
+<span id="cb12-20"><a href="kaist-model.html#cb12-20" aria-hidden="true" tabindex="-1"></a>model step <span class="dv">416500</span></span>
+<span id="cb12-21"><a href="kaist-model.html#cb12-21" aria-hidden="true" tabindex="-1"></a>model save <span class="st">'lateral-load'</span></span></code></pre></div>
 <!--------------------------------------------------->
 <!--------------------------------------------------->
 <!--------------------------------------------------->
 <div style="page-break-after: always;"></div>
 </div>
 </div>
+</div>
   <div class="chapter-nav">
-<div class="prev"><a href="index.html">This Pandoc</a></div>
-<div class="next"><a href="kaist-model-using-python.html"><span class="header-section-number">2</span> KAIST Model Using Python</a></div>
+<div class="prev"><a href="index.html">Welcome</a></div>
+<div class="next"><a href="pull-tests.html"><span class="header-section-number">2</span> Pull-Tests</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#kaist-model"><span class="header-section-number">1</span> KAIST Model</a></li>
-<li><a class="nav-link" href="#grid-generation"><span class="header-section-number">1.1</span> Grid Generation</a></li>
-<li><a class="nav-link" href="#groups"><span class="header-section-number">1.2</span> Groups</a></li>
-<li><a class="nav-link" href="#properties"><span class="header-section-number">1.3</span> Properties</a></li>
-<li><a class="nav-link" href="#elements"><span class="header-section-number">1.4</span> Elements</a></li>
-<li><a class="nav-link" href="#b.c.-and-i.c."><span class="header-section-number">1.5</span> B.C. and I.C.</a></li>
-<li><a class="nav-link" href="#initial-equilibrium"><span class="header-section-number">1.6</span> Initial Equilibrium</a></li>
-<li><a class="nav-link" href="#alterations"><span class="header-section-number">1.7</span> Alterations</a></li>
-<li><a class="nav-link" href="#results"><span class="header-section-number">1.8</span> Results</a></li>
+<li><a class="nav-link" href="#initial-configuration"><span class="header-section-number">1.1</span> Initial Configuration</a></li>
+<li><a class="nav-link" href="#zones"><span class="header-section-number">1.2</span> Zones</a></li>
+<li><a class="nav-link" href="#group"><span class="header-section-number">1.3</span> Group</a></li>
+<li><a class="nav-link" href="#constitutive-model"><span class="header-section-number">1.4</span> Constitutive Model</a></li>
+<li><a class="nav-link" href="#groups"><span class="header-section-number">1.5</span> Groups</a></li>
+<li><a class="nav-link" href="#properties"><span class="header-section-number">1.6</span> Properties</a></li>
+<li><a class="nav-link" href="#b.c.-and-i.c."><span class="header-section-number">1.7</span> B.C. and I.C.</a></li>
+<li><a class="nav-link" href="#initial-equilibrium"><span class="header-section-number">1.8</span> Initial Equilibrium</a></li>
+<li>
+<a class="nav-link" href="#alterations"><span class="header-section-number">1.9</span> Alterations</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#install-the-pile"><span class="header-section-number">1.9.1</span> install the pile</a></li>
+<li><a class="nav-link" href="#vertical-loading"><span class="header-section-number">1.9.2</span> vertical loading</a></li>
+<li><a class="nav-link" href="#vertical-then-lateral-loading"><span class="header-section-number">1.9.3</span> vertical then lateral loading</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -157,7 +374,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong><p>My <code>FLAC3D</code> Notes</p></strong>" was written by Kyeong Sun Kim. </p>
+    <p>"<strong><p><code>FLAC3D</code> Gitbook</p></strong>" was written by Kyeong Sun Kim. </p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

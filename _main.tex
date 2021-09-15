@@ -231,7 +231,7 @@
 
 %%%%% THESIS / TITLE PAGE INFORMATION
 % Everybody needs to complete the following:
-\title{My \texttt{FLAC3D} Notes}
+\title{\texttt{FLAC3D} Gitbook}
 \author{Kyeong Sun Kim}
 \college{Civil and Environmental Engineering}
 
@@ -359,11 +359,11 @@ from so simple a beginning endless forms most beautiful and most
 wonderful have been, and are being, evolved.
 \qauthor{Charles Darwin(1809-1882)}\end{savequote}
 
-\hypertarget{kaist-model-flac3d}{%
-\chapter{KAIST Model FLAC3D}\label{kaist-model-flac3d}}
+\hypertarget{kaist-model}{%
+\chapter{KAIST Model}\label{kaist-model}}
 
-\hypertarget{grid-generation}{%
-\section{Grid Generation}\label{grid-generation}}
+\hypertarget{initial-configuration}{%
+\section{Initial Configuration}\label{initial-configuration}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -373,184 +373,155 @@ wonderful have been, and are being, evolved.
 \NormalTok{it.command(}\StringTok{"python{-}reset{-}state false"}\NormalTok{)}
 \ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ zonearray }\ImportTok{as}\NormalTok{ za}
 \ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ gridpointarray }\ImportTok{as}\NormalTok{ gpa}
-\CommentTok{" =========================================== "}
-\CommentTok{" =============GRID GENERATION=============== "}
-\CommentTok{" =========================================== "}
-\CommentTok{\#}
-\NormalTok{it.command(}\StringTok{"""}
-\StringTok{model new}
-\StringTok{zone create radial{-}cylinder point 0 (0,0,0) ...}
-\StringTok{                            point 1 (40,0,0) ...}
-\StringTok{                            point 2 (0,10,0) ...}
-\StringTok{                            point 3 (0,0,40) ...}
-\StringTok{                            point 4 (40,10,0) ...}
-\StringTok{                            point 5 (0,10,40) ...}
-\StringTok{                            point 6 (40,0,40) ...}
-\StringTok{                            point 7 (40,10,40) ...}
-\StringTok{                            point 8 (1,0,0) ...}
-\StringTok{                            point 9 (0,0,1) ...}
-\StringTok{                            point 10 (1,10,0) ...}
-\StringTok{                            point 11 (0,10,1) ...}
-\StringTok{                            size 10 20 26 40 ...}
-\StringTok{                            rat 1 1 1 1.5 ...}
-\StringTok{                            fill group "shaft"}
-
-\StringTok{zone group "plate" range position{-}x 0 3.2 position{-}y 8.5 10 position{-}z 0 3.2}
-
-
-\StringTok{"""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\hypertarget{zones}{%
+\section{Zones}\label{zones}}
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/final-block}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model new}
+\NormalTok{zone create radial}\OperatorTok{{-}}\NormalTok{cylinder point }\DecValTok{0}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                            point }\DecValTok{1}\NormalTok{ (}\DecValTok{40}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                            point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                            point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{40}\NormalTok{) ...}
+\NormalTok{                            point }\DecValTok{4}\NormalTok{ (}\DecValTok{40}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                            point }\DecValTok{5}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{40}\NormalTok{) ...}
+\NormalTok{                            point }\DecValTok{6}\NormalTok{ (}\DecValTok{40}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{40}\NormalTok{) ...}
+\NormalTok{                            point }\DecValTok{7}\NormalTok{ (}\DecValTok{40}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{40}\NormalTok{) ...}
+\NormalTok{                            point }\DecValTok{8}\NormalTok{ (}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                            point }\DecValTok{9}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{) ...}
+\NormalTok{                            point }\DecValTok{10}\NormalTok{ (}\DecValTok{1}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                            point }\DecValTok{11}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{1}\NormalTok{) ...}
+\NormalTok{                            size }\DecValTok{10} \DecValTok{20} \DecValTok{26} \DecValTok{40}\NormalTok{ ...}
+\NormalTok{                            rat }\DecValTok{1} \DecValTok{1} \DecValTok{1} \FloatTok{1.5}\NormalTok{ ...}
+\NormalTok{                            fill group }\StringTok{"shaft"}
+
+\NormalTok{zone group }\StringTok{"plate"} \BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{x }\DecValTok{0} \FloatTok{3.2}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\FloatTok{8.5} \DecValTok{10}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\DecValTok{0} \FloatTok{3.2}
+\end{Highlighting}
+\end{Shaded}
+
 \includegraphics[width=1\linewidth]{myfigureeeeee/abc}
 
-\hypertarget{groups}{%
-\section{Groups}\label{groups}}
+\hypertarget{group}{%
+\section{Group}\label{group}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{it.command(}\StringTok{"""}
-\StringTok{zone group "plate" range position{-}x 0 3.2 position{-}y 8.5 10 position{-}z 0 3.2}
-\StringTok{           """}\NormalTok{)}
+\NormalTok{zone group }\StringTok{"plate"} \BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{x }\DecValTok{0} \FloatTok{3.2}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\FloatTok{8.5} \DecValTok{10}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\DecValTok{0} \FloatTok{3.2}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{properties}{%
-\section{Properties}\label{properties}}
+\hypertarget{constitutive-model}{%
+\section{Constitutive Model}\label{constitutive-model}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{it.command(}\StringTok{"""}
-\StringTok{; Constitutive model and properties for soil}
-
-\StringTok{zone cmodel assign strain{-}softening range group "Radial Cylinder1"}
-\StringTok{zone property density 2500 bulk 2e8 shear 1e8 range group "Radial Cylinder1"}
-\StringTok{zone property cohesion 2e6 friction 45 tension 2e5 dilation 10 range group "Radial Cylinder1"}
-\StringTok{zone property table{-}friction \textquotesingle{}fri\textquotesingle{} table{-}cohesion \textquotesingle{}coh\textquotesingle{} table{-}dilation \textquotesingle{}dil\textquotesingle{} range group "Radial Cylinder1"}
-\StringTok{table \textquotesingle{}fri\textquotesingle{} add (0, 45) (.05, 42) (.1, 40) (1, 40)}
-\StringTok{table \textquotesingle{}coh\textquotesingle{} add (0,2e6) (.05,1e6) (.1,5e5) (1,5e5) }
-\StringTok{table \textquotesingle{}dil\textquotesingle{} add (0, 10) (.05,  3) (.1,  0) }
-
-\StringTok{; Constitutive model and properties for shaft and plate}
-
-\StringTok{zone cmodel assign elastic range group \textquotesingle{}shaft\textquotesingle{}}
-\StringTok{zone property bulk 8.333e7  shear 3.846e7  range group \textquotesingle{}shaft\textquotesingle{}}
-\StringTok{zone cmodel assign elastic range group \textquotesingle{}plate\textquotesingle{}}
-\StringTok{zone property bulk 8.333e7  shear 3.846e7  range group \textquotesingle{}plate\textquotesingle{}}
-
-\StringTok{"""}\NormalTok{)}
+\CommentTok{\#Constitutive model and properties for soil}
+\NormalTok{zone cmodel assign strain}\OperatorTok{{-}}\NormalTok{softening }\BuiltInTok{range}\NormalTok{ group }\StringTok{"Radial Cylinder1"}
+\NormalTok{zone }\BuiltInTok{property}\NormalTok{ density }\DecValTok{2500}\NormalTok{ bulk }\FloatTok{2e8}\NormalTok{ shear }\FloatTok{1e8} \BuiltInTok{range}\NormalTok{ group }\StringTok{"Radial Cylinder1"}
+\NormalTok{zone }\BuiltInTok{property}\NormalTok{ cohesion }\FloatTok{2e6}\NormalTok{ friction }\DecValTok{45}\NormalTok{ tension }\FloatTok{2e5}\NormalTok{ dilation }\DecValTok{10} \BuiltInTok{range}\NormalTok{ group }\StringTok{"Radial Cylinder1"}
+\NormalTok{zone }\BuiltInTok{property}\NormalTok{ table}\OperatorTok{{-}}\NormalTok{friction }\StringTok{\textquotesingle{}fri\textquotesingle{}}\NormalTok{ table}\OperatorTok{{-}}\NormalTok{cohesion }\StringTok{\textquotesingle{}coh\textquotesingle{}}\NormalTok{ table}\OperatorTok{{-}}\NormalTok{dilation }\StringTok{\textquotesingle{}dil\textquotesingle{}} \BuiltInTok{range}\NormalTok{ group }\StringTok{"Radial Cylinder1"}
+\NormalTok{table }\StringTok{\textquotesingle{}fri\textquotesingle{}}\NormalTok{ add (}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{) (}\FloatTok{.05}\NormalTok{, }\DecValTok{42}\NormalTok{) (}\FloatTok{.1}\NormalTok{, }\DecValTok{40}\NormalTok{) (}\DecValTok{1}\NormalTok{, }\DecValTok{40}\NormalTok{)}
+\NormalTok{table }\StringTok{\textquotesingle{}coh\textquotesingle{}}\NormalTok{ add (}\DecValTok{0}\NormalTok{,}\FloatTok{2e6}\NormalTok{) (}\FloatTok{.05}\NormalTok{,}\FloatTok{1e6}\NormalTok{) (}\FloatTok{.1}\NormalTok{,}\FloatTok{5e5}\NormalTok{) (}\DecValTok{1}\NormalTok{,}\FloatTok{5e5}\NormalTok{) }
+\NormalTok{table }\StringTok{\textquotesingle{}dil\textquotesingle{}}\NormalTok{ add (}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{) (}\FloatTok{.05}\NormalTok{,  }\DecValTok{3}\NormalTok{) (}\FloatTok{.1}\NormalTok{,  }\DecValTok{0}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=1\linewidth]{myfigureeeeee/d}
+\includegraphics[width=1\linewidth]{myfigureeeeee/concrete-properties}
 
-\hypertarget{b.c.-and-i.c.}{%
-\section{B.C. and I.C.}\label{b.c.-and-i.c.}}
+\#Constitutive model and properties for shaft and plate
+zone cmodel assign elastic range group `shaft'
+zone property bulk 8.333e7 shear 3.846e7 range group `shaft'
+zone cmodel assign elastic range group `plate'
+zone property bulk 8.333e7 shear 3.846e7 range group `plate'
 
-\hypertarget{initial-equilibrium}{%
-\section{Initial Equilibrium}\label{initial-equilibrium}}
+\begin{verbatim}
 
-\hypertarget{alterations}{%
-\section{Alterations}\label{alterations}}
+\includegraphics[width=1\linewidth]{myfigureeeeee/d} 
 
-\hypertarget{results}{%
-\section{Results}\label{results}}
+## Soil-Structure Interface
 
+## Boundary Conditions
+
+## Initial Equilibrium
+
+## Alterations
+
+## Results
+
+
+<!--------------------------------------------------->
+<!--------------------------------------------------->
+<!--------------------------------------------------->
 \newpage
 
-\hypertarget{axial-concrete-pile}{%
-\chapter{Axial Concrete Pile}\label{axial-concrete-pile}}
+# Axial Concrete Pile
 
-\hypertarget{problem-description}{%
-\section{Problem Description}\label{problem-description}}
 
-\hypertarget{problem-statement}{%
-\subsection{Problem Statement}\label{problem-statement}}
-
+## Problem Description
+### Problem Statement
 The pile is subjected to an axial load of 100 kN,
 and then the top of the pile is moved horizontally for a displacement of 4 cm.
 The goal is to determine relation of axial loading to the ultimate bearing capacity.
 And, lateral load-deflection curve is calculated.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi})}
-\tightlist
-\item
-  origin at the top of the pile, z upward.
-\item
-  z=0: free surface
-\item
-  z=-8: fixed in z-eirection
-\item
-  x=+8, -8, y = 8: roller
-\item
-  skin friction is modeled by placing an interface
-  between pile concrete wall and clay.
-  In it, fric angle of 20 and c=30kPa are assumed.
-\item
-  toe interface is placed between pile tip and clay
-  \emph{note: Zone faces are separated in a previous command so that the gridpoints common to both will be separated as well.
-  }note: include Figure of grid (geometry)
-\end{enumerate}
+1) origin at the top of the pile, z upward.
+2) z=0: free surface
+3) z=-8: fixed in z-eirection
+4) x=+8, -8, y = 8: roller
+5) skin friction is modeled by placing an interface
+between pile concrete wall and clay.
+In it, fric angle of 20 and c=30kPa are assumed.
+6) toe interface is placed between pile tip and clay
+*note: Zone faces are separated in a previous command so that the gridpoints common to both will be separated as well.* \
+*note: include Figure of grid (geometry)*
 
-\hypertarget{main-parameters}{%
-\subsection{Main Parameters}\label{main-parameters}}
+### Main Parameters
+Diameter = 0.6 m \
+Length = 5  \
+Clay \
+GWT = 5.5m \
 
-Diameter = 0.6 m
-Length = 5 m
-Clay
-GWT = 5.5m
+## Modeling Procedure
+1) equil. stress state under gravity load before install. \
+1-1) water table is created at z=5.5 \
+1-2) wet density of clay is assigned below this water table. \
+2) equil. stress state after installation. \
+2-1) change properties of pile zones from those  \
+representing clay to those representing concrete. \
+2-2) vertical equil. stress distribution at this equil. state is shown in \
+*note: include Figure of contours of vertical stress at ini state incld. pile weight* \
+3) apply vertical velocity at top of pile \
+"ramp" = boundary condition is increased linearly \
+*note: critical timestep is controlled by high stiffness of concrete* \
+If velocity is sudden, inertial effects will dominate and renders difficulty to identification of steady state response of system \
+table "ramp" is used to apply velocity to pile top gridpoints. \
+*note: FISH FUNCTION vert_load calculates axial stress at the top of pile and stores value as a history* \
+For efficiency, gridpoints on cap surface are stored in symbol "cap" as a map \
+*note: include plot of axial stress vs axial displ. at pile toe. ramp = (0,5e-8), step number = 30000* \
+*note: combined damping is used to remove kinetic energy for prescribed loading condition. This is because mass-adjustment process depends on velocity sign-changes..* \
+*note: FISH FUNCTION tot_reac monitors soil reaction along pile as a func of lateral displ. tot_reac creates tables of soil reaction (p) vs. lateral displ (y) at diff. locations along pile to generate p-y curve.* \
+*note: include Figure of p-y curve at 11 equidistant points along pile* \
 
-\hypertarget{modeling-procedure}{%
-\section{Modeling Procedure}\label{modeling-procedure}}
+## Zones
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi})}
-\tightlist
-\item
-  equil. stress state under gravity load before install.
-  1-1) water table is created at z=5.5
-  1-2) wet density of clay is assigned below this water table.
-\item
-  equil. stress state after installation.
-  2-1) change properties of pile zones from those
-  representing clay to those representing concrete.
-  2-2) vertical equil. stress distribution at this equil. state is shown in
-  *note: include Figure of contours of vertical stress at ini state incld. pile weight
-\item
-  apply vertical velocity at top of pile
-  ``ramp'' = boundary condition is increased linearly
-  \emph{note: critical timestep is controlled by high stiffness of concrete
-  If velocity is sudden, inertial effects will dominate and renders difficulty to identification of steady state response of system
-  table ``ramp'' is used to apply velocity to pile top gridpoints.
-  }note: FISH FUNCTION vert\_load calculates axial stress at the top of pile and stores value as a history
-  For efficiency, gridpoints on cap surface are stored in symbol ``cap'' as a map
-  \emph{note: include plot of axial stress vs axial displ. at pile toe. ramp = (0,5e-8), step number = 30000
-  }note: combined damping is used to remove kinetic energy for prescribed loading condition. This is because mass-adjustment process depends on velocity sign-changes..
-  \emph{note: FISH FUNCTION tot\_reac monitors soil reaction along pile as a func of lateral displ. tot\_reac creates tables of soil reaction (p) vs.~lateral displ (y) at diff. locations along pile to generate p-y curve.
-  }note: include Figure of p-y curve at 11 equidistant points along pile
-\end{enumerate}
+```python
+model new
+model title 'Axial and lateral loading of a concrete pile'
+; create grid interactively from the extruder tool, 
+; exported to geometry.f3dat from State Record pane.
+call 'geometry' suppress
+zone generate from-extruder
+; Reflect the grid to get a 1/2 space instead of a 1/4 space
+zone reflect dip-direction 270 dip 90
+\end{verbatim}
 
-\hypertarget{zones}{%
-\section{Zones}\label{zones}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{model new}
-\NormalTok{model title }\StringTok{\textquotesingle{}Axial and lateral loading of a concrete pile\textquotesingle{}}
-\OperatorTok{;}\NormalTok{ create grid interactively }\ImportTok{from}\NormalTok{ the extruder tool, }
-\OperatorTok{;}\NormalTok{ exported to geometry.f3dat }\ImportTok{from}\NormalTok{ State Record pane.}
-\NormalTok{call }\StringTok{\textquotesingle{}geometry\textquotesingle{}}\NormalTok{ suppress}
-\NormalTok{zone generate }\ImportTok{from}\OperatorTok{{-}}\NormalTok{extruder}
-\OperatorTok{;}\NormalTok{ Reflect the grid to get a }\DecValTok{1}\OperatorTok{/}\DecValTok{2}\NormalTok{ space instead of a }\DecValTok{1}\OperatorTok{/}\DecValTok{4}\NormalTok{ space}
-\NormalTok{zone reflect dip}\OperatorTok{{-}}\NormalTok{direction }\DecValTok{270}\NormalTok{ dip }\DecValTok{90}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{groups-1}{%
-\section{Groups}\label{groups-1}}
+\hypertarget{groups}{%
+\section{Groups}\label{groups}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -577,8 +548,8 @@ GWT = 5.5m
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{properties-1}{%
-\section{Properties}\label{properties-1}}
+\hypertarget{properties}{%
+\section{Properties}\label{properties}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -604,8 +575,8 @@ GWT = 5.5m
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{b.c.-and-i.c.-1}{%
-\section{B.C. and I.C.}\label{b.c.-and-i.c.-1}}
+\hypertarget{b.c.-and-i.c.}{%
+\section{B.C. and I.C.}\label{b.c.-and-i.c.}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -619,8 +590,8 @@ GWT = 5.5m
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{initial-equilibrium-1}{%
-\section{Initial Equilibrium}\label{initial-equilibrium-1}}
+\hypertarget{initial-equilibrium}{%
+\section{Initial Equilibrium}\label{initial-equilibrium}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -631,8 +602,8 @@ GWT = 5.5m
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{alterations-1}{%
-\section{Alterations}\label{alterations-1}}
+\hypertarget{alterations}{%
+\section{Alterations}\label{alterations}}
 
 \hypertarget{install-the-pile}{%
 \subsection{install the pile}\label{install-the-pile}}
@@ -700,36 +671,20 @@ GWT = 5.5m
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{results-1}{%
-\section{Results}\label{results-1}}
-
 \newpage
 
 \hypertarget{pull-tests}{%
 \chapter{Pull-Tests}\label{pull-tests}}
 
-\hypertarget{problem-description-1}{%
-\section{Problem Description}\label{problem-description-1}}
+\hypertarget{problem-description}{%
+\section{Problem Description}\label{problem-description}}
 
-\emph{note: FISH function force is used to sum the raction forces and
-monitor nodal displacement generated by the pull-test.
-}note: free length of bolt that extends out of block + larger diameter
-Perfectly plastic behavior of grout = max cohesion is exceeded.
-+post-peak weakening of shear bond strength
-*note: bond strength softening of the grout is defined with keyword
-coupling-cohesion-table (see Rockbolt Behavior)
-The relation btw shear disp. and cohesion weakening is prescribed
-thru table cct. softening of friction of grout can alsoe be defined
-using keyword coupling-friction-table.
-
-\hypertarget{problem-statement-1}{%
-\subsection{Problem Statement}\label{problem-statement-1}}
-
-\hypertarget{main-parameters-1}{%
-\subsection{Main Parameters}\label{main-parameters-1}}
-
-\hypertarget{modeling-procedure-1}{%
-\section{Modeling Procedure}\label{modeling-procedure-1}}
+\emph{note: FISH function force is used to sum the raction forces and monitor nodal displacement generated by the pull-test}\\
+\emph{note: free length of bolt that extends out of block + larger diameter}\\
+Perfectly plastic behavior of grout = max cohesion is exceeded +post-peak weakening of shear bond strength\\
+\emph{note: bond strength softening of the grout is defined with keyword coupling-cohesion-table (see Rockbolt Behavior)}\\
+The relation btw shear disp. and cohesion weakening is prescribed\\
+thru table cct. softening of friction of grout canbe defined using keyword coupling-friction-table.\\
 
 \hypertarget{zones-1}{%
 \section{Zones}\label{zones-1}}
@@ -749,11 +704,8 @@ using keyword coupling-friction-table.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{groups-2}{%
-\section{Groups}\label{groups-2}}
-
-\hypertarget{properties-2}{%
-\section{Properties}\label{properties-2}}
+\hypertarget{properties-1}{%
+\section{Properties}\label{properties-1}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -777,11 +729,8 @@ using keyword coupling-friction-table.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{b.c.-and-i.c.-2}{%
-\section{B.C. and I.C.}\label{b.c.-and-i.c.-2}}
-
-\hypertarget{initial-equilibrium-2}{%
-\section{Initial Equilibrium}\label{initial-equilibrium-2}}
+\hypertarget{initial-equilibrium-1}{%
+\section{Initial Equilibrium}\label{initial-equilibrium-1}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -791,8 +740,8 @@ using keyword coupling-friction-table.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{alterations-2}{%
-\section{Alterations}\label{alterations-2}}
+\hypertarget{alterations-1}{%
+\section{Alterations}\label{alterations-1}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -807,67 +756,35 @@ using keyword coupling-friction-table.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{results-2}{%
-\section{Results}\label{results-2}}
-
 \hypertarget{some-other-notes}{%
 \section{Some other notes}\label{some-other-notes}}
 
 2.3. pull test with confinement ``Pulltest06.f3dat''
-+modified pile logic.
-(see Behavior of Shear Coupling Springs) linear law is implemented
-whereby reinforcement shear strength is defined as constant
-(coupling-cohesion-shear)+ effective pressure\emph{perimeter}fric angle(coupling-friction-shear)
-This pressure dependence is activated automatically by issuing
-reinforcement properties(perimeter) and (coupling-friction-shear)
-2.4. pull test with confinement (user defined) ``Pulltest07.f3dat''
-*note: use of coupling-confining-table to define ``mean sigma\_c, confining stress''
++modified pile logic.(see Behavior of Shear Coupling Springs) linear law is implemented.whereby reinforcement shear strength is defined as constant\\
+\emph{(coupling-cohesion-shear)+ effective pressure}perimeter\emph{fric angle(coupling-friction-shear)}\\
+This pressure dependence is activated automatically by issuing reinforcement properties(perimeter) and\\
 
 2.5. pull test with tensile rupture ``Pulltest08.f3dat''
-*note: tensile-yield, tensile-failure-strain: for limiting axial yield force and limiting axial strain for rockbolt
+\emph{note: tensile-yield, tensile-failure-strain: for limiting axial yield force and limiting axial strain for rockbolt}
 
 \newpage
 
 \hypertarget{grid}{%
 \chapter{Grid}\label{grid}}
 
-The intention of grid generation is to fit the model grid to the physical region under study
-
-\hypertarget{primitive-shape}{%
-\section{Primitive Shape}\label{primitive-shape}}
+\hypertarget{primitive-shapes}{%
+\section{Primitive Shapes}\label{primitive-shapes}}
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/radial-cylinder}
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/radial-square}
 
-zones for grids
--primitives (zone create) (zone reflect) (zone copy)
-
 \includegraphics[width=1\linewidth]{myfigureeeeee/example-FLAC3D-Model}
 
--dimension
--edge
--fill
--point
--ratio
--size
-
--extrusions
--building blocks
-(mutually exclusive)
--3rd party tool Rhino and mesher Griddle
-
-selection of right mesh generation method
-and efficient deploymentis a critical part
-
-\emph{note: zone create generates primitive grid
-}note: zone gridpoint create puts gridpoints at specific locations
-\emph{note: zone gridpoint merge ensures separate primitives are connected properly
-}note: zone attach connects primitive meshes of different zone sizes.
-each shape has specific type of grid connectivity.
-
-keywords for zone create:
-brick, weidge, uniform-wedge, tetrahedron, pyramid, cylinder, degenerate-brick, radial-brick, radial-tunnel, radial-cylinder, cylindrical-shell, cylindrical-intersection, tunnel-intersection(parallelpiped-shaped tunnels)
+\emph{note: zone create generates primitive grid}\\
+\emph{note: zone gridpoint create puts gridpoints at specific locations }\\
+\emph{note: zone gridpoint merge ensures separate primitives are connected properly}\\
+\emph{note: zone attach connects primitive meshes of different zone sizes.}\\
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -877,19 +794,19 @@ brick, weidge, uniform-wedge, tetrahedron, pyramid, cylinder, degenerate-brick, 
 \end{Highlighting}
 \end{Shaded}
 
-ex) 5 along innder radius of cylindrical tunnel,
-10 along axis
-6 along circumference of tunnel
-12 between periphery of tunnel and outer boundary of moel
-*note: size keyword defines the number of zones in the grid.
+ex) 5 along innder radius of cylindrical tunnel,\\
+10 along axis\\
+6 along circumference of tunnel\\
+12 between periphery of tunnel and outer boundary of model\\
+\emph{note: size keyword defines the number of zones in the grid.}\\
 
-keywords for zone create
--dimension
--edge
--fill
--point (boundary dimensions)
--ratio (coarser toward edge)
--size
+keywords for zone create:\\
+- dimension
+- edge
+- fill
+- point (boundary dimensions)
+- ratio (coarser toward edge)
+- size
 
 \hypertarget{several-primitive-shapes-connected}{%
 \section{several primitive shapes connected:}\label{several-primitive-shapes-connected}}
@@ -909,17 +826,17 @@ keywords for zone create
 \end{Highlighting}
 \end{Shaded}
 
-this adds symmetric part
-*note: The symmetry plane is a vertical plane (located by the dip, dip-direction, and origin keywords) coincident with the x = 0 plane. Note that dip angle (dip) and dip direction (dip-direction) assume that x corresponds to ``East,'' y to ``North'', and z to ``Up.''
+this adds symmetric part.\\
+\emph{note: The symmetry plane is a vertical plane (located by the dip, dip-direction, and origin keywords) coincident with the x = 0 plane. Note that dip angle (dip) and dip direction (dip-direction) assume that x corresponds to ``East,'' y to ``North'', and z to ``Up.''}\\
 
-third option, the zone gridpoint create command, is available to position single points in the model region.
-*note: zone gridpoint create is used for positioning reference points of primitives
+third option, the zone gridpoint create command, is available to position single points in the model region.\\
+\emph{note: zone gridpoint create is used for positioning reference points of primitives }\\
 
-During execution of a zone create command, a check is made for each boundary gridpoint against the boundary gridpoints of zones that already exist.
-If two boundary gridpoints fall within a tolerance of 1 ? 10-7 (relative to the magnitude of the gridpoints position vector) of each other, they are assumed to be the same point,
-If it is discovered that some gridpoints don't match, the zone gridpoint merge command can be used to merge these gridpoints after the zone create command has been applied.
+During execution of a zone create command, a check is made for each boundary gridpoint against the boundary gridpoints of zones that already exist.\\
+If two boundary gridpoints fall within a tolerance of 1 ? 10-7 (relative to the magnitude of the gridpoints position vector) of each other, they are assumed to be the same point,\\
+If it is discovered that some gridpoints don't match, the zone gridpoint merge command can be used to merge these gridpoints after the zone create command has been applied.\\
 
-(zone attach) - Two unequal sub-grids
+Example: (zone attach) - Two unequal sub-grids
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -931,7 +848,7 @@ If it is discovered that some gridpoints don't match, the zone gridpoint merge c
 \end{Highlighting}
 \end{Shaded}
 
-(zone densify)
+Example: (zone densify)
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -962,9 +879,6 @@ The liner contains 240 structural shell elements and is connected to the FLAC3D 
 \hypertarget{densifying-grid-by-specifying-max-size-length}{%
 \section{Densifying grid by specifying max size length}\label{densifying-grid-by-specifying-max-size-length}}
 
-\hypertarget{densify-a-grid-by-specifying-the-maximum-size-length}{%
-\subsection{Densify a grid by specifying the maximum size length}\label{densify-a-grid-by-specifying-the-maximum-size-length}}
-
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{model new}
@@ -978,10 +892,10 @@ The liner contains 240 structural shell elements and is connected to the FLAC3D 
 \end{Highlighting}
 \end{Shaded}
 
-note that in the local z-direction, the maximum size length is 0.4. FLAC3D densifies the maximum length in this direction to be 1/3 (= 0.4)
-The zone attach by-face command in this example is used to attach faces of sub-grids together rigidly to form a single grid
+note that in the local z-direction, the maximum size length is 0.4. FLAC3D densifies the maximum length in this direction to be 1/3 (= 0.4)\\
+The zone attach by-face command in this example is used to attach faces of sub-grids together rigidly to form a single grid\\
 
-Always use the zone attach by-face command after the zone densify command if there are different numbers of gridpoints along faces of different zones.
+Always use the zone attach by-face command after the zone densify command if there are different numbers of gridpoints along faces of different zones.\\
 
 \hypertarget{densify-a-grid-using-geometric-information}{%
 \subsection{Densify a grid using geometric information}\label{densify-a-grid-using-geometric-information}}
@@ -1058,8 +972,8 @@ Always use the zone attach by-face command after the zone densify command if the
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{properties-3}{%
-\section{Properties}\label{properties-3}}
+\hypertarget{properties-2}{%
+\section{Properties}\label{properties-2}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1332,44 +1246,35 @@ Always use the zone attach by-face command after the zone densify command if the
 
 \startappendices
 
-\hypertarget{appendix-1.-template}{%
-\chapter{Appendix 1. Template}\label{appendix-1.-template}}
+\hypertarget{template}{%
+\chapter{1. Template}\label{template}}
 
-\hypertarget{problem-description-2}{%
-\section{Problem Description}\label{problem-description-2}}
+\hypertarget{problem-description-1}{%
+\section{Problem Description}\label{problem-description-1}}
 
-\hypertarget{problem-statement-2}{%
-\subsection{Problem Statement}\label{problem-statement-2}}
+\hypertarget{modeling-procedure}{%
+\section{Modeling Procedure}\label{modeling-procedure}}
 
-\hypertarget{main-parameters-2}{%
-\subsection{Main Parameters}\label{main-parameters-2}}
+\hypertarget{zonesgroups}{%
+\section{Zones/Groups}\label{zonesgroups}}
 
-\hypertarget{modeling-procedure-2}{%
-\section{Modeling Procedure}\label{modeling-procedure-2}}
+\hypertarget{properties-3}{%
+\section{Properties}\label{properties-3}}
 
-\hypertarget{zones-3}{%
-\section{Zones}\label{zones-3}}
+\hypertarget{b.c.-and-i.c.-1}{%
+\section{B.C. and I.C.}\label{b.c.-and-i.c.-1}}
 
-\hypertarget{groups-3}{%
-\section{Groups}\label{groups-3}}
+\hypertarget{initial-equilibrium-2}{%
+\section{Initial Equilibrium}\label{initial-equilibrium-2}}
 
-\hypertarget{properties-4}{%
-\section{Properties}\label{properties-4}}
+\hypertarget{alterations-2}{%
+\section{Alterations}\label{alterations-2}}
 
-\hypertarget{b.c.-and-i.c.-3}{%
-\section{B.C. and I.C.}\label{b.c.-and-i.c.-3}}
+\hypertarget{results}{%
+\section{Results}\label{results}}
 
-\hypertarget{initial-equilibrium-3}{%
-\section{Initial Equilibrium}\label{initial-equilibrium-3}}
-
-\hypertarget{alterations-3}{%
-\section{Alterations}\label{alterations-3}}
-
-\hypertarget{results-3}{%
-\section{Results}\label{results-3}}
-
-\hypertarget{literature-compilation}{%
-\chapter{Literature Compilation}\label{literature-compilation}}
+\hypertarget{reference-collective}{%
+\chapter{Reference Collective}\label{reference-collective}}
 
 \hypertarget{uplift-resistance-of-anchor-plate}{%
 \subsection{Uplift Resistance of Anchor Plate}\label{uplift-resistance-of-anchor-plate}}
