@@ -428,16 +428,15 @@ wonderful have been, and are being, evolved.
 \NormalTok{table }\StringTok{\textquotesingle{}fri\textquotesingle{}}\NormalTok{ add (}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{) (}\FloatTok{.05}\NormalTok{, }\DecValTok{42}\NormalTok{) (}\FloatTok{.1}\NormalTok{, }\DecValTok{40}\NormalTok{) (}\DecValTok{1}\NormalTok{, }\DecValTok{40}\NormalTok{)}
 \NormalTok{table }\StringTok{\textquotesingle{}coh\textquotesingle{}}\NormalTok{ add (}\DecValTok{0}\NormalTok{,}\FloatTok{2e6}\NormalTok{) (}\FloatTok{.05}\NormalTok{,}\FloatTok{1e6}\NormalTok{) (}\FloatTok{.1}\NormalTok{,}\FloatTok{5e5}\NormalTok{) (}\DecValTok{1}\NormalTok{,}\FloatTok{5e5}\NormalTok{) }
 \NormalTok{table }\StringTok{\textquotesingle{}dil\textquotesingle{}}\NormalTok{ add (}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{) (}\FloatTok{.05}\NormalTok{,  }\DecValTok{3}\NormalTok{) (}\FloatTok{.1}\NormalTok{,  }\DecValTok{0}\NormalTok{) }
+\CommentTok{\#Constitutive modeland properties for shaft and plate}
+\NormalTok{zone cmodel assign elastic }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}shaft\textquotesingle{}}
+\NormalTok{zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{8.333e7}\NormalTok{  shear }\FloatTok{3.846e7}  \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}shaft\textquotesingle{}}
+\NormalTok{zone cmodel assign elastic }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}plate\textquotesingle{}}
+\NormalTok{zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{8.333e7}\NormalTok{  shear }\FloatTok{3.846e7}  \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}plate\textquotesingle{}}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/concrete-properties}
-
-\#Constitutive model and properties for shaft and plate
-zone cmodel assign elastic range group `shaft'
-zone property bulk 8.333e7 shear 3.846e7 range group `shaft'
-zone cmodel assign elastic range group `plate'
-zone property bulk 8.333e7 shear 3.846e7 range group `plate'
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/d}
 

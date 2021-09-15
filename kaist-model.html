@@ -113,13 +113,13 @@
 <span id="cb4-5"><a href="kaist-model.html#cb4-5" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> table<span class="op">-</span>friction <span class="st">'fri'</span> table<span class="op">-</span>cohesion <span class="st">'coh'</span> table<span class="op">-</span>dilation <span class="st">'dil'</span> <span class="bu">range</span> group <span class="st">"Radial Cylinder1"</span></span>
 <span id="cb4-6"><a href="kaist-model.html#cb4-6" aria-hidden="true" tabindex="-1"></a>table <span class="st">'fri'</span> add (<span class="dv">0</span>, <span class="dv">45</span>) (<span class="fl">.05</span>, <span class="dv">42</span>) (<span class="fl">.1</span>, <span class="dv">40</span>) (<span class="dv">1</span>, <span class="dv">40</span>)</span>
 <span id="cb4-7"><a href="kaist-model.html#cb4-7" aria-hidden="true" tabindex="-1"></a>table <span class="st">'coh'</span> add (<span class="dv">0</span>,<span class="fl">2e6</span>) (<span class="fl">.05</span>,<span class="fl">1e6</span>) (<span class="fl">.1</span>,<span class="fl">5e5</span>) (<span class="dv">1</span>,<span class="fl">5e5</span>) </span>
-<span id="cb4-8"><a href="kaist-model.html#cb4-8" aria-hidden="true" tabindex="-1"></a>table <span class="st">'dil'</span> add (<span class="dv">0</span>, <span class="dv">10</span>) (<span class="fl">.05</span>,  <span class="dv">3</span>) (<span class="fl">.1</span>,  <span class="dv">0</span>) </span></code></pre></div>
+<span id="cb4-8"><a href="kaist-model.html#cb4-8" aria-hidden="true" tabindex="-1"></a>table <span class="st">'dil'</span> add (<span class="dv">0</span>, <span class="dv">10</span>) (<span class="fl">.05</span>,  <span class="dv">3</span>) (<span class="fl">.1</span>,  <span class="dv">0</span>) </span>
+<span id="cb4-9"><a href="kaist-model.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Constitutive modeland properties for shaft and plate</span></span>
+<span id="cb4-10"><a href="kaist-model.html#cb4-10" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic <span class="bu">range</span> group <span class="st">'shaft'</span></span>
+<span id="cb4-11"><a href="kaist-model.html#cb4-11" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">8.333e7</span>  shear <span class="fl">3.846e7</span>  <span class="bu">range</span> group <span class="st">'shaft'</span></span>
+<span id="cb4-12"><a href="kaist-model.html#cb4-12" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic <span class="bu">range</span> group <span class="st">'plate'</span></span>
+<span id="cb4-13"><a href="kaist-model.html#cb4-13" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">8.333e7</span>  shear <span class="fl">3.846e7</span>  <span class="bu">range</span> group <span class="st">'plate'</span></span></code></pre></div>
 <div class="inline-figure"><img src="myfigureeeeee/concrete-properties.PNG" width="100%"></div>
-<p>#Constitutive model and properties for shaft and plate
-zone cmodel assign elastic range group ‘shaft’
-zone property bulk 8.333e7 shear 3.846e7 range group ‘shaft’
-zone cmodel assign elastic range group ‘plate’
-zone property bulk 8.333e7 shear 3.846e7 range group ‘plate’</p>
 <div class="inline-figure"><img src="myfigureeeeee/d.PNG" width="100%"></div>
 </div>
 <div id="soil-structure-interface" class="section level2" number="1.5">
