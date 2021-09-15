@@ -1,4 +1,4 @@
-kaist-centrifuge-model
+kaist-model-flac3d
 grid-generation
 groups
 properties
@@ -7,7 +7,9 @@ b.c.-and-i.c.
 initial-equilibrium
 alterations
 results
-axial-and-lateral-loading-of-a-concrete-pile
+kaist-model-python
+code
+axial-concrete-pile
 problem-description
 problem-statement
 main-parameters
@@ -22,7 +24,7 @@ install-the-pile
 vertical-loading
 vertical-then-lateral-loading
 results-1
-simulation-of-pull-tests-for-fully-bonded-rock-reinforcement
+pull-tests
 problem-description-1
 problem-statement-1
 main-parameters-1

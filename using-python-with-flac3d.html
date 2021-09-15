@@ -4,21 +4,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>5 Using Python with FLAC3D | My FLAC3D Notes</title>
+<title>6 Using Python with FLAC3D | My FLAC3D Notes</title>
 <meta name="author" content="Kyeong Sun Kim">
 <meta name="generator" content="bookdown 0.23 with bs4_book()">
-<meta property="og:title" content="5 Using Python with FLAC3D | My FLAC3D Notes">
+<meta property="og:title" content="6 Using Python with FLAC3D | My FLAC3D Notes">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="5 Using Python with FLAC3D | My FLAC3D Notes">
+<meta name="twitter:title" content="6 Using Python with FLAC3D | My FLAC3D Notes">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="templates/bs4_style.css">
 <link rel="stylesheet" href="templates/corrections.css">
-<meta name="description" content='5.1 Introduction import itasca as it it.command("python-reset-state false") it.command(""" model new zone create brick size 10 10 10 zone cmodel assign elastic zone property density 2950 young...'>
-<meta property="og:description" content='5.1 Introduction import itasca as it it.command("python-reset-state false") it.command(""" model new zone create brick size 10 10 10 zone cmodel assign elastic zone property density 2950 young...'>
-<meta name="twitter:description" content='5.1 Introduction import itasca as it it.command("python-reset-state false") it.command(""" model new zone create brick size 10 10 10 zone cmodel assign elastic zone property density 2950 young...'>
+<meta name="description" content='6.1 Introduction import itasca as it it.command("python-reset-state false") it.command(""" model new zone create brick size 10 10 10 zone cmodel assign elastic zone property density 2950 young...'>
+<meta property="og:description" content='6.1 Introduction import itasca as it it.command("python-reset-state false") it.command(""" model new zone create brick size 10 10 10 zone cmodel assign elastic zone property density 2950 young...'>
+<meta name="twitter:description" content='6.1 Introduction import itasca as it it.command("python-reset-state false") it.command(""" model new zone create brick size 10 10 10 zone cmodel assign elastic zone property density 2950 young...'>
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -41,11 +41,12 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">This Pandoc</a></li>
-<li><a class="" href="kaist-centrifuge-model.html"><span class="header-section-number">1</span> KAIST Centrifuge Model</a></li>
-<li><a class="" href="axial-and-lateral-loading-of-a-concrete-pile.html"><span class="header-section-number">2</span> Axial and Lateral Loading of a Concrete Pile</a></li>
-<li><a class="" href="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"><span class="header-section-number">3</span> Simulation of Pull-Tests for Fully Bonded Rock Reinforcement</a></li>
-<li><a class="" href="grid-generation-1.html"><span class="header-section-number">4</span> Grid Generation</a></li>
-<li><a class="active" href="using-python-with-flac3d.html"><span class="header-section-number">5</span> Using Python with FLAC3D</a></li>
+<li><a class="" href="kaist-model-flac3d.html"><span class="header-section-number">1</span> KAIST Model FLAC3D</a></li>
+<li><a class="" href="kaist-model-python.html"><span class="header-section-number">2</span> KAIST Model Python</a></li>
+<li><a class="" href="axial-concrete-pile.html"><span class="header-section-number">3</span> Axial Concrete Pile</a></li>
+<li><a class="" href="pull-tests.html"><span class="header-section-number">4</span> Pull-Tests</a></li>
+<li><a class="" href="grid-generation-1.html"><span class="header-section-number">5</span> Grid Generation</a></li>
+<li><a class="active" href="using-python-with-flac3d.html"><span class="header-section-number">6</span> Using Python with FLAC3D</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="appendix-1.-template.html"><span class="header-section-number">A</span> Appendix 1. Template</a></li>
 <li><a class="" href="literature-compilation.html"><span class="header-section-number">B</span> Literature Compilation</a></li>
@@ -56,146 +57,146 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="using-python-with-flac3d" class="section level1" number="5">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="using-python-with-flac3d" class="section level1" number="6">
 <h1>
-<span class="header-section-number">5</span> Using Python with FLAC3D<a class="anchor" aria-label="anchor" href="#using-python-with-flac3d"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6</span> Using Python with FLAC3D<a class="anchor" aria-label="anchor" href="#using-python-with-flac3d"><i class="fas fa-link"></i></a>
 </h1>
-<div id="introduction" class="section level2" number="5.1">
+<div id="introduction" class="section level2" number="6.1">
 <h2>
-<span class="header-section-number">5.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="using-python-with-flac3d.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
-<span id="cb21-2"><a href="using-python-with-flac3d.html#cb21-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"python-reset-state false"</span>)</span>
-<span id="cb21-3"><a href="using-python-with-flac3d.html#cb21-3" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
-<span id="cb21-4"><a href="using-python-with-flac3d.html#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="st">model new</span></span>
-<span id="cb21-5"><a href="using-python-with-flac3d.html#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="st">zone create brick size 10 10 10</span></span>
-<span id="cb21-6"><a href="using-python-with-flac3d.html#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic</span></span>
-<span id="cb21-7"><a href="using-python-with-flac3d.html#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="st">zone property density 2950 young 12e9 poisson 0.25</span></span>
-<span id="cb21-8"><a href="using-python-with-flac3d.html#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="st">cycle 1</span></span>
-<span id="cb21-9"><a href="using-python-with-flac3d.html#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
-<span id="cb21-10"><a href="using-python-with-flac3d.html#cb21-10" aria-hidden="true" tabindex="-1"></a>it.zone.count()</span>
-<span id="cb21-11"><a href="using-python-with-flac3d.html#cb21-11" aria-hidden="true" tabindex="-1"></a>z<span class="op">=</span>it.zone.find(<span class="dv">1</span>)</span>
-<span id="cb21-12"><a href="using-python-with-flac3d.html#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> z</span>
-<span id="cb21-13"><a href="using-python-with-flac3d.html#cb21-13" aria-hidden="true" tabindex="-1"></a>z.pos()</span>
-<span id="cb21-14"><a href="using-python-with-flac3d.html#cb21-14" aria-hidden="true" tabindex="-1"></a>volume_sum <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb21-15"><a href="using-python-with-flac3d.html#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> it.zone.<span class="bu">list</span>():</span>
-<span id="cb21-16"><a href="using-python-with-flac3d.html#cb21-16" aria-hidden="true" tabindex="-1"></a>  volume_sum <span class="op">+=</span> z.vol()</span>
-<span id="cb21-17"><a href="using-python-with-flac3d.html#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-18"><a href="using-python-with-flac3d.html#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> volume_sum</span>
-<span id="cb21-19"><a href="using-python-with-flac3d.html#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> z.vol() <span class="op">*</span> it.zone.count()</span>
-<span id="cb21-20"><a href="using-python-with-flac3d.html#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> volume_sum <span class="op">==</span> z.vol() <span class="op">*</span> it.zone.count()</span>
-<span id="cb21-21"><a href="using-python-with-flac3d.html#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-22"><a href="using-python-with-flac3d.html#cb21-22" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> it.zone.near ((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>))</span>
-<span id="cb21-23"><a href="using-python-with-flac3d.html#cb21-23" aria-hidden="true" tabindex="-1"></a>z.pos()</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="using-python-with-flac3d.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
+<span id="cb22-2"><a href="using-python-with-flac3d.html#cb22-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"python-reset-state false"</span>)</span>
+<span id="cb22-3"><a href="using-python-with-flac3d.html#cb22-3" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
+<span id="cb22-4"><a href="using-python-with-flac3d.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="st">model new</span></span>
+<span id="cb22-5"><a href="using-python-with-flac3d.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="st">zone create brick size 10 10 10</span></span>
+<span id="cb22-6"><a href="using-python-with-flac3d.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic</span></span>
+<span id="cb22-7"><a href="using-python-with-flac3d.html#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="st">zone property density 2950 young 12e9 poisson 0.25</span></span>
+<span id="cb22-8"><a href="using-python-with-flac3d.html#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="st">cycle 1</span></span>
+<span id="cb22-9"><a href="using-python-with-flac3d.html#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
+<span id="cb22-10"><a href="using-python-with-flac3d.html#cb22-10" aria-hidden="true" tabindex="-1"></a>it.zone.count()</span>
+<span id="cb22-11"><a href="using-python-with-flac3d.html#cb22-11" aria-hidden="true" tabindex="-1"></a>z<span class="op">=</span>it.zone.find(<span class="dv">1</span>)</span>
+<span id="cb22-12"><a href="using-python-with-flac3d.html#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> z</span>
+<span id="cb22-13"><a href="using-python-with-flac3d.html#cb22-13" aria-hidden="true" tabindex="-1"></a>z.pos()</span>
+<span id="cb22-14"><a href="using-python-with-flac3d.html#cb22-14" aria-hidden="true" tabindex="-1"></a>volume_sum <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb22-15"><a href="using-python-with-flac3d.html#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> it.zone.<span class="bu">list</span>():</span>
+<span id="cb22-16"><a href="using-python-with-flac3d.html#cb22-16" aria-hidden="true" tabindex="-1"></a>  volume_sum <span class="op">+=</span> z.vol()</span>
+<span id="cb22-17"><a href="using-python-with-flac3d.html#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-18"><a href="using-python-with-flac3d.html#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> volume_sum</span>
+<span id="cb22-19"><a href="using-python-with-flac3d.html#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> z.vol() <span class="op">*</span> it.zone.count()</span>
+<span id="cb22-20"><a href="using-python-with-flac3d.html#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> volume_sum <span class="op">==</span> z.vol() <span class="op">*</span> it.zone.count()</span>
+<span id="cb22-21"><a href="using-python-with-flac3d.html#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-22"><a href="using-python-with-flac3d.html#cb22-22" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> it.zone.near ((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb22-23"><a href="using-python-with-flac3d.html#cb22-23" aria-hidden="true" tabindex="-1"></a>z.pos()</span></code></pre></div>
 </div>
-<div id="zones-2" class="section level2" number="5.2">
+<div id="zones-2" class="section level2" number="6.2">
 <h2>
-<span class="header-section-number">5.2</span> Zones<a class="anchor" aria-label="anchor" href="#zones-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2</span> Zones<a class="anchor" aria-label="anchor" href="#zones-2"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="using-python-with-flac3d.html#cb22-1" aria-hidden="true" tabindex="-1"></a>it.zone.count() <span class="co"># 1000</span></span>
-<span id="cb22-2"><a href="using-python-with-flac3d.html#cb22-2" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> it.zone.find(<span class="dv">1</span>)</span>
-<span id="cb22-3"><a href="using-python-with-flac3d.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> it.zone.<span class="bu">list</span>():</span>
-<span id="cb22-4"><a href="using-python-with-flac3d.html#cb22-4" aria-hidden="true" tabindex="-1"></a>  z <span class="op">=</span> it.zone.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>))</span>
-<span id="cb22-5"><a href="using-python-with-flac3d.html#cb22-5" aria-hidden="true" tabindex="-1"></a>z.pos()</span>
-<span id="cb22-6"><a href="using-python-with-flac3d.html#cb22-6" aria-hidden="true" tabindex="-1"></a>z.vol()</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="using-python-with-flac3d.html#cb23-1" aria-hidden="true" tabindex="-1"></a>it.zone.count() <span class="co"># 1000</span></span>
+<span id="cb23-2"><a href="using-python-with-flac3d.html#cb23-2" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> it.zone.find(<span class="dv">1</span>)</span>
+<span id="cb23-3"><a href="using-python-with-flac3d.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> it.zone.<span class="bu">list</span>():</span>
+<span id="cb23-4"><a href="using-python-with-flac3d.html#cb23-4" aria-hidden="true" tabindex="-1"></a>  z <span class="op">=</span> it.zone.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb23-5"><a href="using-python-with-flac3d.html#cb23-5" aria-hidden="true" tabindex="-1"></a>z.pos()</span>
+<span id="cb23-6"><a href="using-python-with-flac3d.html#cb23-6" aria-hidden="true" tabindex="-1"></a>z.vol()</span></code></pre></div>
 </div>
-<div id="properties-3" class="section level2" number="5.3">
+<div id="properties-3" class="section level2" number="6.3">
 <h2>
-<span class="header-section-number">5.3</span> Properties<a class="anchor" aria-label="anchor" href="#properties-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.3</span> Properties<a class="anchor" aria-label="anchor" href="#properties-3"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="using-python-with-flac3d.html#cb23-1" aria-hidden="true" tabindex="-1"></a>z.props() <span class="kw">or</span> z.props()[<span class="st">'bulk'</span>]</span>
-<span id="cb23-2"><a href="using-python-with-flac3d.html#cb23-2" aria-hidden="true" tabindex="-1"></a>z.prop(<span class="st">'shear'</span>)</span>
-<span id="cb23-3"><a href="using-python-with-flac3d.html#cb23-3" aria-hidden="true" tabindex="-1"></a>z.set_prop(<span class="st">'bulk'</span>, <span class="fl">8.5e9</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="using-python-with-flac3d.html#cb24-1" aria-hidden="true" tabindex="-1"></a>z.props() <span class="kw">or</span> z.props()[<span class="st">'bulk'</span>]</span>
+<span id="cb24-2"><a href="using-python-with-flac3d.html#cb24-2" aria-hidden="true" tabindex="-1"></a>z.prop(<span class="st">'shear'</span>)</span>
+<span id="cb24-3"><a href="using-python-with-flac3d.html#cb24-3" aria-hidden="true" tabindex="-1"></a>z.set_prop(<span class="st">'bulk'</span>, <span class="fl">8.5e9</span>)</span></code></pre></div>
 </div>
-<div id="gridpoints" class="section level2" number="5.4">
+<div id="gridpoints" class="section level2" number="6.4">
 <h2>
-<span class="header-section-number">5.4</span> Gridpoints<a class="anchor" aria-label="anchor" href="#gridpoints"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.4</span> Gridpoints<a class="anchor" aria-label="anchor" href="#gridpoints"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="using-python-with-flac3d.html#cb24-1" aria-hidden="true" tabindex="-1"></a>gp <span class="op">=</span> it.gridpoint.near((<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb24-2"><a href="using-python-with-flac3d.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> gp <span class="kw">in</span> it.gridpoint.<span class="bu">list</span>():</span>
-<span id="cb24-3"><a href="using-python-with-flac3d.html#cb24-3" aria-hidden="true" tabindex="-1"></a>  total_mass <span class="op">=</span> gp.mass_gravity()</span>
-<span id="cb24-4"><a href="using-python-with-flac3d.html#cb24-4" aria-hidden="true" tabindex="-1"></a>z.vol()<span class="op">*</span>z.density()<span class="op">*</span><span class="dv">1000</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="using-python-with-flac3d.html#cb25-1" aria-hidden="true" tabindex="-1"></a>gp <span class="op">=</span> it.gridpoint.near((<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb25-2"><a href="using-python-with-flac3d.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> gp <span class="kw">in</span> it.gridpoint.<span class="bu">list</span>():</span>
+<span id="cb25-3"><a href="using-python-with-flac3d.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  total_mass <span class="op">=</span> gp.mass_gravity()</span>
+<span id="cb25-4"><a href="using-python-with-flac3d.html#cb25-4" aria-hidden="true" tabindex="-1"></a>z.vol()<span class="op">*</span>z.density()<span class="op">*</span><span class="dv">1000</span></span></code></pre></div>
 </div>
-<div id="structural-elements" class="section level2" number="5.5">
+<div id="structural-elements" class="section level2" number="6.5">
 <h2>
-<span class="header-section-number">5.5</span> Structural Elements<a class="anchor" aria-label="anchor" href="#structural-elements"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.5</span> Structural Elements<a class="anchor" aria-label="anchor" href="#structural-elements"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="using-python-with-flac3d.html#cb25-1" aria-hidden="true" tabindex="-1"></a>it.structure.<span class="bu">list</span>()</span>
-<span id="cb25-2"><a href="using-python-with-flac3d.html#cb25-2" aria-hidden="true" tabindex="-1"></a>it.structure.find(<span class="dv">1</span>)</span>
-<span id="cb25-3"><a href="using-python-with-flac3d.html#cb25-3" aria-hidden="true" tabindex="-1"></a>it.structure.near((<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb25-4"><a href="using-python-with-flac3d.html#cb25-4" aria-hidden="true" tabindex="-1"></a>it.structure.node.find(<span class="dv">1</span>)</span>
-<span id="cb25-5"><a href="using-python-with-flac3d.html#cb25-5" aria-hidden="true" tabindex="-1"></a>s_node.links()[<span class="dv">0</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="using-python-with-flac3d.html#cb26-1" aria-hidden="true" tabindex="-1"></a>it.structure.<span class="bu">list</span>()</span>
+<span id="cb26-2"><a href="using-python-with-flac3d.html#cb26-2" aria-hidden="true" tabindex="-1"></a>it.structure.find(<span class="dv">1</span>)</span>
+<span id="cb26-3"><a href="using-python-with-flac3d.html#cb26-3" aria-hidden="true" tabindex="-1"></a>it.structure.near((<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb26-4"><a href="using-python-with-flac3d.html#cb26-4" aria-hidden="true" tabindex="-1"></a>it.structure.node.find(<span class="dv">1</span>)</span>
+<span id="cb26-5"><a href="using-python-with-flac3d.html#cb26-5" aria-hidden="true" tabindex="-1"></a>s_node.links()[<span class="dv">0</span>]</span></code></pre></div>
 </div>
-<div id="extra-variables" class="section level2" number="5.6">
+<div id="extra-variables" class="section level2" number="6.6">
 <h2>
-<span class="header-section-number">5.6</span> Extra Variables<a class="anchor" aria-label="anchor" href="#extra-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.6</span> Extra Variables<a class="anchor" aria-label="anchor" href="#extra-variables"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="using-python-with-flac3d.html#cb26-1" aria-hidden="true" tabindex="-1"></a>z.set_extra(<span class="dv">1</span>, <span class="fl">1.23</span>)</span>
-<span id="cb26-2"><a href="using-python-with-flac3d.html#cb26-2" aria-hidden="true" tabindex="-1"></a>z.set_extra(<span class="dv">2</span>, <span class="st">"a test string"</span>)</span>
-<span id="cb26-3"><a href="using-python-with-flac3d.html#cb26-3" aria-hidden="true" tabindex="-1"></a>z.set_extra(<span class="dv">1</span>, gp.pos())</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="using-python-with-flac3d.html#cb27-1" aria-hidden="true" tabindex="-1"></a>z.set_extra(<span class="dv">1</span>, <span class="fl">1.23</span>)</span>
+<span id="cb27-2"><a href="using-python-with-flac3d.html#cb27-2" aria-hidden="true" tabindex="-1"></a>z.set_extra(<span class="dv">2</span>, <span class="st">"a test string"</span>)</span>
+<span id="cb27-3"><a href="using-python-with-flac3d.html#cb27-3" aria-hidden="true" tabindex="-1"></a>z.set_extra(<span class="dv">1</span>, gp.pos())</span></code></pre></div>
 </div>
-<div id="groups-and-b.c." class="section level2" number="5.7">
+<div id="groups-and-b.c." class="section level2" number="6.7">
 <h2>
-<span class="header-section-number">5.7</span> Groups and B.C.<a class="anchor" aria-label="anchor" href="#groups-and-b.c."><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.7</span> Groups and B.C.<a class="anchor" aria-label="anchor" href="#groups-and-b.c."><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="using-python-with-flac3d.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> z.group(<span class="st">"default"</span>) <span class="op">==</span> <span class="st">"lower"</span>:</span>
-<span id="cb27-2"><a href="using-python-with-flac3d.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  gp.set_fix(<span class="dv">0</span>, <span class="va">True</span>)</span>
-<span id="cb27-3"><a href="using-python-with-flac3d.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  gp.set_fix(<span class="dv">1</span>, <span class="va">True</span>)</span>
-<span id="cb27-4"><a href="using-python-with-flac3d.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  gp.set_force_load((<span class="fl">1e6</span>,<span class="fl">2e6</span>,<span class="fl">1e6</span>))</span>
-<span id="cb27-5"><a href="using-python-with-flac3d.html#cb27-5" aria-hidden="true" tabindex="-1"></a>it.zone.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)).stress()</span>
-<span id="cb27-6"><a href="using-python-with-flac3d.html#cb27-6" aria-hidden="true" tabindex="-1"></a>it.zone.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)).strain()</span>
-<span id="cb27-7"><a href="using-python-with-flac3d.html#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="using-python-with-flac3d.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> z.group(<span class="st">"default"</span>) <span class="op">==</span> <span class="st">"lower"</span>:</span>
+<span id="cb28-2"><a href="using-python-with-flac3d.html#cb28-2" aria-hidden="true" tabindex="-1"></a>  gp.set_fix(<span class="dv">0</span>, <span class="va">True</span>)</span>
+<span id="cb28-3"><a href="using-python-with-flac3d.html#cb28-3" aria-hidden="true" tabindex="-1"></a>  gp.set_fix(<span class="dv">1</span>, <span class="va">True</span>)</span>
+<span id="cb28-4"><a href="using-python-with-flac3d.html#cb28-4" aria-hidden="true" tabindex="-1"></a>  gp.set_force_load((<span class="fl">1e6</span>,<span class="fl">2e6</span>,<span class="fl">1e6</span>))</span>
+<span id="cb28-5"><a href="using-python-with-flac3d.html#cb28-5" aria-hidden="true" tabindex="-1"></a>it.zone.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)).stress()</span>
+<span id="cb28-6"><a href="using-python-with-flac3d.html#cb28-6" aria-hidden="true" tabindex="-1"></a>it.zone.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)).strain()</span>
+<span id="cb28-7"><a href="using-python-with-flac3d.html#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
 </div>
-<div id="parameteric-studies" class="section level2" number="5.8">
+<div id="parameteric-studies" class="section level2" number="6.8">
 <h2>
-<span class="header-section-number">5.8</span> Parameteric Studies<a class="anchor" aria-label="anchor" href="#parameteric-studies"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.8</span> Parameteric Studies<a class="anchor" aria-label="anchor" href="#parameteric-studies"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="using-python-with-flac3d.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">"*note: for modulus in [6e9, 8e9, 10e9, 12e9]:"</span></span>
-<span id="cb28-2"><a href="using-python-with-flac3d.html#cb28-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
-<span id="cb28-3"><a href="using-python-with-flac3d.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="st">model restore 'before_cycling'</span></span>
-<span id="cb28-4"><a href="using-python-with-flac3d.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="st">zone prop young </span><span class="sc">{}</span></span>
-<span id="cb28-5"><a href="using-python-with-flac3d.html#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="st">model solve</span></span>
-<span id="cb28-6"><a href="using-python-with-flac3d.html#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>.<span class="bu">format</span>(modulus))</span>
-<span id="cb28-7"><a href="using-python-with-flac3d.html#cb28-7" aria-hidden="true" tabindex="-1"></a>vertical_disp <span class="op">=</span> it.gridpoint.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">10</span>)).disp_z()</span>
-<span id="cb28-8"><a href="using-python-with-flac3d.html#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"~~~"</span>.<span class="bu">format</span>(modulus,vertical_disp)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="using-python-with-flac3d.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">"*note: for modulus in [6e9, 8e9, 10e9, 12e9]:"</span></span>
+<span id="cb29-2"><a href="using-python-with-flac3d.html#cb29-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
+<span id="cb29-3"><a href="using-python-with-flac3d.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="st">model restore 'before_cycling'</span></span>
+<span id="cb29-4"><a href="using-python-with-flac3d.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="st">zone prop young </span><span class="sc">{}</span></span>
+<span id="cb29-5"><a href="using-python-with-flac3d.html#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="st">model solve</span></span>
+<span id="cb29-6"><a href="using-python-with-flac3d.html#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>.<span class="bu">format</span>(modulus))</span>
+<span id="cb29-7"><a href="using-python-with-flac3d.html#cb29-7" aria-hidden="true" tabindex="-1"></a>vertical_disp <span class="op">=</span> it.gridpoint.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">10</span>)).disp_z()</span>
+<span id="cb29-8"><a href="using-python-with-flac3d.html#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"~~~"</span>.<span class="bu">format</span>(modulus,vertical_disp)</span></code></pre></div>
 </div>
-<div id="setting-fish-variables" class="section level2" number="5.9">
+<div id="setting-fish-variables" class="section level2" number="6.9">
 <h2>
-<span class="header-section-number">5.9</span> Setting FISH variables<a class="anchor" aria-label="anchor" href="#setting-fish-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.9</span> Setting FISH variables<a class="anchor" aria-label="anchor" href="#setting-fish-variables"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="using-python-with-flac3d.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
-<span id="cb29-2"><a href="using-python-with-flac3d.html#cb29-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">'python-reset-state false'</span>)</span>
-<span id="cb29-3"><a href="using-python-with-flac3d.html#cb29-3" aria-hidden="true" tabindex="-1"></a>it.fish.<span class="bu">set</span>(<span class="st">'x'</span>, <span class="dv">10</span>)</span>
-<span id="cb29-4"><a href="using-python-with-flac3d.html#cb29-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> it.fish.get(<span class="st">'x'</span>) yields <span class="dv">10</span></span></code></pre></div>
-<div id="issuing-command" class="section level3" number="5.9.1">
-<h3>
-<span class="header-section-number">5.9.1</span> Issuing Command<a class="anchor" aria-label="anchor" href="#issuing-command"><i class="fas fa-link"></i></a>
-</h3>
 <div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="using-python-with-flac3d.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
-<span id="cb30-2"><a href="using-python-with-flac3d.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb30-3"><a href="using-python-with-flac3d.html#cb30-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.loadtext(<span class="st">'brick-data.txt'</span>)</span>
-<span id="cb30-4"><a href="using-python-with-flac3d.html#cb30-4" aria-hidden="true" tabindex="-1"></a>command_template <span class="op">=</span> <span class="op">;;;</span> </span>
-<span id="cb30-5"><a href="using-python-with-flac3d.html#cb30-5" aria-hidden="true" tabindex="-1"></a>zone create brick</span>
-<span id="cb30-6"><a href="using-python-with-flac3d.html#cb30-6" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic</span>
-<span id="cb30-7"><a href="using-python-with-flac3d.html#cb30-7" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> density {density} young {young} poisson {poisson}</span>
-<span id="cb30-8"><a href="using-python-with-flac3d.html#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="op">;;;</span></span>
-<span id="cb30-9"><a href="using-python-with-flac3d.html#cb30-9" aria-hidden="true" tabindex="-1"></a>density <span class="op">=</span> data[<span class="dv">0</span>]</span>
-<span id="cb30-10"><a href="using-python-with-flac3d.html#cb30-10" aria-hidden="true" tabindex="-1"></a>young <span class="op">=</span> data[<span class="dv">1</span>]</span>
-<span id="cb30-11"><a href="using-python-with-flac3d.html#cb30-11" aria-hidden="true" tabindex="-1"></a>poisson <span class="op">=</span> data[<span class="dv">2</span>]</span>
-<span id="cb30-12"><a href="using-python-with-flac3d.html#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-13"><a href="using-python-with-flac3d.html#cb30-13" aria-hidden="true" tabindex="-1"></a>command <span class="op">=</span> command_template.<span class="bu">format</span>(density<span class="op">=</span>density, young<span class="op">=</span>young, poisson<span class="op">=</span>poisson)</span>
-<span id="cb30-14"><a href="using-python-with-flac3d.html#cb30-14" aria-hidden="true" tabindex="-1"></a>it.command(command)</span></code></pre></div>
+<span id="cb30-2"><a href="using-python-with-flac3d.html#cb30-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">'python-reset-state false'</span>)</span>
+<span id="cb30-3"><a href="using-python-with-flac3d.html#cb30-3" aria-hidden="true" tabindex="-1"></a>it.fish.<span class="bu">set</span>(<span class="st">'x'</span>, <span class="dv">10</span>)</span>
+<span id="cb30-4"><a href="using-python-with-flac3d.html#cb30-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> it.fish.get(<span class="st">'x'</span>) yields <span class="dv">10</span></span></code></pre></div>
+<div id="issuing-command" class="section level3" number="6.9.1">
+<h3>
+<span class="header-section-number">6.9.1</span> Issuing Command<a class="anchor" aria-label="anchor" href="#issuing-command"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="using-python-with-flac3d.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
+<span id="cb31-2"><a href="using-python-with-flac3d.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb31-3"><a href="using-python-with-flac3d.html#cb31-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.loadtext(<span class="st">'brick-data.txt'</span>)</span>
+<span id="cb31-4"><a href="using-python-with-flac3d.html#cb31-4" aria-hidden="true" tabindex="-1"></a>command_template <span class="op">=</span> <span class="op">;;;</span> </span>
+<span id="cb31-5"><a href="using-python-with-flac3d.html#cb31-5" aria-hidden="true" tabindex="-1"></a>zone create brick</span>
+<span id="cb31-6"><a href="using-python-with-flac3d.html#cb31-6" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic</span>
+<span id="cb31-7"><a href="using-python-with-flac3d.html#cb31-7" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> density {density} young {young} poisson {poisson}</span>
+<span id="cb31-8"><a href="using-python-with-flac3d.html#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="op">;;;</span></span>
+<span id="cb31-9"><a href="using-python-with-flac3d.html#cb31-9" aria-hidden="true" tabindex="-1"></a>density <span class="op">=</span> data[<span class="dv">0</span>]</span>
+<span id="cb31-10"><a href="using-python-with-flac3d.html#cb31-10" aria-hidden="true" tabindex="-1"></a>young <span class="op">=</span> data[<span class="dv">1</span>]</span>
+<span id="cb31-11"><a href="using-python-with-flac3d.html#cb31-11" aria-hidden="true" tabindex="-1"></a>poisson <span class="op">=</span> data[<span class="dv">2</span>]</span>
+<span id="cb31-12"><a href="using-python-with-flac3d.html#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="using-python-with-flac3d.html#cb31-13" aria-hidden="true" tabindex="-1"></a>command <span class="op">=</span> command_template.<span class="bu">format</span>(density<span class="op">=</span>density, young<span class="op">=</span>young, poisson<span class="op">=</span>poisson)</span>
+<span id="cb31-14"><a href="using-python-with-flac3d.html#cb31-14" aria-hidden="true" tabindex="-1"></a>it.command(command)</span></code></pre></div>
 </div>
 </div>
-<div id="string" class="section level2" number="5.10">
+<div id="string" class="section level2" number="6.10">
 <h2>
-<span class="header-section-number">5.10</span> String<a class="anchor" aria-label="anchor" href="#string"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.10</span> String<a class="anchor" aria-label="anchor" href="#string"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="using-python-with-flac3d.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">"The value of x is {:.2f}"</span>.<span class="bu">format</span>(<span class="fl">0.3872</span>)</span>
-<span id="cb31-2"><a href="using-python-with-flac3d.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">"The value of x is {:.2e}"</span>.<span class="bu">format</span>(<span class="fl">0.3872</span>)</span>
-<span id="cb31-3"><a href="using-python-with-flac3d.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is Sasha"</span></span>
-<span id="cb31-4"><a href="using-python-with-flac3d.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is {}"</span>.<span class="bu">format</span>(<span class="st">"Sasha"</span>)</span>
-<span id="cb31-5"><a href="using-python-with-flac3d.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is {name}"</span>.<span class="bu">format</span>(name<span class="op">=</span><span class="st">"Sasha"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="using-python-with-flac3d.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">"The value of x is {:.2f}"</span>.<span class="bu">format</span>(<span class="fl">0.3872</span>)</span>
+<span id="cb32-2"><a href="using-python-with-flac3d.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">"The value of x is {:.2e}"</span>.<span class="bu">format</span>(<span class="fl">0.3872</span>)</span>
+<span id="cb32-3"><a href="using-python-with-flac3d.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is Sasha"</span></span>
+<span id="cb32-4"><a href="using-python-with-flac3d.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is {}"</span>.<span class="bu">format</span>(<span class="st">"Sasha"</span>)</span>
+<span id="cb32-5"><a href="using-python-with-flac3d.html#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is {name}"</span>.<span class="bu">format</span>(name<span class="op">=</span><span class="st">"Sasha"</span>)</span></code></pre></div>
 <!--------------------------------------------------->
 <!--------------------------------------------------->
 <!--------------------------------------------------->
@@ -209,24 +210,24 @@
 <!--------------------------------------------------->
 <!--------------------------------------------------->
 <div class="chapter-nav">
-<div class="prev"><a href="grid-generation-1.html"><span class="header-section-number">4</span> Grid Generation</a></div>
+<div class="prev"><a href="grid-generation-1.html"><span class="header-section-number">5</span> Grid Generation</a></div>
 <div class="next"><a href="appendix-1.-template.html"><span class="header-section-number">A</span> Appendix 1. Template</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#using-python-with-flac3d"><span class="header-section-number">5</span> Using Python with FLAC3D</a></li>
-<li><a class="nav-link" href="#introduction"><span class="header-section-number">5.1</span> Introduction</a></li>
-<li><a class="nav-link" href="#zones-2"><span class="header-section-number">5.2</span> Zones</a></li>
-<li><a class="nav-link" href="#properties-3"><span class="header-section-number">5.3</span> Properties</a></li>
-<li><a class="nav-link" href="#gridpoints"><span class="header-section-number">5.4</span> Gridpoints</a></li>
-<li><a class="nav-link" href="#structural-elements"><span class="header-section-number">5.5</span> Structural Elements</a></li>
-<li><a class="nav-link" href="#extra-variables"><span class="header-section-number">5.6</span> Extra Variables</a></li>
-<li><a class="nav-link" href="#groups-and-b.c."><span class="header-section-number">5.7</span> Groups and B.C.</a></li>
-<li><a class="nav-link" href="#parameteric-studies"><span class="header-section-number">5.8</span> Parameteric Studies</a></li>
+<li><a class="nav-link" href="#using-python-with-flac3d"><span class="header-section-number">6</span> Using Python with FLAC3D</a></li>
+<li><a class="nav-link" href="#introduction"><span class="header-section-number">6.1</span> Introduction</a></li>
+<li><a class="nav-link" href="#zones-2"><span class="header-section-number">6.2</span> Zones</a></li>
+<li><a class="nav-link" href="#properties-3"><span class="header-section-number">6.3</span> Properties</a></li>
+<li><a class="nav-link" href="#gridpoints"><span class="header-section-number">6.4</span> Gridpoints</a></li>
+<li><a class="nav-link" href="#structural-elements"><span class="header-section-number">6.5</span> Structural Elements</a></li>
+<li><a class="nav-link" href="#extra-variables"><span class="header-section-number">6.6</span> Extra Variables</a></li>
+<li><a class="nav-link" href="#groups-and-b.c."><span class="header-section-number">6.7</span> Groups and B.C.</a></li>
+<li><a class="nav-link" href="#parameteric-studies"><span class="header-section-number">6.8</span> Parameteric Studies</a></li>
 <li>
-<a class="nav-link" href="#setting-fish-variables"><span class="header-section-number">5.9</span> Setting FISH variables</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#issuing-command"><span class="header-section-number">5.9.1</span> Issuing Command</a></li></ul>
+<a class="nav-link" href="#setting-fish-variables"><span class="header-section-number">6.9</span> Setting FISH variables</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#issuing-command"><span class="header-section-number">6.9.1</span> Issuing Command</a></li></ul>
 </li>
-<li><a class="nav-link" href="#string"><span class="header-section-number">5.10</span> String</a></li>
+<li><a class="nav-link" href="#string"><span class="header-section-number">6.10</span> String</a></li>
 </ul>
 
       <div class="book-extra">
