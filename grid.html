@@ -4,21 +4,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>3 Grid | FLAC3D Gitbook</title>
+<title>4 Grid | FLAC3D Gitbook</title>
 <meta name="author" content="Kyeong Sun Kim">
 <meta name="generator" content="bookdown 0.23 with bs4_book()">
-<meta property="og:title" content="3 Grid | FLAC3D Gitbook">
+<meta property="og:title" content="4 Grid | FLAC3D Gitbook">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="3 Grid | FLAC3D Gitbook">
+<meta name="twitter:title" content="4 Grid | FLAC3D Gitbook">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="templates/bs4_style.css">
 <link rel="stylesheet" href="templates/corrections.css">
-<meta name="description" content="3.1 Primitive Shapes   note: zone create generates primitive gridnote: zone gridpoint create puts gridpoints at specific locations note: zone gridpoint merge ensures separate primitives are...">
-<meta property="og:description" content="3.1 Primitive Shapes   note: zone create generates primitive gridnote: zone gridpoint create puts gridpoints at specific locations note: zone gridpoint merge ensures separate primitives are...">
-<meta name="twitter:description" content="3.1 Primitive Shapes   note: zone create generates primitive gridnote: zone gridpoint create puts gridpoints at specific locations note: zone gridpoint merge ensures separate primitives are...">
+<meta name="description" content="4.1 Primitive Shapes   note: zone create generates primitive gridnote: zone gridpoint create puts gridpoints at specific locations note: zone gridpoint merge ensures separate primitives are...">
+<meta property="og:description" content="4.1 Primitive Shapes   note: zone create generates primitive gridnote: zone gridpoint create puts gridpoints at specific locations note: zone gridpoint merge ensures separate primitives are...">
+<meta name="twitter:description" content="4.1 Primitive Shapes   note: zone create generates primitive gridnote: zone gridpoint create puts gridpoints at specific locations note: zone gridpoint merge ensures separate primitives are...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -42,9 +42,10 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome</a></li>
 <li><a class="" href="kaist-model.html"><span class="header-section-number">1</span> KAIST Model</a></li>
-<li><a class="" href="pull-tests.html"><span class="header-section-number">2</span> Pull-Tests</a></li>
-<li><a class="active" href="grid.html"><span class="header-section-number">3</span> Grid</a></li>
-<li><a class="" href="python-with-flac3d.html"><span class="header-section-number">4</span> Python with FLAC3D</a></li>
+<li><a class="" href="axial-concrete-pile.html"><span class="header-section-number">2</span> Axial Concrete Pile</a></li>
+<li><a class="" href="pull-tests.html"><span class="header-section-number">3</span> Pull-Tests</a></li>
+<li><a class="active" href="grid.html"><span class="header-section-number">4</span> Grid</a></li>
+<li><a class="" href="python-with-flac3d.html"><span class="header-section-number">5</span> Python with FLAC3D</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="template.html"><span class="header-section-number">A</span> 1. Template</a></li>
 <li><a class="" href="reference-collective.html"><span class="header-section-number">B</span> Reference Collective</a></li>
@@ -55,13 +56,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="grid" class="section level1" number="3">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="grid" class="section level1" number="4">
 <h1>
-<span class="header-section-number">3</span> Grid<a class="anchor" aria-label="anchor" href="#grid"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4</span> Grid<a class="anchor" aria-label="anchor" href="#grid"><i class="fas fa-link"></i></a>
 </h1>
-<div id="primitive-shapes" class="section level2" number="3.1">
+<div id="primitive-shapes" class="section level2" number="4.1">
 <h2>
-<span class="header-section-number">3.1</span> Primitive Shapes<a class="anchor" aria-label="anchor" href="#primitive-shapes"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1</span> Primitive Shapes<a class="anchor" aria-label="anchor" href="#primitive-shapes"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-figure"><img src="myfigureeeeee/radial-cylinder.PNG" width="100%"></div>
 <div class="inline-figure"><img src="myfigureeeeee/radial-square.PNG" width="100%"></div>
@@ -82,9 +83,9 @@
 - ratio (coarser toward edge)
 - size</p>
 </div>
-<div id="several-primitive-shapes-connected" class="section level2" number="3.2">
+<div id="several-primitive-shapes-connected" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">3.2</span> several primitive shapes connected:<a class="anchor" aria-label="anchor" href="#several-primitive-shapes-connected"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> several primitive shapes connected:<a class="anchor" aria-label="anchor" href="#several-primitive-shapes-connected"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="grid.html#cb18-1" aria-hidden="true" tabindex="-1"></a>zone create radial<span class="op">-</span>cylinder size <span class="dv">5</span> <span class="dv">10</span> <span class="dv">6</span> <span class="dv">12</span> rat <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="fl">1.2</span> ...</span>
 <span id="cb18-2"><a href="grid.html#cb18-2" aria-hidden="true" tabindex="-1"></a>                           point <span class="dv">0</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) point <span class="dv">1</span> (<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">0</span>) ...</span>
@@ -113,9 +114,9 @@ If it is discovered that some gridpoints don’t match, the zone gridpoint merge
 <p>the first two command lines can be changed to
 where zone densify segments 2 refines the upper zones (between the z-coordinate of 2 and 4) with the segment number of 2 on each edge.</p>
 </div>
-<div id="structural-element-operation" class="section level2" number="3.3">
+<div id="structural-element-operation" class="section level2" number="4.3">
 <h2>
-<span class="header-section-number">3.3</span> Structural Element Operation<a class="anchor" aria-label="anchor" href="#structural-element-operation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3</span> Structural Element Operation<a class="anchor" aria-label="anchor" href="#structural-element-operation"><i class="fas fa-link"></i></a>
 </h2>
 <p>Creating a liner in the service tunnel</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="grid.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> liner</span>
@@ -124,9 +125,9 @@ where zone densify segments 2 refines the upper zones (between the z-coordinate 
 <span id="cb21-4"><a href="grid.html#cb21-4" aria-hidden="true" tabindex="-1"></a>                                     radius <span class="dv">3</span></span></code></pre></div>
 <p>The liner contains 240 structural shell elements and is connected to the FLAC3D grid at 143 structural-node links. The grid with the liner is shown below.</p>
 </div>
-<div id="densifying-grid-by-specifying-max-size-length" class="section level2" number="3.4">
+<div id="densifying-grid-by-specifying-max-size-length" class="section level2" number="4.4">
 <h2>
-<span class="header-section-number">3.4</span> Densifying grid by specifying max size length<a class="anchor" aria-label="anchor" href="#densifying-grid-by-specifying-max-size-length"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4</span> Densifying grid by specifying max size length<a class="anchor" aria-label="anchor" href="#densifying-grid-by-specifying-max-size-length"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="grid.html#cb22-1" aria-hidden="true" tabindex="-1"></a>model new</span>
 <span id="cb22-2"><a href="grid.html#cb22-2" aria-hidden="true" tabindex="-1"></a>zone create brick size <span class="dv">4</span> <span class="dv">4</span> <span class="dv">4</span></span>
@@ -139,9 +140,9 @@ where zone densify segments 2 refines the upper zones (between the z-coordinate 
 <p>note that in the local z-direction, the maximum size length is 0.4. FLAC3D densifies the maximum length in this direction to be 1/3 (= 0.4)<br>
 The zone attach by-face command in this example is used to attach faces of sub-grids together rigidly to form a single grid<br></p>
 <p>Always use the zone attach by-face command after the zone densify command if there are different numbers of gridpoints along faces of different zones.<br></p>
-<div id="densify-a-grid-using-geometric-information" class="section level3" number="3.4.1">
+<div id="densify-a-grid-using-geometric-information" class="section level3" number="4.4.1">
 <h3>
-<span class="header-section-number">3.4.1</span> Densify a grid using geometric information<a class="anchor" aria-label="anchor" href="#densify-a-grid-using-geometric-information"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.1</span> Densify a grid using geometric information<a class="anchor" aria-label="anchor" href="#densify-a-grid-using-geometric-information"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="grid.html#cb23-1" aria-hidden="true" tabindex="-1"></a>model new</span>
 <span id="cb23-2"><a href="grid.html#cb23-2" aria-hidden="true" tabindex="-1"></a>zone create brick size <span class="dv">10</span> <span class="dv">10</span> <span class="dv">10</span></span>
@@ -168,17 +169,17 @@ The zone attach by-face command in this example is used to attach faces of sub-g
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="pull-tests.html"><span class="header-section-number">2</span> Pull-Tests</a></div>
-<div class="next"><a href="python-with-flac3d.html"><span class="header-section-number">4</span> Python with FLAC3D</a></div>
+<div class="prev"><a href="pull-tests.html"><span class="header-section-number">3</span> Pull-Tests</a></div>
+<div class="next"><a href="python-with-flac3d.html"><span class="header-section-number">5</span> Python with FLAC3D</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#grid"><span class="header-section-number">3</span> Grid</a></li>
-<li><a class="nav-link" href="#primitive-shapes"><span class="header-section-number">3.1</span> Primitive Shapes</a></li>
-<li><a class="nav-link" href="#several-primitive-shapes-connected"><span class="header-section-number">3.2</span> several primitive shapes connected:</a></li>
-<li><a class="nav-link" href="#structural-element-operation"><span class="header-section-number">3.3</span> Structural Element Operation</a></li>
+<li><a class="nav-link" href="#grid"><span class="header-section-number">4</span> Grid</a></li>
+<li><a class="nav-link" href="#primitive-shapes"><span class="header-section-number">4.1</span> Primitive Shapes</a></li>
+<li><a class="nav-link" href="#several-primitive-shapes-connected"><span class="header-section-number">4.2</span> several primitive shapes connected:</a></li>
+<li><a class="nav-link" href="#structural-element-operation"><span class="header-section-number">4.3</span> Structural Element Operation</a></li>
 <li>
-<a class="nav-link" href="#densifying-grid-by-specifying-max-size-length"><span class="header-section-number">3.4</span> Densifying grid by specifying max size length</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#densify-a-grid-using-geometric-information"><span class="header-section-number">3.4.1</span> Densify a grid using geometric information</a></li></ul>
+<a class="nav-link" href="#densifying-grid-by-specifying-max-size-length"><span class="header-section-number">4.4</span> Densifying grid by specifying max size length</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#densify-a-grid-using-geometric-information"><span class="header-section-number">4.4.1</span> Densify a grid using geometric information</a></li></ul>
 </li>
 </ul>
 

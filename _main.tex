@@ -439,86 +439,113 @@ zone property bulk 8.333e7 shear 3.846e7 range group `shaft'
 zone cmodel assign elastic range group `plate'
 zone property bulk 8.333e7 shear 3.846e7 range group `plate'
 
-\begin{verbatim}
+\includegraphics[width=1\linewidth]{myfigureeeeee/d}
 
-\includegraphics[width=1\linewidth]{myfigureeeeee/d} 
+\hypertarget{soil-structure-interface}{%
+\section{Soil-Structure Interface}\label{soil-structure-interface}}
 
-## Soil-Structure Interface
+\hypertarget{boundary-conditions}{%
+\section{Boundary Conditions}\label{boundary-conditions}}
 
-## Boundary Conditions
+\hypertarget{initial-equilibrium}{%
+\section{Initial Equilibrium}\label{initial-equilibrium}}
 
-## Initial Equilibrium
+\hypertarget{alterations}{%
+\section{Alterations}\label{alterations}}
 
-## Alterations
+\hypertarget{results}{%
+\section{Results}\label{results}}
 
-## Results
-
-
-<!--------------------------------------------------->
-<!--------------------------------------------------->
-<!--------------------------------------------------->
 \newpage
 
-# Axial Concrete Pile
+\hypertarget{axial-concrete-pile}{%
+\chapter{Axial Concrete Pile}\label{axial-concrete-pile}}
 
+\hypertarget{problem-description}{%
+\section{Problem Description}\label{problem-description}}
 
-## Problem Description
-### Problem Statement
+\hypertarget{problem-statement}{%
+\subsection{Problem Statement}\label{problem-statement}}
+
 The pile is subjected to an axial load of 100 kN,
 and then the top of the pile is moved horizontally for a displacement of 4 cm.
 The goal is to determine relation of axial loading to the ultimate bearing capacity.
 And, lateral load-deflection curve is calculated.
 
-1) origin at the top of the pile, z upward.
-2) z=0: free surface
-3) z=-8: fixed in z-eirection
-4) x=+8, -8, y = 8: roller
-5) skin friction is modeled by placing an interface
-between pile concrete wall and clay.
-In it, fric angle of 20 and c=30kPa are assumed.
-6) toe interface is placed between pile tip and clay
-*note: Zone faces are separated in a previous command so that the gridpoints common to both will be separated as well.* \
-*note: include Figure of grid (geometry)*
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  origin at the top of the pile, z upward.
+\item
+  z=0: free surface
+\item
+  z=-8: fixed in z-eirection
+\item
+  x=+8, -8, y = 8: roller
+\item
+  skin friction is modeled by placing an interface
+  between pile concrete wall and clay.
+  In it, fric angle of 20 and c=30kPa are assumed.
+\item
+  toe interface is placed between pile tip and clay
+  \emph{note: Zone faces are separated in a previous command so that the gridpoints common to both will be separated as well.}\\
+  \emph{note: include Figure of grid (geometry)}
+\end{enumerate}
 
-### Main Parameters
-Diameter = 0.6 m \
-Length = 5  \
-Clay \
-GWT = 5.5m \
+\hypertarget{main-parameters}{%
+\subsection{Main Parameters}\label{main-parameters}}
 
-## Modeling Procedure
-1) equil. stress state under gravity load before install. \
-1-1) water table is created at z=5.5 \
-1-2) wet density of clay is assigned below this water table. \
-2) equil. stress state after installation. \
-2-1) change properties of pile zones from those  \
-representing clay to those representing concrete. \
-2-2) vertical equil. stress distribution at this equil. state is shown in \
-*note: include Figure of contours of vertical stress at ini state incld. pile weight* \
-3) apply vertical velocity at top of pile \
-"ramp" = boundary condition is increased linearly \
-*note: critical timestep is controlled by high stiffness of concrete* \
-If velocity is sudden, inertial effects will dominate and renders difficulty to identification of steady state response of system \
-table "ramp" is used to apply velocity to pile top gridpoints. \
-*note: FISH FUNCTION vert_load calculates axial stress at the top of pile and stores value as a history* \
-For efficiency, gridpoints on cap surface are stored in symbol "cap" as a map \
-*note: include plot of axial stress vs axial displ. at pile toe. ramp = (0,5e-8), step number = 30000* \
-*note: combined damping is used to remove kinetic energy for prescribed loading condition. This is because mass-adjustment process depends on velocity sign-changes..* \
-*note: FISH FUNCTION tot_reac monitors soil reaction along pile as a func of lateral displ. tot_reac creates tables of soil reaction (p) vs. lateral displ (y) at diff. locations along pile to generate p-y curve.* \
-*note: include Figure of p-y curve at 11 equidistant points along pile* \
+Diameter = 0.6 m\\
+Length = 5\\
+Clay\\
+GWT = 5.5m\\
 
-## Zones
+\hypertarget{modeling-procedure}{%
+\section{Modeling Procedure}\label{modeling-procedure}}
 
-```python
-model new
-model title 'Axial and lateral loading of a concrete pile'
-; create grid interactively from the extruder tool, 
-; exported to geometry.f3dat from State Record pane.
-call 'geometry' suppress
-zone generate from-extruder
-; Reflect the grid to get a 1/2 space instead of a 1/4 space
-zone reflect dip-direction 270 dip 90
-\end{verbatim}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  equil. stress state under gravity load before install.\\
+  1-1) water table is created at z=5.5\\
+  1-2) wet density of clay is assigned below this water table.\\
+\item
+  equil. stress state after installation.\\
+  2-1) change properties of pile zones from those\\
+  representing clay to those representing concrete.\\
+  2-2) vertical equil. stress distribution at this equil. state is shown in\\
+  \emph{note: include Figure of contours of vertical stress at ini state incld. pile weight}\\
+\item
+  apply vertical velocity at top of pile\\
+  ``ramp'' = boundary condition is increased linearly\\
+  \emph{note: critical timestep is controlled by high stiffness of concrete}\\
+  If velocity is sudden, inertial effects will dominate and renders difficulty to identification of steady state response of system\\
+  table ``ramp'' is used to apply velocity to pile top gridpoints.\\
+  \emph{note: FISH FUNCTION vert\_load calculates axial stress at the top of pile and stores value as a history}\\
+  For efficiency, gridpoints on cap surface are stored in symbol ``cap'' as a map\\
+  \emph{note: include plot of axial stress vs axial displ. at pile toe. ramp = (0,5e-8), step number = 30000}\\
+  \emph{note: combined damping is used to remove kinetic energy for prescribed loading condition. This is because mass-adjustment process depends on velocity sign-changes..}\\
+  \emph{note: FISH FUNCTION tot\_reac monitors soil reaction along pile as a func of lateral displ. tot\_reac creates tables of soil reaction (p) vs.~lateral displ (y) at diff. locations along pile to generate p-y curve.}\\
+  \emph{note: include Figure of p-y curve at 11 equidistant points along pile}\\
+\end{enumerate}
+
+\hypertarget{zones-1}{%
+\section{Zones}\label{zones-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model new}
+\NormalTok{model title }\StringTok{\textquotesingle{}Axial and lateral loading of a concrete pile\textquotesingle{}}
+\OperatorTok{;}\NormalTok{ create grid interactively }\ImportTok{from}\NormalTok{ the extruder tool, }
+\OperatorTok{;}\NormalTok{ exported to geometry.f3dat }\ImportTok{from}\NormalTok{ State Record pane.}
+\NormalTok{call }\StringTok{\textquotesingle{}geometry\textquotesingle{}}\NormalTok{ suppress}
+\NormalTok{zone generate }\ImportTok{from}\OperatorTok{{-}}\NormalTok{extruder}
+\OperatorTok{;}\NormalTok{ Reflect the grid to get a }\DecValTok{1}\OperatorTok{/}\DecValTok{2}\NormalTok{ space instead of a }\DecValTok{1}\OperatorTok{/}\DecValTok{4}\NormalTok{ space}
+\NormalTok{zone reflect dip}\OperatorTok{{-}}\NormalTok{direction }\DecValTok{270}\NormalTok{ dip }\DecValTok{90}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{groups}{%
 \section{Groups}\label{groups}}
@@ -590,8 +617,8 @@ zone reflect dip-direction 270 dip 90
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{initial-equilibrium}{%
-\section{Initial Equilibrium}\label{initial-equilibrium}}
+\hypertarget{initial-equilibrium-1}{%
+\section{Initial Equilibrium}\label{initial-equilibrium-1}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -602,8 +629,8 @@ zone reflect dip-direction 270 dip 90
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{alterations}{%
-\section{Alterations}\label{alterations}}
+\hypertarget{alterations-1}{%
+\section{Alterations}\label{alterations-1}}
 
 \hypertarget{install-the-pile}{%
 \subsection{install the pile}\label{install-the-pile}}
@@ -676,8 +703,8 @@ zone reflect dip-direction 270 dip 90
 \hypertarget{pull-tests}{%
 \chapter{Pull-Tests}\label{pull-tests}}
 
-\hypertarget{problem-description}{%
-\section{Problem Description}\label{problem-description}}
+\hypertarget{problem-description-1}{%
+\section{Problem Description}\label{problem-description-1}}
 
 \emph{note: FISH function force is used to sum the raction forces and monitor nodal displacement generated by the pull-test}\\
 \emph{note: free length of bolt that extends out of block + larger diameter}\\
@@ -686,8 +713,8 @@ Perfectly plastic behavior of grout = max cohesion is exceeded +post-peak weaken
 The relation btw shear disp. and cohesion weakening is prescribed\\
 thru table cct. softening of friction of grout canbe defined using keyword coupling-friction-table.\\
 
-\hypertarget{zones-1}{%
-\section{Zones}\label{zones-1}}
+\hypertarget{zones-2}{%
+\section{Zones}\label{zones-2}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -729,8 +756,8 @@ thru table cct. softening of friction of grout canbe defined using keyword coupl
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{initial-equilibrium-1}{%
-\section{Initial Equilibrium}\label{initial-equilibrium-1}}
+\hypertarget{initial-equilibrium-2}{%
+\section{Initial Equilibrium}\label{initial-equilibrium-2}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -740,8 +767,8 @@ thru table cct. softening of friction of grout canbe defined using keyword coupl
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{alterations-1}{%
-\section{Alterations}\label{alterations-1}}
+\hypertarget{alterations-2}{%
+\section{Alterations}\label{alterations-2}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -958,8 +985,8 @@ Always use the zone attach by-face command after the zone densify command if the
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{zones-2}{%
-\section{Zones}\label{zones-2}}
+\hypertarget{zones-3}{%
+\section{Zones}\label{zones-3}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1249,11 +1276,11 @@ Always use the zone attach by-face command after the zone densify command if the
 \hypertarget{template}{%
 \chapter{1. Template}\label{template}}
 
-\hypertarget{problem-description-1}{%
-\section{Problem Description}\label{problem-description-1}}
+\hypertarget{problem-description-2}{%
+\section{Problem Description}\label{problem-description-2}}
 
-\hypertarget{modeling-procedure}{%
-\section{Modeling Procedure}\label{modeling-procedure}}
+\hypertarget{modeling-procedure-1}{%
+\section{Modeling Procedure}\label{modeling-procedure-1}}
 
 \hypertarget{zonesgroups}{%
 \section{Zones/Groups}\label{zonesgroups}}
@@ -1264,14 +1291,14 @@ Always use the zone attach by-face command after the zone densify command if the
 \hypertarget{b.c.-and-i.c.-1}{%
 \section{B.C. and I.C.}\label{b.c.-and-i.c.-1}}
 
-\hypertarget{initial-equilibrium-2}{%
-\section{Initial Equilibrium}\label{initial-equilibrium-2}}
+\hypertarget{initial-equilibrium-3}{%
+\section{Initial Equilibrium}\label{initial-equilibrium-3}}
 
-\hypertarget{alterations-2}{%
-\section{Alterations}\label{alterations-2}}
+\hypertarget{alterations-3}{%
+\section{Alterations}\label{alterations-3}}
 
-\hypertarget{results}{%
-\section{Results}\label{results}}
+\hypertarget{results-1}{%
+\section{Results}\label{results-1}}
 
 \hypertarget{reference-collective}{%
 \chapter{Reference Collective}\label{reference-collective}}
