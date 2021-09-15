@@ -394,7 +394,11 @@ wonderful have been, and are being, evolved.
 \StringTok{                            size 10 20 26 40 ...}
 \StringTok{                            rat 1 1 1 1.5 ...}
 \StringTok{                            fill group "shaft"}
-\StringTok{          """}\NormalTok{)}
+
+\StringTok{zone group "plate" range position{-}x 0 3.2 position{-}y 8.5 10 position{-}z 0 3.2}
+
+
+\StringTok{"""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -408,9 +412,7 @@ wonderful have been, and are being, evolved.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{it.command(}\StringTok{"""}
-\StringTok{zone group "plate" range position{-}x 0 3.2 ...}
-\StringTok{                         position{-}y 8.5 10 ...}
-\StringTok{                         position{-}z 0 3.2}
+\StringTok{zone group "plate" range position{-}x 0 3.2 position{-}y 8.5 10 position{-}z 0 3.2}
 \StringTok{           """}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -421,12 +423,23 @@ wonderful have been, and are being, evolved.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{it.command(}\StringTok{"""}
-\StringTok{zone shaft assign elastic}
-\StringTok{zone property density 2400 young 40e9 poisson 0.25}
-\StringTok{zone plate assign elastic}
-\StringTok{zone property density 2400 young 40e9 poisson 0.25}
-\StringTok{zone radial assign elastic}
-\StringTok{zone property density 2400 young 40e9 poisson 0.25}
+\StringTok{; Constitutive model and properties for soil}
+
+\StringTok{zone cmodel assign strain{-}softening range group "Radial Cylinder1"}
+\StringTok{zone property density 2500 bulk 2e8 shear 1e8 range group "Radial Cylinder1"}
+\StringTok{zone property cohesion 2e6 friction 45 tension 2e5 dilation 10 range group "Radial Cylinder1"}
+\StringTok{zone property table{-}friction \textquotesingle{}fri\textquotesingle{} table{-}cohesion \textquotesingle{}coh\textquotesingle{} table{-}dilation \textquotesingle{}dil\textquotesingle{} range group "Radial Cylinder1"}
+\StringTok{table \textquotesingle{}fri\textquotesingle{} add (0, 45) (.05, 42) (.1, 40) (1, 40)}
+\StringTok{table \textquotesingle{}coh\textquotesingle{} add (0,2e6) (.05,1e6) (.1,5e5) (1,5e5) }
+\StringTok{table \textquotesingle{}dil\textquotesingle{} add (0, 10) (.05,  3) (.1,  0) }
+
+\StringTok{; Constitutive model and properties for shaft and plate}
+
+\StringTok{zone cmodel assign elastic range group \textquotesingle{}shaft\textquotesingle{}}
+\StringTok{zone property bulk 8.333e7  shear 3.846e7  range group \textquotesingle{}shaft\textquotesingle{}}
+\StringTok{zone cmodel assign elastic range group \textquotesingle{}plate\textquotesingle{}}
+\StringTok{zone property bulk 8.333e7  shear 3.846e7  range group \textquotesingle{}plate\textquotesingle{}}
+
 \StringTok{"""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
