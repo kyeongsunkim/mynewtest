@@ -367,29 +367,34 @@ wonderful have been, and are being, evolved.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ itasca }\ImportTok{as}\NormalTok{ it}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\NormalTok{np.set\_printoptions(threshold}\OperatorTok{=}\DecValTok{20}\NormalTok{)}
+\NormalTok{it.command(}\StringTok{"python{-}reset{-}state false"}\NormalTok{)}
+\ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ zonearray }\ImportTok{as}\NormalTok{ za}
+\ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ gridpointarray }\ImportTok{as}\NormalTok{ gpa}
 \CommentTok{" =========================================== "}
 \CommentTok{" =============GRID GENERATION=============== "}
 \CommentTok{" =========================================== "}
-\ImportTok{import}\NormalTok{ itasca }\ImportTok{as}\NormalTok{ it}
-\NormalTok{it.command(}\StringTok{"python{-}reset{-}state false"}\NormalTok{)}
+\CommentTok{\#}
 \NormalTok{it.command(}\StringTok{"""}
 \StringTok{model new}
 \StringTok{zone create radial{-}cylinder point 0 (0,0,0) ...}
 \StringTok{                            point 1 (40,0,0) ...}
-\StringTok{                            point 2 (0,7.45,0) ...}
+\StringTok{                            point 2 (0,10,0) ...}
 \StringTok{                            point 3 (0,0,40) ...}
-\StringTok{                            point 4 (40,7.45,0) ...}
-\StringTok{                            point 5 (0,7.45,40) ...}
+\StringTok{                            point 4 (40,10,0) ...}
+\StringTok{                            point 5 (0,10,40) ...}
 \StringTok{                            point 6 (40,0,40) ...}
-\StringTok{                            point 7 (40,7.45,40) ...}
+\StringTok{                            point 7 (40,10,40) ...}
 \StringTok{                            point 8 (1,0,0) ...}
 \StringTok{                            point 9 (0,0,1) ...}
-\StringTok{                            point 10 (1,7.45,0) ...}
-\StringTok{                            point 11 (0,7.45,0) ...}
-\StringTok{                            size 5 10 6 20 ...}
-\StringTok{                            rat 1 1 1 1.2 ...}
-\StringTok{                            fill group \textquotesingle{}shaft\textquotesingle{}}
-\StringTok{                            """}\NormalTok{)}
+\StringTok{                            point 10 (1,10,0) ...}
+\StringTok{                            point 11 (0,10,1) ...}
+\StringTok{                            size 10 20 26 40 ...}
+\StringTok{                            rat 1 1 1 1.5 ...}
+\StringTok{                            fill group "shaft"}
+\StringTok{          """}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -400,8 +405,39 @@ wonderful have been, and are being, evolved.
 \hypertarget{groups}{%
 \section{Groups}\label{groups}}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{" =========================================== "}
+\CommentTok{" =================GROUPS==================== "}
+\CommentTok{" =========================================== "}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone group "plate" range position{-}x 0 3.2 ...}
+\StringTok{                         position{-}y 8.5 10 ...}
+\StringTok{                         position{-}z 0 3.2}
+\StringTok{           """}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{properties}{%
 \section{Properties}\label{properties}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{" =========================================== "}
+\CommentTok{" ===============PROPERTIES================== "}
+\CommentTok{" =========================================== "}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone shaft assign elastic}
+\StringTok{zone property density 2400 young 40e9 poisson 0.25}
+\StringTok{zone plate assign elastic}
+\StringTok{zone property density 2400 young 40e9 poisson 0.25}
+\StringTok{zone radial assign elastic}
+\StringTok{zone property density 2400 young 40e9 poisson 0.25}
+\StringTok{"""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{elements}{%
 \section{Elements}\label{elements}}
@@ -429,35 +465,34 @@ wonderful have been, and are being, evolved.
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{import}\NormalTok{ itasca }\ImportTok{as}\NormalTok{ it}
-\NormalTok{it.command(}\StringTok{"python{-}reset{-}state false"}\NormalTok{)}
 \ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
 \NormalTok{np.set\_printoptions(threshold}\OperatorTok{=}\DecValTok{20}\NormalTok{)}
+\NormalTok{it.command(}\StringTok{"python{-}reset{-}state false"}\NormalTok{)}
 \ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ zonearray }\ImportTok{as}\NormalTok{ za}
 \ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ gridpointarray }\ImportTok{as}\NormalTok{ gpa}
-
-
 \CommentTok{" =========================================== "}
 \CommentTok{" =============GRID GENERATION=============== "}
 \CommentTok{" =========================================== "}
-
+\CommentTok{\#}
 \NormalTok{it.command(}\StringTok{"""}
 \StringTok{model new}
 \StringTok{zone create radial{-}cylinder point 0 (0,0,0) ...}
 \StringTok{                            point 1 (40,0,0) ...}
-\StringTok{                            point 2 (0,7.45,0) ...}
+\StringTok{                            point 2 (0,10,0) ...}
 \StringTok{                            point 3 (0,0,40) ...}
-\StringTok{                            point 4 (40,7.45,0) ...}
-\StringTok{                            point 5 (0,7.45,40) ...}
+\StringTok{                            point 4 (40,10,0) ...}
+\StringTok{                            point 5 (0,10,40) ...}
 \StringTok{                            point 6 (40,0,40) ...}
-\StringTok{                            point 7 (40,7.45,40) ...}
+\StringTok{                            point 7 (40,10,40) ...}
 \StringTok{                            point 8 (1,0,0) ...}
 \StringTok{                            point 9 (0,0,1) ...}
-\StringTok{                            point 10 (1,7.45,0) ...}
-\StringTok{                            point 11 (0,7.45,0) ...}
-\StringTok{                            size 5 10 6 20 ...}
-\StringTok{                            rat 1 1 1 1.2 ...}
-\StringTok{                            fill group \textquotesingle{}shaft\textquotesingle{}}
-\StringTok{                            """}\NormalTok{)}
+\StringTok{                            point 10 (1,10,0) ...}
+\StringTok{                            point 11 (0,10,1) ...}
+\StringTok{                            size 10 20 26 40 ...}
+\StringTok{                            rat 1 1 1 1.5 ...}
+\StringTok{                            fill group "shaft"}
+\StringTok{zone group "plate" range position{-}x 0 3.2 position{-}y 8.5 10 position{-}z 0 3.2}
+\StringTok{"""}\NormalTok{)}
 
 \CommentTok{" =========================================== "}
 \CommentTok{" ============GROUPS AND MASKS=============== "}
