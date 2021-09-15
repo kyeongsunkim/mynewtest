@@ -42,11 +42,10 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">This Pandoc</a></li>
 <li><a class="active" href="kaist-model-flac3d.html"><span class="header-section-number">1</span> KAIST Model FLAC3D</a></li>
-<li><a class="" href="kaist-model-python.html"><span class="header-section-number">2</span> KAIST Model Python</a></li>
-<li><a class="" href="axial-concrete-pile.html"><span class="header-section-number">3</span> Axial Concrete Pile</a></li>
-<li><a class="" href="pull-tests.html"><span class="header-section-number">4</span> Pull-Tests</a></li>
-<li><a class="" href="grid-generation-1.html"><span class="header-section-number">5</span> Grid Generation</a></li>
-<li><a class="" href="using-python-with-flac3d.html"><span class="header-section-number">6</span> Using Python with FLAC3D</a></li>
+<li><a class="" href="axial-concrete-pile.html"><span class="header-section-number">2</span> Axial Concrete Pile</a></li>
+<li><a class="" href="pull-tests.html"><span class="header-section-number">3</span> Pull-Tests</a></li>
+<li><a class="" href="grid.html"><span class="header-section-number">4</span> Grid</a></li>
+<li><a class="" href="python-with-flac3d.html"><span class="header-section-number">5</span> Python with FLAC3D</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="appendix-1.-template.html"><span class="header-section-number">A</span> Appendix 1. Template</a></li>
 <li><a class="" href="literature-compilation.html"><span class="header-section-number">B</span> Literature Compilation</a></li>
@@ -100,56 +99,43 @@
 <h2>
 <span class="header-section-number">1.2</span> Groups<a class="anchor" aria-label="anchor" href="#groups"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="kaist-model-flac3d.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb2-2"><a href="kaist-model-flac3d.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">" =================GROUPS==================== "</span></span>
-<span id="cb2-3"><a href="kaist-model-flac3d.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb2-4"><a href="kaist-model-flac3d.html#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="kaist-model-flac3d.html#cb2-5" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
-<span id="cb2-6"><a href="kaist-model-flac3d.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">zone group "plate" range position-x 0 3.2 ...</span></span>
-<span id="cb2-7"><a href="kaist-model-flac3d.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">                         position-y 8.5 10 ...</span></span>
-<span id="cb2-8"><a href="kaist-model-flac3d.html#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">                         position-z 0 3.2</span></span>
-<span id="cb2-9"><a href="kaist-model-flac3d.html#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">           """</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="kaist-model-flac3d.html#cb2-1" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
+<span id="cb2-2"><a href="kaist-model-flac3d.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="st">zone group "plate" range position-x 0 3.2 ...</span></span>
+<span id="cb2-3"><a href="kaist-model-flac3d.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">                         position-y 8.5 10 ...</span></span>
+<span id="cb2-4"><a href="kaist-model-flac3d.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">                         position-z 0 3.2</span></span>
+<span id="cb2-5"><a href="kaist-model-flac3d.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">           """</span>)</span></code></pre></div>
 </div>
 <div id="properties" class="section level2" number="1.3">
 <h2>
 <span class="header-section-number">1.3</span> Properties<a class="anchor" aria-label="anchor" href="#properties"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="kaist-model-flac3d.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb3-2"><a href="kaist-model-flac3d.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">" ===============PROPERTIES================== "</span></span>
-<span id="cb3-3"><a href="kaist-model-flac3d.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb3-4"><a href="kaist-model-flac3d.html#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="kaist-model-flac3d.html#cb3-5" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
-<span id="cb3-6"><a href="kaist-model-flac3d.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">zone shaft assign elastic</span></span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="kaist-model-flac3d.html#cb3-1" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
+<span id="cb3-2"><a href="kaist-model-flac3d.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">zone shaft assign elastic</span></span>
+<span id="cb3-3"><a href="kaist-model-flac3d.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">zone property density 2400 young 40e9 poisson 0.25</span></span>
+<span id="cb3-4"><a href="kaist-model-flac3d.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">zone plate assign elastic</span></span>
+<span id="cb3-5"><a href="kaist-model-flac3d.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">zone property density 2400 young 40e9 poisson 0.25</span></span>
+<span id="cb3-6"><a href="kaist-model-flac3d.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">zone radial assign elastic</span></span>
 <span id="cb3-7"><a href="kaist-model-flac3d.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">zone property density 2400 young 40e9 poisson 0.25</span></span>
-<span id="cb3-8"><a href="kaist-model-flac3d.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">zone plate assign elastic</span></span>
-<span id="cb3-9"><a href="kaist-model-flac3d.html#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">zone property density 2400 young 40e9 poisson 0.25</span></span>
-<span id="cb3-10"><a href="kaist-model-flac3d.html#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="st">zone radial assign elastic</span></span>
-<span id="cb3-11"><a href="kaist-model-flac3d.html#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="st">zone property density 2400 young 40e9 poisson 0.25</span></span>
-<span id="cb3-12"><a href="kaist-model-flac3d.html#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code></pre></div>
+<span id="cb3-8"><a href="kaist-model-flac3d.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code></pre></div>
 </div>
-<div id="elements" class="section level2" number="1.4">
+<div id="b.c.-and-i.c." class="section level2" number="1.4">
 <h2>
-<span class="header-section-number">1.4</span> Elements<a class="anchor" aria-label="anchor" href="#elements"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.4</span> B.C. and I.C.<a class="anchor" aria-label="anchor" href="#b.c.-and-i.c."><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="b.c.-and-i.c." class="section level2" number="1.5">
+<div id="initial-equilibrium" class="section level2" number="1.5">
 <h2>
-<span class="header-section-number">1.5</span> B.C. and I.C.<a class="anchor" aria-label="anchor" href="#b.c.-and-i.c."><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5</span> Initial Equilibrium<a class="anchor" aria-label="anchor" href="#initial-equilibrium"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="initial-equilibrium" class="section level2" number="1.6">
+<div id="alterations" class="section level2" number="1.6">
 <h2>
-<span class="header-section-number">1.6</span> Initial Equilibrium<a class="anchor" aria-label="anchor" href="#initial-equilibrium"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6</span> Alterations<a class="anchor" aria-label="anchor" href="#alterations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="alterations" class="section level2" number="1.7">
+<div id="results" class="section level2" number="1.7">
 <h2>
-<span class="header-section-number">1.7</span> Alterations<a class="anchor" aria-label="anchor" href="#alterations"><i class="fas fa-link"></i></a>
-</h2>
-</div>
-<div id="results" class="section level2" number="1.8">
-<h2>
-<span class="header-section-number">1.8</span> Results<a class="anchor" aria-label="anchor" href="#results"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.7</span> Results<a class="anchor" aria-label="anchor" href="#results"><i class="fas fa-link"></i></a>
 </h2>
 <!--------------------------------------------------->
 <!--------------------------------------------------->
@@ -159,7 +145,7 @@
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="index.html">This Pandoc</a></div>
-<div class="next"><a href="kaist-model-python.html"><span class="header-section-number">2</span> KAIST Model Python</a></div>
+<div class="next"><a href="axial-concrete-pile.html"><span class="header-section-number">2</span> Axial Concrete Pile</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -167,11 +153,10 @@
 <li><a class="nav-link" href="#grid-generation"><span class="header-section-number">1.1</span> Grid Generation</a></li>
 <li><a class="nav-link" href="#groups"><span class="header-section-number">1.2</span> Groups</a></li>
 <li><a class="nav-link" href="#properties"><span class="header-section-number">1.3</span> Properties</a></li>
-<li><a class="nav-link" href="#elements"><span class="header-section-number">1.4</span> Elements</a></li>
-<li><a class="nav-link" href="#b.c.-and-i.c."><span class="header-section-number">1.5</span> B.C. and I.C.</a></li>
-<li><a class="nav-link" href="#initial-equilibrium"><span class="header-section-number">1.6</span> Initial Equilibrium</a></li>
-<li><a class="nav-link" href="#alterations"><span class="header-section-number">1.7</span> Alterations</a></li>
-<li><a class="nav-link" href="#results"><span class="header-section-number">1.8</span> Results</a></li>
+<li><a class="nav-link" href="#b.c.-and-i.c."><span class="header-section-number">1.4</span> B.C. and I.C.</a></li>
+<li><a class="nav-link" href="#initial-equilibrium"><span class="header-section-number">1.5</span> Initial Equilibrium</a></li>
+<li><a class="nav-link" href="#alterations"><span class="header-section-number">1.6</span> Alterations</a></li>
+<li><a class="nav-link" href="#results"><span class="header-section-number">1.7</span> Results</a></li>
 </ul>
 
       <div class="book-extra">
