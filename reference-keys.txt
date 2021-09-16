@@ -35,7 +35,7 @@ several-primitive-shapes-connected
 structural-element-operation
 densifying-grid-by-specifying-max-size-length
 densify-a-grid-using-geometric-information
-python-with-flac3d
+syntax-and-grammar
 introduction
 zones-3
 properties-2
@@ -48,6 +48,16 @@ setting-fish-variables
 issuing-command
 string
 kaist-model-code
+fish-syntax
+use-of
+variable-types
+traditional-for-loop-in-fish
+controlled-loop
+if-else-endif-construct
+arrays-and-maps
+array-example
+map-example
+fish-function
 template
 problem-description-2
 modeling-procedure-1

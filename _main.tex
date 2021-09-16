@@ -418,6 +418,34 @@ wonderful have been, and are being, evolved.
 \hypertarget{constitutive-model}{%
 \section{Constitutive Model}\label{constitutive-model}}
 
+Besides standard looping as depicted above, one can easily loop over sets of model objects (i.e., zones, gridpoints, structural element nodes, etc.) using the loop foreach construct. In this case, a container of objects must be given by a FISH intrinsic such as zone.list. A practical use of the loop foreach construct is to install a nonlinear initial distribution of elastic moduli in a FLAC3D grid. Suppose that the Young's modulus at a site is given by this equation:
+
+\[ E = E_0 + c \sqrt{z}  \]
+where z is the depth below surface, and c and E∘ are constants. We write a FISH function to install appropriate values of bulk and shear modulus in the grid, as in this example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model new}
+\NormalTok{zone create brick point }\DecValTok{0}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{1}\NormalTok{ (}\OperatorTok{{-}}\DecValTok{10}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                  point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\OperatorTok{{-}}\DecValTok{10}\NormalTok{)}
+\NormalTok{zone cmodel assign elastic}
+\NormalTok{fish define install(y\_zero,cc)}
+\NormalTok{    loop foreach pnt zone.}\BuiltInTok{list}
+\NormalTok{        z\_depth }\OperatorTok{=} \OperatorTok{{-}}\NormalTok{zone.pos.z(pnt)}
+\NormalTok{        y\_mod }\OperatorTok{=}\NormalTok{ y\_zero }\OperatorTok{+}\NormalTok{ cc }\OperatorTok{*}\NormalTok{ math.sqrt(z\_depth)}
+\NormalTok{        zone.prop(pnt,}\StringTok{\textquotesingle{}young\textquotesingle{}}\NormalTok{) }\OperatorTok{=}\NormalTok{ y\_mod}
+\NormalTok{    end\_loop}
+\NormalTok{end}
+\AttributeTok{@install}\NormalTok{(}\FloatTok{1e7}\NormalTok{,}\FloatTok{1e8}\NormalTok{)}
+\NormalTok{zone }\BuiltInTok{property}\NormalTok{ poisson }\FloatTok{0.25}
+\NormalTok{plot item create zone contour }\BuiltInTok{property}\NormalTok{ name }\StringTok{\textquotesingle{}young\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+Again, you can verify correct operation of the function by printing or plotting shear and bulk moduli.
+
+In the function install, the loop takes place over all zones in the global list of zones. The FISH statement loop foreach is a variation of the loop statement that sets pnt to each zone in zone.list. Inside the loop, the z-coordinate of each zone centroid is used to calculate the Young's modulus, given in the equation above. We assume that the datum (or ground surface reference point) is at z = 0. The variables zone.pos.z(pnt) and zone.prop(pnt, `young') are zone intrinsics. (Recall that we talked about the gridpoint intrinsic gp.force.unbal earlier.) Here, we set properties directly from within a FISH function, rather than with a zone property command as in an earlier example.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#Constitutive model and properties for soil}
@@ -950,8 +978,8 @@ Always use the zone attach by-face command after the zone densify command if the
 
 \newpage
 
-\hypertarget{python-with-flac3d}{%
-\chapter{Python with FLAC3D}\label{python-with-flac3d}}
+\hypertarget{syntax-and-grammar}{%
+\chapter{Syntax and Grammar}\label{syntax-and-grammar}}
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
@@ -1267,6 +1295,221 @@ Always use the zone attach by-face command after the zone densify command if the
 \CommentTok{for gp in z.gridpoints():}
 \CommentTok{    print "gridpoint with id: \{\} at \{\}".format(gp.id(), gp.pos())}
 \CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{fish-syntax}{%
+\section{Fish Syntax}\label{fish-syntax}}
+
+\hypertarget{use-of}{%
+\subsection{Use of \ldots{}}\label{use-of}}
+
+A complete FISH statement occupies one line. However, a line may be typed across two or more lines as long as each line but the ultimate is terminated with the continuation character ( \ldots{} ). Use of temporary variables as hinge points to concatenate lengthy formulas can also be handy. The following example shows how this can be done:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fish define long\_sum  }\OperatorTok{;}\NormalTok{example of a }\BuiltInTok{sum}\NormalTok{ of many things}
+\NormalTok{    local temp }\OperatorTok{=}\NormalTok{ v1 }\OperatorTok{+}\NormalTok{ v2 }\OperatorTok{+}\NormalTok{ v3 }\OperatorTok{+}\NormalTok{ v4 }\OperatorTok{+}\NormalTok{ v5 }\OperatorTok{+}\NormalTok{ v6 }\OperatorTok{+}\NormalTok{ v7 }\OperatorTok{+}\NormalTok{ v8 }\OperatorTok{+}\NormalTok{ v9 }\OperatorTok{+}\NormalTok{ v10}
+\NormalTok{    long\_sum }\OperatorTok{=}\NormalTok{ temp }\OperatorTok{+}\NormalTok{ v11 }\OperatorTok{+}\NormalTok{ v12 }\OperatorTok{+}\NormalTok{ v13 }\OperatorTok{+}\NormalTok{ v14 }\OperatorTok{+}\NormalTok{ v15}
+\NormalTok{end}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{variable-types}{%
+\subsection{Variable Types}\label{variable-types}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model new}
+\NormalTok{fish define types}
+\NormalTok{    v1 }\OperatorTok{=} \DecValTok{2}
+\NormalTok{    v2 }\OperatorTok{=} \FloatTok{3.4}
+\NormalTok{    v3 }\OperatorTok{=} \StringTok{\textquotesingle{}Have a nice day\textquotesingle{}}
+\NormalTok{    v4 }\OperatorTok{=}\NormalTok{ v1 }\OperatorTok{*}\NormalTok{ v2}
+\NormalTok{    v5 }\OperatorTok{=}\NormalTok{ v3 }\OperatorTok{+} \StringTok{\textquotesingle{}, old chap\textquotesingle{}}
+\NormalTok{    v6 }\OperatorTok{=}\NormalTok{ vector(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\NormalTok{    v7 }\OperatorTok{=}\NormalTok{ matrix(vector(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\NormalTok{    v8 }\OperatorTok{=}\NormalTok{ true}
+\NormalTok{end}
+\AttributeTok{@types}
+\NormalTok{fish }\BuiltInTok{list}
+\end{Highlighting}
+\end{Shaded}
+
+The resulting screen display looks like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{           Name    Value}
+           \OperatorTok{{-}{-}{-}{-}{-}{-}{-}} \OperatorTok{{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{(function) types }\DecValTok{0}\NormalTok{ (integer)}
+\NormalTok{           v1    }\DecValTok{2}\NormalTok{ (integer)}
+\NormalTok{           v2    }\FloatTok{3.400000000000000e+00}\NormalTok{ (real)}
+\NormalTok{           v3    }\StringTok{\textquotesingle{}Have a nice day\textquotesingle{}}\NormalTok{ (string)}
+\NormalTok{           v4    }\FloatTok{6.800000000000000e+00}\NormalTok{ (real)}
+\NormalTok{           v5    }\StringTok{\textquotesingle{}Have a nice day, old chap\textquotesingle{}}\NormalTok{ (string)}
+\NormalTok{           v6    (}\FloatTok{1.000000000000000e+00}\NormalTok{,}\FloatTok{2.000000000000000e+00}\NormalTok{,}
+                  \FloatTok{3.000000000000000e+00}\NormalTok{) (vector3)                [}\OperatorTok{**}\NormalTok{]}
+\NormalTok{           v7    }\DecValTok{3}\NormalTok{ x }\DecValTok{1}\NormalTok{ (matrix)}
+\NormalTok{           v8    true (boolean)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{traditional-for-loop-in-fish}{%
+\subsection{Traditional for loop in FISH}\label{traditional-for-loop-in-fish}}
+
+standard for loop is also available in FISH to provide for additionalloop control.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fish define xxx}
+    \BuiltInTok{sum}  \OperatorTok{=} \DecValTok{0}
+\NormalTok{    prod }\OperatorTok{=} \DecValTok{1}
+\NormalTok{    loop }\ControlFlowTok{for}\NormalTok{ (n }\OperatorTok{=} \DecValTok{1}\NormalTok{, n }\OperatorTok{\textless{}=} \DecValTok{10}\NormalTok{, n }\OperatorTok{=}\NormalTok{ n }\OperatorTok{+} \DecValTok{1}\NormalTok{)}
+        \BuiltInTok{sum}  \OperatorTok{=} \BuiltInTok{sum}  \OperatorTok{+}\NormalTok{ n}
+\NormalTok{        prod }\OperatorTok{=}\NormalTok{ prod }\OperatorTok{*}\NormalTok{ n}
+\NormalTok{    end\_loop}
+\NormalTok{    io.out(}\StringTok{\textquotesingle{}The sum is \textquotesingle{}} \OperatorTok{+}\NormalTok{ string(}\BuiltInTok{sum}\NormalTok{) }\OperatorTok{+}\NormalTok{ ... }
+           \StringTok{\textquotesingle{} and the product is \textquotesingle{}} \OperatorTok{+}\NormalTok{ string(prod))}
+\NormalTok{end}
+\AttributeTok{@xxx}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{controlled-loop}{%
+\subsubsection{Controlled loop}\label{controlled-loop}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model new}
+\NormalTok{fish define xxx}
+    \BuiltInTok{sum}  \OperatorTok{=} \DecValTok{0}
+\NormalTok{    prod }\OperatorTok{=} \DecValTok{1}
+\NormalTok{    loop n (}\DecValTok{1}\NormalTok{,}\DecValTok{10}\NormalTok{)}
+        \BuiltInTok{sum}  \OperatorTok{=} \BuiltInTok{sum}  \OperatorTok{+}\NormalTok{ n}
+\NormalTok{        prod }\OperatorTok{=}\NormalTok{ prod }\OperatorTok{*}\NormalTok{ n}
+\NormalTok{    end\_loop}
+\NormalTok{    io.out(}\StringTok{\textquotesingle{}The sum is \textquotesingle{}} \OperatorTok{+}\NormalTok{ string(}\BuiltInTok{sum}\NormalTok{) }\OperatorTok{+}\NormalTok{  ...}
+           \StringTok{\textquotesingle{} and the product is \textquotesingle{}} \OperatorTok{+}\NormalTok{ string(prod))}
+\NormalTok{end}
+\AttributeTok{@xxx}
+\end{Highlighting}
+\end{Shaded}
+
+In this case, the loop variable n is given successive values from 1 to 10, and the statements inside the loop (between the loop and endloop statements) are executed for each value. As mentioned, variable names or an arithmetic expression could be substituted for the numbers 1 or 10. Note that the exit statement can be used to break out of a FISH loop and the continue statement can be used to skip the remaining instructions in the loop, moving to the next sequence of the loop.
+
+It is important to note that this formulation of looping is different from a for loop in most high-level programming languages. For instance, one cannot easily control the ending condition (i.e., loop from 1 to 10 excluding 10) or the incrementing mechanism (i.e., loop from 1 to 10 by twos or loop backward). A standard for loop is also available in FISH to provide for additional loop control.
+
+\hypertarget{if-else-endif-construct}{%
+\subsection{if else endif construct}\label{if-else-endif-construct}}
+
+These statements allow conditional execution of FISH function segments; else and then are optional. The item test consists of one of the following symbols or symbol pairs:\\
+
+= \# \textgreater{} \textless{} \textgreater= \textless=\\
+
+The displayed value of abc in this example depends on the argument provided to abc when it is executed. You should experiment with different test symbols (e.g., replace \textgreater{} with \textless).
+
+Until now, our FISH functions have been invoked from FLAC3D, either by using the sqaure brackets {[}{]} of inline FISH, by giving the function name prepended with the the @ character, or by using the fish list command. It is also possible to do the reverse, to give FLAC3D commands from within FISH functions. Most valid FLAC3D commands can be embedded between the following FISH statements:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model new}
+\NormalTok{fish define abc(xx)}
+    \ControlFlowTok{if}\NormalTok{ xx }\OperatorTok{\textgreater{}} \DecValTok{0}\NormalTok{ then }
+\NormalTok{        abc }\OperatorTok{=} \DecValTok{33}
+    \ControlFlowTok{else}
+\NormalTok{        abc }\OperatorTok{=} \DecValTok{11}
+\NormalTok{    end\_if}
+\NormalTok{end}
+\NormalTok{[abc(}\DecValTok{1}\NormalTok{)]}
+\NormalTok{[abc(}\OperatorTok{{-}}\DecValTok{1}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{arrays-and-maps}{%
+\subsection{Arrays and Maps}\label{arrays-and-maps}}
+
+It is often the case that one would like to store a list of objects that they will loop over in the future. These may be computed values from zones, for instance, or specific gridpoint pointers themselves. FISH has two containers to use in these circumstances, termed arrays and maps.
+
+An array holds a list of FISH variables of any type that can be looped over or accessed by the integer index of the element of the array. Arrays can be multidimensional and do not resize dynamically. The simple example below shows how one can create an array of integers and then sum the values.
+
+\hypertarget{array-example}{%
+\subsubsection{Array example}\label{array-example}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model new}
+\NormalTok{fish define array\_operation}
+    \OperatorTok{;}\NormalTok{create }\KeywordTok{and}\NormalTok{ populate an array }\ControlFlowTok{with}\NormalTok{ products of }\DecValTok{2}
+\NormalTok{    arr }\OperatorTok{=}\NormalTok{ array.create(}\DecValTok{10}\NormalTok{)}
+\NormalTok{    loop local n(}\DecValTok{1}\NormalTok{,}\DecValTok{10}\NormalTok{)}
+\NormalTok{        arr[n] }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{n}
+\NormalTok{    end\_loop}
+      
+    \OperatorTok{;}\NormalTok{compute the }\BuiltInTok{sum} \KeywordTok{and}\NormalTok{ product of elements }\KeywordTok{in}\NormalTok{ the array}
+    \BuiltInTok{sum} \OperatorTok{=} \DecValTok{0}
+\NormalTok{    prod }\OperatorTok{=} \DecValTok{1}
+\NormalTok{    local i }\OperatorTok{=} \DecValTok{1}
+\NormalTok{    loop }\ControlFlowTok{while}\NormalTok{ (i }\OperatorTok{\textless{}=}\NormalTok{ array.size(arr,}\DecValTok{1}\NormalTok{))}
+        \BuiltInTok{sum} \OperatorTok{=} \BuiltInTok{sum} \OperatorTok{+}\NormalTok{ arr[i]}
+\NormalTok{        prod }\OperatorTok{=}\NormalTok{ prod }\OperatorTok{*}\NormalTok{ arr[i]}
+\NormalTok{        i }\OperatorTok{=}\NormalTok{ i }\OperatorTok{+} \DecValTok{1}
+\NormalTok{    end\_loop}
+\NormalTok{    io.out(}\StringTok{\textquotesingle{}The sum is \textquotesingle{}} \OperatorTok{+}\NormalTok{ string(}\BuiltInTok{sum}\NormalTok{) }\OperatorTok{+}\NormalTok{ ...}
+           \StringTok{\textquotesingle{} and the product is \textquotesingle{}} \OperatorTok{+}\NormalTok{ string(prod))}
+\NormalTok{end}
+\AttributeTok{@array\_operation}
+\end{Highlighting}
+\end{Shaded}
+
+In this example, an array is created and filled with numbers. The loop while construct is used to loop over the array entries and the sum and product are computed and output.
+
+A map, on the other hand, is an associative container, meaning that one can access the members of a map by an integer or string used to insert a value in the map. Maps can dynamically be resized and added to one another (appending maps together), and are the preferred constructs for storing lists of FISH variables for later access.
+
+\hypertarget{map-example}{%
+\subsubsection{Map example}\label{map-example}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model new}
+\NormalTok{fish define map\_operation}
+    \OperatorTok{;}\NormalTok{create }\KeywordTok{and}\NormalTok{ populate a }\BuiltInTok{map} \ControlFlowTok{with}\NormalTok{ products of }\DecValTok{2}
+\NormalTok{    my\_map }\OperatorTok{=} \BuiltInTok{map}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{    loop local n(}\DecValTok{2}\NormalTok{,}\DecValTok{10}\NormalTok{)}
+        \BuiltInTok{map}\NormalTok{.add(my\_map,n,}\DecValTok{2}\OperatorTok{*}\NormalTok{n)}
+\NormalTok{    end\_loop}
+      
+    \OperatorTok{;}\NormalTok{compute the }\BuiltInTok{sum} \KeywordTok{and}\NormalTok{ product of elements }\KeywordTok{in}\NormalTok{ the }\BuiltInTok{map}
+    \BuiltInTok{sum} \OperatorTok{=} \DecValTok{0}
+\NormalTok{    prod }\OperatorTok{=} \DecValTok{1}
+\NormalTok{    loop foreach n my\_map}
+        \BuiltInTok{sum} \OperatorTok{=} \BuiltInTok{sum} \OperatorTok{+}\NormalTok{ n}
+\NormalTok{        prod }\OperatorTok{=}\NormalTok{ prod }\OperatorTok{*}\NormalTok{ n}
+\NormalTok{    end\_loop}
+\NormalTok{    io.out(}\StringTok{\textquotesingle{}The sum is \textquotesingle{}} \OperatorTok{+}\NormalTok{ string(}\BuiltInTok{sum}\NormalTok{) }\OperatorTok{+}\NormalTok{ ...}
+           \StringTok{\textquotesingle{} and the product is \textquotesingle{}} \OperatorTok{+}\NormalTok{ string(prod))}
+\NormalTok{end}
+\AttributeTok{@map\_operation}
+\end{Highlighting}
+\end{Shaded}
+
+Unlike with arrays, maps can be looped through using the loop foreach construct. In this case, n is the value held in each map entry, not the integer name of the object in the map. Likewise, instead of using integers to insert objects into the map, one could use strings such as first, second, etc. This allows one to easily and efficiently store and access FISH variables by a user-defined name.
+
+\hypertarget{fish-function}{%
+\subsection{Fish Function}\label{fish-function}}
+
+FISH functions to calculate bulk and shear moduli
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model new}
+\NormalTok{fish define derive(y\_mod,p\_ratio)}
+\NormalTok{    s\_mod }\OperatorTok{=}\NormalTok{ y\_mod }\OperatorTok{/}\NormalTok{ (}\FloatTok{2.0} \OperatorTok{*}\NormalTok{ (}\FloatTok{1.0} \OperatorTok{+}\NormalTok{ p\_ratio))}
+\NormalTok{    b\_mod }\OperatorTok{=}\NormalTok{ y\_mod }\OperatorTok{/}\NormalTok{ (}\FloatTok{3.0} \OperatorTok{*}\NormalTok{ (}\FloatTok{1.0} \OperatorTok{{-}} \FloatTok{2.0} \OperatorTok{*}\NormalTok{ p\_ratio))}
+\NormalTok{end}
+\NormalTok{[derive(}\FloatTok{5e8}\NormalTok{,}\FloatTok{0.25}\NormalTok{)]}
+\NormalTok{[b\_mod] }
+\NormalTok{[s\_mod]}
 \end{Highlighting}
 \end{Shaded}
 

@@ -45,7 +45,7 @@
 <li><a class="" href="axial-concrete-pile.html"><span class="header-section-number">2</span> Axial Concrete Pile</a></li>
 <li><a class="" href="pull-tests.html"><span class="header-section-number">3</span> Pull-Tests</a></li>
 <li><a class="" href="grid.html"><span class="header-section-number">4</span> Grid</a></li>
-<li><a class="" href="python-with-flac3d.html"><span class="header-section-number">5</span> Python with FLAC3D</a></li>
+<li><a class="" href="syntax-and-grammar.html"><span class="header-section-number">5</span> Syntax and Grammar</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="template.html"><span class="header-section-number">A</span> 1. Template</a></li>
 <li><a class="" href="reference-collective.html"><span class="header-section-number">B</span> Reference Collective</a></li>
@@ -106,19 +106,38 @@
 <h2>
 <span class="header-section-number">1.4</span> Constitutive Model<a class="anchor" aria-label="anchor" href="#constitutive-model"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="kaist-model.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Constitutive model and properties for soil</span></span>
-<span id="cb4-2"><a href="kaist-model.html#cb4-2" aria-hidden="true" tabindex="-1"></a>zone cmodel assign strain<span class="op">-</span>softening <span class="bu">range</span> group <span class="st">"Radial Cylinder1"</span></span>
-<span id="cb4-3"><a href="kaist-model.html#cb4-3" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> density <span class="dv">2500</span> bulk <span class="fl">2e8</span> shear <span class="fl">1e8</span> <span class="bu">range</span> group <span class="st">"Radial Cylinder1"</span></span>
-<span id="cb4-4"><a href="kaist-model.html#cb4-4" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> cohesion <span class="fl">2e6</span> friction <span class="dv">45</span> tension <span class="fl">2e5</span> dilation <span class="dv">10</span> <span class="bu">range</span> group <span class="st">"Radial Cylinder1"</span></span>
-<span id="cb4-5"><a href="kaist-model.html#cb4-5" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> table<span class="op">-</span>friction <span class="st">'fri'</span> table<span class="op">-</span>cohesion <span class="st">'coh'</span> table<span class="op">-</span>dilation <span class="st">'dil'</span> <span class="bu">range</span> group <span class="st">"Radial Cylinder1"</span></span>
-<span id="cb4-6"><a href="kaist-model.html#cb4-6" aria-hidden="true" tabindex="-1"></a>table <span class="st">'fri'</span> add (<span class="dv">0</span>, <span class="dv">45</span>) (<span class="fl">.05</span>, <span class="dv">42</span>) (<span class="fl">.1</span>, <span class="dv">40</span>) (<span class="dv">1</span>, <span class="dv">40</span>)</span>
-<span id="cb4-7"><a href="kaist-model.html#cb4-7" aria-hidden="true" tabindex="-1"></a>table <span class="st">'coh'</span> add (<span class="dv">0</span>,<span class="fl">2e6</span>) (<span class="fl">.05</span>,<span class="fl">1e6</span>) (<span class="fl">.1</span>,<span class="fl">5e5</span>) (<span class="dv">1</span>,<span class="fl">5e5</span>) </span>
-<span id="cb4-8"><a href="kaist-model.html#cb4-8" aria-hidden="true" tabindex="-1"></a>table <span class="st">'dil'</span> add (<span class="dv">0</span>, <span class="dv">10</span>) (<span class="fl">.05</span>,  <span class="dv">3</span>) (<span class="fl">.1</span>,  <span class="dv">0</span>) </span>
-<span id="cb4-9"><a href="kaist-model.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Constitutive modeland properties for shaft and plate</span></span>
-<span id="cb4-10"><a href="kaist-model.html#cb4-10" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic <span class="bu">range</span> group <span class="st">'shaft'</span></span>
-<span id="cb4-11"><a href="kaist-model.html#cb4-11" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">8.333e7</span>  shear <span class="fl">3.846e7</span>  <span class="bu">range</span> group <span class="st">'shaft'</span></span>
-<span id="cb4-12"><a href="kaist-model.html#cb4-12" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic <span class="bu">range</span> group <span class="st">'plate'</span></span>
-<span id="cb4-13"><a href="kaist-model.html#cb4-13" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">8.333e7</span>  shear <span class="fl">3.846e7</span>  <span class="bu">range</span> group <span class="st">'plate'</span></span></code></pre></div>
+<p>Besides standard looping as depicted above, one can easily loop over sets of model objects (i.e., zones, gridpoints, structural element nodes, etc.) using the loop foreach construct. In this case, a container of objects must be given by a FISH intrinsic such as zone.list. A practical use of the loop foreach construct is to install a nonlinear initial distribution of elastic moduli in a FLAC3D grid. Suppose that the Young’s modulus at a site is given by this equation:</p>
+<p><span class="math display">\[ E = E_0 + c \sqrt{z}  \]</span>
+where z is the depth below surface, and c and E∘ are constants. We write a FISH function to install appropriate values of bulk and shear modulus in the grid, as in this example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="kaist-model.html#cb4-1" aria-hidden="true" tabindex="-1"></a>model new</span>
+<span id="cb4-2"><a href="kaist-model.html#cb4-2" aria-hidden="true" tabindex="-1"></a>zone create brick point <span class="dv">0</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) point <span class="dv">1</span> (<span class="op">-</span><span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">0</span>) ...</span>
+<span id="cb4-3"><a href="kaist-model.html#cb4-3" aria-hidden="true" tabindex="-1"></a>                  point <span class="dv">2</span> (<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">0</span>) point <span class="dv">3</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="op">-</span><span class="dv">10</span>)</span>
+<span id="cb4-4"><a href="kaist-model.html#cb4-4" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic</span>
+<span id="cb4-5"><a href="kaist-model.html#cb4-5" aria-hidden="true" tabindex="-1"></a>fish define install(y_zero,cc)</span>
+<span id="cb4-6"><a href="kaist-model.html#cb4-6" aria-hidden="true" tabindex="-1"></a>    loop foreach pnt zone.<span class="bu">list</span></span>
+<span id="cb4-7"><a href="kaist-model.html#cb4-7" aria-hidden="true" tabindex="-1"></a>        z_depth <span class="op">=</span> <span class="op">-</span>zone.pos.z(pnt)</span>
+<span id="cb4-8"><a href="kaist-model.html#cb4-8" aria-hidden="true" tabindex="-1"></a>        y_mod <span class="op">=</span> y_zero <span class="op">+</span> cc <span class="op">*</span> math.sqrt(z_depth)</span>
+<span id="cb4-9"><a href="kaist-model.html#cb4-9" aria-hidden="true" tabindex="-1"></a>        zone.prop(pnt,<span class="st">'young'</span>) <span class="op">=</span> y_mod</span>
+<span id="cb4-10"><a href="kaist-model.html#cb4-10" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
+<span id="cb4-11"><a href="kaist-model.html#cb4-11" aria-hidden="true" tabindex="-1"></a>end</span>
+<span id="cb4-12"><a href="kaist-model.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="at">@install</span>(<span class="fl">1e7</span>,<span class="fl">1e8</span>)</span>
+<span id="cb4-13"><a href="kaist-model.html#cb4-13" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> poisson <span class="fl">0.25</span></span>
+<span id="cb4-14"><a href="kaist-model.html#cb4-14" aria-hidden="true" tabindex="-1"></a>plot item create zone contour <span class="bu">property</span> name <span class="st">'young'</span></span></code></pre></div>
+<p>Again, you can verify correct operation of the function by printing or plotting shear and bulk moduli.</p>
+<p>In the function install, the loop takes place over all zones in the global list of zones. The FISH statement loop foreach is a variation of the loop statement that sets pnt to each zone in zone.list. Inside the loop, the z-coordinate of each zone centroid is used to calculate the Young’s modulus, given in the equation above. We assume that the datum (or ground surface reference point) is at z = 0. The variables zone.pos.z(pnt) and zone.prop(pnt, ‘young’) are zone intrinsics. (Recall that we talked about the gridpoint intrinsic gp.force.unbal earlier.) Here, we set properties directly from within a FISH function, rather than with a zone property command as in an earlier example.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="kaist-model.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Constitutive model and properties for soil</span></span>
+<span id="cb5-2"><a href="kaist-model.html#cb5-2" aria-hidden="true" tabindex="-1"></a>zone cmodel assign strain<span class="op">-</span>softening <span class="bu">range</span> group <span class="st">"Radial Cylinder1"</span></span>
+<span id="cb5-3"><a href="kaist-model.html#cb5-3" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> density <span class="dv">2500</span> bulk <span class="fl">2e8</span> shear <span class="fl">1e8</span> <span class="bu">range</span> group <span class="st">"Radial Cylinder1"</span></span>
+<span id="cb5-4"><a href="kaist-model.html#cb5-4" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> cohesion <span class="fl">2e6</span> friction <span class="dv">45</span> tension <span class="fl">2e5</span> dilation <span class="dv">10</span> <span class="bu">range</span> group <span class="st">"Radial Cylinder1"</span></span>
+<span id="cb5-5"><a href="kaist-model.html#cb5-5" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> table<span class="op">-</span>friction <span class="st">'fri'</span> table<span class="op">-</span>cohesion <span class="st">'coh'</span> table<span class="op">-</span>dilation <span class="st">'dil'</span> <span class="bu">range</span> group <span class="st">"Radial Cylinder1"</span></span>
+<span id="cb5-6"><a href="kaist-model.html#cb5-6" aria-hidden="true" tabindex="-1"></a>table <span class="st">'fri'</span> add (<span class="dv">0</span>, <span class="dv">45</span>) (<span class="fl">.05</span>, <span class="dv">42</span>) (<span class="fl">.1</span>, <span class="dv">40</span>) (<span class="dv">1</span>, <span class="dv">40</span>)</span>
+<span id="cb5-7"><a href="kaist-model.html#cb5-7" aria-hidden="true" tabindex="-1"></a>table <span class="st">'coh'</span> add (<span class="dv">0</span>,<span class="fl">2e6</span>) (<span class="fl">.05</span>,<span class="fl">1e6</span>) (<span class="fl">.1</span>,<span class="fl">5e5</span>) (<span class="dv">1</span>,<span class="fl">5e5</span>) </span>
+<span id="cb5-8"><a href="kaist-model.html#cb5-8" aria-hidden="true" tabindex="-1"></a>table <span class="st">'dil'</span> add (<span class="dv">0</span>, <span class="dv">10</span>) (<span class="fl">.05</span>,  <span class="dv">3</span>) (<span class="fl">.1</span>,  <span class="dv">0</span>) </span>
+<span id="cb5-9"><a href="kaist-model.html#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Constitutive modeland properties for shaft and plate</span></span>
+<span id="cb5-10"><a href="kaist-model.html#cb5-10" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic <span class="bu">range</span> group <span class="st">'shaft'</span></span>
+<span id="cb5-11"><a href="kaist-model.html#cb5-11" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">8.333e7</span>  shear <span class="fl">3.846e7</span>  <span class="bu">range</span> group <span class="st">'shaft'</span></span>
+<span id="cb5-12"><a href="kaist-model.html#cb5-12" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic <span class="bu">range</span> group <span class="st">'plate'</span></span>
+<span id="cb5-13"><a href="kaist-model.html#cb5-13" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">8.333e7</span>  shear <span class="fl">3.846e7</span>  <span class="bu">range</span> group <span class="st">'plate'</span></span></code></pre></div>
 <div class="inline-figure"><img src="myfigureeeeee/concrete-properties.PNG" width="100%"></div>
 <div class="inline-figure"><img src="myfigureeeeee/d.PNG" width="100%"></div>
 </div>
@@ -193,6 +212,34 @@
   </div>
 
 </div></div>
-</footer>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
 </body>
 </html>
