@@ -64,282 +64,282 @@
 <h2>
 <span class="header-section-number">5.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="syntax-and-grammar.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
-<span id="cb25-2"><a href="syntax-and-grammar.html#cb25-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"python-reset-state false"</span>)</span>
-<span id="cb25-3"><a href="syntax-and-grammar.html#cb25-3" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
-<span id="cb25-4"><a href="syntax-and-grammar.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="st">model new</span></span>
-<span id="cb25-5"><a href="syntax-and-grammar.html#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="st">zone create brick size 10 10 10</span></span>
-<span id="cb25-6"><a href="syntax-and-grammar.html#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic</span></span>
-<span id="cb25-7"><a href="syntax-and-grammar.html#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="st">zone property density 2950 young 12e9 poisson 0.25</span></span>
-<span id="cb25-8"><a href="syntax-and-grammar.html#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="st">cycle 1</span></span>
-<span id="cb25-9"><a href="syntax-and-grammar.html#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
-<span id="cb25-10"><a href="syntax-and-grammar.html#cb25-10" aria-hidden="true" tabindex="-1"></a>it.zone.count()</span>
-<span id="cb25-11"><a href="syntax-and-grammar.html#cb25-11" aria-hidden="true" tabindex="-1"></a>z<span class="op">=</span>it.zone.find(<span class="dv">1</span>)</span>
-<span id="cb25-12"><a href="syntax-and-grammar.html#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> z</span>
-<span id="cb25-13"><a href="syntax-and-grammar.html#cb25-13" aria-hidden="true" tabindex="-1"></a>z.pos()</span>
-<span id="cb25-14"><a href="syntax-and-grammar.html#cb25-14" aria-hidden="true" tabindex="-1"></a>volume_sum <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb25-15"><a href="syntax-and-grammar.html#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> it.zone.<span class="bu">list</span>():</span>
-<span id="cb25-16"><a href="syntax-and-grammar.html#cb25-16" aria-hidden="true" tabindex="-1"></a>  volume_sum <span class="op">+=</span> z.vol()</span>
-<span id="cb25-17"><a href="syntax-and-grammar.html#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-18"><a href="syntax-and-grammar.html#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> volume_sum</span>
-<span id="cb25-19"><a href="syntax-and-grammar.html#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> z.vol() <span class="op">*</span> it.zone.count()</span>
-<span id="cb25-20"><a href="syntax-and-grammar.html#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> volume_sum <span class="op">==</span> z.vol() <span class="op">*</span> it.zone.count()</span>
-<span id="cb25-21"><a href="syntax-and-grammar.html#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-22"><a href="syntax-and-grammar.html#cb25-22" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> it.zone.near ((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>))</span>
-<span id="cb25-23"><a href="syntax-and-grammar.html#cb25-23" aria-hidden="true" tabindex="-1"></a>z.pos()</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="syntax-and-grammar.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
+<span id="cb26-2"><a href="syntax-and-grammar.html#cb26-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"python-reset-state false"</span>)</span>
+<span id="cb26-3"><a href="syntax-and-grammar.html#cb26-3" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
+<span id="cb26-4"><a href="syntax-and-grammar.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="st">model new</span></span>
+<span id="cb26-5"><a href="syntax-and-grammar.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="st">zone create brick size 10 10 10</span></span>
+<span id="cb26-6"><a href="syntax-and-grammar.html#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic</span></span>
+<span id="cb26-7"><a href="syntax-and-grammar.html#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="st">zone property density 2950 young 12e9 poisson 0.25</span></span>
+<span id="cb26-8"><a href="syntax-and-grammar.html#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="st">cycle 1</span></span>
+<span id="cb26-9"><a href="syntax-and-grammar.html#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
+<span id="cb26-10"><a href="syntax-and-grammar.html#cb26-10" aria-hidden="true" tabindex="-1"></a>it.zone.count()</span>
+<span id="cb26-11"><a href="syntax-and-grammar.html#cb26-11" aria-hidden="true" tabindex="-1"></a>z<span class="op">=</span>it.zone.find(<span class="dv">1</span>)</span>
+<span id="cb26-12"><a href="syntax-and-grammar.html#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> z</span>
+<span id="cb26-13"><a href="syntax-and-grammar.html#cb26-13" aria-hidden="true" tabindex="-1"></a>z.pos()</span>
+<span id="cb26-14"><a href="syntax-and-grammar.html#cb26-14" aria-hidden="true" tabindex="-1"></a>volume_sum <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb26-15"><a href="syntax-and-grammar.html#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> it.zone.<span class="bu">list</span>():</span>
+<span id="cb26-16"><a href="syntax-and-grammar.html#cb26-16" aria-hidden="true" tabindex="-1"></a>  volume_sum <span class="op">+=</span> z.vol()</span>
+<span id="cb26-17"><a href="syntax-and-grammar.html#cb26-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-18"><a href="syntax-and-grammar.html#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> volume_sum</span>
+<span id="cb26-19"><a href="syntax-and-grammar.html#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> z.vol() <span class="op">*</span> it.zone.count()</span>
+<span id="cb26-20"><a href="syntax-and-grammar.html#cb26-20" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> volume_sum <span class="op">==</span> z.vol() <span class="op">*</span> it.zone.count()</span>
+<span id="cb26-21"><a href="syntax-and-grammar.html#cb26-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-22"><a href="syntax-and-grammar.html#cb26-22" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> it.zone.near ((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb26-23"><a href="syntax-and-grammar.html#cb26-23" aria-hidden="true" tabindex="-1"></a>z.pos()</span></code></pre></div>
 </div>
 <div id="zones-3" class="section level2" number="5.2">
 <h2>
 <span class="header-section-number">5.2</span> Zones<a class="anchor" aria-label="anchor" href="#zones-3"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="syntax-and-grammar.html#cb26-1" aria-hidden="true" tabindex="-1"></a>it.zone.count() <span class="co"># 1000</span></span>
-<span id="cb26-2"><a href="syntax-and-grammar.html#cb26-2" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> it.zone.find(<span class="dv">1</span>)</span>
-<span id="cb26-3"><a href="syntax-and-grammar.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> it.zone.<span class="bu">list</span>():</span>
-<span id="cb26-4"><a href="syntax-and-grammar.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  z <span class="op">=</span> it.zone.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>))</span>
-<span id="cb26-5"><a href="syntax-and-grammar.html#cb26-5" aria-hidden="true" tabindex="-1"></a>z.pos()</span>
-<span id="cb26-6"><a href="syntax-and-grammar.html#cb26-6" aria-hidden="true" tabindex="-1"></a>z.vol()</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="syntax-and-grammar.html#cb27-1" aria-hidden="true" tabindex="-1"></a>it.zone.count() <span class="co"># 1000</span></span>
+<span id="cb27-2"><a href="syntax-and-grammar.html#cb27-2" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> it.zone.find(<span class="dv">1</span>)</span>
+<span id="cb27-3"><a href="syntax-and-grammar.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> it.zone.<span class="bu">list</span>():</span>
+<span id="cb27-4"><a href="syntax-and-grammar.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  z <span class="op">=</span> it.zone.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb27-5"><a href="syntax-and-grammar.html#cb27-5" aria-hidden="true" tabindex="-1"></a>z.pos()</span>
+<span id="cb27-6"><a href="syntax-and-grammar.html#cb27-6" aria-hidden="true" tabindex="-1"></a>z.vol()</span></code></pre></div>
 </div>
 <div id="properties-2" class="section level2" number="5.3">
 <h2>
 <span class="header-section-number">5.3</span> Properties<a class="anchor" aria-label="anchor" href="#properties-2"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="syntax-and-grammar.html#cb27-1" aria-hidden="true" tabindex="-1"></a>z.props() <span class="kw">or</span> z.props()[<span class="st">'bulk'</span>]</span>
-<span id="cb27-2"><a href="syntax-and-grammar.html#cb27-2" aria-hidden="true" tabindex="-1"></a>z.prop(<span class="st">'shear'</span>)</span>
-<span id="cb27-3"><a href="syntax-and-grammar.html#cb27-3" aria-hidden="true" tabindex="-1"></a>z.set_prop(<span class="st">'bulk'</span>, <span class="fl">8.5e9</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="syntax-and-grammar.html#cb28-1" aria-hidden="true" tabindex="-1"></a>z.props() <span class="kw">or</span> z.props()[<span class="st">'bulk'</span>]</span>
+<span id="cb28-2"><a href="syntax-and-grammar.html#cb28-2" aria-hidden="true" tabindex="-1"></a>z.prop(<span class="st">'shear'</span>)</span>
+<span id="cb28-3"><a href="syntax-and-grammar.html#cb28-3" aria-hidden="true" tabindex="-1"></a>z.set_prop(<span class="st">'bulk'</span>, <span class="fl">8.5e9</span>)</span></code></pre></div>
 </div>
 <div id="gridpoints" class="section level2" number="5.4">
 <h2>
 <span class="header-section-number">5.4</span> Gridpoints<a class="anchor" aria-label="anchor" href="#gridpoints"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="syntax-and-grammar.html#cb28-1" aria-hidden="true" tabindex="-1"></a>gp <span class="op">=</span> it.gridpoint.near((<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb28-2"><a href="syntax-and-grammar.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> gp <span class="kw">in</span> it.gridpoint.<span class="bu">list</span>():</span>
-<span id="cb28-3"><a href="syntax-and-grammar.html#cb28-3" aria-hidden="true" tabindex="-1"></a>  total_mass <span class="op">=</span> gp.mass_gravity()</span>
-<span id="cb28-4"><a href="syntax-and-grammar.html#cb28-4" aria-hidden="true" tabindex="-1"></a>z.vol()<span class="op">*</span>z.density()<span class="op">*</span><span class="dv">1000</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="syntax-and-grammar.html#cb29-1" aria-hidden="true" tabindex="-1"></a>gp <span class="op">=</span> it.gridpoint.near((<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb29-2"><a href="syntax-and-grammar.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> gp <span class="kw">in</span> it.gridpoint.<span class="bu">list</span>():</span>
+<span id="cb29-3"><a href="syntax-and-grammar.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  total_mass <span class="op">=</span> gp.mass_gravity()</span>
+<span id="cb29-4"><a href="syntax-and-grammar.html#cb29-4" aria-hidden="true" tabindex="-1"></a>z.vol()<span class="op">*</span>z.density()<span class="op">*</span><span class="dv">1000</span></span></code></pre></div>
 </div>
 <div id="structural-elements" class="section level2" number="5.5">
 <h2>
 <span class="header-section-number">5.5</span> Structural Elements<a class="anchor" aria-label="anchor" href="#structural-elements"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="syntax-and-grammar.html#cb29-1" aria-hidden="true" tabindex="-1"></a>it.structure.<span class="bu">list</span>()</span>
-<span id="cb29-2"><a href="syntax-and-grammar.html#cb29-2" aria-hidden="true" tabindex="-1"></a>it.structure.find(<span class="dv">1</span>)</span>
-<span id="cb29-3"><a href="syntax-and-grammar.html#cb29-3" aria-hidden="true" tabindex="-1"></a>it.structure.near((<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb29-4"><a href="syntax-and-grammar.html#cb29-4" aria-hidden="true" tabindex="-1"></a>it.structure.node.find(<span class="dv">1</span>)</span>
-<span id="cb29-5"><a href="syntax-and-grammar.html#cb29-5" aria-hidden="true" tabindex="-1"></a>s_node.links()[<span class="dv">0</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="syntax-and-grammar.html#cb30-1" aria-hidden="true" tabindex="-1"></a>it.structure.<span class="bu">list</span>()</span>
+<span id="cb30-2"><a href="syntax-and-grammar.html#cb30-2" aria-hidden="true" tabindex="-1"></a>it.structure.find(<span class="dv">1</span>)</span>
+<span id="cb30-3"><a href="syntax-and-grammar.html#cb30-3" aria-hidden="true" tabindex="-1"></a>it.structure.near((<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb30-4"><a href="syntax-and-grammar.html#cb30-4" aria-hidden="true" tabindex="-1"></a>it.structure.node.find(<span class="dv">1</span>)</span>
+<span id="cb30-5"><a href="syntax-and-grammar.html#cb30-5" aria-hidden="true" tabindex="-1"></a>s_node.links()[<span class="dv">0</span>]</span></code></pre></div>
 </div>
 <div id="extra-variables" class="section level2" number="5.6">
 <h2>
 <span class="header-section-number">5.6</span> Extra Variables<a class="anchor" aria-label="anchor" href="#extra-variables"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="syntax-and-grammar.html#cb30-1" aria-hidden="true" tabindex="-1"></a>z.set_extra(<span class="dv">1</span>, <span class="fl">1.23</span>)</span>
-<span id="cb30-2"><a href="syntax-and-grammar.html#cb30-2" aria-hidden="true" tabindex="-1"></a>z.set_extra(<span class="dv">2</span>, <span class="st">"a test string"</span>)</span>
-<span id="cb30-3"><a href="syntax-and-grammar.html#cb30-3" aria-hidden="true" tabindex="-1"></a>z.set_extra(<span class="dv">1</span>, gp.pos())</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="syntax-and-grammar.html#cb31-1" aria-hidden="true" tabindex="-1"></a>z.set_extra(<span class="dv">1</span>, <span class="fl">1.23</span>)</span>
+<span id="cb31-2"><a href="syntax-and-grammar.html#cb31-2" aria-hidden="true" tabindex="-1"></a>z.set_extra(<span class="dv">2</span>, <span class="st">"a test string"</span>)</span>
+<span id="cb31-3"><a href="syntax-and-grammar.html#cb31-3" aria-hidden="true" tabindex="-1"></a>z.set_extra(<span class="dv">1</span>, gp.pos())</span></code></pre></div>
 </div>
 <div id="groups-and-b.c." class="section level2" number="5.7">
 <h2>
 <span class="header-section-number">5.7</span> Groups and B.C.<a class="anchor" aria-label="anchor" href="#groups-and-b.c."><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="syntax-and-grammar.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> z.group(<span class="st">"default"</span>) <span class="op">==</span> <span class="st">"lower"</span>:</span>
-<span id="cb31-2"><a href="syntax-and-grammar.html#cb31-2" aria-hidden="true" tabindex="-1"></a>  gp.set_fix(<span class="dv">0</span>, <span class="va">True</span>)</span>
-<span id="cb31-3"><a href="syntax-and-grammar.html#cb31-3" aria-hidden="true" tabindex="-1"></a>  gp.set_fix(<span class="dv">1</span>, <span class="va">True</span>)</span>
-<span id="cb31-4"><a href="syntax-and-grammar.html#cb31-4" aria-hidden="true" tabindex="-1"></a>  gp.set_force_load((<span class="fl">1e6</span>,<span class="fl">2e6</span>,<span class="fl">1e6</span>))</span>
-<span id="cb31-5"><a href="syntax-and-grammar.html#cb31-5" aria-hidden="true" tabindex="-1"></a>it.zone.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)).stress()</span>
-<span id="cb31-6"><a href="syntax-and-grammar.html#cb31-6" aria-hidden="true" tabindex="-1"></a>it.zone.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)).strain()</span>
-<span id="cb31-7"><a href="syntax-and-grammar.html#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="syntax-and-grammar.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> z.group(<span class="st">"default"</span>) <span class="op">==</span> <span class="st">"lower"</span>:</span>
+<span id="cb32-2"><a href="syntax-and-grammar.html#cb32-2" aria-hidden="true" tabindex="-1"></a>  gp.set_fix(<span class="dv">0</span>, <span class="va">True</span>)</span>
+<span id="cb32-3"><a href="syntax-and-grammar.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  gp.set_fix(<span class="dv">1</span>, <span class="va">True</span>)</span>
+<span id="cb32-4"><a href="syntax-and-grammar.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  gp.set_force_load((<span class="fl">1e6</span>,<span class="fl">2e6</span>,<span class="fl">1e6</span>))</span>
+<span id="cb32-5"><a href="syntax-and-grammar.html#cb32-5" aria-hidden="true" tabindex="-1"></a>it.zone.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)).stress()</span>
+<span id="cb32-6"><a href="syntax-and-grammar.html#cb32-6" aria-hidden="true" tabindex="-1"></a>it.zone.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)).strain()</span>
+<span id="cb32-7"><a href="syntax-and-grammar.html#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
 </div>
 <div id="parameteric-studies" class="section level2" number="5.8">
 <h2>
 <span class="header-section-number">5.8</span> Parameteric Studies<a class="anchor" aria-label="anchor" href="#parameteric-studies"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="syntax-and-grammar.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">"*note: for modulus in [6e9, 8e9, 10e9, 12e9]:"</span></span>
-<span id="cb32-2"><a href="syntax-and-grammar.html#cb32-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
-<span id="cb32-3"><a href="syntax-and-grammar.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="st">model restore 'before_cycling'</span></span>
-<span id="cb32-4"><a href="syntax-and-grammar.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="st">zone prop young </span><span class="sc">{}</span></span>
-<span id="cb32-5"><a href="syntax-and-grammar.html#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="st">model solve</span></span>
-<span id="cb32-6"><a href="syntax-and-grammar.html#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>.<span class="bu">format</span>(modulus))</span>
-<span id="cb32-7"><a href="syntax-and-grammar.html#cb32-7" aria-hidden="true" tabindex="-1"></a>vertical_disp <span class="op">=</span> it.gridpoint.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">10</span>)).disp_z()</span>
-<span id="cb32-8"><a href="syntax-and-grammar.html#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"~~~"</span>.<span class="bu">format</span>(modulus,vertical_disp)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="syntax-and-grammar.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">"*note: for modulus in [6e9, 8e9, 10e9, 12e9]:"</span></span>
+<span id="cb33-2"><a href="syntax-and-grammar.html#cb33-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
+<span id="cb33-3"><a href="syntax-and-grammar.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="st">model restore 'before_cycling'</span></span>
+<span id="cb33-4"><a href="syntax-and-grammar.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="st">zone prop young </span><span class="sc">{}</span></span>
+<span id="cb33-5"><a href="syntax-and-grammar.html#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="st">model solve</span></span>
+<span id="cb33-6"><a href="syntax-and-grammar.html#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>.<span class="bu">format</span>(modulus))</span>
+<span id="cb33-7"><a href="syntax-and-grammar.html#cb33-7" aria-hidden="true" tabindex="-1"></a>vertical_disp <span class="op">=</span> it.gridpoint.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">10</span>)).disp_z()</span>
+<span id="cb33-8"><a href="syntax-and-grammar.html#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"~~~"</span>.<span class="bu">format</span>(modulus,vertical_disp)</span></code></pre></div>
 </div>
 <div id="setting-fish-variables" class="section level2" number="5.9">
 <h2>
 <span class="header-section-number">5.9</span> Setting FISH variables<a class="anchor" aria-label="anchor" href="#setting-fish-variables"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="syntax-and-grammar.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
-<span id="cb33-2"><a href="syntax-and-grammar.html#cb33-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">'python-reset-state false'</span>)</span>
-<span id="cb33-3"><a href="syntax-and-grammar.html#cb33-3" aria-hidden="true" tabindex="-1"></a>it.fish.<span class="bu">set</span>(<span class="st">'x'</span>, <span class="dv">10</span>)</span>
-<span id="cb33-4"><a href="syntax-and-grammar.html#cb33-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> it.fish.get(<span class="st">'x'</span>) yields <span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="syntax-and-grammar.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
+<span id="cb34-2"><a href="syntax-and-grammar.html#cb34-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">'python-reset-state false'</span>)</span>
+<span id="cb34-3"><a href="syntax-and-grammar.html#cb34-3" aria-hidden="true" tabindex="-1"></a>it.fish.<span class="bu">set</span>(<span class="st">'x'</span>, <span class="dv">10</span>)</span>
+<span id="cb34-4"><a href="syntax-and-grammar.html#cb34-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> it.fish.get(<span class="st">'x'</span>) yields <span class="dv">10</span></span></code></pre></div>
 <div id="issuing-command" class="section level3" number="5.9.1">
 <h3>
 <span class="header-section-number">5.9.1</span> Issuing Command<a class="anchor" aria-label="anchor" href="#issuing-command"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="syntax-and-grammar.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
-<span id="cb34-2"><a href="syntax-and-grammar.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb34-3"><a href="syntax-and-grammar.html#cb34-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.loadtext(<span class="st">'brick-data.txt'</span>)</span>
-<span id="cb34-4"><a href="syntax-and-grammar.html#cb34-4" aria-hidden="true" tabindex="-1"></a>command_template <span class="op">=</span> <span class="op">;;;</span> </span>
-<span id="cb34-5"><a href="syntax-and-grammar.html#cb34-5" aria-hidden="true" tabindex="-1"></a>zone create brick</span>
-<span id="cb34-6"><a href="syntax-and-grammar.html#cb34-6" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic</span>
-<span id="cb34-7"><a href="syntax-and-grammar.html#cb34-7" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> density {density} young {young} poisson {poisson}</span>
-<span id="cb34-8"><a href="syntax-and-grammar.html#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="op">;;;</span></span>
-<span id="cb34-9"><a href="syntax-and-grammar.html#cb34-9" aria-hidden="true" tabindex="-1"></a>density <span class="op">=</span> data[<span class="dv">0</span>]</span>
-<span id="cb34-10"><a href="syntax-and-grammar.html#cb34-10" aria-hidden="true" tabindex="-1"></a>young <span class="op">=</span> data[<span class="dv">1</span>]</span>
-<span id="cb34-11"><a href="syntax-and-grammar.html#cb34-11" aria-hidden="true" tabindex="-1"></a>poisson <span class="op">=</span> data[<span class="dv">2</span>]</span>
-<span id="cb34-12"><a href="syntax-and-grammar.html#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-13"><a href="syntax-and-grammar.html#cb34-13" aria-hidden="true" tabindex="-1"></a>command <span class="op">=</span> command_template.<span class="bu">format</span>(density<span class="op">=</span>density, young<span class="op">=</span>young, poisson<span class="op">=</span>poisson)</span>
-<span id="cb34-14"><a href="syntax-and-grammar.html#cb34-14" aria-hidden="true" tabindex="-1"></a>it.command(command)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="syntax-and-grammar.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
+<span id="cb35-2"><a href="syntax-and-grammar.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb35-3"><a href="syntax-and-grammar.html#cb35-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.loadtext(<span class="st">'brick-data.txt'</span>)</span>
+<span id="cb35-4"><a href="syntax-and-grammar.html#cb35-4" aria-hidden="true" tabindex="-1"></a>command_template <span class="op">=</span> <span class="op">;;;</span> </span>
+<span id="cb35-5"><a href="syntax-and-grammar.html#cb35-5" aria-hidden="true" tabindex="-1"></a>zone create brick</span>
+<span id="cb35-6"><a href="syntax-and-grammar.html#cb35-6" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic</span>
+<span id="cb35-7"><a href="syntax-and-grammar.html#cb35-7" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> density {density} young {young} poisson {poisson}</span>
+<span id="cb35-8"><a href="syntax-and-grammar.html#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="op">;;;</span></span>
+<span id="cb35-9"><a href="syntax-and-grammar.html#cb35-9" aria-hidden="true" tabindex="-1"></a>density <span class="op">=</span> data[<span class="dv">0</span>]</span>
+<span id="cb35-10"><a href="syntax-and-grammar.html#cb35-10" aria-hidden="true" tabindex="-1"></a>young <span class="op">=</span> data[<span class="dv">1</span>]</span>
+<span id="cb35-11"><a href="syntax-and-grammar.html#cb35-11" aria-hidden="true" tabindex="-1"></a>poisson <span class="op">=</span> data[<span class="dv">2</span>]</span>
+<span id="cb35-12"><a href="syntax-and-grammar.html#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-13"><a href="syntax-and-grammar.html#cb35-13" aria-hidden="true" tabindex="-1"></a>command <span class="op">=</span> command_template.<span class="bu">format</span>(density<span class="op">=</span>density, young<span class="op">=</span>young, poisson<span class="op">=</span>poisson)</span>
+<span id="cb35-14"><a href="syntax-and-grammar.html#cb35-14" aria-hidden="true" tabindex="-1"></a>it.command(command)</span></code></pre></div>
 </div>
 </div>
 <div id="string" class="section level2" number="5.10">
 <h2>
 <span class="header-section-number">5.10</span> String<a class="anchor" aria-label="anchor" href="#string"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="syntax-and-grammar.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">"The value of x is {:.2f}"</span>.<span class="bu">format</span>(<span class="fl">0.3872</span>)</span>
-<span id="cb35-2"><a href="syntax-and-grammar.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">"The value of x is {:.2e}"</span>.<span class="bu">format</span>(<span class="fl">0.3872</span>)</span>
-<span id="cb35-3"><a href="syntax-and-grammar.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is Sasha"</span></span>
-<span id="cb35-4"><a href="syntax-and-grammar.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is {}"</span>.<span class="bu">format</span>(<span class="st">"Sasha"</span>)</span>
-<span id="cb35-5"><a href="syntax-and-grammar.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is {name}"</span>.<span class="bu">format</span>(name<span class="op">=</span><span class="st">"Sasha"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="syntax-and-grammar.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">"The value of x is {:.2f}"</span>.<span class="bu">format</span>(<span class="fl">0.3872</span>)</span>
+<span id="cb36-2"><a href="syntax-and-grammar.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">"The value of x is {:.2e}"</span>.<span class="bu">format</span>(<span class="fl">0.3872</span>)</span>
+<span id="cb36-3"><a href="syntax-and-grammar.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is Sasha"</span></span>
+<span id="cb36-4"><a href="syntax-and-grammar.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is {}"</span>.<span class="bu">format</span>(<span class="st">"Sasha"</span>)</span>
+<span id="cb36-5"><a href="syntax-and-grammar.html#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is {name}"</span>.<span class="bu">format</span>(name<span class="op">=</span><span class="st">"Sasha"</span>)</span></code></pre></div>
 </div>
 <div id="kaist-model-code" class="section level2" number="5.11">
 <h2>
 <span class="header-section-number">5.11</span> KAIST Model Code<a class="anchor" aria-label="anchor" href="#kaist-model-code"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="syntax-and-grammar.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
-<span id="cb36-2"><a href="syntax-and-grammar.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb36-3"><a href="syntax-and-grammar.html#cb36-3" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(threshold<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb36-4"><a href="syntax-and-grammar.html#cb36-4" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"python-reset-state false"</span>)</span>
-<span id="cb36-5"><a href="syntax-and-grammar.html#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> zonearray <span class="im">as</span> za</span>
-<span id="cb36-6"><a href="syntax-and-grammar.html#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> gridpointarray <span class="im">as</span> gpa</span>
-<span id="cb36-7"><a href="syntax-and-grammar.html#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb36-8"><a href="syntax-and-grammar.html#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co">" =============GRID GENERATION=============== "</span></span>
-<span id="cb36-9"><a href="syntax-and-grammar.html#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb36-10"><a href="syntax-and-grammar.html#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb36-11"><a href="syntax-and-grammar.html#cb36-11" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
-<span id="cb36-12"><a href="syntax-and-grammar.html#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="st">model new</span></span>
-<span id="cb36-13"><a href="syntax-and-grammar.html#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="st">zone create radial-cylinder point 0 (0,0,0) ...</span></span>
-<span id="cb36-14"><a href="syntax-and-grammar.html#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 1 (40,0,0) ...</span></span>
-<span id="cb36-15"><a href="syntax-and-grammar.html#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 2 (0,10,0) ...</span></span>
-<span id="cb36-16"><a href="syntax-and-grammar.html#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 3 (0,0,40) ...</span></span>
-<span id="cb36-17"><a href="syntax-and-grammar.html#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 4 (40,10,0) ...</span></span>
-<span id="cb36-18"><a href="syntax-and-grammar.html#cb36-18" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 5 (0,10,40) ...</span></span>
-<span id="cb36-19"><a href="syntax-and-grammar.html#cb36-19" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 6 (40,0,40) ...</span></span>
-<span id="cb36-20"><a href="syntax-and-grammar.html#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 7 (40,10,40) ...</span></span>
-<span id="cb36-21"><a href="syntax-and-grammar.html#cb36-21" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 8 (1,0,0) ...</span></span>
-<span id="cb36-22"><a href="syntax-and-grammar.html#cb36-22" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 9 (0,0,1) ...</span></span>
-<span id="cb36-23"><a href="syntax-and-grammar.html#cb36-23" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 10 (1,10,0) ...</span></span>
-<span id="cb36-24"><a href="syntax-and-grammar.html#cb36-24" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 11 (0,10,1) ...</span></span>
-<span id="cb36-25"><a href="syntax-and-grammar.html#cb36-25" aria-hidden="true" tabindex="-1"></a><span class="st">                            size 10 20 26 40 ...</span></span>
-<span id="cb36-26"><a href="syntax-and-grammar.html#cb36-26" aria-hidden="true" tabindex="-1"></a><span class="st">                            rat 1 1 1 1.5 ...</span></span>
-<span id="cb36-27"><a href="syntax-and-grammar.html#cb36-27" aria-hidden="true" tabindex="-1"></a><span class="st">                            fill group "shaft"</span></span>
-<span id="cb36-28"><a href="syntax-and-grammar.html#cb36-28" aria-hidden="true" tabindex="-1"></a><span class="st">zone group "plate" range position-x 0 3.2 position-y 8.5 10 position-z 0 3.2</span></span>
-<span id="cb36-29"><a href="syntax-and-grammar.html#cb36-29" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
-<span id="cb36-30"><a href="syntax-and-grammar.html#cb36-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-31"><a href="syntax-and-grammar.html#cb36-31" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb36-32"><a href="syntax-and-grammar.html#cb36-32" aria-hidden="true" tabindex="-1"></a><span class="co">" ============GROUPS AND MASKS=============== "</span></span>
-<span id="cb36-33"><a href="syntax-and-grammar.html#cb36-33" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb36-34"><a href="syntax-and-grammar.html#cb36-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-35"><a href="syntax-and-grammar.html#cb36-35" aria-hidden="true" tabindex="-1"></a><span class="co">" GROUPS AND MASK ARRAYS "</span></span>
-<span id="cb36-36"><a href="syntax-and-grammar.html#cb36-36" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"zone group </span><span class="ch">\"</span><span class="st">lower</span><span class="ch">\"</span><span class="st"> range position-z 0 5"</span>)</span>
-<span id="cb36-37"><a href="syntax-and-grammar.html#cb36-37" aria-hidden="true" tabindex="-1"></a>za.in_group(<span class="st">"lower"</span>)</span>
-<span id="cb36-38"><a href="syntax-and-grammar.html#cb36-38" aria-hidden="true" tabindex="-1"></a>za.in_group(<span class="st">"lower"</span>).<span class="bu">sum</span>(), <span class="st">"zones in lower group."</span></span>
-<span id="cb36-39"><a href="syntax-and-grammar.html#cb36-39" aria-hidden="true" tabindex="-1"></a>corner_mask <span class="op">=</span> <span class="bu">reduce</span>(np.logical_and, (x<span class="op">&lt;</span><span class="dv">3</span>, y<span class="op">&lt;</span><span class="dv">3</span>, z<span class="op">&lt;</span><span class="dv">3</span>))</span>
-<span id="cb36-40"><a href="syntax-and-grammar.html#cb36-40" aria-hidden="true" tabindex="-1"></a>za.set_group(corner_mask, <span class="st">"corner"</span>, <span class="st">"geometry"</span>)</span>
-<span id="cb36-41"><a href="syntax-and-grammar.html#cb36-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> za.in_group(<span class="st">"corner"</span>, <span class="st">"geometry"</span>).<span class="bu">sum</span>(), <span class="st">"zones in corner group."</span></span>
-<span id="cb36-42"><a href="syntax-and-grammar.html#cb36-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-43"><a href="syntax-and-grammar.html#cb36-43" aria-hidden="true" tabindex="-1"></a><span class="co">" GRIDPOINTS ARRAY FUNCTIONS "</span></span>
-<span id="cb36-44"><a href="syntax-and-grammar.html#cb36-44" aria-hidden="true" tabindex="-1"></a>gpos <span class="op">=</span> gpa.pos()</span>
-<span id="cb36-45"><a href="syntax-and-grammar.html#cb36-45" aria-hidden="true" tabindex="-1"></a>gx, gy, gz <span class="op">=</span> gpos.T</span>
-<span id="cb36-46"><a href="syntax-and-grammar.html#cb36-46" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> gz</span>
-<span id="cb36-47"><a href="syntax-and-grammar.html#cb36-47" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> gpa.fixity()</span>
-<span id="cb36-48"><a href="syntax-and-grammar.html#cb36-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> f</span>
-<span id="cb36-49"><a href="syntax-and-grammar.html#cb36-49" aria-hidden="true" tabindex="-1"></a>f[:,][gz<span class="op">==</span><span class="dv">0</span>] <span class="op">=</span> <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span></span>
-<span id="cb36-50"><a href="syntax-and-grammar.html#cb36-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> f</span>
-<span id="cb36-51"><a href="syntax-and-grammar.html#cb36-51" aria-hidden="true" tabindex="-1"></a>gpa.set_fixity(f)</span>
-<span id="cb36-52"><a href="syntax-and-grammar.html#cb36-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-53"><a href="syntax-and-grammar.html#cb36-53" aria-hidden="true" tabindex="-1"></a>top_gridpoints <span class="op">=</span> gz<span class="op">==</span><span class="dv">10</span></span>
-<span id="cb36-54"><a href="syntax-and-grammar.html#cb36-54" aria-hidden="true" tabindex="-1"></a>radial_distance <span class="op">=</span> np.sqrt((gx<span class="op">-</span><span class="dv">5</span>)<span class="op">**</span><span class="dv">2</span><span class="op">+</span>(gy<span class="op">-</span><span class="dv">5</span>)<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb36-55"><a href="syntax-and-grammar.html#cb36-55" aria-hidden="true" tabindex="-1"></a>central_gridpoints <span class="op">=</span> radial_distance <span class="op">&lt;</span> <span class="dv">5</span></span>
-<span id="cb36-56"><a href="syntax-and-grammar.html#cb36-56" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.logical_and(top_gridpoints, central_gridpoints)</span>
-<span id="cb36-57"><a href="syntax-and-grammar.html#cb36-57" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"boundary load applied to </span><span class="sc">{}</span><span class="st"> gridpoints"</span>.<span class="bu">format</span>(mask.<span class="bu">sum</span>())</span>
-<span id="cb36-58"><a href="syntax-and-grammar.html#cb36-58" aria-hidden="true" tabindex="-1"></a>fapp <span class="op">=</span> gpa.force_app()</span>
-<span id="cb36-59"><a href="syntax-and-grammar.html#cb36-59" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> fapp</span>
-<span id="cb36-60"><a href="syntax-and-grammar.html#cb36-60" aria-hidden="true" tabindex="-1"></a>fapp[:,<span class="dv">2</span>] <span class="op">=</span> mask<span class="op">*</span><span class="fl">1e6</span><span class="op">*</span>(<span class="fl">5.0</span><span class="op">-</span>radial_distance)<span class="op">/</span><span class="fl">5.0</span></span>
-<span id="cb36-61"><a href="syntax-and-grammar.html#cb36-61" aria-hidden="true" tabindex="-1"></a>gpa.set_force_app(fapp)</span>
-<span id="cb36-62"><a href="syntax-and-grammar.html#cb36-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-63"><a href="syntax-and-grammar.html#cb36-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-64"><a href="syntax-and-grammar.html#cb36-64" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"zone centroids: "</span></span>
-<span id="cb36-65"><a href="syntax-and-grammar.html#cb36-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> za.pos()</span>
-<span id="cb36-66"><a href="syntax-and-grammar.html#cb36-66" aria-hidden="true" tabindex="-1"></a>za.gridpoints()</span>
-<span id="cb36-67"><a href="syntax-and-grammar.html#cb36-67" aria-hidden="true" tabindex="-1"></a>za.faces()</span>
-<span id="cb36-68"><a href="syntax-and-grammar.html#cb36-68" aria-hidden="true" tabindex="-1"></a>za.ids()</span>
-<span id="cb36-69"><a href="syntax-and-grammar.html#cb36-69" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> za.neighbors()</span>
-<span id="cb36-70"><a href="syntax-and-grammar.html#cb36-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-71"><a href="syntax-and-grammar.html#cb36-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-72"><a href="syntax-and-grammar.html#cb36-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-73"><a href="syntax-and-grammar.html#cb36-73" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb36-74"><a href="syntax-and-grammar.html#cb36-74" aria-hidden="true" tabindex="-1"></a><span class="co">" ===============PROPERTIES================== "</span></span>
-<span id="cb36-75"><a href="syntax-and-grammar.html#cb36-75" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb36-76"><a href="syntax-and-grammar.html#cb36-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-77"><a href="syntax-and-grammar.html#cb36-77" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
-<span id="cb36-78"><a href="syntax-and-grammar.html#cb36-78" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic</span></span>
-<span id="cb36-79"><a href="syntax-and-grammar.html#cb36-79" aria-hidden="true" tabindex="-1"></a><span class="st">zone property density 2950 young 12e9 poisson 0.25</span></span>
-<span id="cb36-80"><a href="syntax-and-grammar.html#cb36-80" aria-hidden="true" tabindex="-1"></a><span class="st">cycle 1</span></span>
-<span id="cb36-81"><a href="syntax-and-grammar.html#cb36-81" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
-<span id="cb36-82"><a href="syntax-and-grammar.html#cb36-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-83"><a href="syntax-and-grammar.html#cb36-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-84"><a href="syntax-and-grammar.html#cb36-84" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb36-85"><a href="syntax-and-grammar.html#cb36-85" aria-hidden="true" tabindex="-1"></a><span class="co">" ==========BOUNDARY CONDITIONS============== "</span></span>
-<span id="cb36-86"><a href="syntax-and-grammar.html#cb36-86" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb36-87"><a href="syntax-and-grammar.html#cb36-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-88"><a href="syntax-and-grammar.html#cb36-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-89"><a href="syntax-and-grammar.html#cb36-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-90"><a href="syntax-and-grammar.html#cb36-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-91"><a href="syntax-and-grammar.html#cb36-91" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb36-92"><a href="syntax-and-grammar.html#cb36-92" aria-hidden="true" tabindex="-1"></a><span class="co">" =================RESULTS=================== "</span></span>
-<span id="cb36-93"><a href="syntax-and-grammar.html#cb36-93" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb36-94"><a href="syntax-and-grammar.html#cb36-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-95"><a href="syntax-and-grammar.html#cb36-95" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"model solve"</span>)</span>
-<span id="cb36-96"><a href="syntax-and-grammar.html#cb36-96" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"gridpoint displacements:"</span></span>
-<span id="cb36-97"><a href="syntax-and-grammar.html#cb36-97" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> gpa.disp()</span>
-<span id="cb36-98"><a href="syntax-and-grammar.html#cb36-98" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"gridpoint displacement magnitudes: "</span></span>
-<span id="cb36-99"><a href="syntax-and-grammar.html#cb36-99" aria-hidden="true" tabindex="-1"></a>mag <span class="op">=</span> np.linalg.norm(gpa.disp(), axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb36-100"><a href="syntax-and-grammar.html#cb36-100" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> mag</span>
-<span id="cb36-101"><a href="syntax-and-grammar.html#cb36-101" aria-hidden="true" tabindex="-1"></a>max_index <span class="op">=</span> np.argmax(mag)</span>
-<span id="cb36-102"><a href="syntax-and-grammar.html#cb36-102" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"Maximum displacement: </span><span class="sc">{}</span><span class="st"> at location </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(gpa.disp()[max_index],</span>
-<span id="cb36-103"><a href="syntax-and-grammar.html#cb36-103" aria-hidden="true" tabindex="-1"></a>                                              gpa.pos()[max_index])</span>
-<span id="cb36-104"><a href="syntax-and-grammar.html#cb36-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-105"><a href="syntax-and-grammar.html#cb36-105" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"Vertical displacement along the vertical line x=5, y=5: from z=0 to z=10"</span></span>
-<span id="cb36-106"><a href="syntax-and-grammar.html#cb36-106" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> gpa.disp()[np.logical_and(gx<span class="op">==</span><span class="dv">5</span>, gy<span class="op">==</span><span class="dv">5</span>)][:,<span class="dv">2</span>]</span>
-<span id="cb36-107"><a href="syntax-and-grammar.html#cb36-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-108"><a href="syntax-and-grammar.html#cb36-108" aria-hidden="true" tabindex="-1"></a>za.stress()</span>
-<span id="cb36-109"><a href="syntax-and-grammar.html#cb36-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-110"><a href="syntax-and-grammar.html#cb36-110" aria-hidden="true" tabindex="-1"></a>za.stress_flat()</span>
-<span id="cb36-111"><a href="syntax-and-grammar.html#cb36-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-112"><a href="syntax-and-grammar.html#cb36-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-113"><a href="syntax-and-grammar.html#cb36-113" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb36-114"><a href="syntax-and-grammar.html#cb36-114" aria-hidden="true" tabindex="-1"></a><span class="co">" =========REFERENCE EXAMPLES================ "</span></span>
-<span id="cb36-115"><a href="syntax-and-grammar.html#cb36-115" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb36-116"><a href="syntax-and-grammar.html#cb36-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-117"><a href="syntax-and-grammar.html#cb36-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-118"><a href="syntax-and-grammar.html#cb36-118" aria-hidden="true" tabindex="-1"></a><span class="co">""" Some Numpy Operation Examples</span></span>
-<span id="cb36-119"><a href="syntax-and-grammar.html#cb36-119" aria-hidden="true" tabindex="-1"></a><span class="co">np.array([1,2,3,4,5])</span></span>
-<span id="cb36-120"><a href="syntax-and-grammar.html#cb36-120" aria-hidden="true" tabindex="-1"></a><span class="co">np.linspace(0,1,15)</span></span>
-<span id="cb36-121"><a href="syntax-and-grammar.html#cb36-121" aria-hidden="true" tabindex="-1"></a><span class="co">np.zeros((4,4))</span></span>
-<span id="cb36-122"><a href="syntax-and-grammar.html#cb36-122" aria-hidden="true" tabindex="-1"></a><span class="co">a = np.linspace(0,1,15)</span></span>
-<span id="cb36-123"><a href="syntax-and-grammar.html#cb36-123" aria-hidden="true" tabindex="-1"></a><span class="co">b = np.ones_like(a)</span></span>
-<span id="cb36-124"><a href="syntax-and-grammar.html#cb36-124" aria-hidden="true" tabindex="-1"></a><span class="co">np.sin(a)</span></span>
-<span id="cb36-125"><a href="syntax-and-grammar.html#cb36-125" aria-hidden="true" tabindex="-1"></a><span class="co">print a[0]</span></span>
-<span id="cb36-126"><a href="syntax-and-grammar.html#cb36-126" aria-hidden="true" tabindex="-1"></a><span class="co">a[0] = 20.2</span></span>
-<span id="cb36-127"><a href="syntax-and-grammar.html#cb36-127" aria-hidden="true" tabindex="-1"></a><span class="co">print a</span></span>
-<span id="cb36-128"><a href="syntax-and-grammar.html#cb36-128" aria-hidden="true" tabindex="-1"></a><span class="co">c = np.array(((1,2,3),(4,5,6),(7,8,9),(10,11,12)))</span></span>
-<span id="cb36-129"><a href="syntax-and-grammar.html#cb36-129" aria-hidden="true" tabindex="-1"></a><span class="co">print c</span></span>
-<span id="cb36-130"><a href="syntax-and-grammar.html#cb36-130" aria-hidden="true" tabindex="-1"></a><span class="co">c[0][0]</span></span>
-<span id="cb36-131"><a href="syntax-and-grammar.html#cb36-131" aria-hidden="true" tabindex="-1"></a><span class="co">c[:,0]</span></span>
-<span id="cb36-132"><a href="syntax-and-grammar.html#cb36-132" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb36-133"><a href="syntax-and-grammar.html#cb36-133" aria-hidden="true" tabindex="-1"></a><span class="co">""" SOME GRIDPOINTS EXAMPLES</span></span>
-<span id="cb36-134"><a href="syntax-and-grammar.html#cb36-134" aria-hidden="true" tabindex="-1"></a><span class="co">z = it.zone.near((5,5,5))</span></span>
-<span id="cb36-135"><a href="syntax-and-grammar.html#cb36-135" aria-hidden="true" tabindex="-1"></a><span class="co">print "central zone id: {}, position: {}".format(z.id(), z.pos())</span></span>
-<span id="cb36-136"><a href="syntax-and-grammar.html#cb36-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-137"><a href="syntax-and-grammar.html#cb36-137" aria-hidden="true" tabindex="-1"></a><span class="co">for gp in z.gridpoints():</span></span>
-<span id="cb36-138"><a href="syntax-and-grammar.html#cb36-138" aria-hidden="true" tabindex="-1"></a><span class="co">    print "gridpoint with id: {} at {}".format(gp.id(), gp.pos())</span></span>
-<span id="cb36-139"><a href="syntax-and-grammar.html#cb36-139" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="syntax-and-grammar.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
+<span id="cb37-2"><a href="syntax-and-grammar.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb37-3"><a href="syntax-and-grammar.html#cb37-3" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(threshold<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb37-4"><a href="syntax-and-grammar.html#cb37-4" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"python-reset-state false"</span>)</span>
+<span id="cb37-5"><a href="syntax-and-grammar.html#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> zonearray <span class="im">as</span> za</span>
+<span id="cb37-6"><a href="syntax-and-grammar.html#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> gridpointarray <span class="im">as</span> gpa</span>
+<span id="cb37-7"><a href="syntax-and-grammar.html#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb37-8"><a href="syntax-and-grammar.html#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co">" =============GRID GENERATION=============== "</span></span>
+<span id="cb37-9"><a href="syntax-and-grammar.html#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb37-10"><a href="syntax-and-grammar.html#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb37-11"><a href="syntax-and-grammar.html#cb37-11" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
+<span id="cb37-12"><a href="syntax-and-grammar.html#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="st">model new</span></span>
+<span id="cb37-13"><a href="syntax-and-grammar.html#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="st">zone create radial-cylinder point 0 (0,0,0) ...</span></span>
+<span id="cb37-14"><a href="syntax-and-grammar.html#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 1 (40,0,0) ...</span></span>
+<span id="cb37-15"><a href="syntax-and-grammar.html#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 2 (0,10,0) ...</span></span>
+<span id="cb37-16"><a href="syntax-and-grammar.html#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 3 (0,0,40) ...</span></span>
+<span id="cb37-17"><a href="syntax-and-grammar.html#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 4 (40,10,0) ...</span></span>
+<span id="cb37-18"><a href="syntax-and-grammar.html#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 5 (0,10,40) ...</span></span>
+<span id="cb37-19"><a href="syntax-and-grammar.html#cb37-19" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 6 (40,0,40) ...</span></span>
+<span id="cb37-20"><a href="syntax-and-grammar.html#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 7 (40,10,40) ...</span></span>
+<span id="cb37-21"><a href="syntax-and-grammar.html#cb37-21" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 8 (1,0,0) ...</span></span>
+<span id="cb37-22"><a href="syntax-and-grammar.html#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 9 (0,0,1) ...</span></span>
+<span id="cb37-23"><a href="syntax-and-grammar.html#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 10 (1,10,0) ...</span></span>
+<span id="cb37-24"><a href="syntax-and-grammar.html#cb37-24" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 11 (0,10,1) ...</span></span>
+<span id="cb37-25"><a href="syntax-and-grammar.html#cb37-25" aria-hidden="true" tabindex="-1"></a><span class="st">                            size 10 20 26 40 ...</span></span>
+<span id="cb37-26"><a href="syntax-and-grammar.html#cb37-26" aria-hidden="true" tabindex="-1"></a><span class="st">                            rat 1 1 1 1.5 ...</span></span>
+<span id="cb37-27"><a href="syntax-and-grammar.html#cb37-27" aria-hidden="true" tabindex="-1"></a><span class="st">                            fill group "shaft"</span></span>
+<span id="cb37-28"><a href="syntax-and-grammar.html#cb37-28" aria-hidden="true" tabindex="-1"></a><span class="st">zone group "plate" range position-x 0 3.2 position-y 8.5 10 position-z 0 3.2</span></span>
+<span id="cb37-29"><a href="syntax-and-grammar.html#cb37-29" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
+<span id="cb37-30"><a href="syntax-and-grammar.html#cb37-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-31"><a href="syntax-and-grammar.html#cb37-31" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb37-32"><a href="syntax-and-grammar.html#cb37-32" aria-hidden="true" tabindex="-1"></a><span class="co">" ============GROUPS AND MASKS=============== "</span></span>
+<span id="cb37-33"><a href="syntax-and-grammar.html#cb37-33" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb37-34"><a href="syntax-and-grammar.html#cb37-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-35"><a href="syntax-and-grammar.html#cb37-35" aria-hidden="true" tabindex="-1"></a><span class="co">" GROUPS AND MASK ARRAYS "</span></span>
+<span id="cb37-36"><a href="syntax-and-grammar.html#cb37-36" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"zone group </span><span class="ch">\"</span><span class="st">lower</span><span class="ch">\"</span><span class="st"> range position-z 0 5"</span>)</span>
+<span id="cb37-37"><a href="syntax-and-grammar.html#cb37-37" aria-hidden="true" tabindex="-1"></a>za.in_group(<span class="st">"lower"</span>)</span>
+<span id="cb37-38"><a href="syntax-and-grammar.html#cb37-38" aria-hidden="true" tabindex="-1"></a>za.in_group(<span class="st">"lower"</span>).<span class="bu">sum</span>(), <span class="st">"zones in lower group."</span></span>
+<span id="cb37-39"><a href="syntax-and-grammar.html#cb37-39" aria-hidden="true" tabindex="-1"></a>corner_mask <span class="op">=</span> <span class="bu">reduce</span>(np.logical_and, (x<span class="op">&lt;</span><span class="dv">3</span>, y<span class="op">&lt;</span><span class="dv">3</span>, z<span class="op">&lt;</span><span class="dv">3</span>))</span>
+<span id="cb37-40"><a href="syntax-and-grammar.html#cb37-40" aria-hidden="true" tabindex="-1"></a>za.set_group(corner_mask, <span class="st">"corner"</span>, <span class="st">"geometry"</span>)</span>
+<span id="cb37-41"><a href="syntax-and-grammar.html#cb37-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> za.in_group(<span class="st">"corner"</span>, <span class="st">"geometry"</span>).<span class="bu">sum</span>(), <span class="st">"zones in corner group."</span></span>
+<span id="cb37-42"><a href="syntax-and-grammar.html#cb37-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-43"><a href="syntax-and-grammar.html#cb37-43" aria-hidden="true" tabindex="-1"></a><span class="co">" GRIDPOINTS ARRAY FUNCTIONS "</span></span>
+<span id="cb37-44"><a href="syntax-and-grammar.html#cb37-44" aria-hidden="true" tabindex="-1"></a>gpos <span class="op">=</span> gpa.pos()</span>
+<span id="cb37-45"><a href="syntax-and-grammar.html#cb37-45" aria-hidden="true" tabindex="-1"></a>gx, gy, gz <span class="op">=</span> gpos.T</span>
+<span id="cb37-46"><a href="syntax-and-grammar.html#cb37-46" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> gz</span>
+<span id="cb37-47"><a href="syntax-and-grammar.html#cb37-47" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> gpa.fixity()</span>
+<span id="cb37-48"><a href="syntax-and-grammar.html#cb37-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> f</span>
+<span id="cb37-49"><a href="syntax-and-grammar.html#cb37-49" aria-hidden="true" tabindex="-1"></a>f[:,][gz<span class="op">==</span><span class="dv">0</span>] <span class="op">=</span> <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span></span>
+<span id="cb37-50"><a href="syntax-and-grammar.html#cb37-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> f</span>
+<span id="cb37-51"><a href="syntax-and-grammar.html#cb37-51" aria-hidden="true" tabindex="-1"></a>gpa.set_fixity(f)</span>
+<span id="cb37-52"><a href="syntax-and-grammar.html#cb37-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-53"><a href="syntax-and-grammar.html#cb37-53" aria-hidden="true" tabindex="-1"></a>top_gridpoints <span class="op">=</span> gz<span class="op">==</span><span class="dv">10</span></span>
+<span id="cb37-54"><a href="syntax-and-grammar.html#cb37-54" aria-hidden="true" tabindex="-1"></a>radial_distance <span class="op">=</span> np.sqrt((gx<span class="op">-</span><span class="dv">5</span>)<span class="op">**</span><span class="dv">2</span><span class="op">+</span>(gy<span class="op">-</span><span class="dv">5</span>)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb37-55"><a href="syntax-and-grammar.html#cb37-55" aria-hidden="true" tabindex="-1"></a>central_gridpoints <span class="op">=</span> radial_distance <span class="op">&lt;</span> <span class="dv">5</span></span>
+<span id="cb37-56"><a href="syntax-and-grammar.html#cb37-56" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.logical_and(top_gridpoints, central_gridpoints)</span>
+<span id="cb37-57"><a href="syntax-and-grammar.html#cb37-57" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"boundary load applied to </span><span class="sc">{}</span><span class="st"> gridpoints"</span>.<span class="bu">format</span>(mask.<span class="bu">sum</span>())</span>
+<span id="cb37-58"><a href="syntax-and-grammar.html#cb37-58" aria-hidden="true" tabindex="-1"></a>fapp <span class="op">=</span> gpa.force_app()</span>
+<span id="cb37-59"><a href="syntax-and-grammar.html#cb37-59" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> fapp</span>
+<span id="cb37-60"><a href="syntax-and-grammar.html#cb37-60" aria-hidden="true" tabindex="-1"></a>fapp[:,<span class="dv">2</span>] <span class="op">=</span> mask<span class="op">*</span><span class="fl">1e6</span><span class="op">*</span>(<span class="fl">5.0</span><span class="op">-</span>radial_distance)<span class="op">/</span><span class="fl">5.0</span></span>
+<span id="cb37-61"><a href="syntax-and-grammar.html#cb37-61" aria-hidden="true" tabindex="-1"></a>gpa.set_force_app(fapp)</span>
+<span id="cb37-62"><a href="syntax-and-grammar.html#cb37-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-63"><a href="syntax-and-grammar.html#cb37-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-64"><a href="syntax-and-grammar.html#cb37-64" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"zone centroids: "</span></span>
+<span id="cb37-65"><a href="syntax-and-grammar.html#cb37-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> za.pos()</span>
+<span id="cb37-66"><a href="syntax-and-grammar.html#cb37-66" aria-hidden="true" tabindex="-1"></a>za.gridpoints()</span>
+<span id="cb37-67"><a href="syntax-and-grammar.html#cb37-67" aria-hidden="true" tabindex="-1"></a>za.faces()</span>
+<span id="cb37-68"><a href="syntax-and-grammar.html#cb37-68" aria-hidden="true" tabindex="-1"></a>za.ids()</span>
+<span id="cb37-69"><a href="syntax-and-grammar.html#cb37-69" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> za.neighbors()</span>
+<span id="cb37-70"><a href="syntax-and-grammar.html#cb37-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-71"><a href="syntax-and-grammar.html#cb37-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-72"><a href="syntax-and-grammar.html#cb37-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-73"><a href="syntax-and-grammar.html#cb37-73" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb37-74"><a href="syntax-and-grammar.html#cb37-74" aria-hidden="true" tabindex="-1"></a><span class="co">" ===============PROPERTIES================== "</span></span>
+<span id="cb37-75"><a href="syntax-and-grammar.html#cb37-75" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb37-76"><a href="syntax-and-grammar.html#cb37-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-77"><a href="syntax-and-grammar.html#cb37-77" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
+<span id="cb37-78"><a href="syntax-and-grammar.html#cb37-78" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic</span></span>
+<span id="cb37-79"><a href="syntax-and-grammar.html#cb37-79" aria-hidden="true" tabindex="-1"></a><span class="st">zone property density 2950 young 12e9 poisson 0.25</span></span>
+<span id="cb37-80"><a href="syntax-and-grammar.html#cb37-80" aria-hidden="true" tabindex="-1"></a><span class="st">cycle 1</span></span>
+<span id="cb37-81"><a href="syntax-and-grammar.html#cb37-81" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
+<span id="cb37-82"><a href="syntax-and-grammar.html#cb37-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-83"><a href="syntax-and-grammar.html#cb37-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-84"><a href="syntax-and-grammar.html#cb37-84" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb37-85"><a href="syntax-and-grammar.html#cb37-85" aria-hidden="true" tabindex="-1"></a><span class="co">" ==========BOUNDARY CONDITIONS============== "</span></span>
+<span id="cb37-86"><a href="syntax-and-grammar.html#cb37-86" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb37-87"><a href="syntax-and-grammar.html#cb37-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-88"><a href="syntax-and-grammar.html#cb37-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-89"><a href="syntax-and-grammar.html#cb37-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-90"><a href="syntax-and-grammar.html#cb37-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-91"><a href="syntax-and-grammar.html#cb37-91" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb37-92"><a href="syntax-and-grammar.html#cb37-92" aria-hidden="true" tabindex="-1"></a><span class="co">" =================RESULTS=================== "</span></span>
+<span id="cb37-93"><a href="syntax-and-grammar.html#cb37-93" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb37-94"><a href="syntax-and-grammar.html#cb37-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-95"><a href="syntax-and-grammar.html#cb37-95" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"model solve"</span>)</span>
+<span id="cb37-96"><a href="syntax-and-grammar.html#cb37-96" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"gridpoint displacements:"</span></span>
+<span id="cb37-97"><a href="syntax-and-grammar.html#cb37-97" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> gpa.disp()</span>
+<span id="cb37-98"><a href="syntax-and-grammar.html#cb37-98" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"gridpoint displacement magnitudes: "</span></span>
+<span id="cb37-99"><a href="syntax-and-grammar.html#cb37-99" aria-hidden="true" tabindex="-1"></a>mag <span class="op">=</span> np.linalg.norm(gpa.disp(), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb37-100"><a href="syntax-and-grammar.html#cb37-100" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> mag</span>
+<span id="cb37-101"><a href="syntax-and-grammar.html#cb37-101" aria-hidden="true" tabindex="-1"></a>max_index <span class="op">=</span> np.argmax(mag)</span>
+<span id="cb37-102"><a href="syntax-and-grammar.html#cb37-102" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"Maximum displacement: </span><span class="sc">{}</span><span class="st"> at location </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(gpa.disp()[max_index],</span>
+<span id="cb37-103"><a href="syntax-and-grammar.html#cb37-103" aria-hidden="true" tabindex="-1"></a>                                              gpa.pos()[max_index])</span>
+<span id="cb37-104"><a href="syntax-and-grammar.html#cb37-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-105"><a href="syntax-and-grammar.html#cb37-105" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"Vertical displacement along the vertical line x=5, y=5: from z=0 to z=10"</span></span>
+<span id="cb37-106"><a href="syntax-and-grammar.html#cb37-106" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> gpa.disp()[np.logical_and(gx<span class="op">==</span><span class="dv">5</span>, gy<span class="op">==</span><span class="dv">5</span>)][:,<span class="dv">2</span>]</span>
+<span id="cb37-107"><a href="syntax-and-grammar.html#cb37-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-108"><a href="syntax-and-grammar.html#cb37-108" aria-hidden="true" tabindex="-1"></a>za.stress()</span>
+<span id="cb37-109"><a href="syntax-and-grammar.html#cb37-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-110"><a href="syntax-and-grammar.html#cb37-110" aria-hidden="true" tabindex="-1"></a>za.stress_flat()</span>
+<span id="cb37-111"><a href="syntax-and-grammar.html#cb37-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-112"><a href="syntax-and-grammar.html#cb37-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-113"><a href="syntax-and-grammar.html#cb37-113" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb37-114"><a href="syntax-and-grammar.html#cb37-114" aria-hidden="true" tabindex="-1"></a><span class="co">" =========REFERENCE EXAMPLES================ "</span></span>
+<span id="cb37-115"><a href="syntax-and-grammar.html#cb37-115" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb37-116"><a href="syntax-and-grammar.html#cb37-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-117"><a href="syntax-and-grammar.html#cb37-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-118"><a href="syntax-and-grammar.html#cb37-118" aria-hidden="true" tabindex="-1"></a><span class="co">""" Some Numpy Operation Examples</span></span>
+<span id="cb37-119"><a href="syntax-and-grammar.html#cb37-119" aria-hidden="true" tabindex="-1"></a><span class="co">np.array([1,2,3,4,5])</span></span>
+<span id="cb37-120"><a href="syntax-and-grammar.html#cb37-120" aria-hidden="true" tabindex="-1"></a><span class="co">np.linspace(0,1,15)</span></span>
+<span id="cb37-121"><a href="syntax-and-grammar.html#cb37-121" aria-hidden="true" tabindex="-1"></a><span class="co">np.zeros((4,4))</span></span>
+<span id="cb37-122"><a href="syntax-and-grammar.html#cb37-122" aria-hidden="true" tabindex="-1"></a><span class="co">a = np.linspace(0,1,15)</span></span>
+<span id="cb37-123"><a href="syntax-and-grammar.html#cb37-123" aria-hidden="true" tabindex="-1"></a><span class="co">b = np.ones_like(a)</span></span>
+<span id="cb37-124"><a href="syntax-and-grammar.html#cb37-124" aria-hidden="true" tabindex="-1"></a><span class="co">np.sin(a)</span></span>
+<span id="cb37-125"><a href="syntax-and-grammar.html#cb37-125" aria-hidden="true" tabindex="-1"></a><span class="co">print a[0]</span></span>
+<span id="cb37-126"><a href="syntax-and-grammar.html#cb37-126" aria-hidden="true" tabindex="-1"></a><span class="co">a[0] = 20.2</span></span>
+<span id="cb37-127"><a href="syntax-and-grammar.html#cb37-127" aria-hidden="true" tabindex="-1"></a><span class="co">print a</span></span>
+<span id="cb37-128"><a href="syntax-and-grammar.html#cb37-128" aria-hidden="true" tabindex="-1"></a><span class="co">c = np.array(((1,2,3),(4,5,6),(7,8,9),(10,11,12)))</span></span>
+<span id="cb37-129"><a href="syntax-and-grammar.html#cb37-129" aria-hidden="true" tabindex="-1"></a><span class="co">print c</span></span>
+<span id="cb37-130"><a href="syntax-and-grammar.html#cb37-130" aria-hidden="true" tabindex="-1"></a><span class="co">c[0][0]</span></span>
+<span id="cb37-131"><a href="syntax-and-grammar.html#cb37-131" aria-hidden="true" tabindex="-1"></a><span class="co">c[:,0]</span></span>
+<span id="cb37-132"><a href="syntax-and-grammar.html#cb37-132" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb37-133"><a href="syntax-and-grammar.html#cb37-133" aria-hidden="true" tabindex="-1"></a><span class="co">""" SOME GRIDPOINTS EXAMPLES</span></span>
+<span id="cb37-134"><a href="syntax-and-grammar.html#cb37-134" aria-hidden="true" tabindex="-1"></a><span class="co">z = it.zone.near((5,5,5))</span></span>
+<span id="cb37-135"><a href="syntax-and-grammar.html#cb37-135" aria-hidden="true" tabindex="-1"></a><span class="co">print "central zone id: {}, position: {}".format(z.id(), z.pos())</span></span>
+<span id="cb37-136"><a href="syntax-and-grammar.html#cb37-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-137"><a href="syntax-and-grammar.html#cb37-137" aria-hidden="true" tabindex="-1"></a><span class="co">for gp in z.gridpoints():</span></span>
+<span id="cb37-138"><a href="syntax-and-grammar.html#cb37-138" aria-hidden="true" tabindex="-1"></a><span class="co">    print "gridpoint with id: {} at {}".format(gp.id(), gp.pos())</span></span>
+<span id="cb37-139"><a href="syntax-and-grammar.html#cb37-139" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
 </div>
 <div id="fish-syntax" class="section level2" number="5.12">
 <h2>
@@ -350,74 +350,74 @@
 <span class="header-section-number">5.12.1</span> Use of …<a class="anchor" aria-label="anchor" href="#use-of"><i class="fas fa-link"></i></a>
 </h3>
 <p>A complete FISH statement occupies one line. However, a line may be typed across two or more lines as long as each line but the ultimate is terminated with the continuation character ( … ). Use of temporary variables as hinge points to concatenate lengthy formulas can also be handy. The following example shows how this can be done:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="syntax-and-grammar.html#cb37-1" aria-hidden="true" tabindex="-1"></a>fish define long_sum  <span class="op">;</span>example of a <span class="bu">sum</span> of many things</span>
-<span id="cb37-2"><a href="syntax-and-grammar.html#cb37-2" aria-hidden="true" tabindex="-1"></a>    local temp <span class="op">=</span> v1 <span class="op">+</span> v2 <span class="op">+</span> v3 <span class="op">+</span> v4 <span class="op">+</span> v5 <span class="op">+</span> v6 <span class="op">+</span> v7 <span class="op">+</span> v8 <span class="op">+</span> v9 <span class="op">+</span> v10</span>
-<span id="cb37-3"><a href="syntax-and-grammar.html#cb37-3" aria-hidden="true" tabindex="-1"></a>    long_sum <span class="op">=</span> temp <span class="op">+</span> v11 <span class="op">+</span> v12 <span class="op">+</span> v13 <span class="op">+</span> v14 <span class="op">+</span> v15</span>
-<span id="cb37-4"><a href="syntax-and-grammar.html#cb37-4" aria-hidden="true" tabindex="-1"></a>end</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="syntax-and-grammar.html#cb38-1" aria-hidden="true" tabindex="-1"></a>fish define long_sum  <span class="op">;</span>example of a <span class="bu">sum</span> of many things</span>
+<span id="cb38-2"><a href="syntax-and-grammar.html#cb38-2" aria-hidden="true" tabindex="-1"></a>    local temp <span class="op">=</span> v1 <span class="op">+</span> v2 <span class="op">+</span> v3 <span class="op">+</span> v4 <span class="op">+</span> v5 <span class="op">+</span> v6 <span class="op">+</span> v7 <span class="op">+</span> v8 <span class="op">+</span> v9 <span class="op">+</span> v10</span>
+<span id="cb38-3"><a href="syntax-and-grammar.html#cb38-3" aria-hidden="true" tabindex="-1"></a>    long_sum <span class="op">=</span> temp <span class="op">+</span> v11 <span class="op">+</span> v12 <span class="op">+</span> v13 <span class="op">+</span> v14 <span class="op">+</span> v15</span>
+<span id="cb38-4"><a href="syntax-and-grammar.html#cb38-4" aria-hidden="true" tabindex="-1"></a>end</span></code></pre></div>
 </div>
 <div id="variable-types" class="section level3" number="5.12.2">
 <h3>
 <span class="header-section-number">5.12.2</span> Variable Types<a class="anchor" aria-label="anchor" href="#variable-types"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="syntax-and-grammar.html#cb38-1" aria-hidden="true" tabindex="-1"></a>model new</span>
-<span id="cb38-2"><a href="syntax-and-grammar.html#cb38-2" aria-hidden="true" tabindex="-1"></a>fish define types</span>
-<span id="cb38-3"><a href="syntax-and-grammar.html#cb38-3" aria-hidden="true" tabindex="-1"></a>    v1 <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb38-4"><a href="syntax-and-grammar.html#cb38-4" aria-hidden="true" tabindex="-1"></a>    v2 <span class="op">=</span> <span class="fl">3.4</span></span>
-<span id="cb38-5"><a href="syntax-and-grammar.html#cb38-5" aria-hidden="true" tabindex="-1"></a>    v3 <span class="op">=</span> <span class="st">'Have a nice day'</span></span>
-<span id="cb38-6"><a href="syntax-and-grammar.html#cb38-6" aria-hidden="true" tabindex="-1"></a>    v4 <span class="op">=</span> v1 <span class="op">*</span> v2</span>
-<span id="cb38-7"><a href="syntax-and-grammar.html#cb38-7" aria-hidden="true" tabindex="-1"></a>    v5 <span class="op">=</span> v3 <span class="op">+</span> <span class="st">', old chap'</span></span>
-<span id="cb38-8"><a href="syntax-and-grammar.html#cb38-8" aria-hidden="true" tabindex="-1"></a>    v6 <span class="op">=</span> vector(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
-<span id="cb38-9"><a href="syntax-and-grammar.html#cb38-9" aria-hidden="true" tabindex="-1"></a>    v7 <span class="op">=</span> matrix(vector(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb38-10"><a href="syntax-and-grammar.html#cb38-10" aria-hidden="true" tabindex="-1"></a>    v8 <span class="op">=</span> true</span>
-<span id="cb38-11"><a href="syntax-and-grammar.html#cb38-11" aria-hidden="true" tabindex="-1"></a>end</span>
-<span id="cb38-12"><a href="syntax-and-grammar.html#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="at">@types</span></span>
-<span id="cb38-13"><a href="syntax-and-grammar.html#cb38-13" aria-hidden="true" tabindex="-1"></a>fish <span class="bu">list</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="syntax-and-grammar.html#cb39-1" aria-hidden="true" tabindex="-1"></a>model new</span>
+<span id="cb39-2"><a href="syntax-and-grammar.html#cb39-2" aria-hidden="true" tabindex="-1"></a>fish define types</span>
+<span id="cb39-3"><a href="syntax-and-grammar.html#cb39-3" aria-hidden="true" tabindex="-1"></a>    v1 <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb39-4"><a href="syntax-and-grammar.html#cb39-4" aria-hidden="true" tabindex="-1"></a>    v2 <span class="op">=</span> <span class="fl">3.4</span></span>
+<span id="cb39-5"><a href="syntax-and-grammar.html#cb39-5" aria-hidden="true" tabindex="-1"></a>    v3 <span class="op">=</span> <span class="st">'Have a nice day'</span></span>
+<span id="cb39-6"><a href="syntax-and-grammar.html#cb39-6" aria-hidden="true" tabindex="-1"></a>    v4 <span class="op">=</span> v1 <span class="op">*</span> v2</span>
+<span id="cb39-7"><a href="syntax-and-grammar.html#cb39-7" aria-hidden="true" tabindex="-1"></a>    v5 <span class="op">=</span> v3 <span class="op">+</span> <span class="st">', old chap'</span></span>
+<span id="cb39-8"><a href="syntax-and-grammar.html#cb39-8" aria-hidden="true" tabindex="-1"></a>    v6 <span class="op">=</span> vector(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb39-9"><a href="syntax-and-grammar.html#cb39-9" aria-hidden="true" tabindex="-1"></a>    v7 <span class="op">=</span> matrix(vector(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb39-10"><a href="syntax-and-grammar.html#cb39-10" aria-hidden="true" tabindex="-1"></a>    v8 <span class="op">=</span> true</span>
+<span id="cb39-11"><a href="syntax-and-grammar.html#cb39-11" aria-hidden="true" tabindex="-1"></a>end</span>
+<span id="cb39-12"><a href="syntax-and-grammar.html#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="at">@types</span></span>
+<span id="cb39-13"><a href="syntax-and-grammar.html#cb39-13" aria-hidden="true" tabindex="-1"></a>fish <span class="bu">list</span></span></code></pre></div>
 <p>The resulting screen display looks like this:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="syntax-and-grammar.html#cb39-1" aria-hidden="true" tabindex="-1"></a>           Name    Value</span>
-<span id="cb39-2"><a href="syntax-and-grammar.html#cb39-2" aria-hidden="true" tabindex="-1"></a>           <span class="op">-------</span> <span class="op">--------------------</span></span>
-<span id="cb39-3"><a href="syntax-and-grammar.html#cb39-3" aria-hidden="true" tabindex="-1"></a>(function) types <span class="dv">0</span> (integer)</span>
-<span id="cb39-4"><a href="syntax-and-grammar.html#cb39-4" aria-hidden="true" tabindex="-1"></a>           v1    <span class="dv">2</span> (integer)</span>
-<span id="cb39-5"><a href="syntax-and-grammar.html#cb39-5" aria-hidden="true" tabindex="-1"></a>           v2    <span class="fl">3.400000000000000e+00</span> (real)</span>
-<span id="cb39-6"><a href="syntax-and-grammar.html#cb39-6" aria-hidden="true" tabindex="-1"></a>           v3    <span class="st">'Have a nice day'</span> (string)</span>
-<span id="cb39-7"><a href="syntax-and-grammar.html#cb39-7" aria-hidden="true" tabindex="-1"></a>           v4    <span class="fl">6.800000000000000e+00</span> (real)</span>
-<span id="cb39-8"><a href="syntax-and-grammar.html#cb39-8" aria-hidden="true" tabindex="-1"></a>           v5    <span class="st">'Have a nice day, old chap'</span> (string)</span>
-<span id="cb39-9"><a href="syntax-and-grammar.html#cb39-9" aria-hidden="true" tabindex="-1"></a>           v6    (<span class="fl">1.000000000000000e+00</span>,<span class="fl">2.000000000000000e+00</span>,</span>
-<span id="cb39-10"><a href="syntax-and-grammar.html#cb39-10" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">3.000000000000000e+00</span>) (vector3)                [<span class="op">**</span>]</span>
-<span id="cb39-11"><a href="syntax-and-grammar.html#cb39-11" aria-hidden="true" tabindex="-1"></a>           v7    <span class="dv">3</span> x <span class="dv">1</span> (matrix)</span>
-<span id="cb39-12"><a href="syntax-and-grammar.html#cb39-12" aria-hidden="true" tabindex="-1"></a>           v8    true (boolean)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="syntax-and-grammar.html#cb40-1" aria-hidden="true" tabindex="-1"></a>           Name    Value</span>
+<span id="cb40-2"><a href="syntax-and-grammar.html#cb40-2" aria-hidden="true" tabindex="-1"></a>           <span class="op">-------</span> <span class="op">--------------------</span></span>
+<span id="cb40-3"><a href="syntax-and-grammar.html#cb40-3" aria-hidden="true" tabindex="-1"></a>(function) types <span class="dv">0</span> (integer)</span>
+<span id="cb40-4"><a href="syntax-and-grammar.html#cb40-4" aria-hidden="true" tabindex="-1"></a>           v1    <span class="dv">2</span> (integer)</span>
+<span id="cb40-5"><a href="syntax-and-grammar.html#cb40-5" aria-hidden="true" tabindex="-1"></a>           v2    <span class="fl">3.400000000000000e+00</span> (real)</span>
+<span id="cb40-6"><a href="syntax-and-grammar.html#cb40-6" aria-hidden="true" tabindex="-1"></a>           v3    <span class="st">'Have a nice day'</span> (string)</span>
+<span id="cb40-7"><a href="syntax-and-grammar.html#cb40-7" aria-hidden="true" tabindex="-1"></a>           v4    <span class="fl">6.800000000000000e+00</span> (real)</span>
+<span id="cb40-8"><a href="syntax-and-grammar.html#cb40-8" aria-hidden="true" tabindex="-1"></a>           v5    <span class="st">'Have a nice day, old chap'</span> (string)</span>
+<span id="cb40-9"><a href="syntax-and-grammar.html#cb40-9" aria-hidden="true" tabindex="-1"></a>           v6    (<span class="fl">1.000000000000000e+00</span>,<span class="fl">2.000000000000000e+00</span>,</span>
+<span id="cb40-10"><a href="syntax-and-grammar.html#cb40-10" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">3.000000000000000e+00</span>) (vector3)                [<span class="op">**</span>]</span>
+<span id="cb40-11"><a href="syntax-and-grammar.html#cb40-11" aria-hidden="true" tabindex="-1"></a>           v7    <span class="dv">3</span> x <span class="dv">1</span> (matrix)</span>
+<span id="cb40-12"><a href="syntax-and-grammar.html#cb40-12" aria-hidden="true" tabindex="-1"></a>           v8    true (boolean)</span></code></pre></div>
 </div>
 <div id="traditional-for-loop-in-fish" class="section level3" number="5.12.3">
 <h3>
 <span class="header-section-number">5.12.3</span> Traditional for loop in FISH<a class="anchor" aria-label="anchor" href="#traditional-for-loop-in-fish"><i class="fas fa-link"></i></a>
 </h3>
 <p>standard for loop is also available in FISH to provide for additionalloop control.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="syntax-and-grammar.html#cb40-1" aria-hidden="true" tabindex="-1"></a>fish define xxx</span>
-<span id="cb40-2"><a href="syntax-and-grammar.html#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span>  <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb40-3"><a href="syntax-and-grammar.html#cb40-3" aria-hidden="true" tabindex="-1"></a>    prod <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb40-4"><a href="syntax-and-grammar.html#cb40-4" aria-hidden="true" tabindex="-1"></a>    loop <span class="cf">for</span> (n <span class="op">=</span> <span class="dv">1</span>, n <span class="op">&lt;=</span> <span class="dv">10</span>, n <span class="op">=</span> n <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb40-5"><a href="syntax-and-grammar.html#cb40-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span>  <span class="op">=</span> <span class="bu">sum</span>  <span class="op">+</span> n</span>
-<span id="cb40-6"><a href="syntax-and-grammar.html#cb40-6" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> n</span>
-<span id="cb40-7"><a href="syntax-and-grammar.html#cb40-7" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
-<span id="cb40-8"><a href="syntax-and-grammar.html#cb40-8" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ... </span>
-<span id="cb40-9"><a href="syntax-and-grammar.html#cb40-9" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
-<span id="cb40-10"><a href="syntax-and-grammar.html#cb40-10" aria-hidden="true" tabindex="-1"></a>end</span>
-<span id="cb40-11"><a href="syntax-and-grammar.html#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="at">@xxx</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="syntax-and-grammar.html#cb41-1" aria-hidden="true" tabindex="-1"></a>fish define xxx</span>
+<span id="cb41-2"><a href="syntax-and-grammar.html#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span>  <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb41-3"><a href="syntax-and-grammar.html#cb41-3" aria-hidden="true" tabindex="-1"></a>    prod <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb41-4"><a href="syntax-and-grammar.html#cb41-4" aria-hidden="true" tabindex="-1"></a>    loop <span class="cf">for</span> (n <span class="op">=</span> <span class="dv">1</span>, n <span class="op">&lt;=</span> <span class="dv">10</span>, n <span class="op">=</span> n <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb41-5"><a href="syntax-and-grammar.html#cb41-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span>  <span class="op">=</span> <span class="bu">sum</span>  <span class="op">+</span> n</span>
+<span id="cb41-6"><a href="syntax-and-grammar.html#cb41-6" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> n</span>
+<span id="cb41-7"><a href="syntax-and-grammar.html#cb41-7" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
+<span id="cb41-8"><a href="syntax-and-grammar.html#cb41-8" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ... </span>
+<span id="cb41-9"><a href="syntax-and-grammar.html#cb41-9" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
+<span id="cb41-10"><a href="syntax-and-grammar.html#cb41-10" aria-hidden="true" tabindex="-1"></a>end</span>
+<span id="cb41-11"><a href="syntax-and-grammar.html#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="at">@xxx</span></span></code></pre></div>
 <div id="controlled-loop" class="section level4" number="5.12.3.1">
 <h4>
 <span class="header-section-number">5.12.3.1</span> Controlled loop<a class="anchor" aria-label="anchor" href="#controlled-loop"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="syntax-and-grammar.html#cb41-1" aria-hidden="true" tabindex="-1"></a>model new</span>
-<span id="cb41-2"><a href="syntax-and-grammar.html#cb41-2" aria-hidden="true" tabindex="-1"></a>fish define xxx</span>
-<span id="cb41-3"><a href="syntax-and-grammar.html#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span>  <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb41-4"><a href="syntax-and-grammar.html#cb41-4" aria-hidden="true" tabindex="-1"></a>    prod <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb41-5"><a href="syntax-and-grammar.html#cb41-5" aria-hidden="true" tabindex="-1"></a>    loop n (<span class="dv">1</span>,<span class="dv">10</span>)</span>
-<span id="cb41-6"><a href="syntax-and-grammar.html#cb41-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span>  <span class="op">=</span> <span class="bu">sum</span>  <span class="op">+</span> n</span>
-<span id="cb41-7"><a href="syntax-and-grammar.html#cb41-7" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> n</span>
-<span id="cb41-8"><a href="syntax-and-grammar.html#cb41-8" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
-<span id="cb41-9"><a href="syntax-and-grammar.html#cb41-9" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span>  ...</span>
-<span id="cb41-10"><a href="syntax-and-grammar.html#cb41-10" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
-<span id="cb41-11"><a href="syntax-and-grammar.html#cb41-11" aria-hidden="true" tabindex="-1"></a>end</span>
-<span id="cb41-12"><a href="syntax-and-grammar.html#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="at">@xxx</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="syntax-and-grammar.html#cb42-1" aria-hidden="true" tabindex="-1"></a>model new</span>
+<span id="cb42-2"><a href="syntax-and-grammar.html#cb42-2" aria-hidden="true" tabindex="-1"></a>fish define xxx</span>
+<span id="cb42-3"><a href="syntax-and-grammar.html#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span>  <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb42-4"><a href="syntax-and-grammar.html#cb42-4" aria-hidden="true" tabindex="-1"></a>    prod <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb42-5"><a href="syntax-and-grammar.html#cb42-5" aria-hidden="true" tabindex="-1"></a>    loop n (<span class="dv">1</span>,<span class="dv">10</span>)</span>
+<span id="cb42-6"><a href="syntax-and-grammar.html#cb42-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span>  <span class="op">=</span> <span class="bu">sum</span>  <span class="op">+</span> n</span>
+<span id="cb42-7"><a href="syntax-and-grammar.html#cb42-7" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> n</span>
+<span id="cb42-8"><a href="syntax-and-grammar.html#cb42-8" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
+<span id="cb42-9"><a href="syntax-and-grammar.html#cb42-9" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span>  ...</span>
+<span id="cb42-10"><a href="syntax-and-grammar.html#cb42-10" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
+<span id="cb42-11"><a href="syntax-and-grammar.html#cb42-11" aria-hidden="true" tabindex="-1"></a>end</span>
+<span id="cb42-12"><a href="syntax-and-grammar.html#cb42-12" aria-hidden="true" tabindex="-1"></a><span class="at">@xxx</span></span></code></pre></div>
 <p>In this case, the loop variable n is given successive values from 1 to 10, and the statements inside the loop (between the loop and endloop statements) are executed for each value. As mentioned, variable names or an arithmetic expression could be substituted for the numbers 1 or 10. Note that the exit statement can be used to break out of a FISH loop and the continue statement can be used to skip the remaining instructions in the loop, moving to the next sequence of the loop.</p>
 <p>It is important to note that this formulation of looping is different from a for loop in most high-level programming languages. For instance, one cannot easily control the ending condition (i.e., loop from 1 to 10 excluding 10) or the incrementing mechanism (i.e., loop from 1 to 10 by twos or loop backward). A standard for loop is also available in FISH to provide for additional loop control.</p>
 </div>
@@ -430,16 +430,16 @@
 <p>= # &gt; &lt; &gt;= &lt;=<br></p>
 <p>The displayed value of abc in this example depends on the argument provided to abc when it is executed. You should experiment with different test symbols (e.g., replace &gt; with &lt;).</p>
 <p>Until now, our FISH functions have been invoked from FLAC3D, either by using the sqaure brackets [] of inline FISH, by giving the function name prepended with the the @ character, or by using the fish list command. It is also possible to do the reverse, to give FLAC3D commands from within FISH functions. Most valid FLAC3D commands can be embedded between the following FISH statements:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="syntax-and-grammar.html#cb42-1" aria-hidden="true" tabindex="-1"></a>model new</span>
-<span id="cb42-2"><a href="syntax-and-grammar.html#cb42-2" aria-hidden="true" tabindex="-1"></a>fish define abc(xx)</span>
-<span id="cb42-3"><a href="syntax-and-grammar.html#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> xx <span class="op">&gt;</span> <span class="dv">0</span> then </span>
-<span id="cb42-4"><a href="syntax-and-grammar.html#cb42-4" aria-hidden="true" tabindex="-1"></a>        abc <span class="op">=</span> <span class="dv">33</span></span>
-<span id="cb42-5"><a href="syntax-and-grammar.html#cb42-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
-<span id="cb42-6"><a href="syntax-and-grammar.html#cb42-6" aria-hidden="true" tabindex="-1"></a>        abc <span class="op">=</span> <span class="dv">11</span></span>
-<span id="cb42-7"><a href="syntax-and-grammar.html#cb42-7" aria-hidden="true" tabindex="-1"></a>    end_if</span>
-<span id="cb42-8"><a href="syntax-and-grammar.html#cb42-8" aria-hidden="true" tabindex="-1"></a>end</span>
-<span id="cb42-9"><a href="syntax-and-grammar.html#cb42-9" aria-hidden="true" tabindex="-1"></a>[abc(<span class="dv">1</span>)]</span>
-<span id="cb42-10"><a href="syntax-and-grammar.html#cb42-10" aria-hidden="true" tabindex="-1"></a>[abc(<span class="op">-</span><span class="dv">1</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="syntax-and-grammar.html#cb43-1" aria-hidden="true" tabindex="-1"></a>model new</span>
+<span id="cb43-2"><a href="syntax-and-grammar.html#cb43-2" aria-hidden="true" tabindex="-1"></a>fish define abc(xx)</span>
+<span id="cb43-3"><a href="syntax-and-grammar.html#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> xx <span class="op">&gt;</span> <span class="dv">0</span> then </span>
+<span id="cb43-4"><a href="syntax-and-grammar.html#cb43-4" aria-hidden="true" tabindex="-1"></a>        abc <span class="op">=</span> <span class="dv">33</span></span>
+<span id="cb43-5"><a href="syntax-and-grammar.html#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb43-6"><a href="syntax-and-grammar.html#cb43-6" aria-hidden="true" tabindex="-1"></a>        abc <span class="op">=</span> <span class="dv">11</span></span>
+<span id="cb43-7"><a href="syntax-and-grammar.html#cb43-7" aria-hidden="true" tabindex="-1"></a>    end_if</span>
+<span id="cb43-8"><a href="syntax-and-grammar.html#cb43-8" aria-hidden="true" tabindex="-1"></a>end</span>
+<span id="cb43-9"><a href="syntax-and-grammar.html#cb43-9" aria-hidden="true" tabindex="-1"></a>[abc(<span class="dv">1</span>)]</span>
+<span id="cb43-10"><a href="syntax-and-grammar.html#cb43-10" aria-hidden="true" tabindex="-1"></a>[abc(<span class="op">-</span><span class="dv">1</span>)]</span></code></pre></div>
 </div>
 <div id="arrays-and-maps" class="section level3" number="5.12.5">
 <h3>
@@ -451,27 +451,27 @@
 <h4>
 <span class="header-section-number">5.12.5.1</span> Array example<a class="anchor" aria-label="anchor" href="#array-example"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="syntax-and-grammar.html#cb43-1" aria-hidden="true" tabindex="-1"></a>model new</span>
-<span id="cb43-2"><a href="syntax-and-grammar.html#cb43-2" aria-hidden="true" tabindex="-1"></a>fish define array_operation</span>
-<span id="cb43-3"><a href="syntax-and-grammar.html#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>create <span class="kw">and</span> populate an array <span class="cf">with</span> products of <span class="dv">2</span></span>
-<span id="cb43-4"><a href="syntax-and-grammar.html#cb43-4" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> array.create(<span class="dv">10</span>)</span>
-<span id="cb43-5"><a href="syntax-and-grammar.html#cb43-5" aria-hidden="true" tabindex="-1"></a>    loop local n(<span class="dv">1</span>,<span class="dv">10</span>)</span>
-<span id="cb43-6"><a href="syntax-and-grammar.html#cb43-6" aria-hidden="true" tabindex="-1"></a>        arr[n] <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>n</span>
-<span id="cb43-7"><a href="syntax-and-grammar.html#cb43-7" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
-<span id="cb43-8"><a href="syntax-and-grammar.html#cb43-8" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb43-9"><a href="syntax-and-grammar.html#cb43-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>compute the <span class="bu">sum</span> <span class="kw">and</span> product of elements <span class="kw">in</span> the array</span>
-<span id="cb43-10"><a href="syntax-and-grammar.html#cb43-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb43-11"><a href="syntax-and-grammar.html#cb43-11" aria-hidden="true" tabindex="-1"></a>    prod <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb43-12"><a href="syntax-and-grammar.html#cb43-12" aria-hidden="true" tabindex="-1"></a>    local i <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb43-13"><a href="syntax-and-grammar.html#cb43-13" aria-hidden="true" tabindex="-1"></a>    loop <span class="cf">while</span> (i <span class="op">&lt;=</span> array.size(arr,<span class="dv">1</span>))</span>
-<span id="cb43-14"><a href="syntax-and-grammar.html#cb43-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="bu">sum</span> <span class="op">+</span> arr[i]</span>
-<span id="cb43-15"><a href="syntax-and-grammar.html#cb43-15" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> arr[i]</span>
-<span id="cb43-16"><a href="syntax-and-grammar.html#cb43-16" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb43-17"><a href="syntax-and-grammar.html#cb43-17" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
-<span id="cb43-18"><a href="syntax-and-grammar.html#cb43-18" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ...</span>
-<span id="cb43-19"><a href="syntax-and-grammar.html#cb43-19" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
-<span id="cb43-20"><a href="syntax-and-grammar.html#cb43-20" aria-hidden="true" tabindex="-1"></a>end</span>
-<span id="cb43-21"><a href="syntax-and-grammar.html#cb43-21" aria-hidden="true" tabindex="-1"></a><span class="at">@array_operation</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="syntax-and-grammar.html#cb44-1" aria-hidden="true" tabindex="-1"></a>model new</span>
+<span id="cb44-2"><a href="syntax-and-grammar.html#cb44-2" aria-hidden="true" tabindex="-1"></a>fish define array_operation</span>
+<span id="cb44-3"><a href="syntax-and-grammar.html#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>create <span class="kw">and</span> populate an array <span class="cf">with</span> products of <span class="dv">2</span></span>
+<span id="cb44-4"><a href="syntax-and-grammar.html#cb44-4" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> array.create(<span class="dv">10</span>)</span>
+<span id="cb44-5"><a href="syntax-and-grammar.html#cb44-5" aria-hidden="true" tabindex="-1"></a>    loop local n(<span class="dv">1</span>,<span class="dv">10</span>)</span>
+<span id="cb44-6"><a href="syntax-and-grammar.html#cb44-6" aria-hidden="true" tabindex="-1"></a>        arr[n] <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>n</span>
+<span id="cb44-7"><a href="syntax-and-grammar.html#cb44-7" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
+<span id="cb44-8"><a href="syntax-and-grammar.html#cb44-8" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb44-9"><a href="syntax-and-grammar.html#cb44-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>compute the <span class="bu">sum</span> <span class="kw">and</span> product of elements <span class="kw">in</span> the array</span>
+<span id="cb44-10"><a href="syntax-and-grammar.html#cb44-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb44-11"><a href="syntax-and-grammar.html#cb44-11" aria-hidden="true" tabindex="-1"></a>    prod <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb44-12"><a href="syntax-and-grammar.html#cb44-12" aria-hidden="true" tabindex="-1"></a>    local i <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb44-13"><a href="syntax-and-grammar.html#cb44-13" aria-hidden="true" tabindex="-1"></a>    loop <span class="cf">while</span> (i <span class="op">&lt;=</span> array.size(arr,<span class="dv">1</span>))</span>
+<span id="cb44-14"><a href="syntax-and-grammar.html#cb44-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="bu">sum</span> <span class="op">+</span> arr[i]</span>
+<span id="cb44-15"><a href="syntax-and-grammar.html#cb44-15" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> arr[i]</span>
+<span id="cb44-16"><a href="syntax-and-grammar.html#cb44-16" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb44-17"><a href="syntax-and-grammar.html#cb44-17" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
+<span id="cb44-18"><a href="syntax-and-grammar.html#cb44-18" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ...</span>
+<span id="cb44-19"><a href="syntax-and-grammar.html#cb44-19" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
+<span id="cb44-20"><a href="syntax-and-grammar.html#cb44-20" aria-hidden="true" tabindex="-1"></a>end</span>
+<span id="cb44-21"><a href="syntax-and-grammar.html#cb44-21" aria-hidden="true" tabindex="-1"></a><span class="at">@array_operation</span></span></code></pre></div>
 <p>In this example, an array is created and filled with numbers. The loop while construct is used to loop over the array entries and the sum and product are computed and output.</p>
 <p>A map, on the other hand, is an associative container, meaning that one can access the members of a map by an integer or string used to insert a value in the map. Maps can dynamically be resized and added to one another (appending maps together), and are the preferred constructs for storing lists of FISH variables for later access.</p>
 </div>
@@ -479,25 +479,25 @@
 <h4>
 <span class="header-section-number">5.12.5.2</span> Map example<a class="anchor" aria-label="anchor" href="#map-example"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="syntax-and-grammar.html#cb44-1" aria-hidden="true" tabindex="-1"></a>model new</span>
-<span id="cb44-2"><a href="syntax-and-grammar.html#cb44-2" aria-hidden="true" tabindex="-1"></a>fish define map_operation</span>
-<span id="cb44-3"><a href="syntax-and-grammar.html#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>create <span class="kw">and</span> populate a <span class="bu">map</span> <span class="cf">with</span> products of <span class="dv">2</span></span>
-<span id="cb44-4"><a href="syntax-and-grammar.html#cb44-4" aria-hidden="true" tabindex="-1"></a>    my_map <span class="op">=</span> <span class="bu">map</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
-<span id="cb44-5"><a href="syntax-and-grammar.html#cb44-5" aria-hidden="true" tabindex="-1"></a>    loop local n(<span class="dv">2</span>,<span class="dv">10</span>)</span>
-<span id="cb44-6"><a href="syntax-and-grammar.html#cb44-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">map</span>.add(my_map,n,<span class="dv">2</span><span class="op">*</span>n)</span>
-<span id="cb44-7"><a href="syntax-and-grammar.html#cb44-7" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
-<span id="cb44-8"><a href="syntax-and-grammar.html#cb44-8" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb44-9"><a href="syntax-and-grammar.html#cb44-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>compute the <span class="bu">sum</span> <span class="kw">and</span> product of elements <span class="kw">in</span> the <span class="bu">map</span></span>
-<span id="cb44-10"><a href="syntax-and-grammar.html#cb44-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb44-11"><a href="syntax-and-grammar.html#cb44-11" aria-hidden="true" tabindex="-1"></a>    prod <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb44-12"><a href="syntax-and-grammar.html#cb44-12" aria-hidden="true" tabindex="-1"></a>    loop foreach n my_map</span>
-<span id="cb44-13"><a href="syntax-and-grammar.html#cb44-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="bu">sum</span> <span class="op">+</span> n</span>
-<span id="cb44-14"><a href="syntax-and-grammar.html#cb44-14" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> n</span>
-<span id="cb44-15"><a href="syntax-and-grammar.html#cb44-15" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
-<span id="cb44-16"><a href="syntax-and-grammar.html#cb44-16" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ...</span>
-<span id="cb44-17"><a href="syntax-and-grammar.html#cb44-17" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
-<span id="cb44-18"><a href="syntax-and-grammar.html#cb44-18" aria-hidden="true" tabindex="-1"></a>end</span>
-<span id="cb44-19"><a href="syntax-and-grammar.html#cb44-19" aria-hidden="true" tabindex="-1"></a><span class="at">@map_operation</span></span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="syntax-and-grammar.html#cb45-1" aria-hidden="true" tabindex="-1"></a>model new</span>
+<span id="cb45-2"><a href="syntax-and-grammar.html#cb45-2" aria-hidden="true" tabindex="-1"></a>fish define map_operation</span>
+<span id="cb45-3"><a href="syntax-and-grammar.html#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>create <span class="kw">and</span> populate a <span class="bu">map</span> <span class="cf">with</span> products of <span class="dv">2</span></span>
+<span id="cb45-4"><a href="syntax-and-grammar.html#cb45-4" aria-hidden="true" tabindex="-1"></a>    my_map <span class="op">=</span> <span class="bu">map</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb45-5"><a href="syntax-and-grammar.html#cb45-5" aria-hidden="true" tabindex="-1"></a>    loop local n(<span class="dv">2</span>,<span class="dv">10</span>)</span>
+<span id="cb45-6"><a href="syntax-and-grammar.html#cb45-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">map</span>.add(my_map,n,<span class="dv">2</span><span class="op">*</span>n)</span>
+<span id="cb45-7"><a href="syntax-and-grammar.html#cb45-7" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
+<span id="cb45-8"><a href="syntax-and-grammar.html#cb45-8" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb45-9"><a href="syntax-and-grammar.html#cb45-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>compute the <span class="bu">sum</span> <span class="kw">and</span> product of elements <span class="kw">in</span> the <span class="bu">map</span></span>
+<span id="cb45-10"><a href="syntax-and-grammar.html#cb45-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb45-11"><a href="syntax-and-grammar.html#cb45-11" aria-hidden="true" tabindex="-1"></a>    prod <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb45-12"><a href="syntax-and-grammar.html#cb45-12" aria-hidden="true" tabindex="-1"></a>    loop foreach n my_map</span>
+<span id="cb45-13"><a href="syntax-and-grammar.html#cb45-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="bu">sum</span> <span class="op">+</span> n</span>
+<span id="cb45-14"><a href="syntax-and-grammar.html#cb45-14" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> n</span>
+<span id="cb45-15"><a href="syntax-and-grammar.html#cb45-15" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
+<span id="cb45-16"><a href="syntax-and-grammar.html#cb45-16" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ...</span>
+<span id="cb45-17"><a href="syntax-and-grammar.html#cb45-17" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
+<span id="cb45-18"><a href="syntax-and-grammar.html#cb45-18" aria-hidden="true" tabindex="-1"></a>end</span>
+<span id="cb45-19"><a href="syntax-and-grammar.html#cb45-19" aria-hidden="true" tabindex="-1"></a><span class="at">@map_operation</span></span></code></pre></div>
 <p>Unlike with arrays, maps can be looped through using the loop foreach construct. In this case, n is the value held in each map entry, not the integer name of the object in the map. Likewise, instead of using integers to insert objects into the map, one could use strings such as first, second, etc. This allows one to easily and efficiently store and access FISH variables by a user-defined name.</p>
 </div>
 </div>
@@ -506,14 +506,14 @@
 <span class="header-section-number">5.12.6</span> Fish Function<a class="anchor" aria-label="anchor" href="#fish-function"><i class="fas fa-link"></i></a>
 </h3>
 <p>FISH functions to calculate bulk and shear moduli</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="syntax-and-grammar.html#cb45-1" aria-hidden="true" tabindex="-1"></a>model new</span>
-<span id="cb45-2"><a href="syntax-and-grammar.html#cb45-2" aria-hidden="true" tabindex="-1"></a>fish define derive(y_mod,p_ratio)</span>
-<span id="cb45-3"><a href="syntax-and-grammar.html#cb45-3" aria-hidden="true" tabindex="-1"></a>    s_mod <span class="op">=</span> y_mod <span class="op">/</span> (<span class="fl">2.0</span> <span class="op">*</span> (<span class="fl">1.0</span> <span class="op">+</span> p_ratio))</span>
-<span id="cb45-4"><a href="syntax-and-grammar.html#cb45-4" aria-hidden="true" tabindex="-1"></a>    b_mod <span class="op">=</span> y_mod <span class="op">/</span> (<span class="fl">3.0</span> <span class="op">*</span> (<span class="fl">1.0</span> <span class="op">-</span> <span class="fl">2.0</span> <span class="op">*</span> p_ratio))</span>
-<span id="cb45-5"><a href="syntax-and-grammar.html#cb45-5" aria-hidden="true" tabindex="-1"></a>end</span>
-<span id="cb45-6"><a href="syntax-and-grammar.html#cb45-6" aria-hidden="true" tabindex="-1"></a>[derive(<span class="fl">5e8</span>,<span class="fl">0.25</span>)]</span>
-<span id="cb45-7"><a href="syntax-and-grammar.html#cb45-7" aria-hidden="true" tabindex="-1"></a>[b_mod] </span>
-<span id="cb45-8"><a href="syntax-and-grammar.html#cb45-8" aria-hidden="true" tabindex="-1"></a>[s_mod]</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="syntax-and-grammar.html#cb46-1" aria-hidden="true" tabindex="-1"></a>model new</span>
+<span id="cb46-2"><a href="syntax-and-grammar.html#cb46-2" aria-hidden="true" tabindex="-1"></a>fish define derive(y_mod,p_ratio)</span>
+<span id="cb46-3"><a href="syntax-and-grammar.html#cb46-3" aria-hidden="true" tabindex="-1"></a>    s_mod <span class="op">=</span> y_mod <span class="op">/</span> (<span class="fl">2.0</span> <span class="op">*</span> (<span class="fl">1.0</span> <span class="op">+</span> p_ratio))</span>
+<span id="cb46-4"><a href="syntax-and-grammar.html#cb46-4" aria-hidden="true" tabindex="-1"></a>    b_mod <span class="op">=</span> y_mod <span class="op">/</span> (<span class="fl">3.0</span> <span class="op">*</span> (<span class="fl">1.0</span> <span class="op">-</span> <span class="fl">2.0</span> <span class="op">*</span> p_ratio))</span>
+<span id="cb46-5"><a href="syntax-and-grammar.html#cb46-5" aria-hidden="true" tabindex="-1"></a>end</span>
+<span id="cb46-6"><a href="syntax-and-grammar.html#cb46-6" aria-hidden="true" tabindex="-1"></a>[derive(<span class="fl">5e8</span>,<span class="fl">0.25</span>)]</span>
+<span id="cb46-7"><a href="syntax-and-grammar.html#cb46-7" aria-hidden="true" tabindex="-1"></a>[b_mod] </span>
+<span id="cb46-8"><a href="syntax-and-grammar.html#cb46-8" aria-hidden="true" tabindex="-1"></a>[s_mod]</span></code></pre></div>
 <!--------------------------------------------------->
 <!--------------------------------------------------->
 <!--------------------------------------------------->

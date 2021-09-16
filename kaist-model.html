@@ -135,9 +135,9 @@ where z is the depth below surface, and c and E∘ are constants. We write a FIS
 <span id="cb5-8"><a href="kaist-model.html#cb5-8" aria-hidden="true" tabindex="-1"></a>table <span class="st">'dil'</span> add (<span class="dv">0</span>, <span class="dv">10</span>) (<span class="fl">.05</span>,  <span class="dv">3</span>) (<span class="fl">.1</span>,  <span class="dv">0</span>) </span>
 <span id="cb5-9"><a href="kaist-model.html#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Constitutive modeland properties for shaft and plate</span></span>
 <span id="cb5-10"><a href="kaist-model.html#cb5-10" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic <span class="bu">range</span> group <span class="st">'shaft'</span></span>
-<span id="cb5-11"><a href="kaist-model.html#cb5-11" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">8.333e7</span>  shear <span class="fl">3.846e7</span>  <span class="bu">range</span> group <span class="st">'shaft'</span></span>
+<span id="cb5-11"><a href="kaist-model.html#cb5-11" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">13.9e9</span>  shear <span class="fl">10.4e9</span>  <span class="bu">range</span> group <span class="st">'shaft'</span></span>
 <span id="cb5-12"><a href="kaist-model.html#cb5-12" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic <span class="bu">range</span> group <span class="st">'plate'</span></span>
-<span id="cb5-13"><a href="kaist-model.html#cb5-13" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">8.333e7</span>  shear <span class="fl">3.846e7</span>  <span class="bu">range</span> group <span class="st">'plate'</span></span></code></pre></div>
+<span id="cb5-13"><a href="kaist-model.html#cb5-13" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">13.9e9</span>  shear <span class="fl">10.4e9</span>  <span class="bu">range</span> group <span class="st">'plate'</span></span></code></pre></div>
 <div class="inline-figure"><img src="myfigureeeeee/concrete-properties.PNG" width="100%"></div>
 <div class="inline-figure"><img src="myfigureeeeee/d.PNG" width="100%"></div>
 </div>
@@ -145,6 +145,25 @@ where z is the depth below surface, and c and E∘ are constants. We write a FIS
 <h2>
 <span class="header-section-number">1.5</span> Soil-Structure Interface<a class="anchor" aria-label="anchor" href="#soil-structure-interface"><i class="fas fa-link"></i></a>
 </h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="kaist-model.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Name intersections of things named in the two extruder views</span></span>
+<span id="cb6-2"><a href="kaist-model.html#cb6-2" aria-hidden="true" tabindex="-1"></a>zone group <span class="st">'clay'</span> <span class="bu">range</span> group <span class="st">'clay-c'</span> <span class="kw">or</span> <span class="st">'clay-s'</span> <span class="kw">or</span> <span class="st">'wetclay-s'</span></span>
+<span id="cb6-3"><a href="kaist-model.html#cb6-3" aria-hidden="true" tabindex="-1"></a>zone group <span class="st">'pile'</span> <span class="bu">range</span> group <span class="st">'pile-c'</span> group <span class="st">'pile-s'</span> <span class="kw">or</span> <span class="st">'remove-s'</span></span>
+<span id="cb6-4"><a href="kaist-model.html#cb6-4" aria-hidden="true" tabindex="-1"></a>zone group <span class="st">'remove'</span> <span class="bu">range</span> group <span class="st">'remove-s'</span> group <span class="st">'pile-c'</span> <span class="kw">not</span> <span class="op">;</span> </span>
+<span id="cb6-5"><a href="kaist-model.html#cb6-5" aria-hidden="true" tabindex="-1"></a>zone face group <span class="st">'wall'</span> internal <span class="bu">range</span> group <span class="st">'wall-c'</span> group <span class="st">'pile'</span></span>
+<span id="cb6-6"><a href="kaist-model.html#cb6-6" aria-hidden="true" tabindex="-1"></a>zone face group <span class="st">'base'</span> internal <span class="bu">range</span> group <span class="st">'base-s'</span> group <span class="st">'pile'</span></span>
+<span id="cb6-7"><a href="kaist-model.html#cb6-7" aria-hidden="true" tabindex="-1"></a>zone face skin <span class="op">;</span> Name far field boundaries</span>
+<span id="cb6-8"><a href="kaist-model.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete the area marked for removal</span></span>
+<span id="cb6-9"><a href="kaist-model.html#cb6-9" aria-hidden="true" tabindex="-1"></a>zone delete <span class="bu">range</span> group <span class="st">'remove'</span></span>
+<span id="cb6-10"><a href="kaist-model.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
+<span id="cb6-11"><a href="kaist-model.html#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># setup interfaces - separate using ZONE SEPARATE </span></span>
+<span id="cb6-12"><a href="kaist-model.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># all at once so common nodes are separated</span></span>
+<span id="cb6-13"><a href="kaist-model.html#cb6-13" aria-hidden="true" tabindex="-1"></a>zone separate by<span class="op">-</span>face new<span class="op">-</span>side group <span class="st">'iwall'</span> slot <span class="st">'int'</span> ...</span>
+<span id="cb6-14"><a href="kaist-model.html#cb6-14" aria-hidden="true" tabindex="-1"></a>     <span class="bu">range</span> group <span class="st">'wall'</span> <span class="kw">or</span> <span class="st">'base'</span></span>
+<span id="cb6-15"><a href="kaist-model.html#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Want two different interfaces for proper normal direction at corner</span></span>
+<span id="cb6-16"><a href="kaist-model.html#cb6-16" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'side'</span> create by<span class="op">-</span>face <span class="bu">range</span> group <span class="st">'wall'</span> <span class="kw">and</span> <span class="st">'iwall'</span></span>
+<span id="cb6-17"><a href="kaist-model.html#cb6-17" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'base'</span> create by<span class="op">-</span>face <span class="bu">range</span> group <span class="st">'base'</span> <span class="kw">and</span> <span class="st">'iwall'</span></span>
+<span id="cb6-18"><a href="kaist-model.html#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Save initial geometric state</span></span>
+<span id="cb6-19"><a href="kaist-model.html#cb6-19" aria-hidden="true" tabindex="-1"></a>model save <span class="st">'geometry'</span></span></code></pre></div>
 </div>
 <div id="boundary-conditions" class="section level2" number="1.6">
 <h2>

@@ -458,9 +458,9 @@ In the function install, the loop takes place over all zones in the global list 
 \NormalTok{table }\StringTok{\textquotesingle{}dil\textquotesingle{}}\NormalTok{ add (}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{) (}\FloatTok{.05}\NormalTok{,  }\DecValTok{3}\NormalTok{) (}\FloatTok{.1}\NormalTok{,  }\DecValTok{0}\NormalTok{) }
 \CommentTok{\#Constitutive modeland properties for shaft and plate}
 \NormalTok{zone cmodel assign elastic }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}shaft\textquotesingle{}}
-\NormalTok{zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{8.333e7}\NormalTok{  shear }\FloatTok{3.846e7}  \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}shaft\textquotesingle{}}
+\NormalTok{zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{13.9e9}\NormalTok{  shear }\FloatTok{10.4e9}  \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}shaft\textquotesingle{}}
 \NormalTok{zone cmodel assign elastic }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}plate\textquotesingle{}}
-\NormalTok{zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{8.333e7}\NormalTok{  shear }\FloatTok{3.846e7}  \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}plate\textquotesingle{}}
+\NormalTok{zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{13.9e9}\NormalTok{  shear }\FloatTok{10.4e9}  \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}plate\textquotesingle{}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -470,6 +470,30 @@ In the function install, the loop takes place over all zones in the global list 
 
 \hypertarget{soil-structure-interface}{%
 \section{Soil-Structure Interface}\label{soil-structure-interface}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Name intersections of things named in the two extruder views}
+\NormalTok{zone group }\StringTok{\textquotesingle{}clay\textquotesingle{}} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}clay{-}c\textquotesingle{}} \KeywordTok{or} \StringTok{\textquotesingle{}clay{-}s\textquotesingle{}} \KeywordTok{or} \StringTok{\textquotesingle{}wetclay{-}s\textquotesingle{}}
+\NormalTok{zone group }\StringTok{\textquotesingle{}pile\textquotesingle{}} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}pile{-}c\textquotesingle{}}\NormalTok{ group }\StringTok{\textquotesingle{}pile{-}s\textquotesingle{}} \KeywordTok{or} \StringTok{\textquotesingle{}remove{-}s\textquotesingle{}}
+\NormalTok{zone group }\StringTok{\textquotesingle{}remove\textquotesingle{}} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}remove{-}s\textquotesingle{}}\NormalTok{ group }\StringTok{\textquotesingle{}pile{-}c\textquotesingle{}} \KeywordTok{not} \OperatorTok{;} 
+\NormalTok{zone face group }\StringTok{\textquotesingle{}wall\textquotesingle{}}\NormalTok{ internal }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}wall{-}c\textquotesingle{}}\NormalTok{ group }\StringTok{\textquotesingle{}pile\textquotesingle{}}
+\NormalTok{zone face group }\StringTok{\textquotesingle{}base\textquotesingle{}}\NormalTok{ internal }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}base{-}s\textquotesingle{}}\NormalTok{ group }\StringTok{\textquotesingle{}pile\textquotesingle{}}
+\NormalTok{zone face skin }\OperatorTok{;}\NormalTok{ Name far field boundaries}
+\CommentTok{\# Delete the area marked for removal}
+\NormalTok{zone delete }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}remove\textquotesingle{}}
+\OperatorTok{;}
+\CommentTok{\# setup interfaces {-} separate using ZONE SEPARATE }
+\CommentTok{\# all at once so common nodes are separated}
+\NormalTok{zone separate by}\OperatorTok{{-}}\NormalTok{face new}\OperatorTok{{-}}\NormalTok{side group }\StringTok{\textquotesingle{}iwall\textquotesingle{}}\NormalTok{ slot }\StringTok{\textquotesingle{}int\textquotesingle{}}\NormalTok{ ...}
+     \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}wall\textquotesingle{}} \KeywordTok{or} \StringTok{\textquotesingle{}base\textquotesingle{}}
+\CommentTok{\# Want two different interfaces for proper normal direction at corner}
+\NormalTok{zone interface }\StringTok{\textquotesingle{}side\textquotesingle{}}\NormalTok{ create by}\OperatorTok{{-}}\NormalTok{face }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}wall\textquotesingle{}} \KeywordTok{and} \StringTok{\textquotesingle{}iwall\textquotesingle{}}
+\NormalTok{zone interface }\StringTok{\textquotesingle{}base\textquotesingle{}}\NormalTok{ create by}\OperatorTok{{-}}\NormalTok{face }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}base\textquotesingle{}} \KeywordTok{and} \StringTok{\textquotesingle{}iwall\textquotesingle{}}
+\CommentTok{\# Save initial geometric state}
+\NormalTok{model save }\StringTok{\textquotesingle{}geometry\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{boundary-conditions}{%
 \section{Boundary Conditions}\label{boundary-conditions}}

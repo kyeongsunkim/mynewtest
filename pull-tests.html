@@ -73,59 +73,59 @@ thru table cct. softening of friction of grout canbe defined using keyword coupl
 <h2>
 <span class="header-section-number">3.2</span> Zones<a class="anchor" aria-label="anchor" href="#zones-2"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="pull-tests.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> <span class="op">==================================================================</span></span>
-<span id="cb14-2"><a href="pull-tests.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="op">;</span>   Simulation of pull<span class="op">-</span>test <span class="cf">for</span> grouted reinforcement</span>
-<span id="cb14-3"><a href="pull-tests.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="op">;</span>   using modified pile elements <span class="op">-</span> Softening of cohesion</span>
-<span id="cb14-4"><a href="pull-tests.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> <span class="op">==================================================================</span></span>
-<span id="cb14-5"><a href="pull-tests.html#cb14-5" aria-hidden="true" tabindex="-1"></a>model new </span>
-<span id="cb14-6"><a href="pull-tests.html#cb14-6" aria-hidden="true" tabindex="-1"></a>fish automatic<span class="op">-</span>create off</span>
-<span id="cb14-7"><a href="pull-tests.html#cb14-7" aria-hidden="true" tabindex="-1"></a>model title <span class="st">'Pull-test using modified pile elements - cohesion softening'</span></span>
-<span id="cb14-8"><a href="pull-tests.html#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Create a single rock block <span class="kw">and</span> <span class="bu">set</span> its material properties.</span>
-<span id="cb14-9"><a href="pull-tests.html#cb14-9" aria-hidden="true" tabindex="-1"></a>zone create brick size <span class="dv">4</span> <span class="dv">4</span> <span class="dv">6</span> point <span class="dv">1</span> (<span class="fl">0.4</span>,<span class="dv">0</span>,<span class="dv">0</span>) point <span class="dv">2</span> (<span class="dv">0</span>,<span class="fl">0.4</span>,<span class="dv">0</span>) ...</span>
-<span id="cb14-10"><a href="pull-tests.html#cb14-10" aria-hidden="true" tabindex="-1"></a>                             point <span class="dv">3</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="pull-tests.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> <span class="op">==================================================================</span></span>
+<span id="cb15-2"><a href="pull-tests.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="op">;</span>   Simulation of pull<span class="op">-</span>test <span class="cf">for</span> grouted reinforcement</span>
+<span id="cb15-3"><a href="pull-tests.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="op">;</span>   using modified pile elements <span class="op">-</span> Softening of cohesion</span>
+<span id="cb15-4"><a href="pull-tests.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> <span class="op">==================================================================</span></span>
+<span id="cb15-5"><a href="pull-tests.html#cb15-5" aria-hidden="true" tabindex="-1"></a>model new </span>
+<span id="cb15-6"><a href="pull-tests.html#cb15-6" aria-hidden="true" tabindex="-1"></a>fish automatic<span class="op">-</span>create off</span>
+<span id="cb15-7"><a href="pull-tests.html#cb15-7" aria-hidden="true" tabindex="-1"></a>model title <span class="st">'Pull-test using modified pile elements - cohesion softening'</span></span>
+<span id="cb15-8"><a href="pull-tests.html#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Create a single rock block <span class="kw">and</span> <span class="bu">set</span> its material properties.</span>
+<span id="cb15-9"><a href="pull-tests.html#cb15-9" aria-hidden="true" tabindex="-1"></a>zone create brick size <span class="dv">4</span> <span class="dv">4</span> <span class="dv">6</span> point <span class="dv">1</span> (<span class="fl">0.4</span>,<span class="dv">0</span>,<span class="dv">0</span>) point <span class="dv">2</span> (<span class="dv">0</span>,<span class="fl">0.4</span>,<span class="dv">0</span>) ...</span>
+<span id="cb15-10"><a href="pull-tests.html#cb15-10" aria-hidden="true" tabindex="-1"></a>                             point <span class="dv">3</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.6</span>)</span></code></pre></div>
 </div>
 <div id="properties-1" class="section level2" number="3.3">
 <h2>
 <span class="header-section-number">3.3</span> Properties<a class="anchor" aria-label="anchor" href="#properties-1"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="pull-tests.html#cb15-1" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic</span>
-<span id="cb15-2"><a href="pull-tests.html#cb15-2" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">5e9</span> shear <span class="fl">3e9</span></span>
-<span id="cb15-3"><a href="pull-tests.html#cb15-3" aria-hidden="true" tabindex="-1"></a>zone face <span class="bu">apply</span> velocity<span class="op">-</span>normal <span class="fl">0.0</span> <span class="bu">range</span> position<span class="op">-</span>z <span class="fl">0.6</span></span>
-<span id="cb15-4"><a href="pull-tests.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Create a pile element <span class="kw">and</span> assign properties</span>
-<span id="cb15-5"><a href="pull-tests.html#cb15-5" aria-hidden="true" tabindex="-1"></a>struct pile create by<span class="op">-</span>line (<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.1</span>) (<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.7</span>) segments <span class="dv">12</span></span>
-<span id="cb15-6"><a href="pull-tests.html#cb15-6" aria-hidden="true" tabindex="-1"></a>struct pile <span class="bu">property</span> rockbolt<span class="op">-</span>flag on</span>
-<span id="cb15-7"><a href="pull-tests.html#cb15-7" aria-hidden="true" tabindex="-1"></a>struct pile <span class="bu">property</span> young <span class="fl">200e9</span> poisson <span class="fl">0.25</span> cross<span class="op">-</span>sectional<span class="op">-</span>area <span class="fl">5e-4</span> ...</span>
-<span id="cb15-8"><a href="pull-tests.html#cb15-8" aria-hidden="true" tabindex="-1"></a>                     perimeter <span class="fl">0.08</span></span>
-<span id="cb15-9"><a href="pull-tests.html#cb15-9" aria-hidden="true" tabindex="-1"></a>struct pile <span class="bu">property</span> tensile<span class="op">-</span><span class="cf">yield</span>   <span class="fl">2.25e5</span>  <span class="op">;</span> ultimate tensile strength</span>
-<span id="cb15-10"><a href="pull-tests.html#cb15-10" aria-hidden="true" tabindex="-1"></a>struct pile <span class="bu">property</span> moi<span class="op">-</span>y <span class="fl">2.0e-8</span> moi<span class="op">-</span>z <span class="fl">2.0e-8</span> moi<span class="op">-</span>polar <span class="fl">4.0e-8</span> <span class="op">;</span> <span class="fl">0.25</span><span class="op">*</span>pi<span class="op">*</span>r<span class="op">^</span><span class="dv">4</span></span>
-<span id="cb15-11"><a href="pull-tests.html#cb15-11" aria-hidden="true" tabindex="-1"></a>struct pile <span class="bu">property</span> coupling<span class="op">-</span>cohesion<span class="op">-</span>shear <span class="fl">1.75e5</span> ...</span>
-<span id="cb15-12"><a href="pull-tests.html#cb15-12" aria-hidden="true" tabindex="-1"></a>                     coupling<span class="op">-</span>stiffness<span class="op">-</span>shear <span class="fl">1.12e7</span></span>
-<span id="cb15-13"><a href="pull-tests.html#cb15-13" aria-hidden="true" tabindex="-1"></a>struct pile <span class="bu">property</span> coupling<span class="op">-</span>cohesion<span class="op">-</span>normal <span class="fl">1.75e5</span> ...</span>
-<span id="cb15-14"><a href="pull-tests.html#cb15-14" aria-hidden="true" tabindex="-1"></a>                     coupling<span class="op">-</span>stiffness<span class="op">-</span>normal <span class="fl">1.12e7</span></span>
-<span id="cb15-15"><a href="pull-tests.html#cb15-15" aria-hidden="true" tabindex="-1"></a>struct pile <span class="bu">property</span> coupling<span class="op">-</span>cohesion<span class="op">-</span>table <span class="st">'cct'</span></span>
-<span id="cb15-16"><a href="pull-tests.html#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> change <span class="kw">in</span> cohesion <span class="cf">with</span> relative shear displacement</span>
-<span id="cb15-17"><a href="pull-tests.html#cb15-17" aria-hidden="true" tabindex="-1"></a>table <span class="st">'cct'</span> add (<span class="dv">0</span>,<span class="fl">1.75e5</span>) (<span class="fl">0.025</span>,<span class="fl">1.75e4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="pull-tests.html#cb16-1" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic</span>
+<span id="cb16-2"><a href="pull-tests.html#cb16-2" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">5e9</span> shear <span class="fl">3e9</span></span>
+<span id="cb16-3"><a href="pull-tests.html#cb16-3" aria-hidden="true" tabindex="-1"></a>zone face <span class="bu">apply</span> velocity<span class="op">-</span>normal <span class="fl">0.0</span> <span class="bu">range</span> position<span class="op">-</span>z <span class="fl">0.6</span></span>
+<span id="cb16-4"><a href="pull-tests.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Create a pile element <span class="kw">and</span> assign properties</span>
+<span id="cb16-5"><a href="pull-tests.html#cb16-5" aria-hidden="true" tabindex="-1"></a>struct pile create by<span class="op">-</span>line (<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.1</span>) (<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.7</span>) segments <span class="dv">12</span></span>
+<span id="cb16-6"><a href="pull-tests.html#cb16-6" aria-hidden="true" tabindex="-1"></a>struct pile <span class="bu">property</span> rockbolt<span class="op">-</span>flag on</span>
+<span id="cb16-7"><a href="pull-tests.html#cb16-7" aria-hidden="true" tabindex="-1"></a>struct pile <span class="bu">property</span> young <span class="fl">200e9</span> poisson <span class="fl">0.25</span> cross<span class="op">-</span>sectional<span class="op">-</span>area <span class="fl">5e-4</span> ...</span>
+<span id="cb16-8"><a href="pull-tests.html#cb16-8" aria-hidden="true" tabindex="-1"></a>                     perimeter <span class="fl">0.08</span></span>
+<span id="cb16-9"><a href="pull-tests.html#cb16-9" aria-hidden="true" tabindex="-1"></a>struct pile <span class="bu">property</span> tensile<span class="op">-</span><span class="cf">yield</span>   <span class="fl">2.25e5</span>  <span class="op">;</span> ultimate tensile strength</span>
+<span id="cb16-10"><a href="pull-tests.html#cb16-10" aria-hidden="true" tabindex="-1"></a>struct pile <span class="bu">property</span> moi<span class="op">-</span>y <span class="fl">2.0e-8</span> moi<span class="op">-</span>z <span class="fl">2.0e-8</span> moi<span class="op">-</span>polar <span class="fl">4.0e-8</span> <span class="op">;</span> <span class="fl">0.25</span><span class="op">*</span>pi<span class="op">*</span>r<span class="op">^</span><span class="dv">4</span></span>
+<span id="cb16-11"><a href="pull-tests.html#cb16-11" aria-hidden="true" tabindex="-1"></a>struct pile <span class="bu">property</span> coupling<span class="op">-</span>cohesion<span class="op">-</span>shear <span class="fl">1.75e5</span> ...</span>
+<span id="cb16-12"><a href="pull-tests.html#cb16-12" aria-hidden="true" tabindex="-1"></a>                     coupling<span class="op">-</span>stiffness<span class="op">-</span>shear <span class="fl">1.12e7</span></span>
+<span id="cb16-13"><a href="pull-tests.html#cb16-13" aria-hidden="true" tabindex="-1"></a>struct pile <span class="bu">property</span> coupling<span class="op">-</span>cohesion<span class="op">-</span>normal <span class="fl">1.75e5</span> ...</span>
+<span id="cb16-14"><a href="pull-tests.html#cb16-14" aria-hidden="true" tabindex="-1"></a>                     coupling<span class="op">-</span>stiffness<span class="op">-</span>normal <span class="fl">1.12e7</span></span>
+<span id="cb16-15"><a href="pull-tests.html#cb16-15" aria-hidden="true" tabindex="-1"></a>struct pile <span class="bu">property</span> coupling<span class="op">-</span>cohesion<span class="op">-</span>table <span class="st">'cct'</span></span>
+<span id="cb16-16"><a href="pull-tests.html#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> change <span class="kw">in</span> cohesion <span class="cf">with</span> relative shear displacement</span>
+<span id="cb16-17"><a href="pull-tests.html#cb16-17" aria-hidden="true" tabindex="-1"></a>table <span class="st">'cct'</span> add (<span class="dv">0</span>,<span class="fl">1.75e5</span>) (<span class="fl">0.025</span>,<span class="fl">1.75e4</span>)</span></code></pre></div>
 </div>
 <div id="initial-equilibrium-2" class="section level2" number="3.4">
 <h2>
 <span class="header-section-number">3.4</span> Initial Equilibrium<a class="anchor" aria-label="anchor" href="#initial-equilibrium-2"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="pull-tests.html#cb16-1" aria-hidden="true" tabindex="-1"></a>struct node fix velocity<span class="op">-</span>x <span class="bu">range</span> position<span class="op">-</span>z <span class="fl">0.7</span></span>
-<span id="cb16-2"><a href="pull-tests.html#cb16-2" aria-hidden="true" tabindex="-1"></a>struct node initialize velocity<span class="op">-</span>x <span class="fl">1e-6</span> local <span class="bu">range</span> position<span class="op">-</span>z <span class="fl">0.7</span></span>
-<span id="cb16-3"><a href="pull-tests.html#cb16-3" aria-hidden="true" tabindex="-1"></a>call <span class="st">'pileforce'</span> suppress <span class="op">;</span> FISH function calculates reaction force on zones</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="pull-tests.html#cb17-1" aria-hidden="true" tabindex="-1"></a>struct node fix velocity<span class="op">-</span>x <span class="bu">range</span> position<span class="op">-</span>z <span class="fl">0.7</span></span>
+<span id="cb17-2"><a href="pull-tests.html#cb17-2" aria-hidden="true" tabindex="-1"></a>struct node initialize velocity<span class="op">-</span>x <span class="fl">1e-6</span> local <span class="bu">range</span> position<span class="op">-</span>z <span class="fl">0.7</span></span>
+<span id="cb17-3"><a href="pull-tests.html#cb17-3" aria-hidden="true" tabindex="-1"></a>call <span class="st">'pileforce'</span> suppress <span class="op">;</span> FISH function calculates reaction force on zones</span></code></pre></div>
 </div>
 <div id="alterations-2" class="section level2" number="3.5">
 <h2>
 <span class="header-section-number">3.5</span> Alterations<a class="anchor" aria-label="anchor" href="#alterations-2"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="pull-tests.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Set up histories <span class="cf">for</span> monitoring model behavior</span>
-<span id="cb17-2"><a href="pull-tests.html#cb17-2" aria-hidden="true" tabindex="-1"></a>history interval <span class="dv">10</span></span>
-<span id="cb17-3"><a href="pull-tests.html#cb17-3" aria-hidden="true" tabindex="-1"></a>fish history name <span class="st">'force'</span> <span class="op">@</span>force</span>
-<span id="cb17-4"><a href="pull-tests.html#cb17-4" aria-hidden="true" tabindex="-1"></a>struct node history name <span class="st">'disp'</span> displacement<span class="op">-</span>z position (<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.7</span>)</span>
-<span id="cb17-5"><a href="pull-tests.html#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Achieve a total displacement of <span class="fl">4.0</span> cm</span>
-<span id="cb17-6"><a href="pull-tests.html#cb17-6" aria-hidden="true" tabindex="-1"></a>model cycle <span class="dv">40000</span></span>
-<span id="cb17-7"><a href="pull-tests.html#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
-<span id="cb17-8"><a href="pull-tests.html#cb17-8" aria-hidden="true" tabindex="-1"></a>model save <span class="st">'pull-5'</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="pull-tests.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Set up histories <span class="cf">for</span> monitoring model behavior</span>
+<span id="cb18-2"><a href="pull-tests.html#cb18-2" aria-hidden="true" tabindex="-1"></a>history interval <span class="dv">10</span></span>
+<span id="cb18-3"><a href="pull-tests.html#cb18-3" aria-hidden="true" tabindex="-1"></a>fish history name <span class="st">'force'</span> <span class="op">@</span>force</span>
+<span id="cb18-4"><a href="pull-tests.html#cb18-4" aria-hidden="true" tabindex="-1"></a>struct node history name <span class="st">'disp'</span> displacement<span class="op">-</span>z position (<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.7</span>)</span>
+<span id="cb18-5"><a href="pull-tests.html#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Achieve a total displacement of <span class="fl">4.0</span> cm</span>
+<span id="cb18-6"><a href="pull-tests.html#cb18-6" aria-hidden="true" tabindex="-1"></a>model cycle <span class="dv">40000</span></span>
+<span id="cb18-7"><a href="pull-tests.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
+<span id="cb18-8"><a href="pull-tests.html#cb18-8" aria-hidden="true" tabindex="-1"></a>model save <span class="st">'pull-5'</span></span></code></pre></div>
 </div>
 <div id="some-other-notes" class="section level2" number="3.6">
 <h2>
