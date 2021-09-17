@@ -23,7 +23,6 @@ install-the-pile
 vertical-loading
 vertical-then-lateral-loading
 pull-tests
-problem-description-1
 zones-2
 properties-1
 initial-equilibrium-2
@@ -71,7 +70,7 @@ zone-face-skin
 zone-separate
 zone-interface-create
 template
-problem-description-2
+problem-description-1
 modeling-procedure-1
 zonesgroups
 properties-3

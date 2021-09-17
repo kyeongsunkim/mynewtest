@@ -373,45 +373,94 @@ wonderful have been, and are being, evolved.
 \NormalTok{it.command(}\StringTok{"python{-}reset{-}state false"}\NormalTok{)}
 \ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ zonearray }\ImportTok{as}\NormalTok{ za}
 \ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ gridpointarray }\ImportTok{as}\NormalTok{ gpa}
+
+\CommentTok{\# PARAMETERS \#}
+
+\NormalTok{\_D\_shaft }\OperatorTok{=} \DecValTok{1}
+\NormalTok{\_H\_shaft }\OperatorTok{=} \FloatTok{7.45}
+\NormalTok{\_T\_plate }\OperatorTok{=} \FloatTok{1.5}
+\NormalTok{\_B\_footing }\OperatorTok{=} \FloatTok{3.25}
+\NormalTok{\_D\_footing }\OperatorTok{=}\NormalTok{ \_H\_shaft }\OperatorTok{+}\NormalTok{ \_T\_plate}
+\NormalTok{\_B\_soil }\OperatorTok{=}\NormalTok{ \_B\_footing}\OperatorTok{*}\DecValTok{5}
+\NormalTok{\_D\_soil }\OperatorTok{=}\NormalTok{ \_D\_footing}\OperatorTok{+}\DecValTok{3}
+
+\NormalTok{\_radial }\OperatorTok{=} \DecValTok{50}
+\NormalTok{\_perimeter }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
+\NormalTok{\_axial }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
+\NormalTok{\_outer }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
+
+\NormalTok{\_bulk }\OperatorTok{=} \FloatTok{13.9e9}
+\NormalTok{\_shear }\OperatorTok{=} \FloatTok{10.4e9}
+
+\NormalTok{\_E\_o }\OperatorTok{=} \FloatTok{1e7}
+\NormalTok{\_const }\OperatorTok{=} \FloatTok{1e8}
+\NormalTok{\_poisson }\OperatorTok{=} \FloatTok{0.25}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{zones}{%
 \section{Zones}\label{zones}}
 
-\includegraphics[width=1\linewidth]{myfigureeeeee/final-block}
+\includegraphics[width=1\linewidth]{myfigureeeeee/final-block-square1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{model new}
-\NormalTok{zone create radial}\OperatorTok{{-}}\NormalTok{cylinder point }\DecValTok{0}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
-\NormalTok{                            point }\DecValTok{1}\NormalTok{ (}\DecValTok{40}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
-\NormalTok{                            point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
-\NormalTok{                            point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{40}\NormalTok{) ...}
-\NormalTok{                            point }\DecValTok{4}\NormalTok{ (}\DecValTok{40}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
-\NormalTok{                            point }\DecValTok{5}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{40}\NormalTok{) ...}
-\NormalTok{                            point }\DecValTok{6}\NormalTok{ (}\DecValTok{40}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{40}\NormalTok{) ...}
-\NormalTok{                            point }\DecValTok{7}\NormalTok{ (}\DecValTok{40}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{40}\NormalTok{) ...}
-\NormalTok{                            point }\DecValTok{8}\NormalTok{ (}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
-\NormalTok{                            point }\DecValTok{9}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{) ...}
-\NormalTok{                            point }\DecValTok{10}\NormalTok{ (}\DecValTok{1}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
-\NormalTok{                            point }\DecValTok{11}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{1}\NormalTok{) ...}
-\NormalTok{                            size }\DecValTok{10} \DecValTok{20} \DecValTok{26} \DecValTok{40}\NormalTok{ ...}
-\NormalTok{                            rat }\DecValTok{1} \DecValTok{1} \DecValTok{1} \FloatTok{1.5}\NormalTok{ ...}
-\NormalTok{                            fill group }\StringTok{"shaft"}
+\CommentTok{\# ZONE \#}
+\NormalTok{command\_zone }\OperatorTok{=} \StringTok{"""}
+\StringTok{model new}
+\StringTok{z crea r{-}t p 0 (0,0,0) ...}
+\StringTok{           p 1 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,0) ... }
+\StringTok{           p 2 (0,}\SpecialCharTok{\{D\_soil\}}\StringTok{,0) ...}
+\StringTok{           p 3 (0,0,}\SpecialCharTok{\{B\_soil\}}\StringTok{) ...}
+\StringTok{           p 4 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,0) ...}
+\StringTok{           p 5 (0,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{) ...}
+\StringTok{           p 6 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,}\SpecialCharTok{\{B\_soil\}}\StringTok{) ...}
+\StringTok{           p 7 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{) ...}
+\StringTok{           p 8 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,0) ...}
+\StringTok{           p 9 (0,0,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
+\StringTok{           p 10 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,0) ...}
+\StringTok{           p 11 (0,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
+\StringTok{           p 12 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
+\StringTok{           p 13 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
+\StringTok{           size }\SpecialCharTok{\{radial\}}\StringTok{ }\SpecialCharTok{\{axial\}}\StringTok{ }\SpecialCharTok{\{perimeter\}}\StringTok{ }\SpecialCharTok{\{outer\}}\StringTok{ ...}
+\StringTok{           rat 1 1 1 1.01 ...}
+\StringTok{           fill}
+\StringTok{"""}
 
-\NormalTok{zone group }\StringTok{"plate"} \BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{x }\DecValTok{0} \FloatTok{3.2}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\FloatTok{8.5} \DecValTok{10}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\DecValTok{0} \FloatTok{3.2}
+\NormalTok{command }\OperatorTok{=}\NormalTok{ command\_zone.}\BuiltInTok{format}\NormalTok{(}
+\NormalTok{B\_footing }\OperatorTok{=}\NormalTok{ \_B\_footing,}
+\NormalTok{B\_soil }\OperatorTok{=}\NormalTok{ \_B\_soil,}
+\NormalTok{D\_soil }\OperatorTok{=}\NormalTok{ \_D\_soil,}
+\NormalTok{radial}\OperatorTok{=}\NormalTok{\_radial,}
+\NormalTok{axial }\OperatorTok{=}\NormalTok{ \_axial,}
+\NormalTok{perimeter }\OperatorTok{=}\NormalTok{ \_perimeter,}
+\NormalTok{outer }\OperatorTok{=}\NormalTok{ \_outer)}
+
+\NormalTok{it.command(command)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=1\linewidth]{myfigureeeeee/abc}
+\includegraphics[width=1\linewidth]{myfigureeeeee/e}
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/f}
 
 \hypertarget{group}{%
 \section{Group}\label{group}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{zone group }\StringTok{"plate"} \BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{x }\DecValTok{0} \FloatTok{3.2}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\FloatTok{8.5} \DecValTok{10}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\DecValTok{0} \FloatTok{3.2}
+\CommentTok{\# GROUP \#}
+\NormalTok{p }\OperatorTok{=}\NormalTok{ za.pos()}
+\NormalTok{x,y,z }\OperatorTok{=}\NormalTok{ p.T}
+\BuiltInTok{print}\NormalTok{(it.zone.count(), }\StringTok{"zones in whole model"}\NormalTok{)}
+
+\NormalTok{shaft }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (np.sqrt(x}\OperatorTok{**}\DecValTok{2}\OperatorTok{+}\NormalTok{z}\OperatorTok{**}\DecValTok{2}\NormalTok{)}\OperatorTok{\textless{}}\NormalTok{\_D\_shaft, y}\OperatorTok{\textless{}}\NormalTok{\_H\_shaft))}
+\NormalTok{za.set\_group(shaft, }\StringTok{"shaft"}\NormalTok{) }\CommentTok{\# set the zones with shaft = true have "shaft" and "geometry"}
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"shaft"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in shaft group."}\NormalTok{) }\CommentTok{\#output how many zones are in the corner group}
+
+\NormalTok{plate }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (x}\OperatorTok{\textless{}}\NormalTok{\_B\_footing,z}\OperatorTok{\textless{}}\NormalTok{\_B\_footing, y}\OperatorTok{\textgreater{}}\NormalTok{\_H\_shaft,y}\OperatorTok{\textless{}}\NormalTok{\_D\_footing))}
+\NormalTok{za.set\_group(plate, }\StringTok{"plate"}\NormalTok{) }\CommentTok{\# set the zones with plate = true have "plate" and "geometry"}
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"plate"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in plate group."}\NormalTok{) }\CommentTok{\#output how many zones are in the corner group}
 \end{Highlighting}
 \end{Shaded}
 
@@ -425,20 +474,28 @@ where z is the depth below surface, and c and E∘ are constants. We write a FIS
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{model new}
-\NormalTok{zone create brick point }\DecValTok{0}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{1}\NormalTok{ (}\OperatorTok{{-}}\DecValTok{10}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
-\NormalTok{                  point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\OperatorTok{{-}}\DecValTok{10}\NormalTok{)}
-\NormalTok{zone cmodel assign elastic}
-\NormalTok{fish define install(y\_zero,cc)}
-\NormalTok{    loop foreach pnt zone.}\BuiltInTok{list}
-\NormalTok{        z\_depth }\OperatorTok{=} \OperatorTok{{-}}\NormalTok{zone.pos.z(pnt)}
-\NormalTok{        y\_mod }\OperatorTok{=}\NormalTok{ y\_zero }\OperatorTok{+}\NormalTok{ cc }\OperatorTok{*}\NormalTok{ math.sqrt(z\_depth)}
-\NormalTok{        zone.prop(pnt,}\StringTok{\textquotesingle{}young\textquotesingle{}}\NormalTok{) }\OperatorTok{=}\NormalTok{ y\_mod}
-\NormalTok{    end\_loop}
-\NormalTok{end}
-\AttributeTok{@install}\NormalTok{(}\FloatTok{1e7}\NormalTok{,}\FloatTok{1e8}\NormalTok{)}
-\NormalTok{zone }\BuiltInTok{property}\NormalTok{ poisson }\FloatTok{0.25}
-\NormalTok{plot item create zone contour }\BuiltInTok{property}\NormalTok{ name }\StringTok{\textquotesingle{}young\textquotesingle{}}
+\CommentTok{\# CONSTITUTIVE MODEL}
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone cmodel assign elastic range group "Radial Tunnel1"}
+\StringTok{zone cmodel assign elastic range group \textquotesingle{}shaft\textquotesingle{}}
+\StringTok{zone cmodel assign elastic range group \textquotesingle{}plate\textquotesingle{}}
+
+\StringTok{fish define fname(E\_o,const)}
+\StringTok{loop foreach pnt zone.list}
+\StringTok{z\_depth = zone.pos.y(pnt)}
+\StringTok{E = E\_o+const*math.sqrt(z\_depth)}
+\StringTok{zone.prop(pnt,\textquotesingle{}young\textquotesingle{})=E}
+\StringTok{end\_loop}
+\StringTok{end}
+\StringTok{@fname(}\SpecialCharTok{\{E\_o\_\}}\StringTok{,}\SpecialCharTok{\{const\_\}}\StringTok{)}
+\StringTok{zone property poisson }\SpecialCharTok{\{poisson\_\}}
+\StringTok{plot item create zone contour property name \textquotesingle{}young\textquotesingle{}}
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(E\_o\_}\OperatorTok{=}\NormalTok{\_E\_o,const\_}\OperatorTok{=}\NormalTok{\_const,poisson\_}\OperatorTok{=}\NormalTok{\_poisson))}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone property bulk }\SpecialCharTok{\{bulk\}}\StringTok{  shear }\SpecialCharTok{\{shear\}}\StringTok{ range group \textquotesingle{}shaft\textquotesingle{}}
+\StringTok{zone property bulk }\SpecialCharTok{\{bulk\}}\StringTok{  shear }\SpecialCharTok{\{shear\}}\StringTok{ range group \textquotesingle{}plate\textquotesingle{}}
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(bulk}\OperatorTok{=}\NormalTok{\_bulk,shear}\OperatorTok{=}\NormalTok{\_shear))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -448,50 +505,29 @@ In the function install, the loop takes place over all zones in the global list 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#Constitutive model and properties for soil}
-\NormalTok{zone cmodel assign strain}\OperatorTok{{-}}\NormalTok{softening }\BuiltInTok{range}\NormalTok{ group }\StringTok{"Radial Cylinder1"}
-\NormalTok{zone }\BuiltInTok{property}\NormalTok{ density }\DecValTok{2500}\NormalTok{ bulk }\FloatTok{2e8}\NormalTok{ shear }\FloatTok{1e8} \BuiltInTok{range}\NormalTok{ group }\StringTok{"Radial Cylinder1"}
-\NormalTok{zone }\BuiltInTok{property}\NormalTok{ cohesion }\FloatTok{2e6}\NormalTok{ friction }\DecValTok{45}\NormalTok{ tension }\FloatTok{2e5}\NormalTok{ dilation }\DecValTok{10} \BuiltInTok{range}\NormalTok{ group }\StringTok{"Radial Cylinder1"}
-\NormalTok{zone }\BuiltInTok{property}\NormalTok{ table}\OperatorTok{{-}}\NormalTok{friction }\StringTok{\textquotesingle{}fri\textquotesingle{}}\NormalTok{ table}\OperatorTok{{-}}\NormalTok{cohesion }\StringTok{\textquotesingle{}coh\textquotesingle{}}\NormalTok{ table}\OperatorTok{{-}}\NormalTok{dilation }\StringTok{\textquotesingle{}dil\textquotesingle{}} \BuiltInTok{range}\NormalTok{ group }\StringTok{"Radial Cylinder1"}
-\NormalTok{table }\StringTok{\textquotesingle{}fri\textquotesingle{}}\NormalTok{ add (}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{) (}\FloatTok{.05}\NormalTok{, }\DecValTok{42}\NormalTok{) (}\FloatTok{.1}\NormalTok{, }\DecValTok{40}\NormalTok{) (}\DecValTok{1}\NormalTok{, }\DecValTok{40}\NormalTok{)}
-\NormalTok{table }\StringTok{\textquotesingle{}coh\textquotesingle{}}\NormalTok{ add (}\DecValTok{0}\NormalTok{,}\FloatTok{2e6}\NormalTok{) (}\FloatTok{.05}\NormalTok{,}\FloatTok{1e6}\NormalTok{) (}\FloatTok{.1}\NormalTok{,}\FloatTok{5e5}\NormalTok{) (}\DecValTok{1}\NormalTok{,}\FloatTok{5e5}\NormalTok{) }
-\NormalTok{table }\StringTok{\textquotesingle{}dil\textquotesingle{}}\NormalTok{ add (}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{) (}\FloatTok{.05}\NormalTok{,  }\DecValTok{3}\NormalTok{) (}\FloatTok{.1}\NormalTok{,  }\DecValTok{0}\NormalTok{) }
-\CommentTok{\#Constitutive modeland properties for shaft and plate}
-\NormalTok{zone cmodel assign elastic }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}shaft\textquotesingle{}}
-\NormalTok{zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{13.9e9}\NormalTok{  shear }\FloatTok{10.4e9}  \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}shaft\textquotesingle{}}
-\NormalTok{zone cmodel assign elastic }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}plate\textquotesingle{}}
-\NormalTok{zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{13.9e9}\NormalTok{  shear }\FloatTok{10.4e9}  \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}plate\textquotesingle{}}
+\CommentTok{\# SOFTENING MODEL \#}
+\CommentTok{\#it.command("""}
+\CommentTok{\#zone cmodel assign strain{-}softening range group "Radial Tunnel1"}
+\CommentTok{\#zone property density 2500 bulk 2e8 shear 1e8 range group "Radial Tunnel1"}
+\CommentTok{\#zone property cohesion 2e6 friction 45 tension 2e5 dilation 10 range group "Radial Tunnel1"}
+\CommentTok{\#zone property table{-}friction \textquotesingle{}fri\textquotesingle{} table{-}cohesion \textquotesingle{}coh\textquotesingle{} table{-}dilation \textquotesingle{}dil\textquotesingle{} range group "Radial Tunnel1"}
+\CommentTok{\#table \textquotesingle{}fri\textquotesingle{} add (0, 45) (.05, 42) (.1, 40) (1, 40)}
+\CommentTok{\#table \textquotesingle{}coh\textquotesingle{} add (0,2e6) (.05,1e6) (.1,5e5) (1,5e5) }
+\CommentTok{\#table \textquotesingle{}dil\textquotesingle{} add (0, 10) (.05,  3) (.1,  0)}
+\CommentTok{\#""")}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=1\linewidth]{myfigureeeeee/concrete-properties}
+\includegraphics[width=1\linewidth]{myfigureeeeee/g}
 
-\includegraphics[width=1\linewidth]{myfigureeeeee/d}
+\includegraphics[width=1\linewidth]{myfigureeeeee/concrete-properties}
 
 \hypertarget{soil-structure-interface}{%
 \section{Soil-Structure Interface}\label{soil-structure-interface}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Name intersections of things named in the two extruder views}
-\NormalTok{zone group }\StringTok{\textquotesingle{}clay\textquotesingle{}} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}clay{-}c\textquotesingle{}} \KeywordTok{or} \StringTok{\textquotesingle{}clay{-}s\textquotesingle{}} \KeywordTok{or} \StringTok{\textquotesingle{}wetclay{-}s\textquotesingle{}}
-\NormalTok{zone group }\StringTok{\textquotesingle{}pile\textquotesingle{}} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}pile{-}c\textquotesingle{}}\NormalTok{ group }\StringTok{\textquotesingle{}pile{-}s\textquotesingle{}} \KeywordTok{or} \StringTok{\textquotesingle{}remove{-}s\textquotesingle{}}
-\NormalTok{zone group }\StringTok{\textquotesingle{}remove\textquotesingle{}} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}remove{-}s\textquotesingle{}}\NormalTok{ group }\StringTok{\textquotesingle{}pile{-}c\textquotesingle{}} \KeywordTok{not} \OperatorTok{;} 
-\NormalTok{zone face group }\StringTok{\textquotesingle{}wall\textquotesingle{}}\NormalTok{ internal }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}wall{-}c\textquotesingle{}}\NormalTok{ group }\StringTok{\textquotesingle{}pile\textquotesingle{}}
-\NormalTok{zone face group }\StringTok{\textquotesingle{}base\textquotesingle{}}\NormalTok{ internal }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}base{-}s\textquotesingle{}}\NormalTok{ group }\StringTok{\textquotesingle{}pile\textquotesingle{}}
-\NormalTok{zone face skin }\OperatorTok{;}\NormalTok{ Name far field boundaries}
-\CommentTok{\# Delete the area marked for removal}
-\NormalTok{zone delete }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}remove\textquotesingle{}}
-\OperatorTok{;}
-\CommentTok{\# setup interfaces {-} separate using ZONE SEPARATE }
-\CommentTok{\# all at once so common nodes are separated}
-\NormalTok{zone separate by}\OperatorTok{{-}}\NormalTok{face new}\OperatorTok{{-}}\NormalTok{side group }\StringTok{\textquotesingle{}iwall\textquotesingle{}}\NormalTok{ slot }\StringTok{\textquotesingle{}int\textquotesingle{}}\NormalTok{ ...}
-     \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}wall\textquotesingle{}} \KeywordTok{or} \StringTok{\textquotesingle{}base\textquotesingle{}}
-\CommentTok{\# Want two different interfaces for proper normal direction at corner}
-\NormalTok{zone interface }\StringTok{\textquotesingle{}side\textquotesingle{}}\NormalTok{ create by}\OperatorTok{{-}}\NormalTok{face }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}wall\textquotesingle{}} \KeywordTok{and} \StringTok{\textquotesingle{}iwall\textquotesingle{}}
-\NormalTok{zone interface }\StringTok{\textquotesingle{}base\textquotesingle{}}\NormalTok{ create by}\OperatorTok{{-}}\NormalTok{face }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}base\textquotesingle{}} \KeywordTok{and} \StringTok{\textquotesingle{}iwall\textquotesingle{}}
-\CommentTok{\# Save initial geometric state}
-\NormalTok{model save }\StringTok{\textquotesingle{}geometry\textquotesingle{}}
+\CommentTok{\# INTERFACE}
 \end{Highlighting}
 \end{Shaded}
 
@@ -509,8 +545,25 @@ In the function install, the loop takes place over all zones in the global list 
 
 \newpage
 
+\begin{savequote}
+My modelling choices\\
+Are founded in logic.\\
+Can I convince you?\\
+If you look down,\\
+Are you surprised to see\\
+Only your feet?\\
+The train keeps to the tracks\\
+But the country around\\
+Remains unexplored.\\
+The excellent map\\
+misses no detail, but it is\\
+as large as the world.
+\qauthor{Muir Wood(2004)}\end{savequote}
+
 \hypertarget{axial-concrete-pile}{%
 \chapter{Axial Concrete Pile}\label{axial-concrete-pile}}
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/h}
 
 \hypertarget{problem-description}{%
 \section{Problem Description}\label{problem-description}}
@@ -749,14 +802,23 @@ GWT = 5.5m\\
 \end{Highlighting}
 \end{Shaded}
 
+\includegraphics[width=1\linewidth]{myfigureeeeee/i}
+
 \newpage
+
+\begin{savequote}
+In spite of their obvious deficiencies and unreliability, pile driving
+formulas still enjoy great popularity among practicing engineers,
+because the use of these formulas reduces the design of pile foundations
+to a very simple procedure. The price one pays for this artificial
+simplification is very high.
+\qauthor{Karl Terzaghi(1943)}\end{savequote}
 
 \hypertarget{pull-tests}{%
 \chapter{Pull-Tests}\label{pull-tests}}
 
-\hypertarget{problem-description-1}{%
-\section{Problem Description}\label{problem-description-1}}
-
+\includegraphics[width=1\linewidth]{myfigureeeeee/j}
+\#\# Problem Description
 \emph{note: FISH function force is used to sum the raction forces and monitor nodal displacement generated by the pull-test}\\
 \emph{note: free length of bolt that extends out of block + larger diameter}\\
 Perfectly plastic behavior of grout = max cohesion is exceeded +post-peak weakening of shear bond strength\\
@@ -1508,77 +1570,115 @@ FISH functions to calculate bulk and shear moduli
 \ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ zonearray }\ImportTok{as}\NormalTok{ za}
 \ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ gridpointarray }\ImportTok{as}\NormalTok{ gpa}
 
-\NormalTok{command\_template\_zone }\OperatorTok{=} \StringTok{"""}
+\CommentTok{\# PARAMETERS \#}
+
+\NormalTok{\_D\_shaft }\OperatorTok{=} \DecValTok{1}
+\NormalTok{\_H\_shaft }\OperatorTok{=} \FloatTok{7.45}
+\NormalTok{\_T\_plate }\OperatorTok{=} \FloatTok{1.5}
+\NormalTok{\_B\_footing }\OperatorTok{=} \FloatTok{3.25}
+\NormalTok{\_D\_footing }\OperatorTok{=}\NormalTok{ \_H\_shaft }\OperatorTok{+}\NormalTok{ \_T\_plate}
+\NormalTok{\_B\_soil }\OperatorTok{=}\NormalTok{ \_B\_footing}\OperatorTok{*}\DecValTok{5}
+\NormalTok{\_D\_soil }\OperatorTok{=}\NormalTok{ \_D\_footing}\OperatorTok{+}\DecValTok{3}
+
+\NormalTok{\_radial }\OperatorTok{=} \DecValTok{50}
+\NormalTok{\_perimeter }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
+\NormalTok{\_axial }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
+\NormalTok{\_outer }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
+
+\NormalTok{\_bulk }\OperatorTok{=} \FloatTok{13.9e9}
+\NormalTok{\_shear }\OperatorTok{=} \FloatTok{10.4e9}
+
+\NormalTok{\_E\_o }\OperatorTok{=} \FloatTok{1e7}
+\NormalTok{\_const }\OperatorTok{=} \FloatTok{1e8}
+\NormalTok{\_poisson }\OperatorTok{=} \FloatTok{0.25}
+
+\CommentTok{\# ZONE \#}
+
+\NormalTok{command\_zone }\OperatorTok{=} \StringTok{"""}
 \StringTok{model new}
-\StringTok{zone create radial{-}cylinder point 0 (0,0,0) ...}
-\StringTok{                            point 1 (40,0,0) ...}
-\StringTok{                            point 2 (0,10,0) ...}
-\StringTok{                            point 3 (0,0,40) ...}
-\StringTok{                            point 4 (40,10,0) ...}
-\StringTok{                            point 5 (0,10,40) ...}
-\StringTok{                            point 6 (40,0,40) ...}
-\StringTok{                            point 7 (40,10,40) ...}
-\StringTok{                            point 8 (1,0,0) ...}
-\StringTok{                            point 9 (0,0,1) ...}
-\StringTok{                            point 10 (1,10,0) ...}
-\StringTok{                            point 11 (0,10,1) ...}
-\StringTok{                            size }\SpecialCharTok{\{radial\}}\StringTok{ }\SpecialCharTok{\{axial\}}\StringTok{ }\SpecialCharTok{\{perimeter\}}\StringTok{ }\SpecialCharTok{\{outer\}}\StringTok{ ...}
-\StringTok{                            rat 1 1 1 1.5 ...}
-\StringTok{                            fill group "shaft"}
+\StringTok{z crea r{-}t p 0 (0,0,0) ...}
+\StringTok{           p 1 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,0) ... }
+\StringTok{           p 2 (0,}\SpecialCharTok{\{D\_soil\}}\StringTok{,0) ...}
+\StringTok{           p 3 (0,0,}\SpecialCharTok{\{B\_soil\}}\StringTok{) ...}
+\StringTok{           p 4 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,0) ...}
+\StringTok{           p 5 (0,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{) ...}
+\StringTok{           p 6 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,}\SpecialCharTok{\{B\_soil\}}\StringTok{) ...}
+\StringTok{           p 7 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{) ...}
+\StringTok{           p 8 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,0) ...}
+\StringTok{           p 9 (0,0,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
+\StringTok{           p 10 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,0) ...}
+\StringTok{           p 11 (0,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
+\StringTok{           p 12 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
+\StringTok{           p 13 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
+\StringTok{           size }\SpecialCharTok{\{radial\}}\StringTok{ }\SpecialCharTok{\{axial\}}\StringTok{ }\SpecialCharTok{\{perimeter\}}\StringTok{ }\SpecialCharTok{\{outer\}}\StringTok{ ...}
+\StringTok{           rat 1 1 1 1.01 ...}
+\StringTok{           fill}
 \StringTok{"""}
 
-\NormalTok{\_radial }\OperatorTok{=} \DecValTok{10}
-\NormalTok{\_axial }\OperatorTok{=} \DecValTok{20}
-\NormalTok{\_perimeter }\OperatorTok{=} \DecValTok{26} 
-\NormalTok{\_outer }\OperatorTok{=} \DecValTok{40}
+\NormalTok{command }\OperatorTok{=}\NormalTok{ command\_zone.}\BuiltInTok{format}\NormalTok{(}
+\NormalTok{B\_footing }\OperatorTok{=}\NormalTok{ \_B\_footing,}
+\NormalTok{B\_soil }\OperatorTok{=}\NormalTok{ \_B\_soil,}
+\NormalTok{D\_soil }\OperatorTok{=}\NormalTok{ \_D\_soil,}
+\NormalTok{radial}\OperatorTok{=}\NormalTok{\_radial,}
+\NormalTok{axial }\OperatorTok{=}\NormalTok{ \_axial,}
+\NormalTok{perimeter }\OperatorTok{=}\NormalTok{ \_perimeter,}
+\NormalTok{outer }\OperatorTok{=}\NormalTok{ \_outer)}
 
-\NormalTok{command }\OperatorTok{=}\NormalTok{ command\_template\_zone.}\BuiltInTok{format}\NormalTok{(radial}\OperatorTok{=}\NormalTok{\_radial, axial }\OperatorTok{=}\NormalTok{ \_axial, perimeter }\OperatorTok{=}\NormalTok{ \_perimeter, outer }\OperatorTok{=}\NormalTok{ \_outer)}
 \NormalTok{it.command(command)}
 
-
-\NormalTok{it.command(}\StringTok{"""}
-\StringTok{zone group "plate" range position{-}x 0 3.2 position{-}y 8.5 10 position{-}z 0 3.2}
-\StringTok{"""}\NormalTok{)}
-
-\NormalTok{it.command(}\StringTok{"""}
-\StringTok{zone cmodel assign strain{-}softening range group "Radial Cylinder1"}
-\StringTok{zone property density 2500 bulk 2e8 shear 1e8 range group "Radial Cylinder1"}
-\StringTok{zone property cohesion 2e6 friction 45 tension 2e5 dilation 10 range group "Radial Cylinder1"}
-\StringTok{zone property table{-}friction \textquotesingle{}fri\textquotesingle{} table{-}cohesion \textquotesingle{}coh\textquotesingle{} table{-}dilation \textquotesingle{}dil\textquotesingle{} range group "Radial Cylinder1"}
-\StringTok{table \textquotesingle{}fri\textquotesingle{} add (0, 45) (.05, 42) (.1, 40) (1, 40)}
-\StringTok{table \textquotesingle{}coh\textquotesingle{} add (0,2e6) (.05,1e6) (.1,5e5) (1,5e5) }
-\StringTok{table \textquotesingle{}dil\textquotesingle{} add (0, 10) (.05,  3) (.1,  0) }
-\StringTok{;Constitutive modeland properties for shaft and plate}
-\StringTok{zone cmodel assign elastic range group \textquotesingle{}shaft\textquotesingle{}}
-\StringTok{zone property bulk }\SpecialCharTok{\{name\}}\StringTok{  shear 10.4e9  range group \textquotesingle{}shaft\textquotesingle{}}
-\StringTok{zone cmodel assign elastic range group \textquotesingle{}plate\textquotesingle{}}
-\StringTok{zone property bulk }\SpecialCharTok{\{name\}}\StringTok{  shear 10.4e9  range group \textquotesingle{}plate\textquotesingle{}}
-\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(name}\OperatorTok{=}\FloatTok{13.9e9}\NormalTok{))}
-
+\CommentTok{\# GROUP \#}
 
 \NormalTok{p }\OperatorTok{=}\NormalTok{ za.pos()}
-\BuiltInTok{type}\NormalTok{(p)}
-\NormalTok{p.shape}
-\NormalTok{it.zone.count()}
 \NormalTok{x,y,z }\OperatorTok{=}\NormalTok{ p.T}
-\NormalTok{upper\_zones }\OperatorTok{=}\NormalTok{ z }\OperatorTok{\textgreater{}} \FloatTok{1.5}
-\BuiltInTok{print}\NormalTok{((upper\_zones).}\BuiltInTok{sum}\NormalTok{())}
+\BuiltInTok{print}\NormalTok{(it.zone.count(), }\StringTok{"zones in whole model"}\NormalTok{)}
 
-\NormalTok{modulus }\OperatorTok{=}\NormalTok{ np.zeros\_like(x) }\CommentTok{\#create array same shape as x}
-\NormalTok{modulus[upper\_zones] }\OperatorTok{=} \FloatTok{1.2e10}\CommentTok{\#specify all upper zones have modulus 1.2e10}
-\NormalTok{lower\_zones }\OperatorTok{=}\NormalTok{ np.logical\_not(upper\_zones)}
-\NormalTok{modulus[lower\_zones] }\OperatorTok{=} \FloatTok{1.6e10}
-\NormalTok{za.set\_prop\_scalar(}\StringTok{"young"}\NormalTok{, modulus)}
+\NormalTok{shaft }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (np.sqrt(x}\OperatorTok{**}\DecValTok{2}\OperatorTok{+}\NormalTok{z}\OperatorTok{**}\DecValTok{2}\NormalTok{)}\OperatorTok{\textless{}}\NormalTok{\_D\_shaft, y}\OperatorTok{\textless{}}\NormalTok{\_H\_shaft))}
+\NormalTok{za.set\_group(shaft, }\StringTok{"shaft"}\NormalTok{) }\CommentTok{\# set the zones with shaft = true have "shaft" and "geometry"}
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"shaft"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in shaft group."}\NormalTok{) }\CommentTok{\#output how many zones are in the corner group}
 
-\NormalTok{it.command(}\StringTok{"zone group }\CharTok{\textbackslash{}"}\StringTok{lower}\CharTok{\textbackslash{}"}\StringTok{ range position{-}z 0 5"}\NormalTok{)}
-\NormalTok{za.in\_group(}\StringTok{"lower"}\NormalTok{)}
-\NormalTok{za.in\_group(}\StringTok{"lower"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{() }\CommentTok{\#how many zones within specific group}
+\NormalTok{plate }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (x}\OperatorTok{\textless{}}\NormalTok{\_B\_footing,z}\OperatorTok{\textless{}}\NormalTok{\_B\_footing, y}\OperatorTok{\textgreater{}}\NormalTok{\_H\_shaft,y}\OperatorTok{\textless{}}\NormalTok{\_D\_footing))}
+\NormalTok{za.set\_group(plate, }\StringTok{"plate"}\NormalTok{) }\CommentTok{\# set the zones with plate = true have "plate" and "geometry"}
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"plate"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in plate group."}\NormalTok{) }\CommentTok{\#output how many zones are in the corner group}
 
-\CommentTok{\#refine this by getting corners}
-\CommentTok{\#create a new mask}
-\NormalTok{corner\_mask }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (x}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{, y}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{, z}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{)) }\CommentTok{\#reduce is simply applying logical and x\textless{}3, y\textless{}3, z\textless{}3}
-\NormalTok{za.set\_group(corner\_mask, }\StringTok{"corner"}\NormalTok{, }\StringTok{"geometry"}\NormalTok{) }\CommentTok{\# set the zones with corner\_mask = true have "corner" and "geometry"}
-\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"corner"}\NormalTok{, }\StringTok{"geometry"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in corner group."}\NormalTok{) }\CommentTok{\#output how many zones are in the corner group}
+\CommentTok{\# CONSTITUTIVE MODEL \#}
+
+\CommentTok{\#it.command("""}
+\CommentTok{\#zone cmodel assign strain{-}softening range group "Radial Tunnel1"}
+\CommentTok{\#zone property density 2500 bulk 2e8 shear 1e8 range group "Radial Tunnel1"}
+\CommentTok{\#zone property cohesion 2e6 friction 45 tension 2e5 dilation 10 range group "Radial Tunnel1"}
+\CommentTok{\#zone property table{-}friction \textquotesingle{}fri\textquotesingle{} table{-}cohesion \textquotesingle{}coh\textquotesingle{} table{-}dilation \textquotesingle{}dil\textquotesingle{} range group "Radial Tunnel1"}
+\CommentTok{\#table \textquotesingle{}fri\textquotesingle{} add (0, 45) (.05, 42) (.1, 40) (1, 40)}
+\CommentTok{\#table \textquotesingle{}coh\textquotesingle{} add (0,2e6) (.05,1e6) (.1,5e5) (1,5e5) }
+\CommentTok{\#table \textquotesingle{}dil\textquotesingle{} add (0, 10) (.05,  3) (.1,  0)}
+\CommentTok{\#""")}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone cmodel assign elastic range group "Radial Tunnel1"}
+\StringTok{zone cmodel assign elastic range group \textquotesingle{}shaft\textquotesingle{}}
+\StringTok{zone cmodel assign elastic range group \textquotesingle{}plate\textquotesingle{}}
+
+\StringTok{fish define fname(E\_o,const)}
+\StringTok{loop foreach pnt zone.list}
+\StringTok{z\_depth = zone.pos.y(pnt)}
+\StringTok{E = E\_o+const*math.sqrt(z\_depth)}
+\StringTok{zone.prop(pnt,\textquotesingle{}young\textquotesingle{})=E}
+\StringTok{end\_loop}
+\StringTok{end}
+\StringTok{@fname(}\SpecialCharTok{\{E\_o\_\}}\StringTok{,}\SpecialCharTok{\{const\_\}}\StringTok{)}
+\StringTok{zone property poisson }\SpecialCharTok{\{poisson\_\}}
+\StringTok{plot item create zone contour property name \textquotesingle{}young\textquotesingle{}}
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(E\_o\_}\OperatorTok{=}\NormalTok{\_E\_o,const\_}\OperatorTok{=}\NormalTok{\_const,poisson\_}\OperatorTok{=}\NormalTok{\_poisson))}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone property bulk }\SpecialCharTok{\{bulk\}}\StringTok{  shear }\SpecialCharTok{\{shear\}}\StringTok{ range group \textquotesingle{}shaft\textquotesingle{}}
+\StringTok{zone property bulk }\SpecialCharTok{\{bulk\}}\StringTok{  shear }\SpecialCharTok{\{shear\}}\StringTok{ range group \textquotesingle{}plate\textquotesingle{}}
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(bulk}\OperatorTok{=}\NormalTok{\_bulk,shear}\OperatorTok{=}\NormalTok{\_shear))}
+
+\CommentTok{\#soil = za.in\_group("Radial Tunnel1")}
+\CommentTok{\# list(gp.list)}
+\CommentTok{\# gp.isgroup(::gp.list,"North")}
+\CommentTok{\# gp.force.unbal(::ad)}
+\CommentTok{\# [ad = list(gp.list)(gp.isgroup(::gp.list,"North))]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1829,8 +1929,8 @@ For each point of the element, one of the following two keywords must be supplie
 \hypertarget{template}{%
 \chapter{1. Template}\label{template}}
 
-\hypertarget{problem-description-2}{%
-\section{Problem Description}\label{problem-description-2}}
+\hypertarget{problem-description-1}{%
+\section{Problem Description}\label{problem-description-1}}
 
 \hypertarget{modeling-procedure-1}{%
 \section{Modeling Procedure}\label{modeling-procedure-1}}
