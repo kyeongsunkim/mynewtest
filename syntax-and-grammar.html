@@ -1,81 +1,299 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" xml:lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>5 Syntax and Grammar | FLAC3D Gitbook</title>
-<meta name="author" content="Kyeong Sun Kim">
-<meta name="generator" content="bookdown 0.23 with bs4_book()">
-<meta property="og:title" content="5 Syntax and Grammar | FLAC3D Gitbook">
-<meta property="og:type" content="book">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="5 Syntax and Grammar | FLAC3D Gitbook">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="templates/bs4_style.css">
-<link rel="stylesheet" href="templates/corrections.css">
-<meta name="description" content='5.1 Introduction import itasca as it it.command("python-reset-state false") it.command(""" model new zone create brick size 10 10 10 zone cmodel assign elastic zone property density 2950 young...'>
-<meta property="og:description" content='5.1 Introduction import itasca as it it.command("python-reset-state false") it.command(""" model new zone create brick size 10 10 10 zone cmodel assign elastic zone property density 2950 young...'>
-<meta name="twitter:description" content='5.1 Introduction import itasca as it it.command("python-reset-state false") it.command(""" model new zone create brick size 10 10 10 zone cmodel assign elastic zone property density 2950 young...'>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Syntax and Grammar | FLAC3D Gitbook</title>
+  <meta name="description" content="5 Syntax and Grammar | FLAC3D Gitbook" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Syntax and Grammar | FLAC3D Gitbook" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Syntax and Grammar | FLAC3D Gitbook" />
+  
+  
+  
+
+<meta name="author" content="Kyeong Sun Kim" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="grid.html"/>
+<link rel="next" href="code-block.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="templates/style.css" type="text/css" />
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body>
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title=""><p><code>FLAC3D</code> Gitbook</p></a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
 
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Welcome</a></li>
-<li><a class="" href="kaist-model.html"><span class="header-section-number">1</span> KAIST Model</a></li>
-<li><a class="" href="axial-concrete-pile.html"><span class="header-section-number">2</span> Axial Concrete Pile</a></li>
-<li><a class="" href="pull-tests.html"><span class="header-section-number">3</span> Pull-Tests</a></li>
-<li><a class="" href="grid.html"><span class="header-section-number">4</span> Grid</a></li>
-<li><a class="active" href="syntax-and-grammar.html"><span class="header-section-number">5</span> Syntax and Grammar</a></li>
-<li><a class="" href="code-block.html"><span class="header-section-number">6</span> Code Block</a></li>
-<li><a class="" href="theory.html"><span class="header-section-number">7</span> Theory</a></li>
-<li><a class="" href="command.html"><span class="header-section-number">8</span> Command</a></li>
-<li class="book-part">Appendix</li>
-<li><a class="" href="template.html"><span class="header-section-number">A</span> 1. Template</a></li>
-<li><a class="" href="reference-collective.html"><span class="header-section-number">B</span> Reference Collective</a></li>
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="1" data-path="kaist-model.html"><a href="kaist-model.html"><i class="fa fa-check"></i><b>1</b> KAIST Model</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="kaist-model.html"><a href="kaist-model.html#initial-configuration"><i class="fa fa-check"></i><b>1.1</b> Initial Configuration</a></li>
+<li class="chapter" data-level="1.2" data-path="kaist-model.html"><a href="kaist-model.html#zones"><i class="fa fa-check"></i><b>1.2</b> Zones</a></li>
+<li class="chapter" data-level="1.3" data-path="kaist-model.html"><a href="kaist-model.html#group"><i class="fa fa-check"></i><b>1.3</b> Group</a></li>
+<li class="chapter" data-level="1.4" data-path="kaist-model.html"><a href="kaist-model.html#constitutive-model"><i class="fa fa-check"></i><b>1.4</b> Constitutive Model</a></li>
+<li class="chapter" data-level="1.5" data-path="kaist-model.html"><a href="kaist-model.html#soil-structure-interface"><i class="fa fa-check"></i><b>1.5</b> Soil-Structure Interface</a></li>
+<li class="chapter" data-level="1.6" data-path="kaist-model.html"><a href="kaist-model.html#boundary-conditions"><i class="fa fa-check"></i><b>1.6</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="1.7" data-path="kaist-model.html"><a href="kaist-model.html#initial-equilibrium"><i class="fa fa-check"></i><b>1.7</b> Initial Equilibrium</a></li>
+<li class="chapter" data-level="1.8" data-path="kaist-model.html"><a href="kaist-model.html#alterations"><i class="fa fa-check"></i><b>1.8</b> Alterations</a></li>
+<li class="chapter" data-level="1.9" data-path="kaist-model.html"><a href="kaist-model.html#results"><i class="fa fa-check"></i><b>1.9</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html"><i class="fa fa-check"></i><b>2</b> Axial Concrete Pile</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#problem-description"><i class="fa fa-check"></i><b>2.1</b> Problem Description</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#problem-statement"><i class="fa fa-check"></i><b>2.1.1</b> Problem Statement</a></li>
+<li class="chapter" data-level="2.1.2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#main-parameters"><i class="fa fa-check"></i><b>2.1.2</b> Main Parameters</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#modeling-procedure"><i class="fa fa-check"></i><b>2.2</b> Modeling Procedure</a></li>
+<li class="chapter" data-level="2.3" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#zones-1"><i class="fa fa-check"></i><b>2.3</b> Zones</a></li>
+<li class="chapter" data-level="2.4" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#groups"><i class="fa fa-check"></i><b>2.4</b> Groups</a></li>
+<li class="chapter" data-level="2.5" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#properties"><i class="fa fa-check"></i><b>2.5</b> Properties</a></li>
+<li class="chapter" data-level="2.6" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#b.c.-and-i.c."><i class="fa fa-check"></i><b>2.6</b> B.C. and I.C.</a></li>
+<li class="chapter" data-level="2.7" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#initial-equilibrium-1"><i class="fa fa-check"></i><b>2.7</b> Initial Equilibrium</a></li>
+<li class="chapter" data-level="2.8" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#alterations-1"><i class="fa fa-check"></i><b>2.8</b> Alterations</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#install-the-pile"><i class="fa fa-check"></i><b>2.8.1</b> install the pile</a></li>
+<li class="chapter" data-level="2.8.2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#vertical-loading"><i class="fa fa-check"></i><b>2.8.2</b> vertical loading</a></li>
+<li class="chapter" data-level="2.8.3" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#vertical-then-lateral-loading"><i class="fa fa-check"></i><b>2.8.3</b> vertical then lateral loading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="pull-tests.html"><a href="pull-tests.html"><i class="fa fa-check"></i><b>3</b> Pull-Tests</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="pull-tests.html"><a href="pull-tests.html#zones-2"><i class="fa fa-check"></i><b>3.1</b> Zones</a></li>
+<li class="chapter" data-level="3.2" data-path="pull-tests.html"><a href="pull-tests.html#properties-1"><i class="fa fa-check"></i><b>3.2</b> Properties</a></li>
+<li class="chapter" data-level="3.3" data-path="pull-tests.html"><a href="pull-tests.html#initial-equilibrium-2"><i class="fa fa-check"></i><b>3.3</b> Initial Equilibrium</a></li>
+<li class="chapter" data-level="3.4" data-path="pull-tests.html"><a href="pull-tests.html#alterations-2"><i class="fa fa-check"></i><b>3.4</b> Alterations</a></li>
+<li class="chapter" data-level="3.5" data-path="pull-tests.html"><a href="pull-tests.html#some-other-notes"><i class="fa fa-check"></i><b>3.5</b> Some other notes</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="grid.html"><a href="grid.html"><i class="fa fa-check"></i><b>4</b> Grid</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="grid.html"><a href="grid.html#primitive-shapes"><i class="fa fa-check"></i><b>4.1</b> Primitive Shapes</a></li>
+<li class="chapter" data-level="4.2" data-path="grid.html"><a href="grid.html#several-primitive-shapes-connected"><i class="fa fa-check"></i><b>4.2</b> several primitive shapes connected:</a></li>
+<li class="chapter" data-level="4.3" data-path="grid.html"><a href="grid.html#structural-element-operation"><i class="fa fa-check"></i><b>4.3</b> Structural Element Operation</a></li>
+<li class="chapter" data-level="4.4" data-path="grid.html"><a href="grid.html#densifying-grid-by-specifying-max-size-length"><i class="fa fa-check"></i><b>4.4</b> Densifying grid by specifying max size length</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="grid.html"><a href="grid.html#densify-a-grid-using-geometric-information"><i class="fa fa-check"></i><b>4.4.1</b> Densify a grid using geometric information</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html"><i class="fa fa-check"></i><b>5</b> Syntax and Grammar</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#zones-3"><i class="fa fa-check"></i><b>5.2</b> Zones</a></li>
+<li class="chapter" data-level="5.3" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#properties-2"><i class="fa fa-check"></i><b>5.3</b> Properties</a></li>
+<li class="chapter" data-level="5.4" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#gridpoints"><i class="fa fa-check"></i><b>5.4</b> Gridpoints</a></li>
+<li class="chapter" data-level="5.5" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#structural-elements"><i class="fa fa-check"></i><b>5.5</b> Structural Elements</a></li>
+<li class="chapter" data-level="5.6" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#extra-variables"><i class="fa fa-check"></i><b>5.6</b> Extra Variables</a></li>
+<li class="chapter" data-level="5.7" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#groups-and-b.c."><i class="fa fa-check"></i><b>5.7</b> Groups and B.C.</a></li>
+<li class="chapter" data-level="5.8" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#parameteric-studies"><i class="fa fa-check"></i><b>5.8</b> Parameteric Studies</a></li>
+<li class="chapter" data-level="5.9" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#results-1"><i class="fa fa-check"></i><b>5.9</b> Results</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#measuring-time-of-calculation"><i class="fa fa-check"></i><b>5.9.1</b> Measuring time of calculation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#setting-fish-variables"><i class="fa fa-check"></i><b>5.10</b> Setting FISH variables</a>
+<ul>
+<li class="chapter" data-level="5.10.1" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#issuing-command"><i class="fa fa-check"></i><b>5.10.1</b> Issuing Command</a></li>
+</ul></li>
+<li class="chapter" data-level="5.11" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#string"><i class="fa fa-check"></i><b>5.11</b> String</a></li>
+<li class="chapter" data-level="5.12" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#fish-syntax"><i class="fa fa-check"></i><b>5.12</b> Fish Syntax</a>
+<ul>
+<li class="chapter" data-level="5.12.1" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#use-of"><i class="fa fa-check"></i><b>5.12.1</b> Use of …</a></li>
+<li class="chapter" data-level="5.12.2" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#variable-types"><i class="fa fa-check"></i><b>5.12.2</b> Variable Types</a></li>
+<li class="chapter" data-level="5.12.3" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#traditional-for-loop-in-fish"><i class="fa fa-check"></i><b>5.12.3</b> Traditional for loop in FISH</a></li>
+<li class="chapter" data-level="5.12.4" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#if-else-endif-construct"><i class="fa fa-check"></i><b>5.12.4</b> if else endif construct</a></li>
+<li class="chapter" data-level="5.12.5" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#arrays-and-maps"><i class="fa fa-check"></i><b>5.12.5</b> Arrays and Maps</a></li>
+<li class="chapter" data-level="5.12.6" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#fish-function"><i class="fa fa-check"></i><b>5.12.6</b> Fish Function</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="code-block.html"><a href="code-block.html"><i class="fa fa-check"></i><b>6</b> Code Block</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="code-block.html"><a href="code-block.html#some-code"><i class="fa fa-check"></i><b>6.1</b> Some Code</a></li>
+<li class="chapter" data-level="6.2" data-path="code-block.html"><a href="code-block.html#interface"><i class="fa fa-check"></i><b>6.2</b> Interface</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="code-block.html"><a href="code-block.html#penetration"><i class="fa fa-check"></i><b>6.2.1</b> Penetration</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="code-block.html"><a href="code-block.html#kaist-model-1"><i class="fa fa-check"></i><b>6.3</b> KAIST Model</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="theory.html"><a href="theory.html"><i class="fa fa-check"></i><b>7</b> Theory</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="theory.html"><a href="theory.html#interface-1"><i class="fa fa-check"></i><b>7.1</b> Interface</a></li>
+<li class="chapter" data-level="7.2" data-path="theory.html"><a href="theory.html#formulation"><i class="fa fa-check"></i><b>7.2</b> Formulation</a></li>
+<li class="chapter" data-level="7.3" data-path="theory.html"><a href="theory.html#creation-of-interface-geometry"><i class="fa fa-check"></i><b>7.3</b> Creation of Interface Geometry</a></li>
+<li class="chapter" data-level="7.4" data-path="theory.html"><a href="theory.html#typical-properties"><i class="fa fa-check"></i><b>7.4</b> Typical Properties</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="theory.html"><a href="theory.html#shear-dilatancy"><i class="fa fa-check"></i><b>7.4.1</b> Shear Dilatancy</a></li>
+<li class="chapter" data-level="7.4.2" data-path="theory.html"><a href="theory.html#compression-test-on-strain-softening-material"><i class="fa fa-check"></i><b>7.4.2</b> Compression Test on strain-softening material</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="command.html"><a href="command.html"><i class="fa fa-check"></i><b>8</b> Command</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="command.html"><a href="command.html#interface-2"><i class="fa fa-check"></i><b>8.1</b> Interface</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="command.html"><a href="command.html#zone-face-group"><i class="fa fa-check"></i><b>8.1.1</b> zone face group</a></li>
+<li class="chapter" data-level="8.1.2" data-path="command.html"><a href="command.html#zone-face-skin"><i class="fa fa-check"></i><b>8.1.2</b> zone face skin</a></li>
+<li class="chapter" data-level="8.1.3" data-path="command.html"><a href="command.html#zone-separate"><i class="fa fa-check"></i><b>8.1.3</b> zone separate</a></li>
+<li class="chapter" data-level="8.1.4" data-path="command.html"><a href="command.html#zone-interface-create"><i class="fa fa-check"></i><b>8.1.4</b> zone interface create</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="template.html"><a href="template.html"><i class="fa fa-check"></i><b>A</b> 1. Template</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="template.html"><a href="template.html#problem-description-1"><i class="fa fa-check"></i><b>A.1</b> Problem Description</a></li>
+<li class="chapter" data-level="A.2" data-path="template.html"><a href="template.html#modeling-procedure-1"><i class="fa fa-check"></i><b>A.2</b> Modeling Procedure</a></li>
+<li class="chapter" data-level="A.3" data-path="template.html"><a href="template.html#zonesgroups"><i class="fa fa-check"></i><b>A.3</b> Zones/Groups</a></li>
+<li class="chapter" data-level="A.4" data-path="template.html"><a href="template.html#properties-3"><i class="fa fa-check"></i><b>A.4</b> Properties</a></li>
+<li class="chapter" data-level="A.5" data-path="template.html"><a href="template.html#b.c.-and-i.c.-1"><i class="fa fa-check"></i><b>A.5</b> B.C. and I.C.</a></li>
+<li class="chapter" data-level="A.6" data-path="template.html"><a href="template.html#initial-equilibrium-3"><i class="fa fa-check"></i><b>A.6</b> Initial Equilibrium</a></li>
+<li class="chapter" data-level="A.7" data-path="template.html"><a href="template.html#alterations-3"><i class="fa fa-check"></i><b>A.7</b> Alterations</a></li>
+<li class="chapter" data-level="A.8" data-path="template.html"><a href="template.html#results-2"><i class="fa fa-check"></i><b>A.8</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="reference-collective.html"><a href="reference-collective.html"><i class="fa fa-check"></i><b>B</b> Reference Collective</a>
+<ul>
+<li class="chapter" data-level="B.0.1" data-path="reference-collective.html"><a href="reference-collective.html#uplift-resistance-of-anchor-plate"><i class="fa fa-check"></i><b>B.0.1</b> Uplift Resistance of Anchor Plate</a></li>
+<li class="chapter" data-level="B.0.2" data-path="reference-collective.html"><a href="reference-collective.html#numerical-analysis"><i class="fa fa-check"></i><b>B.0.2</b> Numerical Analysis</a></li>
+<li class="chapter" data-level="B.0.3" data-path="reference-collective.html"><a href="reference-collective.html#standards"><i class="fa fa-check"></i><b>B.0.3</b> Standards</a></li>
+<li class="chapter" data-level="B.0.4" data-path="reference-collective.html"><a href="reference-collective.html#textbook"><i class="fa fa-check"></i><b>B.0.4</b> Textbook</a></li>
+<li class="chapter" data-level="B.0.5" data-path="reference-collective.html"><a href="reference-collective.html#ph.d-thesis"><i class="fa fa-check"></i><b>B.0.5</b> Ph.D Thesis</a></li>
+<li class="chapter" data-level="B.0.6" data-path="reference-collective.html"><a href="reference-collective.html#awarded-lectures"><i class="fa fa-check"></i><b>B.0.6</b> Awarded Lectures</a></li>
+</ul></li>
 </ul>
 
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/ulyngs/oxforddown">View book source <i class="fab fa-github"></i></a></p>
-        </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="syntax-and-grammar" class="section level1" number="5">
-<h1>
-<span class="header-section-number">5</span> Syntax and Grammar<a class="anchor" aria-label="anchor" href="#syntax-and-grammar"><i class="fas fa-link"></i></a>
-</h1>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><p><code>FLAC3D</code> Gitbook</p></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="syntax-and-grammar" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Syntax and Grammar</h1>
 <div id="introduction" class="section level2" number="5.1">
-<h2>
-<span class="header-section-number">5.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">5.1</span> Introduction</h2>
 <div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="syntax-and-grammar.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
-<span id="cb26-2"><a href="syntax-and-grammar.html#cb26-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"python-reset-state false"</span>)</span>
-<span id="cb26-3"><a href="syntax-and-grammar.html#cb26-3" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
+<span id="cb26-2"><a href="syntax-and-grammar.html#cb26-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;python-reset-state false&quot;</span>)</span>
+<span id="cb26-3"><a href="syntax-and-grammar.html#cb26-3" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb26-4"><a href="syntax-and-grammar.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="st">model new</span></span>
 <span id="cb26-5"><a href="syntax-and-grammar.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="st">zone create brick size 10 10 10</span></span>
 <span id="cb26-6"><a href="syntax-and-grammar.html#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic</span></span>
 <span id="cb26-7"><a href="syntax-and-grammar.html#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="st">zone property density 2950 young 12e9 poisson 0.25</span></span>
 <span id="cb26-8"><a href="syntax-and-grammar.html#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="st">cycle 1</span></span>
-<span id="cb26-9"><a href="syntax-and-grammar.html#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
+<span id="cb26-9"><a href="syntax-and-grammar.html#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span>
 <span id="cb26-10"><a href="syntax-and-grammar.html#cb26-10" aria-hidden="true" tabindex="-1"></a>it.zone.count()</span>
 <span id="cb26-11"><a href="syntax-and-grammar.html#cb26-11" aria-hidden="true" tabindex="-1"></a>z<span class="op">=</span>it.zone.find(<span class="dv">1</span>)</span>
 <span id="cb26-12"><a href="syntax-and-grammar.html#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> z</span>
@@ -92,9 +310,7 @@
 <span id="cb26-23"><a href="syntax-and-grammar.html#cb26-23" aria-hidden="true" tabindex="-1"></a>z.pos()</span></code></pre></div>
 </div>
 <div id="zones-3" class="section level2" number="5.2">
-<h2>
-<span class="header-section-number">5.2</span> Zones<a class="anchor" aria-label="anchor" href="#zones-3"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">5.2</span> Zones</h2>
 <div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="syntax-and-grammar.html#cb27-1" aria-hidden="true" tabindex="-1"></a>it.zone.count() <span class="co"># 1000</span></span>
 <span id="cb27-2"><a href="syntax-and-grammar.html#cb27-2" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> it.zone.find(<span class="dv">1</span>)</span>
 <span id="cb27-3"><a href="syntax-and-grammar.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> it.zone.<span class="bu">list</span>():</span>
@@ -103,26 +319,20 @@
 <span id="cb27-6"><a href="syntax-and-grammar.html#cb27-6" aria-hidden="true" tabindex="-1"></a>z.vol()</span></code></pre></div>
 </div>
 <div id="properties-2" class="section level2" number="5.3">
-<h2>
-<span class="header-section-number">5.3</span> Properties<a class="anchor" aria-label="anchor" href="#properties-2"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="syntax-and-grammar.html#cb28-1" aria-hidden="true" tabindex="-1"></a>z.props() <span class="kw">or</span> z.props()[<span class="st">'bulk'</span>]</span>
-<span id="cb28-2"><a href="syntax-and-grammar.html#cb28-2" aria-hidden="true" tabindex="-1"></a>z.prop(<span class="st">'shear'</span>)</span>
-<span id="cb28-3"><a href="syntax-and-grammar.html#cb28-3" aria-hidden="true" tabindex="-1"></a>z.set_prop(<span class="st">'bulk'</span>, <span class="fl">8.5e9</span>)</span></code></pre></div>
+<h2><span class="header-section-number">5.3</span> Properties</h2>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="syntax-and-grammar.html#cb28-1" aria-hidden="true" tabindex="-1"></a>z.props() <span class="kw">or</span> z.props()[<span class="st">&#39;bulk&#39;</span>]</span>
+<span id="cb28-2"><a href="syntax-and-grammar.html#cb28-2" aria-hidden="true" tabindex="-1"></a>z.prop(<span class="st">&#39;shear&#39;</span>)</span>
+<span id="cb28-3"><a href="syntax-and-grammar.html#cb28-3" aria-hidden="true" tabindex="-1"></a>z.set_prop(<span class="st">&#39;bulk&#39;</span>, <span class="fl">8.5e9</span>)</span></code></pre></div>
 </div>
 <div id="gridpoints" class="section level2" number="5.4">
-<h2>
-<span class="header-section-number">5.4</span> Gridpoints<a class="anchor" aria-label="anchor" href="#gridpoints"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">5.4</span> Gridpoints</h2>
 <div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="syntax-and-grammar.html#cb29-1" aria-hidden="true" tabindex="-1"></a>gp <span class="op">=</span> it.gridpoint.near((<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
 <span id="cb29-2"><a href="syntax-and-grammar.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> gp <span class="kw">in</span> it.gridpoint.<span class="bu">list</span>():</span>
 <span id="cb29-3"><a href="syntax-and-grammar.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  total_mass <span class="op">=</span> gp.mass_gravity()</span>
 <span id="cb29-4"><a href="syntax-and-grammar.html#cb29-4" aria-hidden="true" tabindex="-1"></a>z.vol()<span class="op">*</span>z.density()<span class="op">*</span><span class="dv">1000</span></span></code></pre></div>
 </div>
 <div id="structural-elements" class="section level2" number="5.5">
-<h2>
-<span class="header-section-number">5.5</span> Structural Elements<a class="anchor" aria-label="anchor" href="#structural-elements"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">5.5</span> Structural Elements</h2>
 <div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="syntax-and-grammar.html#cb30-1" aria-hidden="true" tabindex="-1"></a>it.structure.<span class="bu">list</span>()</span>
 <span id="cb30-2"><a href="syntax-and-grammar.html#cb30-2" aria-hidden="true" tabindex="-1"></a>it.structure.find(<span class="dv">1</span>)</span>
 <span id="cb30-3"><a href="syntax-and-grammar.html#cb30-3" aria-hidden="true" tabindex="-1"></a>it.structure.near((<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
@@ -130,42 +340,34 @@
 <span id="cb30-5"><a href="syntax-and-grammar.html#cb30-5" aria-hidden="true" tabindex="-1"></a>s_node.links()[<span class="dv">0</span>]</span></code></pre></div>
 </div>
 <div id="extra-variables" class="section level2" number="5.6">
-<h2>
-<span class="header-section-number">5.6</span> Extra Variables<a class="anchor" aria-label="anchor" href="#extra-variables"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">5.6</span> Extra Variables</h2>
 <div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="syntax-and-grammar.html#cb31-1" aria-hidden="true" tabindex="-1"></a>z.set_extra(<span class="dv">1</span>, <span class="fl">1.23</span>)</span>
-<span id="cb31-2"><a href="syntax-and-grammar.html#cb31-2" aria-hidden="true" tabindex="-1"></a>z.set_extra(<span class="dv">2</span>, <span class="st">"a test string"</span>)</span>
+<span id="cb31-2"><a href="syntax-and-grammar.html#cb31-2" aria-hidden="true" tabindex="-1"></a>z.set_extra(<span class="dv">2</span>, <span class="st">&quot;a test string&quot;</span>)</span>
 <span id="cb31-3"><a href="syntax-and-grammar.html#cb31-3" aria-hidden="true" tabindex="-1"></a>z.set_extra(<span class="dv">1</span>, gp.pos())</span></code></pre></div>
 </div>
 <div id="groups-and-b.c." class="section level2" number="5.7">
-<h2>
-<span class="header-section-number">5.7</span> Groups and B.C.<a class="anchor" aria-label="anchor" href="#groups-and-b.c."><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="syntax-and-grammar.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> z.group(<span class="st">"default"</span>) <span class="op">==</span> <span class="st">"lower"</span>:</span>
+<h2><span class="header-section-number">5.7</span> Groups and B.C.</h2>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="syntax-and-grammar.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> z.group(<span class="st">&quot;default&quot;</span>) <span class="op">==</span> <span class="st">&quot;lower&quot;</span>:</span>
 <span id="cb32-2"><a href="syntax-and-grammar.html#cb32-2" aria-hidden="true" tabindex="-1"></a>  gp.set_fix(<span class="dv">0</span>, <span class="va">True</span>)</span>
 <span id="cb32-3"><a href="syntax-and-grammar.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  gp.set_fix(<span class="dv">1</span>, <span class="va">True</span>)</span>
 <span id="cb32-4"><a href="syntax-and-grammar.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  gp.set_force_load((<span class="fl">1e6</span>,<span class="fl">2e6</span>,<span class="fl">1e6</span>))</span>
 <span id="cb32-5"><a href="syntax-and-grammar.html#cb32-5" aria-hidden="true" tabindex="-1"></a>it.zone.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)).stress()</span>
 <span id="cb32-6"><a href="syntax-and-grammar.html#cb32-6" aria-hidden="true" tabindex="-1"></a>it.zone.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)).strain()</span>
-<span id="cb32-7"><a href="syntax-and-grammar.html#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+<span id="cb32-7"><a href="syntax-and-grammar.html#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
 </div>
 <div id="parameteric-studies" class="section level2" number="5.8">
-<h2>
-<span class="header-section-number">5.8</span> Parameteric Studies<a class="anchor" aria-label="anchor" href="#parameteric-studies"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="syntax-and-grammar.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">"*note: for modulus in [6e9, 8e9, 10e9, 12e9]:"</span></span>
-<span id="cb33-2"><a href="syntax-and-grammar.html#cb33-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
-<span id="cb33-3"><a href="syntax-and-grammar.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="st">model restore 'before_cycling'</span></span>
+<h2><span class="header-section-number">5.8</span> Parameteric Studies</h2>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="syntax-and-grammar.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;*note: for modulus in [6e9, 8e9, 10e9, 12e9]:&quot;</span></span>
+<span id="cb33-2"><a href="syntax-and-grammar.html#cb33-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb33-3"><a href="syntax-and-grammar.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="st">model restore &#39;before_cycling&#39;</span></span>
 <span id="cb33-4"><a href="syntax-and-grammar.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="st">zone prop young </span><span class="sc">{}</span></span>
 <span id="cb33-5"><a href="syntax-and-grammar.html#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="st">model solve</span></span>
-<span id="cb33-6"><a href="syntax-and-grammar.html#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>.<span class="bu">format</span>(modulus))</span>
+<span id="cb33-6"><a href="syntax-and-grammar.html#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>.<span class="bu">format</span>(modulus))</span>
 <span id="cb33-7"><a href="syntax-and-grammar.html#cb33-7" aria-hidden="true" tabindex="-1"></a>vertical_disp <span class="op">=</span> it.gridpoint.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">10</span>)).disp_z()</span>
-<span id="cb33-8"><a href="syntax-and-grammar.html#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"~~~"</span>.<span class="bu">format</span>(modulus,vertical_disp)</span></code></pre></div>
+<span id="cb33-8"><a href="syntax-and-grammar.html#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">&quot;~~~&quot;</span>.<span class="bu">format</span>(modulus,vertical_disp)</span></code></pre></div>
 </div>
 <div id="results-1" class="section level2" number="5.9">
-<h2>
-<span class="header-section-number">5.9</span> Results<a class="anchor" aria-label="anchor" href="#results-1"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">5.9</span> Results</h2>
 <p>As discussed in Reaching Equilibrium, we recommend you use the convergence
 1.0 limit criteria when using the model solve command</p>
 <p>Initially solving to a convergence of 100 or more and then
@@ -178,32 +380,26 @@ velocity and measure the reaction forces, rather than apply forces and measure
 displacements).</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="syntax-and-grammar.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Solve</span>
 <span id="cb34-2"><a href="syntax-and-grammar.html#cb34-2" aria-hidden="true" tabindex="-1"></a>model solve convergence <span class="dv">1</span></span>
-<span id="cb34-3"><a href="syntax-and-grammar.html#cb34-3" aria-hidden="true" tabindex="-1"></a>model factor<span class="op">-</span>of<span class="op">-</span>safety <span class="bu">file</span> <span class="st">'slope3dfos'</span> associated convergence <span class="dv">1</span></span></code></pre></div>
+<span id="cb34-3"><a href="syntax-and-grammar.html#cb34-3" aria-hidden="true" tabindex="-1"></a>model factor<span class="op">-</span>of<span class="op">-</span>safety <span class="bu">file</span> <span class="st">&#39;slope3dfos&#39;</span> associated convergence <span class="dv">1</span></span></code></pre></div>
 <div id="measuring-time-of-calculation" class="section level3" number="5.9.1">
-<h3>
-<span class="header-section-number">5.9.1</span> Measuring time of calculation<a class="anchor" aria-label="anchor" href="#measuring-time-of-calculation"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">5.9.1</span> Measuring time of calculation</h3>
 <div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="syntax-and-grammar.html#cb35-1" aria-hidden="true" tabindex="-1"></a>[<span class="kw">global</span> start <span class="op">=</span> time.clock]</span>
 <span id="cb35-2"><a href="syntax-and-grammar.html#cb35-2" aria-hidden="true" tabindex="-1"></a>model step <span class="dv">100</span></span>
 <span id="cb35-3"><a href="syntax-and-grammar.html#cb35-3" aria-hidden="true" tabindex="-1"></a>[<span class="kw">global</span> rate <span class="op">=</span> <span class="dv">10</span> <span class="op">*</span> zone.num <span class="op">/</span> (time.clock<span class="op">-</span>start) ]</span>
-<span id="cb35-4"><a href="syntax-and-grammar.html#cb35-4" aria-hidden="true" tabindex="-1"></a>[io.out(<span class="st">'Calculation rate = '</span><span class="op">+</span>string(rate)<span class="op">+</span><span class="st">' kilo-zones/sec'</span>)]</span></code></pre></div>
+<span id="cb35-4"><a href="syntax-and-grammar.html#cb35-4" aria-hidden="true" tabindex="-1"></a>[io.out(<span class="st">&#39;Calculation rate = &#39;</span><span class="op">+</span>string(rate)<span class="op">+</span><span class="st">&#39; kilo-zones/sec&#39;</span>)]</span></code></pre></div>
 </div>
 </div>
 <div id="setting-fish-variables" class="section level2" number="5.10">
-<h2>
-<span class="header-section-number">5.10</span> Setting FISH variables<a class="anchor" aria-label="anchor" href="#setting-fish-variables"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">5.10</span> Setting FISH variables</h2>
 <div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="syntax-and-grammar.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
-<span id="cb36-2"><a href="syntax-and-grammar.html#cb36-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">'python-reset-state false'</span>)</span>
-<span id="cb36-3"><a href="syntax-and-grammar.html#cb36-3" aria-hidden="true" tabindex="-1"></a>it.fish.<span class="bu">set</span>(<span class="st">'x'</span>, <span class="dv">10</span>)</span>
-<span id="cb36-4"><a href="syntax-and-grammar.html#cb36-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> it.fish.get(<span class="st">'x'</span>) yields <span class="dv">10</span></span></code></pre></div>
+<span id="cb36-2"><a href="syntax-and-grammar.html#cb36-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&#39;python-reset-state false&#39;</span>)</span>
+<span id="cb36-3"><a href="syntax-and-grammar.html#cb36-3" aria-hidden="true" tabindex="-1"></a>it.fish.<span class="bu">set</span>(<span class="st">&#39;x&#39;</span>, <span class="dv">10</span>)</span>
+<span id="cb36-4"><a href="syntax-and-grammar.html#cb36-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> it.fish.get(<span class="st">&#39;x&#39;</span>) yields <span class="dv">10</span></span></code></pre></div>
 <div id="issuing-command" class="section level3" number="5.10.1">
-<h3>
-<span class="header-section-number">5.10.1</span> Issuing Command<a class="anchor" aria-label="anchor" href="#issuing-command"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">5.10.1</span> Issuing Command</h3>
 <div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="syntax-and-grammar.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
 <span id="cb37-2"><a href="syntax-and-grammar.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb37-3"><a href="syntax-and-grammar.html#cb37-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.loadtext(<span class="st">'brick-data.txt'</span>)</span>
+<span id="cb37-3"><a href="syntax-and-grammar.html#cb37-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.loadtext(<span class="st">&#39;brick-data.txt&#39;</span>)</span>
 <span id="cb37-4"><a href="syntax-and-grammar.html#cb37-4" aria-hidden="true" tabindex="-1"></a>command_template <span class="op">=</span> <span class="op">;;;</span> </span>
 <span id="cb37-5"><a href="syntax-and-grammar.html#cb37-5" aria-hidden="true" tabindex="-1"></a>zone create brick</span>
 <span id="cb37-6"><a href="syntax-and-grammar.html#cb37-6" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic</span>
@@ -218,23 +414,17 @@ displacements).</p>
 </div>
 </div>
 <div id="string" class="section level2" number="5.11">
-<h2>
-<span class="header-section-number">5.11</span> String<a class="anchor" aria-label="anchor" href="#string"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="syntax-and-grammar.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">"The value of x is {:.2f}"</span>.<span class="bu">format</span>(<span class="fl">0.3872</span>)</span>
-<span id="cb38-2"><a href="syntax-and-grammar.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co">"The value of x is {:.2e}"</span>.<span class="bu">format</span>(<span class="fl">0.3872</span>)</span>
-<span id="cb38-3"><a href="syntax-and-grammar.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is Sasha"</span></span>
-<span id="cb38-4"><a href="syntax-and-grammar.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is {}"</span>.<span class="bu">format</span>(<span class="st">"Sasha"</span>)</span>
-<span id="cb38-5"><a href="syntax-and-grammar.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is {name}"</span>.<span class="bu">format</span>(name<span class="op">=</span><span class="st">"Sasha"</span>)</span></code></pre></div>
+<h2><span class="header-section-number">5.11</span> String</h2>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="syntax-and-grammar.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;The value of x is {:.2f}&quot;</span>.<span class="bu">format</span>(<span class="fl">0.3872</span>)</span>
+<span id="cb38-2"><a href="syntax-and-grammar.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;The value of x is {:.2e}&quot;</span>.<span class="bu">format</span>(<span class="fl">0.3872</span>)</span>
+<span id="cb38-3"><a href="syntax-and-grammar.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;My name is Sasha&quot;</span></span>
+<span id="cb38-4"><a href="syntax-and-grammar.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;My name is {}&quot;</span>.<span class="bu">format</span>(<span class="st">&quot;Sasha&quot;</span>)</span>
+<span id="cb38-5"><a href="syntax-and-grammar.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;My name is {name}&quot;</span>.<span class="bu">format</span>(name<span class="op">=</span><span class="st">&quot;Sasha&quot;</span>)</span></code></pre></div>
 </div>
 <div id="fish-syntax" class="section level2" number="5.12">
-<h2>
-<span class="header-section-number">5.12</span> Fish Syntax<a class="anchor" aria-label="anchor" href="#fish-syntax"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">5.12</span> Fish Syntax</h2>
 <div id="use-of" class="section level3" number="5.12.1">
-<h3>
-<span class="header-section-number">5.12.1</span> Use of …<a class="anchor" aria-label="anchor" href="#use-of"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">5.12.1</span> Use of …</h3>
 <p>A complete FISH statement occupies one line. However, a line may be typed across two or more lines as long as each line but the ultimate is terminated with the continuation character ( … ). Use of temporary variables as hinge points to concatenate lengthy formulas can also be handy. The following example shows how this can be done:</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="syntax-and-grammar.html#cb39-1" aria-hidden="true" tabindex="-1"></a>fish define long_sum  <span class="op">;</span>example of a <span class="bu">sum</span> of many things</span>
 <span id="cb39-2"><a href="syntax-and-grammar.html#cb39-2" aria-hidden="true" tabindex="-1"></a>    local temp <span class="op">=</span> v1 <span class="op">+</span> v2 <span class="op">+</span> v3 <span class="op">+</span> v4 <span class="op">+</span> v5 <span class="op">+</span> v6 <span class="op">+</span> v7 <span class="op">+</span> v8 <span class="op">+</span> v9 <span class="op">+</span> v10</span>
@@ -242,16 +432,14 @@ displacements).</p>
 <span id="cb39-4"><a href="syntax-and-grammar.html#cb39-4" aria-hidden="true" tabindex="-1"></a>end</span></code></pre></div>
 </div>
 <div id="variable-types" class="section level3" number="5.12.2">
-<h3>
-<span class="header-section-number">5.12.2</span> Variable Types<a class="anchor" aria-label="anchor" href="#variable-types"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">5.12.2</span> Variable Types</h3>
 <div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="syntax-and-grammar.html#cb40-1" aria-hidden="true" tabindex="-1"></a>model new</span>
 <span id="cb40-2"><a href="syntax-and-grammar.html#cb40-2" aria-hidden="true" tabindex="-1"></a>fish define types</span>
 <span id="cb40-3"><a href="syntax-and-grammar.html#cb40-3" aria-hidden="true" tabindex="-1"></a>    v1 <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb40-4"><a href="syntax-and-grammar.html#cb40-4" aria-hidden="true" tabindex="-1"></a>    v2 <span class="op">=</span> <span class="fl">3.4</span></span>
-<span id="cb40-5"><a href="syntax-and-grammar.html#cb40-5" aria-hidden="true" tabindex="-1"></a>    v3 <span class="op">=</span> <span class="st">'Have a nice day'</span></span>
+<span id="cb40-5"><a href="syntax-and-grammar.html#cb40-5" aria-hidden="true" tabindex="-1"></a>    v3 <span class="op">=</span> <span class="st">&#39;Have a nice day&#39;</span></span>
 <span id="cb40-6"><a href="syntax-and-grammar.html#cb40-6" aria-hidden="true" tabindex="-1"></a>    v4 <span class="op">=</span> v1 <span class="op">*</span> v2</span>
-<span id="cb40-7"><a href="syntax-and-grammar.html#cb40-7" aria-hidden="true" tabindex="-1"></a>    v5 <span class="op">=</span> v3 <span class="op">+</span> <span class="st">', old chap'</span></span>
+<span id="cb40-7"><a href="syntax-and-grammar.html#cb40-7" aria-hidden="true" tabindex="-1"></a>    v5 <span class="op">=</span> v3 <span class="op">+</span> <span class="st">&#39;, old chap&#39;</span></span>
 <span id="cb40-8"><a href="syntax-and-grammar.html#cb40-8" aria-hidden="true" tabindex="-1"></a>    v6 <span class="op">=</span> vector(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
 <span id="cb40-9"><a href="syntax-and-grammar.html#cb40-9" aria-hidden="true" tabindex="-1"></a>    v7 <span class="op">=</span> matrix(vector(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
 <span id="cb40-10"><a href="syntax-and-grammar.html#cb40-10" aria-hidden="true" tabindex="-1"></a>    v8 <span class="op">=</span> true</span>
@@ -264,18 +452,16 @@ displacements).</p>
 <span id="cb41-3"><a href="syntax-and-grammar.html#cb41-3" aria-hidden="true" tabindex="-1"></a>(function) types <span class="dv">0</span> (integer)</span>
 <span id="cb41-4"><a href="syntax-and-grammar.html#cb41-4" aria-hidden="true" tabindex="-1"></a>           v1    <span class="dv">2</span> (integer)</span>
 <span id="cb41-5"><a href="syntax-and-grammar.html#cb41-5" aria-hidden="true" tabindex="-1"></a>           v2    <span class="fl">3.400000000000000e+00</span> (real)</span>
-<span id="cb41-6"><a href="syntax-and-grammar.html#cb41-6" aria-hidden="true" tabindex="-1"></a>           v3    <span class="st">'Have a nice day'</span> (string)</span>
+<span id="cb41-6"><a href="syntax-and-grammar.html#cb41-6" aria-hidden="true" tabindex="-1"></a>           v3    <span class="st">&#39;Have a nice day&#39;</span> (string)</span>
 <span id="cb41-7"><a href="syntax-and-grammar.html#cb41-7" aria-hidden="true" tabindex="-1"></a>           v4    <span class="fl">6.800000000000000e+00</span> (real)</span>
-<span id="cb41-8"><a href="syntax-and-grammar.html#cb41-8" aria-hidden="true" tabindex="-1"></a>           v5    <span class="st">'Have a nice day, old chap'</span> (string)</span>
+<span id="cb41-8"><a href="syntax-and-grammar.html#cb41-8" aria-hidden="true" tabindex="-1"></a>           v5    <span class="st">&#39;Have a nice day, old chap&#39;</span> (string)</span>
 <span id="cb41-9"><a href="syntax-and-grammar.html#cb41-9" aria-hidden="true" tabindex="-1"></a>           v6    (<span class="fl">1.000000000000000e+00</span>,<span class="fl">2.000000000000000e+00</span>,</span>
 <span id="cb41-10"><a href="syntax-and-grammar.html#cb41-10" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">3.000000000000000e+00</span>) (vector3)                [<span class="op">**</span>]</span>
 <span id="cb41-11"><a href="syntax-and-grammar.html#cb41-11" aria-hidden="true" tabindex="-1"></a>           v7    <span class="dv">3</span> x <span class="dv">1</span> (matrix)</span>
 <span id="cb41-12"><a href="syntax-and-grammar.html#cb41-12" aria-hidden="true" tabindex="-1"></a>           v8    true (boolean)</span></code></pre></div>
 </div>
 <div id="traditional-for-loop-in-fish" class="section level3" number="5.12.3">
-<h3>
-<span class="header-section-number">5.12.3</span> Traditional for loop in FISH<a class="anchor" aria-label="anchor" href="#traditional-for-loop-in-fish"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">5.12.3</span> Traditional for loop in FISH</h3>
 <p>standard for loop is also available in FISH to provide for additionalloop control.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="syntax-and-grammar.html#cb42-1" aria-hidden="true" tabindex="-1"></a>fish define xxx</span>
 <span id="cb42-2"><a href="syntax-and-grammar.html#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span>  <span class="op">=</span> <span class="dv">0</span></span>
@@ -284,14 +470,12 @@ displacements).</p>
 <span id="cb42-5"><a href="syntax-and-grammar.html#cb42-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span>  <span class="op">=</span> <span class="bu">sum</span>  <span class="op">+</span> n</span>
 <span id="cb42-6"><a href="syntax-and-grammar.html#cb42-6" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> n</span>
 <span id="cb42-7"><a href="syntax-and-grammar.html#cb42-7" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
-<span id="cb42-8"><a href="syntax-and-grammar.html#cb42-8" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ... </span>
-<span id="cb42-9"><a href="syntax-and-grammar.html#cb42-9" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
+<span id="cb42-8"><a href="syntax-and-grammar.html#cb42-8" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">&#39;The sum is &#39;</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ... </span>
+<span id="cb42-9"><a href="syntax-and-grammar.html#cb42-9" aria-hidden="true" tabindex="-1"></a>           <span class="st">&#39; and the product is &#39;</span> <span class="op">+</span> string(prod))</span>
 <span id="cb42-10"><a href="syntax-and-grammar.html#cb42-10" aria-hidden="true" tabindex="-1"></a>end</span>
 <span id="cb42-11"><a href="syntax-and-grammar.html#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="at">@xxx</span></span></code></pre></div>
 <div id="controlled-loop" class="section level4" number="5.12.3.1">
-<h4>
-<span class="header-section-number">5.12.3.1</span> Controlled loop<a class="anchor" aria-label="anchor" href="#controlled-loop"><i class="fas fa-link"></i></a>
-</h4>
+<h4><span class="header-section-number">5.12.3.1</span> Controlled loop</h4>
 <div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="syntax-and-grammar.html#cb43-1" aria-hidden="true" tabindex="-1"></a>model new</span>
 <span id="cb43-2"><a href="syntax-and-grammar.html#cb43-2" aria-hidden="true" tabindex="-1"></a>fish define xxx</span>
 <span id="cb43-3"><a href="syntax-and-grammar.html#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span>  <span class="op">=</span> <span class="dv">0</span></span>
@@ -300,8 +484,8 @@ displacements).</p>
 <span id="cb43-6"><a href="syntax-and-grammar.html#cb43-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span>  <span class="op">=</span> <span class="bu">sum</span>  <span class="op">+</span> n</span>
 <span id="cb43-7"><a href="syntax-and-grammar.html#cb43-7" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> n</span>
 <span id="cb43-8"><a href="syntax-and-grammar.html#cb43-8" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
-<span id="cb43-9"><a href="syntax-and-grammar.html#cb43-9" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span>  ...</span>
-<span id="cb43-10"><a href="syntax-and-grammar.html#cb43-10" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
+<span id="cb43-9"><a href="syntax-and-grammar.html#cb43-9" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">&#39;The sum is &#39;</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span>  ...</span>
+<span id="cb43-10"><a href="syntax-and-grammar.html#cb43-10" aria-hidden="true" tabindex="-1"></a>           <span class="st">&#39; and the product is &#39;</span> <span class="op">+</span> string(prod))</span>
 <span id="cb43-11"><a href="syntax-and-grammar.html#cb43-11" aria-hidden="true" tabindex="-1"></a>end</span>
 <span id="cb43-12"><a href="syntax-and-grammar.html#cb43-12" aria-hidden="true" tabindex="-1"></a><span class="at">@xxx</span></span></code></pre></div>
 <p>In this case, the loop variable n is given successive values from 1 to 10, and the statements inside the loop (between the loop and endloop statements) are executed for each value. As mentioned, variable names or an arithmetic expression could be substituted for the numbers 1 or 10. Note that the exit statement can be used to break out of a FISH loop and the continue statement can be used to skip the remaining instructions in the loop, moving to the next sequence of the loop.</p>
@@ -309,11 +493,11 @@ displacements).</p>
 </div>
 </div>
 <div id="if-else-endif-construct" class="section level3" number="5.12.4">
-<h3>
-<span class="header-section-number">5.12.4</span> if else endif construct<a class="anchor" aria-label="anchor" href="#if-else-endif-construct"><i class="fas fa-link"></i></a>
-</h3>
-<p>These statements allow conditional execution of FISH function segments; else and then are optional. The item test consists of one of the following symbols or symbol pairs:<br></p>
-<p>= # &gt; &lt; &gt;= &lt;=<br></p>
+<h3><span class="header-section-number">5.12.4</span> if else endif construct</h3>
+<p>These statements allow conditional execution of FISH function segments; else and then are optional. The item test consists of one of the following symbols or symbol pairs:<br />
+</p>
+<p>= # &gt; &lt; &gt;= &lt;=<br />
+</p>
 <p>The displayed value of abc in this example depends on the argument provided to abc when it is executed. You should experiment with different test symbols (e.g., replace &gt; with &lt;).</p>
 <p>Until now, our FISH functions have been invoked from FLAC3D, either by using the sqaure brackets [] of inline FISH, by giving the function name prepended with the the @ character, or by using the fish list command. It is also possible to do the reverse, to give FLAC3D commands from within FISH functions. Most valid FLAC3D commands can be embedded between the following FISH statements:</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="syntax-and-grammar.html#cb44-1" aria-hidden="true" tabindex="-1"></a>model new</span>
@@ -328,15 +512,11 @@ displacements).</p>
 <span id="cb44-10"><a href="syntax-and-grammar.html#cb44-10" aria-hidden="true" tabindex="-1"></a>[abc(<span class="op">-</span><span class="dv">1</span>)]</span></code></pre></div>
 </div>
 <div id="arrays-and-maps" class="section level3" number="5.12.5">
-<h3>
-<span class="header-section-number">5.12.5</span> Arrays and Maps<a class="anchor" aria-label="anchor" href="#arrays-and-maps"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">5.12.5</span> Arrays and Maps</h3>
 <p>It is often the case that one would like to store a list of objects that they will loop over in the future. These may be computed values from zones, for instance, or specific gridpoint pointers themselves. FISH has two containers to use in these circumstances, termed arrays and maps.</p>
 <p>An array holds a list of FISH variables of any type that can be looped over or accessed by the integer index of the element of the array. Arrays can be multidimensional and do not resize dynamically. The simple example below shows how one can create an array of integers and then sum the values.</p>
 <div id="array-example" class="section level4" number="5.12.5.1">
-<h4>
-<span class="header-section-number">5.12.5.1</span> Array example<a class="anchor" aria-label="anchor" href="#array-example"><i class="fas fa-link"></i></a>
-</h4>
+<h4><span class="header-section-number">5.12.5.1</span> Array example</h4>
 <div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="syntax-and-grammar.html#cb45-1" aria-hidden="true" tabindex="-1"></a>model new</span>
 <span id="cb45-2"><a href="syntax-and-grammar.html#cb45-2" aria-hidden="true" tabindex="-1"></a>fish define array_operation</span>
 <span id="cb45-3"><a href="syntax-and-grammar.html#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>create <span class="kw">and</span> populate an array <span class="cf">with</span> products of <span class="dv">2</span></span>
@@ -354,17 +534,15 @@ displacements).</p>
 <span id="cb45-15"><a href="syntax-and-grammar.html#cb45-15" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> arr[i]</span>
 <span id="cb45-16"><a href="syntax-and-grammar.html#cb45-16" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
 <span id="cb45-17"><a href="syntax-and-grammar.html#cb45-17" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
-<span id="cb45-18"><a href="syntax-and-grammar.html#cb45-18" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ...</span>
-<span id="cb45-19"><a href="syntax-and-grammar.html#cb45-19" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
+<span id="cb45-18"><a href="syntax-and-grammar.html#cb45-18" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">&#39;The sum is &#39;</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ...</span>
+<span id="cb45-19"><a href="syntax-and-grammar.html#cb45-19" aria-hidden="true" tabindex="-1"></a>           <span class="st">&#39; and the product is &#39;</span> <span class="op">+</span> string(prod))</span>
 <span id="cb45-20"><a href="syntax-and-grammar.html#cb45-20" aria-hidden="true" tabindex="-1"></a>end</span>
 <span id="cb45-21"><a href="syntax-and-grammar.html#cb45-21" aria-hidden="true" tabindex="-1"></a><span class="at">@array_operation</span></span></code></pre></div>
 <p>In this example, an array is created and filled with numbers. The loop while construct is used to loop over the array entries and the sum and product are computed and output.</p>
 <p>A map, on the other hand, is an associative container, meaning that one can access the members of a map by an integer or string used to insert a value in the map. Maps can dynamically be resized and added to one another (appending maps together), and are the preferred constructs for storing lists of FISH variables for later access.</p>
 </div>
 <div id="map-example" class="section level4" number="5.12.5.2">
-<h4>
-<span class="header-section-number">5.12.5.2</span> Map example<a class="anchor" aria-label="anchor" href="#map-example"><i class="fas fa-link"></i></a>
-</h4>
+<h4><span class="header-section-number">5.12.5.2</span> Map example</h4>
 <div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="syntax-and-grammar.html#cb46-1" aria-hidden="true" tabindex="-1"></a>model new</span>
 <span id="cb46-2"><a href="syntax-and-grammar.html#cb46-2" aria-hidden="true" tabindex="-1"></a>fish define map_operation</span>
 <span id="cb46-3"><a href="syntax-and-grammar.html#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>create <span class="kw">and</span> populate a <span class="bu">map</span> <span class="cf">with</span> products of <span class="dv">2</span></span>
@@ -380,17 +558,15 @@ displacements).</p>
 <span id="cb46-13"><a href="syntax-and-grammar.html#cb46-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="bu">sum</span> <span class="op">+</span> n</span>
 <span id="cb46-14"><a href="syntax-and-grammar.html#cb46-14" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> n</span>
 <span id="cb46-15"><a href="syntax-and-grammar.html#cb46-15" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
-<span id="cb46-16"><a href="syntax-and-grammar.html#cb46-16" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ...</span>
-<span id="cb46-17"><a href="syntax-and-grammar.html#cb46-17" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
+<span id="cb46-16"><a href="syntax-and-grammar.html#cb46-16" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">&#39;The sum is &#39;</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ...</span>
+<span id="cb46-17"><a href="syntax-and-grammar.html#cb46-17" aria-hidden="true" tabindex="-1"></a>           <span class="st">&#39; and the product is &#39;</span> <span class="op">+</span> string(prod))</span>
 <span id="cb46-18"><a href="syntax-and-grammar.html#cb46-18" aria-hidden="true" tabindex="-1"></a>end</span>
 <span id="cb46-19"><a href="syntax-and-grammar.html#cb46-19" aria-hidden="true" tabindex="-1"></a><span class="at">@map_operation</span></span></code></pre></div>
 <p>Unlike with arrays, maps can be looped through using the loop foreach construct. In this case, n is the value held in each map entry, not the integer name of the object in the map. Likewise, instead of using integers to insert objects into the map, one could use strings such as first, second, etc. This allows one to easily and efficiently store and access FISH variables by a user-defined name.</p>
 </div>
 </div>
 <div id="fish-function" class="section level3" number="5.12.6">
-<h3>
-<span class="header-section-number">5.12.6</span> Fish Function<a class="anchor" aria-label="anchor" href="#fish-function"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">5.12.6</span> Fish Function</h3>
 <p>FISH functions to calculate bulk and shear moduli</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="syntax-and-grammar.html#cb47-1" aria-hidden="true" tabindex="-1"></a>model new</span>
 <span id="cb47-2"><a href="syntax-and-grammar.html#cb47-2" aria-hidden="true" tabindex="-1"></a>fish define derive(y_mod,p_ratio)</span>
@@ -407,64 +583,69 @@ displacements).</p>
 </div>
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="grid.html"><span class="header-section-number">4</span> Grid</a></div>
-<div class="next"><a href="code-block.html"><span class="header-section-number">6</span> Code Block</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#syntax-and-grammar"><span class="header-section-number">5</span> Syntax and Grammar</a></li>
-<li><a class="nav-link" href="#introduction"><span class="header-section-number">5.1</span> Introduction</a></li>
-<li><a class="nav-link" href="#zones-3"><span class="header-section-number">5.2</span> Zones</a></li>
-<li><a class="nav-link" href="#properties-2"><span class="header-section-number">5.3</span> Properties</a></li>
-<li><a class="nav-link" href="#gridpoints"><span class="header-section-number">5.4</span> Gridpoints</a></li>
-<li><a class="nav-link" href="#structural-elements"><span class="header-section-number">5.5</span> Structural Elements</a></li>
-<li><a class="nav-link" href="#extra-variables"><span class="header-section-number">5.6</span> Extra Variables</a></li>
-<li><a class="nav-link" href="#groups-and-b.c."><span class="header-section-number">5.7</span> Groups and B.C.</a></li>
-<li><a class="nav-link" href="#parameteric-studies"><span class="header-section-number">5.8</span> Parameteric Studies</a></li>
-<li>
-<a class="nav-link" href="#results-1"><span class="header-section-number">5.9</span> Results</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#measuring-time-of-calculation"><span class="header-section-number">5.9.1</span> Measuring time of calculation</a></li></ul>
-</li>
-<li>
-<a class="nav-link" href="#setting-fish-variables"><span class="header-section-number">5.10</span> Setting FISH variables</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#issuing-command"><span class="header-section-number">5.10.1</span> Issuing Command</a></li></ul>
-</li>
-<li><a class="nav-link" href="#string"><span class="header-section-number">5.11</span> String</a></li>
-<li>
-<a class="nav-link" href="#fish-syntax"><span class="header-section-number">5.12</span> Fish Syntax</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#use-of"><span class="header-section-number">5.12.1</span> Use of …</a></li>
-<li><a class="nav-link" href="#variable-types"><span class="header-section-number">5.12.2</span> Variable Types</a></li>
-<li><a class="nav-link" href="#traditional-for-loop-in-fish"><span class="header-section-number">5.12.3</span> Traditional for loop in FISH</a></li>
-<li><a class="nav-link" href="#if-else-endif-construct"><span class="header-section-number">5.12.4</span> if else endif construct</a></li>
-<li><a class="nav-link" href="#arrays-and-maps"><span class="header-section-number">5.12.5</span> Arrays and Maps</a></li>
-<li><a class="nav-link" href="#fish-function"><span class="header-section-number">5.12.6</span> Fish Function</a></li>
-</ul>
-</li>
-</ul>
+            </section>
 
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/ulyngs/oxforddown/blob/master/01-how-to-use.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/ulyngs/oxforddown/edit/master/01-how-to-use.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
-</div>
-    </nav>
-</div>
-
-</div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong><p><code>FLAC3D</code> Gitbook</p></strong>" was written by Kyeong Sun Kim. </p>
+          </div>
+        </div>
+      </div>
+<a href="grid.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="code-block.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
   </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/kyeongsunkim/mynewtest01-how-to-use.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
 
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -476,22 +657,7 @@ displacements).</p>
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
 </script>
 </body>
+
 </html>
