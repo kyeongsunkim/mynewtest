@@ -90,8 +90,9 @@ reference-collective
 uplift-resistance-of-anchor-plate
 before-1968
 post-1968
+post-2000
 numerical-analysis
 standards
 textbook
 ph.d-thesis
-award-lecture
+awarded-lectures

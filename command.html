@@ -16,9 +16,9 @@
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="templates/bs4_style.css">
 <link rel="stylesheet" href="templates/corrections.css">
-<meta name="description" content="8.1 Interface  8.1.1 zone face group zone face group s keyword …  Example:  ```python zone face group 'wall' internal range group 'wall-c' group 'pile' Adds a group name ‘wall’ to zone faces...">
-<meta property="og:description" content="8.1 Interface  8.1.1 zone face group zone face group s keyword …  Example:  ```python zone face group 'wall' internal range group 'wall-c' group 'pile' Adds a group name ‘wall’ to zone faces...">
-<meta name="twitter:description" content="8.1 Interface  8.1.1 zone face group zone face group s keyword …  Example:  ```python zone face group 'wall' internal range group 'wall-c' group 'pile' Adds a group name ‘wall’ to zone faces...">
+<meta name="description" content="8.1 Interface  8.1.1 zone face group zone face group s keyword ... &lt;range&gt; Example: zone face group 'wall' internal range group 'wall-c' group 'pile' Adds a group name ‘wall’ to zone faces...">
+<meta property="og:description" content="8.1 Interface  8.1.1 zone face group zone face group s keyword ... &lt;range&gt; Example: zone face group 'wall' internal range group 'wall-c' group 'pile' Adds a group name ‘wall’ to zone faces...">
+<meta name="twitter:description" content="8.1 Interface  8.1.1 zone face group zone face group s keyword ... &lt;range&gt; Example: zone face group 'wall' internal range group 'wall-c' group 'pile' Adds a group name ‘wall’ to zone faces...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -71,12 +71,9 @@
 <h3>
 <span class="header-section-number">8.1.1</span> zone face group<a class="anchor" aria-label="anchor" href="#zone-face-group"><i class="fas fa-link"></i></a>
 </h3>
-<p>zone face group s keyword … <range></range></p>
-<pre><code>
-Example: 
-
-```python
-zone face group 'wall' internal range group 'wall-c' group 'pile'</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="command.html#cb55-1" aria-hidden="true" tabindex="-1"></a>zone face group s keyword ... <span class="op">&lt;</span><span class="bu">range</span><span class="op">&gt;</span> </span></code></pre></div>
+<p>Example:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="command.html#cb56-1" aria-hidden="true" tabindex="-1"></a>zone face group <span class="st">'wall'</span> internal <span class="bu">range</span> group <span class="st">'wall-c'</span> group <span class="st">'pile'</span></span></code></pre></div>
 <p>Adds a group name ‘wall’ to zone faces included in the optional range.
 Also can be used with zone face group “slotname = groupname”
 Zone face may belong to many groups, up to 128.
@@ -92,7 +89,7 @@ If specified, then the range looks at internal faces as well as surface faces.</
 <h3>
 <span class="header-section-number">8.1.2</span> zone face skin<a class="anchor" aria-label="anchor" href="#zone-face-skin"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="command.html#cb56-1" aria-hidden="true" tabindex="-1"></a>zone face skin</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="command.html#cb57-1" aria-hidden="true" tabindex="-1"></a>zone face skin</span></code></pre></div>
 <p>Generates contiguous face groups by skinning.</p>
 <p>“skinning” refers to automatic face group generation, which occurs as follows: the program looks for contiguous faces and puts them into automatically named groups within the slot named skin. Two faces are not considered contiguous if the angle between two faces exceeds the break angle, or if the two faces belong to different groups according to the command’s slot specification.
 Unless internal is specified, the operation of zone face skin is restricted to external faces. Only zone faces that have no zone on the other side, a hidden zone on the other side are considered surface faces.
@@ -105,11 +102,11 @@ sEast, sWest, sNorth, sSouth, sTop, sBottom</p>
 <h3>
 <span class="header-section-number">8.1.3</span> zone separate<a class="anchor" aria-label="anchor" href="#zone-separate"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="command.html#cb57-1" aria-hidden="true" tabindex="-1"></a>zone separete by<span class="op">-</span>face new<span class="op">-</span>side group <span class="st">'iwall'</span> slot <span class="st">'int'</span> <span class="bu">range</span> group <span class="st">'wall'</span> <span class="kw">or</span> <span class="st">'base'</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="command.html#cb58-1" aria-hidden="true" tabindex="-1"></a>zone separete by<span class="op">-</span>face new<span class="op">-</span>side group <span class="st">'iwall'</span> slot <span class="st">'int'</span> <span class="bu">range</span> group <span class="st">'wall'</span> <span class="kw">or</span> <span class="st">'base'</span></span></code></pre></div>
 <p>separates internal faces specified by the range. The gridpoints of the face are duplicated, and new face is created. New faces and gridpoints get copies of all group and extra variable assignments belonging to the original face and gridpoint.</p>
 <p>Example:
 If Fred and George are group names assigned to zones, then</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="command.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="bu">range</span> group <span class="st">'Fred'</span> group <span class="st">'George'</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="command.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="bu">range</span> group <span class="st">'Fred'</span> group <span class="st">'George'</span></span></code></pre></div>
 <p>will select faces that are connected to zone of both group Fred and George.</p>
 <p>keyword:
 - by-face: attempts to separate all internal faces in the range
@@ -120,9 +117,9 @@ The default slot, is named Default.</p>
 <h3>
 <span class="header-section-number">8.1.4</span> zone interface create<a class="anchor" aria-label="anchor" href="#zone-interface-create"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="command.html#cb59-1" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'side'</span> create by<span class="op">-</span>face <span class="bu">range</span> group <span class="st">'wall'</span> <span class="kw">and</span> <span class="st">'iwall'</span></span>
-<span id="cb59-2"><a href="command.html#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-3"><a href="command.html#cb59-3" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'side'</span> node <span class="bu">property</span> stiffness<span class="op">-</span>normal <span class="fl">1e8</span> stiffness<span class="op">-</span>shear <span class="fl">1e8</span> friction <span class="dv">20</span> cohesion <span class="dv">30000</span></span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="command.html#cb60-1" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'side'</span> create by<span class="op">-</span>face <span class="bu">range</span> group <span class="st">'wall'</span> <span class="kw">and</span> <span class="st">'iwall'</span></span>
+<span id="cb60-2"><a href="command.html#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="command.html#cb60-3" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'side'</span> node <span class="bu">property</span> stiffness<span class="op">-</span>normal <span class="fl">1e8</span> stiffness<span class="op">-</span>shear <span class="fl">1e8</span> friction <span class="dv">20</span> cohesion <span class="dv">30000</span></span></code></pre></div>
 <p>creates nodes or elements on interface side</p>
 <p>There are two techniques for creating an interface.
 1. To derive an interface from a range of zone faces using by-face keyword.
