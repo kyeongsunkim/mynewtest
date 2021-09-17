@@ -47,7 +47,6 @@ parameteric-studies
 setting-fish-variables
 issuing-command
 string
-kaist-model-code
 fish-syntax
 use-of
 variable-types
@@ -58,6 +57,9 @@ arrays-and-maps
 array-example
 map-example
 fish-function
+code-block
+some-code
+kiast-model
 template
 problem-description-2
 modeling-procedure-1

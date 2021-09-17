@@ -1175,153 +1175,6 @@ Always use the zone attach by-face command after the zone densify command if the
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{kaist-model-code}{%
-\section{KAIST Model Code}\label{kaist-model-code}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ itasca }\ImportTok{as}\NormalTok{ it}
-\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
-\NormalTok{np.set\_printoptions(threshold}\OperatorTok{=}\DecValTok{20}\NormalTok{)}
-\NormalTok{it.command(}\StringTok{"python{-}reset{-}state false"}\NormalTok{)}
-\ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ zonearray }\ImportTok{as}\NormalTok{ za}
-\ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ gridpointarray }\ImportTok{as}\NormalTok{ gpa}
-\CommentTok{" =========================================== "}
-\CommentTok{" =============GRID GENERATION=============== "}
-\CommentTok{" =========================================== "}
-\CommentTok{\#}
-\NormalTok{it.command(}\StringTok{"""}
-\StringTok{model new}
-\StringTok{zone create radial{-}cylinder point 0 (0,0,0) ...}
-\StringTok{                            point 1 (40,0,0) ...}
-\StringTok{                            point 2 (0,10,0) ...}
-\StringTok{                            point 3 (0,0,40) ...}
-\StringTok{                            point 4 (40,10,0) ...}
-\StringTok{                            point 5 (0,10,40) ...}
-\StringTok{                            point 6 (40,0,40) ...}
-\StringTok{                            point 7 (40,10,40) ...}
-\StringTok{                            point 8 (1,0,0) ...}
-\StringTok{                            point 9 (0,0,1) ...}
-\StringTok{                            point 10 (1,10,0) ...}
-\StringTok{                            point 11 (0,10,1) ...}
-\StringTok{                            size 10 20 26 40 ...}
-\StringTok{                            rat 1 1 1 1.5 ...}
-\StringTok{                            fill group "shaft"}
-\StringTok{zone group "plate" range position{-}x 0 3.2 position{-}y 8.5 10 position{-}z 0 3.2}
-\StringTok{"""}\NormalTok{)}
-
-\CommentTok{" =========================================== "}
-\CommentTok{" ============GROUPS AND MASKS=============== "}
-\CommentTok{" =========================================== "}
-
-\CommentTok{" GROUPS AND MASK ARRAYS "}
-\NormalTok{it.command(}\StringTok{"zone group }\CharTok{\textbackslash{}"}\StringTok{lower}\CharTok{\textbackslash{}"}\StringTok{ range position{-}z 0 5"}\NormalTok{)}
-\NormalTok{za.in\_group(}\StringTok{"lower"}\NormalTok{)}
-\NormalTok{za.in\_group(}\StringTok{"lower"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in lower group."}
-\NormalTok{corner\_mask }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (x}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{, y}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{, z}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{))}
-\NormalTok{za.set\_group(corner\_mask, }\StringTok{"corner"}\NormalTok{, }\StringTok{"geometry"}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{ za.in\_group(}\StringTok{"corner"}\NormalTok{, }\StringTok{"geometry"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in corner group."}
-
-\CommentTok{" GRIDPOINTS ARRAY FUNCTIONS "}
-\NormalTok{gpos }\OperatorTok{=}\NormalTok{ gpa.pos()}
-\NormalTok{gx, gy, gz }\OperatorTok{=}\NormalTok{ gpos.T}
-\BuiltInTok{print}\NormalTok{ gz}
-\NormalTok{f }\OperatorTok{=}\NormalTok{ gpa.fixity()}
-\BuiltInTok{print}\NormalTok{ f}
-\NormalTok{f[:,][gz}\OperatorTok{==}\DecValTok{0}\NormalTok{] }\OperatorTok{=} \VariableTok{True}\NormalTok{, }\VariableTok{True}\NormalTok{, }\VariableTok{True}
-\BuiltInTok{print}\NormalTok{ f}
-\NormalTok{gpa.set\_fixity(f)}
-
-\NormalTok{top\_gridpoints }\OperatorTok{=}\NormalTok{ gz}\OperatorTok{==}\DecValTok{10}
-\NormalTok{radial\_distance }\OperatorTok{=}\NormalTok{ np.sqrt((gx}\OperatorTok{{-}}\DecValTok{5}\NormalTok{)}\OperatorTok{**}\DecValTok{2}\OperatorTok{+}\NormalTok{(gy}\OperatorTok{{-}}\DecValTok{5}\NormalTok{)}\OperatorTok{**}\DecValTok{2}\NormalTok{)}
-\NormalTok{central\_gridpoints }\OperatorTok{=}\NormalTok{ radial\_distance }\OperatorTok{\textless{}} \DecValTok{5}
-\NormalTok{mask }\OperatorTok{=}\NormalTok{ np.logical\_and(top\_gridpoints, central\_gridpoints)}
-\BuiltInTok{print} \StringTok{"boundary load applied to }\SpecialCharTok{\{\}}\StringTok{ gridpoints"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(mask.}\BuiltInTok{sum}\NormalTok{())}
-\NormalTok{fapp }\OperatorTok{=}\NormalTok{ gpa.force\_app()}
-\BuiltInTok{print}\NormalTok{ fapp}
-\NormalTok{fapp[:,}\DecValTok{2}\NormalTok{] }\OperatorTok{=}\NormalTok{ mask}\OperatorTok{*}\FloatTok{1e6}\OperatorTok{*}\NormalTok{(}\FloatTok{5.0}\OperatorTok{{-}}\NormalTok{radial\_distance)}\OperatorTok{/}\FloatTok{5.0}
-\NormalTok{gpa.set\_force\_app(fapp)}
-
-
-\BuiltInTok{print} \StringTok{"zone centroids: "}
-\BuiltInTok{print}\NormalTok{ za.pos()}
-\NormalTok{za.gridpoints()}
-\NormalTok{za.faces()}
-\NormalTok{za.ids()}
-\BuiltInTok{print}\NormalTok{ za.neighbors()}
-
-
-
-\CommentTok{" =========================================== "}
-\CommentTok{" ===============PROPERTIES================== "}
-\CommentTok{" =========================================== "}
-
-\NormalTok{it.command(}\StringTok{"""}
-\StringTok{zone cmodel assign elastic}
-\StringTok{zone property density 2950 young 12e9 poisson 0.25}
-\StringTok{cycle 1}
-\StringTok{"""}\NormalTok{)}
-
-
-\CommentTok{" =========================================== "}
-\CommentTok{" ==========BOUNDARY CONDITIONS============== "}
-\CommentTok{" =========================================== "}
-
-
-
-
-\CommentTok{" =========================================== "}
-\CommentTok{" =================RESULTS=================== "}
-\CommentTok{" =========================================== "}
-
-\NormalTok{it.command(}\StringTok{"model solve"}\NormalTok{)}
-\BuiltInTok{print} \StringTok{"gridpoint displacements:"}
-\BuiltInTok{print}\NormalTok{ gpa.disp()}
-\BuiltInTok{print} \StringTok{"gridpoint displacement magnitudes: "}
-\NormalTok{mag }\OperatorTok{=}\NormalTok{ np.linalg.norm(gpa.disp(), axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{ mag}
-\NormalTok{max\_index }\OperatorTok{=}\NormalTok{ np.argmax(mag)}
-\BuiltInTok{print} \StringTok{"Maximum displacement: }\SpecialCharTok{\{\}}\StringTok{ at location }\SpecialCharTok{\{\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(gpa.disp()[max\_index],}
-\NormalTok{                                              gpa.pos()[max\_index])}
-
-\BuiltInTok{print} \StringTok{"Vertical displacement along the vertical line x=5, y=5: from z=0 to z=10"}
-\BuiltInTok{print}\NormalTok{ gpa.disp()[np.logical\_and(gx}\OperatorTok{==}\DecValTok{5}\NormalTok{, gy}\OperatorTok{==}\DecValTok{5}\NormalTok{)][:,}\DecValTok{2}\NormalTok{]}
-
-\NormalTok{za.stress()}
-
-\NormalTok{za.stress\_flat()}
-
-
-\CommentTok{" =========================================== "}
-\CommentTok{" =========REFERENCE EXAMPLES================ "}
-\CommentTok{" =========================================== "}
-
-
-\CommentTok{""" Some Numpy Operation Examples}
-\CommentTok{np.array([1,2,3,4,5])}
-\CommentTok{np.linspace(0,1,15)}
-\CommentTok{np.zeros((4,4))}
-\CommentTok{a = np.linspace(0,1,15)}
-\CommentTok{b = np.ones\_like(a)}
-\CommentTok{np.sin(a)}
-\CommentTok{print a[0]}
-\CommentTok{a[0] = 20.2}
-\CommentTok{print a}
-\CommentTok{c = np.array(((1,2,3),(4,5,6),(7,8,9),(10,11,12)))}
-\CommentTok{print c}
-\CommentTok{c[0][0]}
-\CommentTok{c[:,0]}
-\CommentTok{"""}
-\CommentTok{""" SOME GRIDPOINTS EXAMPLES}
-\CommentTok{z = it.zone.near((5,5,5))}
-\CommentTok{print "central zone id: \{\}, position: \{\}".format(z.id(), z.pos())}
-
-\CommentTok{for gp in z.gridpoints():}
-\CommentTok{    print "gridpoint with id: \{\} at \{\}".format(gp.id(), gp.pos())}
-\CommentTok{"""}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{fish-syntax}{%
 \section{Fish Syntax}\label{fish-syntax}}
 
@@ -1534,6 +1387,196 @@ FISH functions to calculate bulk and shear moduli
 \NormalTok{[derive(}\FloatTok{5e8}\NormalTok{,}\FloatTok{0.25}\NormalTok{)]}
 \NormalTok{[b\_mod] }
 \NormalTok{[s\_mod]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{code-block}{%
+\chapter{Code Block}\label{code-block}}
+
+\hypertarget{some-code}{%
+\section{Some Code}\label{some-code}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ itasca }\ImportTok{as}\NormalTok{ it}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\NormalTok{np.set\_printoptions(threshold}\OperatorTok{=}\DecValTok{20}\NormalTok{)}
+\NormalTok{it.command(}\StringTok{"python{-}reset{-}state false"}\NormalTok{)}
+\ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ zonearray }\ImportTok{as}\NormalTok{ za}
+\ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ gridpointarray }\ImportTok{as}\NormalTok{ gpa}
+
+\CommentTok{" GROUPS AND MASK ARRAYS "}
+\NormalTok{it.command(}\StringTok{"zone group }\CharTok{\textbackslash{}"}\StringTok{lower}\CharTok{\textbackslash{}"}\StringTok{ range position{-}z 0 5"}\NormalTok{)}
+\NormalTok{za.in\_group(}\StringTok{"lower"}\NormalTok{)}
+\NormalTok{za.in\_group(}\StringTok{"lower"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in lower group."}
+\NormalTok{corner\_mask }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (x}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{, y}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{, z}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{))}
+\NormalTok{za.set\_group(corner\_mask, }\StringTok{"corner"}\NormalTok{, }\StringTok{"geometry"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{ za.in\_group(}\StringTok{"corner"}\NormalTok{, }\StringTok{"geometry"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in corner group."}
+
+\CommentTok{" GRIDPOINTS ARRAY FUNCTIONS "}
+\NormalTok{gpos }\OperatorTok{=}\NormalTok{ gpa.pos()}
+\NormalTok{gx, gy, gz }\OperatorTok{=}\NormalTok{ gpos.T}
+\BuiltInTok{print}\NormalTok{ gz}
+\NormalTok{f }\OperatorTok{=}\NormalTok{ gpa.fixity()}
+\BuiltInTok{print}\NormalTok{ f}
+\NormalTok{f[:,][gz}\OperatorTok{==}\DecValTok{0}\NormalTok{] }\OperatorTok{=} \VariableTok{True}\NormalTok{, }\VariableTok{True}\NormalTok{, }\VariableTok{True}
+\BuiltInTok{print}\NormalTok{ f}
+\NormalTok{gpa.set\_fixity(f)}
+
+\NormalTok{top\_gridpoints }\OperatorTok{=}\NormalTok{ gz}\OperatorTok{==}\DecValTok{10}
+\NormalTok{radial\_distance }\OperatorTok{=}\NormalTok{ np.sqrt((gx}\OperatorTok{{-}}\DecValTok{5}\NormalTok{)}\OperatorTok{**}\DecValTok{2}\OperatorTok{+}\NormalTok{(gy}\OperatorTok{{-}}\DecValTok{5}\NormalTok{)}\OperatorTok{**}\DecValTok{2}\NormalTok{)}
+\NormalTok{central\_gridpoints }\OperatorTok{=}\NormalTok{ radial\_distance }\OperatorTok{\textless{}} \DecValTok{5}
+\NormalTok{mask }\OperatorTok{=}\NormalTok{ np.logical\_and(top\_gridpoints, central\_gridpoints)}
+\BuiltInTok{print} \StringTok{"boundary load applied to }\SpecialCharTok{\{\}}\StringTok{ gridpoints"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(mask.}\BuiltInTok{sum}\NormalTok{())}
+\NormalTok{fapp }\OperatorTok{=}\NormalTok{ gpa.force\_app()}
+\BuiltInTok{print}\NormalTok{ fapp}
+\NormalTok{fapp[:,}\DecValTok{2}\NormalTok{] }\OperatorTok{=}\NormalTok{ mask}\OperatorTok{*}\FloatTok{1e6}\OperatorTok{*}\NormalTok{(}\FloatTok{5.0}\OperatorTok{{-}}\NormalTok{radial\_distance)}\OperatorTok{/}\FloatTok{5.0}
+\NormalTok{gpa.set\_force\_app(fapp)}
+
+\BuiltInTok{print} \StringTok{"zone centroids: "}
+\BuiltInTok{print}\NormalTok{ za.pos()}
+\NormalTok{za.gridpoints()}
+\NormalTok{za.faces()}
+\NormalTok{za.ids()}
+\BuiltInTok{print}\NormalTok{ za.neighbors()}
+
+
+
+\CommentTok{" =========================================== "}
+\CommentTok{" =================RESULTS=================== "}
+\CommentTok{" =========================================== "}
+
+\NormalTok{it.command(}\StringTok{"model solve"}\NormalTok{)}
+\BuiltInTok{print} \StringTok{"gridpoint displacements:"}
+\BuiltInTok{print}\NormalTok{ gpa.disp()}
+\BuiltInTok{print} \StringTok{"gridpoint displacement magnitudes: "}
+\NormalTok{mag }\OperatorTok{=}\NormalTok{ np.linalg.norm(gpa.disp(), axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{ mag}
+\NormalTok{max\_index }\OperatorTok{=}\NormalTok{ np.argmax(mag)}
+\BuiltInTok{print} \StringTok{"Maximum displacement: }\SpecialCharTok{\{\}}\StringTok{ at location }\SpecialCharTok{\{\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(gpa.disp()[max\_index],}
+\NormalTok{                                              gpa.pos()[max\_index])}
+
+\BuiltInTok{print} \StringTok{"Vertical displacement along the vertical line x=5, y=5: from z=0 to z=10"}
+\BuiltInTok{print}\NormalTok{ gpa.disp()[np.logical\_and(gx}\OperatorTok{==}\DecValTok{5}\NormalTok{, gy}\OperatorTok{==}\DecValTok{5}\NormalTok{)][:,}\DecValTok{2}\NormalTok{]}
+
+\NormalTok{za.stress()}
+
+\NormalTok{za.stress\_flat()}
+
+
+\CommentTok{" =========================================== "}
+\CommentTok{" =========REFERENCE EXAMPLES================ "}
+\CommentTok{" =========================================== "}
+
+
+\CommentTok{""" Some Numpy Operation Examples}
+\CommentTok{np.array([1,2,3,4,5])}
+\CommentTok{np.linspace(0,1,15)}
+\CommentTok{np.zeros((4,4))}
+\CommentTok{a = np.linspace(0,1,15)}
+\CommentTok{b = np.ones\_like(a)}
+\CommentTok{np.sin(a)}
+\CommentTok{print a[0]}
+\CommentTok{a[0] = 20.2}
+\CommentTok{print a}
+\CommentTok{c = np.array(((1,2,3),(4,5,6),(7,8,9),(10,11,12)))}
+\CommentTok{print c}
+\CommentTok{c[0][0]}
+\CommentTok{c[:,0]}
+\CommentTok{"""}
+\CommentTok{""" SOME GRIDPOINTS EXAMPLES}
+\CommentTok{z = it.zone.near((5,5,5))}
+\CommentTok{print "central zone id: \{\}, position: \{\}".format(z.id(), z.pos())}
+
+\CommentTok{for gp in z.gridpoints():}
+\CommentTok{    print "gridpoint with id: \{\} at \{\}".format(gp.id(), gp.pos())}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{kiast-model}{%
+\section{KIAST Model}\label{kiast-model}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ itasca }\ImportTok{as}\NormalTok{ it}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\NormalTok{np.set\_printoptions(threshold}\OperatorTok{=}\DecValTok{20}\NormalTok{)}
+\NormalTok{it.command(}\StringTok{"python{-}reset{-}state false"}\NormalTok{)}
+\ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ zonearray }\ImportTok{as}\NormalTok{ za}
+\ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ gridpointarray }\ImportTok{as}\NormalTok{ gpa}
+
+\NormalTok{command\_template\_zone }\OperatorTok{=} \StringTok{"""}
+\StringTok{model new}
+\StringTok{zone create radial{-}cylinder point 0 (0,0,0) ...}
+\StringTok{                            point 1 (40,0,0) ...}
+\StringTok{                            point 2 (0,10,0) ...}
+\StringTok{                            point 3 (0,0,40) ...}
+\StringTok{                            point 4 (40,10,0) ...}
+\StringTok{                            point 5 (0,10,40) ...}
+\StringTok{                            point 6 (40,0,40) ...}
+\StringTok{                            point 7 (40,10,40) ...}
+\StringTok{                            point 8 (1,0,0) ...}
+\StringTok{                            point 9 (0,0,1) ...}
+\StringTok{                            point 10 (1,10,0) ...}
+\StringTok{                            point 11 (0,10,1) ...}
+\StringTok{                            size }\SpecialCharTok{\{radial\}}\StringTok{ }\SpecialCharTok{\{axial\}}\StringTok{ }\SpecialCharTok{\{perimeter\}}\StringTok{ }\SpecialCharTok{\{outer\}}\StringTok{ ...}
+\StringTok{                            rat 1 1 1 1.5 ...}
+\StringTok{                            fill group "shaft"}
+\StringTok{"""}
+
+\NormalTok{\_radial }\OperatorTok{=} \DecValTok{10}
+\NormalTok{\_axial }\OperatorTok{=} \DecValTok{20}
+\NormalTok{\_perimeter }\OperatorTok{=} \DecValTok{26} 
+\NormalTok{\_outer }\OperatorTok{=} \DecValTok{40}
+
+\NormalTok{command }\OperatorTok{=}\NormalTok{ command\_template\_zone.}\BuiltInTok{format}\NormalTok{(radial}\OperatorTok{=}\NormalTok{\_radial, axial }\OperatorTok{=}\NormalTok{ \_axial, perimeter }\OperatorTok{=}\NormalTok{ \_perimeter, outer }\OperatorTok{=}\NormalTok{ \_outer)}
+\NormalTok{it.command(command)}
+
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone group "plate" range position{-}x 0 3.2 position{-}y 8.5 10 position{-}z 0 3.2}
+\StringTok{"""}\NormalTok{)}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone cmodel assign strain{-}softening range group "Radial Cylinder1"}
+\StringTok{zone property density 2500 bulk 2e8 shear 1e8 range group "Radial Cylinder1"}
+\StringTok{zone property cohesion 2e6 friction 45 tension 2e5 dilation 10 range group "Radial Cylinder1"}
+\StringTok{zone property table{-}friction \textquotesingle{}fri\textquotesingle{} table{-}cohesion \textquotesingle{}coh\textquotesingle{} table{-}dilation \textquotesingle{}dil\textquotesingle{} range group "Radial Cylinder1"}
+\StringTok{table \textquotesingle{}fri\textquotesingle{} add (0, 45) (.05, 42) (.1, 40) (1, 40)}
+\StringTok{table \textquotesingle{}coh\textquotesingle{} add (0,2e6) (.05,1e6) (.1,5e5) (1,5e5) }
+\StringTok{table \textquotesingle{}dil\textquotesingle{} add (0, 10) (.05,  3) (.1,  0) }
+\StringTok{;Constitutive modeland properties for shaft and plate}
+\StringTok{zone cmodel assign elastic range group \textquotesingle{}shaft\textquotesingle{}}
+\StringTok{zone property bulk }\SpecialCharTok{\{name\}}\StringTok{  shear 10.4e9  range group \textquotesingle{}shaft\textquotesingle{}}
+\StringTok{zone cmodel assign elastic range group \textquotesingle{}plate\textquotesingle{}}
+\StringTok{zone property bulk }\SpecialCharTok{\{name\}}\StringTok{  shear 10.4e9  range group \textquotesingle{}plate\textquotesingle{}}
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(name}\OperatorTok{=}\FloatTok{13.9e9}\NormalTok{))}
+
+
+\NormalTok{p }\OperatorTok{=}\NormalTok{ za.pos()}
+\BuiltInTok{type}\NormalTok{(p)}
+\NormalTok{p.shape}
+\NormalTok{it.zone.count()}
+\NormalTok{x,y,z }\OperatorTok{=}\NormalTok{ p.T}
+\NormalTok{upper\_zones }\OperatorTok{=}\NormalTok{ z }\OperatorTok{\textgreater{}} \FloatTok{1.5}
+\BuiltInTok{print}\NormalTok{((upper\_zones).}\BuiltInTok{sum}\NormalTok{())}
+
+\NormalTok{modulus }\OperatorTok{=}\NormalTok{ np.zeros\_like(x) }\CommentTok{\#create array same shape as x}
+\NormalTok{modulus[upper\_zones] }\OperatorTok{=} \FloatTok{1.2e10}\CommentTok{\#specify all upper zones have modulus 1.2e10}
+\NormalTok{lower\_zones }\OperatorTok{=}\NormalTok{ np.logical\_not(upper\_zones)}
+\NormalTok{modulus[lower\_zones] }\OperatorTok{=} \FloatTok{1.6e10}
+\NormalTok{za.set\_prop\_scalar(}\StringTok{"young"}\NormalTok{, modulus)}
+
+\NormalTok{it.command(}\StringTok{"zone group }\CharTok{\textbackslash{}"}\StringTok{lower}\CharTok{\textbackslash{}"}\StringTok{ range position{-}z 0 5"}\NormalTok{)}
+\NormalTok{za.in\_group(}\StringTok{"lower"}\NormalTok{)}
+\NormalTok{za.in\_group(}\StringTok{"lower"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{() }\CommentTok{\#how many zones within specific group}
+
+\CommentTok{\#refine this by getting corners}
+\CommentTok{\#create a new mask}
+\NormalTok{corner\_mask }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (x}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{, y}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{, z}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{)) }\CommentTok{\#reduce is simply applying logical and x\textless{}3, y\textless{}3, z\textless{}3}
+\NormalTok{za.set\_group(corner\_mask, }\StringTok{"corner"}\NormalTok{, }\StringTok{"geometry"}\NormalTok{) }\CommentTok{\# set the zones with corner\_mask = true have "corner" and "geometry"}
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"corner"}\NormalTok{, }\StringTok{"geometry"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in corner group."}\NormalTok{) }\CommentTok{\#output how many zones are in the corner group}
 \end{Highlighting}
 \end{Shaded}
 

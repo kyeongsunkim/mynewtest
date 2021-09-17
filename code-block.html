@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>6 Code Block | FLAC3D Gitbook</title>
+<meta name="author" content="Kyeong Sun Kim">
+<meta name="generator" content="bookdown 0.23 with bs4_book()">
+<meta property="og:title" content="6 Code Block | FLAC3D Gitbook">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="6 Code Block | FLAC3D Gitbook">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="templates/bs4_style.css">
+<link rel="stylesheet" href="templates/corrections.css">
+<meta name="description" content='6.1 Some Code import itasca as it import numpy as np np.set_printoptions(threshold=20) it.command("python-reset-state false") from itasca import zonearray as za from itasca import gridpointarray...'>
+<meta property="og:description" content='6.1 Some Code import itasca as it import numpy as np np.set_printoptions(threshold=20) it.command("python-reset-state false") from itasca import zonearray as za from itasca import gridpointarray...'>
+<meta name="twitter:description" content='6.1 Some Code import itasca as it import numpy as np np.set_printoptions(threshold=20) it.command("python-reset-state false") from itasca import zonearray as za from itasca import gridpointarray...'>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""><p><code>FLAC3D</code> Gitbook</p></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="kaist-model.html"><span class="header-section-number">1</span> KAIST Model</a></li>
+<li><a class="" href="axial-concrete-pile.html"><span class="header-section-number">2</span> Axial Concrete Pile</a></li>
+<li><a class="" href="pull-tests.html"><span class="header-section-number">3</span> Pull-Tests</a></li>
+<li><a class="" href="grid.html"><span class="header-section-number">4</span> Grid</a></li>
+<li><a class="" href="syntax-and-grammar.html"><span class="header-section-number">5</span> Syntax and Grammar</a></li>
+<li><a class="active" href="code-block.html"><span class="header-section-number">6</span> Code Block</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="template.html"><span class="header-section-number">A</span> 1. Template</a></li>
+<li><a class="" href="reference-collective.html"><span class="header-section-number">B</span> Reference Collective</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/ulyngs/oxforddown">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="code-block" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Code Block<a class="anchor" aria-label="anchor" href="#code-block"><i class="fas fa-link"></i></a>
+</h1>
+<div id="some-code" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Some Code<a class="anchor" aria-label="anchor" href="#some-code"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="code-block.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
+<span id="cb46-2"><a href="code-block.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb46-3"><a href="code-block.html#cb46-3" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(threshold<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb46-4"><a href="code-block.html#cb46-4" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"python-reset-state false"</span>)</span>
+<span id="cb46-5"><a href="code-block.html#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> zonearray <span class="im">as</span> za</span>
+<span id="cb46-6"><a href="code-block.html#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> gridpointarray <span class="im">as</span> gpa</span>
+<span id="cb46-7"><a href="code-block.html#cb46-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-8"><a href="code-block.html#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="co">" GROUPS AND MASK ARRAYS "</span></span>
+<span id="cb46-9"><a href="code-block.html#cb46-9" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"zone group </span><span class="ch">\"</span><span class="st">lower</span><span class="ch">\"</span><span class="st"> range position-z 0 5"</span>)</span>
+<span id="cb46-10"><a href="code-block.html#cb46-10" aria-hidden="true" tabindex="-1"></a>za.in_group(<span class="st">"lower"</span>)</span>
+<span id="cb46-11"><a href="code-block.html#cb46-11" aria-hidden="true" tabindex="-1"></a>za.in_group(<span class="st">"lower"</span>).<span class="bu">sum</span>(), <span class="st">"zones in lower group."</span></span>
+<span id="cb46-12"><a href="code-block.html#cb46-12" aria-hidden="true" tabindex="-1"></a>corner_mask <span class="op">=</span> <span class="bu">reduce</span>(np.logical_and, (x<span class="op">&lt;</span><span class="dv">3</span>, y<span class="op">&lt;</span><span class="dv">3</span>, z<span class="op">&lt;</span><span class="dv">3</span>))</span>
+<span id="cb46-13"><a href="code-block.html#cb46-13" aria-hidden="true" tabindex="-1"></a>za.set_group(corner_mask, <span class="st">"corner"</span>, <span class="st">"geometry"</span>)</span>
+<span id="cb46-14"><a href="code-block.html#cb46-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> za.in_group(<span class="st">"corner"</span>, <span class="st">"geometry"</span>).<span class="bu">sum</span>(), <span class="st">"zones in corner group."</span></span>
+<span id="cb46-15"><a href="code-block.html#cb46-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-16"><a href="code-block.html#cb46-16" aria-hidden="true" tabindex="-1"></a><span class="co">" GRIDPOINTS ARRAY FUNCTIONS "</span></span>
+<span id="cb46-17"><a href="code-block.html#cb46-17" aria-hidden="true" tabindex="-1"></a>gpos <span class="op">=</span> gpa.pos()</span>
+<span id="cb46-18"><a href="code-block.html#cb46-18" aria-hidden="true" tabindex="-1"></a>gx, gy, gz <span class="op">=</span> gpos.T</span>
+<span id="cb46-19"><a href="code-block.html#cb46-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> gz</span>
+<span id="cb46-20"><a href="code-block.html#cb46-20" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> gpa.fixity()</span>
+<span id="cb46-21"><a href="code-block.html#cb46-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> f</span>
+<span id="cb46-22"><a href="code-block.html#cb46-22" aria-hidden="true" tabindex="-1"></a>f[:,][gz<span class="op">==</span><span class="dv">0</span>] <span class="op">=</span> <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span></span>
+<span id="cb46-23"><a href="code-block.html#cb46-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> f</span>
+<span id="cb46-24"><a href="code-block.html#cb46-24" aria-hidden="true" tabindex="-1"></a>gpa.set_fixity(f)</span>
+<span id="cb46-25"><a href="code-block.html#cb46-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-26"><a href="code-block.html#cb46-26" aria-hidden="true" tabindex="-1"></a>top_gridpoints <span class="op">=</span> gz<span class="op">==</span><span class="dv">10</span></span>
+<span id="cb46-27"><a href="code-block.html#cb46-27" aria-hidden="true" tabindex="-1"></a>radial_distance <span class="op">=</span> np.sqrt((gx<span class="op">-</span><span class="dv">5</span>)<span class="op">**</span><span class="dv">2</span><span class="op">+</span>(gy<span class="op">-</span><span class="dv">5</span>)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb46-28"><a href="code-block.html#cb46-28" aria-hidden="true" tabindex="-1"></a>central_gridpoints <span class="op">=</span> radial_distance <span class="op">&lt;</span> <span class="dv">5</span></span>
+<span id="cb46-29"><a href="code-block.html#cb46-29" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.logical_and(top_gridpoints, central_gridpoints)</span>
+<span id="cb46-30"><a href="code-block.html#cb46-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"boundary load applied to </span><span class="sc">{}</span><span class="st"> gridpoints"</span>.<span class="bu">format</span>(mask.<span class="bu">sum</span>())</span>
+<span id="cb46-31"><a href="code-block.html#cb46-31" aria-hidden="true" tabindex="-1"></a>fapp <span class="op">=</span> gpa.force_app()</span>
+<span id="cb46-32"><a href="code-block.html#cb46-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> fapp</span>
+<span id="cb46-33"><a href="code-block.html#cb46-33" aria-hidden="true" tabindex="-1"></a>fapp[:,<span class="dv">2</span>] <span class="op">=</span> mask<span class="op">*</span><span class="fl">1e6</span><span class="op">*</span>(<span class="fl">5.0</span><span class="op">-</span>radial_distance)<span class="op">/</span><span class="fl">5.0</span></span>
+<span id="cb46-34"><a href="code-block.html#cb46-34" aria-hidden="true" tabindex="-1"></a>gpa.set_force_app(fapp)</span>
+<span id="cb46-35"><a href="code-block.html#cb46-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-36"><a href="code-block.html#cb46-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"zone centroids: "</span></span>
+<span id="cb46-37"><a href="code-block.html#cb46-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> za.pos()</span>
+<span id="cb46-38"><a href="code-block.html#cb46-38" aria-hidden="true" tabindex="-1"></a>za.gridpoints()</span>
+<span id="cb46-39"><a href="code-block.html#cb46-39" aria-hidden="true" tabindex="-1"></a>za.faces()</span>
+<span id="cb46-40"><a href="code-block.html#cb46-40" aria-hidden="true" tabindex="-1"></a>za.ids()</span>
+<span id="cb46-41"><a href="code-block.html#cb46-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> za.neighbors()</span>
+<span id="cb46-42"><a href="code-block.html#cb46-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-43"><a href="code-block.html#cb46-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-44"><a href="code-block.html#cb46-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-45"><a href="code-block.html#cb46-45" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb46-46"><a href="code-block.html#cb46-46" aria-hidden="true" tabindex="-1"></a><span class="co">" =================RESULTS=================== "</span></span>
+<span id="cb46-47"><a href="code-block.html#cb46-47" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb46-48"><a href="code-block.html#cb46-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-49"><a href="code-block.html#cb46-49" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"model solve"</span>)</span>
+<span id="cb46-50"><a href="code-block.html#cb46-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"gridpoint displacements:"</span></span>
+<span id="cb46-51"><a href="code-block.html#cb46-51" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> gpa.disp()</span>
+<span id="cb46-52"><a href="code-block.html#cb46-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"gridpoint displacement magnitudes: "</span></span>
+<span id="cb46-53"><a href="code-block.html#cb46-53" aria-hidden="true" tabindex="-1"></a>mag <span class="op">=</span> np.linalg.norm(gpa.disp(), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb46-54"><a href="code-block.html#cb46-54" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> mag</span>
+<span id="cb46-55"><a href="code-block.html#cb46-55" aria-hidden="true" tabindex="-1"></a>max_index <span class="op">=</span> np.argmax(mag)</span>
+<span id="cb46-56"><a href="code-block.html#cb46-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"Maximum displacement: </span><span class="sc">{}</span><span class="st"> at location </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(gpa.disp()[max_index],</span>
+<span id="cb46-57"><a href="code-block.html#cb46-57" aria-hidden="true" tabindex="-1"></a>                                              gpa.pos()[max_index])</span>
+<span id="cb46-58"><a href="code-block.html#cb46-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-59"><a href="code-block.html#cb46-59" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"Vertical displacement along the vertical line x=5, y=5: from z=0 to z=10"</span></span>
+<span id="cb46-60"><a href="code-block.html#cb46-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> gpa.disp()[np.logical_and(gx<span class="op">==</span><span class="dv">5</span>, gy<span class="op">==</span><span class="dv">5</span>)][:,<span class="dv">2</span>]</span>
+<span id="cb46-61"><a href="code-block.html#cb46-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-62"><a href="code-block.html#cb46-62" aria-hidden="true" tabindex="-1"></a>za.stress()</span>
+<span id="cb46-63"><a href="code-block.html#cb46-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-64"><a href="code-block.html#cb46-64" aria-hidden="true" tabindex="-1"></a>za.stress_flat()</span>
+<span id="cb46-65"><a href="code-block.html#cb46-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-66"><a href="code-block.html#cb46-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-67"><a href="code-block.html#cb46-67" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb46-68"><a href="code-block.html#cb46-68" aria-hidden="true" tabindex="-1"></a><span class="co">" =========REFERENCE EXAMPLES================ "</span></span>
+<span id="cb46-69"><a href="code-block.html#cb46-69" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb46-70"><a href="code-block.html#cb46-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-71"><a href="code-block.html#cb46-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-72"><a href="code-block.html#cb46-72" aria-hidden="true" tabindex="-1"></a><span class="co">""" Some Numpy Operation Examples</span></span>
+<span id="cb46-73"><a href="code-block.html#cb46-73" aria-hidden="true" tabindex="-1"></a><span class="co">np.array([1,2,3,4,5])</span></span>
+<span id="cb46-74"><a href="code-block.html#cb46-74" aria-hidden="true" tabindex="-1"></a><span class="co">np.linspace(0,1,15)</span></span>
+<span id="cb46-75"><a href="code-block.html#cb46-75" aria-hidden="true" tabindex="-1"></a><span class="co">np.zeros((4,4))</span></span>
+<span id="cb46-76"><a href="code-block.html#cb46-76" aria-hidden="true" tabindex="-1"></a><span class="co">a = np.linspace(0,1,15)</span></span>
+<span id="cb46-77"><a href="code-block.html#cb46-77" aria-hidden="true" tabindex="-1"></a><span class="co">b = np.ones_like(a)</span></span>
+<span id="cb46-78"><a href="code-block.html#cb46-78" aria-hidden="true" tabindex="-1"></a><span class="co">np.sin(a)</span></span>
+<span id="cb46-79"><a href="code-block.html#cb46-79" aria-hidden="true" tabindex="-1"></a><span class="co">print a[0]</span></span>
+<span id="cb46-80"><a href="code-block.html#cb46-80" aria-hidden="true" tabindex="-1"></a><span class="co">a[0] = 20.2</span></span>
+<span id="cb46-81"><a href="code-block.html#cb46-81" aria-hidden="true" tabindex="-1"></a><span class="co">print a</span></span>
+<span id="cb46-82"><a href="code-block.html#cb46-82" aria-hidden="true" tabindex="-1"></a><span class="co">c = np.array(((1,2,3),(4,5,6),(7,8,9),(10,11,12)))</span></span>
+<span id="cb46-83"><a href="code-block.html#cb46-83" aria-hidden="true" tabindex="-1"></a><span class="co">print c</span></span>
+<span id="cb46-84"><a href="code-block.html#cb46-84" aria-hidden="true" tabindex="-1"></a><span class="co">c[0][0]</span></span>
+<span id="cb46-85"><a href="code-block.html#cb46-85" aria-hidden="true" tabindex="-1"></a><span class="co">c[:,0]</span></span>
+<span id="cb46-86"><a href="code-block.html#cb46-86" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb46-87"><a href="code-block.html#cb46-87" aria-hidden="true" tabindex="-1"></a><span class="co">""" SOME GRIDPOINTS EXAMPLES</span></span>
+<span id="cb46-88"><a href="code-block.html#cb46-88" aria-hidden="true" tabindex="-1"></a><span class="co">z = it.zone.near((5,5,5))</span></span>
+<span id="cb46-89"><a href="code-block.html#cb46-89" aria-hidden="true" tabindex="-1"></a><span class="co">print "central zone id: {}, position: {}".format(z.id(), z.pos())</span></span>
+<span id="cb46-90"><a href="code-block.html#cb46-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-91"><a href="code-block.html#cb46-91" aria-hidden="true" tabindex="-1"></a><span class="co">for gp in z.gridpoints():</span></span>
+<span id="cb46-92"><a href="code-block.html#cb46-92" aria-hidden="true" tabindex="-1"></a><span class="co">    print "gridpoint with id: {} at {}".format(gp.id(), gp.pos())</span></span>
+<span id="cb46-93"><a href="code-block.html#cb46-93" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+</div>
+<div id="kiast-model" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> KIAST Model<a class="anchor" aria-label="anchor" href="#kiast-model"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="code-block.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
+<span id="cb47-2"><a href="code-block.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb47-3"><a href="code-block.html#cb47-3" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(threshold<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb47-4"><a href="code-block.html#cb47-4" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"python-reset-state false"</span>)</span>
+<span id="cb47-5"><a href="code-block.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> zonearray <span class="im">as</span> za</span>
+<span id="cb47-6"><a href="code-block.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> gridpointarray <span class="im">as</span> gpa</span>
+<span id="cb47-7"><a href="code-block.html#cb47-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-8"><a href="code-block.html#cb47-8" aria-hidden="true" tabindex="-1"></a>command_template_zone <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb47-9"><a href="code-block.html#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="st">model new</span></span>
+<span id="cb47-10"><a href="code-block.html#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="st">zone create radial-cylinder point 0 (0,0,0) ...</span></span>
+<span id="cb47-11"><a href="code-block.html#cb47-11" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 1 (40,0,0) ...</span></span>
+<span id="cb47-12"><a href="code-block.html#cb47-12" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 2 (0,10,0) ...</span></span>
+<span id="cb47-13"><a href="code-block.html#cb47-13" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 3 (0,0,40) ...</span></span>
+<span id="cb47-14"><a href="code-block.html#cb47-14" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 4 (40,10,0) ...</span></span>
+<span id="cb47-15"><a href="code-block.html#cb47-15" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 5 (0,10,40) ...</span></span>
+<span id="cb47-16"><a href="code-block.html#cb47-16" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 6 (40,0,40) ...</span></span>
+<span id="cb47-17"><a href="code-block.html#cb47-17" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 7 (40,10,40) ...</span></span>
+<span id="cb47-18"><a href="code-block.html#cb47-18" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 8 (1,0,0) ...</span></span>
+<span id="cb47-19"><a href="code-block.html#cb47-19" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 9 (0,0,1) ...</span></span>
+<span id="cb47-20"><a href="code-block.html#cb47-20" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 10 (1,10,0) ...</span></span>
+<span id="cb47-21"><a href="code-block.html#cb47-21" aria-hidden="true" tabindex="-1"></a><span class="st">                            point 11 (0,10,1) ...</span></span>
+<span id="cb47-22"><a href="code-block.html#cb47-22" aria-hidden="true" tabindex="-1"></a><span class="st">                            size </span><span class="sc">{radial}</span><span class="st"> </span><span class="sc">{axial}</span><span class="st"> </span><span class="sc">{perimeter}</span><span class="st"> </span><span class="sc">{outer}</span><span class="st"> ...</span></span>
+<span id="cb47-23"><a href="code-block.html#cb47-23" aria-hidden="true" tabindex="-1"></a><span class="st">                            rat 1 1 1 1.5 ...</span></span>
+<span id="cb47-24"><a href="code-block.html#cb47-24" aria-hidden="true" tabindex="-1"></a><span class="st">                            fill group "shaft"</span></span>
+<span id="cb47-25"><a href="code-block.html#cb47-25" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb47-26"><a href="code-block.html#cb47-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-27"><a href="code-block.html#cb47-27" aria-hidden="true" tabindex="-1"></a>_radial <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb47-28"><a href="code-block.html#cb47-28" aria-hidden="true" tabindex="-1"></a>_axial <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb47-29"><a href="code-block.html#cb47-29" aria-hidden="true" tabindex="-1"></a>_perimeter <span class="op">=</span> <span class="dv">26</span> </span>
+<span id="cb47-30"><a href="code-block.html#cb47-30" aria-hidden="true" tabindex="-1"></a>_outer <span class="op">=</span> <span class="dv">40</span></span>
+<span id="cb47-31"><a href="code-block.html#cb47-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-32"><a href="code-block.html#cb47-32" aria-hidden="true" tabindex="-1"></a>command <span class="op">=</span> command_template_zone.<span class="bu">format</span>(radial<span class="op">=</span>_radial, axial <span class="op">=</span> _axial, perimeter <span class="op">=</span> _perimeter, outer <span class="op">=</span> _outer)</span>
+<span id="cb47-33"><a href="code-block.html#cb47-33" aria-hidden="true" tabindex="-1"></a>it.command(command)</span>
+<span id="cb47-34"><a href="code-block.html#cb47-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-35"><a href="code-block.html#cb47-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-36"><a href="code-block.html#cb47-36" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
+<span id="cb47-37"><a href="code-block.html#cb47-37" aria-hidden="true" tabindex="-1"></a><span class="st">zone group "plate" range position-x 0 3.2 position-y 8.5 10 position-z 0 3.2</span></span>
+<span id="cb47-38"><a href="code-block.html#cb47-38" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
+<span id="cb47-39"><a href="code-block.html#cb47-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-40"><a href="code-block.html#cb47-40" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
+<span id="cb47-41"><a href="code-block.html#cb47-41" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign strain-softening range group "Radial Cylinder1"</span></span>
+<span id="cb47-42"><a href="code-block.html#cb47-42" aria-hidden="true" tabindex="-1"></a><span class="st">zone property density 2500 bulk 2e8 shear 1e8 range group "Radial Cylinder1"</span></span>
+<span id="cb47-43"><a href="code-block.html#cb47-43" aria-hidden="true" tabindex="-1"></a><span class="st">zone property cohesion 2e6 friction 45 tension 2e5 dilation 10 range group "Radial Cylinder1"</span></span>
+<span id="cb47-44"><a href="code-block.html#cb47-44" aria-hidden="true" tabindex="-1"></a><span class="st">zone property table-friction 'fri' table-cohesion 'coh' table-dilation 'dil' range group "Radial Cylinder1"</span></span>
+<span id="cb47-45"><a href="code-block.html#cb47-45" aria-hidden="true" tabindex="-1"></a><span class="st">table 'fri' add (0, 45) (.05, 42) (.1, 40) (1, 40)</span></span>
+<span id="cb47-46"><a href="code-block.html#cb47-46" aria-hidden="true" tabindex="-1"></a><span class="st">table 'coh' add (0,2e6) (.05,1e6) (.1,5e5) (1,5e5) </span></span>
+<span id="cb47-47"><a href="code-block.html#cb47-47" aria-hidden="true" tabindex="-1"></a><span class="st">table 'dil' add (0, 10) (.05,  3) (.1,  0) </span></span>
+<span id="cb47-48"><a href="code-block.html#cb47-48" aria-hidden="true" tabindex="-1"></a><span class="st">;Constitutive modeland properties for shaft and plate</span></span>
+<span id="cb47-49"><a href="code-block.html#cb47-49" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic range group 'shaft'</span></span>
+<span id="cb47-50"><a href="code-block.html#cb47-50" aria-hidden="true" tabindex="-1"></a><span class="st">zone property bulk </span><span class="sc">{name}</span><span class="st">  shear 10.4e9  range group 'shaft'</span></span>
+<span id="cb47-51"><a href="code-block.html#cb47-51" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic range group 'plate'</span></span>
+<span id="cb47-52"><a href="code-block.html#cb47-52" aria-hidden="true" tabindex="-1"></a><span class="st">zone property bulk </span><span class="sc">{name}</span><span class="st">  shear 10.4e9  range group 'plate'</span></span>
+<span id="cb47-53"><a href="code-block.html#cb47-53" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>.<span class="bu">format</span>(name<span class="op">=</span><span class="fl">13.9e9</span>))</span>
+<span id="cb47-54"><a href="code-block.html#cb47-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-55"><a href="code-block.html#cb47-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-56"><a href="code-block.html#cb47-56" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> za.pos()</span>
+<span id="cb47-57"><a href="code-block.html#cb47-57" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(p)</span>
+<span id="cb47-58"><a href="code-block.html#cb47-58" aria-hidden="true" tabindex="-1"></a>p.shape</span>
+<span id="cb47-59"><a href="code-block.html#cb47-59" aria-hidden="true" tabindex="-1"></a>it.zone.count()</span>
+<span id="cb47-60"><a href="code-block.html#cb47-60" aria-hidden="true" tabindex="-1"></a>x,y,z <span class="op">=</span> p.T</span>
+<span id="cb47-61"><a href="code-block.html#cb47-61" aria-hidden="true" tabindex="-1"></a>upper_zones <span class="op">=</span> z <span class="op">&gt;</span> <span class="fl">1.5</span></span>
+<span id="cb47-62"><a href="code-block.html#cb47-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((upper_zones).<span class="bu">sum</span>())</span>
+<span id="cb47-63"><a href="code-block.html#cb47-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-64"><a href="code-block.html#cb47-64" aria-hidden="true" tabindex="-1"></a>modulus <span class="op">=</span> np.zeros_like(x) <span class="co">#create array same shape as x</span></span>
+<span id="cb47-65"><a href="code-block.html#cb47-65" aria-hidden="true" tabindex="-1"></a>modulus[upper_zones] <span class="op">=</span> <span class="fl">1.2e10</span><span class="co">#specify all upper zones have modulus 1.2e10</span></span>
+<span id="cb47-66"><a href="code-block.html#cb47-66" aria-hidden="true" tabindex="-1"></a>lower_zones <span class="op">=</span> np.logical_not(upper_zones)</span>
+<span id="cb47-67"><a href="code-block.html#cb47-67" aria-hidden="true" tabindex="-1"></a>modulus[lower_zones] <span class="op">=</span> <span class="fl">1.6e10</span></span>
+<span id="cb47-68"><a href="code-block.html#cb47-68" aria-hidden="true" tabindex="-1"></a>za.set_prop_scalar(<span class="st">"young"</span>, modulus)</span>
+<span id="cb47-69"><a href="code-block.html#cb47-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-70"><a href="code-block.html#cb47-70" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"zone group </span><span class="ch">\"</span><span class="st">lower</span><span class="ch">\"</span><span class="st"> range position-z 0 5"</span>)</span>
+<span id="cb47-71"><a href="code-block.html#cb47-71" aria-hidden="true" tabindex="-1"></a>za.in_group(<span class="st">"lower"</span>)</span>
+<span id="cb47-72"><a href="code-block.html#cb47-72" aria-hidden="true" tabindex="-1"></a>za.in_group(<span class="st">"lower"</span>).<span class="bu">sum</span>() <span class="co">#how many zones within specific group</span></span>
+<span id="cb47-73"><a href="code-block.html#cb47-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-74"><a href="code-block.html#cb47-74" aria-hidden="true" tabindex="-1"></a><span class="co">#refine this by getting corners</span></span>
+<span id="cb47-75"><a href="code-block.html#cb47-75" aria-hidden="true" tabindex="-1"></a><span class="co">#create a new mask</span></span>
+<span id="cb47-76"><a href="code-block.html#cb47-76" aria-hidden="true" tabindex="-1"></a>corner_mask <span class="op">=</span> <span class="bu">reduce</span>(np.logical_and, (x<span class="op">&lt;</span><span class="dv">3</span>, y<span class="op">&lt;</span><span class="dv">3</span>, z<span class="op">&lt;</span><span class="dv">3</span>)) <span class="co">#reduce is simply applying logical and x&lt;3, y&lt;3, z&lt;3</span></span>
+<span id="cb47-77"><a href="code-block.html#cb47-77" aria-hidden="true" tabindex="-1"></a>za.set_group(corner_mask, <span class="st">"corner"</span>, <span class="st">"geometry"</span>) <span class="co"># set the zones with corner_mask = true have "corner" and "geometry"</span></span>
+<span id="cb47-78"><a href="code-block.html#cb47-78" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(za.in_group(<span class="st">"corner"</span>, <span class="st">"geometry"</span>).<span class="bu">sum</span>(), <span class="st">"zones in corner group."</span>) <span class="co">#output how many zones are in the corner group</span></span></code></pre></div>
+
+</div>
+</div>
+
+
+
+<!--------------------------------------------------->
+<!--------------------------------------------------->
+<!--------------------------------------------------->
+<div class="chapter-nav">
+<div class="prev"><a href="syntax-and-grammar.html"><span class="header-section-number">5</span> Syntax and Grammar</a></div>
+<div class="next"><a href="template.html"><span class="header-section-number">A</span> 1. Template</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#code-block"><span class="header-section-number">6</span> Code Block</a></li>
+<li><a class="nav-link" href="#some-code"><span class="header-section-number">6.1</span> Some Code</a></li>
+<li><a class="nav-link" href="#kiast-model"><span class="header-section-number">6.2</span> KIAST Model</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/ulyngs/oxforddown/blob/master/01-how-to-use.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/ulyngs/oxforddown/edit/master/01-how-to-use.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+</div>
+  
+
+  
+
+</div>
+ <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong><p><code>FLAC3D</code> Gitbook</p></strong>" was written by Kyeong Sun Kim. </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
