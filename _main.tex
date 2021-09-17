@@ -1704,6 +1704,126 @@ Several rules should be followed when using interface elements in FLAC3D:\\
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/interface-theory}
 
+\hypertarget{command}{%
+\chapter{Command}\label{command}}
+
+\hypertarget{interface-1}{%
+\section{Interface}\label{interface-1}}
+
+\hypertarget{zone-face-group}{%
+\subsection{zone face group}\label{zone-face-group}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zone face group s keyword ... }\OperatorTok{\textless{}}\BuiltInTok{range}\OperatorTok{\textgreater{}} 
+\end{Highlighting}
+\end{Shaded}
+
+Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zone face group }\StringTok{\textquotesingle{}wall\textquotesingle{}}\NormalTok{ internal }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}wall{-}c\textquotesingle{}}\NormalTok{ group }\StringTok{\textquotesingle{}pile\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+Adds a group name `wall' to zone faces included in the optional range.
+Also can be used with zone face group ``slotname = groupname''
+Zone face may belong to many groups, up to 128.
+keywords: internal, or, remove.\\
+- internal: to select all faces.\\
+If specified, then the range looks at internal faces as well as surface faces.
+
+\begin{itemize}
+\item
+  or: considered inside the surface if any of those conditions has a non-null model.
+\item
+  remove: group is removed from the zone face.
+\end{itemize}
+
+\hypertarget{zone-face-skin}{%
+\subsection{zone face skin}\label{zone-face-skin}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zone face skin}
+\end{Highlighting}
+\end{Shaded}
+
+Generates contiguous face groups by skinning.
+
+``skinning'' refers to automatic face group generation, which occurs as follows: the program looks for contiguous faces and puts them into automatically named groups within the slot named skin. Two faces are not considered contiguous if the angle between two faces exceeds the break angle, or if the two faces belong to different groups according to the command's slot specification.
+Unless internal is specified, the operation of zone face skin is restricted to external faces. Only zone faces that have no zone on the other side, a hidden zone on the other side are considered surface faces.
+When use-hidden-zones is used, within specified range will be included for consideration.
+
+group names are generated as follows:
+sEast, sWest, sNorth, sSouth, sTop, sBottom
+
+Internal faces are assigned names of the group on either side that changed in order to create them.
+
+\hypertarget{zone-separate}{%
+\subsection{zone separate}\label{zone-separate}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zone separete by}\OperatorTok{{-}}\NormalTok{face new}\OperatorTok{{-}}\NormalTok{side group }\StringTok{\textquotesingle{}iwall\textquotesingle{}}\NormalTok{ slot }\StringTok{\textquotesingle{}int\textquotesingle{}} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}wall\textquotesingle{}} \KeywordTok{or} \StringTok{\textquotesingle{}base\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+separates internal faces specified by the range. The gridpoints of the face are duplicated, and new face is created. New faces and gridpoints get copies of all group and extra variable assignments belonging to the original face and gridpoint.
+
+Example:
+If Fred and George are group names assigned to zones, then
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}Fred\textquotesingle{}}\NormalTok{ group }\StringTok{\textquotesingle{}George\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+will select faces that are connected to zone of both group Fred and George.
+
+keyword:
+- by-face: attempts to separate all internal faces in the range
+- new-side group: newly created faces will be assigned the group name in the specified slot.
+The default slot, is named Default.
+
+\hypertarget{zone-interface-create}{%
+\subsection{zone interface create}\label{zone-interface-create}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zone interface }\StringTok{\textquotesingle{}side\textquotesingle{}}\NormalTok{ create by}\OperatorTok{{-}}\NormalTok{face }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}wall\textquotesingle{}} \KeywordTok{and} \StringTok{\textquotesingle{}iwall\textquotesingle{}}
+
+\NormalTok{zone interface }\StringTok{\textquotesingle{}side\textquotesingle{}}\NormalTok{ node }\BuiltInTok{property}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1e8}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1e8}\NormalTok{ friction }\DecValTok{20}\NormalTok{ cohesion }\DecValTok{30000}
+\end{Highlighting}
+\end{Shaded}
+
+creates nodes or elements on interface side
+
+There are two techniques for creating an interface.
+1. To derive an interface from a range of zone faces using by-face keyword.
+2. To specify a triangular interface element from 3 points.
+3. Command may also be used to construct an interface node that may be used with the element keyword.
+
+keyword:
+- by-face: interface elements are created on all surface zone faces that are within the specified range. An error will occur if interface elements from that interface already exist on the selected faces.
+If the optional separate keyword is used, then internal zone faces are selected by the range. The list of selected faces is then automatically separated (as with zone separate) and interface elements placed on one side. The following are for the separate keyword: new-side-origin, clear-attach.
+
+\begin{itemize}
+\tightlist
+\item
+  element point i keyword \ldots{} : create a triangular interface element by specifying 3 points. Three verticies must be specified by the following keyword. Each point can be created and located in space using the position keyword, or an existing interface node with ID i may be specified. The interface element that is created is not attached to a grid face even if the location corresponds to that of the face. the element is fixed in space. The active side of the element is defined by walking around the edge of the element, from point 1 to point 2 to point 3; the active side is up when walking in a clockwise direction.
+\end{itemize}
+
+For each point of the element, one of the following two keywords must be supplied: node i, position v.
+
+\begin{itemize}
+\tightlist
+\item
+  node v : this creates an interface node at position v. If a node already exists at the selected location, an error is reported. The created node is fixed in space.
+\end{itemize}
+
 \startappendices
 
 \hypertarget{template}{%

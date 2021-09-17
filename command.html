@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>8 Command | FLAC3D Gitbook</title>
+<meta name="author" content="Kyeong Sun Kim">
+<meta name="generator" content="bookdown 0.23 with bs4_book()">
+<meta property="og:title" content="8 Command | FLAC3D Gitbook">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="8 Command | FLAC3D Gitbook">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.9002/transition.js"></script><script src="libs/bs3compat-0.2.5.9002/tabs.js"></script><script src="libs/bs3compat-0.2.5.9002/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="templates/bs4_style.css">
+<link rel="stylesheet" href="templates/corrections.css">
+<meta name="description" content="8.1 Interface  8.1.1 zone face group zone face group s keyword ... &lt;range&gt; Example: zone face group 'wall' internal range group 'wall-c' group 'pile' Adds a group name ‘wall’ to zone faces...">
+<meta property="og:description" content="8.1 Interface  8.1.1 zone face group zone face group s keyword ... &lt;range&gt; Example: zone face group 'wall' internal range group 'wall-c' group 'pile' Adds a group name ‘wall’ to zone faces...">
+<meta name="twitter:description" content="8.1 Interface  8.1.1 zone face group zone face group s keyword ... &lt;range&gt; Example: zone face group 'wall' internal range group 'wall-c' group 'pile' Adds a group name ‘wall’ to zone faces...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""><p><code>FLAC3D</code> Gitbook</p></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="kaist-model.html"><span class="header-section-number">1</span> KAIST Model</a></li>
+<li><a class="" href="axial-concrete-pile.html"><span class="header-section-number">2</span> Axial Concrete Pile</a></li>
+<li><a class="" href="pull-tests.html"><span class="header-section-number">3</span> Pull-Tests</a></li>
+<li><a class="" href="grid.html"><span class="header-section-number">4</span> Grid</a></li>
+<li><a class="" href="syntax-and-grammar.html"><span class="header-section-number">5</span> Syntax and Grammar</a></li>
+<li><a class="" href="code-block.html"><span class="header-section-number">6</span> Code Block</a></li>
+<li><a class="" href="theory.html"><span class="header-section-number">7</span> Theory</a></li>
+<li><a class="active" href="command.html"><span class="header-section-number">8</span> Command</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="template.html"><span class="header-section-number">A</span> 1. Template</a></li>
+<li><a class="" href="reference-collective.html"><span class="header-section-number">B</span> Reference Collective</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/ulyngs/oxforddown">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="command" class="section level1" number="8">
+<h1>
+<span class="header-section-number">8</span> Command<a class="anchor" aria-label="anchor" href="#command"><i class="fas fa-link"></i></a>
+</h1>
+<div id="interface-1" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Interface<a class="anchor" aria-label="anchor" href="#interface-1"><i class="fas fa-link"></i></a>
+</h2>
+<div id="zone-face-group" class="section level3" number="8.1.1">
+<h3>
+<span class="header-section-number">8.1.1</span> zone face group<a class="anchor" aria-label="anchor" href="#zone-face-group"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="command.html#cb49-1" aria-hidden="true" tabindex="-1"></a>zone face group s keyword ... <span class="op">&lt;</span><span class="bu">range</span><span class="op">&gt;</span> </span></code></pre></div>
+<p>Example:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="command.html#cb50-1" aria-hidden="true" tabindex="-1"></a>zone face group <span class="st">'wall'</span> internal <span class="bu">range</span> group <span class="st">'wall-c'</span> group <span class="st">'pile'</span></span></code></pre></div>
+<p>Adds a group name ‘wall’ to zone faces included in the optional range.
+Also can be used with zone face group “slotname = groupname”
+Zone face may belong to many groups, up to 128.
+keywords: internal, or, remove.<br>
+- internal: to select all faces.<br>
+If specified, then the range looks at internal faces as well as surface faces.</p>
+<ul>
+<li><p>or: considered inside the surface if any of those conditions has a non-null model.</p></li>
+<li><p>remove: group is removed from the zone face.</p></li>
+</ul>
+</div>
+<div id="zone-face-skin" class="section level3" number="8.1.2">
+<h3>
+<span class="header-section-number">8.1.2</span> zone face skin<a class="anchor" aria-label="anchor" href="#zone-face-skin"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="command.html#cb51-1" aria-hidden="true" tabindex="-1"></a>zone face skin</span></code></pre></div>
+<p>Generates contiguous face groups by skinning.</p>
+<p>“skinning” refers to automatic face group generation, which occurs as follows: the program looks for contiguous faces and puts them into automatically named groups within the slot named skin. Two faces are not considered contiguous if the angle between two faces exceeds the break angle, or if the two faces belong to different groups according to the command’s slot specification.
+Unless internal is specified, the operation of zone face skin is restricted to external faces. Only zone faces that have no zone on the other side, a hidden zone on the other side are considered surface faces.
+When use-hidden-zones is used, within specified range will be included for consideration.</p>
+<p>group names are generated as follows:
+sEast, sWest, sNorth, sSouth, sTop, sBottom</p>
+<p>Internal faces are assigned names of the group on either side that changed in order to create them.</p>
+</div>
+<div id="zone-separate" class="section level3" number="8.1.3">
+<h3>
+<span class="header-section-number">8.1.3</span> zone separate<a class="anchor" aria-label="anchor" href="#zone-separate"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="command.html#cb52-1" aria-hidden="true" tabindex="-1"></a>zone separete by<span class="op">-</span>face new<span class="op">-</span>side group <span class="st">'iwall'</span> slot <span class="st">'int'</span> <span class="bu">range</span> group <span class="st">'wall'</span> <span class="kw">or</span> <span class="st">'base'</span></span></code></pre></div>
+<p>separates internal faces specified by the range. The gridpoints of the face are duplicated, and new face is created. New faces and gridpoints get copies of all group and extra variable assignments belonging to the original face and gridpoint.</p>
+<p>Example:
+If Fred and George are group names assigned to zones, then</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="command.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="bu">range</span> group <span class="st">'Fred'</span> group <span class="st">'George'</span></span></code></pre></div>
+<p>will select faces that are connected to zone of both group Fred and George.</p>
+<p>keyword:
+- by-face: attempts to separate all internal faces in the range
+- new-side group: newly created faces will be assigned the group name in the specified slot.
+The default slot, is named Default.</p>
+</div>
+<div id="zone-interface-create" class="section level3" number="8.1.4">
+<h3>
+<span class="header-section-number">8.1.4</span> zone interface create<a class="anchor" aria-label="anchor" href="#zone-interface-create"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="command.html#cb54-1" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'side'</span> create by<span class="op">-</span>face <span class="bu">range</span> group <span class="st">'wall'</span> <span class="kw">and</span> <span class="st">'iwall'</span></span>
+<span id="cb54-2"><a href="command.html#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="command.html#cb54-3" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'side'</span> node <span class="bu">property</span> stiffness<span class="op">-</span>normal <span class="fl">1e8</span> stiffness<span class="op">-</span>shear <span class="fl">1e8</span> friction <span class="dv">20</span> cohesion <span class="dv">30000</span></span></code></pre></div>
+<p>creates nodes or elements on interface side</p>
+<p>There are two techniques for creating an interface.
+1. To derive an interface from a range of zone faces using by-face keyword.
+2. To specify a triangular interface element from 3 points.
+3. Command may also be used to construct an interface node that may be used with the element keyword.</p>
+<p>keyword:
+- by-face: interface elements are created on all surface zone faces that are within the specified range. An error will occur if interface elements from that interface already exist on the selected faces.
+If the optional separate keyword is used, then internal zone faces are selected by the range. The list of selected faces is then automatically separated (as with zone separate) and interface elements placed on one side. The following are for the separate keyword: new-side-origin, clear-attach.</p>
+<ul>
+<li>element point i keyword … : create a triangular interface element by specifying 3 points. Three verticies must be specified by the following keyword. Each point can be created and located in space using the position keyword, or an existing interface node with ID i may be specified. The interface element that is created is not attached to a grid face even if the location corresponds to that of the face. the element is fixed in space. The active side of the element is defined by walking around the edge of the element, from point 1 to point 2 to point 3; the active side is up when walking in a clockwise direction.</li>
+</ul>
+<p>For each point of the element, one of the following two keywords must be supplied: node i, position v.</p>
+<ul>
+<li>node v : this creates an interface node at position v. If a node already exists at the selected location, an error is reported. The created node is fixed in space.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+<!--------------------------------------------------->
+<!--------------------------------------------------->
+<!--------------------------------------------------->
+<div class="chapter-nav">
+<div class="prev"><a href="theory.html"><span class="header-section-number">7</span> Theory</a></div>
+<div class="next"><a href="template.html"><span class="header-section-number">A</span> 1. Template</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#command"><span class="header-section-number">8</span> Command</a></li>
+<li>
+<a class="nav-link" href="#interface-1"><span class="header-section-number">8.1</span> Interface</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#zone-face-group"><span class="header-section-number">8.1.1</span> zone face group</a></li>
+<li><a class="nav-link" href="#zone-face-skin"><span class="header-section-number">8.1.2</span> zone face skin</a></li>
+<li><a class="nav-link" href="#zone-separate"><span class="header-section-number">8.1.3</span> zone separate</a></li>
+<li><a class="nav-link" href="#zone-interface-create"><span class="header-section-number">8.1.4</span> zone interface create</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/ulyngs/oxforddown/blob/master/01-how-to-use.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/ulyngs/oxforddown/edit/master/01-how-to-use.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+</div>
+  
+
+  
+
+</div>
+ <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong><p><code>FLAC3D</code> Gitbook</p></strong>" was written by Kyeong Sun Kim. </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
