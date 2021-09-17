@@ -63,7 +63,7 @@ code-block
 some-code
 interface
 penetration
-kiast-model
+kaist-model-1
 theory
 interface-1
 formulation

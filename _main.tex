@@ -1693,8 +1693,8 @@ zone property-distribution friction 45 deviation-gaussian 2
 Use of the variation keywords in any command (not just for property variation) is
 defined in the topic Value Modifiers (Add, Multiply, Gradient, Vary).
 
-\hypertarget{kiast-model}{%
-\section{KIAST Model}\label{kiast-model}}
+\hypertarget{kaist-model-1}{%
+\section{KAIST Model}\label{kaist-model-1}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1851,7 +1851,7 @@ Interfaces may also be used to join regions that have different zone sizes. In g
 
 FLAC3D represents interfaces as collections of triangular elements (interface elements), each of which is defined by three nodes (interface nodes). Interface elements can be created at any location in space. Generally, interface elements are attached to a zone surface face; two triangular interface elements are defined for every quadrilateral zone face. Interface nodes are then created automatically at every interface element vertex. When another grid surface comes into contact with an interface element, the contact is detected at the interface node and is characterized by normal and shear stiffnesses, and sliding properties.\\
 
-Each interface element distributes its area to its nodes in a weighted fashion. Each interface node has an associated representative area. The entire interface is thus divided into active interface nodes representing the total area of the interface. Figure 1 illustrates the relation between interface elements and interface nodes, and the representative area associated with an individual node.\\
+Each interface element distributes its area to its nodes in a weighted fashion. Each interface node has an associated representative area. The entire interface is thus divided into active interface nodes representing the total area of the interface. Figure 1 illustrates the relation between interface elements and interface nodes, and the representative area associated with an individual node.
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/interface-formulation}
 
@@ -1859,16 +1859,16 @@ It is important to note that interfaces are one-sided in FLAC3D. (This differs f
 
 The fundamental contact relation is defined between the interface node and a zone surface face, also known as the target face. The normal direction of the interface force is determined by the orientation of the target face.\\
 
-During each timestep, the absolute normal penetration and the relative shear velocity are calculated for each interface node and its contacting target face. Both of these values are then used by the interface constitutive model to calculate a normal force and a shear-force vector. The constitutive model is defined by a linear Coulomb shear-strength criterion that limits the shear force acting at an interface node, normal and shear stiffnesses, tensile and shear bond strengths, and a dilation angle that causes an increase in effective normal force on the target face after the shear-strength limit is reached. By default, pore pressure is used in the interface effective stress calculation. This option can be activated/deactivated using the command zone interface effective command by setting effective = on/off. Figure 2 illustrates the components of the constitutive model acting at interface node (P):\\
+During each timestep, the absolute normal penetration and the relative shear velocity are calculated for each interface node and its contacting target face. Both of these values are then used by the interface constitutive model to calculate a normal force and a shear-force vector. The constitutive model is defined by a linear Coulomb shear-strength criterion that limits the shear force acting at an interface node, normal and shear stiffnesses, tensile and shear bond strengths, and a dilation angle that causes an increase in effective normal force on the target face after the shear-strength limit is reached. By default, pore pressure is used in the interface effective stress calculation. This option can be activated/deactivated using the command zone interface effective command by setting effective = on/off. Figure 2 illustrates the components of the constitutive model acting at interface node (P):
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/interface-constitutive}
 
-The normal and shear forces that describe the elastic interface response are determined at calculation time \((t + \Delta t)\) using the relations:\\
+The normal and shear forces that describe the elastic interface response are determined at calculation time \((t + \Delta t)\) using the relations:
 
 \[ F_n^{(t + \Delta t)} = k_n u_n A + \sigma_n A  \]
 \[ F_{si}^{(t + \Delta t)} = F_{si}^{(t)} + k_s \Delta u_{si}^{(t + 0.5 \Delta t)} A + \sigma_{si} A\]
 
-The inelastic interface logic works in the following way:\\
+The inelastic interface logic works in the following way:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1888,10 +1888,10 @@ The default state of bonded-slip (if not given) is off.
   Coulomb sliding --- A bond is either intact or broken. If it is broken, then the behavior of the interface segment is determined by the friction and cohesion (and of course the stiffnesses). This is the default behavior, if bond strengths are not set (zero). A broken bond segment cannot take effective tension (which may occur under compressive normal force, if the pore pressure is greater). The shear force is zero (for a nonbonded segment) if the effective normal force is tensile or zero.\\
 \end{enumerate}
 
-The Coulomb shear-strength criterion limits the shear force by the relation:\\
+The Coulomb shear-strength criterion limits the shear force by the relation:
 
 \[ F_{smax} = c A + tan\phi (F_n - pA)\]
-During sliding, shear displacement may cause an increase in the effective normal stress on the joint, according to the relation:\\
+During sliding, shear displacement may cause an increase in the effective normal stress on the joint, according to the relation:
 
 \[\sigma_n := \sigma_n + \frac{|F_s|_o - F_{smax}}{A k_s} tan\psi k_n\]
 
