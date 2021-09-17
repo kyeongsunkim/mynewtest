@@ -1,3 +1,4 @@
+fig:unnamed-chunk-58
 kaist-model
 initial-configuration
 zones
@@ -43,6 +44,8 @@ structural-elements
 extra-variables
 groups-and-b.c.
 parameteric-studies
+results-1
+measuring-time-of-calculation
 setting-fish-variables
 issuing-command
 string
@@ -58,13 +61,18 @@ map-example
 fish-function
 code-block
 some-code
+interface
+penetration
 kiast-model
 theory
-interface
+interface-1
 formulation
 creation-of-interface-geometry
+typical-properties
+shear-dilatancy
+compression-test-on-strain-softening-material
 command
-interface-1
+interface-2
 zone-face-group
 zone-face-skin
 zone-separate
@@ -77,7 +85,7 @@ properties-3
 b.c.-and-i.c.-1
 initial-equilibrium-3
 alterations-3
-results-1
+results-2
 reference-collective
 uplift-resistance-of-anchor-plate
 before-1968

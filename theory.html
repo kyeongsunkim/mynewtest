@@ -63,9 +63,9 @@
 <h1>
 <span class="header-section-number">7</span> Theory<a class="anchor" aria-label="anchor" href="#theory"><i class="fas fa-link"></i></a>
 </h1>
-<div id="interface" class="section level2" number="7.1">
+<div id="interface-1" class="section level2" number="7.1">
 <h2>
-<span class="header-section-number">7.1</span> Interface<a class="anchor" aria-label="anchor" href="#interface"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1</span> Interface<a class="anchor" aria-label="anchor" href="#interface-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>There are several instances in geomechanics in which it is desirable to represent planes on which sliding or separation can occur. For example:<br></p>
 <ol style="list-style-type: decimal">
@@ -130,11 +130,93 @@ During sliding, shear displacement may cause an increase in the effective normal
 A simple example illustrating the procedure for interface creation is provided in “DippingJoint.f3dat.” The corresponding project file, “DippingJoint.f3prj,” is located in the folder “datafiles InterfaceDippingJoint.” The example is a block specimen containing a single joint dipping at an angle of <span class="math inline">\(45°\)</span>
 </li>
 </ol>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="theory.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Create interface elements on the top surface of the base        </span>
-<span id="cb48-2"><a href="theory.html#cb48-2" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'joint'</span> create by<span class="op">-</span>face separate <span class="bu">range</span> group <span class="st">'Top'</span> group <span class="st">'Base'</span></span>
-<span id="cb48-3"><a href="theory.html#cb48-3" aria-hidden="true" tabindex="-1"></a>model save <span class="st">'int1'</span></span>
-<span id="cb48-4"><a href="theory.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span></span></code></pre></div>
-<div class="inline-figure"><img src="myfigureeeeee/interface-theory.PNG" width="100%"></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="theory.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Create interface elements on the top surface of the base        </span>
+<span id="cb53-2"><a href="theory.html#cb53-2" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'joint'</span> create by<span class="op">-</span>face separate <span class="bu">range</span> group <span class="st">'Top'</span> group <span class="st">'Base'</span></span>
+<span id="cb53-3"><a href="theory.html#cb53-3" aria-hidden="true" tabindex="-1"></a>model save <span class="st">'int1'</span></span>
+<span id="cb53-4"><a href="theory.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span></span></code></pre></div>
+</div>
+<div id="typical-properties" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Typical Properties<a class="anchor" aria-label="anchor" href="#typical-properties"><i class="fas fa-link"></i></a>
+</h2>
+<div class="inline-figure"><img src="myfigureeeeee/typical_dilation.PNG" width="100%"></div>
+<p>Post-Failure Properties
+In many instances, particularly in mining engineering, the response of a material
+after failure has initiated is an important factor in the engineering design.
+Consequently, the post-failure behavior must be simulated in the material
+model. In FLAC3D, this is accomplished with properties that define four types of
+post failure response:
+1. shear dilatancy;
+2. shear hardening/softening;
+3. volumetric hardening/softening; and
+4. tensile softening.
+These properties are only activated after failure is initiated, as defined by the
+Mohr-Coulomb relation or the tensile-failure criterion. Shear dilatancy is
+simulated with the Mohr-Coulomb, ubiquitous-joint and strain-softening MohrCoulomb and ubiquitous-joint models. Shear hardening/softening is simulated
+with the strain-softening Mohr-Coulomb and ubiquitous-joint models, and
+volumetric hardening/softening is simulated with the modified Cam-clay model.
+Tensile softening is simulated with the strain-softening Mohr-Coulomb and
+ubiquitous-joint models</p>
+<div id="shear-dilatancy" class="section level3" number="7.4.1">
+<h3>
+<span class="header-section-number">7.4.1</span> Shear Dilatancy<a class="anchor" aria-label="anchor" href="#shear-dilatancy"><i class="fas fa-link"></i></a>
+</h3>
+<p><img src="myfigureeeeee/dil.PNG" width="100%">
+Shear dilatancy, or dilatancy, is the change in volume that occurs with shear
+distortion of a material. Dilatancy is characterized by a dilation angle, , which is
+related to the ratio of plastic volume change to plastic shear strain. This angle
+can be specified in the Mohr-Coulomb ubiquitous-joint and strain-hardening/
+softening models in FLAC3D. Dilation angle is typically determined from triaxial
+tests or shear-box tests. For example, the idealized relation for dilatancy, based
+upon the Mohr-Coulomb failure surface, is depicted for a triaxial test in the
+figure below. The dilation angle is found from the plot of volumetric strain
+versus axial strain. Note that the initial slope for this plot corresponds to the
+elastic regime, while the slope used to measure the dilation angle corresponds to
+the plastic regime
+<img src="myfigureeeeee/typical_angles.PNG" width="100%">
+Selected Strength Properties (drained, laboratory-scale) for Soils (Ortiz
+et al. 1980)</p>
+<div class="inline-figure"><img src="myfigureeeeee/typical_sand.PNG" width="100%"></div>
+</div>
+<div id="compression-test-on-strain-softening-material" class="section level3" number="7.4.2">
+<h3>
+<span class="header-section-number">7.4.2</span> Compression Test on strain-softening material<a class="anchor" aria-label="anchor" href="#compression-test-on-strain-softening-material"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="theory.html#cb54-1" aria-hidden="true" tabindex="-1"></a>model new</span>
+<span id="cb54-2"><a href="theory.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Create zones</span>
+<span id="cb54-3"><a href="theory.html#cb54-3" aria-hidden="true" tabindex="-1"></a>zone create cylinder point <span class="dv">0</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) point <span class="dv">1</span> (<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>) point <span class="dv">2</span> (<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">0</span>) ...</span>
+<span id="cb54-4"><a href="theory.html#cb54-4" aria-hidden="true" tabindex="-1"></a>point <span class="dv">3</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>) size <span class="dv">4</span> <span class="dv">5</span> <span class="dv">4</span></span>
+<span id="cb54-5"><a href="theory.html#cb54-5" aria-hidden="true" tabindex="-1"></a>zone reflect normal (<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb54-6"><a href="theory.html#cb54-6" aria-hidden="true" tabindex="-1"></a>zone reflect normal (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb54-7"><a href="theory.html#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Constitutive Model <span class="kw">and</span> properties</span>
+<span id="cb54-8"><a href="theory.html#cb54-8" aria-hidden="true" tabindex="-1"></a>zone cmodel assign strain<span class="op">-</span>softening</span>
+<span id="cb54-9"><a href="theory.html#cb54-9" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">1.19e10</span> shear <span class="fl">1.1e10</span></span>
+<span id="cb54-10"><a href="theory.html#cb54-10" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> cohesion <span class="fl">2.72e5</span> friction <span class="dv">44</span> tension <span class="fl">2e5</span></span>
+<span id="cb54-11"><a href="theory.html#cb54-11" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> table<span class="op">-</span>cohesion <span class="st">'coh'</span> table<span class="op">-</span>friction <span class="st">'fri'</span></span>
+<span id="cb54-12"><a href="theory.html#cb54-12" aria-hidden="true" tabindex="-1"></a>table <span class="st">'coh'</span> add (<span class="dv">0</span>,<span class="fl">2.72e5</span>) (<span class="fl">1e-4</span>,<span class="fl">2e5</span>) (<span class="fl">2e-4</span>,<span class="fl">1.5e5</span>) (<span class="fl">3e-4</span>,<span class="fl">1.03e5</span>) (<span class="dv">1</span>,<span class="fl">1.03e5</span>)</span>
+<span id="cb54-13"><a href="theory.html#cb54-13" aria-hidden="true" tabindex="-1"></a>table <span class="st">'fri'</span> add (<span class="dv">0</span>,<span class="dv">44</span>) (<span class="fl">1e-4</span>,<span class="dv">42</span>) (<span class="fl">2e-4</span>,<span class="dv">40</span>) (<span class="fl">3e-4</span>,<span class="dv">38</span>) (<span class="dv">1</span>,<span class="dv">38</span>)</span>
+<span id="cb54-14"><a href="theory.html#cb54-14" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Boundary Conditions</span>
+<span id="cb54-15"><a href="theory.html#cb54-15" aria-hidden="true" tabindex="-1"></a>zone face <span class="bu">apply</span> velocity (<span class="dv">0</span>, <span class="fl">1e-7</span>,<span class="dv">0</span>) <span class="bu">range</span> position<span class="op">-</span>y <span class="dv">0</span></span>
+<span id="cb54-16"><a href="theory.html#cb54-16" aria-hidden="true" tabindex="-1"></a>zone face <span class="bu">apply</span> velocity (<span class="dv">0</span>,<span class="op">-</span><span class="fl">1e-7</span>,<span class="dv">0</span>) <span class="bu">range</span> position<span class="op">-</span>y <span class="dv">2</span></span>
+<span id="cb54-17"><a href="theory.html#cb54-17" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Histories</span>
+<span id="cb54-18"><a href="theory.html#cb54-18" aria-hidden="true" tabindex="-1"></a>zone history displacement<span class="op">-</span>y position (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb54-19"><a href="theory.html#cb54-19" aria-hidden="true" tabindex="-1"></a>zone history stress<span class="op">-</span>yy position (<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb54-20"><a href="theory.html#cb54-20" aria-hidden="true" tabindex="-1"></a>zone history stress<span class="op">-</span>yy position (<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb54-21"><a href="theory.html#cb54-21" aria-hidden="true" tabindex="-1"></a>model step <span class="dv">3000</span></span>
+<span id="cb54-22"><a href="theory.html#cb54-22" aria-hidden="true" tabindex="-1"></a>model save <span class="st">'Softening'</span></span></code></pre></div>
+<div class="inline-figure">The horizontal stress-displacement response is monitored again, as shown in
+the image below. This test produces distinct peak and residual failure stress
+levels
+<img src="myfigureeeeee/softening.PNG" width="100%">
+</div>
+<p>The strain-softening model assumes both a brittle softening (due to reduction in
+cohesion) and a gradual softening (due to a reduction in friction angle). The
+selection of the properties is discussed further in Material Properties.
+Comparison of the two images above illustrates the different responses of the
+two models. The initial response up to the onset of failure is identical, but postfailure behavior is quite different. Clearly, more data are required to use the
+strain-softening model and, typically, the softening model must be calibrated for
+each specific problem.</p>
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -144,9 +226,15 @@ A simple example illustrating the procedure for interface creation is provided i
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#theory"><span class="header-section-number">7</span> Theory</a></li>
-<li><a class="nav-link" href="#interface"><span class="header-section-number">7.1</span> Interface</a></li>
+<li><a class="nav-link" href="#interface-1"><span class="header-section-number">7.1</span> Interface</a></li>
 <li><a class="nav-link" href="#formulation"><span class="header-section-number">7.2</span> Formulation</a></li>
 <li><a class="nav-link" href="#creation-of-interface-geometry"><span class="header-section-number">7.3</span> Creation of Interface Geometry</a></li>
+<li>
+<a class="nav-link" href="#typical-properties"><span class="header-section-number">7.4</span> Typical Properties</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#shear-dilatancy"><span class="header-section-number">7.4.1</span> Shear Dilatancy</a></li>
+<li><a class="nav-link" href="#compression-test-on-strain-softening-material"><span class="header-section-number">7.4.2</span> Compression Test on strain-softening material</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">

@@ -1190,6 +1190,42 @@ Always use the zone attach by-face command after the zone densify command if the
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{results-1}{%
+\section{Results}\label{results-1}}
+
+As discussed in Reaching Equilibrium, we recommend you use the convergence
+1.0 limit criteria when using the model solve command
+
+Initially solving to a convergence of 100 or more and then
+examining the response is good practice. Making isosurface plots of convergence
+to see where the model is having trouble can give insight into where model
+adjustments in the interest of efficiency are best placed.
+
+In order to determine a collapse load, it is often better to use ``strain-controlled''
+rather than ``stress-controlled'' boundary conditions (i.e., apply a constant
+velocity and measure the reaction forces, rather than apply forces and measure
+displacements).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OperatorTok{;}\NormalTok{ Solve}
+\NormalTok{model solve convergence }\DecValTok{1}
+\NormalTok{model factor}\OperatorTok{{-}}\NormalTok{of}\OperatorTok{{-}}\NormalTok{safety }\BuiltInTok{file} \StringTok{\textquotesingle{}slope3dfos\textquotesingle{}}\NormalTok{ associated convergence }\DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{measuring-time-of-calculation}{%
+\subsection{Measuring time of calculation}\label{measuring-time-of-calculation}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{[}\KeywordTok{global}\NormalTok{ start }\OperatorTok{=}\NormalTok{ time.clock]}
+\NormalTok{model step }\DecValTok{100}
+\NormalTok{[}\KeywordTok{global}\NormalTok{ rate }\OperatorTok{=} \DecValTok{10} \OperatorTok{*}\NormalTok{ zone.num }\OperatorTok{/}\NormalTok{ (time.clock}\OperatorTok{{-}}\NormalTok{start) ]}
+\NormalTok{[io.out(}\StringTok{\textquotesingle{}Calculation rate = \textquotesingle{}}\OperatorTok{+}\NormalTok{string(rate)}\OperatorTok{+}\StringTok{\textquotesingle{} kilo{-}zones/sec\textquotesingle{}}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{setting-fish-variables}{%
 \section{Setting FISH variables}\label{setting-fish-variables}}
 
@@ -1504,8 +1540,6 @@ FISH functions to calculate bulk and shear moduli
 \NormalTok{za.ids()}
 \BuiltInTok{print}\NormalTok{ za.neighbors()}
 
-
-
 \CommentTok{" =========================================== "}
 \CommentTok{" =================RESULTS=================== "}
 \CommentTok{" =========================================== "}
@@ -1527,12 +1561,9 @@ FISH functions to calculate bulk and shear moduli
 
 \NormalTok{za.stress\_flat()}
 
-
 \CommentTok{" =========================================== "}
 \CommentTok{" =========REFERENCE EXAMPLES================ "}
 \CommentTok{" =========================================== "}
-
-
 \CommentTok{""" Some Numpy Operation Examples}
 \CommentTok{np.array([1,2,3,4,5])}
 \CommentTok{np.linspace(0,1,15)}
@@ -1557,6 +1588,110 @@ FISH functions to calculate bulk and shear moduli
 \CommentTok{"""}
 \end{Highlighting}
 \end{Shaded}
+
+\hypertarget{interface}{%
+\section{Interface}\label{interface}}
+
+Interfaces are most often created with the zone interface create by-face command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zone interface }\StringTok{\textquotesingle{}flt\textquotesingle{}}\NormalTok{ create by}\OperatorTok{{-}}\NormalTok{face separate }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\DecValTok{5}
+\NormalTok{zone interface }\StringTok{\textquotesingle{}flt\textquotesingle{}}\NormalTok{ node }\BuiltInTok{property}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1e8}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1e8}
+\end{Highlighting}
+\end{Shaded}
+
+This command creates an interface named flt by separating all zone faces found
+at z=5 and placing interface elements and nodes on one side. Contacts are found
+(and forces generated) by interface nodes coming into contact with zone surface
+faces that are not part of the interface itself.
+
+\begin{figure}[H]
+\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-58}
+\end{figure}
+
+Every reference to an interface uses a name (like the table command) to indicate
+which interface is being referred to
+
+Interfaces in FLAC3D are one-sided objects. Interface elements are (in general) created attached to zone surface faces, which
+in turn create interface nodes. All contact detection is between interface nodes and zone surface faces.
+
+Most commonly, interfaces need to be created starting with a mesh that is
+continuous. In that case, it is easiest to separate the mesh and create the
+interfaces all in one command using the separate keyword (as shown in the
+example above).
+
+The new-side-origin keyword can be used to determine which
+side of the separation interface elements are applied to. The side opposite the
+location of the origin will be selected. In the example above, to select the other
+side, change the command to
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zone interface }\StringTok{\textquotesingle{}flt\textquotesingle{}}\NormalTok{ create by}\OperatorTok{{-}}\NormalTok{face separate new}\OperatorTok{{-}}\NormalTok{side}\OperatorTok{{-}}\NormalTok{origin (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{) ...}
+\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{penetration}{%
+\subsection{Penetration}\label{penetration}}
+
+the calculation of normal stress due
+to interface penetration is absolute instead of incremental. This means that
+moving a gridpoint relative to an interface in the normal direction will have an
+immediate effect on the normal stress calculated. This is not true of accumulated
+shear stress, which remains incremental.
+
+In small-strain mode, gridpoints do not actually move their location in response
+to accumulated velocities.
+
+small-displacement'' field. is a vector field
+that is accumulated from the velocity field every step in small-strain mode only.
+For the purposes of calculating interface penetration, a gridpoint location is
+based on the current location plus the small-strain displacement. The smallstrain displacement may be initialized using the zone gridpoint initialize
+displacement-small command, and this is sometimes useful to reset the effective
+penetration of an interface after some grid motion.
+To initialize interface stresses without actually moving gridpoints, we introduce
+a normal stress increment that is added to the normal stress calculated from
+absolute penetration. It is this value that is set when the zone interface node
+initialize-stresses command is given. It can also be set explicitly using zone
+interface node stress-normal-increment.
+
+Spatial Variation and Randomness of Property Distribution
+
+Material properties can be specified to adjust or to vary as a function of grid
+position. In fact, a different property can be assigned to every zone in a FLAC3D
+model, regardless of model size.
+There are two commands avialable in FLAC3D to specfiy material properties. The
+first, zone property, allows multiple properties to be specified in a single
+command. This is convenient to completely specify properties in different
+regions, where that property does not vary within that region.
+The second can only specify one property at a time, but has optional keywords
+that allow the property value to be automatically varied in space. This is the zone
+property-distribution command. Among the available keywords are add,
+multiply, gradient, and vary, which can be used to provide fixed or linear
+variations of properties with position. For example, the following command
+provides a linear variation of cohesion in the x-direction:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zone }\BuiltInTok{property}\OperatorTok{{-}}\NormalTok{distribution cohesion }\FloatTok{1e6}\NormalTok{ gradient (}\OperatorTok{{-}}\FloatTok{1e5}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+An initial profile of a property can also be assigned via FISH.
+With FLAC3D, it is also possible to study the influence of nonhomogeneity in a
+material. Any type of statistical property distribution can be introduced, as each
+element may have a unique property value. Two optional keywords are available
+to apply a random distribution of a selected property with the zone propertydistribution command. The keyword deviation-gaussian assumes a normal
+(Gaussian) distribution for the property, with a mean value, v, and standard
+deviation, s. The keyword deviation-uniform assumes a uniform distribution with
+mean value, v, and standard deviation, s. Be careful to ensure that properties do
+not acquire negative values if s is large. As an example, the following command
+would give a mean friction angle of 40° with a standard deviation of ±5\%:
+zone property-distribution friction 45 deviation-gaussian 2
+Use of the variation keywords in any command (not just for property variation) is
+defined in the topic Value Modifiers (Add, Multiply, Gradient, Vary).
 
 \hypertarget{kiast-model}{%
 \section{KIAST Model}\label{kiast-model}}
@@ -1687,8 +1822,8 @@ FISH functions to calculate bulk and shear moduli
 \hypertarget{theory}{%
 \chapter{Theory}\label{theory}}
 
-\hypertarget{interface}{%
-\section{Interface}\label{interface}}
+\hypertarget{interface-1}{%
+\section{Interface}\label{interface-1}}
 
 There are several instances in geomechanics in which it is desirable to represent planes on which sliding or separation can occur. For example:\\
 
@@ -1802,30 +1937,112 @@ Several rules should be followed when using interface elements in FLAC3D:\\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=1\linewidth]{myfigureeeeee/interface-theory}
+\hypertarget{typical-properties}{%
+\section{Typical Properties}\label{typical-properties}}
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/typical_dilation}
+
+Post-Failure Properties
+In many instances, particularly in mining engineering, the response of a material
+after failure has initiated is an important factor in the engineering design.
+Consequently, the post-failure behavior must be simulated in the material
+model. In FLAC3D, this is accomplished with properties that define four types of
+post failure response:
+1. shear dilatancy;
+2. shear hardening/softening;
+3. volumetric hardening/softening; and
+4. tensile softening.
+These properties are only activated after failure is initiated, as defined by the
+Mohr-Coulomb relation or the tensile-failure criterion. Shear dilatancy is
+simulated with the Mohr-Coulomb, ubiquitous-joint and strain-softening MohrCoulomb and ubiquitous-joint models. Shear hardening/softening is simulated
+with the strain-softening Mohr-Coulomb and ubiquitous-joint models, and
+volumetric hardening/softening is simulated with the modified Cam-clay model.
+Tensile softening is simulated with the strain-softening Mohr-Coulomb and
+ubiquitous-joint models
+
+\hypertarget{shear-dilatancy}{%
+\subsection{Shear Dilatancy}\label{shear-dilatancy}}
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/dil}
+Shear dilatancy, or dilatancy, is the change in volume that occurs with shear
+distortion of a material. Dilatancy is characterized by a dilation angle, , which is
+related to the ratio of plastic volume change to plastic shear strain. This angle
+can be specified in the Mohr-Coulomb ubiquitous-joint and strain-hardening/
+softening models in FLAC3D. Dilation angle is typically determined from triaxial
+tests or shear-box tests. For example, the idealized relation for dilatancy, based
+upon the Mohr-Coulomb failure surface, is depicted for a triaxial test in the
+figure below. The dilation angle is found from the plot of volumetric strain
+versus axial strain. Note that the initial slope for this plot corresponds to the
+elastic regime, while the slope used to measure the dilation angle corresponds to
+the plastic regime
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/typical_angles}
+Selected Strength Properties (drained, laboratory-scale) for Soils (Ortiz
+et al.~1980)
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/typical_sand}
+
+\hypertarget{compression-test-on-strain-softening-material}{%
+\subsection{Compression Test on strain-softening material}\label{compression-test-on-strain-softening-material}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model new}
+\OperatorTok{;}\NormalTok{ Create zones}
+\NormalTok{zone create cylinder point }\DecValTok{0}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{1}\NormalTok{ (}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{) size }\DecValTok{4} \DecValTok{5} \DecValTok{4}
+\NormalTok{zone reflect normal (}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{zone reflect normal (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\OperatorTok{;}\NormalTok{ Constitutive Model }\KeywordTok{and}\NormalTok{ properties}
+\NormalTok{zone cmodel assign strain}\OperatorTok{{-}}\NormalTok{softening}
+\NormalTok{zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{1.19e10}\NormalTok{ shear }\FloatTok{1.1e10}
+\NormalTok{zone }\BuiltInTok{property}\NormalTok{ cohesion }\FloatTok{2.72e5}\NormalTok{ friction }\DecValTok{44}\NormalTok{ tension }\FloatTok{2e5}
+\NormalTok{zone }\BuiltInTok{property}\NormalTok{ table}\OperatorTok{{-}}\NormalTok{cohesion }\StringTok{\textquotesingle{}coh\textquotesingle{}}\NormalTok{ table}\OperatorTok{{-}}\NormalTok{friction }\StringTok{\textquotesingle{}fri\textquotesingle{}}
+\NormalTok{table }\StringTok{\textquotesingle{}coh\textquotesingle{}}\NormalTok{ add (}\DecValTok{0}\NormalTok{,}\FloatTok{2.72e5}\NormalTok{) (}\FloatTok{1e{-}4}\NormalTok{,}\FloatTok{2e5}\NormalTok{) (}\FloatTok{2e{-}4}\NormalTok{,}\FloatTok{1.5e5}\NormalTok{) (}\FloatTok{3e{-}4}\NormalTok{,}\FloatTok{1.03e5}\NormalTok{) (}\DecValTok{1}\NormalTok{,}\FloatTok{1.03e5}\NormalTok{)}
+\NormalTok{table }\StringTok{\textquotesingle{}fri\textquotesingle{}}\NormalTok{ add (}\DecValTok{0}\NormalTok{,}\DecValTok{44}\NormalTok{) (}\FloatTok{1e{-}4}\NormalTok{,}\DecValTok{42}\NormalTok{) (}\FloatTok{2e{-}4}\NormalTok{,}\DecValTok{40}\NormalTok{) (}\FloatTok{3e{-}4}\NormalTok{,}\DecValTok{38}\NormalTok{) (}\DecValTok{1}\NormalTok{,}\DecValTok{38}\NormalTok{)}
+\OperatorTok{;}\NormalTok{ Boundary Conditions}
+\NormalTok{zone face }\BuiltInTok{apply}\NormalTok{ velocity (}\DecValTok{0}\NormalTok{, }\FloatTok{1e{-}7}\NormalTok{,}\DecValTok{0}\NormalTok{) }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\DecValTok{0}
+\NormalTok{zone face }\BuiltInTok{apply}\NormalTok{ velocity (}\DecValTok{0}\NormalTok{,}\OperatorTok{{-}}\FloatTok{1e{-}7}\NormalTok{,}\DecValTok{0}\NormalTok{) }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\DecValTok{2}
+\OperatorTok{;}\NormalTok{ Histories}
+\NormalTok{zone history displacement}\OperatorTok{{-}}\NormalTok{y position (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{zone history stress}\OperatorTok{{-}}\NormalTok{yy position (}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{zone history stress}\OperatorTok{{-}}\NormalTok{yy position (}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{model step }\DecValTok{3000}
+\NormalTok{model save }\StringTok{\textquotesingle{}Softening\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+The horizontal stress-displacement response is monitored again, as shown in
+the image below. This test produces distinct peak and residual failure stress
+levels
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/softening}
+
+The strain-softening model assumes both a brittle softening (due to reduction in
+cohesion) and a gradual softening (due to a reduction in friction angle). The
+selection of the properties is discussed further in Material Properties.
+Comparison of the two images above illustrates the different responses of the
+two models. The initial response up to the onset of failure is identical, but postfailure behavior is quite different. Clearly, more data are required to use the
+strain-softening model and, typically, the softening model must be calibrated for
+each specific problem.
 
 \hypertarget{command}{%
 \chapter{Command}\label{command}}
 
-\hypertarget{interface-1}{%
-\section{Interface}\label{interface-1}}
+\hypertarget{interface-2}{%
+\section{Interface}\label{interface-2}}
 
 \hypertarget{zone-face-group}{%
 \subsection{zone face group}\label{zone-face-group}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{zone face group s keyword ... }\OperatorTok{\textless{}}\BuiltInTok{range}\OperatorTok{\textgreater{}} 
-\end{Highlighting}
-\end{Shaded}
+zone face group s keyword \ldots{}
 
-Example:
+\begin{verbatim}
+Example: 
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{zone face group }\StringTok{\textquotesingle{}wall\textquotesingle{}}\NormalTok{ internal }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}wall{-}c\textquotesingle{}}\NormalTok{ group }\StringTok{\textquotesingle{}pile\textquotesingle{}}
-\end{Highlighting}
-\end{Shaded}
+```python
+zone face group 'wall' internal range group 'wall-c' group 'pile'
+\end{verbatim}
 
 Adds a group name `wall' to zone faces included in the optional range.
 Also can be used with zone face group ``slotname = groupname''
@@ -1950,8 +2167,8 @@ For each point of the element, one of the following two keywords must be supplie
 \hypertarget{alterations-3}{%
 \section{Alterations}\label{alterations-3}}
 
-\hypertarget{results-1}{%
-\section{Results}\label{results-1}}
+\hypertarget{results-2}{%
+\section{Results}\label{results-2}}
 
 \hypertarget{reference-collective}{%
 \chapter{Reference Collective}\label{reference-collective}}

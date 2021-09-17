@@ -162,217 +162,244 @@
 <span id="cb33-7"><a href="syntax-and-grammar.html#cb33-7" aria-hidden="true" tabindex="-1"></a>vertical_disp <span class="op">=</span> it.gridpoint.near((<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">10</span>)).disp_z()</span>
 <span id="cb33-8"><a href="syntax-and-grammar.html#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"~~~"</span>.<span class="bu">format</span>(modulus,vertical_disp)</span></code></pre></div>
 </div>
-<div id="setting-fish-variables" class="section level2" number="5.9">
+<div id="results-1" class="section level2" number="5.9">
 <h2>
-<span class="header-section-number">5.9</span> Setting FISH variables<a class="anchor" aria-label="anchor" href="#setting-fish-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.9</span> Results<a class="anchor" aria-label="anchor" href="#results-1"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="syntax-and-grammar.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
-<span id="cb34-2"><a href="syntax-and-grammar.html#cb34-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">'python-reset-state false'</span>)</span>
-<span id="cb34-3"><a href="syntax-and-grammar.html#cb34-3" aria-hidden="true" tabindex="-1"></a>it.fish.<span class="bu">set</span>(<span class="st">'x'</span>, <span class="dv">10</span>)</span>
-<span id="cb34-4"><a href="syntax-and-grammar.html#cb34-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> it.fish.get(<span class="st">'x'</span>) yields <span class="dv">10</span></span></code></pre></div>
-<div id="issuing-command" class="section level3" number="5.9.1">
+<p>As discussed in Reaching Equilibrium, we recommend you use the convergence
+1.0 limit criteria when using the model solve command</p>
+<p>Initially solving to a convergence of 100 or more and then
+examining the response is good practice. Making isosurface plots of convergence
+to see where the model is having trouble can give insight into where model
+adjustments in the interest of efficiency are best placed.</p>
+<p>In order to determine a collapse load, it is often better to use “strain-controlled”
+rather than “stress-controlled” boundary conditions (i.e., apply a constant
+velocity and measure the reaction forces, rather than apply forces and measure
+displacements).</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="syntax-and-grammar.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Solve</span>
+<span id="cb34-2"><a href="syntax-and-grammar.html#cb34-2" aria-hidden="true" tabindex="-1"></a>model solve convergence <span class="dv">1</span></span>
+<span id="cb34-3"><a href="syntax-and-grammar.html#cb34-3" aria-hidden="true" tabindex="-1"></a>model factor<span class="op">-</span>of<span class="op">-</span>safety <span class="bu">file</span> <span class="st">'slope3dfos'</span> associated convergence <span class="dv">1</span></span></code></pre></div>
+<div id="measuring-time-of-calculation" class="section level3" number="5.9.1">
 <h3>
-<span class="header-section-number">5.9.1</span> Issuing Command<a class="anchor" aria-label="anchor" href="#issuing-command"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.9.1</span> Measuring time of calculation<a class="anchor" aria-label="anchor" href="#measuring-time-of-calculation"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="syntax-and-grammar.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
-<span id="cb35-2"><a href="syntax-and-grammar.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb35-3"><a href="syntax-and-grammar.html#cb35-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.loadtext(<span class="st">'brick-data.txt'</span>)</span>
-<span id="cb35-4"><a href="syntax-and-grammar.html#cb35-4" aria-hidden="true" tabindex="-1"></a>command_template <span class="op">=</span> <span class="op">;;;</span> </span>
-<span id="cb35-5"><a href="syntax-and-grammar.html#cb35-5" aria-hidden="true" tabindex="-1"></a>zone create brick</span>
-<span id="cb35-6"><a href="syntax-and-grammar.html#cb35-6" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic</span>
-<span id="cb35-7"><a href="syntax-and-grammar.html#cb35-7" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> density {density} young {young} poisson {poisson}</span>
-<span id="cb35-8"><a href="syntax-and-grammar.html#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="op">;;;</span></span>
-<span id="cb35-9"><a href="syntax-and-grammar.html#cb35-9" aria-hidden="true" tabindex="-1"></a>density <span class="op">=</span> data[<span class="dv">0</span>]</span>
-<span id="cb35-10"><a href="syntax-and-grammar.html#cb35-10" aria-hidden="true" tabindex="-1"></a>young <span class="op">=</span> data[<span class="dv">1</span>]</span>
-<span id="cb35-11"><a href="syntax-and-grammar.html#cb35-11" aria-hidden="true" tabindex="-1"></a>poisson <span class="op">=</span> data[<span class="dv">2</span>]</span>
-<span id="cb35-12"><a href="syntax-and-grammar.html#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-13"><a href="syntax-and-grammar.html#cb35-13" aria-hidden="true" tabindex="-1"></a>command <span class="op">=</span> command_template.<span class="bu">format</span>(density<span class="op">=</span>density, young<span class="op">=</span>young, poisson<span class="op">=</span>poisson)</span>
-<span id="cb35-14"><a href="syntax-and-grammar.html#cb35-14" aria-hidden="true" tabindex="-1"></a>it.command(command)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="syntax-and-grammar.html#cb35-1" aria-hidden="true" tabindex="-1"></a>[<span class="kw">global</span> start <span class="op">=</span> time.clock]</span>
+<span id="cb35-2"><a href="syntax-and-grammar.html#cb35-2" aria-hidden="true" tabindex="-1"></a>model step <span class="dv">100</span></span>
+<span id="cb35-3"><a href="syntax-and-grammar.html#cb35-3" aria-hidden="true" tabindex="-1"></a>[<span class="kw">global</span> rate <span class="op">=</span> <span class="dv">10</span> <span class="op">*</span> zone.num <span class="op">/</span> (time.clock<span class="op">-</span>start) ]</span>
+<span id="cb35-4"><a href="syntax-and-grammar.html#cb35-4" aria-hidden="true" tabindex="-1"></a>[io.out(<span class="st">'Calculation rate = '</span><span class="op">+</span>string(rate)<span class="op">+</span><span class="st">' kilo-zones/sec'</span>)]</span></code></pre></div>
 </div>
 </div>
-<div id="string" class="section level2" number="5.10">
+<div id="setting-fish-variables" class="section level2" number="5.10">
 <h2>
-<span class="header-section-number">5.10</span> String<a class="anchor" aria-label="anchor" href="#string"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.10</span> Setting FISH variables<a class="anchor" aria-label="anchor" href="#setting-fish-variables"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="syntax-and-grammar.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">"The value of x is {:.2f}"</span>.<span class="bu">format</span>(<span class="fl">0.3872</span>)</span>
-<span id="cb36-2"><a href="syntax-and-grammar.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">"The value of x is {:.2e}"</span>.<span class="bu">format</span>(<span class="fl">0.3872</span>)</span>
-<span id="cb36-3"><a href="syntax-and-grammar.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is Sasha"</span></span>
-<span id="cb36-4"><a href="syntax-and-grammar.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is {}"</span>.<span class="bu">format</span>(<span class="st">"Sasha"</span>)</span>
-<span id="cb36-5"><a href="syntax-and-grammar.html#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is {name}"</span>.<span class="bu">format</span>(name<span class="op">=</span><span class="st">"Sasha"</span>)</span></code></pre></div>
-</div>
-<div id="fish-syntax" class="section level2" number="5.11">
-<h2>
-<span class="header-section-number">5.11</span> Fish Syntax<a class="anchor" aria-label="anchor" href="#fish-syntax"><i class="fas fa-link"></i></a>
-</h2>
-<div id="use-of" class="section level3" number="5.11.1">
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="syntax-and-grammar.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
+<span id="cb36-2"><a href="syntax-and-grammar.html#cb36-2" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">'python-reset-state false'</span>)</span>
+<span id="cb36-3"><a href="syntax-and-grammar.html#cb36-3" aria-hidden="true" tabindex="-1"></a>it.fish.<span class="bu">set</span>(<span class="st">'x'</span>, <span class="dv">10</span>)</span>
+<span id="cb36-4"><a href="syntax-and-grammar.html#cb36-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> it.fish.get(<span class="st">'x'</span>) yields <span class="dv">10</span></span></code></pre></div>
+<div id="issuing-command" class="section level3" number="5.10.1">
 <h3>
-<span class="header-section-number">5.11.1</span> Use of …<a class="anchor" aria-label="anchor" href="#use-of"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.10.1</span> Issuing Command<a class="anchor" aria-label="anchor" href="#issuing-command"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="syntax-and-grammar.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
+<span id="cb37-2"><a href="syntax-and-grammar.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb37-3"><a href="syntax-and-grammar.html#cb37-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.loadtext(<span class="st">'brick-data.txt'</span>)</span>
+<span id="cb37-4"><a href="syntax-and-grammar.html#cb37-4" aria-hidden="true" tabindex="-1"></a>command_template <span class="op">=</span> <span class="op">;;;</span> </span>
+<span id="cb37-5"><a href="syntax-and-grammar.html#cb37-5" aria-hidden="true" tabindex="-1"></a>zone create brick</span>
+<span id="cb37-6"><a href="syntax-and-grammar.html#cb37-6" aria-hidden="true" tabindex="-1"></a>zone cmodel assign elastic</span>
+<span id="cb37-7"><a href="syntax-and-grammar.html#cb37-7" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> density {density} young {young} poisson {poisson}</span>
+<span id="cb37-8"><a href="syntax-and-grammar.html#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="op">;;;</span></span>
+<span id="cb37-9"><a href="syntax-and-grammar.html#cb37-9" aria-hidden="true" tabindex="-1"></a>density <span class="op">=</span> data[<span class="dv">0</span>]</span>
+<span id="cb37-10"><a href="syntax-and-grammar.html#cb37-10" aria-hidden="true" tabindex="-1"></a>young <span class="op">=</span> data[<span class="dv">1</span>]</span>
+<span id="cb37-11"><a href="syntax-and-grammar.html#cb37-11" aria-hidden="true" tabindex="-1"></a>poisson <span class="op">=</span> data[<span class="dv">2</span>]</span>
+<span id="cb37-12"><a href="syntax-and-grammar.html#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-13"><a href="syntax-and-grammar.html#cb37-13" aria-hidden="true" tabindex="-1"></a>command <span class="op">=</span> command_template.<span class="bu">format</span>(density<span class="op">=</span>density, young<span class="op">=</span>young, poisson<span class="op">=</span>poisson)</span>
+<span id="cb37-14"><a href="syntax-and-grammar.html#cb37-14" aria-hidden="true" tabindex="-1"></a>it.command(command)</span></code></pre></div>
+</div>
+</div>
+<div id="string" class="section level2" number="5.11">
+<h2>
+<span class="header-section-number">5.11</span> String<a class="anchor" aria-label="anchor" href="#string"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="syntax-and-grammar.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">"The value of x is {:.2f}"</span>.<span class="bu">format</span>(<span class="fl">0.3872</span>)</span>
+<span id="cb38-2"><a href="syntax-and-grammar.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co">"The value of x is {:.2e}"</span>.<span class="bu">format</span>(<span class="fl">0.3872</span>)</span>
+<span id="cb38-3"><a href="syntax-and-grammar.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is Sasha"</span></span>
+<span id="cb38-4"><a href="syntax-and-grammar.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is {}"</span>.<span class="bu">format</span>(<span class="st">"Sasha"</span>)</span>
+<span id="cb38-5"><a href="syntax-and-grammar.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">"My name is {name}"</span>.<span class="bu">format</span>(name<span class="op">=</span><span class="st">"Sasha"</span>)</span></code></pre></div>
+</div>
+<div id="fish-syntax" class="section level2" number="5.12">
+<h2>
+<span class="header-section-number">5.12</span> Fish Syntax<a class="anchor" aria-label="anchor" href="#fish-syntax"><i class="fas fa-link"></i></a>
+</h2>
+<div id="use-of" class="section level3" number="5.12.1">
+<h3>
+<span class="header-section-number">5.12.1</span> Use of …<a class="anchor" aria-label="anchor" href="#use-of"><i class="fas fa-link"></i></a>
 </h3>
 <p>A complete FISH statement occupies one line. However, a line may be typed across two or more lines as long as each line but the ultimate is terminated with the continuation character ( … ). Use of temporary variables as hinge points to concatenate lengthy formulas can also be handy. The following example shows how this can be done:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="syntax-and-grammar.html#cb37-1" aria-hidden="true" tabindex="-1"></a>fish define long_sum  <span class="op">;</span>example of a <span class="bu">sum</span> of many things</span>
-<span id="cb37-2"><a href="syntax-and-grammar.html#cb37-2" aria-hidden="true" tabindex="-1"></a>    local temp <span class="op">=</span> v1 <span class="op">+</span> v2 <span class="op">+</span> v3 <span class="op">+</span> v4 <span class="op">+</span> v5 <span class="op">+</span> v6 <span class="op">+</span> v7 <span class="op">+</span> v8 <span class="op">+</span> v9 <span class="op">+</span> v10</span>
-<span id="cb37-3"><a href="syntax-and-grammar.html#cb37-3" aria-hidden="true" tabindex="-1"></a>    long_sum <span class="op">=</span> temp <span class="op">+</span> v11 <span class="op">+</span> v12 <span class="op">+</span> v13 <span class="op">+</span> v14 <span class="op">+</span> v15</span>
-<span id="cb37-4"><a href="syntax-and-grammar.html#cb37-4" aria-hidden="true" tabindex="-1"></a>end</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="syntax-and-grammar.html#cb39-1" aria-hidden="true" tabindex="-1"></a>fish define long_sum  <span class="op">;</span>example of a <span class="bu">sum</span> of many things</span>
+<span id="cb39-2"><a href="syntax-and-grammar.html#cb39-2" aria-hidden="true" tabindex="-1"></a>    local temp <span class="op">=</span> v1 <span class="op">+</span> v2 <span class="op">+</span> v3 <span class="op">+</span> v4 <span class="op">+</span> v5 <span class="op">+</span> v6 <span class="op">+</span> v7 <span class="op">+</span> v8 <span class="op">+</span> v9 <span class="op">+</span> v10</span>
+<span id="cb39-3"><a href="syntax-and-grammar.html#cb39-3" aria-hidden="true" tabindex="-1"></a>    long_sum <span class="op">=</span> temp <span class="op">+</span> v11 <span class="op">+</span> v12 <span class="op">+</span> v13 <span class="op">+</span> v14 <span class="op">+</span> v15</span>
+<span id="cb39-4"><a href="syntax-and-grammar.html#cb39-4" aria-hidden="true" tabindex="-1"></a>end</span></code></pre></div>
 </div>
-<div id="variable-types" class="section level3" number="5.11.2">
+<div id="variable-types" class="section level3" number="5.12.2">
 <h3>
-<span class="header-section-number">5.11.2</span> Variable Types<a class="anchor" aria-label="anchor" href="#variable-types"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.12.2</span> Variable Types<a class="anchor" aria-label="anchor" href="#variable-types"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="syntax-and-grammar.html#cb38-1" aria-hidden="true" tabindex="-1"></a>model new</span>
-<span id="cb38-2"><a href="syntax-and-grammar.html#cb38-2" aria-hidden="true" tabindex="-1"></a>fish define types</span>
-<span id="cb38-3"><a href="syntax-and-grammar.html#cb38-3" aria-hidden="true" tabindex="-1"></a>    v1 <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb38-4"><a href="syntax-and-grammar.html#cb38-4" aria-hidden="true" tabindex="-1"></a>    v2 <span class="op">=</span> <span class="fl">3.4</span></span>
-<span id="cb38-5"><a href="syntax-and-grammar.html#cb38-5" aria-hidden="true" tabindex="-1"></a>    v3 <span class="op">=</span> <span class="st">'Have a nice day'</span></span>
-<span id="cb38-6"><a href="syntax-and-grammar.html#cb38-6" aria-hidden="true" tabindex="-1"></a>    v4 <span class="op">=</span> v1 <span class="op">*</span> v2</span>
-<span id="cb38-7"><a href="syntax-and-grammar.html#cb38-7" aria-hidden="true" tabindex="-1"></a>    v5 <span class="op">=</span> v3 <span class="op">+</span> <span class="st">', old chap'</span></span>
-<span id="cb38-8"><a href="syntax-and-grammar.html#cb38-8" aria-hidden="true" tabindex="-1"></a>    v6 <span class="op">=</span> vector(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
-<span id="cb38-9"><a href="syntax-and-grammar.html#cb38-9" aria-hidden="true" tabindex="-1"></a>    v7 <span class="op">=</span> matrix(vector(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb38-10"><a href="syntax-and-grammar.html#cb38-10" aria-hidden="true" tabindex="-1"></a>    v8 <span class="op">=</span> true</span>
-<span id="cb38-11"><a href="syntax-and-grammar.html#cb38-11" aria-hidden="true" tabindex="-1"></a>end</span>
-<span id="cb38-12"><a href="syntax-and-grammar.html#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="at">@types</span></span>
-<span id="cb38-13"><a href="syntax-and-grammar.html#cb38-13" aria-hidden="true" tabindex="-1"></a>fish <span class="bu">list</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="syntax-and-grammar.html#cb40-1" aria-hidden="true" tabindex="-1"></a>model new</span>
+<span id="cb40-2"><a href="syntax-and-grammar.html#cb40-2" aria-hidden="true" tabindex="-1"></a>fish define types</span>
+<span id="cb40-3"><a href="syntax-and-grammar.html#cb40-3" aria-hidden="true" tabindex="-1"></a>    v1 <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb40-4"><a href="syntax-and-grammar.html#cb40-4" aria-hidden="true" tabindex="-1"></a>    v2 <span class="op">=</span> <span class="fl">3.4</span></span>
+<span id="cb40-5"><a href="syntax-and-grammar.html#cb40-5" aria-hidden="true" tabindex="-1"></a>    v3 <span class="op">=</span> <span class="st">'Have a nice day'</span></span>
+<span id="cb40-6"><a href="syntax-and-grammar.html#cb40-6" aria-hidden="true" tabindex="-1"></a>    v4 <span class="op">=</span> v1 <span class="op">*</span> v2</span>
+<span id="cb40-7"><a href="syntax-and-grammar.html#cb40-7" aria-hidden="true" tabindex="-1"></a>    v5 <span class="op">=</span> v3 <span class="op">+</span> <span class="st">', old chap'</span></span>
+<span id="cb40-8"><a href="syntax-and-grammar.html#cb40-8" aria-hidden="true" tabindex="-1"></a>    v6 <span class="op">=</span> vector(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb40-9"><a href="syntax-and-grammar.html#cb40-9" aria-hidden="true" tabindex="-1"></a>    v7 <span class="op">=</span> matrix(vector(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb40-10"><a href="syntax-and-grammar.html#cb40-10" aria-hidden="true" tabindex="-1"></a>    v8 <span class="op">=</span> true</span>
+<span id="cb40-11"><a href="syntax-and-grammar.html#cb40-11" aria-hidden="true" tabindex="-1"></a>end</span>
+<span id="cb40-12"><a href="syntax-and-grammar.html#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="at">@types</span></span>
+<span id="cb40-13"><a href="syntax-and-grammar.html#cb40-13" aria-hidden="true" tabindex="-1"></a>fish <span class="bu">list</span></span></code></pre></div>
 <p>The resulting screen display looks like this:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="syntax-and-grammar.html#cb39-1" aria-hidden="true" tabindex="-1"></a>           Name    Value</span>
-<span id="cb39-2"><a href="syntax-and-grammar.html#cb39-2" aria-hidden="true" tabindex="-1"></a>           <span class="op">-------</span> <span class="op">--------------------</span></span>
-<span id="cb39-3"><a href="syntax-and-grammar.html#cb39-3" aria-hidden="true" tabindex="-1"></a>(function) types <span class="dv">0</span> (integer)</span>
-<span id="cb39-4"><a href="syntax-and-grammar.html#cb39-4" aria-hidden="true" tabindex="-1"></a>           v1    <span class="dv">2</span> (integer)</span>
-<span id="cb39-5"><a href="syntax-and-grammar.html#cb39-5" aria-hidden="true" tabindex="-1"></a>           v2    <span class="fl">3.400000000000000e+00</span> (real)</span>
-<span id="cb39-6"><a href="syntax-and-grammar.html#cb39-6" aria-hidden="true" tabindex="-1"></a>           v3    <span class="st">'Have a nice day'</span> (string)</span>
-<span id="cb39-7"><a href="syntax-and-grammar.html#cb39-7" aria-hidden="true" tabindex="-1"></a>           v4    <span class="fl">6.800000000000000e+00</span> (real)</span>
-<span id="cb39-8"><a href="syntax-and-grammar.html#cb39-8" aria-hidden="true" tabindex="-1"></a>           v5    <span class="st">'Have a nice day, old chap'</span> (string)</span>
-<span id="cb39-9"><a href="syntax-and-grammar.html#cb39-9" aria-hidden="true" tabindex="-1"></a>           v6    (<span class="fl">1.000000000000000e+00</span>,<span class="fl">2.000000000000000e+00</span>,</span>
-<span id="cb39-10"><a href="syntax-and-grammar.html#cb39-10" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">3.000000000000000e+00</span>) (vector3)                [<span class="op">**</span>]</span>
-<span id="cb39-11"><a href="syntax-and-grammar.html#cb39-11" aria-hidden="true" tabindex="-1"></a>           v7    <span class="dv">3</span> x <span class="dv">1</span> (matrix)</span>
-<span id="cb39-12"><a href="syntax-and-grammar.html#cb39-12" aria-hidden="true" tabindex="-1"></a>           v8    true (boolean)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="syntax-and-grammar.html#cb41-1" aria-hidden="true" tabindex="-1"></a>           Name    Value</span>
+<span id="cb41-2"><a href="syntax-and-grammar.html#cb41-2" aria-hidden="true" tabindex="-1"></a>           <span class="op">-------</span> <span class="op">--------------------</span></span>
+<span id="cb41-3"><a href="syntax-and-grammar.html#cb41-3" aria-hidden="true" tabindex="-1"></a>(function) types <span class="dv">0</span> (integer)</span>
+<span id="cb41-4"><a href="syntax-and-grammar.html#cb41-4" aria-hidden="true" tabindex="-1"></a>           v1    <span class="dv">2</span> (integer)</span>
+<span id="cb41-5"><a href="syntax-and-grammar.html#cb41-5" aria-hidden="true" tabindex="-1"></a>           v2    <span class="fl">3.400000000000000e+00</span> (real)</span>
+<span id="cb41-6"><a href="syntax-and-grammar.html#cb41-6" aria-hidden="true" tabindex="-1"></a>           v3    <span class="st">'Have a nice day'</span> (string)</span>
+<span id="cb41-7"><a href="syntax-and-grammar.html#cb41-7" aria-hidden="true" tabindex="-1"></a>           v4    <span class="fl">6.800000000000000e+00</span> (real)</span>
+<span id="cb41-8"><a href="syntax-and-grammar.html#cb41-8" aria-hidden="true" tabindex="-1"></a>           v5    <span class="st">'Have a nice day, old chap'</span> (string)</span>
+<span id="cb41-9"><a href="syntax-and-grammar.html#cb41-9" aria-hidden="true" tabindex="-1"></a>           v6    (<span class="fl">1.000000000000000e+00</span>,<span class="fl">2.000000000000000e+00</span>,</span>
+<span id="cb41-10"><a href="syntax-and-grammar.html#cb41-10" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">3.000000000000000e+00</span>) (vector3)                [<span class="op">**</span>]</span>
+<span id="cb41-11"><a href="syntax-and-grammar.html#cb41-11" aria-hidden="true" tabindex="-1"></a>           v7    <span class="dv">3</span> x <span class="dv">1</span> (matrix)</span>
+<span id="cb41-12"><a href="syntax-and-grammar.html#cb41-12" aria-hidden="true" tabindex="-1"></a>           v8    true (boolean)</span></code></pre></div>
 </div>
-<div id="traditional-for-loop-in-fish" class="section level3" number="5.11.3">
+<div id="traditional-for-loop-in-fish" class="section level3" number="5.12.3">
 <h3>
-<span class="header-section-number">5.11.3</span> Traditional for loop in FISH<a class="anchor" aria-label="anchor" href="#traditional-for-loop-in-fish"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.12.3</span> Traditional for loop in FISH<a class="anchor" aria-label="anchor" href="#traditional-for-loop-in-fish"><i class="fas fa-link"></i></a>
 </h3>
 <p>standard for loop is also available in FISH to provide for additionalloop control.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="syntax-and-grammar.html#cb40-1" aria-hidden="true" tabindex="-1"></a>fish define xxx</span>
-<span id="cb40-2"><a href="syntax-and-grammar.html#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span>  <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb40-3"><a href="syntax-and-grammar.html#cb40-3" aria-hidden="true" tabindex="-1"></a>    prod <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb40-4"><a href="syntax-and-grammar.html#cb40-4" aria-hidden="true" tabindex="-1"></a>    loop <span class="cf">for</span> (n <span class="op">=</span> <span class="dv">1</span>, n <span class="op">&lt;=</span> <span class="dv">10</span>, n <span class="op">=</span> n <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb40-5"><a href="syntax-and-grammar.html#cb40-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span>  <span class="op">=</span> <span class="bu">sum</span>  <span class="op">+</span> n</span>
-<span id="cb40-6"><a href="syntax-and-grammar.html#cb40-6" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> n</span>
-<span id="cb40-7"><a href="syntax-and-grammar.html#cb40-7" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
-<span id="cb40-8"><a href="syntax-and-grammar.html#cb40-8" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ... </span>
-<span id="cb40-9"><a href="syntax-and-grammar.html#cb40-9" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
-<span id="cb40-10"><a href="syntax-and-grammar.html#cb40-10" aria-hidden="true" tabindex="-1"></a>end</span>
-<span id="cb40-11"><a href="syntax-and-grammar.html#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="at">@xxx</span></span></code></pre></div>
-<div id="controlled-loop" class="section level4" number="5.11.3.1">
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="syntax-and-grammar.html#cb42-1" aria-hidden="true" tabindex="-1"></a>fish define xxx</span>
+<span id="cb42-2"><a href="syntax-and-grammar.html#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span>  <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb42-3"><a href="syntax-and-grammar.html#cb42-3" aria-hidden="true" tabindex="-1"></a>    prod <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb42-4"><a href="syntax-and-grammar.html#cb42-4" aria-hidden="true" tabindex="-1"></a>    loop <span class="cf">for</span> (n <span class="op">=</span> <span class="dv">1</span>, n <span class="op">&lt;=</span> <span class="dv">10</span>, n <span class="op">=</span> n <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb42-5"><a href="syntax-and-grammar.html#cb42-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span>  <span class="op">=</span> <span class="bu">sum</span>  <span class="op">+</span> n</span>
+<span id="cb42-6"><a href="syntax-and-grammar.html#cb42-6" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> n</span>
+<span id="cb42-7"><a href="syntax-and-grammar.html#cb42-7" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
+<span id="cb42-8"><a href="syntax-and-grammar.html#cb42-8" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ... </span>
+<span id="cb42-9"><a href="syntax-and-grammar.html#cb42-9" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
+<span id="cb42-10"><a href="syntax-and-grammar.html#cb42-10" aria-hidden="true" tabindex="-1"></a>end</span>
+<span id="cb42-11"><a href="syntax-and-grammar.html#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="at">@xxx</span></span></code></pre></div>
+<div id="controlled-loop" class="section level4" number="5.12.3.1">
 <h4>
-<span class="header-section-number">5.11.3.1</span> Controlled loop<a class="anchor" aria-label="anchor" href="#controlled-loop"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.12.3.1</span> Controlled loop<a class="anchor" aria-label="anchor" href="#controlled-loop"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="syntax-and-grammar.html#cb41-1" aria-hidden="true" tabindex="-1"></a>model new</span>
-<span id="cb41-2"><a href="syntax-and-grammar.html#cb41-2" aria-hidden="true" tabindex="-1"></a>fish define xxx</span>
-<span id="cb41-3"><a href="syntax-and-grammar.html#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span>  <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb41-4"><a href="syntax-and-grammar.html#cb41-4" aria-hidden="true" tabindex="-1"></a>    prod <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb41-5"><a href="syntax-and-grammar.html#cb41-5" aria-hidden="true" tabindex="-1"></a>    loop n (<span class="dv">1</span>,<span class="dv">10</span>)</span>
-<span id="cb41-6"><a href="syntax-and-grammar.html#cb41-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span>  <span class="op">=</span> <span class="bu">sum</span>  <span class="op">+</span> n</span>
-<span id="cb41-7"><a href="syntax-and-grammar.html#cb41-7" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> n</span>
-<span id="cb41-8"><a href="syntax-and-grammar.html#cb41-8" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
-<span id="cb41-9"><a href="syntax-and-grammar.html#cb41-9" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span>  ...</span>
-<span id="cb41-10"><a href="syntax-and-grammar.html#cb41-10" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
-<span id="cb41-11"><a href="syntax-and-grammar.html#cb41-11" aria-hidden="true" tabindex="-1"></a>end</span>
-<span id="cb41-12"><a href="syntax-and-grammar.html#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="at">@xxx</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="syntax-and-grammar.html#cb43-1" aria-hidden="true" tabindex="-1"></a>model new</span>
+<span id="cb43-2"><a href="syntax-and-grammar.html#cb43-2" aria-hidden="true" tabindex="-1"></a>fish define xxx</span>
+<span id="cb43-3"><a href="syntax-and-grammar.html#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span>  <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb43-4"><a href="syntax-and-grammar.html#cb43-4" aria-hidden="true" tabindex="-1"></a>    prod <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb43-5"><a href="syntax-and-grammar.html#cb43-5" aria-hidden="true" tabindex="-1"></a>    loop n (<span class="dv">1</span>,<span class="dv">10</span>)</span>
+<span id="cb43-6"><a href="syntax-and-grammar.html#cb43-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span>  <span class="op">=</span> <span class="bu">sum</span>  <span class="op">+</span> n</span>
+<span id="cb43-7"><a href="syntax-and-grammar.html#cb43-7" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> n</span>
+<span id="cb43-8"><a href="syntax-and-grammar.html#cb43-8" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
+<span id="cb43-9"><a href="syntax-and-grammar.html#cb43-9" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span>  ...</span>
+<span id="cb43-10"><a href="syntax-and-grammar.html#cb43-10" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
+<span id="cb43-11"><a href="syntax-and-grammar.html#cb43-11" aria-hidden="true" tabindex="-1"></a>end</span>
+<span id="cb43-12"><a href="syntax-and-grammar.html#cb43-12" aria-hidden="true" tabindex="-1"></a><span class="at">@xxx</span></span></code></pre></div>
 <p>In this case, the loop variable n is given successive values from 1 to 10, and the statements inside the loop (between the loop and endloop statements) are executed for each value. As mentioned, variable names or an arithmetic expression could be substituted for the numbers 1 or 10. Note that the exit statement can be used to break out of a FISH loop and the continue statement can be used to skip the remaining instructions in the loop, moving to the next sequence of the loop.</p>
 <p>It is important to note that this formulation of looping is different from a for loop in most high-level programming languages. For instance, one cannot easily control the ending condition (i.e., loop from 1 to 10 excluding 10) or the incrementing mechanism (i.e., loop from 1 to 10 by twos or loop backward). A standard for loop is also available in FISH to provide for additional loop control.</p>
 </div>
 </div>
-<div id="if-else-endif-construct" class="section level3" number="5.11.4">
+<div id="if-else-endif-construct" class="section level3" number="5.12.4">
 <h3>
-<span class="header-section-number">5.11.4</span> if else endif construct<a class="anchor" aria-label="anchor" href="#if-else-endif-construct"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.12.4</span> if else endif construct<a class="anchor" aria-label="anchor" href="#if-else-endif-construct"><i class="fas fa-link"></i></a>
 </h3>
 <p>These statements allow conditional execution of FISH function segments; else and then are optional. The item test consists of one of the following symbols or symbol pairs:<br></p>
 <p>= # &gt; &lt; &gt;= &lt;=<br></p>
 <p>The displayed value of abc in this example depends on the argument provided to abc when it is executed. You should experiment with different test symbols (e.g., replace &gt; with &lt;).</p>
 <p>Until now, our FISH functions have been invoked from FLAC3D, either by using the sqaure brackets [] of inline FISH, by giving the function name prepended with the the @ character, or by using the fish list command. It is also possible to do the reverse, to give FLAC3D commands from within FISH functions. Most valid FLAC3D commands can be embedded between the following FISH statements:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="syntax-and-grammar.html#cb42-1" aria-hidden="true" tabindex="-1"></a>model new</span>
-<span id="cb42-2"><a href="syntax-and-grammar.html#cb42-2" aria-hidden="true" tabindex="-1"></a>fish define abc(xx)</span>
-<span id="cb42-3"><a href="syntax-and-grammar.html#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> xx <span class="op">&gt;</span> <span class="dv">0</span> then </span>
-<span id="cb42-4"><a href="syntax-and-grammar.html#cb42-4" aria-hidden="true" tabindex="-1"></a>        abc <span class="op">=</span> <span class="dv">33</span></span>
-<span id="cb42-5"><a href="syntax-and-grammar.html#cb42-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
-<span id="cb42-6"><a href="syntax-and-grammar.html#cb42-6" aria-hidden="true" tabindex="-1"></a>        abc <span class="op">=</span> <span class="dv">11</span></span>
-<span id="cb42-7"><a href="syntax-and-grammar.html#cb42-7" aria-hidden="true" tabindex="-1"></a>    end_if</span>
-<span id="cb42-8"><a href="syntax-and-grammar.html#cb42-8" aria-hidden="true" tabindex="-1"></a>end</span>
-<span id="cb42-9"><a href="syntax-and-grammar.html#cb42-9" aria-hidden="true" tabindex="-1"></a>[abc(<span class="dv">1</span>)]</span>
-<span id="cb42-10"><a href="syntax-and-grammar.html#cb42-10" aria-hidden="true" tabindex="-1"></a>[abc(<span class="op">-</span><span class="dv">1</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="syntax-and-grammar.html#cb44-1" aria-hidden="true" tabindex="-1"></a>model new</span>
+<span id="cb44-2"><a href="syntax-and-grammar.html#cb44-2" aria-hidden="true" tabindex="-1"></a>fish define abc(xx)</span>
+<span id="cb44-3"><a href="syntax-and-grammar.html#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> xx <span class="op">&gt;</span> <span class="dv">0</span> then </span>
+<span id="cb44-4"><a href="syntax-and-grammar.html#cb44-4" aria-hidden="true" tabindex="-1"></a>        abc <span class="op">=</span> <span class="dv">33</span></span>
+<span id="cb44-5"><a href="syntax-and-grammar.html#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb44-6"><a href="syntax-and-grammar.html#cb44-6" aria-hidden="true" tabindex="-1"></a>        abc <span class="op">=</span> <span class="dv">11</span></span>
+<span id="cb44-7"><a href="syntax-and-grammar.html#cb44-7" aria-hidden="true" tabindex="-1"></a>    end_if</span>
+<span id="cb44-8"><a href="syntax-and-grammar.html#cb44-8" aria-hidden="true" tabindex="-1"></a>end</span>
+<span id="cb44-9"><a href="syntax-and-grammar.html#cb44-9" aria-hidden="true" tabindex="-1"></a>[abc(<span class="dv">1</span>)]</span>
+<span id="cb44-10"><a href="syntax-and-grammar.html#cb44-10" aria-hidden="true" tabindex="-1"></a>[abc(<span class="op">-</span><span class="dv">1</span>)]</span></code></pre></div>
 </div>
-<div id="arrays-and-maps" class="section level3" number="5.11.5">
+<div id="arrays-and-maps" class="section level3" number="5.12.5">
 <h3>
-<span class="header-section-number">5.11.5</span> Arrays and Maps<a class="anchor" aria-label="anchor" href="#arrays-and-maps"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.12.5</span> Arrays and Maps<a class="anchor" aria-label="anchor" href="#arrays-and-maps"><i class="fas fa-link"></i></a>
 </h3>
 <p>It is often the case that one would like to store a list of objects that they will loop over in the future. These may be computed values from zones, for instance, or specific gridpoint pointers themselves. FISH has two containers to use in these circumstances, termed arrays and maps.</p>
 <p>An array holds a list of FISH variables of any type that can be looped over or accessed by the integer index of the element of the array. Arrays can be multidimensional and do not resize dynamically. The simple example below shows how one can create an array of integers and then sum the values.</p>
-<div id="array-example" class="section level4" number="5.11.5.1">
+<div id="array-example" class="section level4" number="5.12.5.1">
 <h4>
-<span class="header-section-number">5.11.5.1</span> Array example<a class="anchor" aria-label="anchor" href="#array-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.12.5.1</span> Array example<a class="anchor" aria-label="anchor" href="#array-example"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="syntax-and-grammar.html#cb43-1" aria-hidden="true" tabindex="-1"></a>model new</span>
-<span id="cb43-2"><a href="syntax-and-grammar.html#cb43-2" aria-hidden="true" tabindex="-1"></a>fish define array_operation</span>
-<span id="cb43-3"><a href="syntax-and-grammar.html#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>create <span class="kw">and</span> populate an array <span class="cf">with</span> products of <span class="dv">2</span></span>
-<span id="cb43-4"><a href="syntax-and-grammar.html#cb43-4" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> array.create(<span class="dv">10</span>)</span>
-<span id="cb43-5"><a href="syntax-and-grammar.html#cb43-5" aria-hidden="true" tabindex="-1"></a>    loop local n(<span class="dv">1</span>,<span class="dv">10</span>)</span>
-<span id="cb43-6"><a href="syntax-and-grammar.html#cb43-6" aria-hidden="true" tabindex="-1"></a>        arr[n] <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>n</span>
-<span id="cb43-7"><a href="syntax-and-grammar.html#cb43-7" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
-<span id="cb43-8"><a href="syntax-and-grammar.html#cb43-8" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb43-9"><a href="syntax-and-grammar.html#cb43-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>compute the <span class="bu">sum</span> <span class="kw">and</span> product of elements <span class="kw">in</span> the array</span>
-<span id="cb43-10"><a href="syntax-and-grammar.html#cb43-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb43-11"><a href="syntax-and-grammar.html#cb43-11" aria-hidden="true" tabindex="-1"></a>    prod <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb43-12"><a href="syntax-and-grammar.html#cb43-12" aria-hidden="true" tabindex="-1"></a>    local i <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb43-13"><a href="syntax-and-grammar.html#cb43-13" aria-hidden="true" tabindex="-1"></a>    loop <span class="cf">while</span> (i <span class="op">&lt;=</span> array.size(arr,<span class="dv">1</span>))</span>
-<span id="cb43-14"><a href="syntax-and-grammar.html#cb43-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="bu">sum</span> <span class="op">+</span> arr[i]</span>
-<span id="cb43-15"><a href="syntax-and-grammar.html#cb43-15" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> arr[i]</span>
-<span id="cb43-16"><a href="syntax-and-grammar.html#cb43-16" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb43-17"><a href="syntax-and-grammar.html#cb43-17" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
-<span id="cb43-18"><a href="syntax-and-grammar.html#cb43-18" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ...</span>
-<span id="cb43-19"><a href="syntax-and-grammar.html#cb43-19" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
-<span id="cb43-20"><a href="syntax-and-grammar.html#cb43-20" aria-hidden="true" tabindex="-1"></a>end</span>
-<span id="cb43-21"><a href="syntax-and-grammar.html#cb43-21" aria-hidden="true" tabindex="-1"></a><span class="at">@array_operation</span></span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="syntax-and-grammar.html#cb45-1" aria-hidden="true" tabindex="-1"></a>model new</span>
+<span id="cb45-2"><a href="syntax-and-grammar.html#cb45-2" aria-hidden="true" tabindex="-1"></a>fish define array_operation</span>
+<span id="cb45-3"><a href="syntax-and-grammar.html#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>create <span class="kw">and</span> populate an array <span class="cf">with</span> products of <span class="dv">2</span></span>
+<span id="cb45-4"><a href="syntax-and-grammar.html#cb45-4" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> array.create(<span class="dv">10</span>)</span>
+<span id="cb45-5"><a href="syntax-and-grammar.html#cb45-5" aria-hidden="true" tabindex="-1"></a>    loop local n(<span class="dv">1</span>,<span class="dv">10</span>)</span>
+<span id="cb45-6"><a href="syntax-and-grammar.html#cb45-6" aria-hidden="true" tabindex="-1"></a>        arr[n] <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>n</span>
+<span id="cb45-7"><a href="syntax-and-grammar.html#cb45-7" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
+<span id="cb45-8"><a href="syntax-and-grammar.html#cb45-8" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb45-9"><a href="syntax-and-grammar.html#cb45-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>compute the <span class="bu">sum</span> <span class="kw">and</span> product of elements <span class="kw">in</span> the array</span>
+<span id="cb45-10"><a href="syntax-and-grammar.html#cb45-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb45-11"><a href="syntax-and-grammar.html#cb45-11" aria-hidden="true" tabindex="-1"></a>    prod <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb45-12"><a href="syntax-and-grammar.html#cb45-12" aria-hidden="true" tabindex="-1"></a>    local i <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb45-13"><a href="syntax-and-grammar.html#cb45-13" aria-hidden="true" tabindex="-1"></a>    loop <span class="cf">while</span> (i <span class="op">&lt;=</span> array.size(arr,<span class="dv">1</span>))</span>
+<span id="cb45-14"><a href="syntax-and-grammar.html#cb45-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="bu">sum</span> <span class="op">+</span> arr[i]</span>
+<span id="cb45-15"><a href="syntax-and-grammar.html#cb45-15" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> arr[i]</span>
+<span id="cb45-16"><a href="syntax-and-grammar.html#cb45-16" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb45-17"><a href="syntax-and-grammar.html#cb45-17" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
+<span id="cb45-18"><a href="syntax-and-grammar.html#cb45-18" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ...</span>
+<span id="cb45-19"><a href="syntax-and-grammar.html#cb45-19" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
+<span id="cb45-20"><a href="syntax-and-grammar.html#cb45-20" aria-hidden="true" tabindex="-1"></a>end</span>
+<span id="cb45-21"><a href="syntax-and-grammar.html#cb45-21" aria-hidden="true" tabindex="-1"></a><span class="at">@array_operation</span></span></code></pre></div>
 <p>In this example, an array is created and filled with numbers. The loop while construct is used to loop over the array entries and the sum and product are computed and output.</p>
 <p>A map, on the other hand, is an associative container, meaning that one can access the members of a map by an integer or string used to insert a value in the map. Maps can dynamically be resized and added to one another (appending maps together), and are the preferred constructs for storing lists of FISH variables for later access.</p>
 </div>
-<div id="map-example" class="section level4" number="5.11.5.2">
+<div id="map-example" class="section level4" number="5.12.5.2">
 <h4>
-<span class="header-section-number">5.11.5.2</span> Map example<a class="anchor" aria-label="anchor" href="#map-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.12.5.2</span> Map example<a class="anchor" aria-label="anchor" href="#map-example"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="syntax-and-grammar.html#cb44-1" aria-hidden="true" tabindex="-1"></a>model new</span>
-<span id="cb44-2"><a href="syntax-and-grammar.html#cb44-2" aria-hidden="true" tabindex="-1"></a>fish define map_operation</span>
-<span id="cb44-3"><a href="syntax-and-grammar.html#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>create <span class="kw">and</span> populate a <span class="bu">map</span> <span class="cf">with</span> products of <span class="dv">2</span></span>
-<span id="cb44-4"><a href="syntax-and-grammar.html#cb44-4" aria-hidden="true" tabindex="-1"></a>    my_map <span class="op">=</span> <span class="bu">map</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
-<span id="cb44-5"><a href="syntax-and-grammar.html#cb44-5" aria-hidden="true" tabindex="-1"></a>    loop local n(<span class="dv">2</span>,<span class="dv">10</span>)</span>
-<span id="cb44-6"><a href="syntax-and-grammar.html#cb44-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">map</span>.add(my_map,n,<span class="dv">2</span><span class="op">*</span>n)</span>
-<span id="cb44-7"><a href="syntax-and-grammar.html#cb44-7" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
-<span id="cb44-8"><a href="syntax-and-grammar.html#cb44-8" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb44-9"><a href="syntax-and-grammar.html#cb44-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>compute the <span class="bu">sum</span> <span class="kw">and</span> product of elements <span class="kw">in</span> the <span class="bu">map</span></span>
-<span id="cb44-10"><a href="syntax-and-grammar.html#cb44-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb44-11"><a href="syntax-and-grammar.html#cb44-11" aria-hidden="true" tabindex="-1"></a>    prod <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb44-12"><a href="syntax-and-grammar.html#cb44-12" aria-hidden="true" tabindex="-1"></a>    loop foreach n my_map</span>
-<span id="cb44-13"><a href="syntax-and-grammar.html#cb44-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="bu">sum</span> <span class="op">+</span> n</span>
-<span id="cb44-14"><a href="syntax-and-grammar.html#cb44-14" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> n</span>
-<span id="cb44-15"><a href="syntax-and-grammar.html#cb44-15" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
-<span id="cb44-16"><a href="syntax-and-grammar.html#cb44-16" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ...</span>
-<span id="cb44-17"><a href="syntax-and-grammar.html#cb44-17" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
-<span id="cb44-18"><a href="syntax-and-grammar.html#cb44-18" aria-hidden="true" tabindex="-1"></a>end</span>
-<span id="cb44-19"><a href="syntax-and-grammar.html#cb44-19" aria-hidden="true" tabindex="-1"></a><span class="at">@map_operation</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="syntax-and-grammar.html#cb46-1" aria-hidden="true" tabindex="-1"></a>model new</span>
+<span id="cb46-2"><a href="syntax-and-grammar.html#cb46-2" aria-hidden="true" tabindex="-1"></a>fish define map_operation</span>
+<span id="cb46-3"><a href="syntax-and-grammar.html#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>create <span class="kw">and</span> populate a <span class="bu">map</span> <span class="cf">with</span> products of <span class="dv">2</span></span>
+<span id="cb46-4"><a href="syntax-and-grammar.html#cb46-4" aria-hidden="true" tabindex="-1"></a>    my_map <span class="op">=</span> <span class="bu">map</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb46-5"><a href="syntax-and-grammar.html#cb46-5" aria-hidden="true" tabindex="-1"></a>    loop local n(<span class="dv">2</span>,<span class="dv">10</span>)</span>
+<span id="cb46-6"><a href="syntax-and-grammar.html#cb46-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">map</span>.add(my_map,n,<span class="dv">2</span><span class="op">*</span>n)</span>
+<span id="cb46-7"><a href="syntax-and-grammar.html#cb46-7" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
+<span id="cb46-8"><a href="syntax-and-grammar.html#cb46-8" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb46-9"><a href="syntax-and-grammar.html#cb46-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span>compute the <span class="bu">sum</span> <span class="kw">and</span> product of elements <span class="kw">in</span> the <span class="bu">map</span></span>
+<span id="cb46-10"><a href="syntax-and-grammar.html#cb46-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb46-11"><a href="syntax-and-grammar.html#cb46-11" aria-hidden="true" tabindex="-1"></a>    prod <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb46-12"><a href="syntax-and-grammar.html#cb46-12" aria-hidden="true" tabindex="-1"></a>    loop foreach n my_map</span>
+<span id="cb46-13"><a href="syntax-and-grammar.html#cb46-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="bu">sum</span> <span class="op">+</span> n</span>
+<span id="cb46-14"><a href="syntax-and-grammar.html#cb46-14" aria-hidden="true" tabindex="-1"></a>        prod <span class="op">=</span> prod <span class="op">*</span> n</span>
+<span id="cb46-15"><a href="syntax-and-grammar.html#cb46-15" aria-hidden="true" tabindex="-1"></a>    end_loop</span>
+<span id="cb46-16"><a href="syntax-and-grammar.html#cb46-16" aria-hidden="true" tabindex="-1"></a>    io.out(<span class="st">'The sum is '</span> <span class="op">+</span> string(<span class="bu">sum</span>) <span class="op">+</span> ...</span>
+<span id="cb46-17"><a href="syntax-and-grammar.html#cb46-17" aria-hidden="true" tabindex="-1"></a>           <span class="st">' and the product is '</span> <span class="op">+</span> string(prod))</span>
+<span id="cb46-18"><a href="syntax-and-grammar.html#cb46-18" aria-hidden="true" tabindex="-1"></a>end</span>
+<span id="cb46-19"><a href="syntax-and-grammar.html#cb46-19" aria-hidden="true" tabindex="-1"></a><span class="at">@map_operation</span></span></code></pre></div>
 <p>Unlike with arrays, maps can be looped through using the loop foreach construct. In this case, n is the value held in each map entry, not the integer name of the object in the map. Likewise, instead of using integers to insert objects into the map, one could use strings such as first, second, etc. This allows one to easily and efficiently store and access FISH variables by a user-defined name.</p>
 </div>
 </div>
-<div id="fish-function" class="section level3" number="5.11.6">
+<div id="fish-function" class="section level3" number="5.12.6">
 <h3>
-<span class="header-section-number">5.11.6</span> Fish Function<a class="anchor" aria-label="anchor" href="#fish-function"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.12.6</span> Fish Function<a class="anchor" aria-label="anchor" href="#fish-function"><i class="fas fa-link"></i></a>
 </h3>
 <p>FISH functions to calculate bulk and shear moduli</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="syntax-and-grammar.html#cb45-1" aria-hidden="true" tabindex="-1"></a>model new</span>
-<span id="cb45-2"><a href="syntax-and-grammar.html#cb45-2" aria-hidden="true" tabindex="-1"></a>fish define derive(y_mod,p_ratio)</span>
-<span id="cb45-3"><a href="syntax-and-grammar.html#cb45-3" aria-hidden="true" tabindex="-1"></a>    s_mod <span class="op">=</span> y_mod <span class="op">/</span> (<span class="fl">2.0</span> <span class="op">*</span> (<span class="fl">1.0</span> <span class="op">+</span> p_ratio))</span>
-<span id="cb45-4"><a href="syntax-and-grammar.html#cb45-4" aria-hidden="true" tabindex="-1"></a>    b_mod <span class="op">=</span> y_mod <span class="op">/</span> (<span class="fl">3.0</span> <span class="op">*</span> (<span class="fl">1.0</span> <span class="op">-</span> <span class="fl">2.0</span> <span class="op">*</span> p_ratio))</span>
-<span id="cb45-5"><a href="syntax-and-grammar.html#cb45-5" aria-hidden="true" tabindex="-1"></a>end</span>
-<span id="cb45-6"><a href="syntax-and-grammar.html#cb45-6" aria-hidden="true" tabindex="-1"></a>[derive(<span class="fl">5e8</span>,<span class="fl">0.25</span>)]</span>
-<span id="cb45-7"><a href="syntax-and-grammar.html#cb45-7" aria-hidden="true" tabindex="-1"></a>[b_mod] </span>
-<span id="cb45-8"><a href="syntax-and-grammar.html#cb45-8" aria-hidden="true" tabindex="-1"></a>[s_mod]</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="syntax-and-grammar.html#cb47-1" aria-hidden="true" tabindex="-1"></a>model new</span>
+<span id="cb47-2"><a href="syntax-and-grammar.html#cb47-2" aria-hidden="true" tabindex="-1"></a>fish define derive(y_mod,p_ratio)</span>
+<span id="cb47-3"><a href="syntax-and-grammar.html#cb47-3" aria-hidden="true" tabindex="-1"></a>    s_mod <span class="op">=</span> y_mod <span class="op">/</span> (<span class="fl">2.0</span> <span class="op">*</span> (<span class="fl">1.0</span> <span class="op">+</span> p_ratio))</span>
+<span id="cb47-4"><a href="syntax-and-grammar.html#cb47-4" aria-hidden="true" tabindex="-1"></a>    b_mod <span class="op">=</span> y_mod <span class="op">/</span> (<span class="fl">3.0</span> <span class="op">*</span> (<span class="fl">1.0</span> <span class="op">-</span> <span class="fl">2.0</span> <span class="op">*</span> p_ratio))</span>
+<span id="cb47-5"><a href="syntax-and-grammar.html#cb47-5" aria-hidden="true" tabindex="-1"></a>end</span>
+<span id="cb47-6"><a href="syntax-and-grammar.html#cb47-6" aria-hidden="true" tabindex="-1"></a>[derive(<span class="fl">5e8</span>,<span class="fl">0.25</span>)]</span>
+<span id="cb47-7"><a href="syntax-and-grammar.html#cb47-7" aria-hidden="true" tabindex="-1"></a>[b_mod] </span>
+<span id="cb47-8"><a href="syntax-and-grammar.html#cb47-8" aria-hidden="true" tabindex="-1"></a>[s_mod]</span></code></pre></div>
 <!--------------------------------------------------->
 <!--------------------------------------------------->
 <!--------------------------------------------------->
@@ -396,17 +423,20 @@
 <li><a class="nav-link" href="#groups-and-b.c."><span class="header-section-number">5.7</span> Groups and B.C.</a></li>
 <li><a class="nav-link" href="#parameteric-studies"><span class="header-section-number">5.8</span> Parameteric Studies</a></li>
 <li>
-<a class="nav-link" href="#setting-fish-variables"><span class="header-section-number">5.9</span> Setting FISH variables</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#issuing-command"><span class="header-section-number">5.9.1</span> Issuing Command</a></li></ul>
+<a class="nav-link" href="#results-1"><span class="header-section-number">5.9</span> Results</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#measuring-time-of-calculation"><span class="header-section-number">5.9.1</span> Measuring time of calculation</a></li></ul>
 </li>
-<li><a class="nav-link" href="#string"><span class="header-section-number">5.10</span> String</a></li>
 <li>
-<a class="nav-link" href="#fish-syntax"><span class="header-section-number">5.11</span> Fish Syntax</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#use-of"><span class="header-section-number">5.11.1</span> Use of …</a></li>
-<li><a class="nav-link" href="#variable-types"><span class="header-section-number">5.11.2</span> Variable Types</a></li>
-<li><a class="nav-link" href="#traditional-for-loop-in-fish"><span class="header-section-number">5.11.3</span> Traditional for loop in FISH</a></li>
-<li><a class="nav-link" href="#if-else-endif-construct"><span class="header-section-number">5.11.4</span> if else endif construct</a></li>
-<li><a class="nav-link" href="#arrays-and-maps"><span class="header-section-number">5.11.5</span> Arrays and Maps</a></li>
-<li><a class="nav-link" href="#fish-function"><span class="header-section-number">5.11.6</span> Fish Function</a></li>
+<a class="nav-link" href="#setting-fish-variables"><span class="header-section-number">5.10</span> Setting FISH variables</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#issuing-command"><span class="header-section-number">5.10.1</span> Issuing Command</a></li></ul>
+</li>
+<li><a class="nav-link" href="#string"><span class="header-section-number">5.11</span> String</a></li>
+<li>
+<a class="nav-link" href="#fish-syntax"><span class="header-section-number">5.12</span> Fish Syntax</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#use-of"><span class="header-section-number">5.12.1</span> Use of …</a></li>
+<li><a class="nav-link" href="#variable-types"><span class="header-section-number">5.12.2</span> Variable Types</a></li>
+<li><a class="nav-link" href="#traditional-for-loop-in-fish"><span class="header-section-number">5.12.3</span> Traditional for loop in FISH</a></li>
+<li><a class="nav-link" href="#if-else-endif-construct"><span class="header-section-number">5.12.4</span> if else endif construct</a></li>
+<li><a class="nav-link" href="#arrays-and-maps"><span class="header-section-number">5.12.5</span> Arrays and Maps</a></li>
+<li><a class="nav-link" href="#fish-function"><span class="header-section-number">5.12.6</span> Fish Function</a></li>
 </ul>
 </li>
 </ul>

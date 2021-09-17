@@ -67,220 +67,298 @@
 <h2>
 <span class="header-section-number">6.1</span> Some Code<a class="anchor" aria-label="anchor" href="#some-code"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="code-block.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
-<span id="cb46-2"><a href="code-block.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb46-3"><a href="code-block.html#cb46-3" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(threshold<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb46-4"><a href="code-block.html#cb46-4" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"python-reset-state false"</span>)</span>
-<span id="cb46-5"><a href="code-block.html#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> zonearray <span class="im">as</span> za</span>
-<span id="cb46-6"><a href="code-block.html#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> gridpointarray <span class="im">as</span> gpa</span>
-<span id="cb46-7"><a href="code-block.html#cb46-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-8"><a href="code-block.html#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="co">" GROUPS AND MASK ARRAYS "</span></span>
-<span id="cb46-9"><a href="code-block.html#cb46-9" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"zone group </span><span class="ch">\"</span><span class="st">lower</span><span class="ch">\"</span><span class="st"> range position-z 0 5"</span>)</span>
-<span id="cb46-10"><a href="code-block.html#cb46-10" aria-hidden="true" tabindex="-1"></a>za.in_group(<span class="st">"lower"</span>)</span>
-<span id="cb46-11"><a href="code-block.html#cb46-11" aria-hidden="true" tabindex="-1"></a>za.in_group(<span class="st">"lower"</span>).<span class="bu">sum</span>(), <span class="st">"zones in lower group."</span></span>
-<span id="cb46-12"><a href="code-block.html#cb46-12" aria-hidden="true" tabindex="-1"></a>corner_mask <span class="op">=</span> <span class="bu">reduce</span>(np.logical_and, (x<span class="op">&lt;</span><span class="dv">3</span>, y<span class="op">&lt;</span><span class="dv">3</span>, z<span class="op">&lt;</span><span class="dv">3</span>))</span>
-<span id="cb46-13"><a href="code-block.html#cb46-13" aria-hidden="true" tabindex="-1"></a>za.set_group(corner_mask, <span class="st">"corner"</span>, <span class="st">"geometry"</span>)</span>
-<span id="cb46-14"><a href="code-block.html#cb46-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> za.in_group(<span class="st">"corner"</span>, <span class="st">"geometry"</span>).<span class="bu">sum</span>(), <span class="st">"zones in corner group."</span></span>
-<span id="cb46-15"><a href="code-block.html#cb46-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-16"><a href="code-block.html#cb46-16" aria-hidden="true" tabindex="-1"></a><span class="co">" GRIDPOINTS ARRAY FUNCTIONS "</span></span>
-<span id="cb46-17"><a href="code-block.html#cb46-17" aria-hidden="true" tabindex="-1"></a>gpos <span class="op">=</span> gpa.pos()</span>
-<span id="cb46-18"><a href="code-block.html#cb46-18" aria-hidden="true" tabindex="-1"></a>gx, gy, gz <span class="op">=</span> gpos.T</span>
-<span id="cb46-19"><a href="code-block.html#cb46-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> gz</span>
-<span id="cb46-20"><a href="code-block.html#cb46-20" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> gpa.fixity()</span>
-<span id="cb46-21"><a href="code-block.html#cb46-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> f</span>
-<span id="cb46-22"><a href="code-block.html#cb46-22" aria-hidden="true" tabindex="-1"></a>f[:,][gz<span class="op">==</span><span class="dv">0</span>] <span class="op">=</span> <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span></span>
-<span id="cb46-23"><a href="code-block.html#cb46-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> f</span>
-<span id="cb46-24"><a href="code-block.html#cb46-24" aria-hidden="true" tabindex="-1"></a>gpa.set_fixity(f)</span>
-<span id="cb46-25"><a href="code-block.html#cb46-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-26"><a href="code-block.html#cb46-26" aria-hidden="true" tabindex="-1"></a>top_gridpoints <span class="op">=</span> gz<span class="op">==</span><span class="dv">10</span></span>
-<span id="cb46-27"><a href="code-block.html#cb46-27" aria-hidden="true" tabindex="-1"></a>radial_distance <span class="op">=</span> np.sqrt((gx<span class="op">-</span><span class="dv">5</span>)<span class="op">**</span><span class="dv">2</span><span class="op">+</span>(gy<span class="op">-</span><span class="dv">5</span>)<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb46-28"><a href="code-block.html#cb46-28" aria-hidden="true" tabindex="-1"></a>central_gridpoints <span class="op">=</span> radial_distance <span class="op">&lt;</span> <span class="dv">5</span></span>
-<span id="cb46-29"><a href="code-block.html#cb46-29" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.logical_and(top_gridpoints, central_gridpoints)</span>
-<span id="cb46-30"><a href="code-block.html#cb46-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"boundary load applied to </span><span class="sc">{}</span><span class="st"> gridpoints"</span>.<span class="bu">format</span>(mask.<span class="bu">sum</span>())</span>
-<span id="cb46-31"><a href="code-block.html#cb46-31" aria-hidden="true" tabindex="-1"></a>fapp <span class="op">=</span> gpa.force_app()</span>
-<span id="cb46-32"><a href="code-block.html#cb46-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> fapp</span>
-<span id="cb46-33"><a href="code-block.html#cb46-33" aria-hidden="true" tabindex="-1"></a>fapp[:,<span class="dv">2</span>] <span class="op">=</span> mask<span class="op">*</span><span class="fl">1e6</span><span class="op">*</span>(<span class="fl">5.0</span><span class="op">-</span>radial_distance)<span class="op">/</span><span class="fl">5.0</span></span>
-<span id="cb46-34"><a href="code-block.html#cb46-34" aria-hidden="true" tabindex="-1"></a>gpa.set_force_app(fapp)</span>
-<span id="cb46-35"><a href="code-block.html#cb46-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-36"><a href="code-block.html#cb46-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"zone centroids: "</span></span>
-<span id="cb46-37"><a href="code-block.html#cb46-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> za.pos()</span>
-<span id="cb46-38"><a href="code-block.html#cb46-38" aria-hidden="true" tabindex="-1"></a>za.gridpoints()</span>
-<span id="cb46-39"><a href="code-block.html#cb46-39" aria-hidden="true" tabindex="-1"></a>za.faces()</span>
-<span id="cb46-40"><a href="code-block.html#cb46-40" aria-hidden="true" tabindex="-1"></a>za.ids()</span>
-<span id="cb46-41"><a href="code-block.html#cb46-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> za.neighbors()</span>
-<span id="cb46-42"><a href="code-block.html#cb46-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-43"><a href="code-block.html#cb46-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-44"><a href="code-block.html#cb46-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-45"><a href="code-block.html#cb46-45" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb46-46"><a href="code-block.html#cb46-46" aria-hidden="true" tabindex="-1"></a><span class="co">" =================RESULTS=================== "</span></span>
-<span id="cb46-47"><a href="code-block.html#cb46-47" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb46-48"><a href="code-block.html#cb46-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-49"><a href="code-block.html#cb46-49" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"model solve"</span>)</span>
-<span id="cb46-50"><a href="code-block.html#cb46-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"gridpoint displacements:"</span></span>
-<span id="cb46-51"><a href="code-block.html#cb46-51" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> gpa.disp()</span>
-<span id="cb46-52"><a href="code-block.html#cb46-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"gridpoint displacement magnitudes: "</span></span>
-<span id="cb46-53"><a href="code-block.html#cb46-53" aria-hidden="true" tabindex="-1"></a>mag <span class="op">=</span> np.linalg.norm(gpa.disp(), axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb46-54"><a href="code-block.html#cb46-54" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> mag</span>
-<span id="cb46-55"><a href="code-block.html#cb46-55" aria-hidden="true" tabindex="-1"></a>max_index <span class="op">=</span> np.argmax(mag)</span>
-<span id="cb46-56"><a href="code-block.html#cb46-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"Maximum displacement: </span><span class="sc">{}</span><span class="st"> at location </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(gpa.disp()[max_index],</span>
-<span id="cb46-57"><a href="code-block.html#cb46-57" aria-hidden="true" tabindex="-1"></a>                                              gpa.pos()[max_index])</span>
-<span id="cb46-58"><a href="code-block.html#cb46-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-59"><a href="code-block.html#cb46-59" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"Vertical displacement along the vertical line x=5, y=5: from z=0 to z=10"</span></span>
-<span id="cb46-60"><a href="code-block.html#cb46-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> gpa.disp()[np.logical_and(gx<span class="op">==</span><span class="dv">5</span>, gy<span class="op">==</span><span class="dv">5</span>)][:,<span class="dv">2</span>]</span>
-<span id="cb46-61"><a href="code-block.html#cb46-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-62"><a href="code-block.html#cb46-62" aria-hidden="true" tabindex="-1"></a>za.stress()</span>
-<span id="cb46-63"><a href="code-block.html#cb46-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-64"><a href="code-block.html#cb46-64" aria-hidden="true" tabindex="-1"></a>za.stress_flat()</span>
-<span id="cb46-65"><a href="code-block.html#cb46-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-66"><a href="code-block.html#cb46-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-67"><a href="code-block.html#cb46-67" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb46-68"><a href="code-block.html#cb46-68" aria-hidden="true" tabindex="-1"></a><span class="co">" =========REFERENCE EXAMPLES================ "</span></span>
-<span id="cb46-69"><a href="code-block.html#cb46-69" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
-<span id="cb46-70"><a href="code-block.html#cb46-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-71"><a href="code-block.html#cb46-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-72"><a href="code-block.html#cb46-72" aria-hidden="true" tabindex="-1"></a><span class="co">""" Some Numpy Operation Examples</span></span>
-<span id="cb46-73"><a href="code-block.html#cb46-73" aria-hidden="true" tabindex="-1"></a><span class="co">np.array([1,2,3,4,5])</span></span>
-<span id="cb46-74"><a href="code-block.html#cb46-74" aria-hidden="true" tabindex="-1"></a><span class="co">np.linspace(0,1,15)</span></span>
-<span id="cb46-75"><a href="code-block.html#cb46-75" aria-hidden="true" tabindex="-1"></a><span class="co">np.zeros((4,4))</span></span>
-<span id="cb46-76"><a href="code-block.html#cb46-76" aria-hidden="true" tabindex="-1"></a><span class="co">a = np.linspace(0,1,15)</span></span>
-<span id="cb46-77"><a href="code-block.html#cb46-77" aria-hidden="true" tabindex="-1"></a><span class="co">b = np.ones_like(a)</span></span>
-<span id="cb46-78"><a href="code-block.html#cb46-78" aria-hidden="true" tabindex="-1"></a><span class="co">np.sin(a)</span></span>
-<span id="cb46-79"><a href="code-block.html#cb46-79" aria-hidden="true" tabindex="-1"></a><span class="co">print a[0]</span></span>
-<span id="cb46-80"><a href="code-block.html#cb46-80" aria-hidden="true" tabindex="-1"></a><span class="co">a[0] = 20.2</span></span>
-<span id="cb46-81"><a href="code-block.html#cb46-81" aria-hidden="true" tabindex="-1"></a><span class="co">print a</span></span>
-<span id="cb46-82"><a href="code-block.html#cb46-82" aria-hidden="true" tabindex="-1"></a><span class="co">c = np.array(((1,2,3),(4,5,6),(7,8,9),(10,11,12)))</span></span>
-<span id="cb46-83"><a href="code-block.html#cb46-83" aria-hidden="true" tabindex="-1"></a><span class="co">print c</span></span>
-<span id="cb46-84"><a href="code-block.html#cb46-84" aria-hidden="true" tabindex="-1"></a><span class="co">c[0][0]</span></span>
-<span id="cb46-85"><a href="code-block.html#cb46-85" aria-hidden="true" tabindex="-1"></a><span class="co">c[:,0]</span></span>
-<span id="cb46-86"><a href="code-block.html#cb46-86" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb46-87"><a href="code-block.html#cb46-87" aria-hidden="true" tabindex="-1"></a><span class="co">""" SOME GRIDPOINTS EXAMPLES</span></span>
-<span id="cb46-88"><a href="code-block.html#cb46-88" aria-hidden="true" tabindex="-1"></a><span class="co">z = it.zone.near((5,5,5))</span></span>
-<span id="cb46-89"><a href="code-block.html#cb46-89" aria-hidden="true" tabindex="-1"></a><span class="co">print "central zone id: {}, position: {}".format(z.id(), z.pos())</span></span>
-<span id="cb46-90"><a href="code-block.html#cb46-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-91"><a href="code-block.html#cb46-91" aria-hidden="true" tabindex="-1"></a><span class="co">for gp in z.gridpoints():</span></span>
-<span id="cb46-92"><a href="code-block.html#cb46-92" aria-hidden="true" tabindex="-1"></a><span class="co">    print "gridpoint with id: {} at {}".format(gp.id(), gp.pos())</span></span>
-<span id="cb46-93"><a href="code-block.html#cb46-93" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="code-block.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
+<span id="cb48-2"><a href="code-block.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb48-3"><a href="code-block.html#cb48-3" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(threshold<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb48-4"><a href="code-block.html#cb48-4" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"python-reset-state false"</span>)</span>
+<span id="cb48-5"><a href="code-block.html#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> zonearray <span class="im">as</span> za</span>
+<span id="cb48-6"><a href="code-block.html#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> gridpointarray <span class="im">as</span> gpa</span>
+<span id="cb48-7"><a href="code-block.html#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="code-block.html#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="co">" GROUPS AND MASK ARRAYS "</span></span>
+<span id="cb48-9"><a href="code-block.html#cb48-9" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"zone group </span><span class="ch">\"</span><span class="st">lower</span><span class="ch">\"</span><span class="st"> range position-z 0 5"</span>)</span>
+<span id="cb48-10"><a href="code-block.html#cb48-10" aria-hidden="true" tabindex="-1"></a>za.in_group(<span class="st">"lower"</span>)</span>
+<span id="cb48-11"><a href="code-block.html#cb48-11" aria-hidden="true" tabindex="-1"></a>za.in_group(<span class="st">"lower"</span>).<span class="bu">sum</span>(), <span class="st">"zones in lower group."</span></span>
+<span id="cb48-12"><a href="code-block.html#cb48-12" aria-hidden="true" tabindex="-1"></a>corner_mask <span class="op">=</span> <span class="bu">reduce</span>(np.logical_and, (x<span class="op">&lt;</span><span class="dv">3</span>, y<span class="op">&lt;</span><span class="dv">3</span>, z<span class="op">&lt;</span><span class="dv">3</span>))</span>
+<span id="cb48-13"><a href="code-block.html#cb48-13" aria-hidden="true" tabindex="-1"></a>za.set_group(corner_mask, <span class="st">"corner"</span>, <span class="st">"geometry"</span>)</span>
+<span id="cb48-14"><a href="code-block.html#cb48-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> za.in_group(<span class="st">"corner"</span>, <span class="st">"geometry"</span>).<span class="bu">sum</span>(), <span class="st">"zones in corner group."</span></span>
+<span id="cb48-15"><a href="code-block.html#cb48-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-16"><a href="code-block.html#cb48-16" aria-hidden="true" tabindex="-1"></a><span class="co">" GRIDPOINTS ARRAY FUNCTIONS "</span></span>
+<span id="cb48-17"><a href="code-block.html#cb48-17" aria-hidden="true" tabindex="-1"></a>gpos <span class="op">=</span> gpa.pos()</span>
+<span id="cb48-18"><a href="code-block.html#cb48-18" aria-hidden="true" tabindex="-1"></a>gx, gy, gz <span class="op">=</span> gpos.T</span>
+<span id="cb48-19"><a href="code-block.html#cb48-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> gz</span>
+<span id="cb48-20"><a href="code-block.html#cb48-20" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> gpa.fixity()</span>
+<span id="cb48-21"><a href="code-block.html#cb48-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> f</span>
+<span id="cb48-22"><a href="code-block.html#cb48-22" aria-hidden="true" tabindex="-1"></a>f[:,][gz<span class="op">==</span><span class="dv">0</span>] <span class="op">=</span> <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span></span>
+<span id="cb48-23"><a href="code-block.html#cb48-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> f</span>
+<span id="cb48-24"><a href="code-block.html#cb48-24" aria-hidden="true" tabindex="-1"></a>gpa.set_fixity(f)</span>
+<span id="cb48-25"><a href="code-block.html#cb48-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-26"><a href="code-block.html#cb48-26" aria-hidden="true" tabindex="-1"></a>top_gridpoints <span class="op">=</span> gz<span class="op">==</span><span class="dv">10</span></span>
+<span id="cb48-27"><a href="code-block.html#cb48-27" aria-hidden="true" tabindex="-1"></a>radial_distance <span class="op">=</span> np.sqrt((gx<span class="op">-</span><span class="dv">5</span>)<span class="op">**</span><span class="dv">2</span><span class="op">+</span>(gy<span class="op">-</span><span class="dv">5</span>)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb48-28"><a href="code-block.html#cb48-28" aria-hidden="true" tabindex="-1"></a>central_gridpoints <span class="op">=</span> radial_distance <span class="op">&lt;</span> <span class="dv">5</span></span>
+<span id="cb48-29"><a href="code-block.html#cb48-29" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.logical_and(top_gridpoints, central_gridpoints)</span>
+<span id="cb48-30"><a href="code-block.html#cb48-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"boundary load applied to </span><span class="sc">{}</span><span class="st"> gridpoints"</span>.<span class="bu">format</span>(mask.<span class="bu">sum</span>())</span>
+<span id="cb48-31"><a href="code-block.html#cb48-31" aria-hidden="true" tabindex="-1"></a>fapp <span class="op">=</span> gpa.force_app()</span>
+<span id="cb48-32"><a href="code-block.html#cb48-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> fapp</span>
+<span id="cb48-33"><a href="code-block.html#cb48-33" aria-hidden="true" tabindex="-1"></a>fapp[:,<span class="dv">2</span>] <span class="op">=</span> mask<span class="op">*</span><span class="fl">1e6</span><span class="op">*</span>(<span class="fl">5.0</span><span class="op">-</span>radial_distance)<span class="op">/</span><span class="fl">5.0</span></span>
+<span id="cb48-34"><a href="code-block.html#cb48-34" aria-hidden="true" tabindex="-1"></a>gpa.set_force_app(fapp)</span>
+<span id="cb48-35"><a href="code-block.html#cb48-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-36"><a href="code-block.html#cb48-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"zone centroids: "</span></span>
+<span id="cb48-37"><a href="code-block.html#cb48-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> za.pos()</span>
+<span id="cb48-38"><a href="code-block.html#cb48-38" aria-hidden="true" tabindex="-1"></a>za.gridpoints()</span>
+<span id="cb48-39"><a href="code-block.html#cb48-39" aria-hidden="true" tabindex="-1"></a>za.faces()</span>
+<span id="cb48-40"><a href="code-block.html#cb48-40" aria-hidden="true" tabindex="-1"></a>za.ids()</span>
+<span id="cb48-41"><a href="code-block.html#cb48-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> za.neighbors()</span>
+<span id="cb48-42"><a href="code-block.html#cb48-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-43"><a href="code-block.html#cb48-43" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb48-44"><a href="code-block.html#cb48-44" aria-hidden="true" tabindex="-1"></a><span class="co">" =================RESULTS=================== "</span></span>
+<span id="cb48-45"><a href="code-block.html#cb48-45" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb48-46"><a href="code-block.html#cb48-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-47"><a href="code-block.html#cb48-47" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"model solve"</span>)</span>
+<span id="cb48-48"><a href="code-block.html#cb48-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"gridpoint displacements:"</span></span>
+<span id="cb48-49"><a href="code-block.html#cb48-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> gpa.disp()</span>
+<span id="cb48-50"><a href="code-block.html#cb48-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"gridpoint displacement magnitudes: "</span></span>
+<span id="cb48-51"><a href="code-block.html#cb48-51" aria-hidden="true" tabindex="-1"></a>mag <span class="op">=</span> np.linalg.norm(gpa.disp(), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb48-52"><a href="code-block.html#cb48-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> mag</span>
+<span id="cb48-53"><a href="code-block.html#cb48-53" aria-hidden="true" tabindex="-1"></a>max_index <span class="op">=</span> np.argmax(mag)</span>
+<span id="cb48-54"><a href="code-block.html#cb48-54" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"Maximum displacement: </span><span class="sc">{}</span><span class="st"> at location </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(gpa.disp()[max_index],</span>
+<span id="cb48-55"><a href="code-block.html#cb48-55" aria-hidden="true" tabindex="-1"></a>                                              gpa.pos()[max_index])</span>
+<span id="cb48-56"><a href="code-block.html#cb48-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-57"><a href="code-block.html#cb48-57" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> <span class="st">"Vertical displacement along the vertical line x=5, y=5: from z=0 to z=10"</span></span>
+<span id="cb48-58"><a href="code-block.html#cb48-58" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> gpa.disp()[np.logical_and(gx<span class="op">==</span><span class="dv">5</span>, gy<span class="op">==</span><span class="dv">5</span>)][:,<span class="dv">2</span>]</span>
+<span id="cb48-59"><a href="code-block.html#cb48-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-60"><a href="code-block.html#cb48-60" aria-hidden="true" tabindex="-1"></a>za.stress()</span>
+<span id="cb48-61"><a href="code-block.html#cb48-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-62"><a href="code-block.html#cb48-62" aria-hidden="true" tabindex="-1"></a>za.stress_flat()</span>
+<span id="cb48-63"><a href="code-block.html#cb48-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-64"><a href="code-block.html#cb48-64" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb48-65"><a href="code-block.html#cb48-65" aria-hidden="true" tabindex="-1"></a><span class="co">" =========REFERENCE EXAMPLES================ "</span></span>
+<span id="cb48-66"><a href="code-block.html#cb48-66" aria-hidden="true" tabindex="-1"></a><span class="co">" =========================================== "</span></span>
+<span id="cb48-67"><a href="code-block.html#cb48-67" aria-hidden="true" tabindex="-1"></a><span class="co">""" Some Numpy Operation Examples</span></span>
+<span id="cb48-68"><a href="code-block.html#cb48-68" aria-hidden="true" tabindex="-1"></a><span class="co">np.array([1,2,3,4,5])</span></span>
+<span id="cb48-69"><a href="code-block.html#cb48-69" aria-hidden="true" tabindex="-1"></a><span class="co">np.linspace(0,1,15)</span></span>
+<span id="cb48-70"><a href="code-block.html#cb48-70" aria-hidden="true" tabindex="-1"></a><span class="co">np.zeros((4,4))</span></span>
+<span id="cb48-71"><a href="code-block.html#cb48-71" aria-hidden="true" tabindex="-1"></a><span class="co">a = np.linspace(0,1,15)</span></span>
+<span id="cb48-72"><a href="code-block.html#cb48-72" aria-hidden="true" tabindex="-1"></a><span class="co">b = np.ones_like(a)</span></span>
+<span id="cb48-73"><a href="code-block.html#cb48-73" aria-hidden="true" tabindex="-1"></a><span class="co">np.sin(a)</span></span>
+<span id="cb48-74"><a href="code-block.html#cb48-74" aria-hidden="true" tabindex="-1"></a><span class="co">print a[0]</span></span>
+<span id="cb48-75"><a href="code-block.html#cb48-75" aria-hidden="true" tabindex="-1"></a><span class="co">a[0] = 20.2</span></span>
+<span id="cb48-76"><a href="code-block.html#cb48-76" aria-hidden="true" tabindex="-1"></a><span class="co">print a</span></span>
+<span id="cb48-77"><a href="code-block.html#cb48-77" aria-hidden="true" tabindex="-1"></a><span class="co">c = np.array(((1,2,3),(4,5,6),(7,8,9),(10,11,12)))</span></span>
+<span id="cb48-78"><a href="code-block.html#cb48-78" aria-hidden="true" tabindex="-1"></a><span class="co">print c</span></span>
+<span id="cb48-79"><a href="code-block.html#cb48-79" aria-hidden="true" tabindex="-1"></a><span class="co">c[0][0]</span></span>
+<span id="cb48-80"><a href="code-block.html#cb48-80" aria-hidden="true" tabindex="-1"></a><span class="co">c[:,0]</span></span>
+<span id="cb48-81"><a href="code-block.html#cb48-81" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb48-82"><a href="code-block.html#cb48-82" aria-hidden="true" tabindex="-1"></a><span class="co">""" SOME GRIDPOINTS EXAMPLES</span></span>
+<span id="cb48-83"><a href="code-block.html#cb48-83" aria-hidden="true" tabindex="-1"></a><span class="co">z = it.zone.near((5,5,5))</span></span>
+<span id="cb48-84"><a href="code-block.html#cb48-84" aria-hidden="true" tabindex="-1"></a><span class="co">print "central zone id: {}, position: {}".format(z.id(), z.pos())</span></span>
+<span id="cb48-85"><a href="code-block.html#cb48-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-86"><a href="code-block.html#cb48-86" aria-hidden="true" tabindex="-1"></a><span class="co">for gp in z.gridpoints():</span></span>
+<span id="cb48-87"><a href="code-block.html#cb48-87" aria-hidden="true" tabindex="-1"></a><span class="co">    print "gridpoint with id: {} at {}".format(gp.id(), gp.pos())</span></span>
+<span id="cb48-88"><a href="code-block.html#cb48-88" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div>
 </div>
-<div id="kiast-model" class="section level2" number="6.2">
+<div id="interface" class="section level2" number="6.2">
 <h2>
-<span class="header-section-number">6.2</span> KIAST Model<a class="anchor" aria-label="anchor" href="#kiast-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2</span> Interface<a class="anchor" aria-label="anchor" href="#interface"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="code-block.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
-<span id="cb47-2"><a href="code-block.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb47-3"><a href="code-block.html#cb47-3" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(threshold<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb47-4"><a href="code-block.html#cb47-4" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"python-reset-state false"</span>)</span>
-<span id="cb47-5"><a href="code-block.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> zonearray <span class="im">as</span> za</span>
-<span id="cb47-6"><a href="code-block.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> gridpointarray <span class="im">as</span> gpa</span>
-<span id="cb47-7"><a href="code-block.html#cb47-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-8"><a href="code-block.html#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="co"># PARAMETERS #</span></span>
-<span id="cb47-9"><a href="code-block.html#cb47-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-10"><a href="code-block.html#cb47-10" aria-hidden="true" tabindex="-1"></a>_D_shaft <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb47-11"><a href="code-block.html#cb47-11" aria-hidden="true" tabindex="-1"></a>_H_shaft <span class="op">=</span> <span class="fl">7.45</span></span>
-<span id="cb47-12"><a href="code-block.html#cb47-12" aria-hidden="true" tabindex="-1"></a>_T_plate <span class="op">=</span> <span class="fl">1.5</span></span>
-<span id="cb47-13"><a href="code-block.html#cb47-13" aria-hidden="true" tabindex="-1"></a>_B_footing <span class="op">=</span> <span class="fl">3.25</span></span>
-<span id="cb47-14"><a href="code-block.html#cb47-14" aria-hidden="true" tabindex="-1"></a>_D_footing <span class="op">=</span> _H_shaft <span class="op">+</span> _T_plate</span>
-<span id="cb47-15"><a href="code-block.html#cb47-15" aria-hidden="true" tabindex="-1"></a>_B_soil <span class="op">=</span> _B_footing<span class="op">*</span><span class="dv">5</span></span>
-<span id="cb47-16"><a href="code-block.html#cb47-16" aria-hidden="true" tabindex="-1"></a>_D_soil <span class="op">=</span> _D_footing<span class="op">+</span><span class="dv">3</span></span>
-<span id="cb47-17"><a href="code-block.html#cb47-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-18"><a href="code-block.html#cb47-18" aria-hidden="true" tabindex="-1"></a>_radial <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb47-19"><a href="code-block.html#cb47-19" aria-hidden="true" tabindex="-1"></a>_perimeter <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>_radial</span>
-<span id="cb47-20"><a href="code-block.html#cb47-20" aria-hidden="true" tabindex="-1"></a>_axial <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>_radial</span>
-<span id="cb47-21"><a href="code-block.html#cb47-21" aria-hidden="true" tabindex="-1"></a>_outer <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>_radial</span>
-<span id="cb47-22"><a href="code-block.html#cb47-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-23"><a href="code-block.html#cb47-23" aria-hidden="true" tabindex="-1"></a>_bulk <span class="op">=</span> <span class="fl">13.9e9</span></span>
-<span id="cb47-24"><a href="code-block.html#cb47-24" aria-hidden="true" tabindex="-1"></a>_shear <span class="op">=</span> <span class="fl">10.4e9</span></span>
-<span id="cb47-25"><a href="code-block.html#cb47-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-26"><a href="code-block.html#cb47-26" aria-hidden="true" tabindex="-1"></a>_E_o <span class="op">=</span> <span class="fl">1e7</span></span>
-<span id="cb47-27"><a href="code-block.html#cb47-27" aria-hidden="true" tabindex="-1"></a>_const <span class="op">=</span> <span class="fl">1e8</span></span>
-<span id="cb47-28"><a href="code-block.html#cb47-28" aria-hidden="true" tabindex="-1"></a>_poisson <span class="op">=</span> <span class="fl">0.25</span></span>
-<span id="cb47-29"><a href="code-block.html#cb47-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-30"><a href="code-block.html#cb47-30" aria-hidden="true" tabindex="-1"></a><span class="co"># ZONE #</span></span>
-<span id="cb47-31"><a href="code-block.html#cb47-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-32"><a href="code-block.html#cb47-32" aria-hidden="true" tabindex="-1"></a>command_zone <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb47-33"><a href="code-block.html#cb47-33" aria-hidden="true" tabindex="-1"></a><span class="st">model new</span></span>
-<span id="cb47-34"><a href="code-block.html#cb47-34" aria-hidden="true" tabindex="-1"></a><span class="st">z crea r-t p 0 (0,0,0) ...</span></span>
-<span id="cb47-35"><a href="code-block.html#cb47-35" aria-hidden="true" tabindex="-1"></a><span class="st">           p 1 (</span><span class="sc">{B_soil}</span><span class="st">,0,0) ... </span></span>
-<span id="cb47-36"><a href="code-block.html#cb47-36" aria-hidden="true" tabindex="-1"></a><span class="st">           p 2 (0,</span><span class="sc">{D_soil}</span><span class="st">,0) ...</span></span>
-<span id="cb47-37"><a href="code-block.html#cb47-37" aria-hidden="true" tabindex="-1"></a><span class="st">           p 3 (0,0,</span><span class="sc">{B_soil}</span><span class="st">) ...</span></span>
-<span id="cb47-38"><a href="code-block.html#cb47-38" aria-hidden="true" tabindex="-1"></a><span class="st">           p 4 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">,0) ...</span></span>
-<span id="cb47-39"><a href="code-block.html#cb47-39" aria-hidden="true" tabindex="-1"></a><span class="st">           p 5 (0,</span><span class="sc">{D_soil}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">) ...</span></span>
-<span id="cb47-40"><a href="code-block.html#cb47-40" aria-hidden="true" tabindex="-1"></a><span class="st">           p 6 (</span><span class="sc">{B_soil}</span><span class="st">,0,</span><span class="sc">{B_soil}</span><span class="st">) ...</span></span>
-<span id="cb47-41"><a href="code-block.html#cb47-41" aria-hidden="true" tabindex="-1"></a><span class="st">           p 7 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">) ...</span></span>
-<span id="cb47-42"><a href="code-block.html#cb47-42" aria-hidden="true" tabindex="-1"></a><span class="st">           p 8 (</span><span class="sc">{B_footing}</span><span class="st">,0,0) ...</span></span>
-<span id="cb47-43"><a href="code-block.html#cb47-43" aria-hidden="true" tabindex="-1"></a><span class="st">           p 9 (0,0,</span><span class="sc">{B_footing}</span><span class="st">) ...</span></span>
-<span id="cb47-44"><a href="code-block.html#cb47-44" aria-hidden="true" tabindex="-1"></a><span class="st">           p 10 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">,0) ...</span></span>
-<span id="cb47-45"><a href="code-block.html#cb47-45" aria-hidden="true" tabindex="-1"></a><span class="st">           p 11 (0,</span><span class="sc">{D_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">) ...</span></span>
-<span id="cb47-46"><a href="code-block.html#cb47-46" aria-hidden="true" tabindex="-1"></a><span class="st">           p 12 (</span><span class="sc">{B_footing}</span><span class="st">,0,</span><span class="sc">{B_footing}</span><span class="st">) ...</span></span>
-<span id="cb47-47"><a href="code-block.html#cb47-47" aria-hidden="true" tabindex="-1"></a><span class="st">           p 13 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">) ...</span></span>
-<span id="cb47-48"><a href="code-block.html#cb47-48" aria-hidden="true" tabindex="-1"></a><span class="st">           size </span><span class="sc">{radial}</span><span class="st"> </span><span class="sc">{axial}</span><span class="st"> </span><span class="sc">{perimeter}</span><span class="st"> </span><span class="sc">{outer}</span><span class="st"> ...</span></span>
-<span id="cb47-49"><a href="code-block.html#cb47-49" aria-hidden="true" tabindex="-1"></a><span class="st">           rat 1 1 1 1.01 ...</span></span>
-<span id="cb47-50"><a href="code-block.html#cb47-50" aria-hidden="true" tabindex="-1"></a><span class="st">           fill</span></span>
-<span id="cb47-51"><a href="code-block.html#cb47-51" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb47-52"><a href="code-block.html#cb47-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-53"><a href="code-block.html#cb47-53" aria-hidden="true" tabindex="-1"></a>command <span class="op">=</span> command_zone.<span class="bu">format</span>(</span>
-<span id="cb47-54"><a href="code-block.html#cb47-54" aria-hidden="true" tabindex="-1"></a>B_footing <span class="op">=</span> _B_footing,</span>
-<span id="cb47-55"><a href="code-block.html#cb47-55" aria-hidden="true" tabindex="-1"></a>B_soil <span class="op">=</span> _B_soil,</span>
-<span id="cb47-56"><a href="code-block.html#cb47-56" aria-hidden="true" tabindex="-1"></a>D_soil <span class="op">=</span> _D_soil,</span>
-<span id="cb47-57"><a href="code-block.html#cb47-57" aria-hidden="true" tabindex="-1"></a>radial<span class="op">=</span>_radial,</span>
-<span id="cb47-58"><a href="code-block.html#cb47-58" aria-hidden="true" tabindex="-1"></a>axial <span class="op">=</span> _axial,</span>
-<span id="cb47-59"><a href="code-block.html#cb47-59" aria-hidden="true" tabindex="-1"></a>perimeter <span class="op">=</span> _perimeter,</span>
-<span id="cb47-60"><a href="code-block.html#cb47-60" aria-hidden="true" tabindex="-1"></a>outer <span class="op">=</span> _outer)</span>
-<span id="cb47-61"><a href="code-block.html#cb47-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-62"><a href="code-block.html#cb47-62" aria-hidden="true" tabindex="-1"></a>it.command(command)</span>
-<span id="cb47-63"><a href="code-block.html#cb47-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-64"><a href="code-block.html#cb47-64" aria-hidden="true" tabindex="-1"></a><span class="co"># GROUP #</span></span>
-<span id="cb47-65"><a href="code-block.html#cb47-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-66"><a href="code-block.html#cb47-66" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> za.pos()</span>
-<span id="cb47-67"><a href="code-block.html#cb47-67" aria-hidden="true" tabindex="-1"></a>x,y,z <span class="op">=</span> p.T</span>
-<span id="cb47-68"><a href="code-block.html#cb47-68" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(it.zone.count(), <span class="st">"zones in whole model"</span>)</span>
-<span id="cb47-69"><a href="code-block.html#cb47-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-70"><a href="code-block.html#cb47-70" aria-hidden="true" tabindex="-1"></a>shaft <span class="op">=</span> <span class="bu">reduce</span>(np.logical_and, (np.sqrt(x<span class="op">**</span><span class="dv">2</span><span class="op">+</span>z<span class="op">**</span><span class="dv">2</span>)<span class="op">&lt;</span>_D_shaft, y<span class="op">&lt;</span>_H_shaft))</span>
-<span id="cb47-71"><a href="code-block.html#cb47-71" aria-hidden="true" tabindex="-1"></a>za.set_group(shaft, <span class="st">"shaft"</span>) <span class="co"># set the zones with shaft = true have "shaft" and "geometry"</span></span>
-<span id="cb47-72"><a href="code-block.html#cb47-72" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(za.in_group(<span class="st">"shaft"</span>).<span class="bu">sum</span>(), <span class="st">"zones in shaft group."</span>) <span class="co">#output how many zones are in the corner group</span></span>
-<span id="cb47-73"><a href="code-block.html#cb47-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-74"><a href="code-block.html#cb47-74" aria-hidden="true" tabindex="-1"></a>plate <span class="op">=</span> <span class="bu">reduce</span>(np.logical_and, (x<span class="op">&lt;</span>_B_footing,z<span class="op">&lt;</span>_B_footing, y<span class="op">&gt;</span>_H_shaft,y<span class="op">&lt;</span>_D_footing))</span>
-<span id="cb47-75"><a href="code-block.html#cb47-75" aria-hidden="true" tabindex="-1"></a>za.set_group(plate, <span class="st">"plate"</span>) <span class="co"># set the zones with plate = true have "plate" and "geometry"</span></span>
-<span id="cb47-76"><a href="code-block.html#cb47-76" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(za.in_group(<span class="st">"plate"</span>).<span class="bu">sum</span>(), <span class="st">"zones in plate group."</span>) <span class="co">#output how many zones are in the corner group</span></span>
-<span id="cb47-77"><a href="code-block.html#cb47-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-78"><a href="code-block.html#cb47-78" aria-hidden="true" tabindex="-1"></a><span class="co"># CONSTITUTIVE MODEL #</span></span>
-<span id="cb47-79"><a href="code-block.html#cb47-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-80"><a href="code-block.html#cb47-80" aria-hidden="true" tabindex="-1"></a><span class="co">#it.command("""</span></span>
-<span id="cb47-81"><a href="code-block.html#cb47-81" aria-hidden="true" tabindex="-1"></a><span class="co">#zone cmodel assign strain-softening range group "Radial Tunnel1"</span></span>
-<span id="cb47-82"><a href="code-block.html#cb47-82" aria-hidden="true" tabindex="-1"></a><span class="co">#zone property density 2500 bulk 2e8 shear 1e8 range group "Radial Tunnel1"</span></span>
-<span id="cb47-83"><a href="code-block.html#cb47-83" aria-hidden="true" tabindex="-1"></a><span class="co">#zone property cohesion 2e6 friction 45 tension 2e5 dilation 10 range group "Radial Tunnel1"</span></span>
-<span id="cb47-84"><a href="code-block.html#cb47-84" aria-hidden="true" tabindex="-1"></a><span class="co">#zone property table-friction 'fri' table-cohesion 'coh' table-dilation 'dil' range group "Radial Tunnel1"</span></span>
-<span id="cb47-85"><a href="code-block.html#cb47-85" aria-hidden="true" tabindex="-1"></a><span class="co">#table 'fri' add (0, 45) (.05, 42) (.1, 40) (1, 40)</span></span>
-<span id="cb47-86"><a href="code-block.html#cb47-86" aria-hidden="true" tabindex="-1"></a><span class="co">#table 'coh' add (0,2e6) (.05,1e6) (.1,5e5) (1,5e5) </span></span>
-<span id="cb47-87"><a href="code-block.html#cb47-87" aria-hidden="true" tabindex="-1"></a><span class="co">#table 'dil' add (0, 10) (.05,  3) (.1,  0)</span></span>
-<span id="cb47-88"><a href="code-block.html#cb47-88" aria-hidden="true" tabindex="-1"></a><span class="co">#""")</span></span>
-<span id="cb47-89"><a href="code-block.html#cb47-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-90"><a href="code-block.html#cb47-90" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
-<span id="cb47-91"><a href="code-block.html#cb47-91" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic range group "Radial Tunnel1"</span></span>
-<span id="cb47-92"><a href="code-block.html#cb47-92" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic range group 'shaft'</span></span>
-<span id="cb47-93"><a href="code-block.html#cb47-93" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic range group 'plate'</span></span>
-<span id="cb47-94"><a href="code-block.html#cb47-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-95"><a href="code-block.html#cb47-95" aria-hidden="true" tabindex="-1"></a><span class="st">fish define fname(E_o,const)</span></span>
-<span id="cb47-96"><a href="code-block.html#cb47-96" aria-hidden="true" tabindex="-1"></a><span class="st">loop foreach pnt zone.list</span></span>
-<span id="cb47-97"><a href="code-block.html#cb47-97" aria-hidden="true" tabindex="-1"></a><span class="st">z_depth = zone.pos.y(pnt)</span></span>
-<span id="cb47-98"><a href="code-block.html#cb47-98" aria-hidden="true" tabindex="-1"></a><span class="st">E = E_o+const*math.sqrt(z_depth)</span></span>
-<span id="cb47-99"><a href="code-block.html#cb47-99" aria-hidden="true" tabindex="-1"></a><span class="st">zone.prop(pnt,'young')=E</span></span>
-<span id="cb47-100"><a href="code-block.html#cb47-100" aria-hidden="true" tabindex="-1"></a><span class="st">end_loop</span></span>
-<span id="cb47-101"><a href="code-block.html#cb47-101" aria-hidden="true" tabindex="-1"></a><span class="st">end</span></span>
-<span id="cb47-102"><a href="code-block.html#cb47-102" aria-hidden="true" tabindex="-1"></a><span class="st">@fname(</span><span class="sc">{E_o_}</span><span class="st">,</span><span class="sc">{const_}</span><span class="st">)</span></span>
-<span id="cb47-103"><a href="code-block.html#cb47-103" aria-hidden="true" tabindex="-1"></a><span class="st">zone property poisson </span><span class="sc">{poisson_}</span></span>
-<span id="cb47-104"><a href="code-block.html#cb47-104" aria-hidden="true" tabindex="-1"></a><span class="st">plot item create zone contour property name 'young'</span></span>
-<span id="cb47-105"><a href="code-block.html#cb47-105" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>.<span class="bu">format</span>(E_o_<span class="op">=</span>_E_o,const_<span class="op">=</span>_const,poisson_<span class="op">=</span>_poisson))</span>
-<span id="cb47-106"><a href="code-block.html#cb47-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-107"><a href="code-block.html#cb47-107" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
-<span id="cb47-108"><a href="code-block.html#cb47-108" aria-hidden="true" tabindex="-1"></a><span class="st">zone property bulk </span><span class="sc">{bulk}</span><span class="st">  shear </span><span class="sc">{shear}</span><span class="st"> range group 'shaft'</span></span>
-<span id="cb47-109"><a href="code-block.html#cb47-109" aria-hidden="true" tabindex="-1"></a><span class="st">zone property bulk </span><span class="sc">{bulk}</span><span class="st">  shear </span><span class="sc">{shear}</span><span class="st"> range group 'plate'</span></span>
-<span id="cb47-110"><a href="code-block.html#cb47-110" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>.<span class="bu">format</span>(bulk<span class="op">=</span>_bulk,shear<span class="op">=</span>_shear))</span>
-<span id="cb47-111"><a href="code-block.html#cb47-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-112"><a href="code-block.html#cb47-112" aria-hidden="true" tabindex="-1"></a><span class="co">#soil = za.in_group("Radial Tunnel1")</span></span>
-<span id="cb47-113"><a href="code-block.html#cb47-113" aria-hidden="true" tabindex="-1"></a><span class="co"># list(gp.list)</span></span>
-<span id="cb47-114"><a href="code-block.html#cb47-114" aria-hidden="true" tabindex="-1"></a><span class="co"># gp.isgroup(::gp.list,"North")</span></span>
-<span id="cb47-115"><a href="code-block.html#cb47-115" aria-hidden="true" tabindex="-1"></a><span class="co"># gp.force.unbal(::ad)</span></span>
-<span id="cb47-116"><a href="code-block.html#cb47-116" aria-hidden="true" tabindex="-1"></a><span class="co"># [ad = list(gp.list)(gp.isgroup(::gp.list,"North))]</span></span></code></pre></div>
+<p>Interfaces are most often created with the zone interface create by-face command:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="code-block.html#cb49-1" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'flt'</span> create by<span class="op">-</span>face separate <span class="bu">range</span> position<span class="op">-</span>z <span class="dv">5</span></span>
+<span id="cb49-2"><a href="code-block.html#cb49-2" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'flt'</span> node <span class="bu">property</span> stiffness<span class="op">-</span>normal <span class="fl">1e8</span> stiffness<span class="op">-</span>shear <span class="fl">1e8</span></span></code></pre></div>
+<p>This command creates an interface named flt by separating all zone faces found
+at z=5 and placing interface elements and nodes on one side. Contacts are found
+(and forces generated) by interface nodes coming into contact with zone surface
+faces that are not part of the interface itself.</p>
+<div class="figure">
+<span style="display:block;" id="fig:unnamed-chunk-58"></span>
+<img src="myfigureeeeee/k.PNG" alt="Code chunk syntax" width="100%"><p class="caption">
+Figure 6.1: Code chunk syntax
+</p>
+</div>
+<p>Every reference to an interface uses a name (like the table command) to indicate
+which interface is being referred to</p>
+<p>Interfaces in FLAC3D are one-sided objects. Interface elements are (in general) created attached to zone surface faces, which
+in turn create interface nodes. All contact detection is between interface nodes and zone surface faces.</p>
+<p>Most commonly, interfaces need to be created starting with a mesh that is
+continuous. In that case, it is easiest to separate the mesh and create the
+interfaces all in one command using the separate keyword (as shown in the
+example above).</p>
+<p>The new-side-origin keyword can be used to determine which
+side of the separation interface elements are applied to. The side opposite the
+location of the origin will be selected. In the example above, to select the other
+side, change the command to</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="code-block.html#cb50-1" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">'flt'</span> create by<span class="op">-</span>face separate new<span class="op">-</span>side<span class="op">-</span>origin (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">10</span>) ...</span>
+<span id="cb50-2"><a href="code-block.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="bu">range</span> position<span class="op">-</span>z <span class="dv">5</span></span></code></pre></div>
+<div id="penetration" class="section level3" number="6.2.1">
+<h3>
+<span class="header-section-number">6.2.1</span> Penetration<a class="anchor" aria-label="anchor" href="#penetration"><i class="fas fa-link"></i></a>
+</h3>
+<p>the calculation of normal stress due
+to interface penetration is absolute instead of incremental. This means that
+moving a gridpoint relative to an interface in the normal direction will have an
+immediate effect on the normal stress calculated. This is not true of accumulated
+shear stress, which remains incremental.</p>
+<p>In small-strain mode, gridpoints do not actually move their location in response
+to accumulated velocities.</p>
+<p>small-displacement” field. is a vector field
+that is accumulated from the velocity field every step in small-strain mode only.
+For the purposes of calculating interface penetration, a gridpoint location is
+based on the current location plus the small-strain displacement. The smallstrain displacement may be initialized using the zone gridpoint initialize
+displacement-small command, and this is sometimes useful to reset the effective
+penetration of an interface after some grid motion.
+To initialize interface stresses without actually moving gridpoints, we introduce
+a normal stress increment that is added to the normal stress calculated from
+absolute penetration. It is this value that is set when the zone interface node
+initialize-stresses command is given. It can also be set explicitly using zone
+interface node stress-normal-increment.</p>
+<p>Spatial Variation and Randomness of Property Distribution</p>
+<p>Material properties can be specified to adjust or to vary as a function of grid
+position. In fact, a different property can be assigned to every zone in a FLAC3D
+model, regardless of model size.
+There are two commands avialable in FLAC3D to specfiy material properties. The
+first, zone property, allows multiple properties to be specified in a single
+command. This is convenient to completely specify properties in different
+regions, where that property does not vary within that region.
+The second can only specify one property at a time, but has optional keywords
+that allow the property value to be automatically varied in space. This is the zone
+property-distribution command. Among the available keywords are add,
+multiply, gradient, and vary, which can be used to provide fixed or linear
+variations of properties with position. For example, the following command
+provides a linear variation of cohesion in the x-direction:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="code-block.html#cb51-1" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span><span class="op">-</span>distribution cohesion <span class="fl">1e6</span> gradient (<span class="op">-</span><span class="fl">1e5</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span></code></pre></div>
+<p>An initial profile of a property can also be assigned via FISH.
+With FLAC3D, it is also possible to study the influence of nonhomogeneity in a
+material. Any type of statistical property distribution can be introduced, as each
+element may have a unique property value. Two optional keywords are available
+to apply a random distribution of a selected property with the zone propertydistribution command. The keyword deviation-gaussian assumes a normal
+(Gaussian) distribution for the property, with a mean value, v, and standard
+deviation, s. The keyword deviation-uniform assumes a uniform distribution with
+mean value, v, and standard deviation, s. Be careful to ensure that properties do
+not acquire negative values if s is large. As an example, the following command
+would give a mean friction angle of 40° with a standard deviation of ±5%:
+zone property-distribution friction 45 deviation-gaussian 2
+Use of the variation keywords in any command (not just for property variation) is
+defined in the topic Value Modifiers (Add, Multiply, Gradient, Vary).</p>
+</div>
+</div>
+<div id="kiast-model" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> KIAST Model<a class="anchor" aria-label="anchor" href="#kiast-model"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="code-block.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
+<span id="cb52-2"><a href="code-block.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb52-3"><a href="code-block.html#cb52-3" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(threshold<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb52-4"><a href="code-block.html#cb52-4" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"python-reset-state false"</span>)</span>
+<span id="cb52-5"><a href="code-block.html#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> zonearray <span class="im">as</span> za</span>
+<span id="cb52-6"><a href="code-block.html#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> gridpointarray <span class="im">as</span> gpa</span>
+<span id="cb52-7"><a href="code-block.html#cb52-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-8"><a href="code-block.html#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="co"># PARAMETERS #</span></span>
+<span id="cb52-9"><a href="code-block.html#cb52-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-10"><a href="code-block.html#cb52-10" aria-hidden="true" tabindex="-1"></a>_D_shaft <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb52-11"><a href="code-block.html#cb52-11" aria-hidden="true" tabindex="-1"></a>_H_shaft <span class="op">=</span> <span class="fl">7.45</span></span>
+<span id="cb52-12"><a href="code-block.html#cb52-12" aria-hidden="true" tabindex="-1"></a>_T_plate <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb52-13"><a href="code-block.html#cb52-13" aria-hidden="true" tabindex="-1"></a>_B_footing <span class="op">=</span> <span class="fl">3.25</span></span>
+<span id="cb52-14"><a href="code-block.html#cb52-14" aria-hidden="true" tabindex="-1"></a>_D_footing <span class="op">=</span> _H_shaft <span class="op">+</span> _T_plate</span>
+<span id="cb52-15"><a href="code-block.html#cb52-15" aria-hidden="true" tabindex="-1"></a>_B_soil <span class="op">=</span> _B_footing<span class="op">*</span><span class="dv">5</span></span>
+<span id="cb52-16"><a href="code-block.html#cb52-16" aria-hidden="true" tabindex="-1"></a>_D_soil <span class="op">=</span> _D_footing<span class="op">+</span><span class="dv">3</span></span>
+<span id="cb52-17"><a href="code-block.html#cb52-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-18"><a href="code-block.html#cb52-18" aria-hidden="true" tabindex="-1"></a>_radial <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb52-19"><a href="code-block.html#cb52-19" aria-hidden="true" tabindex="-1"></a>_perimeter <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>_radial</span>
+<span id="cb52-20"><a href="code-block.html#cb52-20" aria-hidden="true" tabindex="-1"></a>_axial <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>_radial</span>
+<span id="cb52-21"><a href="code-block.html#cb52-21" aria-hidden="true" tabindex="-1"></a>_outer <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>_radial</span>
+<span id="cb52-22"><a href="code-block.html#cb52-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-23"><a href="code-block.html#cb52-23" aria-hidden="true" tabindex="-1"></a>_bulk <span class="op">=</span> <span class="fl">13.9e9</span></span>
+<span id="cb52-24"><a href="code-block.html#cb52-24" aria-hidden="true" tabindex="-1"></a>_shear <span class="op">=</span> <span class="fl">10.4e9</span></span>
+<span id="cb52-25"><a href="code-block.html#cb52-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-26"><a href="code-block.html#cb52-26" aria-hidden="true" tabindex="-1"></a>_E_o <span class="op">=</span> <span class="fl">1e7</span></span>
+<span id="cb52-27"><a href="code-block.html#cb52-27" aria-hidden="true" tabindex="-1"></a>_const <span class="op">=</span> <span class="fl">1e8</span></span>
+<span id="cb52-28"><a href="code-block.html#cb52-28" aria-hidden="true" tabindex="-1"></a>_poisson <span class="op">=</span> <span class="fl">0.25</span></span>
+<span id="cb52-29"><a href="code-block.html#cb52-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-30"><a href="code-block.html#cb52-30" aria-hidden="true" tabindex="-1"></a><span class="co"># ZONE #</span></span>
+<span id="cb52-31"><a href="code-block.html#cb52-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-32"><a href="code-block.html#cb52-32" aria-hidden="true" tabindex="-1"></a>command_zone <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb52-33"><a href="code-block.html#cb52-33" aria-hidden="true" tabindex="-1"></a><span class="st">model new</span></span>
+<span id="cb52-34"><a href="code-block.html#cb52-34" aria-hidden="true" tabindex="-1"></a><span class="st">z crea r-t p 0 (0,0,0) ...</span></span>
+<span id="cb52-35"><a href="code-block.html#cb52-35" aria-hidden="true" tabindex="-1"></a><span class="st">           p 1 (</span><span class="sc">{B_soil}</span><span class="st">,0,0) ... </span></span>
+<span id="cb52-36"><a href="code-block.html#cb52-36" aria-hidden="true" tabindex="-1"></a><span class="st">           p 2 (0,</span><span class="sc">{D_soil}</span><span class="st">,0) ...</span></span>
+<span id="cb52-37"><a href="code-block.html#cb52-37" aria-hidden="true" tabindex="-1"></a><span class="st">           p 3 (0,0,</span><span class="sc">{B_soil}</span><span class="st">) ...</span></span>
+<span id="cb52-38"><a href="code-block.html#cb52-38" aria-hidden="true" tabindex="-1"></a><span class="st">           p 4 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">,0) ...</span></span>
+<span id="cb52-39"><a href="code-block.html#cb52-39" aria-hidden="true" tabindex="-1"></a><span class="st">           p 5 (0,</span><span class="sc">{D_soil}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">) ...</span></span>
+<span id="cb52-40"><a href="code-block.html#cb52-40" aria-hidden="true" tabindex="-1"></a><span class="st">           p 6 (</span><span class="sc">{B_soil}</span><span class="st">,0,</span><span class="sc">{B_soil}</span><span class="st">) ...</span></span>
+<span id="cb52-41"><a href="code-block.html#cb52-41" aria-hidden="true" tabindex="-1"></a><span class="st">           p 7 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">) ...</span></span>
+<span id="cb52-42"><a href="code-block.html#cb52-42" aria-hidden="true" tabindex="-1"></a><span class="st">           p 8 (</span><span class="sc">{B_footing}</span><span class="st">,0,0) ...</span></span>
+<span id="cb52-43"><a href="code-block.html#cb52-43" aria-hidden="true" tabindex="-1"></a><span class="st">           p 9 (0,0,</span><span class="sc">{B_footing}</span><span class="st">) ...</span></span>
+<span id="cb52-44"><a href="code-block.html#cb52-44" aria-hidden="true" tabindex="-1"></a><span class="st">           p 10 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">,0) ...</span></span>
+<span id="cb52-45"><a href="code-block.html#cb52-45" aria-hidden="true" tabindex="-1"></a><span class="st">           p 11 (0,</span><span class="sc">{D_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">) ...</span></span>
+<span id="cb52-46"><a href="code-block.html#cb52-46" aria-hidden="true" tabindex="-1"></a><span class="st">           p 12 (</span><span class="sc">{B_footing}</span><span class="st">,0,</span><span class="sc">{B_footing}</span><span class="st">) ...</span></span>
+<span id="cb52-47"><a href="code-block.html#cb52-47" aria-hidden="true" tabindex="-1"></a><span class="st">           p 13 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">) ...</span></span>
+<span id="cb52-48"><a href="code-block.html#cb52-48" aria-hidden="true" tabindex="-1"></a><span class="st">           size </span><span class="sc">{radial}</span><span class="st"> </span><span class="sc">{axial}</span><span class="st"> </span><span class="sc">{perimeter}</span><span class="st"> </span><span class="sc">{outer}</span><span class="st"> ...</span></span>
+<span id="cb52-49"><a href="code-block.html#cb52-49" aria-hidden="true" tabindex="-1"></a><span class="st">           rat 1 1 1 1.01 ...</span></span>
+<span id="cb52-50"><a href="code-block.html#cb52-50" aria-hidden="true" tabindex="-1"></a><span class="st">           fill</span></span>
+<span id="cb52-51"><a href="code-block.html#cb52-51" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb52-52"><a href="code-block.html#cb52-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-53"><a href="code-block.html#cb52-53" aria-hidden="true" tabindex="-1"></a>command <span class="op">=</span> command_zone.<span class="bu">format</span>(</span>
+<span id="cb52-54"><a href="code-block.html#cb52-54" aria-hidden="true" tabindex="-1"></a>B_footing <span class="op">=</span> _B_footing,</span>
+<span id="cb52-55"><a href="code-block.html#cb52-55" aria-hidden="true" tabindex="-1"></a>B_soil <span class="op">=</span> _B_soil,</span>
+<span id="cb52-56"><a href="code-block.html#cb52-56" aria-hidden="true" tabindex="-1"></a>D_soil <span class="op">=</span> _D_soil,</span>
+<span id="cb52-57"><a href="code-block.html#cb52-57" aria-hidden="true" tabindex="-1"></a>radial<span class="op">=</span>_radial,</span>
+<span id="cb52-58"><a href="code-block.html#cb52-58" aria-hidden="true" tabindex="-1"></a>axial <span class="op">=</span> _axial,</span>
+<span id="cb52-59"><a href="code-block.html#cb52-59" aria-hidden="true" tabindex="-1"></a>perimeter <span class="op">=</span> _perimeter,</span>
+<span id="cb52-60"><a href="code-block.html#cb52-60" aria-hidden="true" tabindex="-1"></a>outer <span class="op">=</span> _outer)</span>
+<span id="cb52-61"><a href="code-block.html#cb52-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-62"><a href="code-block.html#cb52-62" aria-hidden="true" tabindex="-1"></a>it.command(command)</span>
+<span id="cb52-63"><a href="code-block.html#cb52-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-64"><a href="code-block.html#cb52-64" aria-hidden="true" tabindex="-1"></a><span class="co"># GROUP #</span></span>
+<span id="cb52-65"><a href="code-block.html#cb52-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-66"><a href="code-block.html#cb52-66" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> za.pos()</span>
+<span id="cb52-67"><a href="code-block.html#cb52-67" aria-hidden="true" tabindex="-1"></a>x,y,z <span class="op">=</span> p.T</span>
+<span id="cb52-68"><a href="code-block.html#cb52-68" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(it.zone.count(), <span class="st">"zones in whole model"</span>)</span>
+<span id="cb52-69"><a href="code-block.html#cb52-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-70"><a href="code-block.html#cb52-70" aria-hidden="true" tabindex="-1"></a>shaft <span class="op">=</span> <span class="bu">reduce</span>(np.logical_and, (np.sqrt(x<span class="op">**</span><span class="dv">2</span><span class="op">+</span>z<span class="op">**</span><span class="dv">2</span>)<span class="op">&lt;</span>_D_shaft, y<span class="op">&lt;</span>_H_shaft))</span>
+<span id="cb52-71"><a href="code-block.html#cb52-71" aria-hidden="true" tabindex="-1"></a>za.set_group(shaft, <span class="st">"shaft"</span>) <span class="co"># set the zones with shaft = true have "shaft" and "geometry"</span></span>
+<span id="cb52-72"><a href="code-block.html#cb52-72" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(za.in_group(<span class="st">"shaft"</span>).<span class="bu">sum</span>(), <span class="st">"zones in shaft group."</span>) <span class="co">#output how many zones are in the corner group</span></span>
+<span id="cb52-73"><a href="code-block.html#cb52-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-74"><a href="code-block.html#cb52-74" aria-hidden="true" tabindex="-1"></a>plate <span class="op">=</span> <span class="bu">reduce</span>(np.logical_and, (x<span class="op">&lt;</span>_B_footing,z<span class="op">&lt;</span>_B_footing, y<span class="op">&gt;</span>_H_shaft,y<span class="op">&lt;</span>_D_footing))</span>
+<span id="cb52-75"><a href="code-block.html#cb52-75" aria-hidden="true" tabindex="-1"></a>za.set_group(plate, <span class="st">"plate"</span>) <span class="co"># set the zones with plate = true have "plate" and "geometry"</span></span>
+<span id="cb52-76"><a href="code-block.html#cb52-76" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(za.in_group(<span class="st">"plate"</span>).<span class="bu">sum</span>(), <span class="st">"zones in plate group."</span>) <span class="co">#output how many zones are in the corner group</span></span>
+<span id="cb52-77"><a href="code-block.html#cb52-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-78"><a href="code-block.html#cb52-78" aria-hidden="true" tabindex="-1"></a><span class="co"># CONSTITUTIVE MODEL #</span></span>
+<span id="cb52-79"><a href="code-block.html#cb52-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-80"><a href="code-block.html#cb52-80" aria-hidden="true" tabindex="-1"></a><span class="co">#it.command("""</span></span>
+<span id="cb52-81"><a href="code-block.html#cb52-81" aria-hidden="true" tabindex="-1"></a><span class="co">#zone cmodel assign strain-softening range group "Radial Tunnel1"</span></span>
+<span id="cb52-82"><a href="code-block.html#cb52-82" aria-hidden="true" tabindex="-1"></a><span class="co">#zone property density 2500 bulk 2e8 shear 1e8 range group "Radial Tunnel1"</span></span>
+<span id="cb52-83"><a href="code-block.html#cb52-83" aria-hidden="true" tabindex="-1"></a><span class="co">#zone property cohesion 2e6 friction 45 tension 2e5 dilation 10 range group "Radial Tunnel1"</span></span>
+<span id="cb52-84"><a href="code-block.html#cb52-84" aria-hidden="true" tabindex="-1"></a><span class="co">#zone property table-friction 'fri' table-cohesion 'coh' table-dilation 'dil' range group "Radial Tunnel1"</span></span>
+<span id="cb52-85"><a href="code-block.html#cb52-85" aria-hidden="true" tabindex="-1"></a><span class="co">#table 'fri' add (0, 45) (.05, 42) (.1, 40) (1, 40)</span></span>
+<span id="cb52-86"><a href="code-block.html#cb52-86" aria-hidden="true" tabindex="-1"></a><span class="co">#table 'coh' add (0,2e6) (.05,1e6) (.1,5e5) (1,5e5) </span></span>
+<span id="cb52-87"><a href="code-block.html#cb52-87" aria-hidden="true" tabindex="-1"></a><span class="co">#table 'dil' add (0, 10) (.05,  3) (.1,  0)</span></span>
+<span id="cb52-88"><a href="code-block.html#cb52-88" aria-hidden="true" tabindex="-1"></a><span class="co">#""")</span></span>
+<span id="cb52-89"><a href="code-block.html#cb52-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-90"><a href="code-block.html#cb52-90" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
+<span id="cb52-91"><a href="code-block.html#cb52-91" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic range group "Radial Tunnel1"</span></span>
+<span id="cb52-92"><a href="code-block.html#cb52-92" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic range group 'shaft'</span></span>
+<span id="cb52-93"><a href="code-block.html#cb52-93" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic range group 'plate'</span></span>
+<span id="cb52-94"><a href="code-block.html#cb52-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-95"><a href="code-block.html#cb52-95" aria-hidden="true" tabindex="-1"></a><span class="st">fish define fname(E_o,const)</span></span>
+<span id="cb52-96"><a href="code-block.html#cb52-96" aria-hidden="true" tabindex="-1"></a><span class="st">loop foreach pnt zone.list</span></span>
+<span id="cb52-97"><a href="code-block.html#cb52-97" aria-hidden="true" tabindex="-1"></a><span class="st">z_depth = zone.pos.y(pnt)</span></span>
+<span id="cb52-98"><a href="code-block.html#cb52-98" aria-hidden="true" tabindex="-1"></a><span class="st">E = E_o+const*math.sqrt(z_depth)</span></span>
+<span id="cb52-99"><a href="code-block.html#cb52-99" aria-hidden="true" tabindex="-1"></a><span class="st">zone.prop(pnt,'young')=E</span></span>
+<span id="cb52-100"><a href="code-block.html#cb52-100" aria-hidden="true" tabindex="-1"></a><span class="st">end_loop</span></span>
+<span id="cb52-101"><a href="code-block.html#cb52-101" aria-hidden="true" tabindex="-1"></a><span class="st">end</span></span>
+<span id="cb52-102"><a href="code-block.html#cb52-102" aria-hidden="true" tabindex="-1"></a><span class="st">@fname(</span><span class="sc">{E_o_}</span><span class="st">,</span><span class="sc">{const_}</span><span class="st">)</span></span>
+<span id="cb52-103"><a href="code-block.html#cb52-103" aria-hidden="true" tabindex="-1"></a><span class="st">zone property poisson </span><span class="sc">{poisson_}</span></span>
+<span id="cb52-104"><a href="code-block.html#cb52-104" aria-hidden="true" tabindex="-1"></a><span class="st">plot item create zone contour property name 'young'</span></span>
+<span id="cb52-105"><a href="code-block.html#cb52-105" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>.<span class="bu">format</span>(E_o_<span class="op">=</span>_E_o,const_<span class="op">=</span>_const,poisson_<span class="op">=</span>_poisson))</span>
+<span id="cb52-106"><a href="code-block.html#cb52-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-107"><a href="code-block.html#cb52-107" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">"""</span></span>
+<span id="cb52-108"><a href="code-block.html#cb52-108" aria-hidden="true" tabindex="-1"></a><span class="st">zone property bulk </span><span class="sc">{bulk}</span><span class="st">  shear </span><span class="sc">{shear}</span><span class="st"> range group 'shaft'</span></span>
+<span id="cb52-109"><a href="code-block.html#cb52-109" aria-hidden="true" tabindex="-1"></a><span class="st">zone property bulk </span><span class="sc">{bulk}</span><span class="st">  shear </span><span class="sc">{shear}</span><span class="st"> range group 'plate'</span></span>
+<span id="cb52-110"><a href="code-block.html#cb52-110" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>.<span class="bu">format</span>(bulk<span class="op">=</span>_bulk,shear<span class="op">=</span>_shear))</span>
+<span id="cb52-111"><a href="code-block.html#cb52-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-112"><a href="code-block.html#cb52-112" aria-hidden="true" tabindex="-1"></a><span class="co">#soil = za.in_group("Radial Tunnel1")</span></span>
+<span id="cb52-113"><a href="code-block.html#cb52-113" aria-hidden="true" tabindex="-1"></a><span class="co"># list(gp.list)</span></span>
+<span id="cb52-114"><a href="code-block.html#cb52-114" aria-hidden="true" tabindex="-1"></a><span class="co"># gp.isgroup(::gp.list,"North")</span></span>
+<span id="cb52-115"><a href="code-block.html#cb52-115" aria-hidden="true" tabindex="-1"></a><span class="co"># gp.force.unbal(::ad)</span></span>
+<span id="cb52-116"><a href="code-block.html#cb52-116" aria-hidden="true" tabindex="-1"></a><span class="co"># [ad = list(gp.list)(gp.isgroup(::gp.list,"North))]</span></span></code></pre></div>
 <!--------------------------------------------------->
 <!--------------------------------------------------->
 <!--------------------------------------------------->
@@ -295,7 +373,10 @@
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#code-block"><span class="header-section-number">6</span> Code Block</a></li>
 <li><a class="nav-link" href="#some-code"><span class="header-section-number">6.1</span> Some Code</a></li>
-<li><a class="nav-link" href="#kiast-model"><span class="header-section-number">6.2</span> KIAST Model</a></li>
+<li>
+<a class="nav-link" href="#interface"><span class="header-section-number">6.2</span> Interface</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#penetration"><span class="header-section-number">6.2.1</span> Penetration</a></li></ul>
+</li>
+<li><a class="nav-link" href="#kiast-model"><span class="header-section-number">6.3</span> KIAST Model</a></li>
 </ul>
 
       <div class="book-extra">
