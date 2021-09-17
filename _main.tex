@@ -1390,6 +1390,8 @@ FISH functions to calculate bulk and shear moduli
 \end{Highlighting}
 \end{Shaded}
 
+\newpage
+
 \hypertarget{code-block}{%
 \chapter{Code Block}\label{code-block}}
 
@@ -1579,6 +1581,128 @@ FISH functions to calculate bulk and shear moduli
 \BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"corner"}\NormalTok{, }\StringTok{"geometry"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in corner group."}\NormalTok{) }\CommentTok{\#output how many zones are in the corner group}
 \end{Highlighting}
 \end{Shaded}
+
+\newpage
+
+\hypertarget{theory}{%
+\chapter{Theory}\label{theory}}
+
+\hypertarget{interface}{%
+\section{Interface}\label{interface}}
+
+There are several instances in geomechanics in which it is desirable to represent planes on which sliding or separation can occur. For example:\\
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  joint, fault, or bedding planes in a geologic medium;
+\item
+  an interface between a foundation and the soil;
+\item
+  a contact plane between a bin or chute and the material that it contains;
+\item
+  a contact between two colliding objects; and
+\item
+  a planar ``barrier'' in space, which represents a fixed, non-deformable boundary at an arbitrary position and orientation.\\
+\end{enumerate}
+
+FLAC3D provides interfaces that are characterized by Coulomb sliding and/or tensile and shear bonding. Interfaces have the properties of friction, cohesion, dilation, normal and shear stiffnesses, and tensile and shear bond strength. Although there is no restriction on the number of interfaces or the complexity of their intersections, it is generally not reasonable to model more than a few simple interfaces with FLAC3D because it is awkward to specify complicated interface geometry. The program 3DEC (Itasca 2007) is specifically designed to model many interacting bodies in three dimensions; it should be used instead of FLAC3D for the more complicated interface problems.\\
+
+Interfaces may also be used to join regions that have different zone sizes. In general, the zone attach command should be used to join grids together. However, in some circumstances, it may be more convenient to use an interface for this purpose. In this case, the interface is prevented from sliding or opening because it does not correspond to any physical entity.
+
+\hypertarget{formulation}{%
+\section{Formulation}\label{formulation}}
+
+FLAC3D represents interfaces as collections of triangular elements (interface elements), each of which is defined by three nodes (interface nodes). Interface elements can be created at any location in space. Generally, interface elements are attached to a zone surface face; two triangular interface elements are defined for every quadrilateral zone face. Interface nodes are then created automatically at every interface element vertex. When another grid surface comes into contact with an interface element, the contact is detected at the interface node and is characterized by normal and shear stiffnesses, and sliding properties.\\
+
+Each interface element distributes its area to its nodes in a weighted fashion. Each interface node has an associated representative area. The entire interface is thus divided into active interface nodes representing the total area of the interface. Figure 1 illustrates the relation between interface elements and interface nodes, and the representative area associated with an individual node.\\
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/interface-formulation}
+
+It is important to note that interfaces are one-sided in FLAC3D. (This differs from the formulation of two-sided interfaces in two-dimensional FLAC (Itasca 2011).) It may be helpful to think of FLAC3D interfaces as ``shrink-wrap'' that is stretched over the desired surface, causing the surface to become sensitive to interpenetration with any other face with which it may come into contact.\\
+
+The fundamental contact relation is defined between the interface node and a zone surface face, also known as the target face. The normal direction of the interface force is determined by the orientation of the target face.\\
+
+During each timestep, the absolute normal penetration and the relative shear velocity are calculated for each interface node and its contacting target face. Both of these values are then used by the interface constitutive model to calculate a normal force and a shear-force vector. The constitutive model is defined by a linear Coulomb shear-strength criterion that limits the shear force acting at an interface node, normal and shear stiffnesses, tensile and shear bond strengths, and a dilation angle that causes an increase in effective normal force on the target face after the shear-strength limit is reached. By default, pore pressure is used in the interface effective stress calculation. This option can be activated/deactivated using the command zone interface effective command by setting effective = on/off. Figure 2 illustrates the components of the constitutive model acting at interface node (P):\\
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/interface-constitutive}
+
+The normal and shear forces that describe the elastic interface response are determined at calculation time \((t + \Delta t)\) using the relations:\\
+
+\[ F_n^{(t + \Delta t)} = k_n u_n A + \sigma_n A  \]
+\[ F_{si}^{(t + \Delta t)} = F_{si}^{(t)} + k_s \Delta u_{si}^{(t + 0.5 \Delta t)} A + \sigma_{si} A\]
+
+The inelastic interface logic works in the following way:\\
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Bonded interface --- The interface remains elastic if stresses remain below the bond strengths; there is a shear bond strength, as well as a tensile bond strength. The normal bond strength is set using the tension interface property keyword. The command zone interface node property shear-bond-ratio = sbr sets the shear bond strength to sbr times the normal bond strength. The default value of property shear-bond-ratio (if not given) is 100.0. The bond breaks if either the shear stress exceeds the shear strength, or the tensile effective normal stress exceeds the normal strength. Note that giving property shear-bond-ratio alone does not cause a bond to be established---the tensile bond strength must also be set.\\
+\item
+  Slip while bonded --- An intact bond, by default, prevents all yield behavior (slip and separation). There is an optional property switch (bonded-slip) that causes only separation to be prevented if the bond is intact (but allows shear yield, under the control of the friction and cohesion parameters, using (F\_n) as the normal force). The command to allow/disallow slip for a bonded interface segment is zone interface node and by setting bonded-slip on or off.\\
+\end{enumerate}
+
+The default state of bonded-slip (if not given) is off.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Coulomb sliding --- A bond is either intact or broken. If it is broken, then the behavior of the interface segment is determined by the friction and cohesion (and of course the stiffnesses). This is the default behavior, if bond strengths are not set (zero). A broken bond segment cannot take effective tension (which may occur under compressive normal force, if the pore pressure is greater). The shear force is zero (for a nonbonded segment) if the effective normal force is tensile or zero.\\
+\end{enumerate}
+
+The Coulomb shear-strength criterion limits the shear force by the relation:\\
+
+\[ F_{smax} = c A + tan\phi (F_n - pA)\]
+During sliding, shear displacement may cause an increase in the effective normal stress on the joint, according to the relation:\\
+
+\[\sigma_n := \sigma_n + \frac{|F_s|_o - F_{smax}}{A k_s} tan\psi k_n\]
+
+On printout (see the zone interface node list command ) the value of tension denotes whether a bond is intact or broken (or not set) --- nonzero or zero, respectively.\\
+
+The normal and shear forces calculated at the interface nodes are distributed in equal and opposite directions to both the target face and the face to which the interface node is connected (the host face). Weighting functions are used to distribute the forces to the gridpoints on each face. The interface stiffnesses are added to the accumulated stiffnesses at gridpoints on both sides of the interface in order to maintain numerical stability.\\
+
+Interface contacts are detected only at interface nodes, and contact forces are transferred only at interface nodes. The stress state associated with a node is assumed to be uniformly distributed over the entire representative area of the node. Interface properties are associated with each node; properties may vary from node to node.\\
+
+By default, the effect of pore pressure is included in the interface calculation by using effective stress as the basis for the slip condition. (The interface pore pressure is interpolated from the target face.) This applies in model configure fluid mode, or if pore pressures are assigned with the zone water or zone gridpoint initialize pore-pressure command without specifying model configure fluid. The user can switch options for interface s by using the zone interface effective command and by setting effective on or off. By default in the FLAC3D logic, fluid flow (saturated or unsaturated) is carried across an interface, provided the interface keyword maximum-edge is not used for that particular interface. The permeable interface option can be deactivated/reactivated for interface s by using the zone interface permeability command and by setting effective on or off. Note that if the keyword maximum-edge is used after the zone interface element command, and permeability is on for a particular interface, a warning is issued to inform the user that this interface will be considered as impermeable to fluid flow. (Note that for fluid flow calculation only, a mechanical model must be present. Also, the model cycle 0 command with model mechanical active on should be used to initialize the weighting factors used to transfer fluid flow information across the interface.) No pressure drop normal to the joint and no influence of normal displacement on pore pressure is calculated.\\
+
+Also, flow of fluid along the interface is not modeled.\\
+
+\hypertarget{creation-of-interface-geometry}{%
+\section{Creation of Interface Geometry}\label{creation-of-interface-geometry}}
+
+Interfaces are created with the zone interface create command. For cases in which an interface between two separate grids in the model is required, the zone interface create by-face command should be used to attach an interface to one of the grid surfaces. This command generates interface elements for interface s along all surface zone faces with a center point that fall within a specified range. Any surfaces on which an interface is to be created must be generated initially; it must be possible to specify an existing surface in order to create the interface elements. A gap must be specified between two adjacent surfaces, unless the zone interface create by-face command and the separate keyword are given. In this case, the separate sub-grids may have surface gridpoints at the same location in space.\\
+
+By default, two interface elements are created for each zone face. The number of interface elements can be increased by using the zone interface s element maximum-edge v command. {[}1{]} This causes all interface elements with edge lengths larger than v to subdivide into smaller elements until their lengths are smaller than v. This command can be used to increase the resolution and decrease arching of forces in portions of a model that have large contrasts in zone size across an interface.\\
+
+Several rules should be followed when using interface elements in FLAC3D:\\
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  If a smaller surface area contacts a larger surface area (e.g., a small block resting on a large block), the interface should be attached to the smaller region.\\
+\item
+  If there is a difference in zone density between two adjacent grids, the interface should be attached to the grid with the greater zone density (i.e., the greater number of zones within the same area).
+\item
+  The size of interface elements should always be equal to or smaller than the target faces with which they will come into contact. If this is not the case, the interface elements should be subdivided into smaller elements.\\
+\item
+  Interface elements should be limited to grid surfaces that will actually come into contact with another grid.\\
+  A simple example illustrating the procedure for interface creation is provided in ``DippingJoint.f3dat''. The corresponding project file, ``DippingJoint.f3prj'', is located in the folder ``datafiles InterfaceDippingJoint.'' The example is a block specimen containing a single joint dipping at an angle of \(45°\)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OperatorTok{;}\NormalTok{ Create interface elements on the top surface of the base        }
+\NormalTok{zone interface }\StringTok{\textquotesingle{}joint\textquotesingle{}}\NormalTok{ create by}\OperatorTok{{-}}\NormalTok{face separate }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}Top\textquotesingle{}}\NormalTok{ group }\StringTok{\textquotesingle{}Base\textquotesingle{}}
+\NormalTok{model save }\StringTok{\textquotesingle{}int1\textquotesingle{}}
+\ControlFlowTok{return}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/interface-theory}
 
 \startappendices
 
