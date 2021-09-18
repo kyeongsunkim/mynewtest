@@ -475,13 +475,7 @@ wonderful have been, and are being, evolved.
 \hypertarget{constitutive-model}{%
 \section{Constitutive Model}\label{constitutive-model}}
 
-Besides standard looping as depicted above, one can easily loop over
-sets of model objects (i.e., zones, gridpoints, structural element
-nodes, etc.) using the loop foreach construct. In this case, a container
-of objects must be given by a FISH intrinsic such as zone.list. A
-practical use of the loop foreach construct is to install a nonlinear
-initial distribution of elastic moduli in a FLAC3D grid. Suppose that
-the Young's modulus at a site is given by this equation:
+It is easy to loop over sets of model objects (i.e., zones, gridpoints, structural element nodes, etc.) using the loop foreach construct. In this case, a container of objects must be given by a FISH intrinsic such as zone.list. A practical use of the loop foreach construct is to install a nonlinear initial distribution of elastic moduli in a FLAC3D grid. Suppose that the Young's modulus at a site is given by this equation:
 
 \[ E = E_0 + c \sqrt{z}  \] where z is the depth below surface, and c
 and E∘ are constants. We write a FISH function to install appropriate
@@ -529,19 +523,20 @@ values of bulk and shear modulus in the grid, as in this example:
 \end{Highlighting}
 \end{Shaded}
 
-Again, you can verify correct operation of the function by printing or
-plotting shear and bulk moduli.
+Again, you can verify correct operation of the function by printing or plotting shear and bulk moduli.
 
 In the function install, the loop takes place over all zones in the
-global list of zones. The FISH statement loop foreach is a variation of
-the loop statement that sets pnt to each zone in zone.list. Inside the
-loop, the z-coordinate of each zone centroid is used to calculate the
-Young's modulus, given in the equation above. We assume that the datum
-(or ground surface reference point) is at z = 0. The variables
-zone.pos.z(pnt) and zone.prop(pnt, `young') are zone intrinsics. (Recall
-that we talked about the gridpoint intrinsic gp.force.unbal earlier.)
+global list of zones. The FISH statement loop foreach is a variation of the loop statement that sets pnt to each zone in zone.list. Inside the loop, the y-coordinate of each zone centroid is used to calculate the Young's modulus, given in the equation above. We assume that the datum (or ground surface reference point) is at y = 0. The variables
+zone.pos.y(pnt) and zone.prop(pnt, `young') are zone intrinsics. (Recall that we talked about the gridpoint intrinsic gp.force.unbal earlier.)
+
 Here, we set properties directly from within a FISH function, rather
 than with a zone property command as in an earlier example.
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/g}
+
+Strain softening Model is also available, but not implemented:
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/softening}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -558,12 +553,12 @@ than with a zone property command as in an earlier example.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=1\linewidth]{myfigureeeeee/g}
-
-\includegraphics[width=1\linewidth]{myfigureeeeee/concrete-properties}
-
 \hypertarget{soil-structure-interface}{%
 \section{Soil-Structure Interface}\label{soil-structure-interface}}
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/interface-formulation}
+
+Each interface element distributes its area to its nodes in a weighted fashion. Each interface node has an associated representative area. The entire interface is thus divided into active interface nodes representing the total area of the interface. Figure 1 illustrates the relation between interface elements and interface nodes, and the representative area associated with an individual node.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1890,7 +1885,7 @@ contact with zone surface faces that are not part of the interface
 itself.
 
 \begin{figure}[H]
-\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-65}
+\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-66}
 \end{figure}
 
 Every reference to an interface uses a name (like the table command) to
@@ -3785,38 +3780,11 @@ bolt.
 
 \startappendices
 
-\hypertarget{template}{%
-\chapter{1. Template}\label{template}}
-
-\hypertarget{problem-description-2}{%
-\section{Problem Description}\label{problem-description-2}}
-
-\hypertarget{modeling-procedure-1}{%
-\section{Modeling Procedure}\label{modeling-procedure-1}}
-
-\hypertarget{zonesgroups}{%
-\section{Zones/Groups}\label{zonesgroups}}
-
-\hypertarget{properties-3}{%
-\section{Properties}\label{properties-3}}
-
-\hypertarget{b.c.-and-i.c.-1}{%
-\section{B.C. and I.C.}\label{b.c.-and-i.c.-1}}
-
-\hypertarget{initial-equilibrium-3}{%
-\section{Initial Equilibrium}\label{initial-equilibrium-3}}
-
-\hypertarget{alterations-3}{%
-\section{Alterations}\label{alterations-3}}
-
-\hypertarget{results-2}{%
-\section{Results}\label{results-2}}
-
 \hypertarget{reference-collective}{%
 \chapter{Reference Collective}\label{reference-collective}}
 
-\hypertarget{uplift-resistance-of-anchor-plate}{%
-\subsection{Uplift Resistance of Anchor Plate}\label{uplift-resistance-of-anchor-plate}}
+\hypertarget{uplift-resistance-of-anchor}{%
+\subsection{Uplift Resistance of Anchor}\label{uplift-resistance-of-anchor}}
 
 \hypertarget{before-1968}{%
 \subsubsection{Before 1968}\label{before-1968}}
@@ -3845,6 +3813,7 @@ bolt.
 \subsubsection{Post-1968}\label{post-1968}}
 
 \begin{itemize}
+\tightlist
 \item
   Meyerhof, G.G., and Adams, J.I. 1968
 \item
@@ -3875,7 +3844,13 @@ bolt.
   Bouazza 1990
 \item
   Tadatsugu Tanaka, and Toshinori Sakai 1993
-  \#\#\#\# Post-2000
+\end{itemize}
+
+\hypertarget{post-2000}{%
+\subsubsection{Post-2000}\label{post-2000}}
+
+\begin{itemize}
+\tightlist
 \item
   Merifield, R.S., and Sloan, S.W. 2006
 \item
@@ -3886,6 +3861,8 @@ bolt.
   V.B. Deshmukh 2011
 \item
   Wu, Kouretzis, Suwal, Sloan 2019
+\item
+  Mary Schafer, Santana Phani Gopal Madabhushi 2019
 \end{itemize}
 
 \hypertarget{numerical-analysis}{%

@@ -252,25 +252,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9" data-path="pull-test.html"><a href="pull-test.html"><i class="fa fa-check"></i><b>9</b> Pull-Test</a></li>
 <li class="chapter" data-level="10" data-path="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"><a href="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"><i class="fa fa-check"></i><b>10</b> Simulation of Pull-Tests for Fully Bonded Rock Reinforcement</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="template.html"><a href="template.html"><i class="fa fa-check"></i><b>A</b> 1. Template</a>
+<li class="chapter" data-level="A" data-path="reference-collective.html"><a href="reference-collective.html"><i class="fa fa-check"></i><b>A</b> Reference Collective</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="template.html"><a href="template.html#problem-description-2"><i class="fa fa-check"></i><b>A.1</b> Problem Description</a></li>
-<li class="chapter" data-level="A.2" data-path="template.html"><a href="template.html#modeling-procedure-1"><i class="fa fa-check"></i><b>A.2</b> Modeling Procedure</a></li>
-<li class="chapter" data-level="A.3" data-path="template.html"><a href="template.html#zonesgroups"><i class="fa fa-check"></i><b>A.3</b> Zones/Groups</a></li>
-<li class="chapter" data-level="A.4" data-path="template.html"><a href="template.html#properties-3"><i class="fa fa-check"></i><b>A.4</b> Properties</a></li>
-<li class="chapter" data-level="A.5" data-path="template.html"><a href="template.html#b.c.-and-i.c.-1"><i class="fa fa-check"></i><b>A.5</b> B.C. and I.C.</a></li>
-<li class="chapter" data-level="A.6" data-path="template.html"><a href="template.html#initial-equilibrium-3"><i class="fa fa-check"></i><b>A.6</b> Initial Equilibrium</a></li>
-<li class="chapter" data-level="A.7" data-path="template.html"><a href="template.html#alterations-3"><i class="fa fa-check"></i><b>A.7</b> Alterations</a></li>
-<li class="chapter" data-level="A.8" data-path="template.html"><a href="template.html#results-2"><i class="fa fa-check"></i><b>A.8</b> Results</a></li>
-</ul></li>
-<li class="chapter" data-level="B" data-path="reference-collective.html"><a href="reference-collective.html"><i class="fa fa-check"></i><b>B</b> Reference Collective</a>
-<ul>
-<li class="chapter" data-level="B.0.1" data-path="reference-collective.html"><a href="reference-collective.html#uplift-resistance-of-anchor-plate"><i class="fa fa-check"></i><b>B.0.1</b> Uplift Resistance of Anchor Plate</a></li>
-<li class="chapter" data-level="B.0.2" data-path="reference-collective.html"><a href="reference-collective.html#numerical-analysis"><i class="fa fa-check"></i><b>B.0.2</b> Numerical Analysis</a></li>
-<li class="chapter" data-level="B.0.3" data-path="reference-collective.html"><a href="reference-collective.html#standards"><i class="fa fa-check"></i><b>B.0.3</b> Standards</a></li>
-<li class="chapter" data-level="B.0.4" data-path="reference-collective.html"><a href="reference-collective.html#textbook"><i class="fa fa-check"></i><b>B.0.4</b> Textbook</a></li>
-<li class="chapter" data-level="B.0.5" data-path="reference-collective.html"><a href="reference-collective.html#ph.d-thesis"><i class="fa fa-check"></i><b>B.0.5</b> Ph.D Thesis</a></li>
-<li class="chapter" data-level="B.0.6" data-path="reference-collective.html"><a href="reference-collective.html#awarded-lectures"><i class="fa fa-check"></i><b>B.0.6</b> Awarded Lectures</a></li>
+<li class="chapter" data-level="A.0.1" data-path="reference-collective.html"><a href="reference-collective.html#uplift-resistance-of-anchor"><i class="fa fa-check"></i><b>A.0.1</b> Uplift Resistance of Anchor</a></li>
+<li class="chapter" data-level="A.0.2" data-path="reference-collective.html"><a href="reference-collective.html#numerical-analysis"><i class="fa fa-check"></i><b>A.0.2</b> Numerical Analysis</a></li>
+<li class="chapter" data-level="A.0.3" data-path="reference-collective.html"><a href="reference-collective.html#standards"><i class="fa fa-check"></i><b>A.0.3</b> Standards</a></li>
+<li class="chapter" data-level="A.0.4" data-path="reference-collective.html"><a href="reference-collective.html#textbook"><i class="fa fa-check"></i><b>A.0.4</b> Textbook</a></li>
+<li class="chapter" data-level="A.0.5" data-path="reference-collective.html"><a href="reference-collective.html#ph.d-thesis"><i class="fa fa-check"></i><b>A.0.5</b> Ph.D Thesis</a></li>
+<li class="chapter" data-level="A.0.6" data-path="reference-collective.html"><a href="reference-collective.html#awarded-lectures"><i class="fa fa-check"></i><b>A.0.6</b> Awarded Lectures</a></li>
 </ul></li>
 </ul>
 
@@ -389,13 +378,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="constitutive-model" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Constitutive Model</h2>
-<p>Besides standard looping as depicted above, one can easily loop over
-sets of model objects (i.e., zones, gridpoints, structural element
-nodes, etc.) using the loop foreach construct. In this case, a container
-of objects must be given by a FISH intrinsic such as zone.list. A
-practical use of the loop foreach construct is to install a nonlinear
-initial distribution of elastic moduli in a FLAC3D grid. Suppose that
-the Young’s modulus at a site is given by this equation:</p>
+<p>It is easy to loop over sets of model objects (i.e., zones, gridpoints, structural element nodes, etc.) using the loop foreach construct. In this case, a container of objects must be given by a FISH intrinsic such as zone.list. A practical use of the loop foreach construct is to install a nonlinear initial distribution of elastic moduli in a FLAC3D grid. Suppose that the Young’s modulus at a site is given by this equation:</p>
 <p><span class="math display">\[ E = E_0 + c \sqrt{z}  \]</span> where z is the depth below surface, and c
 and E∘ are constants. We write a FISH function to install appropriate
 values of bulk and shear modulus in the grid, as in this example:</p>
@@ -436,18 +419,15 @@ values of bulk and shear modulus in the grid, as in this example:</p>
 <span id="cb3-35"><a href="kaist-model.html#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="st">zone property bulk </span><span class="sc">{bulk_}</span><span class="st"> shear </span><span class="sc">{shear_}</span><span class="st"> density </span><span class="sc">{density_}</span><span class="st"> range group &#39;shaft&#39;</span></span>
 <span id="cb3-36"><a href="kaist-model.html#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="st">zone property bulk </span><span class="sc">{bulk_}</span><span class="st"> shear </span><span class="sc">{shear_}</span><span class="st"> density </span><span class="sc">{density_}</span><span class="st"> range group &#39;plate&#39;</span></span>
 <span id="cb3-37"><a href="kaist-model.html#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>.<span class="bu">format</span>(bulk_<span class="op">=</span>_bulk,shear_<span class="op">=</span>_shear,density_<span class="op">=</span>_density_concrete))</span></code></pre></div>
-<p>Again, you can verify correct operation of the function by printing or
-plotting shear and bulk moduli.</p>
+<p>Again, you can verify correct operation of the function by printing or plotting shear and bulk moduli.</p>
 <p>In the function install, the loop takes place over all zones in the
-global list of zones. The FISH statement loop foreach is a variation of
-the loop statement that sets pnt to each zone in zone.list. Inside the
-loop, the z-coordinate of each zone centroid is used to calculate the
-Young’s modulus, given in the equation above. We assume that the datum
-(or ground surface reference point) is at z = 0. The variables
-zone.pos.z(pnt) and zone.prop(pnt, ‘young’) are zone intrinsics. (Recall
-that we talked about the gridpoint intrinsic gp.force.unbal earlier.)
-Here, we set properties directly from within a FISH function, rather
+global list of zones. The FISH statement loop foreach is a variation of the loop statement that sets pnt to each zone in zone.list. Inside the loop, the y-coordinate of each zone centroid is used to calculate the Young’s modulus, given in the equation above. We assume that the datum (or ground surface reference point) is at y = 0. The variables
+zone.pos.y(pnt) and zone.prop(pnt, ‘young’) are zone intrinsics. (Recall that we talked about the gridpoint intrinsic gp.force.unbal earlier.)</p>
+<p>Here, we set properties directly from within a FISH function, rather
 than with a zone property command as in an earlier example.</p>
+<p><img src="myfigureeeeee/g.png" width="100%" /></p>
+<p>Strain softening Model is also available, but not implemented:</p>
+<p><img src="myfigureeeeee/softening.PNG" width="100%" /></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="kaist-model.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SOFTENING MODEL #</span></span>
 <span id="cb4-2"><a href="kaist-model.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#it.command(&quot;&quot;&quot;</span></span>
 <span id="cb4-3"><a href="kaist-model.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#zone cmodel assign strain-softening range group &quot;Radial Tunnel1&quot;</span></span>
@@ -458,11 +438,11 @@ than with a zone property command as in an earlier example.</p>
 <span id="cb4-8"><a href="kaist-model.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#table &#39;coh&#39; add (0,2e6) (.05,1e6) (.1,5e5) (1,5e5) </span></span>
 <span id="cb4-9"><a href="kaist-model.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#table &#39;dil&#39; add (0, 10) (.05,  3) (.1,  0)</span></span>
 <span id="cb4-10"><a href="kaist-model.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;&quot;&quot;)</span></span></code></pre></div>
-<p><img src="myfigureeeeee/g.png" width="100%" /></p>
-<p><img src="myfigureeeeee/concrete-properties.PNG" width="100%" /></p>
 </div>
 <div id="soil-structure-interface" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> Soil-Structure Interface</h2>
+<p><img src="myfigureeeeee/interface-formulation.PNG" width="100%" /></p>
+<p>Each interface element distributes its area to its nodes in a weighted fashion. Each interface node has an associated representative area. The entire interface is thus divided into active interface nodes representing the total area of the interface. Figure 1 illustrates the relation between interface elements and interface nodes, and the representative area associated with an individual node.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="kaist-model.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INTERFACE #</span></span>
 <span id="cb5-2"><a href="kaist-model.html#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="kaist-model.html#cb5-3" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;&quot;&quot;</span></span>

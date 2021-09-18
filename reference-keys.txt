@@ -1,4 +1,4 @@
-fig:unnamed-chunk-65
+fig:unnamed-chunk-66
 kaist-model
 initial-configuration
 zones
@@ -85,19 +85,11 @@ range
 named-ranges
 pull-test
 simulation-of-pull-tests-for-fully-bonded-rock-reinforcement
-template
-problem-description-2
-modeling-procedure-1
-zonesgroups
-properties-3
-b.c.-and-i.c.-1
-initial-equilibrium-3
-alterations-3
-results-2
 reference-collective
-uplift-resistance-of-anchor-plate
+uplift-resistance-of-anchor
 before-1968
 post-1968
+post-2000
 numerical-analysis
 standards
 textbook
