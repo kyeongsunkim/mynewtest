@@ -376,6 +376,7 @@ wonderful have been, and are being, evolved.
 
 \CommentTok{\# PARAMETERS \#}
 
+\CommentTok{\# Dimensions}
 \NormalTok{\_D\_shaft }\OperatorTok{=} \DecValTok{1}
 \NormalTok{\_H\_shaft }\OperatorTok{=} \FloatTok{7.45}
 \NormalTok{\_T\_plate }\OperatorTok{=} \FloatTok{1.5}
@@ -384,17 +385,24 @@ wonderful have been, and are being, evolved.
 \NormalTok{\_B\_soil }\OperatorTok{=}\NormalTok{ \_B\_footing}\OperatorTok{*}\DecValTok{5}
 \NormalTok{\_D\_soil }\OperatorTok{=}\NormalTok{ \_D\_footing}\OperatorTok{+}\DecValTok{3}
 
+\CommentTok{\# Mesh Details}
 \NormalTok{\_radial }\OperatorTok{=} \DecValTok{50}
 \NormalTok{\_perimeter }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
 \NormalTok{\_axial }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
 \NormalTok{\_outer }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
 
+\CommentTok{\# Concrete Properties}
 \NormalTok{\_bulk }\OperatorTok{=} \FloatTok{13.9e9}
 \NormalTok{\_shear }\OperatorTok{=} \FloatTok{10.4e9}
 
+\CommentTok{\# Soil Properties}
 \NormalTok{\_E\_o }\OperatorTok{=} \FloatTok{1e7}
 \NormalTok{\_const }\OperatorTok{=} \FloatTok{1e8}
 \NormalTok{\_poisson }\OperatorTok{=} \FloatTok{0.25}
+
+\CommentTok{\# Interface Properties}
+\NormalTok{\_stiff\_norm }\OperatorTok{=} \FloatTok{1e8}
+\NormalTok{\_stiff\_shear }\OperatorTok{=} \FloatTok{1e8}
 \end{Highlighting}
 \end{Shaded}
 
@@ -544,9 +552,20 @@ than with a zone property command as in an earlier example.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# INTERFACE}
+\CommentTok{\# INTERFACE GROUP \#}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} create by{-}face separate range group \textquotesingle{}plate\textquotesingle{} group \textquotesingle{}Radial Tunnel1\textquotesingle{}}
+\StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} node property stiffness{-}normal }\SpecialCharTok{\{stiff\_norm\_\}}\StringTok{ stiffness{-}shear }\SpecialCharTok{\{stiff\_shear\_\}}
+
+\StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} create by{-}face separate range group \textquotesingle{}shaft\textquotesingle{} group \textquotesingle{}Radial Tunnel1\textquotesingle{}}
+\StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} node property stiffness{-}normal }\SpecialCharTok{\{stiff\_norm\_\}}\StringTok{ stiffness{-}shear }\SpecialCharTok{\{stiff\_shear\_\}}
+
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(stiff\_norm\_}\OperatorTok{=}\NormalTok{\_stiff\_norm, stiff\_shear\_}\OperatorTok{=}\NormalTok{\_stiff\_shear))}
 \end{Highlighting}
 \end{Shaded}
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/interface-both}
 
 \hypertarget{boundary-conditions}{%
 \section{Boundary Conditions}\label{boundary-conditions}}
@@ -559,6 +578,28 @@ than with a zone property command as in an earlier example.
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\DecValTok{2000000}\NormalTok{, }\StringTok{\textquotesingle{}zones in whole model\textquotesingle{}}\NormalTok{)}
+\NormalTok{(}\DecValTok{22940}\NormalTok{, }\StringTok{\textquotesingle{}zones in shaft group.\textquotesingle{}}\NormalTok{)}
+\NormalTok{(}\DecValTok{65000}\NormalTok{, }\StringTok{\textquotesingle{}zones in plate group.\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone interface }\StringTok{\textquotesingle{}interface 1\textquotesingle{}}\NormalTok{ create by}\OperatorTok{{-}}\NormalTok{face separate }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}plate\textquotesingle{}}\NormalTok{ group }\StringTok{\textquotesingle{}Radial Tunnel1\textquotesingle{}}
+\OperatorTok{{-}{-}{-}} \DecValTok{11697}\NormalTok{ gridpoints duplicated, }\DecValTok{23160}\NormalTok{ surface faces created.}
+\OperatorTok{{-}{-}{-}} \DecValTok{47}\NormalTok{ gridpoints skipped on internal edge.}
+\OperatorTok{{-}{-}{-}} \DecValTok{11580}\NormalTok{ faces on one side were assigned the group name Interface }\DecValTok{1} \KeywordTok{in}\NormalTok{ slot Interface.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone interface }\StringTok{\textquotesingle{}interface 1\textquotesingle{}}\NormalTok{ node }\BuiltInTok{property}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1e8}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1e8}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property Normal Stiffness }\BuiltInTok{set} \KeywordTok{in} \DecValTok{11744}\NormalTok{ interface }\DecValTok{1}\NormalTok{ nodes.}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property Shear Stiffness }\BuiltInTok{set} \KeywordTok{in} \DecValTok{11744}\NormalTok{ interface }\DecValTok{1}\NormalTok{ nodes.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone interface }\StringTok{\textquotesingle{}interface 2\textquotesingle{}}\NormalTok{ create by}\OperatorTok{{-}}\NormalTok{face separate }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}shaft\textquotesingle{}}\NormalTok{ group }\StringTok{\textquotesingle{}Radial Tunnel1\textquotesingle{}}
+\OperatorTok{{-}{-}{-}} \DecValTok{2961}\NormalTok{ gridpoints duplicated, }\DecValTok{5704}\NormalTok{ surface faces created.}
+\OperatorTok{{-}{-}{-}} \DecValTok{2852}\NormalTok{ faces on one side were assigned the group name Interface }\DecValTok{2} \KeywordTok{in}\NormalTok{ slot Interface.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone interface }\StringTok{\textquotesingle{}interface 2\textquotesingle{}}\NormalTok{ node }\BuiltInTok{property}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1e8}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1e8}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property Normal Stiffness }\BuiltInTok{set} \KeywordTok{in} \DecValTok{2961}\NormalTok{ interface }\DecValTok{2}\NormalTok{ nodes.}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property Shear Stiffness }\BuiltInTok{set} \KeywordTok{in} \DecValTok{2961}\NormalTok{ interface }\DecValTok{2}\NormalTok{ nodes.}
+\end{Highlighting}
+\end{Shaded}
 
 \newpage
 
@@ -1747,7 +1788,7 @@ contact with zone surface faces that are not part of the interface
 itself.
 
 \begin{figure}[H]
-\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-60}
+\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-62}
 \end{figure}
 
 Every reference to an interface uses a name (like the table command) to
