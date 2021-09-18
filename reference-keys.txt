@@ -1,4 +1,4 @@
-fig:unnamed-chunk-62
+fig:unnamed-chunk-63
 kaist-model
 initial-configuration
 zones
