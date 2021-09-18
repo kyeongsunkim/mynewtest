@@ -1,4 +1,4 @@
-fig:unnamed-chunk-58
+fig:unnamed-chunk-60
 kaist-model
 initial-configuration
 zones
@@ -24,6 +24,7 @@ install-the-pile
 vertical-loading
 vertical-then-lateral-loading
 pull-tests
+problem-description-1
 zones-2
 properties-1
 initial-equilibrium-2
@@ -65,6 +66,10 @@ interface
 penetration
 kaist-model-1
 theory
+structural-elements-1
+types-of-sel
+joining
+joining-sel-to-one-another
 interface-1
 formulation
 creation-of-interface-geometry
@@ -77,8 +82,12 @@ zone-face-group
 zone-face-skin
 zone-separate
 zone-interface-create
+range
+named-ranges
+pull-test
+simulation-of-pull-tests-for-fully-bonded-rock-reinforcement
 template
-problem-description-1
+problem-description-2
 modeling-procedure-1
 zonesgroups
 properties-3

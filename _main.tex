@@ -467,10 +467,17 @@ wonderful have been, and are being, evolved.
 \hypertarget{constitutive-model}{%
 \section{Constitutive Model}\label{constitutive-model}}
 
-Besides standard looping as depicted above, one can easily loop over sets of model objects (i.e., zones, gridpoints, structural element nodes, etc.) using the loop foreach construct. In this case, a container of objects must be given by a FISH intrinsic such as zone.list. A practical use of the loop foreach construct is to install a nonlinear initial distribution of elastic moduli in a FLAC3D grid. Suppose that the Young's modulus at a site is given by this equation:
+Besides standard looping as depicted above, one can easily loop over
+sets of model objects (i.e., zones, gridpoints, structural element
+nodes, etc.) using the loop foreach construct. In this case, a container
+of objects must be given by a FISH intrinsic such as zone.list. A
+practical use of the loop foreach construct is to install a nonlinear
+initial distribution of elastic moduli in a FLAC3D grid. Suppose that
+the Young's modulus at a site is given by this equation:
 
-\[ E = E_0 + c \sqrt{z}  \]
-where z is the depth below surface, and c and E∘ are constants. We write a FISH function to install appropriate values of bulk and shear modulus in the grid, as in this example:
+\[ E = E_0 + c \sqrt{z}  \] where z is the depth below surface, and c
+and E∘ are constants. We write a FISH function to install appropriate
+values of bulk and shear modulus in the grid, as in this example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -499,9 +506,19 @@ where z is the depth below surface, and c and E∘ are constants. We write a FIS
 \end{Highlighting}
 \end{Shaded}
 
-Again, you can verify correct operation of the function by printing or plotting shear and bulk moduli.
+Again, you can verify correct operation of the function by printing or
+plotting shear and bulk moduli.
 
-In the function install, the loop takes place over all zones in the global list of zones. The FISH statement loop foreach is a variation of the loop statement that sets pnt to each zone in zone.list. Inside the loop, the z-coordinate of each zone centroid is used to calculate the Young's modulus, given in the equation above. We assume that the datum (or ground surface reference point) is at z = 0. The variables zone.pos.z(pnt) and zone.prop(pnt, `young') are zone intrinsics. (Recall that we talked about the gridpoint intrinsic gp.force.unbal earlier.) Here, we set properties directly from within a FISH function, rather than with a zone property command as in an earlier example.
+In the function install, the loop takes place over all zones in the
+global list of zones. The FISH statement loop foreach is a variation of
+the loop statement that sets pnt to each zone in zone.list. Inside the
+loop, the z-coordinate of each zone centroid is used to calculate the
+Young's modulus, given in the equation above. We assume that the datum
+(or ground surface reference point) is at z = 0. The variables
+zone.pos.z(pnt) and zone.prop(pnt, `young') are zone intrinsics. (Recall
+that we talked about the gridpoint intrinsic gp.force.unbal earlier.)
+Here, we set properties directly from within a FISH function, rather
+than with a zone property command as in an earlier example.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -571,10 +588,11 @@ as large as the world.
 \hypertarget{problem-statement}{%
 \subsection{Problem Statement}\label{problem-statement}}
 
-The pile is subjected to an axial load of 100 kN,
-and then the top of the pile is moved horizontally for a displacement of 4 cm.
-The goal is to determine relation of axial loading to the ultimate bearing capacity.
-And, lateral load-deflection curve is calculated.
+The pile is subjected to an axial load of 100 kN, and then the top of
+the pile is moved horizontally for a displacement of 4 cm.
+
+The goal is to determine relation of axial loading to the ultimate
+bearing capacity. And, lateral load-deflection curve is calculated.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
@@ -588,12 +606,13 @@ And, lateral load-deflection curve is calculated.
 \item
   x=+8, -8, y = 8: roller
 \item
-  skin friction is modeled by placing an interface
-  between pile concrete wall and clay.
-  In it, fric angle of 20 and c=30kPa are assumed.
+  skin friction is modeled by placing an interface between pile
+  concrete wall and clay. In it, fric angle of 20 and c=30kPa are
+  assumed.
 \item
-  toe interface is placed between pile tip and clay
-  \emph{note: Zone faces are separated in a previous command so that the gridpoints common to both will be separated as well.}\\
+  toe interface is placed between pile tip and clay \emph{note: Zone faces
+  are separated in a previous command so that the gridpoints common to
+  both will be separated as well.}\\
   \emph{note: include Figure of grid (geometry)}
 \end{enumerate}
 
@@ -610,7 +629,6 @@ GWT = 5.5m\\
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
-\tightlist
 \item
   equil. stress state under gravity load before install.\\
   1-1) water table is created at z=5.5\\
@@ -619,20 +637,39 @@ GWT = 5.5m\\
   equil. stress state after installation.\\
   2-1) change properties of pile zones from those\\
   representing clay to those representing concrete.\\
-  2-2) vertical equil. stress distribution at this equil. state is shown in\\
-  \emph{note: include Figure of contours of vertical stress at ini state incld. pile weight}\\
+  2-2) vertical equil. stress distribution at this equil. state is
+  shown in\\
+  \emph{note: include Figure of contours of vertical stress at ini state
+  incld. pile weight}\\
 \item
   apply vertical velocity at top of pile\\
   ``ramp'' = boundary condition is increased linearly\\
-  \emph{note: critical timestep is controlled by high stiffness of concrete}\\
-  If velocity is sudden, inertial effects will dominate and renders difficulty to identification of steady state response of system\\
-  table ``ramp'' is used to apply velocity to pile top gridpoints.\\
-  \emph{note: FISH FUNCTION vert\_load calculates axial stress at the top of pile and stores value as a history}\\
-  For efficiency, gridpoints on cap surface are stored in symbol ``cap'' as a map\\
-  \emph{note: include plot of axial stress vs axial displ. at pile toe. ramp = (0,5e-8), step number = 30000}\\
-  \emph{note: combined damping is used to remove kinetic energy for prescribed loading condition. This is because mass-adjustment process depends on velocity sign-changes..}\\
-  \emph{note: FISH FUNCTION tot\_reac monitors soil reaction along pile as a func of lateral displ. tot\_reac creates tables of soil reaction (p) vs.~lateral displ (y) at diff. locations along pile to generate p-y curve.}\\
-  \emph{note: include Figure of p-y curve at 11 equidistant points along pile}\\
+  \emph{note: critical timestep is controlled by high stiffness of
+  concrete}\\
+  If velocity is sudden, inertial effects will dominate and renders
+  difficulty to identification of steady state response of system\\
+  table ``ramp'' is used to apply velocity to pile top gridpoints.
+
+  \hfill\break
+  \emph{note: FISH FUNCTION vert\_load calculates axial stress at the top of
+  pile and stores value as a history}\\
+  For efficiency, gridpoints on cap surface are stored in symbol ``cap''
+  as a map\\
+  \emph{note: include plot of axial stress vs axial displ. at pile toe.
+  ramp = (0,5e-8), step number = 30000}
+
+  \hfill\break
+  \emph{note: combined damping is used to remove kinetic energy for
+  prescribed loading condition. This is because mass-adjustment
+  process depends on velocity sign-changes..}\\
+  \emph{note: FISH FUNCTION tot\_reac monitors soil reaction along pile as a
+  func of lateral displ. tot\_reac creates tables of soil reaction (p)
+  vs.~lateral displ (y) at diff. locations along pile to generate p-y
+  curve.}
+
+  \hfill\break
+  \emph{note: include Figure of p-y curve at 11 equidistant points along
+  pile}\\
 \end{enumerate}
 
 \hypertarget{zones-1}{%
@@ -818,13 +855,26 @@ simplification is very high.
 \chapter{Pull-Tests}\label{pull-tests}}
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/j}
-\#\# Problem Description
-\emph{note: FISH function force is used to sum the raction forces and monitor nodal displacement generated by the pull-test}\\
+
+\hypertarget{problem-description-1}{%
+\section{Problem Description}\label{problem-description-1}}
+
+\emph{note: FISH function force is used to sum the reaction forces and
+monitor nodal displacement generated by the pull-test}
+
+\hfill\break
 \emph{note: free length of bolt that extends out of block + larger diameter}\\
-Perfectly plastic behavior of grout = max cohesion is exceeded +post-peak weakening of shear bond strength\\
-\emph{note: bond strength softening of the grout is defined with keyword coupling-cohesion-table (see Rockbolt Behavior)}\\
-The relation btw shear disp. and cohesion weakening is prescribed\\
-thru table cct. softening of friction of grout canbe defined using keyword coupling-friction-table.\\
+Perfectly plastic behavior of grout = max cohesion is exceeded
++post-peak weakening of shear bond strength
+
+\hfill\break
+\emph{note: bond strength softening of the grout is defined with keyword
+coupling-cohesion-table (see Rockbolt Behavior)}
+
+\hfill\break
+The relation btw shear disp. and cohesion weakening is prescribed thru
+table cct. softening of friction of grout canbe defined using keyword
+coupling-friction-table.\\
 
 \hypertarget{zones-2}{%
 \section{Zones}\label{zones-2}}
@@ -863,6 +913,7 @@ thru table cct. softening of friction of grout canbe defined using keyword coupl
 \NormalTok{                     coupling}\OperatorTok{{-}}\NormalTok{stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1.12e7}
 \NormalTok{struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1.75e5}\NormalTok{ ...}
 \NormalTok{                     coupling}\OperatorTok{{-}}\NormalTok{stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1.12e7}
+\OperatorTok{;}\NormalTok{ rel btw shear displ }\KeywordTok{and}\NormalTok{ coh weakening }\KeywordTok{is}\NormalTok{ prescribed thru table cct}
 \NormalTok{struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{table }\StringTok{\textquotesingle{}cct\textquotesingle{}}
 \OperatorTok{;}\NormalTok{ change }\KeywordTok{in}\NormalTok{ cohesion }\ControlFlowTok{with}\NormalTok{ relative shear displacement}
 \NormalTok{table }\StringTok{\textquotesingle{}cct\textquotesingle{}}\NormalTok{ add (}\DecValTok{0}\NormalTok{,}\FloatTok{1.75e5}\NormalTok{) (}\FloatTok{0.025}\NormalTok{,}\FloatTok{1.75e4}\NormalTok{)}
@@ -899,15 +950,32 @@ thru table cct. softening of friction of grout canbe defined using keyword coupl
 \hypertarget{some-other-notes}{%
 \section{Some other notes}\label{some-other-notes}}
 
-2.3. pull test with confinement ``Pulltest06.f3dat''
-+modified pile logic.(see Behavior of Shear Coupling Springs) linear law is implemented.whereby reinforcement shear strength is defined as constant\\
-\emph{(coupling-cohesion-shear)+ effective pressure}perimeter\emph{fric angle(coupling-friction-shear)}\\
-This pressure dependence is activated automatically by issuing reinforcement properties(perimeter) and\\
+2.3. pull test with confinement ``Pulltest06.f3dat'' +modified pile
+logic.(see Behavior of Shear Coupling Springs) linear law is
+implemented.whereby reinforcement shear strength is defined as constant
 
-2.5. pull test with tensile rupture ``Pulltest08.f3dat''
-\emph{note: tensile-yield, tensile-failure-strain: for limiting axial yield force and limiting axial strain for rockbolt}
+Confining stress of 4 MN/m2 = 4MPa
 
-\newpage
+As described in Behavior of Shear Coupling Springs a linear law is
+implemented in the modified
+pile logic, whereby the reinforcement shear strength is defined as a
+constant
+(coupling-cohesion-shear) plus the effective pressure
+on the reinforcement multiplied by the reinforcement perimeter
+(perimeter) times a friction angle (coupling-friction-shear). This
+pressure dependence is
+activated automatically in FLAC3D by issuing the
+reinforcement properties (perimeter) and (coupling-friction-shear).
+
+\hfill\break
+\emph{(coupling-cohesion-shear)+ effective pressure}perimeter\emph{fric
+angle(coupling-friction-shear)}\\
+This pressure dependence is activated automatically by issuing
+reinforcement properties(perimeter) and\\
+
+2.5. pull test with tensile rupture ``Pulltest08.f3dat'' \emph{note:
+tensile-yield, tensile-failure-strain: for limiting axial yield force
+and limiting axial strain for rockbolt}
 
 \hypertarget{grid}{%
 \chapter{Grid}\label{grid}}
@@ -922,9 +990,10 @@ This pressure dependence is activated automatically by issuing reinforcement pro
 \includegraphics[width=1\linewidth]{myfigureeeeee/example-FLAC3D-Model}
 
 \emph{note: zone create generates primitive grid}\\
-\emph{note: zone gridpoint create puts gridpoints at specific locations }\\
-\emph{note: zone gridpoint merge ensures separate primitives are connected properly}\\
-\emph{note: zone attach connects primitive meshes of different zone sizes.}\\
+\emph{note: zone gridpoint create puts gridpoints at specific locations}\\
+\emph{note: zone gridpoint merge ensures separate primitives are connected
+properly}\\
+\emph{note: zone attach connects primitive meshes of different zone sizes.}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -934,19 +1003,15 @@ This pressure dependence is activated automatically by issuing reinforcement pro
 \end{Highlighting}
 \end{Shaded}
 
-ex) 5 along innder radius of cylindrical tunnel,\\
+ex) 5 along inner radius of cylindrical tunnel,\\
 10 along axis\\
 6 along circumference of tunnel\\
 12 between periphery of tunnel and outer boundary of model\\
-\emph{note: size keyword defines the number of zones in the grid.}\\
+\emph{note: size keyword defines the number of zones in the grid.}
 
 keywords for zone create:\\
-- dimension
-- edge
-- fill
-- point (boundary dimensions)
-- ratio (coarser toward edge)
-- size
+- dimension - edge - fill - point (boundary dimensions) - ratio (coarser
+toward edge) - size
 
 \hypertarget{several-primitive-shapes-connected}{%
 \section{several primitive shapes connected:}\label{several-primitive-shapes-connected}}
@@ -966,15 +1031,34 @@ keywords for zone create:\\
 \end{Highlighting}
 \end{Shaded}
 
-this adds symmetric part.\\
-\emph{note: The symmetry plane is a vertical plane (located by the dip, dip-direction, and origin keywords) coincident with the x = 0 plane. Note that dip angle (dip) and dip direction (dip-direction) assume that x corresponds to ``East,'' y to ``North'', and z to ``Up.''}\\
+this adds symmetric part.
 
-third option, the zone gridpoint create command, is available to position single points in the model region.\\
-\emph{note: zone gridpoint create is used for positioning reference points of primitives }\\
+\hfill\break
+\emph{note: The symmetry plane is a vertical plane (located by the dip,
+dip-direction, and origin keywords) coincident with the x = 0 plane.
+Note that dip angle (dip) and dip direction (dip-direction) assume that
+x corresponds to ``East,'' y to ``North'', and z to ``Up.''}\\
 
-During execution of a zone create command, a check is made for each boundary gridpoint against the boundary gridpoints of zones that already exist.\\
-If two boundary gridpoints fall within a tolerance of 1 ? 10-7 (relative to the magnitude of the gridpoints position vector) of each other, they are assumed to be the same point,\\
-If it is discovered that some gridpoints don't match, the zone gridpoint merge command can be used to merge these gridpoints after the zone create command has been applied.\\
+third option, the zone gridpoint create command, is available to
+position single points in the model region.
+
+\hfill\break
+\emph{note: zone gridpoint create is used for positioning reference points of
+primitives}\\
+
+During execution of a zone create command, a check is made for each
+boundary gridpoint against the boundary gridpoints of zones that already
+exist.
+
+\hfill\break
+If two boundary gridpoints fall within a tolerance of 1 ? 10-7 (relative
+to the magnitude of the gridpoints position vector) of each other, they
+are assumed to be the same point,
+
+\hfill\break
+If it is discovered that some gridpoints don't match, the zone gridpoint
+merge command can be used to merge these gridpoints after the zone
+create command has been applied.\\
 
 Example: (zone attach) - Two unequal sub-grids
 
@@ -997,8 +1081,9 @@ Example: (zone densify)
 \end{Highlighting}
 \end{Shaded}
 
-the first two command lines can be changed to
-where zone densify segments 2 refines the upper zones (between the z-coordinate of 2 and 4) with the segment number of 2 on each edge.
+the first two command lines can be changed to where zone densify
+segments 2 refines the upper zones (between the z-coordinate of 2 and 4)
+with the segment number of 2 on each edge.
 
 \hypertarget{structural-element-operation}{%
 \section{Structural Element Operation}\label{structural-element-operation}}
@@ -1014,7 +1099,9 @@ Creating a liner in the service tunnel
 \end{Highlighting}
 \end{Shaded}
 
-The liner contains 240 structural shell elements and is connected to the FLAC3D grid at 143 structural-node links. The grid with the liner is shown below.
+The liner contains 240 structural shell elements and is connected to the
+FLAC3D grid at 143 structural-node links. The grid with the liner is
+shown below.
 
 \hypertarget{densifying-grid-by-specifying-max-size-length}{%
 \section{Densifying grid by specifying max size length}\label{densifying-grid-by-specifying-max-size-length}}
@@ -1032,10 +1119,16 @@ The liner contains 240 structural shell elements and is connected to the FLAC3D 
 \end{Highlighting}
 \end{Shaded}
 
-note that in the local z-direction, the maximum size length is 0.4. FLAC3D densifies the maximum length in this direction to be 1/3 (= 0.4)\\
-The zone attach by-face command in this example is used to attach faces of sub-grids together rigidly to form a single grid\\
+note that in the local z-direction, the maximum size length is 0.4.
+FLAC3D densifies the maximum length in this direction to be 1/3 (= 0.4)
 
-Always use the zone attach by-face command after the zone densify command if there are different numbers of gridpoints along faces of different zones.\\
+\hfill\break
+The zone attach by-face command in this example is used to attach faces
+of sub-grids together rigidly to form a single grid\\
+
+Always use the zone attach by-face command after the zone densify
+command if there are different numbers of gridpoints along faces of
+different zones.
 
 \hypertarget{densify-a-grid-using-geometric-information}{%
 \subsection{Densify a grid using geometric information}\label{densify-a-grid-using-geometric-information}}
@@ -1193,18 +1286,18 @@ Always use the zone attach by-face command after the zone densify command if the
 \hypertarget{results-1}{%
 \section{Results}\label{results-1}}
 
-As discussed in Reaching Equilibrium, we recommend you use the convergence
-1.0 limit criteria when using the model solve command
+As discussed in Reaching Equilibrium, we recommend you use the
+convergence 1.0 limit criteria when using the model solve command
 
-Initially solving to a convergence of 100 or more and then
-examining the response is good practice. Making isosurface plots of convergence
-to see where the model is having trouble can give insight into where model
+Initially solving to a convergence of 100 or more and then examining the
+response is good practice. Making isosurface plots of convergence to see
+where the model is having trouble can give insight into where model
 adjustments in the interest of efficiency are best placed.
 
-In order to determine a collapse load, it is often better to use ``strain-controlled''
-rather than ``stress-controlled'' boundary conditions (i.e., apply a constant
-velocity and measure the reaction forces, rather than apply forces and measure
-displacements).
+In order to determine a collapse load, it is often better to use
+``strain-controlled'' rather than ``stress-controlled'' boundary conditions
+(i.e., apply a constant velocity and measure the reaction forces, rather
+than apply forces and measure displacements).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1277,9 +1370,13 @@ displacements).
 \section{Fish Syntax}\label{fish-syntax}}
 
 \hypertarget{use-of}{%
-\subsection{Use of \ldots{}}\label{use-of}}
+\subsection{Use of (\ldots)}\label{use-of}}
 
-A complete FISH statement occupies one line. However, a line may be typed across two or more lines as long as each line but the ultimate is terminated with the continuation character ( \ldots{} ). Use of temporary variables as hinge points to concatenate lengthy formulas can also be handy. The following example shows how this can be done:
+A complete FISH statement occupies one line. However, a line may be
+typed across two or more lines as long as each line but the ultimate is
+terminated with the continuation character ( \ldots{} ). Use of temporary
+variables as hinge points to concatenate lengthy formulas can also be
+handy. The following example shows how this can be done:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1333,7 +1430,8 @@ The resulting screen display looks like this:
 \hypertarget{traditional-for-loop-in-fish}{%
 \subsection{Traditional for loop in FISH}\label{traditional-for-loop-in-fish}}
 
-standard for loop is also available in FISH to provide for additionalloop control.
+standard for loop is also available in FISH to provide for additional
+loop control.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1371,20 +1469,40 @@ standard for loop is also available in FISH to provide for additionalloop contro
 \end{Highlighting}
 \end{Shaded}
 
-In this case, the loop variable n is given successive values from 1 to 10, and the statements inside the loop (between the loop and endloop statements) are executed for each value. As mentioned, variable names or an arithmetic expression could be substituted for the numbers 1 or 10. Note that the exit statement can be used to break out of a FISH loop and the continue statement can be used to skip the remaining instructions in the loop, moving to the next sequence of the loop.
+In this case, the loop variable n is given successive values from 1 to
+10, and the statements inside the loop (between the loop and endloop
+statements) are executed for each value. As mentioned, variable names or
+an arithmetic expression could be substituted for the numbers 1 or 10.
+Note that the exit statement can be used to break out of a FISH loop and
+the continue statement can be used to skip the remaining instructions in
+the loop, moving to the next sequence of the loop.
 
-It is important to note that this formulation of looping is different from a for loop in most high-level programming languages. For instance, one cannot easily control the ending condition (i.e., loop from 1 to 10 excluding 10) or the incrementing mechanism (i.e., loop from 1 to 10 by twos or loop backward). A standard for loop is also available in FISH to provide for additional loop control.
+It is important to note that this formulation of looping is different
+from a for loop in most high-level programming languages. For instance,
+one cannot easily control the ending condition (i.e., loop from 1 to 10
+excluding 10) or the incrementing mechanism (i.e., loop from 1 to 10 by
+twos or loop backward). A standard for loop is also available in FISH to
+provide for additional loop control.
 
 \hypertarget{if-else-endif-construct}{%
 \subsection{if else endif construct}\label{if-else-endif-construct}}
 
-These statements allow conditional execution of FISH function segments; else and then are optional. The item test consists of one of the following symbols or symbol pairs:\\
+These statements allow conditional execution of FISH function segments;
+else and then are optional. The item test consists of one of the
+following symbols or symbol pairs:\\
 
 = \# \textgreater{} \textless{} \textgreater= \textless=\\
 
-The displayed value of abc in this example depends on the argument provided to abc when it is executed. You should experiment with different test symbols (e.g., replace \textgreater{} with \textless).
+The displayed value of abc in this example depends on the argument
+provided to abc when it is executed. You should experiment with
+different test symbols (e.g., replace \textgreater{} with \textless).
 
-Until now, our FISH functions have been invoked from FLAC3D, either by using the sqaure brackets {[}{]} of inline FISH, by giving the function name prepended with the the @ character, or by using the fish list command. It is also possible to do the reverse, to give FLAC3D commands from within FISH functions. Most valid FLAC3D commands can be embedded between the following FISH statements:
+Until now, our FISH functions have been invoked from FLAC3D, either by
+using the sqaure brackets {[}{]} of inline FISH, by giving the function name
+prepended with the the @ character, or by using the fish list command.
+It is also possible to do the reverse, to give FLAC3D commands from
+within FISH functions. Most valid FLAC3D commands can be embedded
+between the following FISH statements:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1404,9 +1522,16 @@ Until now, our FISH functions have been invoked from FLAC3D, either by using the
 \hypertarget{arrays-and-maps}{%
 \subsection{Arrays and Maps}\label{arrays-and-maps}}
 
-It is often the case that one would like to store a list of objects that they will loop over in the future. These may be computed values from zones, for instance, or specific gridpoint pointers themselves. FISH has two containers to use in these circumstances, termed arrays and maps.
+It is often the case that one would like to store a list of objects that
+they will loop over in the future. These may be computed values from
+zones, for instance, or specific gridpoint pointers themselves. FISH has
+two containers to use in these circumstances, termed arrays and maps.
 
-An array holds a list of FISH variables of any type that can be looped over or accessed by the integer index of the element of the array. Arrays can be multidimensional and do not resize dynamically. The simple example below shows how one can create an array of integers and then sum the values.
+An array holds a list of FISH variables of any type that can be looped
+over or accessed by the integer index of the element of the array.
+Arrays can be multidimensional and do not resize dynamically. The simple
+example below shows how one can create an array of integers and then sum
+the values.
 
 \hypertarget{array-example}{%
 \subsubsection{Array example}\label{array-example}}
@@ -1437,9 +1562,15 @@ An array holds a list of FISH variables of any type that can be looped over or a
 \end{Highlighting}
 \end{Shaded}
 
-In this example, an array is created and filled with numbers. The loop while construct is used to loop over the array entries and the sum and product are computed and output.
+In this example, an array is created and filled with numbers. The loop
+while construct is used to loop over the array entries and the sum and
+product are computed and output.
 
-A map, on the other hand, is an associative container, meaning that one can access the members of a map by an integer or string used to insert a value in the map. Maps can dynamically be resized and added to one another (appending maps together), and are the preferred constructs for storing lists of FISH variables for later access.
+A map, on the other hand, is an associative container, meaning that one
+can access the members of a map by an integer or string used to insert a
+value in the map. Maps can dynamically be resized and added to one
+another (appending maps together), and are the preferred constructs for
+storing lists of FISH variables for later access.
 
 \hypertarget{map-example}{%
 \subsubsection{Map example}\label{map-example}}
@@ -1468,7 +1599,12 @@ A map, on the other hand, is an associative container, meaning that one can acce
 \end{Highlighting}
 \end{Shaded}
 
-Unlike with arrays, maps can be looped through using the loop foreach construct. In this case, n is the value held in each map entry, not the integer name of the object in the map. Likewise, instead of using integers to insert objects into the map, one could use strings such as first, second, etc. This allows one to easily and efficiently store and access FISH variables by a user-defined name.
+Unlike with arrays, maps can be looped through using the loop foreach
+construct. In this case, n is the value held in each map entry, not the
+integer name of the object in the map. Likewise, instead of using
+integers to insert objects into the map, one could use strings such as
+first, second, etc. This allows one to easily and efficiently store and
+access FISH variables by a user-defined name.
 
 \hypertarget{fish-function}{%
 \subsection{Fish Function}\label{fish-function}}
@@ -1496,15 +1632,30 @@ FISH functions to calculate bulk and shear moduli
 \hypertarget{some-code}{%
 \section{Some Code}\label{some-code}}
 
+Properties may be specified for each type of physical item, and will be
+inherited automatically by the associated component objects. For
+example, the command
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ itasca }\ImportTok{as}\NormalTok{ it}
-\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
-\NormalTok{np.set\_printoptions(threshold}\OperatorTok{=}\DecValTok{20}\NormalTok{)}
-\NormalTok{it.command(}\StringTok{"python{-}reset{-}state false"}\NormalTok{)}
-\ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ zonearray }\ImportTok{as}\NormalTok{ za}
-\ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ gridpointarray }\ImportTok{as}\NormalTok{ gpa}
+\NormalTok{struct cable }\BuiltInTok{property}\NormalTok{ grout}\OperatorTok{{-}}\NormalTok{friction}\OperatorTok{=}\FloatTok{30.0} \BuiltInTok{range} \BuiltInTok{id}\OperatorTok{=}\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
 
+will assign a grout friction angle of 30 degrees to all cable elements
+thar are part of the cable with an ID number of 3, whereas the command
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{struct cable }\BuiltInTok{property}\NormalTok{ grout}\OperatorTok{{-}}\NormalTok{friction}\OperatorTok{=}\FloatTok{30.0} \BuiltInTok{range}\NormalTok{ component}\OperatorTok{{-}}\BuiltInTok{id}\OperatorTok{=}\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+will assign a grout friction angle of 30 degrees to the single cable
+element with a component-ID number of 3.
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{" GROUPS AND MASK ARRAYS "}
 \NormalTok{it.command(}\StringTok{"zone group }\CharTok{\textbackslash{}"}\StringTok{lower}\CharTok{\textbackslash{}"}\StringTok{ range position{-}z 0 5"}\NormalTok{)}
 \NormalTok{za.in\_group(}\StringTok{"lower"}\NormalTok{)}
@@ -1512,7 +1663,6 @@ FISH functions to calculate bulk and shear moduli
 \NormalTok{corner\_mask }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (x}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{, y}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{, z}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{))}
 \NormalTok{za.set\_group(corner\_mask, }\StringTok{"corner"}\NormalTok{, }\StringTok{"geometry"}\NormalTok{)}
 \BuiltInTok{print}\NormalTok{ za.in\_group(}\StringTok{"corner"}\NormalTok{, }\StringTok{"geometry"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in corner group."}
-
 \CommentTok{" GRIDPOINTS ARRAY FUNCTIONS "}
 \NormalTok{gpos }\OperatorTok{=}\NormalTok{ gpa.pos()}
 \NormalTok{gx, gy, gz }\OperatorTok{=}\NormalTok{ gpos.T}
@@ -1522,7 +1672,6 @@ FISH functions to calculate bulk and shear moduli
 \NormalTok{f[:,][gz}\OperatorTok{==}\DecValTok{0}\NormalTok{] }\OperatorTok{=} \VariableTok{True}\NormalTok{, }\VariableTok{True}\NormalTok{, }\VariableTok{True}
 \BuiltInTok{print}\NormalTok{ f}
 \NormalTok{gpa.set\_fixity(f)}
-
 \NormalTok{top\_gridpoints }\OperatorTok{=}\NormalTok{ gz}\OperatorTok{==}\DecValTok{10}
 \NormalTok{radial\_distance }\OperatorTok{=}\NormalTok{ np.sqrt((gx}\OperatorTok{{-}}\DecValTok{5}\NormalTok{)}\OperatorTok{**}\DecValTok{2}\OperatorTok{+}\NormalTok{(gy}\OperatorTok{{-}}\DecValTok{5}\NormalTok{)}\OperatorTok{**}\DecValTok{2}\NormalTok{)}
 \NormalTok{central\_gridpoints }\OperatorTok{=}\NormalTok{ radial\_distance }\OperatorTok{\textless{}} \DecValTok{5}
@@ -1532,18 +1681,13 @@ FISH functions to calculate bulk and shear moduli
 \BuiltInTok{print}\NormalTok{ fapp}
 \NormalTok{fapp[:,}\DecValTok{2}\NormalTok{] }\OperatorTok{=}\NormalTok{ mask}\OperatorTok{*}\FloatTok{1e6}\OperatorTok{*}\NormalTok{(}\FloatTok{5.0}\OperatorTok{{-}}\NormalTok{radial\_distance)}\OperatorTok{/}\FloatTok{5.0}
 \NormalTok{gpa.set\_force\_app(fapp)}
-
 \BuiltInTok{print} \StringTok{"zone centroids: "}
 \BuiltInTok{print}\NormalTok{ za.pos()}
 \NormalTok{za.gridpoints()}
 \NormalTok{za.faces()}
 \NormalTok{za.ids()}
 \BuiltInTok{print}\NormalTok{ za.neighbors()}
-
-\CommentTok{" =========================================== "}
 \CommentTok{" =================RESULTS=================== "}
-\CommentTok{" =========================================== "}
-
 \NormalTok{it.command(}\StringTok{"model solve"}\NormalTok{)}
 \BuiltInTok{print} \StringTok{"gridpoint displacements:"}
 \BuiltInTok{print}\NormalTok{ gpa.disp()}
@@ -1553,17 +1697,11 @@ FISH functions to calculate bulk and shear moduli
 \NormalTok{max\_index }\OperatorTok{=}\NormalTok{ np.argmax(mag)}
 \BuiltInTok{print} \StringTok{"Maximum displacement: }\SpecialCharTok{\{\}}\StringTok{ at location }\SpecialCharTok{\{\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(gpa.disp()[max\_index],}
 \NormalTok{                                              gpa.pos()[max\_index])}
-
 \BuiltInTok{print} \StringTok{"Vertical displacement along the vertical line x=5, y=5: from z=0 to z=10"}
 \BuiltInTok{print}\NormalTok{ gpa.disp()[np.logical\_and(gx}\OperatorTok{==}\DecValTok{5}\NormalTok{, gy}\OperatorTok{==}\DecValTok{5}\NormalTok{)][:,}\DecValTok{2}\NormalTok{]}
-
 \NormalTok{za.stress()}
-
 \NormalTok{za.stress\_flat()}
-
-\CommentTok{" =========================================== "}
 \CommentTok{" =========REFERENCE EXAMPLES================ "}
-\CommentTok{" =========================================== "}
 \CommentTok{""" Some Numpy Operation Examples}
 \CommentTok{np.array([1,2,3,4,5])}
 \CommentTok{np.linspace(0,1,15)}
@@ -1592,7 +1730,8 @@ FISH functions to calculate bulk and shear moduli
 \hypertarget{interface}{%
 \section{Interface}\label{interface}}
 
-Interfaces are most often created with the zone interface create by-face command:
+Interfaces are most often created with the zone interface create by-face
+command:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1601,30 +1740,33 @@ Interfaces are most often created with the zone interface create by-face command
 \end{Highlighting}
 \end{Shaded}
 
-This command creates an interface named flt by separating all zone faces found
-at z=5 and placing interface elements and nodes on one side. Contacts are found
-(and forces generated) by interface nodes coming into contact with zone surface
-faces that are not part of the interface itself.
+This command creates an interface named flt by separating all zone faces
+found at z=5 and placing interface elements and nodes on one side.
+Contacts are found (and forces generated) by interface nodes coming into
+contact with zone surface faces that are not part of the interface
+itself.
 
 \begin{figure}[H]
-\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-58}
+\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-60}
 \end{figure}
 
-Every reference to an interface uses a name (like the table command) to indicate
-which interface is being referred to
+Every reference to an interface uses a name (like the table command) to
+indicate which interface is being referred to
 
-Interfaces in FLAC3D are one-sided objects. Interface elements are (in general) created attached to zone surface faces, which
-in turn create interface nodes. All contact detection is between interface nodes and zone surface faces.
+Interfaces in FLAC3D are one-sided objects. Interface elements are (in
+general) created attached to zone surface faces, which in turn create
+interface nodes. All contact detection is between interface nodes and
+zone surface faces.
 
-Most commonly, interfaces need to be created starting with a mesh that is
-continuous. In that case, it is easiest to separate the mesh and create the
-interfaces all in one command using the separate keyword (as shown in the
-example above).
+Most commonly, interfaces need to be created starting with a mesh that
+is continuous. In that case, it is easiest to separate the mesh and
+create the interfaces all in one command using the separate keyword (as
+shown in the example above).
 
-The new-side-origin keyword can be used to determine which
-side of the separation interface elements are applied to. The side opposite the
-location of the origin will be selected. In the example above, to select the other
-side, change the command to
+The new-side-origin keyword can be used to determine which side of the
+separation interface elements are applied to. The side opposite the
+location of the origin will be selected. In the example above, to select
+the other side, change the command to
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1636,42 +1778,45 @@ side, change the command to
 \hypertarget{penetration}{%
 \subsection{Penetration}\label{penetration}}
 
-the calculation of normal stress due
-to interface penetration is absolute instead of incremental. This means that
-moving a gridpoint relative to an interface in the normal direction will have an
-immediate effect on the normal stress calculated. This is not true of accumulated
+the calculation of normal stress due to interface penetration is
+absolute instead of incremental. This means that moving a gridpoint
+relative to an interface in the normal direction will have an immediate
+effect on the normal stress calculated. This is not true of accumulated
 shear stress, which remains incremental.
 
-In small-strain mode, gridpoints do not actually move their location in response
-to accumulated velocities.
+In small-strain mode, gridpoints do not actually move their location in
+response to accumulated velocities.
 
-small-displacement'' field. is a vector field
-that is accumulated from the velocity field every step in small-strain mode only.
-For the purposes of calculating interface penetration, a gridpoint location is
-based on the current location plus the small-strain displacement. The smallstrain displacement may be initialized using the zone gridpoint initialize
-displacement-small command, and this is sometimes useful to reset the effective
-penetration of an interface after some grid motion.
-To initialize interface stresses without actually moving gridpoints, we introduce
-a normal stress increment that is added to the normal stress calculated from
-absolute penetration. It is this value that is set when the zone interface node
-initialize-stresses command is given. It can also be set explicitly using zone
-interface node stress-normal-increment.
+small-displacement" field. is a vector field that is accumulated from
+the velocity field every step in small-strain mode only. For the
+purposes of calculating interface penetration, a gridpoint location is
+based on the current location plus the small-strain displacement. The
+smallstrain displacement may be initialized using the zone gridpoint
+initialize displacement-small command, and this is sometimes useful to
+reset the effective penetration of an interface after some grid motion.
+To initialize interface stresses without actually moving gridpoints, we
+introduce a normal stress increment that is added to the normal stress
+calculated from absolute penetration. It is this value that is set when
+the zone interface node initialize-stresses command is given. It can
+also be set explicitly using zone interface node
+stress-normal-increment.
 
 Spatial Variation and Randomness of Property Distribution
 
-Material properties can be specified to adjust or to vary as a function of grid
-position. In fact, a different property can be assigned to every zone in a FLAC3D
-model, regardless of model size.
-There are two commands avialable in FLAC3D to specfiy material properties. The
-first, zone property, allows multiple properties to be specified in a single
-command. This is convenient to completely specify properties in different
-regions, where that property does not vary within that region.
-The second can only specify one property at a time, but has optional keywords
-that allow the property value to be automatically varied in space. This is the zone
-property-distribution command. Among the available keywords are add,
-multiply, gradient, and vary, which can be used to provide fixed or linear
-variations of properties with position. For example, the following command
-provides a linear variation of cohesion in the x-direction:
+Material properties can be specified to adjust or to vary as a function
+of grid position. In fact, a different property can be assigned to every
+zone in a FLAC3D model, regardless of model size. There are two commands
+avialable in FLAC3D to specfiy material properties. The first, zone
+property, allows multiple properties to be specified in a single
+command. This is convenient to completely specify properties in
+different regions, where that property does not vary within that region.
+The second can only specify one property at a time, but has optional
+keywords that allow the property value to be automatically varied in
+space. This is the zone property-distribution command. Among the
+available keywords are add, multiply, gradient, and vary, which can be
+used to provide fixed or linear variations of properties with position.
+For example, the following command provides a linear variation of
+cohesion in the x-direction:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1679,19 +1824,22 @@ provides a linear variation of cohesion in the x-direction:
 \end{Highlighting}
 \end{Shaded}
 
-An initial profile of a property can also be assigned via FISH.
-With FLAC3D, it is also possible to study the influence of nonhomogeneity in a
-material. Any type of statistical property distribution can be introduced, as each
-element may have a unique property value. Two optional keywords are available
-to apply a random distribution of a selected property with the zone propertydistribution command. The keyword deviation-gaussian assumes a normal
-(Gaussian) distribution for the property, with a mean value, v, and standard
-deviation, s. The keyword deviation-uniform assumes a uniform distribution with
-mean value, v, and standard deviation, s. Be careful to ensure that properties do
-not acquire negative values if s is large. As an example, the following command
-would give a mean friction angle of 40° with a standard deviation of ±5\%:
-zone property-distribution friction 45 deviation-gaussian 2
-Use of the variation keywords in any command (not just for property variation) is
-defined in the topic Value Modifiers (Add, Multiply, Gradient, Vary).
+An initial profile of a property can also be assigned via FISH. With
+FLAC3D, it is also possible to study the influence of nonhomogeneity in
+a material. Any type of statistical property distribution can be
+introduced, as each element may have a unique property value. Two
+optional keywords are available to apply a random distribution of a
+selected property with the zone propertydistribution command. The
+keyword deviation-gaussian assumes a normal (Gaussian) distribution for
+the property, with a mean value, v, and standard deviation, s. The
+keyword deviation-uniform assumes a uniform distribution with mean
+value, v, and standard deviation, s. Be careful to ensure that
+properties do not acquire negative values if s is large. As an example,
+the following command would give a mean friction angle of 40° with a
+standard deviation of ±5\%: zone property-distribution friction 45
+deviation-gaussian 2 Use of the variation keywords in any command (not
+just for property variation) is defined in the topic Value Modifiers
+(Add, Multiply, Gradient, Vary).
 
 \hypertarget{kaist-model-1}{%
 \section{KAIST Model}\label{kaist-model-1}}
@@ -1822,10 +1970,185 @@ defined in the topic Value Modifiers (Add, Multiply, Gradient, Vary).
 \hypertarget{theory}{%
 \chapter{Theory}\label{theory}}
 
+\hypertarget{structural-elements-1}{%
+\section{Structural Elements}\label{structural-elements-1}}
+
+Structural elements include beams, cables, piles, shells, geogrids, and
+liners. These can be either independent of, or coupled to, the grid.
+Full dynamic equations of motion are solved (Lagrangian solution
+procedure as opposed to implicit matrix-inversion procedure).
+
+Section organization: 1. means by which SEL are created and joined 2.
+Boundary and Initial Conditions, Local Coord Sys. 3. Damping, Thermal,
+Material Properties 4. Mechanical behavior
+
+Further, a detailed discussion of General Formulation of
+Structural-Element Logic provides more complex interaction btw SEL and
+grid.
+
+\hypertarget{types-of-sel}{%
+\subsection{Types of SEL}\label{types-of-sel}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Beam : 2-noded, straight finite element with 6 dof per node, 3
+  transl, 3 rot, which behaves as LE matl w no failure limit. Beam
+  elements may be rigidly connected to grid st forces and bending
+  moments develop within the beam as grid deforms. Beam Structural
+  Elements --- Beam structural elements are two-noded, straight,
+  finite elements with six degrees of freedom per node: three
+  translational components, and three rotational components. A
+  physical beam (i.e., an arbitrarily curved, beam structure of
+  isotropic material and bisymmetrical cross-section) can be modeled
+  as a collection of beam elements. Each element behaves as a linearly
+  elastic material with no failure limit; however, it is possible to
+  introduce a limiting plastic moment, or even a plastic hinge (across
+  which discontinuity in rotation may develop), between elements. Beam
+  elements may be rigidly connected to the grid such that forces and
+  bending moments develop within the beam as the grid deforms, and
+  they may be loaded by point or distributed loads. Beam elements are
+  used to model structural-support members in which bending resistance
+  and limited bending moments occur, including support struts in an
+  open-cut excavation and general framed structures loaded by point or
+  distributed loads.
+\item
+  Cable Structural Elements --- Cable structural elements are
+  two-noded, straight, finite elements with one axially oriented
+  translational degree-of-freedom per node. A physical cable (i.e., an
+  arbitrarily curved, cable structure of isotropic material) can be
+  modeled as a collection of cable elements. Each element can yield in
+  tension or compression, but cannot resist a bending moment. A
+  shear-directed (parallel with the cable axis) frictional interaction
+  occurs between the cable and the grid. A cable may be anchored at a
+  specific point in the grid, or grouted so that force develops along
+  its length in response to relative motion between the cable and the
+  grid. Cables may also be point-loaded or pretensioned. Cable
+  elements are used to model a wide variety of structural-support
+  members for which tensile capacity is important, including cable
+  bolts and tiebacks.
+\item
+  Pile Structural Elements --- Pile structural elements are two-noded,
+  straight, finite elements with six degrees of freedom per node. A
+  physical pile can be modeled as a collection of pile elements. The
+  stiffness matrix of a pile element is identical to that of a beam
+  element; however, in addition to providing the structural behavior
+  of a beam, both a normal-directed (perpendicular to the pile axis)
+  and a shear-directed (parallel with the pile axis) frictional
+  interaction occurs between the pile and the grid. In this sense,
+  piles offer the combined features of beams and cables. In addition
+  to skin-friction effects, end-bearing effects can also be modeled
+  (see Axially Loaded Pile). Piles may be loaded by point or
+  distributed loads. Pile elements are used to model
+  structural-support members, such as foundation piles, for which both
+  normal- and shear-directed frictional interaction with the rock or
+  soil mass occurs. A special material model is also available as an
+  extension to the pile element to simulate the behavior of rockbolt
+  reinforcement. This model includes the ability to account for
+  changes in confining stress around the reinforcement,
+  strain-softening behavior of the material between the structural
+  element and the grid, and tensile rupture of the element.
+\item
+  Shell Structural Elements --- Shell structural elements are
+  three-noded, flat finite elements. Five finite-element types (2
+  membrane elements, 1 plate-bending element and 2 shell elements) are
+  available. A physical shell (i.e., an arbitrarily curved, shell
+  structure of either isotropic or orthotropic material) can be
+  modeled as a faceted surface composed of a collection of shell
+  elements. The structural response of the shell is controlled by the
+  finite-element type (to resist membrane loading only, bending
+  loading only, or both membrane and bending loading). Each shell
+  element behaves as an isotropic or orthotropic, linearly elastic
+  material with no failure limit; however, one can introduce a
+  plastic-hinge line (across which a discontinuity in rotation may
+  develop) along the edges between elements, using the same
+  double-node procedure as is applied to beams. Shell elements may be
+  rigidly connected to the grid such that stresses develop within the
+  shell as the grid deforms, and they may be loaded by point loads or
+  surface pressures. Shell elements are used to model the structural
+  support provided by any thin-shell structure in which the
+  displacements caused by transverse-shearing deformations can be
+  neglected.
+\item
+  Geogrid Structural Elements --- Geogrid structural elements are
+  three-noded, flat, finite elements that are assigned a
+  finite-element type that resists membrane but does not resist
+  bending loading. A physical membrane can be modeled as a collection
+  of geogrid elements. The geogrid elements behaves as an isotropic or
+  orthotropic, linearly elastic material with no failure limit. A
+  shear-directed (in the tangent plane to the geogrid surface)
+  frictional interaction occurs between the geogrid and the FLAC3D
+  grid, and the geogrid is slaved to the grid motion in the normal
+  direction. A geogrid can be anchored at a specific point in the
+  FLAC3D grid, or attached so that stress develops along its surface
+  in response to relative motion between the geogrid and the FLAC3D
+  grid. The geogrid can be thought of as the two-dimensional analog of
+  a one-dimensional cable. Geogrid elements are used to model flexible
+  membranes whose shear interaction with the soil are important, such
+  as geotextiles and geogrids.
+\item
+  Liner Structural Elements --- Liner structural elements are
+  three-noded, flat finite elements that can be assigned any of the
+  five finite-element types available for shell elements. A physical
+  liner can be modeled as a collection of liner elements that are
+  attached to the surface of the FLAC3D grid. In addition to providing
+  the structural behavior of a shell, a shear-directed (in the tangent
+  plane to the liner surface) frictional interaction occurs between
+  the liner and the FLAC3D grid. Also, in the normal direction, both
+  compressive and tensile forces can be carried, and the liner may
+  break free from (and subsequently come back into contact with) the
+  grid. Liner elements are used to model thin liners for which both
+  normal-directed compressive/tensile interaction and shear-directed
+  frictional interaction with the host medium occurs, such as
+  shotcrete-lined tunnels or retaining walls.
+\end{enumerate}
+
+An option that allows interaction with the FLAC3D grid on both sides of
+the liner is available with the liner element.
+
+\hypertarget{joining}{%
+\subsubsection{Joining}\label{joining}}
+
+When using struct cable create command, if any of the nodes lie within
+zones, these nodes will be linked to these zones, and the link
+properties will be set consistent with the corresponding element
+behavior.
+
+Specifying more than one segment improves accuracy, especially with
+piles and cables interacting with host medium
+
+In this case, distribution of shear forces along pile or cable is a
+function of number of nodes. - Try to provide approx. 1 node in each
+zone, since zones are constant-stress regions. it is not necessary to
+have more than one interaction point within zone. - Try to provide 2\textasciitilde3
+cable elements within development length of cable. This development
+length is determined by dividing the specified yield strength F by the
+grout cohesive strength c.~By following this procedure, failure by
+``pull-out'' can occur if such conditions arise. If cable elements are too
+long, then only the yield failure mode of each element is possible.
+
+\hypertarget{joining-sel-to-one-another}{%
+\subsection{Joining SEL to one another}\label{joining-sel-to-one-another}}
+
+SEL can be joined by sharing a node or by having one of their nodes
+linked to another or to a zone. If two or more elements share a node,
+all forces and moments are transferred btw elements at the node. If its
+necessary to limit forces, then two separate nodes may be created and
+connected by a node-to-node link and set appropriate attachment
+conditions set.
+
+Two structure beam create commands will create 2 nodes in 1 geometric
+location and specify two separate IDs. Forces and moments will not be
+transferred btw adjoining elements; instead, only forces wil be
+transmitted into surrounding zone at the common location.
+
 \hypertarget{interface-1}{%
 \section{Interface}\label{interface-1}}
 
-There are several instances in geomechanics in which it is desirable to represent planes on which sliding or separation can occur. For example:\\
+There are several instances in geomechanics in which it is desirable to
+represent planes on which sliding or separation can occur. For
+{[}\url{example://}{]}(\url{example:/})\{.uri\}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1835,35 +2158,85 @@ There are several instances in geomechanics in which it is desirable to represen
 \item
   an interface between a foundation and the soil;
 \item
-  a contact plane between a bin or chute and the material that it contains;
+  a contact plane between a bin or chute and the material that it
+  contains;
 \item
   a contact between two colliding objects; and
 \item
-  a planar ``barrier'' in space, which represents a fixed, non-deformable boundary at an arbitrary position and orientation.\\
+  a planar ``barrier'' in space, which represents a fixed,
+  non-deformable boundary at an arbitrary position and orientation.\\
 \end{enumerate}
 
-FLAC3D provides interfaces that are characterized by Coulomb sliding and/or tensile and shear bonding. Interfaces have the properties of friction, cohesion, dilation, normal and shear stiffnesses, and tensile and shear bond strength. Although there is no restriction on the number of interfaces or the complexity of their intersections, it is generally not reasonable to model more than a few simple interfaces with FLAC3D because it is awkward to specify complicated interface geometry. The program 3DEC (Itasca 2007) is specifically designed to model many interacting bodies in three dimensions; it should be used instead of FLAC3D for the more complicated interface problems.\\
+FLAC3D provides interfaces that are characterized by Coulomb sliding
+and/or tensile and shear bonding. Interfaces have the properties of
+friction, cohesion, dilation, normal and shear stiffnesses, and tensile
+and shear bond strength. Although there is no restriction on the number
+of interfaces or the complexity of their intersections, it is generally
+not reasonable to model more than a few simple interfaces with FLAC3D
+because it is awkward to specify complicated interface geometry. The
+program 3DEC (Itasca 2007) is specifically designed to model many
+interacting bodies in three dimensions; it should be used instead of
+FLAC3D for the more complicated interface problems.\\
 
-Interfaces may also be used to join regions that have different zone sizes. In general, the zone attach command should be used to join grids together. However, in some circumstances, it may be more convenient to use an interface for this purpose. In this case, the interface is prevented from sliding or opening because it does not correspond to any physical entity.
+Interfaces may also be used to join regions that have different zone
+sizes. In general, the zone attach command should be used to join grids
+together. However, in some circumstances, it may be more convenient to
+use an interface for this purpose. In this case, the interface is
+prevented from sliding or opening because it does not correspond to any
+physical entity.
 
 \hypertarget{formulation}{%
 \section{Formulation}\label{formulation}}
 
-FLAC3D represents interfaces as collections of triangular elements (interface elements), each of which is defined by three nodes (interface nodes). Interface elements can be created at any location in space. Generally, interface elements are attached to a zone surface face; two triangular interface elements are defined for every quadrilateral zone face. Interface nodes are then created automatically at every interface element vertex. When another grid surface comes into contact with an interface element, the contact is detected at the interface node and is characterized by normal and shear stiffnesses, and sliding properties.\\
+FLAC3D represents interfaces as collections of triangular elements
+(interface elements), each of which is defined by three nodes (interface
+nodes). Interface elements can be created at any location in space.
+Generally, interface elements are attached to a zone surface face; two
+triangular interface elements are defined for every quadrilateral zone
+face. Interface nodes are then created automatically at every interface
+element vertex. When another grid surface comes into contact with an
+interface element, the contact is detected at the interface node and is
+characterized by normal and shear stiffnesses, and sliding properties.\\
 
-Each interface element distributes its area to its nodes in a weighted fashion. Each interface node has an associated representative area. The entire interface is thus divided into active interface nodes representing the total area of the interface. Figure 1 illustrates the relation between interface elements and interface nodes, and the representative area associated with an individual node.
+Each interface element distributes its area to its nodes in a weighted
+fashion. Each interface node has an associated representative area. The
+entire interface is thus divided into active interface nodes
+representing the total area of the interface. Figure 1 illustrates the
+relation between interface elements and interface nodes, and the
+representative area associated with an individual node.
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/interface-formulation}
 
-It is important to note that interfaces are one-sided in FLAC3D. (This differs from the formulation of two-sided interfaces in two-dimensional FLAC (Itasca 2011).) It may be helpful to think of FLAC3D interfaces as ``shrink-wrap'' that is stretched over the desired surface, causing the surface to become sensitive to interpenetration with any other face with which it may come into contact.\\
+It is important to note that interfaces are one-sided in FLAC3D. (This
+differs from the formulation of two-sided interfaces in two-dimensional
+FLAC (Itasca 2011).) It may be helpful to think of FLAC3D interfaces as
+``shrink-wrap'' that is stretched over the desired surface, causing the
+surface to become sensitive to interpenetration with any other face with
+which it may come into contact.\\
 
-The fundamental contact relation is defined between the interface node and a zone surface face, also known as the target face. The normal direction of the interface force is determined by the orientation of the target face.\\
+The fundamental contact relation is defined between the interface node
+and a zone surface face, also known as the target face. The normal
+direction of the interface force is determined by the orientation of the
+target face.\\
 
-During each timestep, the absolute normal penetration and the relative shear velocity are calculated for each interface node and its contacting target face. Both of these values are then used by the interface constitutive model to calculate a normal force and a shear-force vector. The constitutive model is defined by a linear Coulomb shear-strength criterion that limits the shear force acting at an interface node, normal and shear stiffnesses, tensile and shear bond strengths, and a dilation angle that causes an increase in effective normal force on the target face after the shear-strength limit is reached. By default, pore pressure is used in the interface effective stress calculation. This option can be activated/deactivated using the command zone interface effective command by setting effective = on/off. Figure 2 illustrates the components of the constitutive model acting at interface node (P):
+During each timestep, the absolute normal penetration and the relative
+shear velocity are calculated for each interface node and its contacting
+target face. Both of these values are then used by the interface
+constitutive model to calculate a normal force and a shear-force vector.
+The constitutive model is defined by a linear Coulomb shear-strength
+criterion that limits the shear force acting at an interface node,
+normal and shear stiffnesses, tensile and shear bond strengths, and a
+dilation angle that causes an increase in effective normal force on the
+target face after the shear-strength limit is reached. By default, pore
+pressure is used in the interface effective stress calculation. This
+option can be activated/deactivated using the command zone interface
+effective command by setting effective = on/off. Figure 2 illustrates
+the components of the constitutive model acting at interface node (P):
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/interface-constitutive}
 
-The normal and shear forces that describe the elastic interface response are determined at calculation time \((t + \Delta t)\) using the relations:
+The normal and shear forces that describe the elastic interface response
+are determined at calculation time \((t + \Delta t)\) using the relations:
 
 \[ F_n^{(t + \Delta t)} = k_n u_n A + \sigma_n A  \]
 \[ F_{si}^{(t + \Delta t)} = F_{si}^{(t)} + k_s \Delta u_{si}^{(t + 0.5 \Delta t)} A + \sigma_{si} A\]
@@ -1873,9 +2246,25 @@ The inelastic interface logic works in the following way:
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  Bonded interface --- The interface remains elastic if stresses remain below the bond strengths; there is a shear bond strength, as well as a tensile bond strength. The normal bond strength is set using the tension interface property keyword. The command zone interface node property shear-bond-ratio = sbr sets the shear bond strength to sbr times the normal bond strength. The default value of property shear-bond-ratio (if not given) is 100.0. The bond breaks if either the shear stress exceeds the shear strength, or the tensile effective normal stress exceeds the normal strength. Note that giving property shear-bond-ratio alone does not cause a bond to be established---the tensile bond strength must also be set.\\
+  Bonded interface --- The interface remains elastic if stresses
+  remain below the bond strengths; there is a shear bond strength, as
+  well as a tensile bond strength. The normal bond strength is set
+  using the tension interface property keyword. The command zone
+  interface node property shear-bond-ratio = sbr sets the shear bond
+  strength to sbr times the normal bond strength. The default value of
+  property shear-bond-ratio (if not given) is 100.0. The bond breaks
+  if either the shear stress exceeds the shear strength, or the
+  tensile effective normal stress exceeds the normal strength. Note
+  that giving property shear-bond-ratio alone does not cause a bond to
+  be established---the tensile bond strength must also be set.\\
 \item
-  Slip while bonded --- An intact bond, by default, prevents all yield behavior (slip and separation). There is an optional property switch (bonded-slip) that causes only separation to be prevented if the bond is intact (but allows shear yield, under the control of the friction and cohesion parameters, using (F\_n) as the normal force). The command to allow/disallow slip for a bonded interface segment is zone interface node and by setting bonded-slip on or off.\\
+  Slip while bonded --- An intact bond, by default, prevents all yield
+  behavior (slip and separation). There is an optional property switch
+  (bonded-slip) that causes only separation to be prevented if the
+  bond is intact (but allows shear yield, under the control of the
+  friction and cohesion parameters, using (F\_n) as the normal force).
+  The command to allow/disallow slip for a bonded interface segment is
+  zone interface node and by setting bonded-slip on or off.\\
 \end{enumerate}
 
 The default state of bonded-slip (if not given) is off.
@@ -1885,47 +2274,120 @@ The default state of bonded-slip (if not given) is off.
 \setcounter{enumi}{2}
 \tightlist
 \item
-  Coulomb sliding --- A bond is either intact or broken. If it is broken, then the behavior of the interface segment is determined by the friction and cohesion (and of course the stiffnesses). This is the default behavior, if bond strengths are not set (zero). A broken bond segment cannot take effective tension (which may occur under compressive normal force, if the pore pressure is greater). The shear force is zero (for a nonbonded segment) if the effective normal force is tensile or zero.\\
+  Coulomb sliding --- A bond is either intact or broken. If it is
+  broken, then the behavior of the interface segment is determined by
+  the friction and cohesion (and of course the stiffnesses). This is
+  the default behavior, if bond strengths are not set (zero). A broken
+  bond segment cannot take effective tension (which may occur under
+  compressive normal force, if the pore pressure is greater). The
+  shear force is zero (for a nonbonded segment) if the effective
+  normal force is tensile or zero.\\
 \end{enumerate}
 
-The Coulomb shear-strength criterion limits the shear force by the relation:
+The Coulomb shear-strength criterion limits the shear force by the
+relation:
 
-\[ F_{smax} = c A + tan\phi (F_n - pA)\]
-During sliding, shear displacement may cause an increase in the effective normal stress on the joint, according to the relation:
+\[ F_{smax} = c A + tan\phi (F_n - pA)\] During sliding, shear
+displacement may cause an increase in the effective normal stress on the
+joint, according to the relation:
 
 \[\sigma_n := \sigma_n + \frac{|F_s|_o - F_{smax}}{A k_s} tan\psi k_n\]
 
-On printout (see the zone interface node list command ) the value of tension denotes whether a bond is intact or broken (or not set) --- nonzero or zero, respectively.\\
+On printout (see the zone interface node list command ) the value of
+tension denotes whether a bond is intact or broken (or not set) ---
+nonzero or zero, respectively.\\
 
-The normal and shear forces calculated at the interface nodes are distributed in equal and opposite directions to both the target face and the face to which the interface node is connected (the host face). Weighting functions are used to distribute the forces to the gridpoints on each face. The interface stiffnesses are added to the accumulated stiffnesses at gridpoints on both sides of the interface in order to maintain numerical stability.\\
+The normal and shear forces calculated at the interface nodes are
+distributed in equal and opposite directions to both the target face and
+the face to which the interface node is connected (the host face).
+Weighting functions are used to distribute the forces to the gridpoints
+on each face. The interface stiffnesses are added to the accumulated
+stiffnesses at gridpoints on both sides of the interface in order to
+maintain numerical stability.\\
 
-Interface contacts are detected only at interface nodes, and contact forces are transferred only at interface nodes. The stress state associated with a node is assumed to be uniformly distributed over the entire representative area of the node. Interface properties are associated with each node; properties may vary from node to node.\\
+Interface contacts are detected only at interface nodes, and contact
+forces are transferred only at interface nodes. The stress state
+associated with a node is assumed to be uniformly distributed over the
+entire representative area of the node. Interface properties are
+associated with each node; properties may vary from node to node.\\
 
-By default, the effect of pore pressure is included in the interface calculation by using effective stress as the basis for the slip condition. (The interface pore pressure is interpolated from the target face.) This applies in model configure fluid mode, or if pore pressures are assigned with the zone water or zone gridpoint initialize pore-pressure command without specifying model configure fluid. The user can switch options for interface s by using the zone interface effective command and by setting effective on or off. By default in the FLAC3D logic, fluid flow (saturated or unsaturated) is carried across an interface, provided the interface keyword maximum-edge is not used for that particular interface. The permeable interface option can be deactivated/reactivated for interface s by using the zone interface permeability command and by setting effective on or off. Note that if the keyword maximum-edge is used after the zone interface element command, and permeability is on for a particular interface, a warning is issued to inform the user that this interface will be considered as impermeable to fluid flow. (Note that for fluid flow calculation only, a mechanical model must be present. Also, the model cycle 0 command with model mechanical active on should be used to initialize the weighting factors used to transfer fluid flow information across the interface.) No pressure drop normal to the joint and no influence of normal displacement on pore pressure is calculated.\\
+By default, the effect of pore pressure is included in the interface
+calculation by using effective stress as the basis for the slip
+condition. (The interface pore pressure is interpolated from the target
+face.) This applies in model configure fluid mode, or if pore pressures
+are assigned with the zone water or zone gridpoint initialize
+pore-pressure command without specifying model configure fluid. The user
+can switch options for interface s by using the zone interface effective
+command and by setting effective on or off. By default in the FLAC3D
+logic, fluid flow (saturated or unsaturated) is carried across an
+interface, provided the interface keyword maximum-edge is not used for
+that particular interface. The permeable interface option can be
+deactivated/reactivated for interface s by using the zone interface
+permeability command and by setting effective on or off. Note that if
+the keyword maximum-edge is used after the zone interface element
+command, and permeability is on for a particular interface, a warning is
+issued to inform the user that this interface will be considered as
+impermeable to fluid flow. (Note that for fluid flow calculation only, a
+mechanical model must be present. Also, the model cycle 0 command with
+model mechanical active on should be used to initialize the weighting
+factors used to transfer fluid flow information across the interface.)
+No pressure drop normal to the joint and no influence of normal
+displacement on pore pressure is calculated.\\
 
 Also, flow of fluid along the interface is not modeled.\\
 
 \hypertarget{creation-of-interface-geometry}{%
 \section{Creation of Interface Geometry}\label{creation-of-interface-geometry}}
 
-Interfaces are created with the zone interface create command. For cases in which an interface between two separate grids in the model is required, the zone interface create by-face command should be used to attach an interface to one of the grid surfaces. This command generates interface elements for interface s along all surface zone faces with a center point that fall within a specified range. Any surfaces on which an interface is to be created must be generated initially; it must be possible to specify an existing surface in order to create the interface elements. A gap must be specified between two adjacent surfaces, unless the zone interface create by-face command and the separate keyword are given. In this case, the separate sub-grids may have surface gridpoints at the same location in space.\\
+Interfaces are created with the zone interface create command. For cases
+in which an interface between two separate grids in the model is
+required, the zone interface create by-face command should be used to
+attach an interface to one of the grid surfaces. This command generates
+interface elements for interface s along all surface zone faces with a
+center point that fall within a specified range. Any surfaces on which
+an interface is to be created must be generated initially; it must be
+possible to specify an existing surface in order to create the interface
+elements. A gap must be specified between two adjacent surfaces, unless
+the zone interface create by-face command and the separate keyword are
+given. In this case, the separate sub-grids may have surface gridpoints
+at the same location in space.\\
 
-By default, two interface elements are created for each zone face. The number of interface elements can be increased by using the zone interface s element maximum-edge v command. {[}1{]} This causes all interface elements with edge lengths larger than v to subdivide into smaller elements until their lengths are smaller than v. This command can be used to increase the resolution and decrease arching of forces in portions of a model that have large contrasts in zone size across an interface.\\
+By default, two interface elements are created for each zone face. The
+number of interface elements can be increased by using the zone
+interface s element maximum-edge v command. {[}1{]} This causes all
+interface elements with edge lengths larger than v to subdivide into
+smaller elements until their lengths are smaller than v. This command
+can be used to increase the resolution and decrease arching of forces in
+portions of a model that have large contrasts in zone size across an
+interface.\\
 
-Several rules should be followed when using interface elements in FLAC3D:\\
+Several rules should be followed when using interface elements in
+FLAC3D:\\
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  If a smaller surface area contacts a larger surface area (e.g., a small block resting on a large block), the interface should be attached to the smaller region.\\
+  If a smaller surface area contacts a larger surface area (e.g., a
+  small block resting on a large block), the interface should be
+  attached to the smaller region.\\
 \item
-  If there is a difference in zone density between two adjacent grids, the interface should be attached to the grid with the greater zone density (i.e., the greater number of zones within the same area).
+  If there is a difference in zone density between two adjacent grids,
+  the interface should be attached to the grid with the greater zone
+  density (i.e., the greater number of zones within the same area).
 \item
-  The size of interface elements should always be equal to or smaller than the target faces with which they will come into contact. If this is not the case, the interface elements should be subdivided into smaller elements.\\
+  The size of interface elements should always be equal to or smaller
+  than the target faces with which they will come into contact. If
+  this is not the case, the interface elements should be subdivided
+  into smaller elements.\\
 \item
-  Interface elements should be limited to grid surfaces that will actually come into contact with another grid.\\
-  A simple example illustrating the procedure for interface creation is provided in ``DippingJoint.f3dat''. The corresponding project file, ``DippingJoint.f3prj'', is located in the folder ``datafiles InterfaceDippingJoint.'' The example is a block specimen containing a single joint dipping at an angle of \(45°\)
+  Interface elements should be limited to grid surfaces that will
+  actually come into contact with another grid.\\
+  A simple example illustrating the procedure for interface creation
+  is provided in ``DippingJoint.f3dat''. The corresponding project file,
+  ``DippingJoint.f3prj'', is located in the folder ``datafiles
+  InterfaceDippingJoint.'' The example is a block specimen containing a
+  single joint dipping at an angle of \(45°\)
 \end{enumerate}
 
 \begin{Shaded}
@@ -1942,43 +2404,45 @@ Several rules should be followed when using interface elements in FLAC3D:\\
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/typical_dilation}
 
-Post-Failure Properties
-In many instances, particularly in mining engineering, the response of a material
-after failure has initiated is an important factor in the engineering design.
-Consequently, the post-failure behavior must be simulated in the material
-model. In FLAC3D, this is accomplished with properties that define four types of
-post failure response:
-1. shear dilatancy;
-2. shear hardening/softening;
-3. volumetric hardening/softening; and
-4. tensile softening.
-These properties are only activated after failure is initiated, as defined by the
-Mohr-Coulomb relation or the tensile-failure criterion. Shear dilatancy is
-simulated with the Mohr-Coulomb, ubiquitous-joint and strain-softening MohrCoulomb and ubiquitous-joint models. Shear hardening/softening is simulated
-with the strain-softening Mohr-Coulomb and ubiquitous-joint models, and
-volumetric hardening/softening is simulated with the modified Cam-clay model.
-Tensile softening is simulated with the strain-softening Mohr-Coulomb and
-ubiquitous-joint models
+Post-Failure Properties In many instances, particularly in mining
+engineering, the response of a material after failure has initiated is
+an important factor in the engineering design. Consequently, the
+post-failure behavior must be simulated in the material model. In
+FLAC3D, this is accomplished with properties that define four types of
+post failure response: 1. shear dilatancy; 2. shear hardening/softening;
+3. volumetric hardening/softening; and 4. tensile softening. These
+properties are only activated after failure is initiated, as defined by
+the Mohr-Coulomb relation or the tensile-failure criterion. Shear
+dilatancy is simulated with the Mohr-Coulomb, ubiquitous-joint and
+strain-softening MohrCoulomb and ubiquitous-joint models. Shear
+hardening/softening is simulated with the strain-softening Mohr-Coulomb
+and ubiquitous-joint models, and volumetric hardening/softening is
+simulated with the modified Cam-clay model. Tensile softening is
+simulated with the strain-softening Mohr-Coulomb and ubiquitous-joint
+models
 
 \hypertarget{shear-dilatancy}{%
 \subsection{Shear Dilatancy}\label{shear-dilatancy}}
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/dil}
-Shear dilatancy, or dilatancy, is the change in volume that occurs with shear
-distortion of a material. Dilatancy is characterized by a dilation angle, , which is
-related to the ratio of plastic volume change to plastic shear strain. This angle
-can be specified in the Mohr-Coulomb ubiquitous-joint and strain-hardening/
-softening models in FLAC3D. Dilation angle is typically determined from triaxial
-tests or shear-box tests. For example, the idealized relation for dilatancy, based
-upon the Mohr-Coulomb failure surface, is depicted for a triaxial test in the
-figure below. The dilation angle is found from the plot of volumetric strain
-versus axial strain. Note that the initial slope for this plot corresponds to the
-elastic regime, while the slope used to measure the dilation angle corresponds to
-the plastic regime
+
+Shear dilatancy, or dilatancy, is the change in volume that occurs with
+shear distortion of a material. Dilatancy is characterized by a dilation
+angle, , which is related to the ratio of plastic volume change to
+plastic shear strain. This angle can be specified in the Mohr-Coulomb
+ubiquitous-joint and strain-hardening/ softening models in FLAC3D.
+Dilation angle is typically determined from triaxial tests or shear-box
+tests. For example, the idealized relation for dilatancy, based upon the
+Mohr-Coulomb failure surface, is depicted for a triaxial test in the
+figure below. The dilation angle is found from the plot of volumetric
+strain versus axial strain. Note that the initial slope for this plot
+corresponds to the elastic regime, while the slope used to measure the
+dilation angle corresponds to the plastic regime
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/typical_angles}
-Selected Strength Properties (drained, laboratory-scale) for Soils (Ortiz
-et al.~1980)
+
+Selected Strength Properties (drained, laboratory-scale) for Soils
+(Ortiz et al.~1980)
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/typical_sand}
 
@@ -2012,19 +2476,21 @@ et al.~1980)
 \end{Highlighting}
 \end{Shaded}
 
-The horizontal stress-displacement response is monitored again, as shown in
-the image below. This test produces distinct peak and residual failure stress
-levels
+The horizontal stress-displacement response is monitored again, as shown
+in the image below. This test produces distinct peak and residual
+failure stress levels
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/softening}
 
-The strain-softening model assumes both a brittle softening (due to reduction in
-cohesion) and a gradual softening (due to a reduction in friction angle). The
-selection of the properties is discussed further in Material Properties.
-Comparison of the two images above illustrates the different responses of the
-two models. The initial response up to the onset of failure is identical, but postfailure behavior is quite different. Clearly, more data are required to use the
-strain-softening model and, typically, the softening model must be calibrated for
-each specific problem.
+The strain-softening model assumes both a brittle softening (due to
+reduction in cohesion) and a gradual softening (due to a reduction in
+friction angle). The selection of the properties is discussed further in
+Material Properties. Comparison of the two images above illustrates the
+different responses of the two models. The initial response up to the
+onset of failure is identical, but postfailure behavior is quite
+different. Clearly, more data are required to use the strain-softening
+model and, typically, the softening model must be calibrated for each
+specific problem.
 
 \hypertarget{command}{%
 \chapter{Command}\label{command}}
@@ -2050,15 +2516,16 @@ Example:
 \end{Shaded}
 
 Adds a group name `wall' to zone faces included in the optional range.
-Also can be used with zone face group ``slotname = groupname''
-Zone face may belong to many groups, up to 128.
-keywords: internal, or, remove.\\
+Also can be used with zone face group ``slotname = groupname'' Zone face
+may belong to many groups, up to 128. keywords: internal, or, remove.\\
 - internal: to select all faces.\\
-If specified, then the range looks at internal faces as well as surface faces.
+If specified, then the range looks at internal faces as well as surface
+faces.
 
 \begin{itemize}
 \item
-  or: considered inside the surface if any of those conditions has a non-null model.
+  or: considered inside the surface if any of those conditions has a
+  non-null model.
 \item
   remove: group is removed from the zone face.
 \end{itemize}
@@ -2074,14 +2541,22 @@ If specified, then the range looks at internal faces as well as surface faces.
 
 Generates contiguous face groups by skinning.
 
-``skinning'' refers to automatic face group generation, which occurs as follows: the program looks for contiguous faces and puts them into automatically named groups within the slot named skin. Two faces are not considered contiguous if the angle between two faces exceeds the break angle, or if the two faces belong to different groups according to the command's slot specification.
-Unless internal is specified, the operation of zone face skin is restricted to external faces. Only zone faces that have no zone on the other side, a hidden zone on the other side are considered surface faces.
-When use-hidden-zones is used, within specified range will be included for consideration.
+``skinning'' refers to automatic face group generation, which occurs as
+follows: the program looks for contiguous faces and puts them into
+automatically named groups within the slot named skin. Two faces are not
+considered contiguous if the angle between two faces exceeds the break
+angle, or if the two faces belong to different groups according to the
+command's slot specification. Unless internal is specified, the
+operation of zone face skin is restricted to external faces. Only zone
+faces that have no zone on the other side, a hidden zone on the other
+side are considered surface faces. When use-hidden-zones is used, within
+specified range will be included for consideration.
 
-group names are generated as follows:
-sEast, sWest, sNorth, sSouth, sTop, sBottom
+group names are generated as follows: sEast, sWest, sNorth, sSouth,
+sTop, sBottom
 
-Internal faces are assigned names of the group on either side that changed in order to create them.
+Internal faces are assigned names of the group on either side that
+changed in order to create them.
 
 \hypertarget{zone-separate}{%
 \subsection{zone separate}\label{zone-separate}}
@@ -2092,10 +2567,12 @@ Internal faces are assigned names of the group on either side that changed in or
 \end{Highlighting}
 \end{Shaded}
 
-separates internal faces specified by the range. The gridpoints of the face are duplicated, and new face is created. New faces and gridpoints get copies of all group and extra variable assignments belonging to the original face and gridpoint.
+separates internal faces specified by the range. The gridpoints of the
+face are duplicated, and new face is created. New faces and gridpoints
+get copies of all group and extra variable assignments belonging to the
+original face and gridpoint.
 
-Example:
-If Fred and George are group names assigned to zones, then
+Example: If Fred and George are group names assigned to zones, then
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2103,12 +2580,12 @@ If Fred and George are group names assigned to zones, then
 \end{Highlighting}
 \end{Shaded}
 
-will select faces that are connected to zone of both group Fred and George.
+will select faces that are connected to zone of both group Fred and
+George.
 
-keyword:
-- by-face: attempts to separate all internal faces in the range
-- new-side group: newly created faces will be assigned the group name in the specified slot.
-The default slot, is named Default.
+keyword: - by-face: attempts to separate all internal faces in the range
+- new-side group: newly created faces will be assigned the group name in
+the specified slot. The default slot, is named Default.
 
 \hypertarget{zone-interface-create}{%
 \subsection{zone interface create}\label{zone-interface-create}}
@@ -2123,36 +2600,1053 @@ The default slot, is named Default.
 
 creates nodes or elements on interface side
 
-There are two techniques for creating an interface.
-1. To derive an interface from a range of zone faces using by-face keyword.
-2. To specify a triangular interface element from 3 points.
-3. Command may also be used to construct an interface node that may be used with the element keyword.
+There are two techniques for creating an interface. 1. To derive an
+interface from a range of zone faces using by-face keyword. 2. To
+specify a triangular interface element from 3 points. 3. Command may
+also be used to construct an interface node that may be used with the
+element keyword.
 
-keyword:
-- by-face: interface elements are created on all surface zone faces that are within the specified range. An error will occur if interface elements from that interface already exist on the selected faces.
-If the optional separate keyword is used, then internal zone faces are selected by the range. The list of selected faces is then automatically separated (as with zone separate) and interface elements placed on one side. The following are for the separate keyword: new-side-origin, clear-attach.
-
-\begin{itemize}
-\tightlist
-\item
-  element point i keyword \ldots{} : create a triangular interface element by specifying 3 points. Three verticies must be specified by the following keyword. Each point can be created and located in space using the position keyword, or an existing interface node with ID i may be specified. The interface element that is created is not attached to a grid face even if the location corresponds to that of the face. the element is fixed in space. The active side of the element is defined by walking around the edge of the element, from point 1 to point 2 to point 3; the active side is up when walking in a clockwise direction.
-\end{itemize}
-
-For each point of the element, one of the following two keywords must be supplied: node i, position v.
+keyword: - by-face: interface elements are created on all surface zone
+faces that are within the specified range. An error will occur if
+interface elements from that interface already exist on the selected
+faces. If the optional separate keyword is used, then internal zone
+faces are selected by the range. The list of selected faces is then
+automatically separated (as with zone separate) and interface elements
+placed on one side. The following are for the separate keyword:
+new-side-origin, clear-attach.
 
 \begin{itemize}
 \tightlist
 \item
-  node v : this creates an interface node at position v. If a node already exists at the selected location, an error is reported. The created node is fixed in space.
+  element point i keyword \ldots{} : create a triangular interface element
+  by specifying 3 points. Three verticies must be specified by the
+  following keyword. Each point can be created and located in space
+  using the position keyword, or an existing interface node with ID i
+  may be specified. The interface element that is created is not
+  attached to a grid face even if the location corresponds to that of
+  the face. the element is fixed in space. The active side of the
+  element is defined by walking around the edge of the element, from
+  point 1 to point 2 to point 3; the active side is up when walking in
+  a clockwise direction.
 \end{itemize}
+
+For each point of the element, one of the following two keywords must be
+supplied: node i, position v.
+
+\begin{itemize}
+\tightlist
+\item
+  node v : this creates an interface node at position v. If a node
+  already exists at the selected location, an error is reported. The
+  created node is fixed in space.
+\end{itemize}
+
+\hypertarget{range}{%
+\subsection{range}\label{range}}
+
+Logical Operations in a Range Phrase A range phrase targets a set of
+objects by specifying one or more range elements (the keywords that
+follow the range keyword in the command). If multiple range elements are
+specified, the final set of objects returned by the range phrase will
+be, by default, the intersection of the separate range elements.
+
+The union keyword may be specified anywhere within a range phrase to
+return a range that is a union of the present range elements.
+
+The not keyword may be used at the end of a particular range element to
+return the inverse of the objects specified by the element. The not
+keyword must appear at the end of the range element specification (e.g.,
+range position-x 0 100 not position-y 0 100 not).
+
+When the keyword extent is used, the extent of the object (rather than
+the object centroid) is used to verify whether the object is within the
+range. This keyword is only applied to geometric range elements (e.g.,
+sphere).
+
+Logical Operations \& Named Ranges
+
+Using the named-range keyword, an existing named range may be inserted
+into a range phrase and be treated as a range element within that range
+phrase. Consequently the logical operations described above will work on
+a named range exactly as they do on range elements. See the next topic,
+Named Ranges, for further information.
+
+\hypertarget{named-ranges}{%
+\subsubsection{Named Ranges}\label{named-ranges}}
+
+Creating a named range provides an easy-access method for subsequent use
+of the range. Range creation is performed using the model range command
+as follows:
+
+model range create `fred' position-x 5 500 id 100 200 group `external'
+not geometry group edge `mainedges' range named-range `fred' This is
+equivalent to:
+
+geometry group edge `mainedges' range position-x 5 500 \ldots{} id 100 200
+group `external' not Note that, in the former case, the range fred could
+be reused without retyping all of the range elements.
+
+Named Ranges vs.~Groups
+
+Named ranges and groups are close in effect. Either are used as range
+elements within a range. However, a named range is still a range, which
+means with each use it is possible it will return different objects,
+depending the range elements that define it and the state of the model.
+By contrast, repeated uses of a group within a range will return the
+same objects each time. The group itself must be altered to return
+different objects.
+
+\hypertarget{pull-test}{%
+\chapter{Pull-Test}\label{pull-test}}
+
+\hypertarget{simulation-of-pull-tests-for-fully-bonded-rock-reinforcement}{%
+\chapter{Simulation of Pull-Tests for Fully Bonded Rock Reinforcement}\label{simulation-of-pull-tests-for-fully-bonded-rock-reinforcement}}
+
+Problem Statement
+
+The most common method to determine properties for fully bonded rock
+reinforcement (such as grouted cable bolts, resin-grouted steel rebar,
+or
+rockbolts) is to perform pull-tests on small segments of grouted
+reinforcement
+in the field. Typically, segments 50 cm in length or longer are grouted
+into
+boreholes. The ends of these segments are pulled with a jack mounted to
+the
+surface of the tunnel and connected to cable via a barrel-and-wedge-type
+anchor.
+The force applied to the reinforcement and the deformation of the
+reinforcement
+are plotted to produce an axial force-deflection curve. From this curve,
+the
+peak shear strength of the grout bond is determined. The results for
+pull-tests
+on one-half meter segments of several types of cables are illustrated in
+Fig 1. These plots are expressed in terms
+of tons/m versus deformation in mm.
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/fig1}
+
+Figure 1: Field results for pull-tests on various types of
+cables for a bond length of 0.5 m and a water/cement ratio of 1/3.
+
+In this example application, FLAC3D is used to
+model pull-tests of this type. Two different approaches are available to
+simulate pull-tests using the structural elements in FLAC3D:
+
+\begin{quote}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  cable elements, which assume the grout behaves as an
+  elastic-perfectly
+  plastic material with confining stress dependence but no loss of
+  strength after
+  failure; and
+\item
+  modified pile elements, which account for changes in confining
+  stress,
+  strain-softening behavior of the grout, and rupture of the
+  reinforcement.
+\end{enumerate}
+\end{quote}
+
+One additional advantage of using the modified pile elements to model
+reinforcement behavior is that bending moment resistance can be
+included. This
+behavior is needed when the reinforcement is subjected to shearing, as
+described
+later in \protect\hyperlink{pulltest-tensile-rupture-section}{Pull-Test with Tensile
+Rupture} and \protect\hyperlink{pulltest-shear-bolt-section}{Shear Test on
+Rockbolts}.
+
+The purpose of the following examples is to demonstrate the use and
+capabilities of both approaches.
+
+Approach 1: Modeling Rock Reinforcement Using Cable
+Elements
+
+In the following sections, the pull-tests are simulated using the
+cable-element logic. The commands needed to create and view variables
+associated
+with cable elements are described in \href{../../../../sel/doc/manual/sel_manual/cables/commands/cable_commands.html\#sel-cable-commands}{Cable
+Commands}.
+
+Pull-out Strength without
+Confinement
+
+First, we consider the case where the confining stress dependence on the
+reinforcement shear-bond strength may be neglected. The cable properties
+required by FLAC3D's cable-bolt model must be
+extracted from the field pull-test curve. This is easily done when the
+field
+test data are presented in terms of force/unit length versus
+deformation, as
+shown in \protect\hyperlink{pulltest-fieldresults}{Figure 1}. Assuming no yielding in
+the cable, the value of the grout shear stiffness, grout-stiffness, is
+simply the slope of the curve, with the
+ultimate bond strength, grout-cohesion, being the
+peak-pull strength value per unit length. This assumption is justified
+by the
+fact that the steel normally yields at stresses that are higher than
+those
+corresponding to the pull-out forces, as shown in \protect\hyperlink{pulltest-fieldresults}{Figure
+1}. For example, for a representative
+cable of 15 mm diameter and 0.5 m length and an (admissible) yield
+strength of
+1200 MPa (assumed in the FLAC3D models in the
+following sections), the maximum yield force is 212 kN. This value is
+approximately 50\% greater than the highest pull-out force of 28 tons/m ×
+0.5 =
+140 kN, at which the grout fails in \protect\hyperlink{pulltest-fieldresults}{Figure
+1}. In addition, in these examples, the
+compliance of the reinforcement
+element and the rock are neglected relative to the compliance of the
+grout.
+
+For example, all of the pull-test results shown here have roughly the
+same
+loading slope, so an average value of grout-stiffness
+is chosen for all:
+
+This value of grout-stiffness is very low,
+indicating a rather poor grouting job for the cable. Typical
+grout-stiffness values would be approximately one order of
+magnitude or more higher than this.
+
+The value of grout-cohesion for the single 15.2 mm
+wire is simply the peak shear resistance in tons/m. In this case,
+grout-cohesion
+
+17.5 tons/m, or 17.5 × 10\textsuperscript{4} N/m. To check whether this value of
+grout-cohesion is reasonable, it can be converted to grout
+shear strength by dividing by the approximate surface area of the wire
+(assuming
+the bond fails at the grout/cable interface). We find that the peak
+shear
+strength is 3.66 MPa. This value should roughly equal half the uniaxial
+compressive strength of the grout, indicating either a very poor grout,
+or that
+the cable was allowed to rotate during the pull-test, yielding
+artificially low
+grout shear-strength values.
+
+The data file ``\protect\hyperlink{pulltest01data}{Pull01.f3dat}'' is a simple
+representation
+of a pull-test using FLAC3D. The cable end-node is
+pulled at a small, constant y-oriented velocity---see \protect\hyperlink{pulltest-geometry}{Figure
+2}. A FISH
+function is used to sum the reaction forces and monitor nodal
+displacement
+generated by the pull-tests for comparison to field test results.
+
+Figure 2: Sketch of geometry of FLAC3D model for pull-test.
+
+A plot of the relation between pull force and cable displacement
+(histories
+\href{../../../../../common/docproject/utilities/types.html\#type:str}{\underline{force}}
+and
+\href{../../../../../common/docproject/utilities/types.html\#type:str}{\underline{disp}},
+respectively) for
+the case of a single 15.2 mm cable is shown in \protect\hyperlink{pulltest-cable1}{Figure
+3}. This figure illustrates the general
+force-displacement behavior given in
+\protect\hyperlink{pulltest-fieldresults}{Figure 1}. The peak force is reached at a
+displacement of approximately 17 mm. After this point, the cable is
+simply
+pulled out of the borehole in much the same fashion as a block sliding
+on a
+plane.
+
+Figure 3: Pull force in N/m versus cable displacement in meters
+for the case of a single 15.2 mm grouted cable.
+
+\protect\hyperlink{pulltest-force1}{Figure 4} to \protect\hyperlink{pulltest-force3}{6}
+show the axial force distribution on the cable for displacements of 10
+mm, 16.5
+mm, and 17.5 mm, respectively. Note that cable-bond slip progresses
+rapidly
+after peak strength is reached at the first cable element. Superimposed
+on the
+axial forces are locations at which the grout bond is yielding. At 10 mm
+(\protect\hyperlink{pulltest-force1}{Figure 4}), the grout bond has not failed. At 16.5
+mm
+(\protect\hyperlink{pulltest-force2}{Figure 5}), bond failure is initiated and rapidly
+propagates (\protect\hyperlink{pulltest-force3}{Figure 6}) down the entire cable
+length. At that stage, the force on the cable end is simply the sum of
+grout\_cohesion
+
+is the length of cable segments) for all n-slipping
+segments. If the embedded length were long enough, the cable axial force
+would
+eventually reach the yield force of the cable itself. The cable should
+then
+break when the extension strain equals the ultimate breaking strain of
+the cable
+(generally around 3\%). An example illustrating tensile rupture of the
+element is
+given in \protect\hyperlink{pulltest-tensile-rupture-section}{Pull-Test with Tensile
+Rupture}.
+
+break
+
+Figure 6: At 17.5 mm deformation: Plot of axial force and cable
+grout yield points for pull-test simulation on a 15.2 mm cable bolt.
+
+Pull-out Strength with
+Confinement
+
+The cable shear bond strength will, in general, increase with increasing
+effective pressure (p') acting on the cable. A linear law
+is implemented in FLAC3D whereby the cable shear
+bond strength is defined as a constant (grout-cohesion) plus the
+effective pressure on the cable
+multiplied by the cable perimeter (grout-permeter)
+times the tangent of the friction angle (grout-friction). This pressure
+dependence is activated
+automatically in FLAC3D by issuing the cable
+properties grout-permeter and grout-friction. Note that in this case,
+the input data for
+grout-cohesion must correspond to the shear bond
+strength in a cable pull-test carried out without confining pressure.
+Numerical
+results of pull-tests on the 15.2 mm cable are presented in \protect\hyperlink{pulltest-cable2}{Figure
+7} and \protect\hyperlink{pulltest-cable3}{8} for a
+friction angle of 30° and two levels of initial confining pressure,
+namely p' = 2 and 4 MN/m\textsuperscript{2}. Compare these figures to \protect\hyperlink{pulltest-cable1}{Figure
+3}. These figures indicate an increasing
+failure level with increasing initial confining pressure, illustrating
+the
+frictional character of the cable-rock interface. Results for the
+pull-test with
+confined pressure on the 15.2 mm cable were obtained using the data
+files ``\protect\hyperlink{pulltest02data}{Pull02.f3dat}''
+and ``\protect\hyperlink{pulltest03data}{Pull03.f3dat}''.
+
+break
+
+Figure 7: Pull-test on 15.2 mm cable, p'
+= 2 MN/m\textsuperscript{2}.
+
+Figure 8: Pull-test on 15.2 mm cable, p'
+= 4 MN/m\textsuperscript{2}.
+
+Approach 2: Modeling Rock Reinforcement Using Modified Pile
+Elements
+
+In the following sections, the modified pile-element logic in FLAC3D is
+used to model rock reinforcement. The purpose of
+the following examples is to illustrate modeling procedures with the
+modified
+pile elements. In addition to a demonstration of the features that
+simulate
+pull-tests, this section also presents examples related to the
+simulation of
+shear tests on rockbolts (see \protect\hyperlink{pulltest-shear-bolt-section}{Shear Test on
+Rockbolts} and
+\protect\hyperlink{pulltest-shear-rupture-section}{Shear
+Test on Rockbolts with Rupture}). The
+tests in this section assume
+that conditions are representative of a 25 mm diameter grouted bolt with
+grout
+properties the same as those defined in \protect\hyperlink{pulltest-cable1-section}{Pull-out Strength without
+Confinement}.
+
+Commands needed to create and view variables associated with the
+modified
+elements are described in \href{../../../../sel/doc/manual/sel_manual/piles/commands/pile_commands.html\#sel-pile-commands}{Pile
+Commands}.
+Note that the modified pile-element formulation is
+activated by giving the \href{../../../../sel/doc/manual/sel_manual/piles/commands/cmd_structure.pile.property.html\#kwd:structure.pile.property.rockbolt-flag}{structure
+pile property
+rockbolt-flag}
+\href{../../../../../common/docproject/utilities/types.html\#type:str}{\underline{on}}
+command.
+
+Pull-out Strength without
+Confinement
+
+The data file ``\protect\hyperlink{pulltest04data}{Pulltest04.f3dat}'' creates a pull-test
+without confinement. The problem is equivalent to that described in
+\protect\hyperlink{pulltest-cable1-section}{Pull-out
+Strength without Confinement}. Compared with
+the model in file ``\protect\hyperlink{pulltest01data}{Pulltest01.f3dat}'', the current
+model
+considers a larger diameter bolt and a free length of bolt that extends
+out of
+the block. The load is applied at the tip of the reinforcement by
+prescribing a
+constant velocity, as was done before. A FISH
+function,
+\href{../../../../../common/docproject/utilities/types.html\#type:sym}{\underline{force}},
+is used to sum the
+reaction forces and monitor nodal displacement generated by the
+pull-test.
+
+\protect\hyperlink{pulltest-pile1}{Figure 9} represents the relation between axial
+force (per unit length of cable) and displacement at the tip of the
+bolt, for a
+total displacement of 20 mm. The figure shows that the maximum pull-out
+load is
+comparable to the one obtained with Approach 1 in \protect\hyperlink{pulltest-cable1-section}{Pull-out Strength
+without
+Confinement} (the slight difference may be
+attributed to the different
+bolt size and the free length of bolt included in this model). \protect\hyperlink{pulltest-pile1}{Figure
+9} also shows the default perfectly plastic
+behavior of the grout once the maximum cohesion is exceeded.
+
+Figure 9: Pull force in N/m versus cable displacement in meters
+for the case of single 25 mm grouted rockbolt.
+
+Pull-Test with Displacement
+Weakening
+
+The data file ``\protect\hyperlink{pulltest05data}{Pulltest05.f3dat}'' defines a pull-test
+similar to the one described in the previous section, \protect\hyperlink{pulltest-pile1-section}{Pull-out
+Strength without Confinement}, but with
+post-peak weakening of shear
+bond strength. The bond strength softening of the grout is defined with
+the
+keyword coupling-cohesion-table, as described in {[}
+The relation between shear displacement and cohesion
+weakening is prescribed through table
+
+(Note that softening
+of the friction of the grout could also be defined using the keyword
+coupling-friction-table).
+
+\protect\hyperlink{pulltest-pile2}{Figure 10} represents the relation between axial
+force (per unit length of the bonded reinforcement) and displacement at
+the tip
+of the reinforcement for a total displacement of 40 mm. The figure
+clearly shows
+the weakening of cohesion after the maximum pull-out load is reached.
+
+Figure 10: Pull force in N/m versus reinforcement displacement
+in meters for the case of a single 15.2 mm grouted reinforcement---with
+displacement weakening.
+
+Pull-Test with Confinement
+
+The data file ``\protect\hyperlink{pulltest06data}{Pulltest06.f3dat}'' shows how a
+pull-test
+with confinement is simulated using the modified pile logic. The model
+is
+equivalent to the one discussed in \protect\hyperlink{pulltest-cable2-section}{Pull-out Strength with
+Confinement}, this time for a confining
+stress, 4 MN/m\textsuperscript{2}. As
+described in \href{../../../../sel/doc/manual/sel_manual/piles/piles.html\#pile-shear-coupling-springs}{Behavior
+of Shear Coupling
+Springs}
+a linear law is implemented in the modified
+pile logic, whereby the reinforcement shear strength is defined as a
+constant
+(coupling-cohesion-shear) plus the effective pressure
+on the reinforcement multiplied by the reinforcement perimeter
+(perimeter) times a friction angle (coupling-friction-shear). This
+pressure dependence is
+activated automatically in FLAC3D by issuing the
+reinforcement properties (perimeter) and (coupling-friction-shear).
+
+\protect\hyperlink{pulltest-pile3}{Figure 11} represents the relation between axial
+force (per unit length of the grouted reinforcement) and displacement at
+the tip
+of the reinforcement for a total displacement of 40 mm. The results are
+comparable to those shown in \protect\hyperlink{pulltest-cable3}{Figure 8}.
+
+Figure 11: Pull force in N/m versus reinforcement axial
+displacement in meters for the case of a single 25 mm grouted
+bolt---uniform 4
+MN/m\textsuperscript{2} confinement.
+
+Pull-Test with Confinement --- User-Defined Behavior
+
+This example shows the use of the option coupling-confining-table to
+define a ``mean'' value σc of confining stress on the
+rockbolt for cases in which the principal stresses σx and σy
+perpendicular to the axis of the rockbolt are not the same.
+
+\protect\hyperlink{pulltest-numericalexample}{Figure 12} shows the results obtained
+numerically for the relation between confining and deviatoric stresses
+in the
+case of a rockbolt with a diameter of 25 mm. In the figure, the
+horizontal axis
+represents the \emph{normalized deviatoric stress}, defined as
+
+while the vertical axis represents the \emph{normalized confining
+stress},
+
+The relation was obtained from pull-test models in FLAC3D, considering
+different values of deviatoric
+stresses in the plane perpendicular to the axis bolt. The mean confining
+stress
+
+using the expression
+
+The data file ``\protect\hyperlink{pulltest07data}{Pulltest07.f3dat}'' creates a model that
+illustrates the use of the coupling-confining-table
+option and the relation represented in \protect\hyperlink{pulltest-numericalexample}{Figure
+12}. The results obtained with this
+data file are shown in \protect\hyperlink{pulltest-pile4}{Figure 13}. In this example,
+one of the principal stresses on the plane perpendicular to the axis of
+the
+rockbolt is zero. Note that the pull-out resistance in \protect\hyperlink{pulltest-pile4}{Figure
+13} is greatly reduced compared to \protect\hyperlink{pulltest-pile3}{Figure
+11} as a result of the zero stress in the
+lateral direction.
+
+Figure 12: Example of relation between normalized confining
+stress and normalized deviator stress obtained numerically for a 25 mm
+rockbolt.
+
+Figure 13: Rockbolt pull force in N/m versus rockbolt axial
+displacement in meters for the case of a single 25 mm grouted
+bolt---lateral
+confinement defined by the relationship represented in \protect\hyperlink{pulltest-numericalexample}{Figure
+12}.
+
+Pull-Test with Tensile
+Rupture
+
+This example shows the definition of limiting axial yield force and
+limiting
+axial strain for the rockbolt, using the options tensile-yield and
+tensile-failure-strain, respectively.
+
+The data file ``\protect\hyperlink{pulltest08data}{Pulltest08.f3dat}'' sets up a model that
+considers a limiting tensile force of 1.5 × 10\textsuperscript{5} N and a limiting
+axial strain of 1 × 10\textsuperscript{-4}. The results from this model are shown in
+\href{.html\#pulltest-pile5}{Figure}Figure \#pulltest-pile5. The diagram
+shows that the limiting
+tensile force is reached after a pull-out displacement of approximately
+2.6 cm.
+Note that after this limiting force is reached, the pull-out force
+rapidly
+decreases to zero, indicating the rupture of the rockbolt.
+
+Figure 14: Rockbolt pull force in N/m versus rockbolt axial
+displacement in meters for the case of a single 25 mm grouted
+bolt---with tensile
+rupture.
+
+Shear Test on Rockbolts
+
+This section and the next present two examples of shear tests. The tests
+are
+similar to the pull-tests described above, except that a velocity acting
+on a
+plane perpendicular to the axial direction of the bolt is applied to the
+top of
+the bolt.
+
+The data file ``\protect\hyperlink{pulltestshear01data}{Shear01.f3dat}'' shows how the
+model
+is created. Note that in the case of a shear test on rockbolts, values
+of
+stiffness and strength for the normal coupling springs (that were not
+needed in
+the pull-tests) need to be defined. \protect\hyperlink{pulltest-shear1}{Figure 15}
+shows a plot of shear force versus shear displacement. We select a
+stiffness
+value of 10\textsuperscript{10} N/m/m and cohesive strength of 10\textsuperscript{8} MPa/m in
+order to illustrate the shear behavior within a shear displacement range
+of 6
+mm. These values do not represent a specific material and should be
+adjusted to
+fit experimental data.
+
+The figure also includes a view of the model after the test. The large
+displacement of the rockbolt near the rock surface is the result of the
+yielding
+of the normal coupling springs, which simulates crushing of the rock.
+
+Figure 15: Rockbolt shear force in N versus rockbolt shear
+displacement in meters for the case of a single 25 mm grouted bolt.
+
+Shear Test on Rockbolts
+with Rupture
+
+The data file ``\protect\hyperlink{pulltestshear02data}{Shear02.f3dat}'' presents a model
+similar to the one described in \protect\hyperlink{pulltest-shear-bolt-section}{Shear Test on
+Rockbolts},
+but with the added option of bending rupture. The failure is controlled
+by
+specified values of limiting (yield) bending moment and limiting tensile
+strain
+(these values are assigned using the keywords plastic-moment and
+tensile-failure-strain, as described in \href{../../../../sel/doc/manual/sel_manual/piles/commands/pile_commands.html\#sel-pile-commands}{Pile
+Commands}).
+
+The results obtained with the data file
+``\protect\hyperlink{pulltestshear02data}{Shear02.f3dat}'' are shown in \protect\hyperlink{pulltest-shear2}{Figure
+16}. Note that the relation between applied
+force and lateral displacement shows some oscillation after rupture.
+This
+oscillation is the normal response following the sudden rupture of the
+bolt.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data Files}
+
+\OperatorTok{**}\NormalTok{Pull01.f3dat}\OperatorTok{**}
+
+    \OperatorTok{;} \OperatorTok{==================================================================}
+    \OperatorTok{;}\NormalTok{   Simulation of pull}\OperatorTok{{-}}\NormalTok{test }\ControlFlowTok{for}\NormalTok{ grouted reinforcement}
+    \OperatorTok{;} \OperatorTok{==================================================================}
+\NormalTok{    model new}
+\NormalTok{    fish automatic}\OperatorTok{{-}}\NormalTok{create off}
+\NormalTok{    [}\KeywordTok{global}\NormalTok{ t }\OperatorTok{=}  \StringTok{\textquotesingle{}Pull Test for Grouted Cable Anchor \textquotesingle{}}\NormalTok{]}
+\NormalTok{    [t }\OperatorTok{+=} \StringTok{\textquotesingle{}(no external confinement, fric=0)\textquotesingle{}}\NormalTok{]}
+\NormalTok{    model title [t]}
+    \OperatorTok{;}\NormalTok{ Create a single rock block }\KeywordTok{and} \BuiltInTok{set}\NormalTok{ its material properties.}
+\NormalTok{    zone create brick size }\DecValTok{4} \DecValTok{7} \DecValTok{4}\NormalTok{ point }\DecValTok{1}\NormalTok{ (}\FloatTok{0.4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\FloatTok{0.7}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                                 point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.4}\NormalTok{)}
+\NormalTok{    zone cmodel assign elastic}
+\NormalTok{    zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{5e9}\NormalTok{ shear }\FloatTok{3e9}
+    \OperatorTok{;}\NormalTok{ Create a single cable }\KeywordTok{and} \BuiltInTok{set}\NormalTok{ its associated properties}
+\NormalTok{    struct cable create by}\OperatorTok{{-}}\NormalTok{line (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.0}\NormalTok{,}\FloatTok{0.2}\NormalTok{) (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.2}\NormalTok{) segments }\DecValTok{10}
+\NormalTok{    struct cable }\BuiltInTok{property}\NormalTok{ cross}\OperatorTok{{-}}\NormalTok{sectional}\OperatorTok{{-}}\NormalTok{area }\FloatTok{181e{-}6}\NormalTok{ young }\FloatTok{98.6e9}\NormalTok{ ...}
+                          \ControlFlowTok{yield}\OperatorTok{{-}}\NormalTok{tension }\FloatTok{0.232e6}\NormalTok{ grout}\OperatorTok{{-}}\NormalTok{stiffness }\FloatTok{1.12e7}\NormalTok{ ...}
+\NormalTok{                          grout}\OperatorTok{{-}}\NormalTok{cohesion }\FloatTok{1.75e5}\NormalTok{ grout}\OperatorTok{{-}}\NormalTok{friction }\FloatTok{0.0}\NormalTok{ ...}
+\NormalTok{                          grout}\OperatorTok{{-}}\NormalTok{perimeter }\FloatTok{7.85e{-}2}
+    \OperatorTok{;}\NormalTok{ Fix free end of rock block }\KeywordTok{and} \BuiltInTok{apply}\NormalTok{ velocity to cable end}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\DecValTok{0} \BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\DecValTok{0}
+\NormalTok{    struct node fix velocity}\OperatorTok{{-}}\NormalTok{x                    }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\DecValTok{0}
+\NormalTok{    struct node initialize velocity}\OperatorTok{{-}}\NormalTok{x }\OperatorTok{{-}}\FloatTok{1e{-}6}\NormalTok{ local }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\DecValTok{0}
+\NormalTok{    call }\StringTok{\textquotesingle{}force\textquotesingle{}}\NormalTok{ suppress }\OperatorTok{;}\NormalTok{ FISH function to calculate reaction force on zones}
+    \OperatorTok{;}\NormalTok{ Set up histories }\ControlFlowTok{for}\NormalTok{ monitoring model behavior}
+\NormalTok{    history interval }\DecValTok{10}
+\NormalTok{    fish history name }\StringTok{\textquotesingle{}force\textquotesingle{}} \OperatorTok{@}\NormalTok{force}
+\NormalTok{    struct node history name }\StringTok{\textquotesingle{}disp\textquotesingle{}}\NormalTok{ displacement}\OperatorTok{{-}}\NormalTok{y component}\OperatorTok{{-}}\BuiltInTok{id} \DecValTok{1}
+    \OperatorTok{;}\NormalTok{ Apply velocity to achieve total displacement of }\FloatTok{2.0}\NormalTok{ cm}
+\NormalTok{    model cycle }\DecValTok{10000}
+\NormalTok{    model save }\StringTok{\textquotesingle{}pull{-}1{-}1\textquotesingle{}}
+\NormalTok{    model cycle }\DecValTok{6500}
+\NormalTok{    model save }\StringTok{\textquotesingle{}pull{-}1{-}2\textquotesingle{}}
+\NormalTok{    model cycle }\DecValTok{1000}
+\NormalTok{    model save }\StringTok{\textquotesingle{}pull{-}1{-}3\textquotesingle{}}
+\NormalTok{    model cycle }\DecValTok{2500}
+\NormalTok{    model save }\StringTok{\textquotesingle{}pull{-}1{-}4\textquotesingle{}}
+
+\OperatorTok{**}\NormalTok{Pull02.f3dat}\OperatorTok{**}
+
+    \OperatorTok{;} \OperatorTok{==================================================================}
+    \OperatorTok{;}\NormalTok{   Simulation of pull}\OperatorTok{{-}}\NormalTok{test }\ControlFlowTok{for}\NormalTok{ grouted reinforcement}
+    \OperatorTok{;}\NormalTok{     confinement }\DecValTok{2}\NormalTok{ MPa}
+    \OperatorTok{;} \OperatorTok{==================================================================}
+\NormalTok{    model new}
+\NormalTok{    fish automatic}\OperatorTok{{-}}\NormalTok{create off}
+\NormalTok{    model title }\StringTok{\textquotesingle{}Pull Test for Grouted Cable Anchor {-} Confinement 2 MPa, fric=30\textquotesingle{}}
+    \OperatorTok{;}\NormalTok{ Create a single rock block }\KeywordTok{and} \BuiltInTok{set}\NormalTok{ its material properties.}
+\NormalTok{    zone create brick size }\DecValTok{4} \DecValTok{7} \DecValTok{4}\NormalTok{ point }\DecValTok{1}\NormalTok{ (}\FloatTok{0.4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\FloatTok{0.7}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                                 point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.4}\NormalTok{)}
+\NormalTok{    zone cmodel assign elastic}
+\NormalTok{    zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{5e9}\NormalTok{ shear }\FloatTok{3e9}
+\NormalTok{    zone initialize stress xx }\OperatorTok{{-}}\FloatTok{2e6}\NormalTok{ zz }\OperatorTok{{-}}\FloatTok{2e6}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ stress}\OperatorTok{{-}}\NormalTok{normal }\OperatorTok{{-}}\FloatTok{2e6} \BuiltInTok{range}\NormalTok{ union position}\OperatorTok{{-}}\NormalTok{x }\DecValTok{0}\NormalTok{ ...}
+\NormalTok{                                             position}\OperatorTok{{-}}\NormalTok{x }\FloatTok{0.4}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\DecValTok{0}\NormalTok{ ...}
+\NormalTok{                                             position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.4}
+    \OperatorTok{;}\NormalTok{ Create a single cable }\KeywordTok{and} \BuiltInTok{set}\NormalTok{ its associated properties}
+\NormalTok{    struct cable create by}\OperatorTok{{-}}\NormalTok{line (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.0}\NormalTok{,}\FloatTok{0.2}\NormalTok{) (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.2}\NormalTok{) segments }\DecValTok{10}
+\NormalTok{    struct cable }\BuiltInTok{property}\NormalTok{ cross}\OperatorTok{{-}}\NormalTok{sectional}\OperatorTok{{-}}\NormalTok{area }\FloatTok{181e{-}6}\NormalTok{ young }\FloatTok{98.6e9}\NormalTok{ ...}
+                          \ControlFlowTok{yield}\OperatorTok{{-}}\NormalTok{tension }\FloatTok{0.232e6}\NormalTok{ grout}\OperatorTok{{-}}\NormalTok{stiffness }\FloatTok{1.12e7}\NormalTok{ ...}
+\NormalTok{                          grout}\OperatorTok{{-}}\NormalTok{cohesion }\FloatTok{1.75e5}\NormalTok{ grout}\OperatorTok{{-}}\NormalTok{friction }\FloatTok{30.0}\NormalTok{ ...}
+\NormalTok{                          grout}\OperatorTok{{-}}\NormalTok{perimeter }\FloatTok{7.85e{-}2}
+    \OperatorTok{;}\NormalTok{ Fix free end of rock block }\KeywordTok{and} \BuiltInTok{apply}\NormalTok{ velocity to cable end}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\DecValTok{0} \BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\DecValTok{0}
+\NormalTok{    struct node fix velocity}\OperatorTok{{-}}\NormalTok{x }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\DecValTok{0}
+\NormalTok{    struct node initialize velocity}\OperatorTok{{-}}\NormalTok{x }\OperatorTok{{-}}\FloatTok{1e{-}6}\NormalTok{ local }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\DecValTok{0}
+\NormalTok{    call }\StringTok{\textquotesingle{}force\textquotesingle{}}\NormalTok{ suppress }\OperatorTok{;}\NormalTok{ FISH function to calculate reaction force on zones}
+    \OperatorTok{;}\NormalTok{ Set up histories }\ControlFlowTok{for}\NormalTok{ monitoring model behavior}
+\NormalTok{    history interval }\DecValTok{10}
+\NormalTok{    fish history name }\StringTok{\textquotesingle{}force\textquotesingle{}} \OperatorTok{@}\NormalTok{force}
+\NormalTok{    struct node history name }\StringTok{\textquotesingle{}disp\textquotesingle{}}\NormalTok{ displacement}\OperatorTok{{-}}\NormalTok{y component}\OperatorTok{{-}}\BuiltInTok{id} \DecValTok{1}
+    \OperatorTok{;}\NormalTok{ Apply velocity to achieve total displacement of }\FloatTok{4.525}\NormalTok{ cm}
+\NormalTok{    model cycle }\DecValTok{45000}
+    \OperatorTok{;}
+\NormalTok{    model save }\StringTok{\textquotesingle{}pull{-}2\textquotesingle{}}
+
+\OperatorTok{**}\NormalTok{Pull03.f3dat}\OperatorTok{**}
+
+    \OperatorTok{;} \OperatorTok{==================================================================}
+    \OperatorTok{;}\NormalTok{   Simulation of pull}\OperatorTok{{-}}\NormalTok{test }\ControlFlowTok{for}\NormalTok{ grouted reinforcement}
+    \OperatorTok{;}\NormalTok{     confinement }\DecValTok{4}\NormalTok{ MPa}
+    \OperatorTok{;} \OperatorTok{==================================================================}
+\NormalTok{    model new }
+\NormalTok{    fish automatic}\OperatorTok{{-}}\NormalTok{create off}
+\NormalTok{    model title }\StringTok{\textquotesingle{}Pull Test for Grouted Cable Anchor {-} Confinement 4 MPa, fric=30\textquotesingle{}}
+    \OperatorTok{;}\NormalTok{ Create a single rock block }\KeywordTok{and} \BuiltInTok{set}\NormalTok{ its material properties.}
+\NormalTok{    zone create brick size }\DecValTok{4} \DecValTok{7} \DecValTok{4}\NormalTok{ point }\DecValTok{1}\NormalTok{ (}\FloatTok{0.4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\FloatTok{0.7}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                                 point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.4}\NormalTok{)}
+\NormalTok{    zone cmodel assign elastic}
+\NormalTok{    zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{5e9}\NormalTok{ shear }\FloatTok{3e9}
+\NormalTok{    zone initialize stress xx }\OperatorTok{{-}}\FloatTok{4e6}\NormalTok{ zz }\OperatorTok{{-}}\FloatTok{4e6}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ stress}\OperatorTok{{-}}\NormalTok{normal }\OperatorTok{{-}}\FloatTok{4e6} \BuiltInTok{range}\NormalTok{ union position}\OperatorTok{{-}}\NormalTok{x }\DecValTok{0}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{x }\FloatTok{0.4}\NormalTok{ ...}
+\NormalTok{                                                   position}\OperatorTok{{-}}\NormalTok{z }\DecValTok{0}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.4}
+    \OperatorTok{;}\NormalTok{ Create a single cable }\KeywordTok{and} \BuiltInTok{set}\NormalTok{ its associated properties}
+\NormalTok{    struct cable create by}\OperatorTok{{-}}\NormalTok{line (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.0}\NormalTok{,}\FloatTok{0.2}\NormalTok{) (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.2}\NormalTok{) segments }\DecValTok{10}
+\NormalTok{    struct cable }\BuiltInTok{property}\NormalTok{ cross}\OperatorTok{{-}}\NormalTok{sectional}\OperatorTok{{-}}\NormalTok{area }\FloatTok{181e{-}6}\NormalTok{ young }\FloatTok{98.6e9}\NormalTok{ ...}
+                          \ControlFlowTok{yield}\OperatorTok{{-}}\NormalTok{tension }\FloatTok{0.232e6}\NormalTok{ grout}\OperatorTok{{-}}\NormalTok{stiffness }\FloatTok{1.12e7}\NormalTok{ ...}
+\NormalTok{                          grout}\OperatorTok{{-}}\NormalTok{cohesion }\FloatTok{1.75e5}\NormalTok{ grout}\OperatorTok{{-}}\NormalTok{friction }\FloatTok{30.0}\NormalTok{ ...}
+\NormalTok{                          grout}\OperatorTok{{-}}\NormalTok{perimeter }\FloatTok{7.85e{-}2}
+    \OperatorTok{;}\NormalTok{ Fix free end of rock block }\KeywordTok{and} \BuiltInTok{apply}\NormalTok{ velocity to cable end}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\DecValTok{0} \BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\DecValTok{0}
+\NormalTok{    struct node fix velocity}\OperatorTok{{-}}\NormalTok{x }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\DecValTok{0}
+\NormalTok{    struct node initialize velocity}\OperatorTok{{-}}\NormalTok{x }\OperatorTok{{-}}\FloatTok{1e{-}6}\NormalTok{ local }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\DecValTok{0}
+\NormalTok{    call }\StringTok{\textquotesingle{}force\textquotesingle{}}\NormalTok{ suppress }\OperatorTok{;}\NormalTok{ FISH function to calculate reaction force on zones}
+    \OperatorTok{;}\NormalTok{ Set up histories }\ControlFlowTok{for}\NormalTok{ monitoring model behavior}
+\NormalTok{    history interval }\DecValTok{10}
+\NormalTok{    fish history name }\StringTok{\textquotesingle{}force\textquotesingle{}} \OperatorTok{@}\NormalTok{force}
+\NormalTok{    struct node history name }\StringTok{\textquotesingle{}disp\textquotesingle{}}\NormalTok{ displacement}\OperatorTok{{-}}\NormalTok{y component}\OperatorTok{{-}}\BuiltInTok{id} \DecValTok{1}
+    \OperatorTok{;}\NormalTok{ Apply velocity to achieve total displacement of }\FloatTok{4.525}\NormalTok{ cm}
+\NormalTok{    model cycle }\DecValTok{45000}
+    \OperatorTok{;}
+\NormalTok{    model save }\StringTok{\textquotesingle{}pull{-}3\textquotesingle{}}
+
+\OperatorTok{**}\NormalTok{Pull04.f3dat}\OperatorTok{**}
+
+    \OperatorTok{;} \OperatorTok{==================================================================}
+    \OperatorTok{;}\NormalTok{   Simulation of pull}\OperatorTok{{-}}\NormalTok{test }\ControlFlowTok{for}\NormalTok{ grouted reinforcement}
+    \OperatorTok{;}\NormalTok{   using modified pile elements}
+    \OperatorTok{;} \OperatorTok{==================================================================}
+\NormalTok{    model new }
+\NormalTok{    fish automatic}\OperatorTok{{-}}\NormalTok{create off}
+\NormalTok{    model title }\StringTok{\textquotesingle{}Pull{-}test using modified pile elements\textquotesingle{}}
+    \OperatorTok{;}\NormalTok{ Create a single rock block }\KeywordTok{and} \BuiltInTok{set}\NormalTok{ its material properties.}
+\NormalTok{    zone create brick size }\DecValTok{4} \DecValTok{4} \DecValTok{6}\NormalTok{ point }\DecValTok{1}\NormalTok{ (}\FloatTok{0.4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                                 point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.6}\NormalTok{)}
+\NormalTok{    zone cmodel assign elastic}
+\NormalTok{    zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{5e9}\NormalTok{ shear }\FloatTok{3e9}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{0.0} \BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.6}
+    \OperatorTok{;}\NormalTok{ Create a pile element }\KeywordTok{and}\NormalTok{ assign properties}
+\NormalTok{    struct pile create by}\OperatorTok{{-}}\NormalTok{line (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.1}\NormalTok{) (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.7}\NormalTok{) segments }\DecValTok{12}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ rockbolt}\OperatorTok{{-}}\NormalTok{flag on}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ young }\FloatTok{200e9}\NormalTok{ poisson }\FloatTok{0.25}\NormalTok{ cross}\OperatorTok{{-}}\NormalTok{sectional}\OperatorTok{{-}}\NormalTok{area }\FloatTok{5e{-}4}\NormalTok{ ...}
+\NormalTok{                         perimeter }\FloatTok{0.08}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ tensile}\OperatorTok{{-}}\ControlFlowTok{yield} \FloatTok{2.25e5}  \OperatorTok{;}\NormalTok{ ultimate tensile strength}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{y }\FloatTok{2.0e{-}8}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{z }\FloatTok{2.0e{-}8}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{polar }\FloatTok{4.0e{-}8} \OperatorTok{;} \FloatTok{0.25}\OperatorTok{*}\NormalTok{pi}\OperatorTok{*}\NormalTok{r}\OperatorTok{\^{}}\DecValTok{4}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1.75e5}\NormalTok{ ...}
+\NormalTok{                         coupling}\OperatorTok{{-}}\NormalTok{stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1.12e7}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1.75e5}\NormalTok{ ...}
+\NormalTok{                         coupling}\OperatorTok{{-}}\NormalTok{stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1.12e7}
+    \OperatorTok{;}\NormalTok{ Set up pull out test}
+\NormalTok{    struct node fix  velocity}\OperatorTok{{-}}\NormalTok{x }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.7}
+\NormalTok{    struct node init velocity}\OperatorTok{{-}}\NormalTok{x }\FloatTok{1e{-}6}\NormalTok{ local }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.7}
+\NormalTok{    call }\StringTok{\textquotesingle{}pileforce\textquotesingle{}}\NormalTok{ suppress }\OperatorTok{;}\NormalTok{ FISH function calculates reaction force on zones}
+    \OperatorTok{;}\NormalTok{ Set up histories }\ControlFlowTok{for}\NormalTok{ monitoring model behavior}
+\NormalTok{    history interval }\DecValTok{10}
+\NormalTok{    fish history name }\StringTok{\textquotesingle{}force\textquotesingle{}} \OperatorTok{@}\NormalTok{force}
+\NormalTok{    struct node history name }\StringTok{\textquotesingle{}disp\textquotesingle{}}\NormalTok{ displacement}\OperatorTok{{-}}\NormalTok{z position (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.7}\NormalTok{)}
+    \OperatorTok{;}\NormalTok{ Achieve a total displacement of }\FloatTok{2.0}\NormalTok{ cm}
+\NormalTok{    model cycle }\DecValTok{20000}
+    \OperatorTok{;}
+\NormalTok{    model save }\StringTok{\textquotesingle{}pull{-}4\textquotesingle{}}
+
+\OperatorTok{**}\NormalTok{Pull05.f3dat}\OperatorTok{**}
+
+    \OperatorTok{;} \OperatorTok{==================================================================}
+    \OperatorTok{;}\NormalTok{   Simulation of pull}\OperatorTok{{-}}\NormalTok{test }\ControlFlowTok{for}\NormalTok{ grouted reinforcement}
+    \OperatorTok{;}\NormalTok{   using modified pile elements }\OperatorTok{{-}}\NormalTok{ Softening of cohesion}
+    \OperatorTok{;} \OperatorTok{==================================================================}
+\NormalTok{    model new }
+\NormalTok{    fish automatic}\OperatorTok{{-}}\NormalTok{create off}
+\NormalTok{    model title }\StringTok{\textquotesingle{}Pull{-}test using modified pile elements {-} cohesion softening\textquotesingle{}}
+    \OperatorTok{;}\NormalTok{ Create a single rock block }\KeywordTok{and} \BuiltInTok{set}\NormalTok{ its material properties.}
+\NormalTok{    zone create brick size }\DecValTok{4} \DecValTok{4} \DecValTok{6}\NormalTok{ point }\DecValTok{1}\NormalTok{ (}\FloatTok{0.4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                                 point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.6}\NormalTok{)}
+\NormalTok{    zone cmodel assign elastic}
+\NormalTok{    zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{5e9}\NormalTok{ shear }\FloatTok{3e9}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{0.0} \BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.6}
+    \OperatorTok{;}\NormalTok{ Create a pile element }\KeywordTok{and}\NormalTok{ assign properties}
+\NormalTok{    struct pile create by}\OperatorTok{{-}}\NormalTok{line (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.1}\NormalTok{) (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.7}\NormalTok{) segments }\DecValTok{12}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ rockbolt}\OperatorTok{{-}}\NormalTok{flag on}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ young }\FloatTok{200e9}\NormalTok{ poisson }\FloatTok{0.25}\NormalTok{ cross}\OperatorTok{{-}}\NormalTok{sectional}\OperatorTok{{-}}\NormalTok{area }\FloatTok{5e{-}4}\NormalTok{ ...}
+\NormalTok{                         perimeter }\FloatTok{0.08}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ tensile}\OperatorTok{{-}}\ControlFlowTok{yield}   \FloatTok{2.25e5}  \OperatorTok{;}\NormalTok{ ultimate tensile strength}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{y }\FloatTok{2.0e{-}8}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{z }\FloatTok{2.0e{-}8}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{polar }\FloatTok{4.0e{-}8} \OperatorTok{;} \FloatTok{0.25}\OperatorTok{*}\NormalTok{pi}\OperatorTok{*}\NormalTok{r}\OperatorTok{\^{}}\DecValTok{4}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1.75e5}\NormalTok{ ...}
+\NormalTok{                         coupling}\OperatorTok{{-}}\NormalTok{stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1.12e7}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1.75e5}\NormalTok{ ...}
+\NormalTok{                         coupling}\OperatorTok{{-}}\NormalTok{stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1.12e7}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{table }\StringTok{\textquotesingle{}cct\textquotesingle{}}
+    \OperatorTok{;}\NormalTok{ change }\KeywordTok{in}\NormalTok{ cohesion }\ControlFlowTok{with}\NormalTok{ relative shear displacement}
+\NormalTok{    table }\StringTok{\textquotesingle{}cct\textquotesingle{}}\NormalTok{ add (}\DecValTok{0}\NormalTok{,}\FloatTok{1.75e5}\NormalTok{) (}\FloatTok{0.025}\NormalTok{,}\FloatTok{1.75e4}\NormalTok{)}
+    \OperatorTok{;}\NormalTok{ Set up pull out test}
+\NormalTok{    struct node fix velocity}\OperatorTok{{-}}\NormalTok{x }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.7}
+\NormalTok{    struct node initialize velocity}\OperatorTok{{-}}\NormalTok{x }\FloatTok{1e{-}6}\NormalTok{ local }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.7}
+\NormalTok{    call }\StringTok{\textquotesingle{}pileforce\textquotesingle{}}\NormalTok{ suppress }\OperatorTok{;}\NormalTok{ FISH function calculates reaction force on zones}
+    \OperatorTok{;}\NormalTok{ Set up histories }\ControlFlowTok{for}\NormalTok{ monitoring model behavior}
+\NormalTok{    history interval }\DecValTok{10}
+\NormalTok{    fish history name }\StringTok{\textquotesingle{}force\textquotesingle{}} \OperatorTok{@}\NormalTok{force}
+\NormalTok{    struct node history name }\StringTok{\textquotesingle{}disp\textquotesingle{}}\NormalTok{ displacement}\OperatorTok{{-}}\NormalTok{z position (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.7}\NormalTok{)}
+    \OperatorTok{;}\NormalTok{ Achieve a total displacement of }\FloatTok{4.0}\NormalTok{ cm}
+\NormalTok{    model cycle }\DecValTok{40000}
+    \OperatorTok{;}
+\NormalTok{    model save }\StringTok{\textquotesingle{}pull{-}5\textquotesingle{}}
+
+\OperatorTok{**}\NormalTok{Pull06.f3dat}\OperatorTok{**}
+
+    \OperatorTok{;} \OperatorTok{==================================================================}
+    \OperatorTok{;}\NormalTok{   Simulation of pull}\OperatorTok{{-}}\NormalTok{test }\ControlFlowTok{for}\NormalTok{ grouted reinforcement}
+    \OperatorTok{;}\NormalTok{   using modified pile elements }\OperatorTok{{-}}\NormalTok{ Confinement }\DecValTok{4}\NormalTok{ MPa}
+    \OperatorTok{;} \OperatorTok{==================================================================}
+\NormalTok{    model new}
+\NormalTok{    fish automatic}\OperatorTok{{-}}\NormalTok{create off}
+\NormalTok{    [}\KeywordTok{global}\NormalTok{ t }\OperatorTok{=}  \StringTok{\textquotesingle{}Pull{-}test using modified pile elements {-} \textquotesingle{}}\NormalTok{]}
+\NormalTok{    [t }\OperatorTok{+=} \StringTok{\textquotesingle{}Confinement 4 MPa, fric=30\textquotesingle{}}\NormalTok{]}
+\NormalTok{    model title [t]}
+    \OperatorTok{;}\NormalTok{ Create a single rock block }\KeywordTok{and} \BuiltInTok{set}\NormalTok{ its material properties.}
+\NormalTok{    zone create brick size }\DecValTok{4} \DecValTok{4} \DecValTok{6}\NormalTok{ point }\DecValTok{1}\NormalTok{ (}\FloatTok{0.4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                                 point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.6}\NormalTok{)}
+\NormalTok{    zone cmodel assign elastic}
+\NormalTok{    zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{5e9}\NormalTok{ shear }\FloatTok{3e9}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{0.0} \BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.6}
+\NormalTok{    model largestrain on}
+    \OperatorTok{;}\NormalTok{ Create a pile element }\KeywordTok{and}\NormalTok{ assign properties}
+\NormalTok{    struct pile create by}\OperatorTok{{-}}\NormalTok{line (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.1}\NormalTok{) (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.7}\NormalTok{) segments }\DecValTok{12}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ rockbolt}\OperatorTok{{-}}\NormalTok{flag on}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ young }\FloatTok{200e9}\NormalTok{ poisson }\FloatTok{0.25}\NormalTok{ cross}\OperatorTok{{-}}\NormalTok{sectional}\OperatorTok{{-}}\NormalTok{area }\FloatTok{5e{-}4}\NormalTok{ ...}
+\NormalTok{                         perimeter }\FloatTok{0.08}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ tensile}\OperatorTok{{-}}\ControlFlowTok{yield}   \FloatTok{2.25e5}  \OperatorTok{;}\NormalTok{ ultimate tensile strength}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{y }\FloatTok{2.0e{-}8}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{z }\FloatTok{2.0e{-}8}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{polar }\FloatTok{4.0e{-}8} \OperatorTok{;} \FloatTok{0.25}\OperatorTok{*}\NormalTok{pi}\OperatorTok{*}\NormalTok{r}\OperatorTok{\^{}}\DecValTok{4}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1.75e5}\NormalTok{ ...}
+\NormalTok{                         coupling}\OperatorTok{{-}}\NormalTok{stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1.12e7}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1.75e5}\NormalTok{ ...}
+\NormalTok{                         coupling}\OperatorTok{{-}}\NormalTok{stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1.12e7}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{friction}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{30.0}
+    \OperatorTok{;}\NormalTok{ Install }\KeywordTok{in}\NormalTok{ situ stresses}
+\NormalTok{    zone initialize stress xx }\OperatorTok{{-}}\FloatTok{4e6}\NormalTok{ yy }\OperatorTok{{-}}\FloatTok{4e6}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ stress}\OperatorTok{{-}}\NormalTok{normal }\OperatorTok{{-}}\FloatTok{4e6} \BuiltInTok{range}\NormalTok{ union position}\OperatorTok{{-}}\NormalTok{x }\DecValTok{0}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{x }\FloatTok{0.4}\NormalTok{ ...}
+\NormalTok{                                                   position}\OperatorTok{{-}}\NormalTok{y }\DecValTok{0}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\FloatTok{0.4}
+    \OperatorTok{;}\NormalTok{ Set up pull out test}
+\NormalTok{    struct node fix velocity}\OperatorTok{{-}}\NormalTok{x }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.7}
+\NormalTok{    struct node init velocity}\OperatorTok{{-}}\NormalTok{x }\FloatTok{1e{-}6}\NormalTok{ local }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.7}
+\NormalTok{    call }\StringTok{\textquotesingle{}pileforce\textquotesingle{}}\NormalTok{ suppress }\OperatorTok{;}\NormalTok{ FISH function calculates reaction force on zones}
+    \OperatorTok{;}\NormalTok{ Set up histories }\ControlFlowTok{for}\NormalTok{ monitoring model behavior}
+\NormalTok{    history interval }\DecValTok{10}
+\NormalTok{    fish history name }\StringTok{\textquotesingle{}force\textquotesingle{}} \OperatorTok{@}\NormalTok{force}
+\NormalTok{    struct node history name }\StringTok{\textquotesingle{}disp\textquotesingle{}}\NormalTok{ displacement}\OperatorTok{{-}}\NormalTok{z position (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.7}\NormalTok{)}
+    \OperatorTok{;}\NormalTok{ Achieve a total displacement of }\FloatTok{4.0}\NormalTok{ cm}
+\NormalTok{    model cycle }\DecValTok{40000}
+    \OperatorTok{;}
+\NormalTok{    model save }\StringTok{\textquotesingle{}pull{-}6\textquotesingle{}}
+
+\OperatorTok{**}\NormalTok{Pull07.f3dat}\OperatorTok{**}
+
+    \OperatorTok{;} \OperatorTok{==================================================================}
+    \OperatorTok{;}\NormalTok{   Simulation of pull}\OperatorTok{{-}}\NormalTok{test }\ControlFlowTok{for}\NormalTok{ grouted reinforcement}
+    \OperatorTok{;}\NormalTok{   using modified pile elements }\OperatorTok{{-}}\NormalTok{ Confinement }\DecValTok{4}\NormalTok{ MPa (w}\OperatorTok{/}\NormalTok{table)}
+    \OperatorTok{;} \OperatorTok{==================================================================}
+\NormalTok{    model new}
+\NormalTok{    fish automatic}\OperatorTok{{-}}\NormalTok{create off}
+\NormalTok{    [}\KeywordTok{global}\NormalTok{ t }\OperatorTok{=}  \StringTok{\textquotesingle{}Pull{-}test using modified pile elements {-} \textquotesingle{}}\NormalTok{]}
+\NormalTok{    [t }\OperatorTok{+=} \StringTok{\textquotesingle{}Confinement 4 MPa (w/table)\textquotesingle{}}\NormalTok{]}
+\NormalTok{    model title [t]}
+    \OperatorTok{;}\NormalTok{ Create a single rock block }\KeywordTok{and} \BuiltInTok{set}\NormalTok{ its material properties.}
+\NormalTok{    zone create brick size }\DecValTok{4} \DecValTok{4} \DecValTok{6}\NormalTok{ point }\DecValTok{1}\NormalTok{ (}\FloatTok{0.4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                                 point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.6}\NormalTok{)}
+\NormalTok{    zone cmodel assign elastic}
+\NormalTok{    zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{5e9}\NormalTok{ shear }\FloatTok{3e9}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{0.0} \BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.6}
+\NormalTok{    model largestrain on}
+    \OperatorTok{;}\NormalTok{ Create a pile element }\KeywordTok{and}\NormalTok{ assign properties}
+\NormalTok{    struct pile create by}\OperatorTok{{-}}\NormalTok{line (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.1}\NormalTok{) (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.7}\NormalTok{) segments }\DecValTok{12}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ rockbolt}\OperatorTok{{-}}\NormalTok{flag on}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ young }\FloatTok{200e9}\NormalTok{ poisson }\FloatTok{0.25}\NormalTok{ cross}\OperatorTok{{-}}\NormalTok{sectional}\OperatorTok{{-}}\NormalTok{area }\FloatTok{5e{-}4}\NormalTok{ ...}
+\NormalTok{                         perimeter }\FloatTok{0.08}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ tensile}\OperatorTok{{-}}\ControlFlowTok{yield}   \FloatTok{2.25e5}  \OperatorTok{;}\NormalTok{ ultimate tensile strength}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{y }\FloatTok{2.0e{-}8}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{z }\FloatTok{2.0e{-}8}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{polar }\FloatTok{4.0e{-}8} \OperatorTok{;} \FloatTok{0.25}\OperatorTok{*}\NormalTok{pi}\OperatorTok{*}\NormalTok{r}\OperatorTok{\^{}}\DecValTok{4}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1.75e5}\NormalTok{ ...}
+\NormalTok{                         coupling}\OperatorTok{{-}}\NormalTok{stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1.12e7}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1.75e5}\NormalTok{ ...}
+\NormalTok{                         coupling}\OperatorTok{{-}}\NormalTok{stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1.12e7}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{friction}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{30.0}
+    \OperatorTok{;}\NormalTok{ define table }\ControlFlowTok{for}\NormalTok{ confining stress correction factor}
+\NormalTok{    table }\StringTok{\textquotesingle{}cct\textquotesingle{}}\NormalTok{ add (}\DecValTok{0}\NormalTok{,}\FloatTok{0.5}\NormalTok{) (}\FloatTok{0.3}\NormalTok{,}\FloatTok{0.48}\NormalTok{) (}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.45}\NormalTok{) (}\FloatTok{0.6}\NormalTok{,}\FloatTok{0.39}\NormalTok{) (}\FloatTok{0.68}\NormalTok{,}\FloatTok{0.36}\NormalTok{)}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{confining}\OperatorTok{{-}}\NormalTok{table }\StringTok{\textquotesingle{}cct\textquotesingle{}}
+    \OperatorTok{;}\NormalTok{ note : (snn}\OperatorTok{{-}}\NormalTok{szz)}\OperatorTok{/}\NormalTok{(snn}\OperatorTok{+}\NormalTok{szz) }\KeywordTok{is} \DecValTok{1}\NormalTok{ , so cfac}\OperatorTok{=}\FloatTok{0.36}
+    \OperatorTok{;}\NormalTok{ Install }\KeywordTok{in}\NormalTok{ situ stresses}
+\NormalTok{    zone initialize stress xx }\OperatorTok{{-}}\FloatTok{4e6}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ stress}\OperatorTok{{-}}\NormalTok{normal }\OperatorTok{{-}}\FloatTok{4e6} \BuiltInTok{range}\NormalTok{ union position}\OperatorTok{{-}}\NormalTok{x }\DecValTok{0}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{x }\FloatTok{0.4} 
+    \OperatorTok{;}\NormalTok{ Set up pull out test}
+\NormalTok{    struct node fix velocity}\OperatorTok{{-}}\NormalTok{x }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.7}
+\NormalTok{    struct node initialize velocity}\OperatorTok{{-}}\NormalTok{x }\FloatTok{1e{-}6}\NormalTok{ local }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.7}
+\NormalTok{    call }\StringTok{\textquotesingle{}pileforce\textquotesingle{}}\NormalTok{ suppress }\OperatorTok{;}\NormalTok{ FISH function calculates reaction force on zones}
+    \OperatorTok{;}\NormalTok{ Set up histories }\ControlFlowTok{for}\NormalTok{ monitoring model behavior}
+\NormalTok{    history interval }\DecValTok{10}
+\NormalTok{    fish history name }\StringTok{\textquotesingle{}force\textquotesingle{}} \OperatorTok{@}\NormalTok{force}
+\NormalTok{    struct node history name }\StringTok{\textquotesingle{}disp\textquotesingle{}}\NormalTok{ displacement}\OperatorTok{{-}}\NormalTok{z position (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.7}\NormalTok{)}
+    \OperatorTok{;}\NormalTok{ Achieve a total displacement of }\FloatTok{4.0}\NormalTok{ cm}
+\NormalTok{    model cycle }\DecValTok{40000}
+    \OperatorTok{;}
+\NormalTok{    model save }\StringTok{\textquotesingle{}pull{-}7\textquotesingle{}}
+
+\OperatorTok{**}\NormalTok{Pull08.f3dat}\OperatorTok{**}
+
+    \OperatorTok{;} \OperatorTok{==================================================================}
+    \OperatorTok{;}\NormalTok{   Simulation of pull}\OperatorTok{{-}}\NormalTok{test }\ControlFlowTok{for}\NormalTok{ grouted reinforcement}
+    \OperatorTok{;}\NormalTok{   using modified pile elements}
+    \OperatorTok{;}\NormalTok{     Definition of failure due to maximum tensile strain }\KeywordTok{or}\NormalTok{ stress}
+    \OperatorTok{;} \OperatorTok{==================================================================}
+\NormalTok{    model new}
+\NormalTok{    fish automatic}\OperatorTok{{-}}\NormalTok{create off}
+\NormalTok{    [}\KeywordTok{global}\NormalTok{ t }\OperatorTok{=}  \StringTok{\textquotesingle{}Pull{-}test using modified pile elements {-} \textquotesingle{}}\NormalTok{]}
+\NormalTok{    [t }\OperatorTok{+=} \StringTok{\textquotesingle{}tensile strain causes rupture\textquotesingle{}}\NormalTok{]}
+\NormalTok{    model title [t]}
+    \OperatorTok{;}\NormalTok{ Create a single rock block }\KeywordTok{and} \BuiltInTok{set}\NormalTok{ its material properties}
+\NormalTok{    zone create brick size }\DecValTok{4} \DecValTok{4} \DecValTok{6}\NormalTok{ point }\DecValTok{1}\NormalTok{ (}\FloatTok{0.4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\FloatTok{0.4}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                                 point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.6}\NormalTok{)}
+\NormalTok{    zone cmodel assign elastic}
+\NormalTok{    zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{5e9}\NormalTok{ shear }\FloatTok{3e9}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{0.0} \BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.6}
+\NormalTok{    model largestrain on}
+\NormalTok{    zone mech damping combined}
+    \OperatorTok{;}\NormalTok{ Create a pile element }\KeywordTok{and}\NormalTok{ assign properties}
+\NormalTok{    struct pile create by}\OperatorTok{{-}}\NormalTok{line (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.1}\NormalTok{) (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.7}\NormalTok{) segments }\DecValTok{12}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ rockbolt}\OperatorTok{{-}}\NormalTok{flag on}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ young }\FloatTok{200e9}\NormalTok{ poisson }\FloatTok{0.25}\NormalTok{ cross}\OperatorTok{{-}}\NormalTok{sectional}\OperatorTok{{-}}\NormalTok{area }\FloatTok{5e{-}4}\NormalTok{ ...}
+\NormalTok{                         perimeter }\FloatTok{0.08}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{y }\FloatTok{2.0e{-}8}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{z }\FloatTok{2.0e{-}8}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{polar }\FloatTok{4.0e{-}8} \OperatorTok{;} \FloatTok{0.25}\OperatorTok{*}\NormalTok{pi}\OperatorTok{*}\NormalTok{r}\OperatorTok{\^{}}\DecValTok{4}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1.75e5}\NormalTok{ ...}
+\NormalTok{                         coupling}\OperatorTok{{-}}\NormalTok{stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1.12e7}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1.75e5}\NormalTok{ ...}
+\NormalTok{                         coupling}\OperatorTok{{-}}\NormalTok{stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1.12e7}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{friction}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{30.0}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ tensile}\OperatorTok{{-}}\ControlFlowTok{yield} \FloatTok{1.5e5}  \OperatorTok{;}\NormalTok{ ultimate tensile strength}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ tensile}\OperatorTok{{-}}\NormalTok{failure}\OperatorTok{{-}}\NormalTok{strain }\FloatTok{1.0e{-}4} \OperatorTok{;}\NormalTok{ ultimate tensile strain}
+    \OperatorTok{;}\NormalTok{ Install }\KeywordTok{in}\NormalTok{ situ stresses}
+\NormalTok{    zone initialize stress xx }\OperatorTok{{-}}\FloatTok{4e6}\NormalTok{ yy }\OperatorTok{{-}}\FloatTok{4e6}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ stress}\OperatorTok{{-}}\NormalTok{normal }\OperatorTok{{-}}\FloatTok{4e6} \BuiltInTok{range}\NormalTok{ union position}\OperatorTok{{-}}\NormalTok{x }\DecValTok{0}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{x }\FloatTok{0.4}\NormalTok{ ...}
+\NormalTok{                                                   position}\OperatorTok{{-}}\NormalTok{y }\DecValTok{0}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{y }\FloatTok{0.4}
+    \OperatorTok{;}\NormalTok{ Set up pull out test}
+\NormalTok{    struct node fix velocity}\OperatorTok{{-}}\NormalTok{x }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.7}
+\NormalTok{    struct node initialize velocity}\OperatorTok{{-}}\NormalTok{x }\FloatTok{1e{-}6}\NormalTok{ local }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.7}
+\NormalTok{    call }\StringTok{\textquotesingle{}pileforce\textquotesingle{}}\NormalTok{ suppress }\OperatorTok{;}\NormalTok{ FISH function calculates reaction force on zones}
+    \OperatorTok{;}\NormalTok{ Set up histories }\ControlFlowTok{for}\NormalTok{ monitoring model behavior}
+\NormalTok{    history interval }\DecValTok{10}
+\NormalTok{    fish history name }\StringTok{\textquotesingle{}force\textquotesingle{}} \OperatorTok{@}\NormalTok{force}
+\NormalTok{    struct node history name }\StringTok{\textquotesingle{}disp\textquotesingle{}}\NormalTok{ displacement}\OperatorTok{{-}}\NormalTok{z position (}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.7}\NormalTok{)}
+    \OperatorTok{;}\NormalTok{ Achieve a total displacement of }\FloatTok{2.0}\NormalTok{ cm}
+\NormalTok{    model cycle }\DecValTok{40000}
+    \OperatorTok{;}
+\NormalTok{    model save }\StringTok{\textquotesingle{}pull{-}8\textquotesingle{}}
+
+\OperatorTok{**}\NormalTok{Shear01.f3dat}\OperatorTok{**}
+
+    \OperatorTok{;} \OperatorTok{==================================================================}
+    \OperatorTok{;}\NormalTok{   Simulation of shear test }\ControlFlowTok{for}\NormalTok{ a grouted bolt}
+    \OperatorTok{;}\NormalTok{   using modified pile elements}
+    \OperatorTok{;} \OperatorTok{==================================================================}
+\NormalTok{    model new}
+\NormalTok{    fish automatic}\OperatorTok{{-}}\NormalTok{create off}
+\NormalTok{    model title }\StringTok{\textquotesingle{}Shear test using pile elements\textquotesingle{}}
+    \OperatorTok{;}\NormalTok{ Create a single rock block }\KeywordTok{and} \BuiltInTok{set}\NormalTok{ its material properties}
+\NormalTok{    zone create brick size }\DecValTok{3} \DecValTok{3} \DecValTok{6}\NormalTok{ point }\DecValTok{1}\NormalTok{ (}\FloatTok{0.3}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\FloatTok{0.3}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                                 point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.6}\NormalTok{)}
+\NormalTok{    zone face skin }\OperatorTok{;}\NormalTok{ Label the model boundaries}
+\NormalTok{    zone cmodel assign elastic}
+\NormalTok{    zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{5e10}\NormalTok{ shear }\FloatTok{3e10}\NormalTok{ density }\DecValTok{2000}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\DecValTok{0} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}Bottom\textquotesingle{}}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\DecValTok{0} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}East\textquotesingle{}} \KeywordTok{or} \StringTok{\textquotesingle{}West\textquotesingle{}}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\DecValTok{0} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}North\textquotesingle{}} \KeywordTok{or} \StringTok{\textquotesingle{}South\textquotesingle{}}
+\NormalTok{    model largestrain on}
+\NormalTok{    zone mechanical damping combined}
+    \OperatorTok{;}\NormalTok{ Create a pile element }\KeywordTok{and}\NormalTok{ assign properties}
+\NormalTok{    struct pile create by}\OperatorTok{{-}}\NormalTok{line (}\FloatTok{0.15}\NormalTok{,}\FloatTok{0.15}\NormalTok{,}\FloatTok{0.1}\NormalTok{) (}\FloatTok{0.15}\NormalTok{,}\FloatTok{0.15}\NormalTok{,}\FloatTok{0.628}\NormalTok{) segments }\DecValTok{22}
+\NormalTok{    struct node group }\StringTok{\textquotesingle{}Top\textquotesingle{}} \BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.628} \OperatorTok{;}\NormalTok{ Tag the node at the top }
+                                                   \OperatorTok{;} \ControlFlowTok{with}\NormalTok{ a name}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ rockbolt}\OperatorTok{{-}}\NormalTok{flag on}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ young }\FloatTok{200e9}\NormalTok{ poisson }\FloatTok{0.25}\NormalTok{ cross}\OperatorTok{{-}}\NormalTok{sectional}\OperatorTok{{-}}\NormalTok{area }\FloatTok{5e{-}4}\NormalTok{ ...}
+\NormalTok{                         perimeter }\FloatTok{0.08}
+    \OperatorTok{;}\NormalTok{ ultimate tensile strength}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ tensile}\OperatorTok{{-}}\ControlFlowTok{yield}   \FloatTok{2.25e5}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{y }\FloatTok{2.0e{-}8}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{z }\FloatTok{2.0e{-}8}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{polar }\FloatTok{4.0e{-}8}
+    \OperatorTok{;}                         \FloatTok{0.25}\OperatorTok{*}\NormalTok{pi}\OperatorTok{*}\NormalTok{r}\OperatorTok{\^{}}\DecValTok{4}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1.75e5}\NormalTok{ ...}
+\NormalTok{                         coupling}\OperatorTok{{-}}\NormalTok{stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1.12e7}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1.75e8}\NormalTok{ ...}
+\NormalTok{                         coupling}\OperatorTok{{-}}\NormalTok{stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1.0e9}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{friction}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{30.0}
+    \OperatorTok{;}\NormalTok{ Set up shear test (need to fix local nodal axes at the top node, }
+    \OperatorTok{;}\NormalTok{ to avoid axes rotating }\ControlFlowTok{with}\NormalTok{ element)}
+\NormalTok{    struct node fix system}\OperatorTok{{-}}\NormalTok{local }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}Top\textquotesingle{}}
+\NormalTok{    struct node initialize velocity}\OperatorTok{{-}}\NormalTok{x }\FloatTok{1e{-}6}\NormalTok{ local }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}Top\textquotesingle{}}
+\NormalTok{    struct node fix velocity}\OperatorTok{{-}}\NormalTok{x }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}Top\textquotesingle{}}
+\NormalTok{    call }\StringTok{\textquotesingle{}shearforce\textquotesingle{}} \OperatorTok{;}\NormalTok{ FISH function to calculate force on the grid}
+    \OperatorTok{;}\NormalTok{ Set up histories }\ControlFlowTok{for}\NormalTok{ monitoring model behavior}
+\NormalTok{    history interval }\DecValTok{100}
+\NormalTok{    fish history name }\StringTok{\textquotesingle{}force\textquotesingle{}} \OperatorTok{@}\NormalTok{force}
+\NormalTok{    struct node history name }\StringTok{\textquotesingle{}disp\textquotesingle{}}\NormalTok{ displacement}\OperatorTok{{-}}\NormalTok{x position (}\FloatTok{0.15}\NormalTok{,}\FloatTok{0.15}\NormalTok{,}\FloatTok{0.628}\NormalTok{)}
+    \OperatorTok{;}\NormalTok{ Achieve a total displacement of }\FloatTok{5.0}\NormalTok{ cm}
+\NormalTok{    model cycle }\DecValTok{50000}
+    \OperatorTok{;}
+\NormalTok{    model save }\StringTok{\textquotesingle{}shear{-}1\textquotesingle{}}
+
+\OperatorTok{**}\NormalTok{Shear02.f3dat}\OperatorTok{**}
+
+    \OperatorTok{;} \OperatorTok{==================================================================}
+    \OperatorTok{;}\NormalTok{   Simulation of shear test }\ControlFlowTok{for}\NormalTok{ a grouted bolt}
+    \OperatorTok{;}\NormalTok{   using modified pile elements }\OperatorTok{{-}}\NormalTok{ Bending moment rupture}
+    \OperatorTok{;} \OperatorTok{==================================================================}
+\NormalTok{    model new}
+\NormalTok{    fish automatic}\OperatorTok{{-}}\NormalTok{create off}
+\NormalTok{    model title }\StringTok{\textquotesingle{}Shear test using pile elements {-} Bending moment rupture\textquotesingle{}}
+    \OperatorTok{;}\NormalTok{ Create a single rock block }\KeywordTok{and} \BuiltInTok{set}\NormalTok{ its material properties}
+\NormalTok{    zone create brick size }\DecValTok{3} \DecValTok{3} \DecValTok{6}\NormalTok{ point }\DecValTok{1}\NormalTok{ (}\FloatTok{0.3}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) point }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\FloatTok{0.3}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{                                 point }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.6}\NormalTok{)}
+\NormalTok{    zone face skin }\OperatorTok{;}\NormalTok{ Label the model boundaries}
+\NormalTok{    zone cmodel assign elastic}
+\NormalTok{    zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{5e10}\NormalTok{ shear }\FloatTok{3e10}\NormalTok{ density }\DecValTok{2000}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\DecValTok{0} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}Bottom\textquotesingle{}}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\DecValTok{0} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}East\textquotesingle{}} \KeywordTok{or} \StringTok{\textquotesingle{}West\textquotesingle{}}
+\NormalTok{    zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\DecValTok{0} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}North\textquotesingle{}} \KeywordTok{or} \StringTok{\textquotesingle{}South\textquotesingle{}}
+\NormalTok{    model largestrain on}
+\NormalTok{    zone mechanical damping combined}
+    \OperatorTok{;}\NormalTok{ Create a pile element }\KeywordTok{and}\NormalTok{ assign properties}
+\NormalTok{    struct pile create by}\OperatorTok{{-}}\NormalTok{line (}\FloatTok{0.15}\NormalTok{,}\FloatTok{0.15}\NormalTok{,}\FloatTok{0.1}\NormalTok{) (}\FloatTok{0.15}\NormalTok{,}\FloatTok{0.15}\NormalTok{,}\FloatTok{0.628}\NormalTok{) segments }\DecValTok{22}
+\NormalTok{    struct node group }\StringTok{\textquotesingle{}Top\textquotesingle{}} \BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\FloatTok{0.628} \OperatorTok{;}\NormalTok{ Tag the node at the top}
+                                                   \OperatorTok{;} \ControlFlowTok{with}\NormalTok{ a name}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ rockbolt}\OperatorTok{{-}}\NormalTok{flag on}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ young }\FloatTok{200e9}\NormalTok{ poisson }\FloatTok{0.25}\NormalTok{ cross}\OperatorTok{{-}}\NormalTok{sectional}\OperatorTok{{-}}\NormalTok{area }\FloatTok{5e{-}4}\NormalTok{ ...}
+\NormalTok{                         perimeter }\FloatTok{0.08}
+    \OperatorTok{;}\NormalTok{ ultimate tensile strength}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ tensile}\OperatorTok{{-}}\ControlFlowTok{yield}   \FloatTok{2.25e5}
+    \OperatorTok{;}\NormalTok{ ultimate moment }\KeywordTok{and}\NormalTok{ tensile strength}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ plastic}\OperatorTok{{-}}\NormalTok{moment   }\FloatTok{5e3}\NormalTok{ tensile}\OperatorTok{{-}}\NormalTok{failure}\OperatorTok{{-}}\NormalTok{strain   }\FloatTok{1e{-}4}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{y }\FloatTok{2.0e{-}8}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{z }\FloatTok{2.0e{-}8}\NormalTok{ moi}\OperatorTok{{-}}\NormalTok{polar }\FloatTok{4.0e{-}8}
+    \OperatorTok{;}                        \FloatTok{0.25}\OperatorTok{*}\NormalTok{pi}\OperatorTok{*}\NormalTok{r}\OperatorTok{\^{}}\DecValTok{4}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1.75e5}\NormalTok{ ...}
+\NormalTok{                         coupling}\OperatorTok{{-}}\NormalTok{stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1.12e7}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{cohesion}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1.75e8}\NormalTok{ ... }
+\NormalTok{                         coupling}\OperatorTok{{-}}\NormalTok{stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1.0e10}
+\NormalTok{    struct pile }\BuiltInTok{property}\NormalTok{ coupling}\OperatorTok{{-}}\NormalTok{friction}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{30.0}
+    \OperatorTok{;}\NormalTok{ Set up shear test (need to fix local nodal axes at the top node, }
+    \OperatorTok{;}\NormalTok{ to avoid axes rotating }\ControlFlowTok{with}\NormalTok{ element)}
+\NormalTok{    struct node fix system}\OperatorTok{{-}}\NormalTok{local }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}Top\textquotesingle{}}
+\NormalTok{    struct node initialize velocity}\OperatorTok{{-}}\NormalTok{x }\FloatTok{1e{-}6}\NormalTok{ local }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}Top\textquotesingle{}}
+\NormalTok{    struct node fix velocity}\OperatorTok{{-}}\NormalTok{x }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}Top\textquotesingle{}}
+\NormalTok{    call }\StringTok{\textquotesingle{}shearforce\textquotesingle{}} \OperatorTok{;}\NormalTok{ FISH function to calculate force on the grid}
+    \OperatorTok{;}\NormalTok{ Set up histories }\ControlFlowTok{for}\NormalTok{ monitoring model behavior}
+\NormalTok{    history interval }\DecValTok{100}
+\NormalTok{    fish history name }\StringTok{\textquotesingle{}force\textquotesingle{}} \OperatorTok{@}\NormalTok{force}
+\NormalTok{    struct node history name }\StringTok{\textquotesingle{}disp\textquotesingle{}}\NormalTok{ displacement}\OperatorTok{{-}}\NormalTok{x position (}\FloatTok{0.15}\NormalTok{,}\FloatTok{0.15}\NormalTok{,}\FloatTok{0.628}\NormalTok{)}
+    \OperatorTok{;}\NormalTok{ Achieve a total displacement of }\FloatTok{2.0}\NormalTok{ cm}
+\NormalTok{    warning off}
+\NormalTok{    model cycle }\DecValTok{20000}
+    \OperatorTok{;}
+\NormalTok{    model save }\StringTok{\textquotesingle{}shear{-}2\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
 
 \startappendices
 
 \hypertarget{template}{%
 \chapter{1. Template}\label{template}}
 
-\hypertarget{problem-description-1}{%
-\section{Problem Description}\label{problem-description-1}}
+\hypertarget{problem-description-2}{%
+\section{Problem Description}\label{problem-description-2}}
 
 \hypertarget{modeling-procedure-1}{%
 \section{Modeling Procedure}\label{modeling-procedure-1}}
