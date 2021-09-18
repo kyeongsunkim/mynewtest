@@ -142,7 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.4" data-path="kaist-model.html"><a href="kaist-model.html#soil-structure-interface"><i class="fa fa-check"></i><b>1.4</b> Soil-Structure Interface</a></li>
 <li class="chapter" data-level="1.5" data-path="kaist-model.html"><a href="kaist-model.html#boundary-conditions"><i class="fa fa-check"></i><b>1.5</b> Boundary Conditions</a></li>
 <li class="chapter" data-level="1.6" data-path="kaist-model.html"><a href="kaist-model.html#initial-equilibrium"><i class="fa fa-check"></i><b>1.6</b> Initial Equilibrium</a></li>
-<li class="chapter" data-level="1.7" data-path="kaist-model.html"><a href="kaist-model.html#alterations"><i class="fa fa-check"></i><b>1.7</b> Alterations</a></li>
+<li class="chapter" data-level="1.7" data-path="kaist-model.html"><a href="kaist-model.html#data-analytics"><i class="fa fa-check"></i><b>1.7</b> Data Analytics</a></li>
 <li class="chapter" data-level="1.8" data-path="kaist-model.html"><a href="kaist-model.html#results"><i class="fa fa-check"></i><b>1.8</b> Results</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html"><i class="fa fa-check"></i><b>2</b> Axial Concrete Pile</a>
@@ -158,7 +158,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#properties"><i class="fa fa-check"></i><b>2.5</b> Properties</a></li>
 <li class="chapter" data-level="2.6" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#b.c.-and-i.c."><i class="fa fa-check"></i><b>2.6</b> B.C. and I.C.</a></li>
 <li class="chapter" data-level="2.7" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#initial-equilibrium-1"><i class="fa fa-check"></i><b>2.7</b> Initial Equilibrium</a></li>
-<li class="chapter" data-level="2.8" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#alterations-1"><i class="fa fa-check"></i><b>2.8</b> Alterations</a>
+<li class="chapter" data-level="2.8" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#alterations"><i class="fa fa-check"></i><b>2.8</b> Alterations</a>
 <ul>
 <li class="chapter" data-level="2.8.1" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#install-the-pile"><i class="fa fa-check"></i><b>2.8.1</b> install the pile</a></li>
 <li class="chapter" data-level="2.8.2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#vertical-loading"><i class="fa fa-check"></i><b>2.8.2</b> vertical loading</a></li>
@@ -171,7 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="pull-tests.html"><a href="pull-tests.html#zones-2"><i class="fa fa-check"></i><b>3.2</b> Zones</a></li>
 <li class="chapter" data-level="3.3" data-path="pull-tests.html"><a href="pull-tests.html#properties-1"><i class="fa fa-check"></i><b>3.3</b> Properties</a></li>
 <li class="chapter" data-level="3.4" data-path="pull-tests.html"><a href="pull-tests.html#initial-equilibrium-2"><i class="fa fa-check"></i><b>3.4</b> Initial Equilibrium</a></li>
-<li class="chapter" data-level="3.5" data-path="pull-tests.html"><a href="pull-tests.html#alterations-2"><i class="fa fa-check"></i><b>3.5</b> Alterations</a></li>
+<li class="chapter" data-level="3.5" data-path="pull-tests.html"><a href="pull-tests.html#alterations-1"><i class="fa fa-check"></i><b>3.5</b> Alterations</a></li>
 <li class="chapter" data-level="3.6" data-path="pull-tests.html"><a href="pull-tests.html#some-other-notes"><i class="fa fa-check"></i><b>3.6</b> Some other notes</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="grid.html"><a href="grid.html"><i class="fa fa-check"></i><b>4</b> Grid</a>
@@ -284,9 +284,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.1</span> Interface</h2>
 <div id="zone-face-group" class="section level3" number="8.1.1">
 <h3><span class="header-section-number">8.1.1</span> zone face group</h3>
-<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="command.html#cb59-1" aria-hidden="true" tabindex="-1"></a>zone face group s keyword ... <span class="op">&lt;</span><span class="bu">range</span><span class="op">&gt;</span> </span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="command.html#cb61-1" aria-hidden="true" tabindex="-1"></a>zone face group s keyword ... <span class="op">&lt;</span><span class="bu">range</span><span class="op">&gt;</span> </span></code></pre></div>
 <p>Example:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="command.html#cb60-1" aria-hidden="true" tabindex="-1"></a>zone face group <span class="st">&#39;wall&#39;</span> internal <span class="bu">range</span> group <span class="st">&#39;wall-c&#39;</span> group <span class="st">&#39;pile&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="command.html#cb62-1" aria-hidden="true" tabindex="-1"></a>zone face group <span class="st">&#39;wall&#39;</span> internal <span class="bu">range</span> group <span class="st">&#39;wall-c&#39;</span> group <span class="st">&#39;pile&#39;</span></span></code></pre></div>
 <p>Adds a group name ‘wall’ to zone faces included in the optional range.
 Also can be used with zone face group “slotname = groupname” Zone face
 may belong to many groups, up to 128. keywords: internal, or, remove.<br />
@@ -301,7 +301,7 @@ non-null model.</p></li>
 </div>
 <div id="zone-face-skin" class="section level3" number="8.1.2">
 <h3><span class="header-section-number">8.1.2</span> zone face skin</h3>
-<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="command.html#cb61-1" aria-hidden="true" tabindex="-1"></a>zone face skin</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="command.html#cb63-1" aria-hidden="true" tabindex="-1"></a>zone face skin</span></code></pre></div>
 <p>Generates contiguous face groups by skinning.</p>
 <p>“skinning” refers to automatic face group generation, which occurs as
 follows: the program looks for contiguous faces and puts them into
@@ -320,13 +320,13 @@ changed in order to create them.</p>
 </div>
 <div id="zone-separate" class="section level3" number="8.1.3">
 <h3><span class="header-section-number">8.1.3</span> zone separate</h3>
-<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="command.html#cb62-1" aria-hidden="true" tabindex="-1"></a>zone separete by<span class="op">-</span>face new<span class="op">-</span>side group <span class="st">&#39;iwall&#39;</span> slot <span class="st">&#39;int&#39;</span> <span class="bu">range</span> group <span class="st">&#39;wall&#39;</span> <span class="kw">or</span> <span class="st">&#39;base&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="command.html#cb64-1" aria-hidden="true" tabindex="-1"></a>zone separete by<span class="op">-</span>face new<span class="op">-</span>side group <span class="st">&#39;iwall&#39;</span> slot <span class="st">&#39;int&#39;</span> <span class="bu">range</span> group <span class="st">&#39;wall&#39;</span> <span class="kw">or</span> <span class="st">&#39;base&#39;</span></span></code></pre></div>
 <p>separates internal faces specified by the range. The gridpoints of the
 face are duplicated, and new face is created. New faces and gridpoints
 get copies of all group and extra variable assignments belonging to the
 original face and gridpoint.</p>
 <p>Example: If Fred and George are group names assigned to zones, then</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="command.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="bu">range</span> group <span class="st">&#39;Fred&#39;</span> group <span class="st">&#39;George&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="command.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="bu">range</span> group <span class="st">&#39;Fred&#39;</span> group <span class="st">&#39;George&#39;</span></span></code></pre></div>
 <p>will select faces that are connected to zone of both group Fred and
 George.</p>
 <p>keyword: - by-face: attempts to separate all internal faces in the range
@@ -335,9 +335,9 @@ the specified slot. The default slot, is named Default.</p>
 </div>
 <div id="zone-interface-create" class="section level3" number="8.1.4">
 <h3><span class="header-section-number">8.1.4</span> zone interface create</h3>
-<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="command.html#cb64-1" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">&#39;side&#39;</span> create by<span class="op">-</span>face <span class="bu">range</span> group <span class="st">&#39;wall&#39;</span> <span class="kw">and</span> <span class="st">&#39;iwall&#39;</span></span>
-<span id="cb64-2"><a href="command.html#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-3"><a href="command.html#cb64-3" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">&#39;side&#39;</span> node <span class="bu">property</span> stiffness<span class="op">-</span>normal <span class="fl">1e8</span> stiffness<span class="op">-</span>shear <span class="fl">1e8</span> friction <span class="dv">20</span> cohesion <span class="dv">30000</span></span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="command.html#cb66-1" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">&#39;side&#39;</span> create by<span class="op">-</span>face <span class="bu">range</span> group <span class="st">&#39;wall&#39;</span> <span class="kw">and</span> <span class="st">&#39;iwall&#39;</span></span>
+<span id="cb66-2"><a href="command.html#cb66-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-3"><a href="command.html#cb66-3" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">&#39;side&#39;</span> node <span class="bu">property</span> stiffness<span class="op">-</span>normal <span class="fl">1e8</span> stiffness<span class="op">-</span>shear <span class="fl">1e8</span> friction <span class="dv">20</span> cohesion <span class="dv">30000</span></span></code></pre></div>
 <p>creates nodes or elements on interface side</p>
 <p>There are two techniques for creating an interface. 1. To derive an
 interface from a range of zone faces using by-face keyword. 2. To

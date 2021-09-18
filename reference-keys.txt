@@ -1,4 +1,4 @@
-fig:unnamed-chunk-66
+fig:unnamed-chunk-68
 kaist-model
 initial-configuration
 zones
@@ -6,7 +6,7 @@ constitutive-model
 soil-structure-interface
 boundary-conditions
 initial-equilibrium
-alterations
+data-analytics
 results
 axial-concrete-pile
 problem-description
@@ -18,7 +18,7 @@ groups
 properties
 b.c.-and-i.c.
 initial-equilibrium-1
-alterations-1
+alterations
 install-the-pile
 vertical-loading
 vertical-then-lateral-loading
@@ -27,7 +27,7 @@ problem-description-1
 zones-2
 properties-1
 initial-equilibrium-2
-alterations-2
+alterations-1
 some-other-notes
 grid
 primitive-shapes

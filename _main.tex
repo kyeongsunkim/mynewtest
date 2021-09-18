@@ -636,8 +636,139 @@ Each interface element distributes its area to its nodes in a weighted fashion. 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{alterations}{%
-\section{Alterations}\label{alterations}}
+\#\#\#Vertical Loading
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# VERTICAL LOADING \#}
+
+\NormalTok{top }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (np.sqrt(x}\OperatorTok{**}\DecValTok{2}\OperatorTok{+}\NormalTok{z}\OperatorTok{**}\DecValTok{2}\NormalTok{)}\OperatorTok{\textless{}}\NormalTok{\_D\_shaft, y}\OperatorTok{==}\NormalTok{np.amin(y)))}
+\NormalTok{za.set\_group(top, }\StringTok{"top"}\NormalTok{) }\CommentTok{\# set the zones with shaft = true have "shaft" and "geometry"}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone initialize state 0}
+\StringTok{zone gridpoint initialize displacement (0,0,0)}
+\StringTok{zone gridpoint initialize velocity     (0,0,0)}
+\StringTok{table \textquotesingle{}ramp\textquotesingle{} add ([global.step],0) ([global.step+30000],{-}5e{-}8) ...}
+\StringTok{      ([global.step+58000],{-}5e{-}8) ; Increase velocity applied to pile}
+\StringTok{                                  ; over 30,000 steps}
+\StringTok{zone face apply velocity{-}normal 1 table \textquotesingle{}ramp\textquotesingle{} range group \textquotesingle{}top\textquotesingle{}}
+\StringTok{history interval 250}
+\StringTok{zone history name \textquotesingle{}disp\textquotesingle{} displacement{-}y position (0,0,0)}
+\StringTok{; =========================================================}
+\StringTok{;  find gridpoints at pile cap, store in map called cap}
+\StringTok{fish define find\_cap}
+\StringTok{    global cap = map}
+\StringTok{    loop foreach local gp gp.list}
+\StringTok{        if gp.isgroup(gp,\textquotesingle{}top\textquotesingle{}) then}
+\StringTok{            cap(gp.id(gp)) = gp}
+\StringTok{        endif}
+\StringTok{    endloop}
+\StringTok{end}
+\StringTok{@find\_cap}
+\StringTok{; monitor vertical loading at pile cap}
+\StringTok{fish define vert\_load}
+\StringTok{    local zftot = 0.0}
+\StringTok{    loop foreach gp cap}
+\StringTok{        zftot = zftot + gp.force.unbal.y(gp)}
+\StringTok{    end\_loop}
+\StringTok{    vert\_load = zftot / (0.25*0.5*0.5*math.pi)}
+\StringTok{end}
+\StringTok{;call \textquotesingle{}load\textquotesingle{}}
+\StringTok{; =========================================================}
+\StringTok{fish history name \textquotesingle{}load\textquotesingle{} @vert\_load}
+\StringTok{zone mechanical damping combined}
+\StringTok{model step 58000}
+\StringTok{model save \textquotesingle{}vertical{-}loading\textquotesingle{}}
+\StringTok{"""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-analytics}{%
+\section{Data Analytics}\label{data-analytics}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OperatorTok{;}\NormalTok{  Calculate PY Curves at equidistant locations along pile}
+\OperatorTok{;}
+\OperatorTok{;}\NormalTok{ Stored }\KeywordTok{in} \BuiltInTok{map}\NormalTok{ called pile, key }\OperatorTok{=} \DecValTok{10}\OperatorTok{*}\NormalTok{z positions rounded to integer}
+\OperatorTok{;}\NormalTok{    value }\OperatorTok{=} \BuiltInTok{map}\NormalTok{, key }\StringTok{\textquotesingle{}z\textquotesingle{}} \OperatorTok{=}\NormalTok{ z}\OperatorTok{{-}}\NormalTok{position}
+\OperatorTok{;}                     \StringTok{\textquotesingle{}length\textquotesingle{}} \OperatorTok{=}\NormalTok{ length of ownership of this segment}
+\OperatorTok{;}                     \StringTok{\textquotesingle{}gp\textquotesingle{}} \OperatorTok{=}\NormalTok{ Gridpoint nearest (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,z)}
+\OperatorTok{;}                     \StringTok{\textquotesingle{}nodes\textquotesingle{}} \OperatorTok{=} \BuiltInTok{map}\NormalTok{ of interface nodes at that position, key order entered.}
+\NormalTok{fish define make\_pydata}
+    \KeywordTok{global}\NormalTok{ pile }\OperatorTok{=} \BuiltInTok{map}
+    \OperatorTok{;}\NormalTok{ Build }\BuiltInTok{list}\NormalTok{ of nodes}
+\NormalTok{    loop foreach local ipnt inter.}\BuiltInTok{list}
+\NormalTok{        loop foreach node inter.node.}\BuiltInTok{list}\NormalTok{(ipnt)}
+\NormalTok{            local z }\OperatorTok{=}\NormalTok{ inter.node.pos.z(node)}
+\NormalTok{            local key }\OperatorTok{=}\NormalTok{ math.}\BuiltInTok{round}\NormalTok{(inter.node.pos.z(node) }\OperatorTok{*} \FloatTok{10.0}\NormalTok{)}
+            \ControlFlowTok{if} \BuiltInTok{map}\NormalTok{.has(pile,key) }\OperatorTok{==}\NormalTok{ false then}
+\NormalTok{                local level }\OperatorTok{=} \BuiltInTok{map}
+\NormalTok{                local nodes }\OperatorTok{=} \BuiltInTok{map}
+\NormalTok{                level(}\StringTok{\textquotesingle{}z\textquotesingle{}}\NormalTok{) }\OperatorTok{=}\NormalTok{ z}
+\NormalTok{                level(}\StringTok{\textquotesingle{}gp\textquotesingle{}}\NormalTok{) }\OperatorTok{=}\NormalTok{ gp.near(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,z,}\StringTok{\textquotesingle{}pile\textquotesingle{}}\NormalTok{)}
+\NormalTok{                level(}\StringTok{\textquotesingle{}nodes\textquotesingle{}}\NormalTok{) }\OperatorTok{=}\NormalTok{ nodes}
+\NormalTok{                level(}\StringTok{\textquotesingle{}length\textquotesingle{}}\NormalTok{) }\OperatorTok{=} \FloatTok{0.0}
+\NormalTok{                pile(key) }\OperatorTok{=}\NormalTok{ level}
+\NormalTok{            endif}
+\NormalTok{            level }\OperatorTok{=}\NormalTok{ pile(key)}
+\NormalTok{            nodes }\OperatorTok{=}\NormalTok{ level(}\StringTok{\textquotesingle{}nodes\textquotesingle{}}\NormalTok{)}
+\NormalTok{            nodes(}\BuiltInTok{map}\NormalTok{.size(nodes)) }\OperatorTok{=}\NormalTok{ node}
+\NormalTok{            level(}\StringTok{\textquotesingle{}nodes\textquotesingle{}}\NormalTok{) }\OperatorTok{=}\NormalTok{ nodes}
+\NormalTok{            pile(key) }\OperatorTok{=}\NormalTok{ level}
+\NormalTok{        end\_loop}
+\NormalTok{    end\_loop}
+    \OperatorTok{;}\NormalTok{ Calculate length of ownership of each segment}
+\NormalTok{    local prev\_key }\OperatorTok{=} \StringTok{\textquotesingle{}0\textquotesingle{}}
+\NormalTok{    loop foreach key }\BuiltInTok{map}\NormalTok{.keys(pile)}
+        \ControlFlowTok{if} \BuiltInTok{type}\NormalTok{.name(prev\_key) }\OperatorTok{==} \StringTok{\textquotesingle{}integer\textquotesingle{}}\NormalTok{ then}
+\NormalTok{            local levelp }\OperatorTok{=}\NormalTok{ pile(prev\_key)}
+\NormalTok{            local leveln }\OperatorTok{=}\NormalTok{ pile(key)}
+\NormalTok{            local dist }\OperatorTok{=}\NormalTok{ math.}\BuiltInTok{abs}\NormalTok{(gp.pos.z(levelp(}\StringTok{\textquotesingle{}gp\textquotesingle{}}\NormalTok{)) }\OperatorTok{{-}}\NormalTok{ gp.pos.z(leveln(}\StringTok{\textquotesingle{}gp\textquotesingle{}}\NormalTok{))) }\OperatorTok{*} \FloatTok{0.5}
+\NormalTok{            levelp(}\StringTok{\textquotesingle{}length\textquotesingle{}}\NormalTok{) }\OperatorTok{=}\NormalTok{ levelp(}\StringTok{\textquotesingle{}length\textquotesingle{}}\NormalTok{) }\OperatorTok{+}\NormalTok{ dist}
+\NormalTok{            leveln(}\StringTok{\textquotesingle{}length\textquotesingle{}}\NormalTok{) }\OperatorTok{=}\NormalTok{ leveln(}\StringTok{\textquotesingle{}length\textquotesingle{}}\NormalTok{) }\OperatorTok{+}\NormalTok{ dist}
+\NormalTok{            pile(prev\_key) }\OperatorTok{=}\NormalTok{ levelp}
+\NormalTok{            pile(key) }\OperatorTok{=}\NormalTok{ leveln}
+\NormalTok{        endif}
+\NormalTok{        prev\_key }\OperatorTok{=}\NormalTok{ key}
+\NormalTok{    end\_loop}
+\NormalTok{end}
+\OperatorTok{;}
+\OperatorTok{;}\NormalTok{ Output resulting data structure...}
+\NormalTok{fish define output\_structure}
+\NormalTok{    loop foreach local level pile}
+\NormalTok{        io.out(}\StringTok{\textquotesingle{}Z{-}Position \textquotesingle{}} \OperatorTok{+}\NormalTok{ string(level(}\StringTok{\textquotesingle{}z\textquotesingle{}}\NormalTok{)))}
+\NormalTok{        io.out(}\StringTok{\textquotesingle{}Length \textquotesingle{}} \OperatorTok{+}\NormalTok{ string(level(}\StringTok{\textquotesingle{}length\textquotesingle{}}\NormalTok{)))}
+\NormalTok{        io.out(}\StringTok{\textquotesingle{}Gp \textquotesingle{}} \OperatorTok{+}\NormalTok{ string(gp.}\BuiltInTok{id}\NormalTok{(level(}\StringTok{\textquotesingle{}gp\textquotesingle{}}\NormalTok{))))}
+\NormalTok{        local nodelist }\OperatorTok{=} \StringTok{\textquotesingle{}\textquotesingle{}}
+\NormalTok{        loop foreach local node level(}\StringTok{\textquotesingle{}nodes\textquotesingle{}}\NormalTok{)}
+\NormalTok{            nodelist }\OperatorTok{=}\NormalTok{ nodelist }\OperatorTok{+} \StringTok{\textquotesingle{} \textquotesingle{}} \OperatorTok{+}\NormalTok{ string(interface.node.}\BuiltInTok{id}\NormalTok{(node))}
+\NormalTok{        end\_loop}
+\NormalTok{        io.out(}\StringTok{\textquotesingle{}Nodes\textquotesingle{}}\OperatorTok{+}\NormalTok{nodelist)}
+\NormalTok{    end\_loop}
+\NormalTok{end}
+
+\NormalTok{fish define tot\_reac}
+\NormalTok{    local total }\OperatorTok{=} \FloatTok{0.0}
+\NormalTok{    loop foreach local key }\BuiltInTok{map}\NormalTok{.keys(pile)}
+\NormalTok{        local level }\OperatorTok{=}\NormalTok{ pile(key)}
+\NormalTok{        local accum }\OperatorTok{=} \FloatTok{0.0}
+\NormalTok{        loop foreach local node level(}\StringTok{\textquotesingle{}nodes\textquotesingle{}}\NormalTok{)}
+\NormalTok{            local area }\OperatorTok{=} \FloatTok{2.0} \OperatorTok{*}\NormalTok{ interface.node.area(node)}
+\NormalTok{            local norm }\OperatorTok{=}\NormalTok{ zone.face.normal(inter.node.target.zone(node),inter.node.target.face(node))}
+\NormalTok{            local xnstress }\OperatorTok{=}\NormalTok{ inter.node.stress.normal(node) }\OperatorTok{*}\NormalTok{ norm}\OperatorTok{{-}\textgreater{}}\NormalTok{x }\OperatorTok{*} \OperatorTok{{-}}\FloatTok{1.0}
+\NormalTok{            local xsstress }\OperatorTok{=}\NormalTok{ inter.node.stress.shear.x(node)}
+\NormalTok{            accum }\OperatorTok{=}\NormalTok{ accum }\OperatorTok{+}\NormalTok{ (xnstress }\OperatorTok{+}\NormalTok{ xsstress) }\OperatorTok{*}\NormalTok{  area}
+\NormalTok{        end\_loop}
+\NormalTok{        local xdis }\OperatorTok{=}\NormalTok{ gp.disp.x(level(}\StringTok{\textquotesingle{}gp\textquotesingle{}}\NormalTok{))}
+\NormalTok{        total }\OperatorTok{=}\NormalTok{ total }\OperatorTok{+}\NormalTok{ accum}
+\NormalTok{        table(string(key),xdis) }\OperatorTok{=}\NormalTok{ accum}\OperatorTok{/}\NormalTok{level(}\StringTok{\textquotesingle{}length\textquotesingle{}}\NormalTok{)}
+\NormalTok{    end\_loop}
+\NormalTok{    tot\_reac }\OperatorTok{=}\NormalTok{ total}
+\NormalTok{end}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
@@ -919,8 +1050,8 @@ GWT = 5.5m\\
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{alterations-1}{%
-\section{Alterations}\label{alterations-1}}
+\hypertarget{alterations}{%
+\section{Alterations}\label{alterations}}
 
 \hypertarget{install-the-pile}{%
 \subsection{install the pile}\label{install-the-pile}}
@@ -1080,8 +1211,8 @@ coupling-friction-table.\\
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{alterations-2}{%
-\section{Alterations}\label{alterations-2}}
+\hypertarget{alterations-1}{%
+\section{Alterations}\label{alterations-1}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1885,7 +2016,7 @@ contact with zone surface faces that are not part of the interface
 itself.
 
 \begin{figure}[H]
-\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-66}
+\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-68}
 \end{figure}
 
 Every reference to an interface uses a name (like the table command) to
