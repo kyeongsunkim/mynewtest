@@ -1,8 +1,7 @@
-fig:unnamed-chunk-63
+fig:unnamed-chunk-65
 kaist-model
 initial-configuration
 zones
-group
 constitutive-model
 soil-structure-interface
 boundary-conditions
@@ -99,7 +98,6 @@ reference-collective
 uplift-resistance-of-anchor-plate
 before-1968
 post-1968
-post-2000
 numerical-analysis
 standards
 textbook

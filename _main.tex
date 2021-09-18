@@ -378,6 +378,10 @@ wonderful have been, and are being, evolved.
 
 \CommentTok{\# PARAMETERS \#}
 
+\CommentTok{\# Physical Constants}
+\NormalTok{\_gravity }\OperatorTok{=} \FloatTok{9.80665}
+\NormalTok{\_K }\OperatorTok{=} \FloatTok{0.4286}
+
 \CommentTok{\# Dimensions}
 \NormalTok{\_D\_shaft }\OperatorTok{=} \DecValTok{1}
 \NormalTok{\_H\_shaft }\OperatorTok{=} \FloatTok{7.45}
@@ -389,18 +393,20 @@ wonderful have been, and are being, evolved.
 
 \CommentTok{\# Mesh Details}
 \NormalTok{\_radial }\OperatorTok{=} \DecValTok{50}
-\NormalTok{\_perimeter }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
+\NormalTok{\_perimeter }\OperatorTok{=}\NormalTok{ \_radial}
 \NormalTok{\_axial }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
 \NormalTok{\_outer }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
 
 \CommentTok{\# Concrete Properties}
 \NormalTok{\_bulk }\OperatorTok{=} \FloatTok{13.9e9}
 \NormalTok{\_shear }\OperatorTok{=} \FloatTok{10.4e9}
+\NormalTok{\_density\_concrete }\OperatorTok{=} \DecValTok{2950}
 
 \CommentTok{\# Soil Properties}
 \NormalTok{\_E\_o }\OperatorTok{=} \FloatTok{1e7}
 \NormalTok{\_const }\OperatorTok{=} \FloatTok{1e8}
 \NormalTok{\_poisson }\OperatorTok{=} \FloatTok{0.25}
+\NormalTok{\_density\_soil }\OperatorTok{=} \DecValTok{1530}
 
 \CommentTok{\# Interface Properties}
 \NormalTok{\_stiff\_norm }\OperatorTok{=} \FloatTok{1e8}
@@ -416,6 +422,18 @@ wonderful have been, and are being, evolved.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# ZONE \#}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{; ==================================================================}
+\StringTok{;   Simulation of Pull{-}out for Shallow Foundation}
+\StringTok{; ==================================================================}
+\StringTok{model new}
+\StringTok{fish automatic{-}create off}
+\StringTok{[global t =  \textquotesingle{}Pull{-}out for Spread Foundation \textquotesingle{}]}
+\StringTok{[t += }\SpecialCharTok{\{name\}}\StringTok{]}
+\StringTok{model title [t]}
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(name}\OperatorTok{=}\StringTok{"(B=6.5m, D=7.45m, Dr=78\%)"}\NormalTok{))}
+
 \NormalTok{command\_zone }\OperatorTok{=} \StringTok{"""}
 \StringTok{model new}
 \StringTok{z crea r{-}t p 0 (0,0,0) ...}
@@ -454,26 +472,6 @@ wonderful have been, and are being, evolved.
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/f}
 
-\hypertarget{group}{%
-\section{Group}\label{group}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# GROUP \#}
-\NormalTok{p }\OperatorTok{=}\NormalTok{ za.pos()}
-\NormalTok{x,y,z }\OperatorTok{=}\NormalTok{ p.T}
-\BuiltInTok{print}\NormalTok{(it.zone.count(), }\StringTok{"zones in whole model"}\NormalTok{)}
-
-\NormalTok{shaft }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (np.sqrt(x}\OperatorTok{**}\DecValTok{2}\OperatorTok{+}\NormalTok{z}\OperatorTok{**}\DecValTok{2}\NormalTok{)}\OperatorTok{\textless{}}\NormalTok{\_D\_shaft, y}\OperatorTok{\textless{}}\NormalTok{\_H\_shaft))}
-\NormalTok{za.set\_group(shaft, }\StringTok{"shaft"}\NormalTok{) }\CommentTok{\# set the zones with shaft = true have "shaft" and "geometry"}
-\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"shaft"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in shaft group."}\NormalTok{) }\CommentTok{\#output how many zones are in the corner group}
-
-\NormalTok{plate }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (x}\OperatorTok{\textless{}}\NormalTok{\_B\_footing,z}\OperatorTok{\textless{}}\NormalTok{\_B\_footing, y}\OperatorTok{\textgreater{}}\NormalTok{\_H\_shaft,y}\OperatorTok{\textless{}}\NormalTok{\_D\_footing))}
-\NormalTok{za.set\_group(plate, }\StringTok{"plate"}\NormalTok{) }\CommentTok{\# set the zones with plate = true have "plate" and "geometry"}
-\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"plate"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in plate group."}\NormalTok{) }\CommentTok{\#output how many zones are in the corner group}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{constitutive-model}{%
 \section{Constitutive Model}\label{constitutive-model}}
 
@@ -494,8 +492,6 @@ values of bulk and shear modulus in the grid, as in this example:
 \CommentTok{\# CONSTITUTIVE MODEL}
 \NormalTok{it.command(}\StringTok{"""}
 \StringTok{zone cmodel assign elastic range group "Radial Tunnel1"}
-\StringTok{zone cmodel assign elastic range group \textquotesingle{}shaft\textquotesingle{}}
-\StringTok{zone cmodel assign elastic range group \textquotesingle{}plate\textquotesingle{}}
 
 \StringTok{fish define fname(E\_o,const)}
 \StringTok{loop foreach pnt zone.list}
@@ -505,14 +501,31 @@ values of bulk and shear modulus in the grid, as in this example:
 \StringTok{end\_loop}
 \StringTok{end}
 \StringTok{@fname(}\SpecialCharTok{\{E\_o\_\}}\StringTok{,}\SpecialCharTok{\{const\_\}}\StringTok{)}
-\StringTok{zone property poisson }\SpecialCharTok{\{poisson\_\}}
+\StringTok{zone property poisson }\SpecialCharTok{\{poisson\_\}}\StringTok{ density }\SpecialCharTok{\{density\_soil\}}
 \StringTok{plot item create zone contour property name \textquotesingle{}young\textquotesingle{}}
-\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(E\_o\_}\OperatorTok{=}\NormalTok{\_E\_o,const\_}\OperatorTok{=}\NormalTok{\_const,poisson\_}\OperatorTok{=}\NormalTok{\_poisson))}
+\StringTok{plot item create zone contour property name \textquotesingle{}density\textquotesingle{}}
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(E\_o\_}\OperatorTok{=}\NormalTok{\_E\_o,const\_}\OperatorTok{=}\NormalTok{\_const,poisson\_}\OperatorTok{=}\NormalTok{\_poisson,density\_soil}\OperatorTok{=}\NormalTok{\_density\_soil))}
+
+\CommentTok{\# GROUP \#}
+
+\NormalTok{p }\OperatorTok{=}\NormalTok{ za.pos()}
+\NormalTok{x,y,z }\OperatorTok{=}\NormalTok{ p.T}
+\BuiltInTok{print}\NormalTok{(it.zone.count(), }\StringTok{"zones in whole model"}\NormalTok{)}
+
+\NormalTok{shaft }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (np.sqrt(x}\OperatorTok{**}\DecValTok{2}\OperatorTok{+}\NormalTok{z}\OperatorTok{**}\DecValTok{2}\NormalTok{)}\OperatorTok{\textless{}}\NormalTok{\_D\_shaft, y}\OperatorTok{\textless{}}\NormalTok{\_H\_shaft))}
+\NormalTok{za.set\_group(shaft, }\StringTok{"shaft"}\NormalTok{) }\CommentTok{\# set the zones with shaft = true have "shaft" and "geometry"}
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"shaft"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in shaft group."}\NormalTok{) }\CommentTok{\#output how many zones are in the corner group}
+
+\NormalTok{plate }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (x}\OperatorTok{\textless{}}\NormalTok{\_B\_footing,z}\OperatorTok{\textless{}}\NormalTok{\_B\_footing, y}\OperatorTok{\textgreater{}}\NormalTok{\_H\_shaft,y}\OperatorTok{\textless{}}\NormalTok{\_D\_footing))}
+\NormalTok{za.set\_group(plate, }\StringTok{"plate"}\NormalTok{) }
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"plate"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in plate group."}\NormalTok{) }
 
 \NormalTok{it.command(}\StringTok{"""}
-\StringTok{zone property bulk }\SpecialCharTok{\{bulk\}}\StringTok{  shear }\SpecialCharTok{\{shear\}}\StringTok{ range group \textquotesingle{}shaft\textquotesingle{}}
-\StringTok{zone property bulk }\SpecialCharTok{\{bulk\}}\StringTok{  shear }\SpecialCharTok{\{shear\}}\StringTok{ range group \textquotesingle{}plate\textquotesingle{}}
-\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(bulk}\OperatorTok{=}\NormalTok{\_bulk,shear}\OperatorTok{=}\NormalTok{\_shear))}
+\StringTok{zone cmodel assign elastic range group \textquotesingle{}shaft\textquotesingle{}}
+\StringTok{zone cmodel assign elastic range group \textquotesingle{}plate\textquotesingle{}}
+\StringTok{zone property bulk }\SpecialCharTok{\{bulk\_\}}\StringTok{ shear }\SpecialCharTok{\{shear\_\}}\StringTok{ density }\SpecialCharTok{\{density\_\}}\StringTok{ range group \textquotesingle{}shaft\textquotesingle{}}
+\StringTok{zone property bulk }\SpecialCharTok{\{bulk\_\}}\StringTok{ shear }\SpecialCharTok{\{shear\_\}}\StringTok{ density }\SpecialCharTok{\{density\_\}}\StringTok{ range group \textquotesingle{}plate\textquotesingle{}}
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(bulk\_}\OperatorTok{=}\NormalTok{\_bulk,shear\_}\OperatorTok{=}\NormalTok{\_shear,density\_}\OperatorTok{=}\NormalTok{\_density\_concrete))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -554,14 +567,14 @@ than with a zone property command as in an earlier example.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# INTERFACE GROUP \#}
+\CommentTok{\# INTERFACE \#}
 
 \NormalTok{it.command(}\StringTok{"""}
 \StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} create by{-}face separate range group \textquotesingle{}plate\textquotesingle{} group \textquotesingle{}Radial Tunnel1\textquotesingle{}}
-\StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} node property stiffness{-}normal }\SpecialCharTok{\{stiff\_norm\_\}}\StringTok{ stiffness{-}shear }\SpecialCharTok{\{stiff\_shear\_\}}
+\StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} node property stiffness{-}normal }\SpecialCharTok{\{stiff\_norm\_\}}\StringTok{ stiffness{-}shear }\SpecialCharTok{\{stiff\_shear\_\}}\StringTok{ friction 20 cohesion 30000}
 
 \StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} create by{-}face separate range group \textquotesingle{}shaft\textquotesingle{} group \textquotesingle{}Radial Tunnel1\textquotesingle{}}
-\StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} node property stiffness{-}normal }\SpecialCharTok{\{stiff\_norm\_\}}\StringTok{ stiffness{-}shear }\SpecialCharTok{\{stiff\_shear\_\}}
+\StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} node property stiffness{-}normal }\SpecialCharTok{\{stiff\_norm\_\}}\StringTok{ stiffness{-}shear }\SpecialCharTok{\{stiff\_shear\_\}}\StringTok{ friction 20 cohesion 30000}
 
 \StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(stiff\_norm\_}\OperatorTok{=}\NormalTok{\_stiff\_norm, stiff\_shear\_}\OperatorTok{=}\NormalTok{\_stiff\_shear))}
 \end{Highlighting}
@@ -572,8 +585,61 @@ than with a zone property command as in an earlier example.
 \hypertarget{boundary-conditions}{%
 \section{Boundary Conditions}\label{boundary-conditions}}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bottom }\OperatorTok{=}\NormalTok{ (y }\OperatorTok{==}\NormalTok{np.amax(y))}
+\NormalTok{za.set\_group(bottom, }\StringTok{"bottom"}\NormalTok{) }
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"bottom"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in bottom group."}\NormalTok{) }
+
+\NormalTok{up }\OperatorTok{=}\NormalTok{ (y }\OperatorTok{==}\NormalTok{ np.amin(y))}
+\NormalTok{za.set\_group(up, }\StringTok{"up"}\NormalTok{) }
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"up"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in up group."}\NormalTok{) }
+
+\NormalTok{x\_side }\OperatorTok{=}\NormalTok{ (z }\OperatorTok{\textless{}=}\NormalTok{ np.amin(z)}\OperatorTok{+}\FloatTok{1e{-}4}\NormalTok{)}
+\NormalTok{za.set\_group(x\_side, }\StringTok{"x\_side"}\NormalTok{) }
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"x\_side"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in x\_side group."}\NormalTok{) }
+
+\NormalTok{z\_side }\OperatorTok{=}\NormalTok{ (x }\OperatorTok{\textless{}=}\NormalTok{ np.amin(x)}\OperatorTok{+}\FloatTok{1e{-}4}\NormalTok{)}
+\NormalTok{za.set\_group(z\_side, }\StringTok{"z\_side"}\NormalTok{) }
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"z\_side"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in z\_side group."}\NormalTok{) }
+
+\NormalTok{x\_side\_end }\OperatorTok{=}\NormalTok{ (z }\OperatorTok{==}\NormalTok{ np.amax(z))}
+\NormalTok{za.set\_group(x\_side\_end, }\StringTok{"x\_side\_end"}\NormalTok{) }
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"x\_side\_end"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in x\_side\_end group."}\NormalTok{) }
+
+\NormalTok{z\_side\_end }\OperatorTok{=}\NormalTok{ (x }\OperatorTok{==}\NormalTok{ np.amax(x))}
+\NormalTok{za.set\_group(z\_side\_end, }\StringTok{"z\_side\_end"}\NormalTok{) }
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"z\_side\_end"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in z\_side\_end group."}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{initial-equilibrium}{%
 \section{Initial Equilibrium}\label{initial-equilibrium}}
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/initial}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone face apply velocity{-}normal 0 range group \textquotesingle{}bottom\textquotesingle{}}
+\StringTok{zone face apply velocity{-}normal 0 range group \textquotesingle{}x\_side\textquotesingle{} or \textquotesingle{}z\_side\textquotesingle{}}
+\StringTok{zone face apply velocity{-}normal 0 range group \textquotesingle{}x\_side\_end\textquotesingle{} or \textquotesingle{}z\_side\_end\textquotesingle{}}
+
+\StringTok{model gravity 0 }\SpecialCharTok{\{gravity\_\}}\StringTok{ 0}
+\StringTok{zone initialize{-}stress ratio }\SpecialCharTok{\{K\_\}}
+\StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} node initialize{-}stresses}
+\StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} node initialize{-}stresses}
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(gravity\_}\OperatorTok{=}\NormalTok{\_gravity, K\_ }\OperatorTok{=}\NormalTok{ \_K))}
+
+\CommentTok{\# INITIAL EQUILIBRIUM \#}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone ratio local}
+\StringTok{model solve ratio 1e{-}4}
+\StringTok{model save \textquotesingle{}initial\textquotesingle{}}
+\StringTok{"""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{alterations}{%
 \section{Alterations}\label{alterations}}
@@ -583,23 +649,68 @@ than with a zone property command as in an earlier example.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{(}\DecValTok{2000000}\NormalTok{, }\StringTok{\textquotesingle{}zones in whole model\textquotesingle{}}\NormalTok{)}
-\NormalTok{(}\DecValTok{22940}\NormalTok{, }\StringTok{\textquotesingle{}zones in shaft group.\textquotesingle{}}\NormalTok{)}
-\NormalTok{(}\DecValTok{65000}\NormalTok{, }\StringTok{\textquotesingle{}zones in plate group.\textquotesingle{}}\NormalTok{)}
+\OperatorTok{;} \OperatorTok{==================================================================}
+\OperatorTok{;}\NormalTok{   IPython Consol Output}
+\OperatorTok{;} \OperatorTok{==================================================================}
+\NormalTok{(}\DecValTok{1250000}\NormalTok{, }\StringTok{\textquotesingle{}zones in whole model\textquotesingle{}}\NormalTok{)}
+\NormalTok{(}\DecValTok{11346}\NormalTok{, }\StringTok{\textquotesingle{}zones in shaft group.\textquotesingle{}}\NormalTok{)}
+\NormalTok{(}\DecValTok{32500}\NormalTok{, }\StringTok{\textquotesingle{}zones in plate group.\textquotesingle{}}\NormalTok{)}
+\NormalTok{(}\DecValTok{12500}\NormalTok{, }\StringTok{\textquotesingle{}zones in bottom group.\textquotesingle{}}\NormalTok{)}
+\NormalTok{(}\DecValTok{12500}\NormalTok{, }\StringTok{\textquotesingle{}zones in up group.\textquotesingle{}}\NormalTok{)}
+\NormalTok{(}\DecValTok{5000}\NormalTok{, }\StringTok{\textquotesingle{}zones in x\_side group.\textquotesingle{}}\NormalTok{)}
+\NormalTok{(}\DecValTok{5000}\NormalTok{, }\StringTok{\textquotesingle{}zones in z\_side group.\textquotesingle{}}\NormalTok{)}
+\NormalTok{(}\DecValTok{5000}\NormalTok{, }\StringTok{\textquotesingle{}zones in x\_side\_end group.\textquotesingle{}}\NormalTok{)}
+\NormalTok{(}\DecValTok{5000}\NormalTok{, }\StringTok{\textquotesingle{}zones in z\_side\_end group.\textquotesingle{}}\NormalTok{)}
 
+\OperatorTok{;} \OperatorTok{==================================================================}
+\OperatorTok{;}\NormalTok{   FISH Consol Output}
+\OperatorTok{;} \OperatorTok{==================================================================}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}@}\NormalTok{fname(}\FloatTok{10000000.0}\NormalTok{,}\FloatTok{100000000.0}\NormalTok{)}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone }\BuiltInTok{property}\NormalTok{ poisson }\FloatTok{0.25}\NormalTok{ density }\DecValTok{1530}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property poisson }\BuiltInTok{set} \KeywordTok{in} \DecValTok{1250000}\NormalTok{ zones using the elastic model.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{plot item create zone contour }\BuiltInTok{property}\NormalTok{ name }\StringTok{\textquotesingle{}young\textquotesingle{}}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{plot item create zone contour }\BuiltInTok{property}\NormalTok{ name }\StringTok{\textquotesingle{}density\textquotesingle{}}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone cmodel assign elastic }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}shaft\textquotesingle{}}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone cmodel assign elastic }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}plate\textquotesingle{}}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{13900000000.0}\NormalTok{ shear }\FloatTok{10400000000.0}\NormalTok{ density }\DecValTok{2950} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}shaft\textquotesingle{}}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property bulk }\BuiltInTok{set} \KeywordTok{in} \DecValTok{11346}\NormalTok{ zones using the elastic model.}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property shear }\BuiltInTok{set} \KeywordTok{in} \DecValTok{11346}\NormalTok{ zones using the elastic model.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone }\BuiltInTok{property}\NormalTok{ bulk }\FloatTok{13900000000.0}\NormalTok{ shear }\FloatTok{10400000000.0}\NormalTok{ density }\DecValTok{2950} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}plate\textquotesingle{}}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property bulk }\BuiltInTok{set} \KeywordTok{in} \DecValTok{32500}\NormalTok{ zones using the elastic model.}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property shear }\BuiltInTok{set} \KeywordTok{in} \DecValTok{32500}\NormalTok{ zones using the elastic model.}
 \NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone interface }\StringTok{\textquotesingle{}interface 1\textquotesingle{}}\NormalTok{ create by}\OperatorTok{{-}}\NormalTok{face separate }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}plate\textquotesingle{}}\NormalTok{ group }\StringTok{\textquotesingle{}Radial Tunnel1\textquotesingle{}}
-\OperatorTok{{-}{-}{-}} \DecValTok{11697}\NormalTok{ gridpoints duplicated, }\DecValTok{23160}\NormalTok{ surface faces created.}
-\OperatorTok{{-}{-}{-}} \DecValTok{47}\NormalTok{ gridpoints skipped on internal edge.}
-\OperatorTok{{-}{-}{-}} \DecValTok{11580}\NormalTok{ faces on one side were assigned the group name Interface }\DecValTok{1} \KeywordTok{in}\NormalTok{ slot Interface.}
-\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone interface }\StringTok{\textquotesingle{}interface 1\textquotesingle{}}\NormalTok{ node }\BuiltInTok{property}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1e8}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1e8}
-\OperatorTok{{-}{-}{-}}\NormalTok{ Property Normal Stiffness }\BuiltInTok{set} \KeywordTok{in} \DecValTok{11744}\NormalTok{ interface }\DecValTok{1}\NormalTok{ nodes.}
-\OperatorTok{{-}{-}{-}}\NormalTok{ Property Shear Stiffness }\BuiltInTok{set} \KeywordTok{in} \DecValTok{11744}\NormalTok{ interface }\DecValTok{1}\NormalTok{ nodes.}
+\OperatorTok{{-}{-}{-}} \DecValTok{6200}\NormalTok{ gridpoints duplicated, }\DecValTok{12234}\NormalTok{ surface faces created.}
+\OperatorTok{{-}{-}{-}} \DecValTok{31}\NormalTok{ gridpoints skipped on internal edge.}
+\OperatorTok{{-}{-}{-}} \DecValTok{6117}\NormalTok{ faces on one side were assigned the group name Interface }\DecValTok{1} \KeywordTok{in}\NormalTok{ slot Interface.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone interface }\StringTok{\textquotesingle{}interface 1\textquotesingle{}}\NormalTok{ node }\BuiltInTok{property}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{100000000.0}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{100000000.0}\NormalTok{ friction }\DecValTok{20}\NormalTok{ cohesion }\DecValTok{30000}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property Normal Stiffness }\BuiltInTok{set} \KeywordTok{in} \DecValTok{6231}\NormalTok{ interface }\DecValTok{1}\NormalTok{ nodes.}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property Shear Stiffness }\BuiltInTok{set} \KeywordTok{in} \DecValTok{6231}\NormalTok{ interface }\DecValTok{1}\NormalTok{ nodes.}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property Friction }\BuiltInTok{set} \KeywordTok{in} \DecValTok{6231}\NormalTok{ interface }\DecValTok{1}\NormalTok{ nodes.}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property Cohesion }\BuiltInTok{set} \KeywordTok{in} \DecValTok{6231}\NormalTok{ interface }\DecValTok{1}\NormalTok{ nodes.}
 \NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone interface }\StringTok{\textquotesingle{}interface 2\textquotesingle{}}\NormalTok{ create by}\OperatorTok{{-}}\NormalTok{face separate }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}shaft\textquotesingle{}}\NormalTok{ group }\StringTok{\textquotesingle{}Radial Tunnel1\textquotesingle{}}
-\OperatorTok{{-}{-}{-}} \DecValTok{2961}\NormalTok{ gridpoints duplicated, }\DecValTok{5704}\NormalTok{ surface faces created.}
-\OperatorTok{{-}{-}{-}} \DecValTok{2852}\NormalTok{ faces on one side were assigned the group name Interface }\DecValTok{2} \KeywordTok{in}\NormalTok{ slot Interface.}
-\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone interface }\StringTok{\textquotesingle{}interface 2\textquotesingle{}}\NormalTok{ node }\BuiltInTok{property}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1e8}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1e8}
-\OperatorTok{{-}{-}{-}}\NormalTok{ Property Normal Stiffness }\BuiltInTok{set} \KeywordTok{in} \DecValTok{2961}\NormalTok{ interface }\DecValTok{2}\NormalTok{ nodes.}
-\OperatorTok{{-}{-}{-}}\NormalTok{ Property Shear Stiffness }\BuiltInTok{set} \KeywordTok{in} \DecValTok{2961}\NormalTok{ interface }\DecValTok{2}\NormalTok{ nodes.}
+\OperatorTok{{-}{-}{-}} \DecValTok{1953}\NormalTok{ gridpoints duplicated, }\DecValTok{3720}\NormalTok{ surface faces created.}
+\OperatorTok{{-}{-}{-}} \DecValTok{1860}\NormalTok{ faces on one side were assigned the group name Interface }\DecValTok{2} \KeywordTok{in}\NormalTok{ slot Interface.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone interface }\StringTok{\textquotesingle{}interface 2\textquotesingle{}}\NormalTok{ node }\BuiltInTok{property}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{100000000.0}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{100000000.0}\NormalTok{ friction }\DecValTok{20}\NormalTok{ cohesion }\DecValTok{30000}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property Normal Stiffness }\BuiltInTok{set} \KeywordTok{in} \DecValTok{1953}\NormalTok{ interface }\DecValTok{2}\NormalTok{ nodes.}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property Shear Stiffness }\BuiltInTok{set} \KeywordTok{in} \DecValTok{1953}\NormalTok{ interface }\DecValTok{2}\NormalTok{ nodes.}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property Friction }\BuiltInTok{set} \KeywordTok{in} \DecValTok{1953}\NormalTok{ interface }\DecValTok{2}\NormalTok{ nodes.}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Property Cohesion }\BuiltInTok{set} \KeywordTok{in} \DecValTok{1953}\NormalTok{ interface }\DecValTok{2}\NormalTok{ nodes.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\DecValTok{0} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}bottom\textquotesingle{}}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Apply conditions added to }\DecValTok{12701}\NormalTok{ gridpoints.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\DecValTok{0} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}x\_side\textquotesingle{}} \KeywordTok{or} \StringTok{\textquotesingle{}z\_side\textquotesingle{}}
+\OperatorTok{{-}{-}{-}} \DecValTok{101}\NormalTok{ gridpoints }\ControlFlowTok{with}\NormalTok{ conflicting conditions had those conditions removed.}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Apply conditions added to }\DecValTok{11308}\NormalTok{ gridpoints.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\DecValTok{0} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}x\_side\_end\textquotesingle{}} \KeywordTok{or} \StringTok{\textquotesingle{}z\_side\_end\textquotesingle{}}
+\OperatorTok{{-}{-}{-}} \DecValTok{101}\NormalTok{ gridpoints }\ControlFlowTok{with}\NormalTok{ conflicting conditions had those conditions removed.}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Apply conditions added to }\DecValTok{10601}\NormalTok{ gridpoints.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{model gravity }\DecValTok{0} \FloatTok{9.80665} \DecValTok{0}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Gravity has been }\BuiltInTok{set}\NormalTok{ to: ( }\FloatTok{0.000000e+00} \FloatTok{9.806650e+00} \FloatTok{0.000000e+00}\NormalTok{).}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone initialize}\OperatorTok{{-}}\NormalTok{stress ratio }\FloatTok{0.4286}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Stresses initialized }\KeywordTok{in} \DecValTok{1250000}\NormalTok{ zones.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone interface }\StringTok{\textquotesingle{}interface 1\textquotesingle{}}\NormalTok{ node initialize}\OperatorTok{{-}}\NormalTok{stresses}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Initial stress state }\BuiltInTok{set} \KeywordTok{in} \DecValTok{6231}\NormalTok{ interface nodes.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone interface }\StringTok{\textquotesingle{}interface 2\textquotesingle{}}\NormalTok{ node initialize}\OperatorTok{{-}}\NormalTok{stresses}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Initial stress state }\BuiltInTok{set} \KeywordTok{in} \DecValTok{1953}\NormalTok{ interface nodes.}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1779,7 +1890,7 @@ contact with zone surface faces that are not part of the interface
 itself.
 
 \begin{figure}[H]
-\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-63}
+\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-65}
 \end{figure}
 
 Every reference to an interface uses a name (like the table command) to
@@ -3719,11 +3830,13 @@ bolt.
 \item
   Kotter's equation
 \item
-  Balla (1961)
+  D.C. Drucker and W. Prager 1951
+\item
+  Balla 1961
 \item
   Mors
 \item
-  Matsuo
+  Matsuo 1968
 \item
   Vesic
 \end{itemize}
@@ -3732,7 +3845,6 @@ bolt.
 \subsubsection{Post-1968}\label{post-1968}}
 
 \begin{itemize}
-\tightlist
 \item
   Meyerhof, G.G., and Adams, J.I. 1968
 \item
@@ -3740,24 +3852,40 @@ bolt.
 \item
   Das, B.M., and Seeley, G.R. 1975
 \item
+  Ovesen 1981
+\item
+  Walters 1982
+\item
   Rowe, R.K., and Davis, H. 1982
 \item
   Dickin, E.A., and Leung, C.F. 1983
+\item
+  Vermeer 1985
 \item
   Murray, E.J., and Geddes, J.D. 1987
 \item
   Dickin, E.A. 1988
 \item
+  Sutherland 1988
+\item
+  Kulhawy 1988
+\item
   Koutsabeloulis, N.C., and Griffiths, D.V. 1989
-\end{itemize}
-
-\hypertarget{post-2000}{%
-\subsubsection{Post-2000}\label{post-2000}}
-
-\begin{itemize}
-\tightlist
+\item
+  Bouazza 1990
+\item
+  Tadatsugu Tanaka, and Toshinori Sakai 1993
+  \#\#\#\# Post-2000
 \item
   Merifield, R.S., and Sloan, S.W. 2006
+\item
+  Cheuk, White, and Bolton 2008
+\item
+  Kumar 2008
+\item
+  V.B. Deshmukh 2011
+\item
+  Wu, Kouretzis, Suwal, Sloan 2019
 \end{itemize}
 
 \hypertarget{numerical-analysis}{%
@@ -3766,9 +3894,21 @@ bolt.
 \begin{itemize}
 \tightlist
 \item
-  Krabbenhoft (2005)
+  D.V. Griffiths 1993
 \item
-  Lyamin (2002)
+  Lyamin 2002
+\item
+  Krabbenhoft, Lyamin, Sloan 2006
+\item
+  J Kumar 2008
+\item
+  Bobet 2010
+\item
+  Ahmed M. Fahmy, John R. de Bruyn 2013
+\item
+  Chong Tang, Kim-Chuan Toh, Kok-Kwang Phoon, 2014
+\item
+  Arya Das, and Ashis Kumar Bera 2019
 \end{itemize}
 
 \hypertarget{standards}{%
@@ -3779,7 +3919,9 @@ bolt.
 \item
   IEEE 2001
 \item
-  DS 1110, DS 1111
+  EPRI TR-105206 1995
+\item
+  DS 1110, DS 1111 2013
 \end{itemize}
 
 \hypertarget{textbook}{%
@@ -3788,7 +3930,15 @@ bolt.
 \begin{itemize}
 \tightlist
 \item
-  Das, B. M. 2013. Earth Anchors
+  R. Hill The Mathematical Theory of Plasticity 1950
+\item
+  W.F. Chen Limit Analysis and Soil Plasticity 1975
+\item
+  W.F. Chen Limit Analysis in Soil Mechanics 1990
+\item
+  David M. Potts, and Lidija Zdravkovic FSAFEM book 1, FEA in Geotechnical Engineering 1999
+\item
+  Das, B. M. Earth Anchors 2013
 \end{itemize}
 
 \hypertarget{ph.d-thesis}{%
@@ -3797,11 +3947,25 @@ bolt.
 \begin{itemize}
 \tightlist
 \item
-  Evans
+  Charles Hughey Evans 1983
 \item
-  Levy
+  M.O. Fadl 1981
 \item
-  Feynman
+  Peter Jay Bosscher 1981
+\item
+  Abdelmalek Bouazza 1990
+\item
+  D.V. Griffiths 1993
+\item
+  Ahmed Mohmed Ebid 2004
+\item
+  Shentang Wang 2006
+\item
+  Vivek Balwantrao Deshmukh 2010
+\item
+  Frederick Levy 2014
+\item
+  Jeremy Bleyer 2016
 \end{itemize}
 
 \hypertarget{awarded-lectures}{%
