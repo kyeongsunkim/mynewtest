@@ -294,22 +294,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">4</span> Grid</h1>
 <div id="primitive-shapes" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Primitive Shapes</h2>
-<p><img src="myfigureeeeee/radial-cylinder.PNG" width="100%" /></p>
-<p><img src="myfigureeeeee/radial-square.PNG" width="100%" /></p>
 <p><img src="myfigureeeeee/example-FLAC3D-Model.PNG" width="100%" /></p>
-<p><em>note: zone create generates primitive grid</em><br />
-<em>note: zone gridpoint create puts gridpoints at specific locations</em><br />
-<em>note: zone gridpoint merge ensures separate primitives are connected
-properly</em><br />
+<blockquote>
+<p><em>note: zone create generates primitive grid</em>
+<em>note: zone gridpoint create puts gridpoints at specific locations</em>
+<em>note: zone gridpoint merge ensures separate primitives are connected properly</em>
 <em>note: zone attach connects primitive meshes of different zone sizes.</em></p>
+</blockquote>
 <div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="grid.html#cb20-1" aria-hidden="true" tabindex="-1"></a>zone create radial<span class="op">-</span>cylinder size <span class="dv">5</span> <span class="dv">10</span> <span class="dv">6</span> <span class="dv">12</span> fill</span>
 <span id="cb20-2"><a href="grid.html#cb20-2" aria-hidden="true" tabindex="-1"></a>zone create radial<span class="op">-</span>cylinder size <span class="dv">5</span> <span class="dv">10</span> <span class="dv">6</span> <span class="dv">12</span> ratio <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">5</span></span>
 <span id="cb20-3"><a href="grid.html#cb20-3" aria-hidden="true" tabindex="-1"></a>each size <span class="kw">is</span> controlled by a ratio (geometric ratio of <span class="fl">1.2</span> times preceding zone)</span></code></pre></div>
+<blockquote>
 <p>ex) 5 along inner radius of cylindrical tunnel,<br />
 10 along axis<br />
 6 along circumference of tunnel<br />
 12 between periphery of tunnel and outer boundary of model<br />
 <em>note: size keyword defines the number of zones in the grid.</em></p>
+</blockquote>
 <p>keywords for zone create:<br />
 - dimension - edge - fill - point (boundary dimensions) - ratio (coarser
 toward edge) - size</p>
@@ -326,43 +327,42 @@ toward edge) - size</p>
 <span id="cb21-8"><a href="grid.html#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> boundary coord are defined using point keyword</span>
 <span id="cb21-9"><a href="grid.html#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-10"><a href="grid.html#cb21-10" aria-hidden="true" tabindex="-1"></a>zone reflect dip <span class="dv">90</span> dip<span class="op">-</span>direction <span class="dv">270</span> origin (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) </span></code></pre></div>
-<p>this adds symmetric part.</p>
-<p><br />
-<em>note: The symmetry plane is a vertical plane (located by the dip,
-dip-direction, and origin keywords) coincident with the x = 0 plane.
-Note that dip angle (dip) and dip direction (dip-direction) assume that
-x corresponds to “East,” y to “North,” and z to “Up.”</em><br />
-</p>
+<p>This adds symmetric part.</p>
+<blockquote>
+<p><em>note: The symmetry plane is a vertical plane (located by the dip,dip-direction, and origin keywords) coincident with the x = 0 plane.</em>
+<em>Note that dip angle (dip) and dip direction (dip-direction)</em>
+<em>assume thatx corresponds to “East,” y to “North,” and z to “Up.”</em></p>
+</blockquote>
 <p>third option, the zone gridpoint create command, is available to
 position single points in the model region.</p>
 <p><br />
-<em>note: zone gridpoint create is used for positioning reference points of
-primitives</em><br />
+&gt; <em>note: zone gridpoint create is used for positioning reference points ofprimitives</em><br />
 </p>
 <p>During execution of a zone create command, a check is made for each
 boundary gridpoint against the boundary gridpoints of zones that already
 exist.</p>
 <p><br />
-If two boundary gridpoints fall within a tolerance of 1 ? 10-7 (relative
-to the magnitude of the gridpoints position vector) of each other, they
-are assumed to be the same point,</p>
+If two boundary gridpoints fall within a tolerance of 1 10-7 (relative to the magnitude of the gridpoints position vector) of each other, they are assumed to be the same point,</p>
 <p><br />
-If it is discovered that some gridpoints don’t match, the zone gridpoint
-merge command can be used to merge these gridpoints after the zone
-create command has been applied.<br />
+If it is discovered that some gridpoints don’t match, the zone gridpoint merge command can be used to merge these gridpoints after the zone create command has been applied.<br />
 </p>
+<blockquote>
 <p>Example: (zone attach) - Two unequal sub-grids</p>
+</blockquote>
 <div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="grid.html#cb22-1" aria-hidden="true" tabindex="-1"></a>zone create brick size <span class="dv">4</span> <span class="dv">4</span> <span class="dv">2</span> point <span class="dv">0</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) point <span class="dv">1</span> (<span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">0</span>) ...</span>
 <span id="cb22-2"><a href="grid.html#cb22-2" aria-hidden="true" tabindex="-1"></a>                             point <span class="dv">2</span> (<span class="dv">0</span>,<span class="dv">4</span>,<span class="dv">0</span>) point <span class="dv">3</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>)</span>
 <span id="cb22-3"><a href="grid.html#cb22-3" aria-hidden="true" tabindex="-1"></a>zone create brick size <span class="dv">8</span> <span class="dv">8</span> <span class="dv">4</span> point <span class="dv">0</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>) point <span class="dv">1</span> (<span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">2</span>) ...</span>
 <span id="cb22-4"><a href="grid.html#cb22-4" aria-hidden="true" tabindex="-1"></a>                             point <span class="dv">2</span> (<span class="dv">0</span>,<span class="dv">4</span>,<span class="dv">2</span>) point <span class="dv">3</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">4</span>)</span>
 <span id="cb22-5"><a href="grid.html#cb22-5" aria-hidden="true" tabindex="-1"></a>zone attach by<span class="op">-</span>face <span class="bu">range</span> position<span class="op">-</span>z <span class="dv">2</span></span></code></pre></div>
+<blockquote>
 <p>Example: (zone densify)</p>
+</blockquote>
 <div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="grid.html#cb23-1" aria-hidden="true" tabindex="-1"></a>zone create brick size <span class="dv">4</span> <span class="dv">4</span> <span class="dv">4</span></span>
 <span id="cb23-2"><a href="grid.html#cb23-2" aria-hidden="true" tabindex="-1"></a>zone densify segments <span class="dv">2</span> <span class="bu">range</span> position<span class="op">-</span>x <span class="dv">2</span> <span class="dv">4</span></span></code></pre></div>
+<blockquote>
 <p>the first two command lines can be changed to where zone densify
-segments 2 refines the upper zones (between the z-coordinate of 2 and 4)
-with the segment number of 2 on each edge.</p>
+segments 2 refines the upper zones (between the z-coordinate of 2 and 4) with the segment number of 2 on each edge.</p>
+</blockquote>
 </div>
 <div id="structural-element-operation" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Structural Element Operation</h2>
@@ -371,9 +371,7 @@ with the segment number of 2 on each edge.</p>
 <span id="cb24-2"><a href="grid.html#cb24-2" aria-hidden="true" tabindex="-1"></a>structure shell create by<span class="op">-</span>face <span class="bu">range</span> cylinder ...</span>
 <span id="cb24-3"><a href="grid.html#cb24-3" aria-hidden="true" tabindex="-1"></a>                                     end<span class="op">-</span><span class="dv">1</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>) end<span class="op">-</span><span class="dv">2</span> (<span class="dv">0</span>,<span class="dv">50</span>,<span class="op">-</span><span class="dv">1</span>) ...</span>
 <span id="cb24-4"><a href="grid.html#cb24-4" aria-hidden="true" tabindex="-1"></a>                                     radius <span class="dv">3</span></span></code></pre></div>
-<p>The liner contains 240 structural shell elements and is connected to the
-FLAC3D grid at 143 structural-node links. The grid with the liner is
-shown below.</p>
+<p>The liner contains 240 structural shell elements and is connected to the FLAC3D grid at 143 structural-node links. The grid with the liner is shown below.</p>
 </div>
 <div id="densifying-grid-by-specifying-max-size-length" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Densifying grid by specifying max size length</h2>
@@ -385,12 +383,10 @@ shown below.</p>
 <span id="cb25-6"><a href="grid.html#cb25-6" aria-hidden="true" tabindex="-1"></a>zone attach by<span class="op">-</span>face</span>
 <span id="cb25-7"><a href="grid.html#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
 <span id="cb25-8"><a href="grid.html#cb25-8" aria-hidden="true" tabindex="-1"></a>plot <span class="st">&#39;Brick&#39;</span> export bitmap filename <span class="st">&#39;densify4.png&#39;</span></span></code></pre></div>
-<p>note that in the local z-direction, the maximum size length is 0.4.
-FLAC3D densifies the maximum length in this direction to be 1/3 (= 0.4)</p>
-<p><br />
-The zone attach by-face command in this example is used to attach faces
-of sub-grids together rigidly to form a single grid<br />
-</p>
+<blockquote>
+<p><em>note that in the local z-direction, the maximum size length is 0.4. FLAC3D densifies the maximum length in this direction to be 1/3 (= 0.4)</em></p>
+</blockquote>
+<p>The zone attach by-face command in this example is used to attach faces of sub-grids together rigidly to form a single grid.</p>
 <p>Always use the zone attach by-face command after the zone densify
 command if there are different numbers of gridpoints along faces of
 different zones.</p>

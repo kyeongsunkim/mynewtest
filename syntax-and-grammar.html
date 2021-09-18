@@ -377,16 +377,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="results-1" class="section level2" number="5.9">
 <h2><span class="header-section-number">5.9</span> Results</h2>
-<p>As discussed in Reaching Equilibrium, we recommend you use the
-convergence 1.0 limit criteria when using the model solve command</p>
-<p>Initially solving to a convergence of 100 or more and then examining the
-response is good practice. Making isosurface plots of convergence to see
-where the model is having trouble can give insight into where model
-adjustments in the interest of efficiency are best placed.</p>
+<p>As discussed in Reaching Equilibrium, we recommend you use the convergence 1.0 limit criteria when using the model solve command</p>
+<p>Initially solving to a convergence of 100 or more and then examining the response is good practice. Making isosurface plots of convergence to see where the model is having trouble can give insight into where model adjustments in the interest of efficiency are best placed.</p>
 <p>In order to determine a collapse load, it is often better to use
-“strain-controlled” rather than “stress-controlled” boundary conditions
-(i.e., apply a constant velocity and measure the reaction forces, rather
-than apply forces and measure displacements).</p>
+“strain-controlled” rather than “stress-controlled” boundary conditions (i.e., apply a constant velocity and measure the reaction forces, rather than apply forces and measure displacements).</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="syntax-and-grammar.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Solve</span>
 <span id="cb35-2"><a href="syntax-and-grammar.html#cb35-2" aria-hidden="true" tabindex="-1"></a>model solve convergence <span class="dv">1</span></span>
 <span id="cb35-3"><a href="syntax-and-grammar.html#cb35-3" aria-hidden="true" tabindex="-1"></a>model factor<span class="op">-</span>of<span class="op">-</span>safety <span class="bu">file</span> <span class="st">&#39;slope3dfos&#39;</span> associated convergence <span class="dv">1</span></span></code></pre></div>
@@ -435,10 +429,8 @@ than apply forces and measure displacements).</p>
 <div id="use-of" class="section level3" number="5.12.1">
 <h3><span class="header-section-number">5.12.1</span> Use of (…)</h3>
 <p>A complete FISH statement occupies one line. However, a line may be
-typed across two or more lines as long as each line but the ultimate is
-terminated with the continuation character ( … ). Use of temporary
-variables as hinge points to concatenate lengthy formulas can also be
-handy. The following example shows how this can be done:</p>
+typed across two or more lines as long as each line but the ultimate is terminated with the continuation character ( … ).</p>
+<p>Use of temporary variables as hinge points to concatenate lengthy formulas can also be handy. The following example shows how this can be done:</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="syntax-and-grammar.html#cb40-1" aria-hidden="true" tabindex="-1"></a>fish define long_sum  <span class="op">;</span>example of a <span class="bu">sum</span> of many things</span>
 <span id="cb40-2"><a href="syntax-and-grammar.html#cb40-2" aria-hidden="true" tabindex="-1"></a>    local temp <span class="op">=</span> v1 <span class="op">+</span> v2 <span class="op">+</span> v3 <span class="op">+</span> v4 <span class="op">+</span> v5 <span class="op">+</span> v6 <span class="op">+</span> v7 <span class="op">+</span> v8 <span class="op">+</span> v9 <span class="op">+</span> v10</span>
 <span id="cb40-3"><a href="syntax-and-grammar.html#cb40-3" aria-hidden="true" tabindex="-1"></a>    long_sum <span class="op">=</span> temp <span class="op">+</span> v11 <span class="op">+</span> v12 <span class="op">+</span> v13 <span class="op">+</span> v14 <span class="op">+</span> v15</span>
@@ -475,7 +467,7 @@ handy. The following example shows how this can be done:</p>
 </div>
 <div id="traditional-for-loop-in-fish" class="section level3" number="5.12.3">
 <h3><span class="header-section-number">5.12.3</span> Traditional for loop in FISH</h3>
-<p>standard for loop is also available in FISH to provide for additional
+<p>Standard <code>for loop</code> is also available in FISH to provide for additional
 loop control.</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="syntax-and-grammar.html#cb43-1" aria-hidden="true" tabindex="-1"></a>fish define xxx</span>
 <span id="cb43-2"><a href="syntax-and-grammar.html#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span>  <span class="op">=</span> <span class="dv">0</span></span>

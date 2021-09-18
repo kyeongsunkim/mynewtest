@@ -1026,17 +1026,14 @@ and limiting axial strain for rockbolt}
 \hypertarget{primitive-shapes}{%
 \section{Primitive Shapes}\label{primitive-shapes}}
 
-\includegraphics[width=1\linewidth]{myfigureeeeee/radial-cylinder}
-
-\includegraphics[width=1\linewidth]{myfigureeeeee/radial-square}
-
 \includegraphics[width=1\linewidth]{myfigureeeeee/example-FLAC3D-Model}
 
-\emph{note: zone create generates primitive grid}\\
-\emph{note: zone gridpoint create puts gridpoints at specific locations}\\
-\emph{note: zone gridpoint merge ensures separate primitives are connected
-properly}\\
+\begin{quote}
+\emph{note: zone create generates primitive grid}
+\emph{note: zone gridpoint create puts gridpoints at specific locations}
+\emph{note: zone gridpoint merge ensures separate primitives are connected properly}
 \emph{note: zone attach connects primitive meshes of different zone sizes.}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1046,11 +1043,13 @@ properly}\\
 \end{Highlighting}
 \end{Shaded}
 
+\begin{quote}
 ex) 5 along inner radius of cylindrical tunnel,\\
 10 along axis\\
 6 along circumference of tunnel\\
 12 between periphery of tunnel and outer boundary of model\\
 \emph{note: size keyword defines the number of zones in the grid.}
+\end{quote}
 
 keywords for zone create:\\
 - dimension - edge - fill - point (boundary dimensions) - ratio (coarser
@@ -1074,36 +1073,33 @@ toward edge) - size
 \end{Highlighting}
 \end{Shaded}
 
-this adds symmetric part.
+This adds symmetric part.
 
-\hfill\break
-\emph{note: The symmetry plane is a vertical plane (located by the dip,
-dip-direction, and origin keywords) coincident with the x = 0 plane.
-Note that dip angle (dip) and dip direction (dip-direction) assume that
-x corresponds to ``East,'' y to ``North'', and z to ``Up.''}\\
+\begin{quote}
+\emph{note: The symmetry plane is a vertical plane (located by the dip,dip-direction, and origin keywords) coincident with the x = 0 plane.}
+\emph{Note that dip angle (dip) and dip direction (dip-direction)}
+\emph{assume thatx corresponds to ``East,'' y to ``North'', and z to ``Up.''}
+\end{quote}
 
 third option, the zone gridpoint create command, is available to
 position single points in the model region.
 
 \hfill\break
-\emph{note: zone gridpoint create is used for positioning reference points of
-primitives}\\
+\textgreater{} \emph{note: zone gridpoint create is used for positioning reference points ofprimitives}\\
 
 During execution of a zone create command, a check is made for each
 boundary gridpoint against the boundary gridpoints of zones that already
 exist.
 
 \hfill\break
-If two boundary gridpoints fall within a tolerance of 1 ? 10-7 (relative
-to the magnitude of the gridpoints position vector) of each other, they
-are assumed to be the same point,
+If two boundary gridpoints fall within a tolerance of 1 10-7 (relative to the magnitude of the gridpoints position vector) of each other, they are assumed to be the same point,
 
 \hfill\break
-If it is discovered that some gridpoints don't match, the zone gridpoint
-merge command can be used to merge these gridpoints after the zone
-create command has been applied.\\
+If it is discovered that some gridpoints don't match, the zone gridpoint merge command can be used to merge these gridpoints after the zone create command has been applied.\\
 
+\begin{quote}
 Example: (zone attach) - Two unequal sub-grids
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1115,7 +1111,9 @@ Example: (zone attach) - Two unequal sub-grids
 \end{Highlighting}
 \end{Shaded}
 
+\begin{quote}
 Example: (zone densify)
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1124,9 +1122,10 @@ Example: (zone densify)
 \end{Highlighting}
 \end{Shaded}
 
+\begin{quote}
 the first two command lines can be changed to where zone densify
-segments 2 refines the upper zones (between the z-coordinate of 2 and 4)
-with the segment number of 2 on each edge.
+segments 2 refines the upper zones (between the z-coordinate of 2 and 4) with the segment number of 2 on each edge.
+\end{quote}
 
 \hypertarget{structural-element-operation}{%
 \section{Structural Element Operation}\label{structural-element-operation}}
@@ -1142,9 +1141,7 @@ Creating a liner in the service tunnel
 \end{Highlighting}
 \end{Shaded}
 
-The liner contains 240 structural shell elements and is connected to the
-FLAC3D grid at 143 structural-node links. The grid with the liner is
-shown below.
+The liner contains 240 structural shell elements and is connected to the FLAC3D grid at 143 structural-node links. The grid with the liner is shown below.
 
 \hypertarget{densifying-grid-by-specifying-max-size-length}{%
 \section{Densifying grid by specifying max size length}\label{densifying-grid-by-specifying-max-size-length}}
@@ -1162,12 +1159,11 @@ shown below.
 \end{Highlighting}
 \end{Shaded}
 
-note that in the local z-direction, the maximum size length is 0.4.
-FLAC3D densifies the maximum length in this direction to be 1/3 (= 0.4)
+\begin{quote}
+\emph{note that in the local z-direction, the maximum size length is 0.4. FLAC3D densifies the maximum length in this direction to be 1/3 (= 0.4)}
+\end{quote}
 
-\hfill\break
-The zone attach by-face command in this example is used to attach faces
-of sub-grids together rigidly to form a single grid\\
+The zone attach by-face command in this example is used to attach faces of sub-grids together rigidly to form a single grid.
 
 Always use the zone attach by-face command after the zone densify
 command if there are different numbers of gridpoints along faces of
@@ -1329,18 +1325,12 @@ different zones.
 \hypertarget{results-1}{%
 \section{Results}\label{results-1}}
 
-As discussed in Reaching Equilibrium, we recommend you use the
-convergence 1.0 limit criteria when using the model solve command
+As discussed in Reaching Equilibrium, we recommend you use the convergence 1.0 limit criteria when using the model solve command
 
-Initially solving to a convergence of 100 or more and then examining the
-response is good practice. Making isosurface plots of convergence to see
-where the model is having trouble can give insight into where model
-adjustments in the interest of efficiency are best placed.
+Initially solving to a convergence of 100 or more and then examining the response is good practice. Making isosurface plots of convergence to see where the model is having trouble can give insight into where model adjustments in the interest of efficiency are best placed.
 
 In order to determine a collapse load, it is often better to use
-``strain-controlled'' rather than ``stress-controlled'' boundary conditions
-(i.e., apply a constant velocity and measure the reaction forces, rather
-than apply forces and measure displacements).
+``strain-controlled'' rather than ``stress-controlled'' boundary conditions (i.e., apply a constant velocity and measure the reaction forces, rather than apply forces and measure displacements).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1416,10 +1406,9 @@ than apply forces and measure displacements).
 \subsection{Use of (\ldots)}\label{use-of}}
 
 A complete FISH statement occupies one line. However, a line may be
-typed across two or more lines as long as each line but the ultimate is
-terminated with the continuation character ( \ldots{} ). Use of temporary
-variables as hinge points to concatenate lengthy formulas can also be
-handy. The following example shows how this can be done:
+typed across two or more lines as long as each line but the ultimate is terminated with the continuation character ( \ldots{} ).
+
+Use of temporary variables as hinge points to concatenate lengthy formulas can also be handy. The following example shows how this can be done:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1473,7 +1462,7 @@ The resulting screen display looks like this:
 \hypertarget{traditional-for-loop-in-fish}{%
 \subsection{Traditional for loop in FISH}\label{traditional-for-loop-in-fish}}
 
-standard for loop is also available in FISH to provide for additional
+Standard \texttt{for\ loop} is also available in FISH to provide for additional
 loop control.
 
 \begin{Shaded}
