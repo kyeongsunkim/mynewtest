@@ -140,10 +140,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2" data-path="kaist-model.html"><a href="kaist-model.html#zones"><i class="fa fa-check"></i><b>1.2</b> Zones</a></li>
 <li class="chapter" data-level="1.3" data-path="kaist-model.html"><a href="kaist-model.html#constitutive-model"><i class="fa fa-check"></i><b>1.3</b> Constitutive Model</a></li>
 <li class="chapter" data-level="1.4" data-path="kaist-model.html"><a href="kaist-model.html#soil-structure-interface"><i class="fa fa-check"></i><b>1.4</b> Soil-Structure Interface</a></li>
-<li class="chapter" data-level="1.5" data-path="kaist-model.html"><a href="kaist-model.html#boundary-conditions"><i class="fa fa-check"></i><b>1.5</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="1.5" data-path="kaist-model.html"><a href="kaist-model.html#boundary-and-initial-conditions"><i class="fa fa-check"></i><b>1.5</b> Boundary and Initial Conditions</a></li>
 <li class="chapter" data-level="1.6" data-path="kaist-model.html"><a href="kaist-model.html#initial-equilibrium"><i class="fa fa-check"></i><b>1.6</b> Initial Equilibrium</a></li>
-<li class="chapter" data-level="1.7" data-path="kaist-model.html"><a href="kaist-model.html#data-analytics"><i class="fa fa-check"></i><b>1.7</b> Data Analytics</a></li>
-<li class="chapter" data-level="1.8" data-path="kaist-model.html"><a href="kaist-model.html#results"><i class="fa fa-check"></i><b>1.8</b> Results</a></li>
+<li class="chapter" data-level="1.7" data-path="kaist-model.html"><a href="kaist-model.html#vertical-loading-1"><i class="fa fa-check"></i><b>1.7</b> Vertical Loading 1</a></li>
+<li class="chapter" data-level="1.8" data-path="kaist-model.html"><a href="kaist-model.html#vertical-loading-2"><i class="fa fa-check"></i><b>1.8</b> Vertical Loading 2</a></li>
+<li class="chapter" data-level="1.9" data-path="kaist-model.html"><a href="kaist-model.html#define-fish-functions"><i class="fa fa-check"></i><b>1.9</b> Define FISH FUNCTIONS</a></li>
+<li class="chapter" data-level="1.10" data-path="kaist-model.html"><a href="kaist-model.html#generate-data-plots"><i class="fa fa-check"></i><b>1.10</b> Generate Data Plots</a></li>
+<li class="chapter" data-level="1.11" data-path="kaist-model.html"><a href="kaist-model.html#results"><i class="fa fa-check"></i><b>1.11</b> Results</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html"><i class="fa fa-check"></i><b>2</b> Axial Concrete Pile</a>
 <ul>
@@ -650,10 +653,10 @@ is provided in “DippingJoint.f3dat.” The corresponding project file,
 InterfaceDippingJoint.” The example is a block specimen containing a
 single joint dipping at an angle of <span class="math inline">\(45°\)</span></li>
 </ol>
-<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="theory.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Create interface elements on the top surface of the base        </span>
-<span id="cb59-2"><a href="theory.html#cb59-2" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">&#39;joint&#39;</span> create by<span class="op">-</span>face separate <span class="bu">range</span> group <span class="st">&#39;Top&#39;</span> group <span class="st">&#39;Base&#39;</span></span>
-<span id="cb59-3"><a href="theory.html#cb59-3" aria-hidden="true" tabindex="-1"></a>model save <span class="st">&#39;int1&#39;</span></span>
-<span id="cb59-4"><a href="theory.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span></span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="theory.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Create interface elements on the top surface of the base        </span>
+<span id="cb61-2"><a href="theory.html#cb61-2" aria-hidden="true" tabindex="-1"></a>zone interface <span class="st">&#39;joint&#39;</span> create by<span class="op">-</span>face separate <span class="bu">range</span> group <span class="st">&#39;Top&#39;</span> group <span class="st">&#39;Base&#39;</span></span>
+<span id="cb61-3"><a href="theory.html#cb61-3" aria-hidden="true" tabindex="-1"></a>model save <span class="st">&#39;int1&#39;</span></span>
+<span id="cb61-4"><a href="theory.html#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span></span></code></pre></div>
 </div>
 <div id="typical-properties" class="section level2" number="7.5">
 <h2><span class="header-section-number">7.5</span> Typical Properties</h2>
@@ -696,28 +699,28 @@ dilation angle corresponds to the plastic regime</p>
 </div>
 <div id="compression-test-on-strain-softening-material" class="section level3" number="7.5.2">
 <h3><span class="header-section-number">7.5.2</span> Compression Test on strain-softening material</h3>
-<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="theory.html#cb60-1" aria-hidden="true" tabindex="-1"></a>model new</span>
-<span id="cb60-2"><a href="theory.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Create zones</span>
-<span id="cb60-3"><a href="theory.html#cb60-3" aria-hidden="true" tabindex="-1"></a>zone create cylinder point <span class="dv">0</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) point <span class="dv">1</span> (<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>) point <span class="dv">2</span> (<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">0</span>) ...</span>
-<span id="cb60-4"><a href="theory.html#cb60-4" aria-hidden="true" tabindex="-1"></a>point <span class="dv">3</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>) size <span class="dv">4</span> <span class="dv">5</span> <span class="dv">4</span></span>
-<span id="cb60-5"><a href="theory.html#cb60-5" aria-hidden="true" tabindex="-1"></a>zone reflect normal (<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
-<span id="cb60-6"><a href="theory.html#cb60-6" aria-hidden="true" tabindex="-1"></a>zone reflect normal (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
-<span id="cb60-7"><a href="theory.html#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Constitutive Model <span class="kw">and</span> properties</span>
-<span id="cb60-8"><a href="theory.html#cb60-8" aria-hidden="true" tabindex="-1"></a>zone cmodel assign strain<span class="op">-</span>softening</span>
-<span id="cb60-9"><a href="theory.html#cb60-9" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">1.19e10</span> shear <span class="fl">1.1e10</span></span>
-<span id="cb60-10"><a href="theory.html#cb60-10" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> cohesion <span class="fl">2.72e5</span> friction <span class="dv">44</span> tension <span class="fl">2e5</span></span>
-<span id="cb60-11"><a href="theory.html#cb60-11" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> table<span class="op">-</span>cohesion <span class="st">&#39;coh&#39;</span> table<span class="op">-</span>friction <span class="st">&#39;fri&#39;</span></span>
-<span id="cb60-12"><a href="theory.html#cb60-12" aria-hidden="true" tabindex="-1"></a>table <span class="st">&#39;coh&#39;</span> add (<span class="dv">0</span>,<span class="fl">2.72e5</span>) (<span class="fl">1e-4</span>,<span class="fl">2e5</span>) (<span class="fl">2e-4</span>,<span class="fl">1.5e5</span>) (<span class="fl">3e-4</span>,<span class="fl">1.03e5</span>) (<span class="dv">1</span>,<span class="fl">1.03e5</span>)</span>
-<span id="cb60-13"><a href="theory.html#cb60-13" aria-hidden="true" tabindex="-1"></a>table <span class="st">&#39;fri&#39;</span> add (<span class="dv">0</span>,<span class="dv">44</span>) (<span class="fl">1e-4</span>,<span class="dv">42</span>) (<span class="fl">2e-4</span>,<span class="dv">40</span>) (<span class="fl">3e-4</span>,<span class="dv">38</span>) (<span class="dv">1</span>,<span class="dv">38</span>)</span>
-<span id="cb60-14"><a href="theory.html#cb60-14" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Boundary Conditions</span>
-<span id="cb60-15"><a href="theory.html#cb60-15" aria-hidden="true" tabindex="-1"></a>zone face <span class="bu">apply</span> velocity (<span class="dv">0</span>, <span class="fl">1e-7</span>,<span class="dv">0</span>) <span class="bu">range</span> position<span class="op">-</span>y <span class="dv">0</span></span>
-<span id="cb60-16"><a href="theory.html#cb60-16" aria-hidden="true" tabindex="-1"></a>zone face <span class="bu">apply</span> velocity (<span class="dv">0</span>,<span class="op">-</span><span class="fl">1e-7</span>,<span class="dv">0</span>) <span class="bu">range</span> position<span class="op">-</span>y <span class="dv">2</span></span>
-<span id="cb60-17"><a href="theory.html#cb60-17" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Histories</span>
-<span id="cb60-18"><a href="theory.html#cb60-18" aria-hidden="true" tabindex="-1"></a>zone history displacement<span class="op">-</span>y position (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
-<span id="cb60-19"><a href="theory.html#cb60-19" aria-hidden="true" tabindex="-1"></a>zone history stress<span class="op">-</span>yy position (<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
-<span id="cb60-20"><a href="theory.html#cb60-20" aria-hidden="true" tabindex="-1"></a>zone history stress<span class="op">-</span>yy position (<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
-<span id="cb60-21"><a href="theory.html#cb60-21" aria-hidden="true" tabindex="-1"></a>model step <span class="dv">3000</span></span>
-<span id="cb60-22"><a href="theory.html#cb60-22" aria-hidden="true" tabindex="-1"></a>model save <span class="st">&#39;Softening&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="theory.html#cb62-1" aria-hidden="true" tabindex="-1"></a>model new</span>
+<span id="cb62-2"><a href="theory.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Create zones</span>
+<span id="cb62-3"><a href="theory.html#cb62-3" aria-hidden="true" tabindex="-1"></a>zone create cylinder point <span class="dv">0</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) point <span class="dv">1</span> (<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>) point <span class="dv">2</span> (<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">0</span>) ...</span>
+<span id="cb62-4"><a href="theory.html#cb62-4" aria-hidden="true" tabindex="-1"></a>point <span class="dv">3</span> (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>) size <span class="dv">4</span> <span class="dv">5</span> <span class="dv">4</span></span>
+<span id="cb62-5"><a href="theory.html#cb62-5" aria-hidden="true" tabindex="-1"></a>zone reflect normal (<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb62-6"><a href="theory.html#cb62-6" aria-hidden="true" tabindex="-1"></a>zone reflect normal (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb62-7"><a href="theory.html#cb62-7" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Constitutive Model <span class="kw">and</span> properties</span>
+<span id="cb62-8"><a href="theory.html#cb62-8" aria-hidden="true" tabindex="-1"></a>zone cmodel assign strain<span class="op">-</span>softening</span>
+<span id="cb62-9"><a href="theory.html#cb62-9" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> bulk <span class="fl">1.19e10</span> shear <span class="fl">1.1e10</span></span>
+<span id="cb62-10"><a href="theory.html#cb62-10" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> cohesion <span class="fl">2.72e5</span> friction <span class="dv">44</span> tension <span class="fl">2e5</span></span>
+<span id="cb62-11"><a href="theory.html#cb62-11" aria-hidden="true" tabindex="-1"></a>zone <span class="bu">property</span> table<span class="op">-</span>cohesion <span class="st">&#39;coh&#39;</span> table<span class="op">-</span>friction <span class="st">&#39;fri&#39;</span></span>
+<span id="cb62-12"><a href="theory.html#cb62-12" aria-hidden="true" tabindex="-1"></a>table <span class="st">&#39;coh&#39;</span> add (<span class="dv">0</span>,<span class="fl">2.72e5</span>) (<span class="fl">1e-4</span>,<span class="fl">2e5</span>) (<span class="fl">2e-4</span>,<span class="fl">1.5e5</span>) (<span class="fl">3e-4</span>,<span class="fl">1.03e5</span>) (<span class="dv">1</span>,<span class="fl">1.03e5</span>)</span>
+<span id="cb62-13"><a href="theory.html#cb62-13" aria-hidden="true" tabindex="-1"></a>table <span class="st">&#39;fri&#39;</span> add (<span class="dv">0</span>,<span class="dv">44</span>) (<span class="fl">1e-4</span>,<span class="dv">42</span>) (<span class="fl">2e-4</span>,<span class="dv">40</span>) (<span class="fl">3e-4</span>,<span class="dv">38</span>) (<span class="dv">1</span>,<span class="dv">38</span>)</span>
+<span id="cb62-14"><a href="theory.html#cb62-14" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Boundary Conditions</span>
+<span id="cb62-15"><a href="theory.html#cb62-15" aria-hidden="true" tabindex="-1"></a>zone face <span class="bu">apply</span> velocity (<span class="dv">0</span>, <span class="fl">1e-7</span>,<span class="dv">0</span>) <span class="bu">range</span> position<span class="op">-</span>y <span class="dv">0</span></span>
+<span id="cb62-16"><a href="theory.html#cb62-16" aria-hidden="true" tabindex="-1"></a>zone face <span class="bu">apply</span> velocity (<span class="dv">0</span>,<span class="op">-</span><span class="fl">1e-7</span>,<span class="dv">0</span>) <span class="bu">range</span> position<span class="op">-</span>y <span class="dv">2</span></span>
+<span id="cb62-17"><a href="theory.html#cb62-17" aria-hidden="true" tabindex="-1"></a><span class="op">;</span> Histories</span>
+<span id="cb62-18"><a href="theory.html#cb62-18" aria-hidden="true" tabindex="-1"></a>zone history displacement<span class="op">-</span>y position (<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb62-19"><a href="theory.html#cb62-19" aria-hidden="true" tabindex="-1"></a>zone history stress<span class="op">-</span>yy position (<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb62-20"><a href="theory.html#cb62-20" aria-hidden="true" tabindex="-1"></a>zone history stress<span class="op">-</span>yy position (<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb62-21"><a href="theory.html#cb62-21" aria-hidden="true" tabindex="-1"></a>model step <span class="dv">3000</span></span>
+<span id="cb62-22"><a href="theory.html#cb62-22" aria-hidden="true" tabindex="-1"></a>model save <span class="st">&#39;Softening&#39;</span></span></code></pre></div>
 <p>The horizontal stress-displacement response is monitored again, as shown
 in the image below. This test produces distinct peak and residual
 failure stress levels</p>
