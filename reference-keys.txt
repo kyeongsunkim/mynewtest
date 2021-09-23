@@ -1,4 +1,4 @@
-fig:unnamed-chunk-73
+fig:unnamed-chunk-72
 kaist-model
 initial-configuration
 zones
@@ -6,9 +6,7 @@ constitutive-model
 interface
 boundary-conditions
 initial-equilibrium
-vimeo-embedding
 vertical-loading
-vimeo-embedding-1
 plot
 results
 axial-concrete-pile
