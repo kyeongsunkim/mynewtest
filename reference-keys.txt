@@ -1,4 +1,4 @@
-fig:unnamed-chunk-71
+fig:unnamed-chunk-73
 kaist-model
 initial-configuration
 zones
@@ -6,9 +6,10 @@ constitutive-model
 interface
 boundary-conditions
 initial-equilibrium
+vimeo-embedding
 vertical-loading
+vimeo-embedding-1
 plot
-define-fish-functions
 results
 axial-concrete-pile
 problem-description
@@ -62,6 +63,7 @@ array-example
 map-example
 fish-function
 code-block
+define-fish-functions
 some-code
 interface-1
 penetration
