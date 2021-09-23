@@ -376,7 +376,9 @@ wonderful have been, and are being, evolved.
 \ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ zonearray }\ImportTok{as}\NormalTok{ za}
 \ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ gridpointarray }\ImportTok{as}\NormalTok{ gpa}
 
-\CommentTok{\# PARAMETERS \#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\# PARAMETERS \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
 
 \CommentTok{\# Mesh Details}
 \NormalTok{\_radial }\OperatorTok{=} \DecValTok{20}
@@ -395,7 +397,7 @@ wonderful have been, and are being, evolved.
 \NormalTok{\_B\_footing }\OperatorTok{=} \FloatTok{3.25}
 \NormalTok{\_D\_footing }\OperatorTok{=}\NormalTok{ \_H\_shaft }\OperatorTok{+}\NormalTok{ \_T\_plate}
 \NormalTok{\_B\_soil }\OperatorTok{=}\NormalTok{ \_B\_footing}\OperatorTok{*}\DecValTok{5}
-\NormalTok{\_D\_soil }\OperatorTok{=}\NormalTok{ \_D\_footing}\OperatorTok{+}\DecValTok{3}
+\NormalTok{\_D\_soil }\OperatorTok{=}\NormalTok{ \_D\_footing}
 
 \CommentTok{\# Concrete Properties}
 \NormalTok{\_bulk }\OperatorTok{=} \FloatTok{13.9e9}
@@ -403,14 +405,14 @@ wonderful have been, and are being, evolved.
 \NormalTok{\_density\_concrete }\OperatorTok{=} \DecValTok{2950}
 
 \CommentTok{\# Soil Properties}
-\NormalTok{\_E\_o }\OperatorTok{=} \FloatTok{1e7}
-\NormalTok{\_const }\OperatorTok{=} \FloatTok{1e8}
+\NormalTok{\_E\_o }\OperatorTok{=} \FloatTok{80e6}
+\NormalTok{\_const }\OperatorTok{=} \FloatTok{1e7}
 \NormalTok{\_poisson }\OperatorTok{=} \FloatTok{0.25}
 \NormalTok{\_density\_soil }\OperatorTok{=} \DecValTok{1530}
 
 \CommentTok{\# Interface Properties}
-\NormalTok{\_stiff\_norm }\OperatorTok{=} \FloatTok{1e8}
-\NormalTok{\_stiff\_shear }\OperatorTok{=} \FloatTok{1e8}
+\NormalTok{\_stiff\_norm }\OperatorTok{=} \FloatTok{1e6}
+\NormalTok{\_stiff\_shear }\OperatorTok{=} \FloatTok{1e6}
 \end{Highlighting}
 \end{Shaded}
 
@@ -421,7 +423,11 @@ wonderful have been, and are being, evolved.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# ZONE \#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\# ZONES \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ((((((((((((((((======== NEW RUN ========)))))))))))))))"}\NormalTok{)}
 
 \NormalTok{command\_zone }\OperatorTok{=} \StringTok{"""}
 \StringTok{model new}
@@ -443,7 +449,6 @@ wonderful have been, and are being, evolved.
 \StringTok{           rat 1 1 1 1.01 ...}
 \StringTok{           fill}
 \StringTok{"""}
-
 \NormalTok{command }\OperatorTok{=}\NormalTok{ command\_zone.}\BuiltInTok{format}\NormalTok{(}
 \NormalTok{B\_footing }\OperatorTok{=}\NormalTok{ \_B\_footing,}
 \NormalTok{B\_soil }\OperatorTok{=}\NormalTok{ \_B\_soil,}
@@ -457,22 +462,25 @@ wonderful have been, and are being, evolved.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=1\linewidth]{myfigureeeeee/e}
+\includegraphics[width=1\linewidth]{myfigureeeeee/model}
 
-\includegraphics[width=1\linewidth]{myfigureeeeee/f}
+\includegraphics[width=1\linewidth]{myfigureeeeee/1_zone_group}
 
 \hypertarget{constitutive-model}{%
 \section{Constitutive Model}\label{constitutive-model}}
 
 It is easy to loop over sets of model objects (i.e., zones, gridpoints, structural element nodes, etc.) using the loop foreach construct. In this case, a container of objects must be given by a FISH intrinsic such as zone.list. A practical use of the loop foreach construct is to install a nonlinear initial distribution of elastic moduli in a FLAC3D grid. Suppose that the Young's modulus at a site is given by this equation:
 
-\[ E = E_0 + c \sqrt{z}  \] where z is the depth below surface, and c
-and E∘ are constants. We write a FISH function to install appropriate
-values of bulk and shear modulus in the grid, as in this example:
+\[ E = E_0 + c \sqrt{z}  \] where \(z\) is the depth below surface, and \(c\)
+and \(E_0\) are constants. We write a FISH function to install appropriate
+values of bulk and shear modulus in the grid:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# CONSTITUTIVE MODEL}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\# CONSTITUTIVE MODEL \#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
 \NormalTok{it.command(}\StringTok{"""}
 \StringTok{zone cmodel assign elastic range group "Radial Tunnel1"}
 
@@ -489,17 +497,16 @@ values of bulk and shear modulus in the grid, as in this example:
 \StringTok{plot item create zone contour property name \textquotesingle{}density\textquotesingle{}}
 \StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(E\_o\_}\OperatorTok{=}\NormalTok{\_E\_o,const\_}\OperatorTok{=}\NormalTok{\_const,poisson\_}\OperatorTok{=}\NormalTok{\_poisson,density\_soil}\OperatorTok{=}\NormalTok{\_density\_soil))}
 
+\BuiltInTok{print}\NormalTok{(}\StringTok{"radial mesh number is "}\NormalTok{, \_radial)}
+
 \CommentTok{\# GROUP \#}
-
-\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== BEGIN A NEW RUN ========        ========"}\NormalTok{)}
-
 \NormalTok{p }\OperatorTok{=}\NormalTok{ za.pos()}
 \NormalTok{x,y,z }\OperatorTok{=}\NormalTok{ p.T}
 \BuiltInTok{print}\NormalTok{(it.zone.count(), }\StringTok{"zones in whole model"}\NormalTok{)}
 
 \NormalTok{shaft }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (np.sqrt(x}\OperatorTok{**}\DecValTok{2}\OperatorTok{+}\NormalTok{z}\OperatorTok{**}\DecValTok{2}\NormalTok{)}\OperatorTok{\textless{}}\NormalTok{\_D\_shaft, y}\OperatorTok{\textless{}}\NormalTok{\_H\_shaft))}
-\NormalTok{za.set\_group(shaft, }\StringTok{"shaft"}\NormalTok{) }\CommentTok{\# set the zones with shaft = true have "shaft" and "geometry"}
-\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"shaft"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in shaft group."}\NormalTok{) }\CommentTok{\#output how many zones are in the corner group}
+\NormalTok{za.set\_group(shaft, }\StringTok{"shaft"}\NormalTok{) }
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"shaft"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in shaft group."}\NormalTok{) }
 
 \NormalTok{plate }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (x}\OperatorTok{\textless{}}\NormalTok{\_B\_footing,z}\OperatorTok{\textless{}}\NormalTok{\_B\_footing, y}\OperatorTok{\textgreater{}}\NormalTok{\_H\_shaft,y}\OperatorTok{\textless{}}\NormalTok{\_D\_footing))}
 \NormalTok{za.set\_group(plate, }\StringTok{"plate"}\NormalTok{)}
@@ -511,21 +518,12 @@ values of bulk and shear modulus in the grid, as in this example:
 \StringTok{zone property bulk }\SpecialCharTok{\{bulk\_\}}\StringTok{ shear }\SpecialCharTok{\{shear\_\}}\StringTok{ density }\SpecialCharTok{\{density\_\}}\StringTok{ range group \textquotesingle{}shaft\textquotesingle{}}
 \StringTok{zone property bulk }\SpecialCharTok{\{bulk\_\}}\StringTok{ shear }\SpecialCharTok{\{shear\_\}}\StringTok{ density }\SpecialCharTok{\{density\_\}}\StringTok{ range group \textquotesingle{}plate\textquotesingle{}}
 \StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(bulk\_}\OperatorTok{=}\NormalTok{\_bulk,shear\_}\OperatorTok{=}\NormalTok{\_shear,density\_}\OperatorTok{=}\NormalTok{\_density\_concrete))}
-
-\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED PROPERTIES SETTING ========        ========"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-Again, you can verify correct operation of the function by printing or plotting shear and bulk moduli.
+\includegraphics[width=1\linewidth]{myfigureeeeee/1_young}
 
-In the function install, the loop takes place over all zones in the
-global list of zones. The FISH statement loop foreach is a variation of the loop statement that sets pnt to each zone in zone.list. Inside the loop, the y-coordinate of each zone centroid is used to calculate the Young's modulus, given in the equation above. We assume that the datum (or ground surface reference point) is at y = 0. The variables
-zone.pos.y(pnt) and zone.prop(pnt, `young') are zone intrinsics. (Recall that we talked about the gridpoint intrinsic gp.force.unbal earlier.)
-
-Here, we set properties directly from within a FISH function, rather
-than with a zone property command as in an earlier example.
-
-\includegraphics[width=1\linewidth]{myfigureeeeee/g}
+\includegraphics[width=1\linewidth]{myfigureeeeee/1_density}
 
 Strain softening Model is also available, but not implemented:
 
@@ -533,187 +531,166 @@ Strain softening Model is also available, but not implemented:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# SOFTENING MODEL \#}
 \CommentTok{\#it.command("""}
 \CommentTok{\#zone cmodel assign strain{-}softening range group "Radial Tunnel1"}
 \CommentTok{\#zone property density 2500 bulk 2e8 shear 1e8 range group "Radial Tunnel1"}
 \CommentTok{\#zone property cohesion 2e6 friction 45 tension 2e5 dilation 10 range group "Radial Tunnel1"}
 \CommentTok{\#zone property table{-}friction \textquotesingle{}fri\textquotesingle{} table{-}cohesion \textquotesingle{}coh\textquotesingle{} table{-}dilation \textquotesingle{}dil\textquotesingle{} range group "Radial Tunnel1"}
 \CommentTok{\#table \textquotesingle{}fri\textquotesingle{} add (0, 45) (.05, 42) (.1, 40) (1, 40)}
-\CommentTok{\#table \textquotesingle{}coh\textquotesingle{} add (0,2e6) (.05,1e6) (.1,5e5) (1,5e5) }
+\CommentTok{\#table \textquotesingle{}coh\textquotesingle{} add (0,2e6) (.05,1e6) (.1,5e5) (1,5e5)}
 \CommentTok{\#table \textquotesingle{}dil\textquotesingle{} add (0, 10) (.05,  3) (.1,  0)}
 \CommentTok{\#""")}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{soil-structure-interface}{%
-\section{Soil-Structure Interface}\label{soil-structure-interface}}
-
-\includegraphics[width=1\linewidth]{myfigureeeeee/interface-formulation}
-
-Each interface element distributes its area to its nodes in a weighted fashion. Each interface node has an associated representative area. The entire interface is thus divided into active interface nodes representing the total area of the interface. Figure 1 illustrates the relation between interface elements and interface nodes, and the representative area associated with an individual node.
+\hypertarget{interface}{%
+\section{Interface}\label{interface}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# INTERFACE \#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\# INTERFACE \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
 \NormalTok{it.command(}\StringTok{"""}
 \StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} create by{-}face separate range group \textquotesingle{}plate\textquotesingle{} group \textquotesingle{}Radial Tunnel1\textquotesingle{}}
 \StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} node property stiffness{-}normal }\SpecialCharTok{\{stiff\_norm\_\}}\StringTok{ stiffness{-}shear }\SpecialCharTok{\{stiff\_shear\_\}}\StringTok{ friction 20 cohesion 30000}
-
 \StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} create by{-}face separate range group \textquotesingle{}shaft\textquotesingle{} group \textquotesingle{}Radial Tunnel1\textquotesingle{}}
 \StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} node property stiffness{-}normal }\SpecialCharTok{\{stiff\_norm\_\}}\StringTok{ stiffness{-}shear }\SpecialCharTok{\{stiff\_shear\_\}}\StringTok{ friction 20 cohesion 30000}
 
 \StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(stiff\_norm\_}\OperatorTok{=}\NormalTok{\_stiff\_norm, stiff\_shear\_}\OperatorTok{=}\NormalTok{\_stiff\_shear))}
 
-\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED INTERFACE SETTING ========        ========"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED INTERFACE ========"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/interface-both}
 
-\hypertarget{boundary-and-initial-conditions}{%
-\section{Boundary and Initial Conditions}\label{boundary-and-initial-conditions}}
+\hypertarget{boundary-conditions}{%
+\section{Boundary Conditions}\label{boundary-conditions}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{bottom }\OperatorTok{=}\NormalTok{ (y }\OperatorTok{==}\NormalTok{np.amax(y))}
-\NormalTok{za.set\_group(bottom, }\StringTok{"bottom"}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"bottom"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in bottom group."}\NormalTok{)}
-
-\NormalTok{up }\OperatorTok{=}\NormalTok{ (y }\OperatorTok{==}\NormalTok{ np.amin(y))}
-\NormalTok{za.set\_group(up, }\StringTok{"up"}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"up"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in up group."}\NormalTok{)}
-
-\NormalTok{x\_side }\OperatorTok{=}\NormalTok{ (z }\OperatorTok{\textless{}=}\NormalTok{ np.amin(z)}\OperatorTok{+}\FloatTok{1e{-}4}\NormalTok{)}
-\NormalTok{za.set\_group(x\_side, }\StringTok{"x\_side"}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"x\_side"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in x\_side group."}\NormalTok{)}
-
-\NormalTok{z\_side }\OperatorTok{=}\NormalTok{ (x }\OperatorTok{\textless{}=}\NormalTok{ np.amin(x)}\OperatorTok{+}\FloatTok{1e{-}4}\NormalTok{)}
-\NormalTok{za.set\_group(z\_side, }\StringTok{"z\_side"}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"z\_side"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in z\_side group."}\NormalTok{)}
-
-\NormalTok{x\_side\_end }\OperatorTok{=}\NormalTok{ (z }\OperatorTok{==}\NormalTok{ np.amax(z))}
-\NormalTok{za.set\_group(x\_side\_end, }\StringTok{"x\_side\_end"}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"x\_side\_end"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in x\_side\_end group."}\NormalTok{)}
-
-\NormalTok{z\_side\_end }\OperatorTok{=}\NormalTok{ (x }\OperatorTok{==}\NormalTok{ np.amax(x))}
-\NormalTok{za.set\_group(z\_side\_end, }\StringTok{"z\_side\_end"}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"z\_side\_end"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in z\_side\_end group."}\NormalTok{)}
-
-\CommentTok{\# INITIAL CONDITIONS \#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\# BOUNDARY CONDITIONS \#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#range group \textquotesingle{}South3\textquotesingle{} or \textquotesingle{}Bottom4\textquotesingle{} or ...}
+\CommentTok{\#\textquotesingle{}Top3\textquotesingle{} or \textquotesingle{}Top4\textquotesingle{} or \textquotesingle{}Bottom2\textquotesingle{} or \textquotesingle{}Top2\textquotesingle{} or \textquotesingle{}West2\textquotesingle{} or ...}
+\CommentTok{\#\textquotesingle{}North2\textquotesingle{} or \textquotesingle{}East1\textquotesingle{} or \textquotesingle{}Top1\textquotesingle{} or \textquotesingle{}East2\textquotesingle{} or \textquotesingle{}Bottom3\textquotesingle{} or \textquotesingle{}Bottom1\textquotesingle{} or ...}
+\CommentTok{\#\textquotesingle{}East4\textquotesingle{} or \textquotesingle{}West5\textquotesingle{} or \textquotesingle{}West3\textquotesingle{} or \textquotesingle{}West1\textquotesingle{} or \textquotesingle{}East3\textquotesingle{} or \textquotesingle{}North3\textquotesingle{} or ...}
+\CommentTok{\#\textquotesingle{}Bottom5\textquotesingle{} or \textquotesingle{}West4\textquotesingle{} or \textquotesingle{}South2\textquotesingle{} or \textquotesingle{}North1}
 
 \NormalTok{it.command(}\StringTok{"""}
-\StringTok{zone face apply velocity{-}normal 0 range group \textquotesingle{}bottom\textquotesingle{}}
-\StringTok{zone face apply velocity{-}normal 0 range group \textquotesingle{}x\_side\textquotesingle{} or \textquotesingle{}z\_side\textquotesingle{}}
-\StringTok{zone face apply velocity{-}normal 0 range group \textquotesingle{}x\_side\_end\textquotesingle{} or \textquotesingle{}z\_side\_end\textquotesingle{}}
-
-\StringTok{model gravity 0 }\SpecialCharTok{\{gravity\_\}}\StringTok{ 0}
-\StringTok{zone initialize{-}stress ratio }\SpecialCharTok{\{K\_\}}
-\StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} node initialize{-}stresses}
-\StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} node initialize{-}stresses}
-\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(gravity\_}\OperatorTok{=}\NormalTok{\_gravity, K\_ }\OperatorTok{=}\NormalTok{ \_K))}
-
-\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED BOUNDARY AND INITIAL CONDITIONS ========        ========"}\NormalTok{)}
+\StringTok{zone face skin}
+\StringTok{zone face apply velocity{-}normal 0 ...}
+\StringTok{range group \textquotesingle{}North1\textquotesingle{} or \textquotesingle{}North2\textquotesingle{} or \textquotesingle{}East3\textquotesingle{} or \textquotesingle{}Bottom5\textquotesingle{} or \textquotesingle{}North3\textquotesingle{} or \textquotesingle{}East5\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}West1\textquotesingle{} or \textquotesingle{}Bottom6\textquotesingle{} or \textquotesingle{}Bottom7\textquotesingle{} or \textquotesingle{}Bottom3\textquotesingle{} or \textquotesingle{}West3\textquotesingle{} or \textquotesingle{}West4\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}Top6\textquotesingle{} or \textquotesingle{}Bottom4\textquotesingle{} or \textquotesingle{}West6\textquotesingle{} or \textquotesingle{}West7\textquotesingle{} or \textquotesingle{}Top5\textquotesingle{} or \textquotesingle{}West5\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}East4\textquotesingle{} or \textquotesingle{}Top3\textquotesingle{} or \textquotesingle{}Bottom1\textquotesingle{} or \textquotesingle{}East6\textquotesingle{} or \textquotesingle{}East2\textquotesingle{} or \textquotesingle{}Top1\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}East1\textquotesingle{} or \textquotesingle{}West2\textquotesingle{} or \textquotesingle{}Top2\textquotesingle{} or \textquotesingle{}Bottom2\textquotesingle{} or \textquotesingle{}Top4\textquotesingle{}}
+\StringTok{"""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{initial-equilibrium}{%
 \section{Initial Equilibrium}\label{initial-equilibrium}}
 
-\includegraphics[width=1\linewidth]{myfigureeeeee/initial}
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# INITIAL EQUILIBRIUM \#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\# INITILIZE \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{model gravity 0 }\SpecialCharTok{\{gravity\_\}}\StringTok{ 0}
+\StringTok{zone initialize{-}stress ratio }\SpecialCharTok{\{K\_\}}
+\StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} node initialize{-}stresses}
+\StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} node initialize{-}stresses}
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(gravity\_}\OperatorTok{=}\NormalTok{\_gravity, K\_ }\OperatorTok{=}\NormalTok{ \_K))}
 
 \NormalTok{it.command(}\StringTok{"""}
 \StringTok{zone ratio local}
 \StringTok{model solve ratio 1e{-}4}
 \StringTok{model save \textquotesingle{}initial\textquotesingle{}}
 \StringTok{"""}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED INITIAL EQUILIBRIUM ========"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{vertical-loading-1}{%
-\section{Vertical Loading 1}\label{vertical-loading-1}}
+\hypertarget{vertical-loading}{%
+\section{Vertical Loading}\label{vertical-loading}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# VERTICAL LOADING 1\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\# VERTICAL LOADING \#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
 
 \NormalTok{top }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (np.sqrt(x}\OperatorTok{**}\DecValTok{2}\OperatorTok{+}\NormalTok{z}\OperatorTok{**}\DecValTok{2}\NormalTok{)}\OperatorTok{\textless{}}\NormalTok{\_D\_shaft, y}\OperatorTok{==}\NormalTok{np.amin(y)))}
-\NormalTok{za.set\_group(top, }\StringTok{"top"}\NormalTok{) }\CommentTok{\# set the zones with shaft = true have "shaft" and "geometry"}
+\NormalTok{za.set\_group(top, }\StringTok{"top"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"top"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in top group."}\NormalTok{)}
 
 \NormalTok{it.command(}\StringTok{"""}
 \StringTok{zone initialize state 0}
 \StringTok{zone gridpoint initialize displacement (0,0,0)}
-\StringTok{zone gridpoint initialize velocity     (0,0,0)}
-\StringTok{table \textquotesingle{}ramp\textquotesingle{} add ([global.step],0) ([global.step+30000],{-}5e{-}8) ...}
-\StringTok{      ([global.step+58000],{-}5e{-}8) ; Increase velocity applied to pile}
-\StringTok{                                  ; over 30,000 steps}
+\StringTok{zone gridpoint initialize velocity     (0,0,0) }
+\StringTok{table \textquotesingle{}ramp\textquotesingle{} add ([global.step],0) ([global.step+5000],{-}1e{-}6) ...}
+\StringTok{      ([global.step+10000],{-}1e{-}6) ; Increase velocity applied to pile}
+\StringTok{;zone face apply velocity{-}normal 1 table \textquotesingle{}ramp\textquotesingle{} range group \textquotesingle{}plate\textquotesingle{} or \textquotesingle{}shaft\textquotesingle{}}
 \StringTok{zone face apply velocity{-}normal 1 table \textquotesingle{}ramp\textquotesingle{} range group \textquotesingle{}top\textquotesingle{}}
 
-\StringTok{history interval 250}
-\StringTok{zone history name \textquotesingle{}disp\textquotesingle{} displacement{-}y position (0,0,0)}
-
-\StringTok{; =========================================================}
-\StringTok{;  find gridpoints at pile cap, store in map called cap}
-
-\StringTok{fish define find\_cap}
-\StringTok{    global cap = map}
-\StringTok{    loop foreach local gp gp.list}
-\StringTok{        if gp.isgroup(gp,\textquotesingle{}top\textquotesingle{}) then}
-\StringTok{            cap(gp.id(gp)) = gp}
-\StringTok{        endif}
-\StringTok{    endloop}
-\StringTok{end}
-\StringTok{@find\_cap}
-
-\StringTok{; =========================================================}
-\StringTok{; monitor vertical loading at pile cap}
+\StringTok{; Set up histories for monitoring model behavior}
+\StringTok{history interval 100}
 
 \StringTok{fish define vert\_load}
 \StringTok{    local yftot = 0.0}
 \StringTok{    loop foreach gp cap}
 \StringTok{        yftot = yftot + gp.force.unbal.y(gp)}
 \StringTok{    end\_loop}
-\StringTok{    vert\_load = yftot / (0.25*}\SpecialCharTok{\{D\_shaft\_\}}\StringTok{*}\SpecialCharTok{\{D\_shaft\_\}}\StringTok{*math.pi)}
+\StringTok{    vert\_load = yftot / (0.25*0.25*}\SpecialCharTok{\{D\_shaft\_\}}\StringTok{*}\SpecialCharTok{\{D\_shaft\_\}}\StringTok{*math.pi)}
 \StringTok{end}
-\StringTok{;call \textquotesingle{}load\textquotesingle{}}
-\StringTok{; =========================================================}
 
-\StringTok{fish history name \textquotesingle{}load\textquotesingle{} @vert\_load}
-\StringTok{zone mechanical damping combined}
-\StringTok{model step 58000}
+\StringTok{zone history name \textquotesingle{}disp\textquotesingle{} displacement{-}y position (0,0,0)}
+\StringTok{fish history name \textquotesingle{}yload\textquotesingle{} @vert\_load}
+
+\StringTok{;zone mechanical damping combined}
+\StringTok{model largestrain true}
+\StringTok{model step 10000}
 \StringTok{model save \textquotesingle{}vertical{-}loading\textquotesingle{}}
 \StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(D\_shaft\_}\OperatorTok{=}\NormalTok{\_D\_shaft))}
-\BuiltInTok{print}\NormalTok{(}\StringTok{"               ========       ======== Passed Vertical Loading 1 ========        ========"}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED VERTICAL LOADING ========"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{vertical-loading-2}{%
-\section{Vertical Loading 2}\label{vertical-loading-2}}
+\hypertarget{plot}{%
+\section{Plot}\label{plot}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# VERTICAL LOADING 2\#}
-\CommentTok{\# =========================================================}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\# PLOT \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
 \NormalTok{it.command(}\StringTok{"""}
-\StringTok{; vertical loading}
-\StringTok{model restore \textquotesingle{}initial\textquotesingle{}}
-\StringTok{zone initialize state 0}
-\StringTok{zone gridpoint initialize displacement (0,0,0)}
-\StringTok{zone gridpoint initialize velocity     (0,0,0)}
-\StringTok{zone face apply stress{-}yy [1.0e5/(math.pi*}\SpecialCharTok{\{D\_shaft\_\}}\StringTok{*}\SpecialCharTok{\{D\_shaft\_\}}\StringTok{)] range group \textquotesingle{}top\textquotesingle{}}
-\StringTok{model solve ratio 1e{-}4}
-\StringTok{model save \textquotesingle{}vertical{-}load{-}end\textquotesingle{}}
-\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(D\_shaft\_}\OperatorTok{=}\NormalTok{\_D\_shaft))}
-\BuiltInTok{print}\NormalTok{(}\StringTok{"               =======        ======== Passed Vertical Loading 2 ========        ========"}\NormalTok{)}
+\StringTok{plot create}
+\StringTok{plot item create zone label group}
+\StringTok{plot create}
+\StringTok{plot item create zone contour property name \textquotesingle{}young\textquotesingle{}}
+\StringTok{plot create}
+\StringTok{plot item create zone label density}
+\StringTok{plot create}
+\StringTok{plot item create zone active on ...}
+\StringTok{    contour Displacement}
+\StringTok{"""}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED PLOT ========"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{define-fish-functions}{%
-\section{Define FISH FUNCTIONS}\label{define-fish-functions}}
+\section{Define Fish functions}\label{define-fish-functions}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -803,24 +780,6 @@ Each interface element distributes its area to its nodes in a weighted fashion. 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{generate-data-plots}{%
-\section{Generate Data Plots}\label{generate-data-plots}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# GENERATE p{-}y data \#}
-\CommentTok{\# =========================================================}
-\NormalTok{it.command(}\StringTok{"""}
-\StringTok{@make\_pydata        ; Generate p{-}y curve calculation data}
-\StringTok{@output\_structure   ; Sanity check of p{-}y curve data}
-\StringTok{fish history name \textquotesingle{}load\textquotesingle{} @tot\_reac}
-\StringTok{model step 416500}
-\StringTok{model save \textquotesingle{}lateral{-}load\textquotesingle{}}
-\StringTok{"""}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{(}\StringTok{"======== PASSED ALL SCRIPTS SUCCESSFULLY ========"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
@@ -829,23 +788,48 @@ Each interface element distributes its area to its nodes in a weighted fashion. 
 \CommentTok{\# ==================================================================}
 \CommentTok{\#   IPython Consol Output}
 \CommentTok{\# ==================================================================}
-               \OperatorTok{========}\NormalTok{ BEGIN A NEW RUN }\OperatorTok{========}        \OperatorTok{========}
+               \OperatorTok{========}\NormalTok{ BEGIN A NEW RUN }\OperatorTok{========}
 \NormalTok{(}\DecValTok{80000}\NormalTok{, }\StringTok{\textquotesingle{}zones in whole model\textquotesingle{}}\NormalTok{)}
 \NormalTok{(}\DecValTok{750}\NormalTok{, }\StringTok{\textquotesingle{}zones in shaft group.\textquotesingle{}}\NormalTok{)}
 \NormalTok{(}\DecValTok{2000}\NormalTok{, }\StringTok{\textquotesingle{}zones in plate group.\textquotesingle{}}\NormalTok{)}
-               \OperatorTok{========}\NormalTok{ PASSED PROPERTIES SETTING }\OperatorTok{========}        \OperatorTok{========}
-               \OperatorTok{========}\NormalTok{ PASSED INTERFACE SETTING }\OperatorTok{========}        \OperatorTok{========}
+               \OperatorTok{========}\NormalTok{ PASSED PROPERTIES SETTING }\OperatorTok{========}
+               \OperatorTok{========}\NormalTok{ PASSED INTERFACE SETTING }\OperatorTok{========}
 \NormalTok{(}\DecValTok{2000}\NormalTok{, }\StringTok{\textquotesingle{}zones in bottom group.\textquotesingle{}}\NormalTok{)}
 \NormalTok{(}\DecValTok{2000}\NormalTok{, }\StringTok{\textquotesingle{}zones in up group.\textquotesingle{}}\NormalTok{)}
 \NormalTok{(}\DecValTok{800}\NormalTok{, }\StringTok{\textquotesingle{}zones in x\_side group.\textquotesingle{}}\NormalTok{)}
 \NormalTok{(}\DecValTok{800}\NormalTok{, }\StringTok{\textquotesingle{}zones in z\_side group.\textquotesingle{}}\NormalTok{)}
 \NormalTok{(}\DecValTok{800}\NormalTok{, }\StringTok{\textquotesingle{}zones in x\_side\_end group.\textquotesingle{}}\NormalTok{)}
 \NormalTok{(}\DecValTok{800}\NormalTok{, }\StringTok{\textquotesingle{}zones in z\_side\_end group.\textquotesingle{}}\NormalTok{)}
-               \OperatorTok{========}\NormalTok{ PASSED BOUNDARY AND INITIAL CONDITIONS }\OperatorTok{========}        \OperatorTok{========}
-
+               \OperatorTok{========}\NormalTok{ PASSED BOUNDARY AND INITIAL CONDITIONS }\OperatorTok{========}
+               \OperatorTok{========}\NormalTok{ PASSED VERTICAL LOADING }\DecValTok{1} \OperatorTok{========}
+               \OperatorTok{========}\NormalTok{ PASSED VERTICAL LOADING }\DecValTok{2} \OperatorTok{========}
+               \OperatorTok{========}\NormalTok{ PASSED DEFINING ALL FISH FUNCTIONS }\OperatorTok{========}
+               \OperatorTok{========}\NormalTok{ PASSED ALL SCRIPTS SUCCESSFULLY }\OperatorTok{========}
 \CommentTok{\# ==================================================================}
 \CommentTok{\#   FISH Consol Output}
 \CommentTok{\# ==================================================================}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{python}\OperatorTok{{-}}\NormalTok{reset}\OperatorTok{{-}}\NormalTok{state false}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{model new}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{model deterministic on}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{model precision }\DecValTok{6}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{model random }\DecValTok{10000}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{z crea r}\OperatorTok{{-}}\NormalTok{t p }\DecValTok{0}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{           p }\DecValTok{1}\NormalTok{ (}\FloatTok{16.25}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{           p }\DecValTok{2}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\FloatTok{11.95}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{           p }\DecValTok{3}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{16.25}\NormalTok{) ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{           p }\DecValTok{4}\NormalTok{ (}\FloatTok{16.25}\NormalTok{,}\FloatTok{11.95}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{           p }\DecValTok{5}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\FloatTok{11.95}\NormalTok{,}\FloatTok{16.25}\NormalTok{) ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{           p }\DecValTok{6}\NormalTok{ (}\FloatTok{16.25}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{16.25}\NormalTok{) ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{           p }\DecValTok{7}\NormalTok{ (}\FloatTok{16.25}\NormalTok{,}\FloatTok{11.95}\NormalTok{,}\FloatTok{16.25}\NormalTok{) ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{           p }\DecValTok{8}\NormalTok{ (}\FloatTok{3.25}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{           p }\DecValTok{9}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{3.25}\NormalTok{) ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{           p }\DecValTok{10}\NormalTok{ (}\FloatTok{3.25}\NormalTok{,}\FloatTok{11.95}\NormalTok{,}\DecValTok{0}\NormalTok{) ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{           p }\DecValTok{11}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\FloatTok{11.95}\NormalTok{,}\FloatTok{3.25}\NormalTok{) ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{           p }\DecValTok{12}\NormalTok{ (}\FloatTok{3.25}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{3.25}\NormalTok{) ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{           p }\DecValTok{13}\NormalTok{ (}\FloatTok{3.25}\NormalTok{,}\FloatTok{11.95}\NormalTok{,}\FloatTok{3.25}\NormalTok{) ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{           size }\DecValTok{20} \DecValTok{40} \DecValTok{20} \DecValTok{40}\NormalTok{ ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{           rat }\DecValTok{1} \DecValTok{1} \DecValTok{1} \FloatTok{1.01}\NormalTok{ ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{           fill}
 \NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone cmodel assign elastic }\BuiltInTok{range}\NormalTok{ group }\StringTok{"Radial Tunnel1"}
 \NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{fish define fname(E\_o,const)}
 \NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{loop foreach pnt zone.}\BuiltInTok{list}
@@ -902,6 +886,213 @@ Each interface element distributes its area to its nodes in a weighted fashion. 
 \OperatorTok{{-}{-}{-}}\NormalTok{ Initial stress state }\BuiltInTok{set} \KeywordTok{in} \DecValTok{338}\NormalTok{ interface nodes.}
 \NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone ratio local}
 \NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{model solve ratio }\FloatTok{1e{-}4}
+\NormalTok{    Cycle      Total Mech Ratio       Clock}
+\OperatorTok{{-}{-}{-}{-}{-}{-}{-}{-}{-}} \OperatorTok{{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}} \OperatorTok{{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}} \OperatorTok{{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}} 
+     \DecValTok{8857}       \DecValTok{8857} \FloatTok{9.9831e{-}05} \DecValTok{00}\NormalTok{:}\DecValTok{00}\NormalTok{:}\DecValTok{03}\NormalTok{:}\DecValTok{36} 
+                     \FloatTok{1.0000e{-}04}             
+\OperatorTok{{-}{-}{-}}\NormalTok{ Limit ratio of }\FloatTok{1.0000e{-}04}\NormalTok{ met }\KeywordTok{in}\NormalTok{ process(es): mech Zone Main (}\FloatTok{9.9831e{-}05}\NormalTok{),mech Struct Main (}\FloatTok{3.4811e{-}06}\NormalTok{).}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Cycling ended at: }\DecValTok{2021}\OperatorTok{{-}}\DecValTok{09}\OperatorTok{{-}}\DecValTok{20} \DecValTok{16}\NormalTok{:}\DecValTok{37}\NormalTok{:}\DecValTok{35}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{model save }\StringTok{\textquotesingle{}initial\textquotesingle{}}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Model saved to }\BuiltInTok{file}\NormalTok{ C:}\OperatorTok{/}\NormalTok{Users}\OperatorTok{/}\NormalTok{kyeongsunkim}\OperatorTok{/}\NormalTok{Desktop}\OperatorTok{/}\NormalTok{FLAC\_WORKING\_DIRECTORY}\OperatorTok{/}\DecValTok{13}\NormalTok{\_KAIST\_vertical\_loading\_0920}\OperatorTok{/}\NormalTok{initial.f3sav.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone initialize state }\DecValTok{0}
+\OperatorTok{{-}{-}{-}}\NormalTok{ state modified }\KeywordTok{in} \DecValTok{80000}\NormalTok{ zones.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone gridpoint initialize displacement (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\OperatorTok{{-}{-}{-}}\NormalTok{ displacement modified }\KeywordTok{in} \DecValTok{86662}\NormalTok{ gridpoints.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone gridpoint initialize velocity     (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\OperatorTok{{-}{-}{-}}\NormalTok{ velocity modified }\KeywordTok{in} \DecValTok{86662}\NormalTok{ gridpoints.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{table }\StringTok{\textquotesingle{}ramp\textquotesingle{}}\NormalTok{ add ([}\KeywordTok{global}\NormalTok{.step],}\DecValTok{0}\NormalTok{) ([}\KeywordTok{global}\NormalTok{.step}\OperatorTok{+}\DecValTok{30000}\NormalTok{],}\OperatorTok{{-}}\FloatTok{5e{-}8}\NormalTok{) ...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{      ([}\KeywordTok{global}\NormalTok{.step}\OperatorTok{+}\DecValTok{58000}\NormalTok{],}\OperatorTok{{-}}\FloatTok{5e{-}8}\NormalTok{) }\OperatorTok{;}\NormalTok{ Increase velocity applied to pile}
+\OperatorTok{{-}{-}{-}}\NormalTok{ The table  }\ControlFlowTok{with}\NormalTok{ name ramp was created }\KeywordTok{and} \DecValTok{3}\NormalTok{ values were added.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}                                  \OperatorTok{;}\NormalTok{ over }\DecValTok{30}\NormalTok{,}\DecValTok{000}\NormalTok{ steps}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone face }\BuiltInTok{apply}\NormalTok{ velocity}\OperatorTok{{-}}\NormalTok{normal }\DecValTok{1}\NormalTok{ table }\StringTok{\textquotesingle{}ramp\textquotesingle{}} \BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}top\textquotesingle{}}
+\OperatorTok{{-}{-}{-}} \DecValTok{39}\NormalTok{ gridpoints }\ControlFlowTok{with}\NormalTok{ conflicting conditions had those conditions removed.}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Apply conditions added to }\DecValTok{67}\NormalTok{ gridpoints.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{history interval }\DecValTok{250}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone history name }\StringTok{\textquotesingle{}disp\textquotesingle{}}\NormalTok{ displacement}\OperatorTok{{-}}\NormalTok{y position (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Created history disp Y Displacement at (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{flac3d}\OperatorTok{\textgreater{};} \OperatorTok{=========================================================}
+\NormalTok{flac3d}\OperatorTok{\textgreater{};}\NormalTok{  find gridpoints at pile cap, store }\KeywordTok{in} \BuiltInTok{map}\NormalTok{ called cap}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{fish define find\_cap}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}    \KeywordTok{global}\NormalTok{ cap }\OperatorTok{=} \BuiltInTok{map}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    loop foreach local gp gp.}\BuiltInTok{list}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}        \ControlFlowTok{if}\NormalTok{ gp.isgroup(gp,}\StringTok{\textquotesingle{}top\textquotesingle{}}\NormalTok{) then}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            cap(gp.}\BuiltInTok{id}\NormalTok{(gp)) }\OperatorTok{=}\NormalTok{ gp}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        endif}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    endloop}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{end}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}@}\NormalTok{find\_cap}
+\NormalTok{flac3d}\OperatorTok{\textgreater{};} \OperatorTok{=========================================================}
+\NormalTok{flac3d}\OperatorTok{\textgreater{};}\NormalTok{ monitor vertical loading at pile cap}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{fish define vert\_load}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    local yftot }\OperatorTok{=} \FloatTok{0.0}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    loop foreach gp cap}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        yftot }\OperatorTok{=}\NormalTok{ yftot }\OperatorTok{+}\NormalTok{ gp.force.unbal.y(gp)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    end\_loop}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    vert\_load }\OperatorTok{=}\NormalTok{ yftot }\OperatorTok{/}\NormalTok{ (}\FloatTok{0.25}\OperatorTok{*}\DecValTok{1}\OperatorTok{*}\DecValTok{1}\OperatorTok{*}\NormalTok{math.pi)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{end}
+\NormalTok{flac3d}\OperatorTok{\textgreater{};}\NormalTok{call }\StringTok{\textquotesingle{}load\textquotesingle{}}
+\NormalTok{flac3d}\OperatorTok{\textgreater{};} \OperatorTok{=========================================================}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{fish history name }\StringTok{\textquotesingle{}load\textquotesingle{}} \OperatorTok{@}\NormalTok{vert\_load}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Created history load}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone mechanical damping combined}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{model step }\DecValTok{58000}
+\NormalTok{    Cycle      Total       Clock}
+\OperatorTok{{-}{-}{-}{-}{-}{-}{-}{-}{-}} \OperatorTok{{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}} \OperatorTok{{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}} 
+    \DecValTok{58000}      \DecValTok{66857} \DecValTok{00}\NormalTok{:}\DecValTok{00}\NormalTok{:}\DecValTok{22}\NormalTok{:}\DecValTok{18} 
+    \DecValTok{58000}                        
+\OperatorTok{{-}{-}{-}}\NormalTok{ Global cycle limit of }\DecValTok{58000}\NormalTok{ met.}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Cycling ended at: }\DecValTok{2021}\OperatorTok{{-}}\DecValTok{09}\OperatorTok{{-}}\DecValTok{20} \DecValTok{16}\NormalTok{:}\DecValTok{59}\NormalTok{:}\DecValTok{55}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{model save }\StringTok{\textquotesingle{}vertical{-}loading\textquotesingle{}}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Model saved to }\BuiltInTok{file}\NormalTok{ C:}\OperatorTok{/}\NormalTok{Users}\OperatorTok{/}\NormalTok{kyeongsunkim}\OperatorTok{/}\NormalTok{Desktop}\OperatorTok{/}\NormalTok{FLAC\_WORKING\_DIRECTORY}\OperatorTok{/}\DecValTok{13}\NormalTok{\_KAIST\_vertical\_loading\_0920}\OperatorTok{/}\NormalTok{vertical}\OperatorTok{{-}}\NormalTok{loading.f3sav.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{};}\NormalTok{ vertical loading}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{model restore }\StringTok{\textquotesingle{}initial\textquotesingle{}}
+\OperatorTok{********************************************}
+\NormalTok{Save }\BuiltInTok{file}\NormalTok{ created by FLAC3D }\FloatTok{6.00.69.0}
+\NormalTok{on ? }\DecValTok{9} \DecValTok{20} \DecValTok{16}\NormalTok{:}\DecValTok{37}\NormalTok{:}\DecValTok{35} \DecValTok{2021}
+\NormalTok{Total Cycles: }\DecValTok{8857}\NormalTok{  Super Cycles: }\DecValTok{8857}
+\NormalTok{Title: }
+\NormalTok{Customer: }
+\NormalTok{        : }
+\OperatorTok{********************************************}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone initialize state }\DecValTok{0}
+\OperatorTok{{-}{-}{-}}\NormalTok{ state modified }\KeywordTok{in} \DecValTok{80000}\NormalTok{ zones.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone gridpoint initialize displacement (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\OperatorTok{{-}{-}{-}}\NormalTok{ displacement modified }\KeywordTok{in} \DecValTok{86662}\NormalTok{ gridpoints.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone gridpoint initialize velocity     (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\OperatorTok{{-}{-}{-}}\NormalTok{ velocity modified }\KeywordTok{in} \DecValTok{86662}\NormalTok{ gridpoints.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{zone face }\BuiltInTok{apply}\NormalTok{ stress}\OperatorTok{{-}}\NormalTok{yy [}\FloatTok{1.0e5}\OperatorTok{/}\NormalTok{(math.pi}\OperatorTok{*}\DecValTok{1}\OperatorTok{*}\DecValTok{1}\NormalTok{)] }\BuiltInTok{range}\NormalTok{ group }\StringTok{\textquotesingle{}top\textquotesingle{}}
+\OperatorTok{+++}\NormalTok{ No }\BuiltInTok{apply}\NormalTok{ conditions created.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{model solve ratio }\FloatTok{1e{-}4}
+\NormalTok{    Cycle      Total Mech Ratio       Clock}
+\OperatorTok{{-}{-}{-}{-}{-}{-}{-}{-}{-}} \OperatorTok{{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}} \OperatorTok{{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}} \OperatorTok{{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}} 
+        \DecValTok{1}       \DecValTok{8858} \FloatTok{9.9831e{-}05} \DecValTok{00}\NormalTok{:}\DecValTok{00}\NormalTok{:}\DecValTok{00}\NormalTok{:}\DecValTok{00} 
+                     \FloatTok{1.0000e{-}04}             
+\OperatorTok{{-}{-}{-}}\NormalTok{ Limit ratio of }\FloatTok{1.0000e{-}04}\NormalTok{ met }\KeywordTok{in}\NormalTok{ process(es): mech Zone Main (}\FloatTok{9.9831e{-}05}\NormalTok{),mech Struct Main (}\FloatTok{3.4811e{-}06}\NormalTok{).}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Cycling ended at: }\DecValTok{2021}\OperatorTok{{-}}\DecValTok{09}\OperatorTok{{-}}\DecValTok{20} \DecValTok{16}\NormalTok{:}\DecValTok{59}\NormalTok{:}\DecValTok{57}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{model save }\StringTok{\textquotesingle{}vertical{-}load{-}end\textquotesingle{}}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Model saved to }\BuiltInTok{file}\NormalTok{ C:}\OperatorTok{/}\NormalTok{Users}\OperatorTok{/}\NormalTok{kyeongsunkim}\OperatorTok{/}\NormalTok{Desktop}\OperatorTok{/}\NormalTok{FLAC\_WORKING\_DIRECTORY}\OperatorTok{/}\DecValTok{13}\NormalTok{\_KAIST\_vertical\_loading\_0920}\OperatorTok{/}\NormalTok{vertical}\OperatorTok{{-}}\NormalTok{load}\OperatorTok{{-}}\NormalTok{end.f3sav.}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{fish define make\_pydata}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}    \KeywordTok{global}\NormalTok{ pile }\OperatorTok{=} \BuiltInTok{map}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}    \OperatorTok{;}\NormalTok{ Build }\BuiltInTok{list}\NormalTok{ of nodes}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    loop foreach local ipnt inter.}\BuiltInTok{list}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        loop foreach node inter.node.}\BuiltInTok{list}\NormalTok{(ipnt)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            local y }\OperatorTok{=}\NormalTok{ inter.node.pos.y(node)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            local key }\OperatorTok{=}\NormalTok{ math.}\BuiltInTok{round}\NormalTok{(inter.node.pos.y(node) }\OperatorTok{*} \FloatTok{1.0}\NormalTok{)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}            \ControlFlowTok{if} \BuiltInTok{map}\NormalTok{.has(pile,key) }\OperatorTok{==}\NormalTok{ false then}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{                local level }\OperatorTok{=} \BuiltInTok{map}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{                local nodes }\OperatorTok{=} \BuiltInTok{map}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{                level(}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{) }\OperatorTok{=}\NormalTok{ y}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{                level(}\StringTok{\textquotesingle{}gp\textquotesingle{}}\NormalTok{) }\OperatorTok{=}\NormalTok{ gp.near(}\DecValTok{0}\NormalTok{,y,}\DecValTok{0}\NormalTok{,}\StringTok{\textquotesingle{}pile\textquotesingle{}}\NormalTok{)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{                level(}\StringTok{\textquotesingle{}nodes\textquotesingle{}}\NormalTok{) }\OperatorTok{=}\NormalTok{ nodes}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{                level(}\StringTok{\textquotesingle{}length\textquotesingle{}}\NormalTok{) }\OperatorTok{=} \FloatTok{0.0}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{                pile(key) }\OperatorTok{=}\NormalTok{ level}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            endif}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            level }\OperatorTok{=}\NormalTok{ pile(key)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            nodes }\OperatorTok{=}\NormalTok{ level(}\StringTok{\textquotesingle{}nodes\textquotesingle{}}\NormalTok{)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            nodes(}\BuiltInTok{map}\NormalTok{.size(nodes)) }\OperatorTok{=}\NormalTok{ node}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            level(}\StringTok{\textquotesingle{}nodes\textquotesingle{}}\NormalTok{) }\OperatorTok{=}\NormalTok{ nodes}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            pile(key) }\OperatorTok{=}\NormalTok{ level}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        end\_loop}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    end\_loop}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}    \OperatorTok{;}\NormalTok{ Calculate length of ownership of each segment}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    local prev\_key }\OperatorTok{=} \StringTok{\textquotesingle{}0\textquotesingle{}}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    loop foreach key }\BuiltInTok{map}\NormalTok{.keys(pile)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}        \ControlFlowTok{if} \BuiltInTok{type}\NormalTok{.name(prev\_key) }\OperatorTok{==} \StringTok{\textquotesingle{}integer\textquotesingle{}}\NormalTok{ then}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            local levelp }\OperatorTok{=}\NormalTok{ pile(prev\_key)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            local leveln }\OperatorTok{=}\NormalTok{ pile(key)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            local dist }\OperatorTok{=}\NormalTok{ math.}\BuiltInTok{abs}\NormalTok{(gp.pos.y(levelp(}\StringTok{\textquotesingle{}gp\textquotesingle{}}\NormalTok{)) }\OperatorTok{{-}}\NormalTok{ gp.pos.y(leveln(}\StringTok{\textquotesingle{}gp\textquotesingle{}}\NormalTok{))) }\OperatorTok{*} \FloatTok{0.5}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            levelp(}\StringTok{\textquotesingle{}length\textquotesingle{}}\NormalTok{) }\OperatorTok{=}\NormalTok{ levelp(}\StringTok{\textquotesingle{}length\textquotesingle{}}\NormalTok{) }\OperatorTok{+}\NormalTok{ dist}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            leveln(}\StringTok{\textquotesingle{}length\textquotesingle{}}\NormalTok{) }\OperatorTok{=}\NormalTok{ leveln(}\StringTok{\textquotesingle{}length\textquotesingle{}}\NormalTok{) }\OperatorTok{+}\NormalTok{ dist}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            pile(prev\_key) }\OperatorTok{=}\NormalTok{ levelp}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            pile(key) }\OperatorTok{=}\NormalTok{ leveln}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        endif}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        prev\_key }\OperatorTok{=}\NormalTok{ key}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    end\_loop}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{end}
+\NormalTok{flac3d}\OperatorTok{\textgreater{};}\NormalTok{ Output resulting data structure...}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{fish define output\_structure}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    loop foreach local level pile}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        io.out(}\StringTok{\textquotesingle{}Y{-}Position \textquotesingle{}} \OperatorTok{+}\NormalTok{ string(level(}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{)))}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        io.out(}\StringTok{\textquotesingle{}Length \textquotesingle{}} \OperatorTok{+}\NormalTok{ string(level(}\StringTok{\textquotesingle{}length\textquotesingle{}}\NormalTok{)))}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        io.out(}\StringTok{\textquotesingle{}GP \textquotesingle{}} \OperatorTok{+}\NormalTok{ string(gp.}\BuiltInTok{id}\NormalTok{(level(}\StringTok{\textquotesingle{}gp\textquotesingle{}}\NormalTok{))))}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        local nodelist }\OperatorTok{=} \StringTok{\textquotesingle{}\textquotesingle{}}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        loop foreach local node level(}\StringTok{\textquotesingle{}nodes\textquotesingle{}}\NormalTok{)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            nodelist }\OperatorTok{=}\NormalTok{ nodelist }\OperatorTok{+} \StringTok{\textquotesingle{} \textquotesingle{}} \OperatorTok{+}\NormalTok{ string(interface.node.}\BuiltInTok{id}\NormalTok{(node))}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        end\_loop}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        io.out(}\StringTok{\textquotesingle{}Nodes\textquotesingle{}}\OperatorTok{+}\NormalTok{nodelist)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    end\_loop}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{end}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{fish define tot\_reac}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    local total }\OperatorTok{=} \FloatTok{0.0}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    loop foreach local key }\BuiltInTok{map}\NormalTok{.keys(pile)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        local level }\OperatorTok{=}\NormalTok{ pile(key)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        local accum }\OperatorTok{=} \FloatTok{0.0}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        loop foreach local node level(}\StringTok{\textquotesingle{}nodes\textquotesingle{}}\NormalTok{)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            local area }\OperatorTok{=} \FloatTok{2.0} \OperatorTok{*}\NormalTok{ interface.node.area(node)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            local norm }\OperatorTok{=}\NormalTok{ zone.face.normal(inter.node.target.zone(node),inter.node.target.face(node))}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            local xnstress }\OperatorTok{=}\NormalTok{ inter.node.stress.normal(node) }\OperatorTok{*}\NormalTok{ norm}\OperatorTok{{-}\textgreater{}}\NormalTok{x }\OperatorTok{*} \OperatorTok{{-}}\FloatTok{1.0}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            local xsstress }\OperatorTok{=}\NormalTok{ inter.node.stress.shear.x(node)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{            accum }\OperatorTok{=}\NormalTok{ accum }\OperatorTok{+}\NormalTok{ (xnstress }\OperatorTok{+}\NormalTok{ xsstress) }\OperatorTok{*}\NormalTok{  area}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        end\_loop}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        local xdis }\OperatorTok{=}\NormalTok{ gp.disp.x(level(}\StringTok{\textquotesingle{}gp\textquotesingle{}}\NormalTok{))}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        total }\OperatorTok{=}\NormalTok{ total }\OperatorTok{+}\NormalTok{ accum}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{        table(string(key),xdis) }\OperatorTok{=}\NormalTok{ accum}\OperatorTok{/}\NormalTok{level(}\StringTok{\textquotesingle{}length\textquotesingle{}}\NormalTok{)}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    end\_loop}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{    tot\_reac }\OperatorTok{=}\NormalTok{ total}
+\NormalTok{   Def}\OperatorTok{\textgreater{}}\NormalTok{end}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}@}\NormalTok{make\_pydata        }\OperatorTok{;}\NormalTok{ Generate p}\OperatorTok{{-}}\NormalTok{y curve calculation data}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}@}\NormalTok{output\_structure   }\OperatorTok{;}\NormalTok{ Sanity check of p}\OperatorTok{{-}}\NormalTok{y curve data}
+\NormalTok{Y}\OperatorTok{{-}}\NormalTok{Position }\DecValTok{0}
+\NormalTok{Length }\FloatTok{0.29875}
+\NormalTok{GP }\DecValTok{68922}
+\NormalTok{Nodes }\DecValTok{1} \DecValTok{2} \DecValTok{3} \DecValTok{4} \DecValTok{53} \DecValTok{54} \DecValTok{79} \DecValTok{80} \DecValTok{81} \DecValTok{82} \DecValTok{131} \DecValTok{132} \DecValTok{133} \DecValTok{134} \DecValTok{183} \DecValTok{184} \DecValTok{185} \DecValTok{186} \DecValTok{235} \DecValTok{236} \DecValTok{237} \DecValTok{238} \DecValTok{239} \DecValTok{240} \DecValTok{241} \DecValTok{242}
+\NormalTok{Y}\OperatorTok{{-}}\NormalTok{Position }\FloatTok{0.5975}
+\NormalTok{Length }\FloatTok{0.89625}
+\NormalTok{GP }\DecValTok{69002}
+\NormalTok{Nodes }\DecValTok{5} \DecValTok{6} \DecValTok{7} \DecValTok{8} \DecValTok{9} \DecValTok{10} \DecValTok{11} \DecValTok{12} \DecValTok{55} \DecValTok{56} \DecValTok{57} \DecValTok{58} \DecValTok{83} \DecValTok{84} \DecValTok{85} \DecValTok{86} \DecValTok{87} \DecValTok{88} \DecValTok{89} \DecValTok{90} \DecValTok{135} \DecValTok{136} \DecValTok{137} \DecValTok{138} \DecValTok{139} \DecValTok{140} \DecValTok{141} \DecValTok{142} \DecValTok{187} \DecValTok{188} \DecValTok{189} \DecValTok{190} \DecValTok{191} \DecValTok{192} \DecValTok{193} \DecValTok{194} \DecValTok{243} \DecValTok{244} \DecValTok{245} \DecValTok{246} \DecValTok{247} \DecValTok{248} \DecValTok{249} \DecValTok{250} \DecValTok{251} \DecValTok{252} \DecValTok{253} \DecValTok{254} \DecValTok{255} \DecValTok{256} \DecValTok{257} \DecValTok{258}
+\NormalTok{Y}\OperatorTok{{-}}\NormalTok{Position }\FloatTok{1.7925}
+\NormalTok{Length }\FloatTok{1.04562}
+\NormalTok{GP }\DecValTok{69162}
+\NormalTok{Nodes }\DecValTok{13} \DecValTok{14} \DecValTok{15} \DecValTok{16} \DecValTok{17} \DecValTok{18} \DecValTok{59} \DecValTok{60} \DecValTok{61} \DecValTok{91} \DecValTok{92} \DecValTok{93} \DecValTok{94} \DecValTok{95} \DecValTok{96} \DecValTok{143} \DecValTok{144} \DecValTok{145} \DecValTok{146} \DecValTok{147} \DecValTok{148} \DecValTok{195} \DecValTok{196} \DecValTok{197} \DecValTok{198} \DecValTok{199} \DecValTok{200} \DecValTok{259} \DecValTok{260} \DecValTok{261} \DecValTok{262} \DecValTok{263} \DecValTok{264} \DecValTok{265} \DecValTok{266} \DecValTok{267} \DecValTok{268} \DecValTok{269} \DecValTok{270}
+\NormalTok{Y}\OperatorTok{{-}}\NormalTok{Position }\FloatTok{2.68875}
+\NormalTok{Length }\FloatTok{0.89625}
+\NormalTok{GP }\DecValTok{69282}
+\NormalTok{Nodes }\DecValTok{19} \DecValTok{20} \DecValTok{21} \DecValTok{22} \DecValTok{23} \DecValTok{24} \DecValTok{62} \DecValTok{63} \DecValTok{64} \DecValTok{97} \DecValTok{98} \DecValTok{99} \DecValTok{100} \DecValTok{101} \DecValTok{102} \DecValTok{149} \DecValTok{150} \DecValTok{151} \DecValTok{152} \DecValTok{153} \DecValTok{154} \DecValTok{201} \DecValTok{202} \DecValTok{203} \DecValTok{204} \DecValTok{205} \DecValTok{206} \DecValTok{271} \DecValTok{272} \DecValTok{273} \DecValTok{274} \DecValTok{275} \DecValTok{276} \DecValTok{277} \DecValTok{278} \DecValTok{279} \DecValTok{280} \DecValTok{281} \DecValTok{282}
+\NormalTok{Y}\OperatorTok{{-}}\NormalTok{Position }\FloatTok{3.585}
+\NormalTok{Length }\FloatTok{1.04563}
+\NormalTok{GP }\DecValTok{69402}
+\NormalTok{Nodes }\DecValTok{25} \DecValTok{26} \DecValTok{27} \DecValTok{28} \DecValTok{29} \DecValTok{30} \DecValTok{31} \DecValTok{32} \DecValTok{65} \DecValTok{66} \DecValTok{67} \DecValTok{68} \DecValTok{103} \DecValTok{104} \DecValTok{105} \DecValTok{106} \DecValTok{107} \DecValTok{108} \DecValTok{109} \DecValTok{110} \DecValTok{155} \DecValTok{156} \DecValTok{157} \DecValTok{158} \DecValTok{159} \DecValTok{160} \DecValTok{161} \DecValTok{162} \DecValTok{207} \DecValTok{208} \DecValTok{209} \DecValTok{210} \DecValTok{211} \DecValTok{212} \DecValTok{213} \DecValTok{214} \DecValTok{283} \DecValTok{284} \DecValTok{285} \DecValTok{286} \DecValTok{287} \DecValTok{288} \DecValTok{289} \DecValTok{290} \DecValTok{291} \DecValTok{292} \DecValTok{293} \DecValTok{294} \DecValTok{295} \DecValTok{296} \DecValTok{297} \DecValTok{298}
+\NormalTok{Y}\OperatorTok{{-}}\NormalTok{Position }\FloatTok{4.78}
+\NormalTok{Length }\FloatTok{1.04563}
+\NormalTok{GP }\DecValTok{69562}
+\NormalTok{Nodes }\DecValTok{33} \DecValTok{34} \DecValTok{35} \DecValTok{36} \DecValTok{37} \DecValTok{38} \DecValTok{69} \DecValTok{70} \DecValTok{71} \DecValTok{111} \DecValTok{112} \DecValTok{113} \DecValTok{114} \DecValTok{115} \DecValTok{116} \DecValTok{163} \DecValTok{164} \DecValTok{165} \DecValTok{166} \DecValTok{167} \DecValTok{168} \DecValTok{215} \DecValTok{216} \DecValTok{217} \DecValTok{218} \DecValTok{219} \DecValTok{220} \DecValTok{299} \DecValTok{300} \DecValTok{301} \DecValTok{302} \DecValTok{303} \DecValTok{304} \DecValTok{305} \DecValTok{306} \DecValTok{307} \DecValTok{308} \DecValTok{309} \DecValTok{310}
+\NormalTok{Y}\OperatorTok{{-}}\NormalTok{Position }\FloatTok{5.67625}
+\NormalTok{Length }\FloatTok{1.34437}
+\NormalTok{GP }\DecValTok{69682}
+\NormalTok{Nodes }\DecValTok{39} \DecValTok{40} \DecValTok{41} \DecValTok{42} \DecValTok{43} \DecValTok{44} \DecValTok{72} \DecValTok{73} \DecValTok{74} \DecValTok{117} \DecValTok{118} \DecValTok{119} \DecValTok{120} \DecValTok{121} \DecValTok{122} \DecValTok{169} \DecValTok{170} \DecValTok{171} \DecValTok{172} \DecValTok{173} \DecValTok{174} \DecValTok{221} \DecValTok{222} \DecValTok{223} \DecValTok{224} \DecValTok{225} \DecValTok{226} \DecValTok{311} \DecValTok{312} \DecValTok{313} \DecValTok{314} \DecValTok{315} \DecValTok{316} \DecValTok{317} \DecValTok{318} \DecValTok{319} \DecValTok{320} \DecValTok{321} \DecValTok{322}
+\NormalTok{Y}\OperatorTok{{-}}\NormalTok{Position }\FloatTok{7.46875}
+\NormalTok{Length }\FloatTok{1.04563}
+\NormalTok{GP }\DecValTok{69922}
+\NormalTok{Nodes }\DecValTok{1} \DecValTok{4} \DecValTok{6} \DecValTok{8} \DecValTok{10} \DecValTok{12} \DecValTok{14} \DecValTok{16} \DecValTok{18} \DecValTok{20} \DecValTok{22} \DecValTok{24} \DecValTok{26} \DecValTok{28} \DecValTok{30} \DecValTok{32} \DecValTok{34} \DecValTok{36} \DecValTok{38} \DecValTok{40} \DecValTok{42} \DecValTok{127} \DecValTok{130} \DecValTok{139} \DecValTok{145} \DecValTok{151} \DecValTok{157} \DecValTok{163} \DecValTok{169} \DecValTok{175} \DecValTok{181} \DecValTok{187} \DecValTok{193} \DecValTok{199} \DecValTok{205} \DecValTok{211} \DecValTok{217} \DecValTok{223} \DecValTok{229} \DecValTok{235} \DecValTok{242} \DecValTok{247} \DecValTok{248} \DecValTok{249} \DecValTok{250} \DecValTok{251} \DecValTok{252} \DecValTok{253} \DecValTok{254} \DecValTok{255} \DecValTok{256} \DecValTok{257} \DecValTok{258} \DecValTok{259} \DecValTok{260} \DecValTok{261} \DecValTok{262} \DecValTok{263} \DecValTok{264} \DecValTok{265} \DecValTok{266} \DecValTok{267} \DecValTok{268} \DecValTok{269} \DecValTok{270} \DecValTok{271} \DecValTok{272} \DecValTok{273} \DecValTok{274} \DecValTok{315} \DecValTok{316} \DecValTok{317} \DecValTok{318} \DecValTok{319} \DecValTok{320} \DecValTok{321} \DecValTok{322} \DecValTok{323} \DecValTok{324} \DecValTok{325} \DecValTok{326} \DecValTok{327} \DecValTok{328} \DecValTok{349} \DecValTok{350} \DecValTok{351} \DecValTok{352} \DecValTok{353} \DecValTok{354} \DecValTok{355} \DecValTok{356} \DecValTok{357} \DecValTok{358} \DecValTok{359} \DecValTok{360} \DecValTok{361} \DecValTok{362} \DecValTok{383} \DecValTok{384} \DecValTok{385} \DecValTok{386} \DecValTok{387} \DecValTok{388} \DecValTok{389} \DecValTok{390} \DecValTok{391} \DecValTok{392} \DecValTok{393} \DecValTok{394} \DecValTok{395} \DecValTok{396} \DecValTok{397} \DecValTok{398} \DecValTok{419} \DecValTok{420} \DecValTok{421} \DecValTok{422} \DecValTok{423} \DecValTok{424} \DecValTok{425} \DecValTok{426} \DecValTok{427} \DecValTok{428} \DecValTok{429} \DecValTok{430} \DecValTok{431} \DecValTok{432} \DecValTok{433} \DecValTok{434} \DecValTok{435} \DecValTok{456} \DecValTok{457} \DecValTok{458} \DecValTok{459} \DecValTok{460} \DecValTok{461} \DecValTok{462} \DecValTok{463} \DecValTok{464} \DecValTok{465} \DecValTok{466} \DecValTok{467} \DecValTok{468} \DecValTok{469} \DecValTok{470} \DecValTok{471} \DecValTok{472} \DecValTok{473} \DecValTok{494} \DecValTok{495} \DecValTok{496} \DecValTok{497} \DecValTok{498} \DecValTok{499} \DecValTok{500} \DecValTok{501} \DecValTok{502} \DecValTok{503} \DecValTok{504} \DecValTok{505} \DecValTok{506} \DecValTok{507} \DecValTok{508} \DecValTok{509} \DecValTok{510} \DecValTok{511} \DecValTok{512} \DecValTok{513} \DecValTok{514} \DecValTok{515} \DecValTok{516} \DecValTok{537} \DecValTok{538} \DecValTok{539} \DecValTok{540} \DecValTok{541} \DecValTok{542} \DecValTok{543} \DecValTok{544} \DecValTok{545} \DecValTok{546} \DecValTok{547} \DecValTok{548} \DecValTok{549} \DecValTok{550} \DecValTok{551} \DecValTok{552} \DecValTok{553} \DecValTok{554} \DecValTok{555} \DecValTok{556} \DecValTok{577} \DecValTok{578} \DecValTok{579} \DecValTok{580} \DecValTok{581} \DecValTok{582} \DecValTok{583} \DecValTok{584} \DecValTok{585} \DecValTok{586} \DecValTok{587} \DecValTok{588} \DecValTok{589} \DecValTok{590} \DecValTok{591} \DecValTok{592} \DecValTok{593} \DecValTok{594} \DecValTok{595} \DecValTok{596} \DecValTok{617} \DecValTok{618} \DecValTok{619} \DecValTok{620} \DecValTok{621} \DecValTok{622} \DecValTok{623} \DecValTok{624} \DecValTok{625} \DecValTok{626} \DecValTok{627} \DecValTok{628} \DecValTok{629} \DecValTok{630} \DecValTok{631} \DecValTok{632} \DecValTok{633} \DecValTok{634} \DecValTok{635} \DecValTok{636} \DecValTok{657} \DecValTok{658} \DecValTok{659} \DecValTok{660} \DecValTok{661} \DecValTok{662} \DecValTok{663} \DecValTok{664} \DecValTok{665} \DecValTok{666} \DecValTok{667} \DecValTok{668} \DecValTok{669} \DecValTok{670} \DecValTok{671} \DecValTok{672} \DecValTok{673} \DecValTok{674} \DecValTok{675} \DecValTok{676} \DecValTok{697} \DecValTok{698} \DecValTok{699} \DecValTok{700} \DecValTok{701} \DecValTok{702} \DecValTok{703} \DecValTok{704} \DecValTok{705} \DecValTok{706} \DecValTok{707} \DecValTok{708} \DecValTok{709} \DecValTok{710} \DecValTok{711} \DecValTok{712} \DecValTok{713} \DecValTok{714} \DecValTok{715} \DecValTok{716} \DecValTok{737} \DecValTok{738} \DecValTok{739} \DecValTok{740} \DecValTok{741} \DecValTok{742} \DecValTok{743} \DecValTok{744} \DecValTok{745} \DecValTok{746} \DecValTok{747} \DecValTok{748} \DecValTok{749} \DecValTok{750} \DecValTok{751} \DecValTok{752} \DecValTok{753} \DecValTok{754} \DecValTok{755} \DecValTok{756} \DecValTok{777} \DecValTok{778} \DecValTok{779} \DecValTok{780} \DecValTok{781} \DecValTok{782} \DecValTok{783} \DecValTok{784} \DecValTok{785} \DecValTok{786} \DecValTok{787} \DecValTok{788} \DecValTok{789} \DecValTok{790} \DecValTok{791} \DecValTok{792} \DecValTok{793} \DecValTok{794} \DecValTok{795} \DecValTok{796} \DecValTok{817} \DecValTok{818} \DecValTok{819} \DecValTok{820} \DecValTok{821} \DecValTok{822} \DecValTok{823} \DecValTok{824} \DecValTok{825} \DecValTok{826} \DecValTok{827} \DecValTok{828} \DecValTok{829} \DecValTok{830} \DecValTok{831} \DecValTok{832} \DecValTok{833} \DecValTok{834} \DecValTok{835} \DecValTok{836} \DecValTok{857} \DecValTok{858} \DecValTok{859} \DecValTok{860} \DecValTok{861} \DecValTok{862} \DecValTok{863} \DecValTok{864} \DecValTok{865} \DecValTok{866} \DecValTok{867} \DecValTok{868} \DecValTok{869} \DecValTok{870} \DecValTok{871} \DecValTok{872} \DecValTok{873} \DecValTok{874} \DecValTok{875} \DecValTok{876} \DecValTok{897} \DecValTok{898} \DecValTok{899} \DecValTok{900} \DecValTok{901} \DecValTok{902} \DecValTok{903} \DecValTok{904} \DecValTok{905} \DecValTok{906} \DecValTok{907} \DecValTok{908} \DecValTok{909} \DecValTok{910} \DecValTok{911} \DecValTok{912} \DecValTok{913} \DecValTok{914} \DecValTok{915} \DecValTok{916} \DecValTok{937} \DecValTok{938} \DecValTok{939} \DecValTok{940} \DecValTok{941} \DecValTok{942} \DecValTok{943} \DecValTok{944} \DecValTok{945} \DecValTok{946} \DecValTok{947} \DecValTok{948} \DecValTok{949} \DecValTok{950} \DecValTok{951} \DecValTok{952} \DecValTok{953} \DecValTok{954} \DecValTok{955} \DecValTok{956} \DecValTok{977} \DecValTok{978} \DecValTok{979} \DecValTok{980} \DecValTok{981} \DecValTok{982} \DecValTok{983} \DecValTok{984} \DecValTok{985} \DecValTok{986} \DecValTok{987} \DecValTok{988} \DecValTok{989} \DecValTok{990} \DecValTok{991} \DecValTok{992} \DecValTok{993} \DecValTok{994} \DecValTok{995} \DecValTok{996} \DecValTok{45} \DecValTok{46} \DecValTok{47} \DecValTok{48} \DecValTok{49} \DecValTok{50} \DecValTok{51} \DecValTok{52} \DecValTok{75} \DecValTok{76} \DecValTok{77} \DecValTok{78} \DecValTok{123} \DecValTok{124} \DecValTok{125} \DecValTok{126} \DecValTok{127} \DecValTok{128} \DecValTok{129} \DecValTok{130} \DecValTok{175} \DecValTok{176} \DecValTok{177} \DecValTok{178} \DecValTok{179} \DecValTok{180} \DecValTok{181} \DecValTok{182} \DecValTok{227} \DecValTok{228} \DecValTok{229} \DecValTok{230} \DecValTok{231} \DecValTok{232} \DecValTok{233} \DecValTok{234} \DecValTok{323} \DecValTok{324} \DecValTok{325} \DecValTok{326} \DecValTok{327} \DecValTok{328} \DecValTok{329} \DecValTok{330} \DecValTok{331} \DecValTok{332} \DecValTok{333} \DecValTok{334} \DecValTok{335} \DecValTok{336} \DecValTok{337} \DecValTok{338}
+\NormalTok{Y}\OperatorTok{{-}}\NormalTok{Position }\FloatTok{7.7675}
+\NormalTok{Length }\FloatTok{0.5975}
+\NormalTok{GP }\DecValTok{69962}
+\NormalTok{Nodes }\DecValTok{2} \DecValTok{3} \DecValTok{5} \DecValTok{7} \DecValTok{9} \DecValTok{11} \DecValTok{13} \DecValTok{15} \DecValTok{17} \DecValTok{19} \DecValTok{21} \DecValTok{23} \DecValTok{25} \DecValTok{27} \DecValTok{29} \DecValTok{31} \DecValTok{33} \DecValTok{35} \DecValTok{37} \DecValTok{39} \DecValTok{41} \DecValTok{43} \DecValTok{44} \DecValTok{45} \DecValTok{46} \DecValTok{47} \DecValTok{48} \DecValTok{49} \DecValTok{50} \DecValTok{51} \DecValTok{52} \DecValTok{53} \DecValTok{54} \DecValTok{55} \DecValTok{56} \DecValTok{57} \DecValTok{58} \DecValTok{59} \DecValTok{60} \DecValTok{61} \DecValTok{62} \DecValTok{63} \DecValTok{64} \DecValTok{65} \DecValTok{66} \DecValTok{67} \DecValTok{68} \DecValTok{69} \DecValTok{70} \DecValTok{71} \DecValTok{72} \DecValTok{73} \DecValTok{74} \DecValTok{75} \DecValTok{76} \DecValTok{77} \DecValTok{78} \DecValTok{79} \DecValTok{80} \DecValTok{81} \DecValTok{82} \DecValTok{83} \DecValTok{84} \DecValTok{128} \DecValTok{129} \DecValTok{131} \DecValTok{132} \DecValTok{133} \DecValTok{134} \DecValTok{140} \DecValTok{141} \DecValTok{142} \DecValTok{146} \DecValTok{147} \DecValTok{148} \DecValTok{152} \DecValTok{153} \DecValTok{154} \DecValTok{158} \DecValTok{159} \DecValTok{160} \DecValTok{164} \DecValTok{165} \DecValTok{166} \DecValTok{170} \DecValTok{171} \DecValTok{172} \DecValTok{176} \DecValTok{177} \DecValTok{178} \DecValTok{182} \DecValTok{183} \DecValTok{184} \DecValTok{188} \DecValTok{189} \DecValTok{190} \DecValTok{194} \DecValTok{195} \DecValTok{196} \DecValTok{200} \DecValTok{201} \DecValTok{202} \DecValTok{206} \DecValTok{207} \DecValTok{208} \DecValTok{212} \DecValTok{213} \DecValTok{214} \DecValTok{218} \DecValTok{219} \DecValTok{220} \DecValTok{224} \DecValTok{225} \DecValTok{226} \DecValTok{230} \DecValTok{231} \DecValTok{232} \DecValTok{236} \DecValTok{237} \DecValTok{238} \DecValTok{241} \DecValTok{243} \DecValTok{244}
+\NormalTok{Y}\OperatorTok{{-}}\NormalTok{Position }\FloatTok{8.66375}
+\NormalTok{Length }\FloatTok{0.448125}
+\NormalTok{GP }\DecValTok{70082}
+\NormalTok{Nodes }\DecValTok{85} \DecValTok{86} \DecValTok{87} \DecValTok{88} \DecValTok{89} \DecValTok{90} \DecValTok{91} \DecValTok{92} \DecValTok{93} \DecValTok{94} \DecValTok{95} \DecValTok{96} \DecValTok{97} \DecValTok{98} \DecValTok{99} \DecValTok{100} \DecValTok{101} \DecValTok{102} \DecValTok{103} \DecValTok{104} \DecValTok{105} \DecValTok{106} \DecValTok{107} \DecValTok{108} \DecValTok{109} \DecValTok{110} \DecValTok{111} \DecValTok{112} \DecValTok{113} \DecValTok{114} \DecValTok{115} \DecValTok{116} \DecValTok{117} \DecValTok{118} \DecValTok{119} \DecValTok{120} \DecValTok{121} \DecValTok{122} \DecValTok{123} \DecValTok{124} \DecValTok{125} \DecValTok{126} \DecValTok{135} \DecValTok{136} \DecValTok{137} \DecValTok{138} \DecValTok{143} \DecValTok{144} \DecValTok{149} \DecValTok{150} \DecValTok{155} \DecValTok{156} \DecValTok{161} \DecValTok{162} \DecValTok{167} \DecValTok{168} \DecValTok{173} \DecValTok{174} \DecValTok{179} \DecValTok{180} \DecValTok{185} \DecValTok{186} \DecValTok{191} \DecValTok{192} \DecValTok{197} \DecValTok{198} \DecValTok{203} \DecValTok{204} \DecValTok{209} \DecValTok{210} \DecValTok{215} \DecValTok{216} \DecValTok{221} \DecValTok{222} \DecValTok{227} \DecValTok{228} \DecValTok{233} \DecValTok{234} \DecValTok{239} \DecValTok{240} \DecValTok{245} \DecValTok{246} \DecValTok{275} \DecValTok{276} \DecValTok{277} \DecValTok{278} \DecValTok{279} \DecValTok{280} \DecValTok{281} \DecValTok{282} \DecValTok{283} \DecValTok{284} \DecValTok{285} \DecValTok{286} \DecValTok{287} \DecValTok{288} \DecValTok{289} \DecValTok{290} \DecValTok{291} \DecValTok{292} \DecValTok{293} \DecValTok{294} \DecValTok{295} \DecValTok{296} \DecValTok{297} \DecValTok{298} \DecValTok{299} \DecValTok{300} \DecValTok{301} \DecValTok{302} \DecValTok{303} \DecValTok{304} \DecValTok{305} \DecValTok{306} \DecValTok{307} \DecValTok{308} \DecValTok{309} \DecValTok{310} \DecValTok{311} \DecValTok{312} \DecValTok{313} \DecValTok{314} \DecValTok{329} \DecValTok{330} \DecValTok{331} \DecValTok{332} \DecValTok{333} \DecValTok{334} \DecValTok{335} \DecValTok{336} \DecValTok{337} \DecValTok{338} \DecValTok{339} \DecValTok{340} \DecValTok{341} \DecValTok{342} \DecValTok{343} \DecValTok{344} \DecValTok{345} \DecValTok{346} \DecValTok{347} \DecValTok{348} \DecValTok{363} \DecValTok{364} \DecValTok{365} \DecValTok{366} \DecValTok{367} \DecValTok{368} \DecValTok{369} \DecValTok{370} \DecValTok{371} \DecValTok{372} \DecValTok{373} \DecValTok{374} \DecValTok{375} \DecValTok{376} \DecValTok{377} \DecValTok{378} \DecValTok{379} \DecValTok{380} \DecValTok{381} \DecValTok{382} \DecValTok{399} \DecValTok{400} \DecValTok{401} \DecValTok{402} \DecValTok{403} \DecValTok{404} \DecValTok{405} \DecValTok{406} \DecValTok{407} \DecValTok{408} \DecValTok{409} \DecValTok{410} \DecValTok{411} \DecValTok{412} \DecValTok{413} \DecValTok{414} \DecValTok{415} \DecValTok{416} \DecValTok{417} \DecValTok{418} \DecValTok{436} \DecValTok{437} \DecValTok{438} \DecValTok{439} \DecValTok{440} \DecValTok{441} \DecValTok{442} \DecValTok{443} \DecValTok{444} \DecValTok{445} \DecValTok{446} \DecValTok{447} \DecValTok{448} \DecValTok{449} \DecValTok{450} \DecValTok{451} \DecValTok{452} \DecValTok{453} \DecValTok{454} \DecValTok{455} \DecValTok{474} \DecValTok{475} \DecValTok{476} \DecValTok{477} \DecValTok{478} \DecValTok{479} \DecValTok{480} \DecValTok{481} \DecValTok{482} \DecValTok{483} \DecValTok{484} \DecValTok{485} \DecValTok{486} \DecValTok{487} \DecValTok{488} \DecValTok{489} \DecValTok{490} \DecValTok{491} \DecValTok{492} \DecValTok{493} \DecValTok{517} \DecValTok{518} \DecValTok{519} \DecValTok{520} \DecValTok{521} \DecValTok{522} \DecValTok{523} \DecValTok{524} \DecValTok{525} \DecValTok{526} \DecValTok{527} \DecValTok{528} \DecValTok{529} \DecValTok{530} \DecValTok{531} \DecValTok{532} \DecValTok{533} \DecValTok{534} \DecValTok{535} \DecValTok{536} \DecValTok{557} \DecValTok{558} \DecValTok{559} \DecValTok{560} \DecValTok{561} \DecValTok{562} \DecValTok{563} \DecValTok{564} \DecValTok{565} \DecValTok{566} \DecValTok{567} \DecValTok{568} \DecValTok{569} \DecValTok{570} \DecValTok{571} \DecValTok{572} \DecValTok{573} \DecValTok{574} \DecValTok{575} \DecValTok{576} \DecValTok{597} \DecValTok{598} \DecValTok{599} \DecValTok{600} \DecValTok{601} \DecValTok{602} \DecValTok{603} \DecValTok{604} \DecValTok{605} \DecValTok{606} \DecValTok{607} \DecValTok{608} \DecValTok{609} \DecValTok{610} \DecValTok{611} \DecValTok{612} \DecValTok{613} \DecValTok{614} \DecValTok{615} \DecValTok{616} \DecValTok{637} \DecValTok{638} \DecValTok{639} \DecValTok{640} \DecValTok{641} \DecValTok{642} \DecValTok{643} \DecValTok{644} \DecValTok{645} \DecValTok{646} \DecValTok{647} \DecValTok{648} \DecValTok{649} \DecValTok{650} \DecValTok{651} \DecValTok{652} \DecValTok{653} \DecValTok{654} \DecValTok{655} \DecValTok{656} \DecValTok{677} \DecValTok{678} \DecValTok{679} \DecValTok{680} \DecValTok{681} \DecValTok{682} \DecValTok{683} \DecValTok{684} \DecValTok{685} \DecValTok{686} \DecValTok{687} \DecValTok{688} \DecValTok{689} \DecValTok{690} \DecValTok{691} \DecValTok{692} \DecValTok{693} \DecValTok{694} \DecValTok{695} \DecValTok{696} \DecValTok{717} \DecValTok{718} \DecValTok{719} \DecValTok{720} \DecValTok{721} \DecValTok{722} \DecValTok{723} \DecValTok{724} \DecValTok{725} \DecValTok{726} \DecValTok{727} \DecValTok{728} \DecValTok{729} \DecValTok{730} \DecValTok{731} \DecValTok{732} \DecValTok{733} \DecValTok{734} \DecValTok{735} \DecValTok{736} \DecValTok{757} \DecValTok{758} \DecValTok{759} \DecValTok{760} \DecValTok{761} \DecValTok{762} \DecValTok{763} \DecValTok{764} \DecValTok{765} \DecValTok{766} \DecValTok{767} \DecValTok{768} \DecValTok{769} \DecValTok{770} \DecValTok{771} \DecValTok{772} \DecValTok{773} \DecValTok{774} \DecValTok{775} \DecValTok{776} \DecValTok{797} \DecValTok{798} \DecValTok{799} \DecValTok{800} \DecValTok{801} \DecValTok{802} \DecValTok{803} \DecValTok{804} \DecValTok{805} \DecValTok{806} \DecValTok{807} \DecValTok{808} \DecValTok{809} \DecValTok{810} \DecValTok{811} \DecValTok{812} \DecValTok{813} \DecValTok{814} \DecValTok{815} \DecValTok{816} \DecValTok{837} \DecValTok{838} \DecValTok{839} \DecValTok{840} \DecValTok{841} \DecValTok{842} \DecValTok{843} \DecValTok{844} \DecValTok{845} \DecValTok{846} \DecValTok{847} \DecValTok{848} \DecValTok{849} \DecValTok{850} \DecValTok{851} \DecValTok{852} \DecValTok{853} \DecValTok{854} \DecValTok{855} \DecValTok{856} \DecValTok{877} \DecValTok{878} \DecValTok{879} \DecValTok{880} \DecValTok{881} \DecValTok{882} \DecValTok{883} \DecValTok{884} \DecValTok{885} \DecValTok{886} \DecValTok{887} \DecValTok{888} \DecValTok{889} \DecValTok{890} \DecValTok{891} \DecValTok{892} \DecValTok{893} \DecValTok{894} \DecValTok{895} \DecValTok{896} \DecValTok{917} \DecValTok{918} \DecValTok{919} \DecValTok{920} \DecValTok{921} \DecValTok{922} \DecValTok{923} \DecValTok{924} \DecValTok{925} \DecValTok{926} \DecValTok{927} \DecValTok{928} \DecValTok{929} \DecValTok{930} \DecValTok{931} \DecValTok{932} \DecValTok{933} \DecValTok{934} \DecValTok{935} \DecValTok{936} \DecValTok{957} \DecValTok{958} \DecValTok{959} \DecValTok{960} \DecValTok{961} \DecValTok{962} \DecValTok{963} \DecValTok{964} \DecValTok{965} \DecValTok{966} \DecValTok{967} \DecValTok{968} \DecValTok{969} \DecValTok{970} \DecValTok{971} \DecValTok{972} \DecValTok{973} \DecValTok{974} \DecValTok{975} \DecValTok{976} \DecValTok{997} \DecValTok{998} \DecValTok{999} \DecValTok{1000} \DecValTok{1001} \DecValTok{1002} \DecValTok{1003} \DecValTok{1004} \DecValTok{1005} \DecValTok{1006} \DecValTok{1007} \DecValTok{1008} \DecValTok{1009} \DecValTok{1010} \DecValTok{1011} \DecValTok{1012} \DecValTok{1013} \DecValTok{1014} \DecValTok{1015} \DecValTok{1016}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{fish history name }\StringTok{\textquotesingle{}load\textquotesingle{}} \OperatorTok{@}\NormalTok{tot\_reac}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Created history load}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{model step }\DecValTok{416500}
+\NormalTok{    Cycle      Total       Clock}
+\OperatorTok{{-}{-}{-}{-}{-}{-}{-}{-}{-}} \OperatorTok{{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}} \OperatorTok{{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}} 
+   \DecValTok{416500}     \DecValTok{425358} \DecValTok{00}\NormalTok{:}\DecValTok{02}\NormalTok{:}\DecValTok{34}\NormalTok{:}\DecValTok{51} 
+   \DecValTok{416500}                        
+\OperatorTok{{-}{-}{-}}\NormalTok{ Global cycle limit of }\DecValTok{416500}\NormalTok{ met.}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Cycling ended at: }\DecValTok{2021}\OperatorTok{{-}}\DecValTok{09}\OperatorTok{{-}}\DecValTok{20} \DecValTok{19}\NormalTok{:}\DecValTok{34}\NormalTok{:}\DecValTok{50}
+\NormalTok{flac3d}\OperatorTok{\textgreater{}}\NormalTok{model save }\StringTok{\textquotesingle{}lateral{-}load\textquotesingle{}}
+\OperatorTok{{-}{-}{-}}\NormalTok{ Model saved to }\BuiltInTok{file}\NormalTok{ C:}\OperatorTok{/}\NormalTok{Users}\OperatorTok{/}\NormalTok{kyeongsunkim}\OperatorTok{/}\NormalTok{Desktop}\OperatorTok{/}\NormalTok{FLAC\_WORKING\_DIRECTORY}\OperatorTok{/}\DecValTok{13}\NormalTok{\_KAIST\_vertical\_loading\_0920}\OperatorTok{/}\NormalTok{lateral}\OperatorTok{{-}}\NormalTok{load.f3sav.}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1132,8 +1323,8 @@ GWT = 5.5m\\
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{vertical-loading}{%
-\subsection{vertical loading}\label{vertical-loading}}
+\hypertarget{vertical-loading-1}{%
+\subsection{vertical loading}\label{vertical-loading-1}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2061,8 +2252,8 @@ element with a component-ID number of 3.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{interface}{%
-\section{Interface}\label{interface}}
+\hypertarget{interface-1}{%
+\section{Interface}\label{interface-1}}
 
 Interfaces are most often created with the zone interface create by-face
 command:
@@ -2081,7 +2272,7 @@ contact with zone surface faces that are not part of the interface
 itself.
 
 \begin{figure}[H]
-\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-70}
+\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-71}
 \end{figure}
 
 Every reference to an interface uses a name (like the table command) to
@@ -2477,8 +2668,8 @@ location and specify two separate IDs. Forces and moments will not be
 transferred btw adjoining elements; instead, only forces wil be
 transmitted into surrounding zone at the common location.
 
-\hypertarget{interface-1}{%
-\section{Interface}\label{interface-1}}
+\hypertarget{interface-2}{%
+\section{Interface}\label{interface-2}}
 
 There are several instances in geomechanics in which it is desirable to
 represent planes on which sliding or separation can occur. For
@@ -2829,8 +3020,8 @@ specific problem.
 \hypertarget{command}{%
 \chapter{Command}\label{command}}
 
-\hypertarget{interface-2}{%
-\section{Interface}\label{interface-2}}
+\hypertarget{interface-3}{%
+\section{Interface}\label{interface-3}}
 
 \hypertarget{zone-face-group}{%
 \subsection{zone face group}\label{zone-face-group}}
