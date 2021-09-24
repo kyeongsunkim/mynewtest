@@ -467,8 +467,6 @@ wonderful have been, and are being, evolved.
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/model}
 
-\includegraphics[width=1\linewidth]{myfigureeeeee/1_zone_group}
-
 \hypertarget{constitutive-model}{%
 \section{Constitutive Model}\label{constitutive-model}}
 
@@ -547,7 +545,7 @@ or
 \[ E = \frac{9 K G}{3K + G}\]
 
 \[ \nu = \frac{3 K - 2 G}{2(3 K + G)}\]
-\#\#\# Strain-softening Model
+\#\#\#\# Strain-softening Model
 
 Strain softening Model is also available, but not implemented:
 
@@ -634,6 +632,98 @@ Note tension cut-off is \(\sigma^{t} = min(\sigma^{t}, \frac{c}{tan\phi})\)
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/interface-both}
 
+During each timestep, the absolute normal penetration and the relative
+shear velocity are calculated for each interface node and its contacting
+target face. Both of these values are then used by the interface
+constitutive model to calculate a normal force and a shear-force vector.
+The constitutive model is defined by a linear Coulomb shear-strength
+criterion that limits the shear force acting at an interface node,
+normal and shear stiffnesses, tensile and shear bond strengths, and a
+dilation angle that causes an increase in effective normal force on the
+target face after the shear-strength limit is reached. By default, pore
+pressure is used in the interface effective stress calculation. This
+option can be activated/deactivated using the command zone interface
+effective command by setting effective = on/off. Figure 2 illustrates
+the components of the constitutive model acting at interface node (P):
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/interface-constitutive}
+
+The normal and shear forces that describe the elastic interface response
+are determined at calculation time \((t + \Delta t)\) using the relations:
+
+\[ F_n^{(t + \Delta t)} = k_n u_n A + \sigma_n A  \]
+\[ F_{si}^{(t + \Delta t)} = F_{si}^{(t)} + k_s \Delta u_{si}^{(t + 0.5 \Delta t)} A + \sigma_{si} A\]
+
+The inelastic interface logic works in the following way:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Bonded interface --- The interface remains elastic if stresses
+  remain below the bond strengths; there is a shear bond strength, as
+  well as a tensile bond strength. The normal bond strength is set
+  using the tension interface property keyword. The command zone
+  interface node property shear-bond-ratio = sbr sets the shear bond
+  strength to sbr times the normal bond strength. The default value of
+  property shear-bond-ratio (if not given) is 100.0. The bond breaks
+  if either the shear stress exceeds the shear strength, or the
+  tensile effective normal stress exceeds the normal strength. Note
+  that giving property shear-bond-ratio alone does not cause a bond to
+  be established---the tensile bond strength must also be set.\\
+\item
+  Slip while bonded --- An intact bond, by default, prevents all yield
+  behavior (slip and separation). There is an optional property switch
+  (bonded-slip) that causes only separation to be prevented if the
+  bond is intact (but allows shear yield, under the control of the
+  friction and cohesion parameters, using (F\_n) as the normal force).
+  The command to allow/disallow slip for a bonded interface segment is
+  zone interface node and by setting bonded-slip on or off.\\
+\end{enumerate}
+
+The default state of bonded-slip (if not given) is off.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Coulomb sliding --- A bond is either intact or broken. If it is
+  broken, then the behavior of the interface segment is determined by
+  the friction and cohesion (and of course the stiffnesses). This is
+  the default behavior, if bond strengths are not set (zero). A broken
+  bond segment cannot take effective tension (which may occur under
+  compressive normal force, if the pore pressure is greater). The
+  shear force is zero (for a nonbonded segment) if the effective
+  normal force is tensile or zero.\\
+\end{enumerate}
+
+The Coulomb shear-strength criterion limits the shear force by the
+relation:
+
+\[ F_{smax} = c A + tan\phi (F_n - pA)\] During sliding, shear
+displacement may cause an increase in the effective normal stress on the
+joint, according to the relation:
+
+\[\sigma_n := \sigma_n + \frac{|F_s|_o - F_{smax}}{A k_s} tan\psi k_n\]
+
+On printout (see the zone interface node list command ) the value of
+tension denotes whether a bond is intact or broken (or not set) ---
+nonzero or zero, respectively.\\
+
+The normal and shear forces calculated at the interface nodes are
+distributed in equal and opposite directions to both the target face and
+the face to which the interface node is connected (the host face).
+Weighting functions are used to distribute the forces to the gridpoints
+on each face. The interface stiffnesses are added to the accumulated
+stiffnesses at gridpoints on both sides of the interface in order to
+maintain numerical stability.\\
+
+Interface contacts are detected only at interface nodes, and contact
+forces are transferred only at interface nodes. The stress state
+associated with a node is assumed to be uniformly distributed over the
+entire representative area of the node. Interface properties are
+associated with each node; properties may vary from node to node.
+
 \hypertarget{boundary-conditions}{%
 \section{Boundary Conditions}\label{boundary-conditions}}
 
@@ -646,11 +736,7 @@ Note tension cut-off is \(\sigma^{t} = min(\sigma^{t}, \frac{c}{tan\phi})\)
 \NormalTok{it.command(}\StringTok{"""}
 \StringTok{zone face skin}
 \StringTok{zone face apply velocity{-}normal 0 ...}
-\StringTok{range group \textquotesingle{}North1\textquotesingle{} or \textquotesingle{}East3\textquotesingle{} or \textquotesingle{}Bottom5\textquotesingle{} or \textquotesingle{}East5\textquotesingle{} or ...}
-\StringTok{\textquotesingle{}West1\textquotesingle{} or \textquotesingle{}Bottom6\textquotesingle{} or \textquotesingle{}Bottom7\textquotesingle{} or \textquotesingle{}Bottom3\textquotesingle{} or \textquotesingle{}West3\textquotesingle{} or \textquotesingle{}West4\textquotesingle{} or ...}
-\StringTok{\textquotesingle{}Top6\textquotesingle{} or \textquotesingle{}Bottom4\textquotesingle{} or \textquotesingle{}West6\textquotesingle{} or \textquotesingle{}West7\textquotesingle{} or \textquotesingle{}Top5\textquotesingle{} or \textquotesingle{}West5\textquotesingle{} or ...}
-\StringTok{\textquotesingle{}East4\textquotesingle{} or \textquotesingle{}Top3\textquotesingle{} or \textquotesingle{}Bottom1\textquotesingle{} or \textquotesingle{}East6\textquotesingle{} or \textquotesingle{}East2\textquotesingle{} or \textquotesingle{}Top1\textquotesingle{} or ...}
-\StringTok{\textquotesingle{}East1\textquotesingle{} or \textquotesingle{}West2\textquotesingle{} or \textquotesingle{}Top2\textquotesingle{} or \textquotesingle{}Bottom2\textquotesingle{} or \textquotesingle{}Top4\textquotesingle{} or \textquotesingle{}North2\textquotesingle{}}
+\StringTok{range group \textquotesingle{}West7\textquotesingle{} or \textquotesingle{}West6\textquotesingle{} or \textquotesingle{}Bottom7\textquotesingle{} or \textquotesingle{}Bottom6\textquotesingle{} or \textquotesingle{}East6\textquotesingle{} or \textquotesingle{}Top6\textquotesingle{}}
 
 \StringTok{zone face apply velocity (0,0,0) range group \textquotesingle{}North3\textquotesingle{}}
 \StringTok{"""}\NormalTok{)}

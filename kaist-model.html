@@ -377,7 +377,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-36"><a href="kaist-model.html#cb2-36" aria-hidden="true" tabindex="-1"></a>it.command(command)</span>
 <span id="cb2-37"><a href="kaist-model.html#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;radial mesh number is &quot;</span>, _radial)</span></code></pre></div>
 <p><img src="myfigureeeeee/model.PNG" width="100%" /></p>
-<p><img src="myfigureeeeee/1_zone_group.PNG" width="100%" /></p>
 </div>
 <div id="constitutive-model" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Constitutive Model</h2>
@@ -441,7 +440,7 @@ values of bulk and shear modulus in the grid:</p>
 or
 <span class="math display">\[ E = \frac{9 K G}{3K + G}\]</span></p>
 <p><span class="math display">\[ \nu = \frac{3 K - 2 G}{2(3 K + G)}\]</span>
-### Strain-softening Model</p>
+#### Strain-softening Model</p>
 <p>Strain softening Model is also available, but not implemented:</p>
 <p><img src="myfigureeeeee/softening.PNG" width="100%" /></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="kaist-model.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#it.command(&quot;&quot;&quot;</span></span>
@@ -498,6 +497,82 @@ After determination of the new stresses for the step, the hardening parameters f
 <span id="cb5-12"><a href="kaist-model.html#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-13"><a href="kaist-model.html#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;               ======== PASSED INTERFACE ========&quot;</span>)</span></code></pre></div>
 <p><img src="myfigureeeeee/interface-both.PNG" width="100%" /></p>
+<p>During each timestep, the absolute normal penetration and the relative
+shear velocity are calculated for each interface node and its contacting
+target face. Both of these values are then used by the interface
+constitutive model to calculate a normal force and a shear-force vector.
+The constitutive model is defined by a linear Coulomb shear-strength
+criterion that limits the shear force acting at an interface node,
+normal and shear stiffnesses, tensile and shear bond strengths, and a
+dilation angle that causes an increase in effective normal force on the
+target face after the shear-strength limit is reached. By default, pore
+pressure is used in the interface effective stress calculation. This
+option can be activated/deactivated using the command zone interface
+effective command by setting effective = on/off. Figure 2 illustrates
+the components of the constitutive model acting at interface node (P):</p>
+<p><img src="myfigureeeeee/interface-constitutive.PNG" width="100%" /></p>
+<p>The normal and shear forces that describe the elastic interface response
+are determined at calculation time <span class="math inline">\((t + \Delta t)\)</span> using the relations:</p>
+<p><span class="math display">\[ F_n^{(t + \Delta t)} = k_n u_n A + \sigma_n A  \]</span>
+<span class="math display">\[ F_{si}^{(t + \Delta t)} = F_{si}^{(t)} + k_s \Delta u_{si}^{(t + 0.5 \Delta t)} A + \sigma_{si} A\]</span></p>
+<p>The inelastic interface logic works in the following way:</p>
+<ol style="list-style-type: decimal">
+<li><p>Bonded interface — The interface remains elastic if stresses
+remain below the bond strengths; there is a shear bond strength, as
+well as a tensile bond strength. The normal bond strength is set
+using the tension interface property keyword. The command zone
+interface node property shear-bond-ratio = sbr sets the shear bond
+strength to sbr times the normal bond strength. The default value of
+property shear-bond-ratio (if not given) is 100.0. The bond breaks
+if either the shear stress exceeds the shear strength, or the
+tensile effective normal stress exceeds the normal strength. Note
+that giving property shear-bond-ratio alone does not cause a bond to
+be established—the tensile bond strength must also be set.<br />
+</p></li>
+<li><p>Slip while bonded — An intact bond, by default, prevents all yield
+behavior (slip and separation). There is an optional property switch
+(bonded-slip) that causes only separation to be prevented if the
+bond is intact (but allows shear yield, under the control of the
+friction and cohesion parameters, using (F_n) as the normal force).
+The command to allow/disallow slip for a bonded interface segment is
+zone interface node and by setting bonded-slip on or off.<br />
+</p></li>
+</ol>
+<p>The default state of bonded-slip (if not given) is off.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Coulomb sliding — A bond is either intact or broken. If it is
+broken, then the behavior of the interface segment is determined by
+the friction and cohesion (and of course the stiffnesses). This is
+the default behavior, if bond strengths are not set (zero). A broken
+bond segment cannot take effective tension (which may occur under
+compressive normal force, if the pore pressure is greater). The
+shear force is zero (for a nonbonded segment) if the effective
+normal force is tensile or zero.<br />
+</li>
+</ol>
+<p>The Coulomb shear-strength criterion limits the shear force by the
+relation:</p>
+<p><span class="math display">\[ F_{smax} = c A + tan\phi (F_n - pA)\]</span> During sliding, shear
+displacement may cause an increase in the effective normal stress on the
+joint, according to the relation:</p>
+<p><span class="math display">\[\sigma_n := \sigma_n + \frac{|F_s|_o - F_{smax}}{A k_s} tan\psi k_n\]</span></p>
+<p>On printout (see the zone interface node list command ) the value of
+tension denotes whether a bond is intact or broken (or not set) —
+nonzero or zero, respectively.<br />
+</p>
+<p>The normal and shear forces calculated at the interface nodes are
+distributed in equal and opposite directions to both the target face and
+the face to which the interface node is connected (the host face).
+Weighting functions are used to distribute the forces to the gridpoints
+on each face. The interface stiffnesses are added to the accumulated
+stiffnesses at gridpoints on both sides of the interface in order to
+maintain numerical stability.<br />
+</p>
+<p>Interface contacts are detected only at interface nodes, and contact
+forces are transferred only at interface nodes. The stress state
+associated with a node is assumed to be uniformly distributed over the
+entire representative area of the node. Interface properties are
+associated with each node; properties may vary from node to node.</p>
 </div>
 <div id="boundary-conditions" class="section level2" number="1.5">
 <h2><span class="header-section-number">1.5</span> Boundary Conditions</h2>
@@ -508,14 +583,10 @@ After determination of the new stresses for the step, the hardening parameters f
 <span id="cb6-5"><a href="kaist-model.html#cb6-5" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb6-6"><a href="kaist-model.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">zone face skin</span></span>
 <span id="cb6-7"><a href="kaist-model.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">zone face apply velocity-normal 0 ...</span></span>
-<span id="cb6-8"><a href="kaist-model.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">range group &#39;North1&#39; or &#39;East3&#39; or &#39;Bottom5&#39; or &#39;East5&#39; or ...</span></span>
-<span id="cb6-9"><a href="kaist-model.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;West1&#39; or &#39;Bottom6&#39; or &#39;Bottom7&#39; or &#39;Bottom3&#39; or &#39;West3&#39; or &#39;West4&#39; or ...</span></span>
-<span id="cb6-10"><a href="kaist-model.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;Top6&#39; or &#39;Bottom4&#39; or &#39;West6&#39; or &#39;West7&#39; or &#39;Top5&#39; or &#39;West5&#39; or ...</span></span>
-<span id="cb6-11"><a href="kaist-model.html#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;East4&#39; or &#39;Top3&#39; or &#39;Bottom1&#39; or &#39;East6&#39; or &#39;East2&#39; or &#39;Top1&#39; or ...</span></span>
-<span id="cb6-12"><a href="kaist-model.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;East1&#39; or &#39;West2&#39; or &#39;Top2&#39; or &#39;Bottom2&#39; or &#39;Top4&#39; or &#39;North2&#39;</span></span>
-<span id="cb6-13"><a href="kaist-model.html#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="kaist-model.html#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="st">zone face apply velocity (0,0,0) range group &#39;North3&#39;</span></span>
-<span id="cb6-15"><a href="kaist-model.html#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<span id="cb6-8"><a href="kaist-model.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">range group &#39;West7&#39; or &#39;West6&#39; or &#39;Bottom7&#39; or &#39;Bottom6&#39; or &#39;East6&#39; or &#39;Top6&#39;</span></span>
+<span id="cb6-9"><a href="kaist-model.html#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="kaist-model.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">zone face apply velocity (0,0,0) range group &#39;North3&#39;</span></span>
+<span id="cb6-11"><a href="kaist-model.html#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code></pre></div>
 </div>
 <div id="initial-equilibrium" class="section level2" number="1.6">
 <h2><span class="header-section-number">1.6</span> Initial Equilibrium</h2>
