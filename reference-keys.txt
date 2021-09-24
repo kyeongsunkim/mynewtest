@@ -1,8 +1,12 @@
-fig:unnamed-chunk-72
+fig:unnamed-chunk-74
 kaist-model
 initial-configuration
 zones
 constitutive-model
+elastic-isotropic-model
+hookes-law
+plastic-strain-increments
+strain-softening-model-properties
 interface
 boundary-conditions
 initial-equilibrium
