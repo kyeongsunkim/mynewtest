@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 KAIST Model Code for Recovery | FLAC3D Gitbook</title>
+  <meta name="description" content="8 KAIST Model Code for Recovery | FLAC3D Gitbook" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8 KAIST Model Code for Recovery | FLAC3D Gitbook" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 KAIST Model Code for Recovery | FLAC3D Gitbook" />
+  
+  
+  
+
+<meta name="author" content="Kyeong Sun Kim" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="command.html"/>
+<link rel="next" href="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="templates/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="1" data-path="kaist-model.html"><a href="kaist-model.html"><i class="fa fa-check"></i><b>1</b> KAIST Model</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="kaist-model.html"><a href="kaist-model.html#initial-configuration"><i class="fa fa-check"></i><b>1.1</b> Initial Configuration</a></li>
+<li class="chapter" data-level="1.2" data-path="kaist-model.html"><a href="kaist-model.html#zones"><i class="fa fa-check"></i><b>1.2</b> Zones</a></li>
+<li class="chapter" data-level="1.3" data-path="kaist-model.html"><a href="kaist-model.html#constitutive-model"><i class="fa fa-check"></i><b>1.3</b> Constitutive Model</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="kaist-model.html"><a href="kaist-model.html#elastic-isotropic-model"><i class="fa fa-check"></i><b>1.3.1</b> Elastic (Isotropic) model</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="kaist-model.html"><a href="kaist-model.html#interface"><i class="fa fa-check"></i><b>1.4</b> Interface</a></li>
+<li class="chapter" data-level="1.5" data-path="kaist-model.html"><a href="kaist-model.html#boundary-conditions"><i class="fa fa-check"></i><b>1.5</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="1.6" data-path="kaist-model.html"><a href="kaist-model.html#initial-equilibrium"><i class="fa fa-check"></i><b>1.6</b> Initial Equilibrium</a></li>
+<li class="chapter" data-level="1.7" data-path="kaist-model.html"><a href="kaist-model.html#vertical-loading"><i class="fa fa-check"></i><b>1.7</b> Vertical Loading</a></li>
+<li class="chapter" data-level="1.8" data-path="kaist-model.html"><a href="kaist-model.html#plot"><i class="fa fa-check"></i><b>1.8</b> Plot</a></li>
+<li class="chapter" data-level="1.9" data-path="kaist-model.html"><a href="kaist-model.html#results"><i class="fa fa-check"></i><b>1.9</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html"><i class="fa fa-check"></i><b>2</b> Axial Concrete Pile</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#problem-description"><i class="fa fa-check"></i><b>2.1</b> Problem Description</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#problem-statement"><i class="fa fa-check"></i><b>2.1.1</b> Problem Statement</a></li>
+<li class="chapter" data-level="2.1.2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#main-parameters"><i class="fa fa-check"></i><b>2.1.2</b> Main Parameters</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#modeling-procedure"><i class="fa fa-check"></i><b>2.2</b> Modeling Procedure</a></li>
+<li class="chapter" data-level="2.3" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#zones-1"><i class="fa fa-check"></i><b>2.3</b> Zones</a></li>
+<li class="chapter" data-level="2.4" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#groups"><i class="fa fa-check"></i><b>2.4</b> Groups</a></li>
+<li class="chapter" data-level="2.5" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#properties"><i class="fa fa-check"></i><b>2.5</b> Properties</a></li>
+<li class="chapter" data-level="2.6" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#b.c.-and-i.c."><i class="fa fa-check"></i><b>2.6</b> B.C. and I.C.</a></li>
+<li class="chapter" data-level="2.7" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#initial-equilibrium-1"><i class="fa fa-check"></i><b>2.7</b> Initial Equilibrium</a></li>
+<li class="chapter" data-level="2.8" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#alterations"><i class="fa fa-check"></i><b>2.8</b> Alterations</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#install-the-pile"><i class="fa fa-check"></i><b>2.8.1</b> install the pile</a></li>
+<li class="chapter" data-level="2.8.2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#vertical-loading-1"><i class="fa fa-check"></i><b>2.8.2</b> vertical loading</a></li>
+<li class="chapter" data-level="2.8.3" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#vertical-then-lateral-loading"><i class="fa fa-check"></i><b>2.8.3</b> vertical then lateral loading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="pull-tests.html"><a href="pull-tests.html"><i class="fa fa-check"></i><b>3</b> Pull-Tests</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="pull-tests.html"><a href="pull-tests.html#problem-description-1"><i class="fa fa-check"></i><b>3.1</b> Problem Description</a></li>
+<li class="chapter" data-level="3.2" data-path="pull-tests.html"><a href="pull-tests.html#zones-2"><i class="fa fa-check"></i><b>3.2</b> Zones</a></li>
+<li class="chapter" data-level="3.3" data-path="pull-tests.html"><a href="pull-tests.html#properties-1"><i class="fa fa-check"></i><b>3.3</b> Properties</a></li>
+<li class="chapter" data-level="3.4" data-path="pull-tests.html"><a href="pull-tests.html#initial-equilibrium-2"><i class="fa fa-check"></i><b>3.4</b> Initial Equilibrium</a></li>
+<li class="chapter" data-level="3.5" data-path="pull-tests.html"><a href="pull-tests.html#alterations-1"><i class="fa fa-check"></i><b>3.5</b> Alterations</a></li>
+<li class="chapter" data-level="3.6" data-path="pull-tests.html"><a href="pull-tests.html#some-other-notes"><i class="fa fa-check"></i><b>3.6</b> Some other notes</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="grid.html"><a href="grid.html"><i class="fa fa-check"></i><b>4</b> Grid</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="grid.html"><a href="grid.html#primitive-shapes"><i class="fa fa-check"></i><b>4.1</b> Primitive Shapes</a></li>
+<li class="chapter" data-level="4.2" data-path="grid.html"><a href="grid.html#several-primitive-shapes-connected"><i class="fa fa-check"></i><b>4.2</b> several primitive shapes connected:</a></li>
+<li class="chapter" data-level="4.3" data-path="grid.html"><a href="grid.html#structural-element-operation"><i class="fa fa-check"></i><b>4.3</b> Structural Element Operation</a></li>
+<li class="chapter" data-level="4.4" data-path="grid.html"><a href="grid.html#densifying-grid-by-specifying-max-size-length"><i class="fa fa-check"></i><b>4.4</b> Densifying grid by specifying max size length</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="grid.html"><a href="grid.html#densify-a-grid-using-geometric-information"><i class="fa fa-check"></i><b>4.4.1</b> Densify a grid using geometric information</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html"><i class="fa fa-check"></i><b>5</b> Syntax and Grammar</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#zones-3"><i class="fa fa-check"></i><b>5.2</b> Zones</a></li>
+<li class="chapter" data-level="5.3" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#properties-2"><i class="fa fa-check"></i><b>5.3</b> Properties</a></li>
+<li class="chapter" data-level="5.4" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#gridpoints"><i class="fa fa-check"></i><b>5.4</b> Gridpoints</a></li>
+<li class="chapter" data-level="5.5" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#structural-elements"><i class="fa fa-check"></i><b>5.5</b> Structural Elements</a></li>
+<li class="chapter" data-level="5.6" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#extra-variables"><i class="fa fa-check"></i><b>5.6</b> Extra Variables</a></li>
+<li class="chapter" data-level="5.7" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#groups-and-b.c."><i class="fa fa-check"></i><b>5.7</b> Groups and B.C.</a></li>
+<li class="chapter" data-level="5.8" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#parameteric-studies"><i class="fa fa-check"></i><b>5.8</b> Parameteric Studies</a></li>
+<li class="chapter" data-level="5.9" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#results-1"><i class="fa fa-check"></i><b>5.9</b> Results</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#measuring-time-of-calculation"><i class="fa fa-check"></i><b>5.9.1</b> Measuring time of calculation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#setting-fish-variables"><i class="fa fa-check"></i><b>5.10</b> Setting FISH variables</a>
+<ul>
+<li class="chapter" data-level="5.10.1" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#issuing-command"><i class="fa fa-check"></i><b>5.10.1</b> Issuing Command</a></li>
+</ul></li>
+<li class="chapter" data-level="5.11" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#string"><i class="fa fa-check"></i><b>5.11</b> String</a></li>
+<li class="chapter" data-level="5.12" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#fish-syntax"><i class="fa fa-check"></i><b>5.12</b> Fish Syntax</a>
+<ul>
+<li class="chapter" data-level="5.12.1" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#use-of"><i class="fa fa-check"></i><b>5.12.1</b> Use of (…)</a></li>
+<li class="chapter" data-level="5.12.2" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#variable-types"><i class="fa fa-check"></i><b>5.12.2</b> Variable Types</a></li>
+<li class="chapter" data-level="5.12.3" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#traditional-for-loop-in-fish"><i class="fa fa-check"></i><b>5.12.3</b> Traditional for loop in FISH</a></li>
+<li class="chapter" data-level="5.12.4" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#if-else-endif-construct"><i class="fa fa-check"></i><b>5.12.4</b> if else endif construct</a></li>
+<li class="chapter" data-level="5.12.5" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#arrays-and-maps"><i class="fa fa-check"></i><b>5.12.5</b> Arrays and Maps</a></li>
+<li class="chapter" data-level="5.12.6" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#fish-function"><i class="fa fa-check"></i><b>5.12.6</b> Fish Function</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="theory.html"><a href="theory.html"><i class="fa fa-check"></i><b>6</b> Theory</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="theory.html"><a href="theory.html#structural-elements-1"><i class="fa fa-check"></i><b>6.1</b> Structural Elements</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="theory.html"><a href="theory.html#types-of-sel"><i class="fa fa-check"></i><b>6.1.1</b> Types of SEL</a></li>
+<li class="chapter" data-level="6.1.2" data-path="theory.html"><a href="theory.html#joining-sel-to-one-another"><i class="fa fa-check"></i><b>6.1.2</b> Joining SEL to one another</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="theory.html"><a href="theory.html#interface-1"><i class="fa fa-check"></i><b>6.2</b> Interface</a></li>
+<li class="chapter" data-level="6.3" data-path="theory.html"><a href="theory.html#formulation"><i class="fa fa-check"></i><b>6.3</b> Formulation</a></li>
+<li class="chapter" data-level="6.4" data-path="theory.html"><a href="theory.html#creation-of-interface-geometry"><i class="fa fa-check"></i><b>6.4</b> Creation of Interface Geometry</a></li>
+<li class="chapter" data-level="6.5" data-path="theory.html"><a href="theory.html#typical-properties"><i class="fa fa-check"></i><b>6.5</b> Typical Properties</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="theory.html"><a href="theory.html#shear-dilatancy"><i class="fa fa-check"></i><b>6.5.1</b> Shear Dilatancy</a></li>
+<li class="chapter" data-level="6.5.2" data-path="theory.html"><a href="theory.html#compression-test-on-strain-softening-material"><i class="fa fa-check"></i><b>6.5.2</b> Compression Test on strain-softening material</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="command.html"><a href="command.html"><i class="fa fa-check"></i><b>7</b> Command</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="command.html"><a href="command.html#interface-2"><i class="fa fa-check"></i><b>7.1</b> Interface</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="command.html"><a href="command.html#zone-face-group"><i class="fa fa-check"></i><b>7.1.1</b> zone face group</a></li>
+<li class="chapter" data-level="7.1.2" data-path="command.html"><a href="command.html#zone-face-skin"><i class="fa fa-check"></i><b>7.1.2</b> zone face skin</a></li>
+<li class="chapter" data-level="7.1.3" data-path="command.html"><a href="command.html#zone-separate"><i class="fa fa-check"></i><b>7.1.3</b> zone separate</a></li>
+<li class="chapter" data-level="7.1.4" data-path="command.html"><a href="command.html#zone-interface-create"><i class="fa fa-check"></i><b>7.1.4</b> zone interface create</a></li>
+<li class="chapter" data-level="7.1.5" data-path="command.html"><a href="command.html#range"><i class="fa fa-check"></i><b>7.1.5</b> range</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="command.html"><a href="command.html#define-fish-functions"><i class="fa fa-check"></i><b>7.2</b> Define Fish functions</a></li>
+<li class="chapter" data-level="7.3" data-path="command.html"><a href="command.html#some-code"><i class="fa fa-check"></i><b>7.3</b> Some Code</a></li>
+<li class="chapter" data-level="7.4" data-path="command.html"><a href="command.html#interface-3"><i class="fa fa-check"></i><b>7.4</b> Interface</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="command.html"><a href="command.html#penetration"><i class="fa fa-check"></i><b>7.4.1</b> Penetration</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="kaist-model-code-for-recovery.html"><a href="kaist-model-code-for-recovery.html"><i class="fa fa-check"></i><b>8</b> KAIST Model Code for Recovery</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="kaist-model-code-for-recovery.html"><a href="kaist-model-code-for-recovery.html#version-16"><i class="fa fa-check"></i><b>8.1</b> version 16</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"><a href="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"><i class="fa fa-check"></i><b>9</b> Simulation of Pull-Tests for Fully Bonded Rock Reinforcement</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="reference-collective.html"><a href="reference-collective.html"><i class="fa fa-check"></i><b>A</b> Reference Collective</a>
+<ul>
+<li class="chapter" data-level="A.0.1" data-path="reference-collective.html"><a href="reference-collective.html#uplift-resistance-of-anchor"><i class="fa fa-check"></i><b>A.0.1</b> Uplift Resistance of Anchor</a></li>
+<li class="chapter" data-level="A.0.2" data-path="reference-collective.html"><a href="reference-collective.html#numerical-analysis"><i class="fa fa-check"></i><b>A.0.2</b> Numerical Analysis</a></li>
+<li class="chapter" data-level="A.0.3" data-path="reference-collective.html"><a href="reference-collective.html#standards"><i class="fa fa-check"></i><b>A.0.3</b> Standards</a></li>
+<li class="chapter" data-level="A.0.4" data-path="reference-collective.html"><a href="reference-collective.html#textbook"><i class="fa fa-check"></i><b>A.0.4</b> Textbook</a></li>
+<li class="chapter" data-level="A.0.5" data-path="reference-collective.html"><a href="reference-collective.html#ph.d-thesis"><i class="fa fa-check"></i><b>A.0.5</b> Ph.D Thesis</a></li>
+<li class="chapter" data-level="A.0.6" data-path="reference-collective.html"><a href="reference-collective.html#awarded-lectures"><i class="fa fa-check"></i><b>A.0.6</b> Awarded Lectures</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><p><code>FLAC3D</code> Gitbook</p></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="kaist-model-code-for-recovery" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> KAIST Model Code for Recovery</h1>
+<div id="version-16" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> version 16</h2>
+<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="kaist-model-code-for-recovery.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
+<span id="cb66-2"><a href="kaist-model-code-for-recovery.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb66-3"><a href="kaist-model-code-for-recovery.html#cb66-3" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(threshold<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb66-4"><a href="kaist-model-code-for-recovery.html#cb66-4" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;python-reset-state false&quot;</span>)</span>
+<span id="cb66-5"><a href="kaist-model-code-for-recovery.html#cb66-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> zonearray <span class="im">as</span> za</span>
+<span id="cb66-6"><a href="kaist-model-code-for-recovery.html#cb66-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> gridpointarray <span class="im">as</span> gpa</span>
+<span id="cb66-7"><a href="kaist-model-code-for-recovery.html#cb66-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-8"><a href="kaist-model-code-for-recovery.html#cb66-8" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb66-9"><a href="kaist-model-code-for-recovery.html#cb66-9" aria-hidden="true" tabindex="-1"></a><span class="st">program threads 128</span></span>
+<span id="cb66-10"><a href="kaist-model-code-for-recovery.html#cb66-10" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span>
+<span id="cb66-11"><a href="kaist-model-code-for-recovery.html#cb66-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-12"><a href="kaist-model-code-for-recovery.html#cb66-12" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb66-13"><a href="kaist-model-code-for-recovery.html#cb66-13" aria-hidden="true" tabindex="-1"></a><span class="co">############ PARAMETERS ################</span></span>
+<span id="cb66-14"><a href="kaist-model-code-for-recovery.html#cb66-14" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb66-15"><a href="kaist-model-code-for-recovery.html#cb66-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-16"><a href="kaist-model-code-for-recovery.html#cb66-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Mesh Details</span></span>
+<span id="cb66-17"><a href="kaist-model-code-for-recovery.html#cb66-17" aria-hidden="true" tabindex="-1"></a>_radial <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb66-18"><a href="kaist-model-code-for-recovery.html#cb66-18" aria-hidden="true" tabindex="-1"></a>_perimeter <span class="op">=</span> _radial</span>
+<span id="cb66-19"><a href="kaist-model-code-for-recovery.html#cb66-19" aria-hidden="true" tabindex="-1"></a>_axial <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>_radial</span>
+<span id="cb66-20"><a href="kaist-model-code-for-recovery.html#cb66-20" aria-hidden="true" tabindex="-1"></a>_outer <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>_radial</span>
+<span id="cb66-21"><a href="kaist-model-code-for-recovery.html#cb66-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-22"><a href="kaist-model-code-for-recovery.html#cb66-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Physical Constants</span></span>
+<span id="cb66-23"><a href="kaist-model-code-for-recovery.html#cb66-23" aria-hidden="true" tabindex="-1"></a>_gravity <span class="op">=</span> <span class="fl">9.80665</span></span>
+<span id="cb66-24"><a href="kaist-model-code-for-recovery.html#cb66-24" aria-hidden="true" tabindex="-1"></a>_K <span class="op">=</span> <span class="fl">0.318</span></span>
+<span id="cb66-25"><a href="kaist-model-code-for-recovery.html#cb66-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-26"><a href="kaist-model-code-for-recovery.html#cb66-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Dimensions</span></span>
+<span id="cb66-27"><a href="kaist-model-code-for-recovery.html#cb66-27" aria-hidden="true" tabindex="-1"></a>_D_shaft <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb66-28"><a href="kaist-model-code-for-recovery.html#cb66-28" aria-hidden="true" tabindex="-1"></a>_H_shaft <span class="op">=</span> <span class="fl">7.45</span></span>
+<span id="cb66-29"><a href="kaist-model-code-for-recovery.html#cb66-29" aria-hidden="true" tabindex="-1"></a>_T_plate <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb66-30"><a href="kaist-model-code-for-recovery.html#cb66-30" aria-hidden="true" tabindex="-1"></a>_B_footing <span class="op">=</span> <span class="fl">3.25</span></span>
+<span id="cb66-31"><a href="kaist-model-code-for-recovery.html#cb66-31" aria-hidden="true" tabindex="-1"></a>_D_footing <span class="op">=</span> _H_shaft <span class="op">+</span> _T_plate</span>
+<span id="cb66-32"><a href="kaist-model-code-for-recovery.html#cb66-32" aria-hidden="true" tabindex="-1"></a>_B_soil <span class="op">=</span> _B_footing<span class="op">*</span><span class="dv">5</span></span>
+<span id="cb66-33"><a href="kaist-model-code-for-recovery.html#cb66-33" aria-hidden="true" tabindex="-1"></a>_D_soil <span class="op">=</span> _D_footing<span class="op">+</span><span class="dv">3</span></span>
+<span id="cb66-34"><a href="kaist-model-code-for-recovery.html#cb66-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-35"><a href="kaist-model-code-for-recovery.html#cb66-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Concrete Properties</span></span>
+<span id="cb66-36"><a href="kaist-model-code-for-recovery.html#cb66-36" aria-hidden="true" tabindex="-1"></a>_bulk <span class="op">=</span> <span class="fl">13.9e9</span></span>
+<span id="cb66-37"><a href="kaist-model-code-for-recovery.html#cb66-37" aria-hidden="true" tabindex="-1"></a>_shear <span class="op">=</span> <span class="fl">10.4e9</span></span>
+<span id="cb66-38"><a href="kaist-model-code-for-recovery.html#cb66-38" aria-hidden="true" tabindex="-1"></a><span class="co">#_bulk = 13.9e9</span></span>
+<span id="cb66-39"><a href="kaist-model-code-for-recovery.html#cb66-39" aria-hidden="true" tabindex="-1"></a><span class="co">#_shear = 10.4e9</span></span>
+<span id="cb66-40"><a href="kaist-model-code-for-recovery.html#cb66-40" aria-hidden="true" tabindex="-1"></a>_density_concrete <span class="op">=</span> <span class="dv">2400</span></span>
+<span id="cb66-41"><a href="kaist-model-code-for-recovery.html#cb66-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-42"><a href="kaist-model-code-for-recovery.html#cb66-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Soil Properties</span></span>
+<span id="cb66-43"><a href="kaist-model-code-for-recovery.html#cb66-43" aria-hidden="true" tabindex="-1"></a>_E_o <span class="op">=</span> <span class="fl">80e6</span></span>
+<span id="cb66-44"><a href="kaist-model-code-for-recovery.html#cb66-44" aria-hidden="true" tabindex="-1"></a>_const <span class="op">=</span> <span class="fl">10e6</span></span>
+<span id="cb66-45"><a href="kaist-model-code-for-recovery.html#cb66-45" aria-hidden="true" tabindex="-1"></a>_poisson <span class="op">=</span> <span class="fl">0.25</span></span>
+<span id="cb66-46"><a href="kaist-model-code-for-recovery.html#cb66-46" aria-hidden="true" tabindex="-1"></a>_density_soil <span class="op">=</span> <span class="dv">1530</span></span>
+<span id="cb66-47"><a href="kaist-model-code-for-recovery.html#cb66-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-48"><a href="kaist-model-code-for-recovery.html#cb66-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Interface Properties</span></span>
+<span id="cb66-49"><a href="kaist-model-code-for-recovery.html#cb66-49" aria-hidden="true" tabindex="-1"></a>_stiff_norm <span class="op">=</span> <span class="fl">1e10</span></span>
+<span id="cb66-50"><a href="kaist-model-code-for-recovery.html#cb66-50" aria-hidden="true" tabindex="-1"></a>_stiff_shear <span class="op">=</span> <span class="fl">1e10</span></span>
+<span id="cb66-51"><a href="kaist-model-code-for-recovery.html#cb66-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-52"><a href="kaist-model-code-for-recovery.html#cb66-52" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb66-53"><a href="kaist-model-code-for-recovery.html#cb66-53" aria-hidden="true" tabindex="-1"></a><span class="co">############### ZONES ##################</span></span>
+<span id="cb66-54"><a href="kaist-model-code-for-recovery.html#cb66-54" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb66-55"><a href="kaist-model-code-for-recovery.html#cb66-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-56"><a href="kaist-model-code-for-recovery.html#cb66-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;       ((((((((((((((((======== NEW RUN ========)))))))))))))))&quot;</span>)</span>
+<span id="cb66-57"><a href="kaist-model-code-for-recovery.html#cb66-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-58"><a href="kaist-model-code-for-recovery.html#cb66-58" aria-hidden="true" tabindex="-1"></a>command_zone <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb66-59"><a href="kaist-model-code-for-recovery.html#cb66-59" aria-hidden="true" tabindex="-1"></a><span class="st">model new</span></span>
+<span id="cb66-60"><a href="kaist-model-code-for-recovery.html#cb66-60" aria-hidden="true" tabindex="-1"></a><span class="st">z crea r-t p 0 (0,0,0) ...</span></span>
+<span id="cb66-61"><a href="kaist-model-code-for-recovery.html#cb66-61" aria-hidden="true" tabindex="-1"></a><span class="st">           p 1 (</span><span class="sc">{B_soil}</span><span class="st">,0,0) ...</span></span>
+<span id="cb66-62"><a href="kaist-model-code-for-recovery.html#cb66-62" aria-hidden="true" tabindex="-1"></a><span class="st">           p 2 (0,</span><span class="sc">{D_soil}</span><span class="st">,0) ...</span></span>
+<span id="cb66-63"><a href="kaist-model-code-for-recovery.html#cb66-63" aria-hidden="true" tabindex="-1"></a><span class="st">           p 3 (0,0,</span><span class="sc">{B_soil}</span><span class="st">) ...</span></span>
+<span id="cb66-64"><a href="kaist-model-code-for-recovery.html#cb66-64" aria-hidden="true" tabindex="-1"></a><span class="st">           p 4 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">,0) ...</span></span>
+<span id="cb66-65"><a href="kaist-model-code-for-recovery.html#cb66-65" aria-hidden="true" tabindex="-1"></a><span class="st">           p 5 (0,</span><span class="sc">{D_soil}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">) ...</span></span>
+<span id="cb66-66"><a href="kaist-model-code-for-recovery.html#cb66-66" aria-hidden="true" tabindex="-1"></a><span class="st">           p 6 (</span><span class="sc">{B_soil}</span><span class="st">,0,</span><span class="sc">{B_soil}</span><span class="st">) ...</span></span>
+<span id="cb66-67"><a href="kaist-model-code-for-recovery.html#cb66-67" aria-hidden="true" tabindex="-1"></a><span class="st">           p 7 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">) ...</span></span>
+<span id="cb66-68"><a href="kaist-model-code-for-recovery.html#cb66-68" aria-hidden="true" tabindex="-1"></a><span class="st">           p 8 (</span><span class="sc">{B_footing}</span><span class="st">,0,0) ...</span></span>
+<span id="cb66-69"><a href="kaist-model-code-for-recovery.html#cb66-69" aria-hidden="true" tabindex="-1"></a><span class="st">           p 9 (0,0,</span><span class="sc">{B_footing}</span><span class="st">) ...</span></span>
+<span id="cb66-70"><a href="kaist-model-code-for-recovery.html#cb66-70" aria-hidden="true" tabindex="-1"></a><span class="st">           p 10 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">,0) ...</span></span>
+<span id="cb66-71"><a href="kaist-model-code-for-recovery.html#cb66-71" aria-hidden="true" tabindex="-1"></a><span class="st">           p 11 (0,</span><span class="sc">{D_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">) ...</span></span>
+<span id="cb66-72"><a href="kaist-model-code-for-recovery.html#cb66-72" aria-hidden="true" tabindex="-1"></a><span class="st">           p 12 (</span><span class="sc">{B_footing}</span><span class="st">,0,</span><span class="sc">{B_footing}</span><span class="st">) ...</span></span>
+<span id="cb66-73"><a href="kaist-model-code-for-recovery.html#cb66-73" aria-hidden="true" tabindex="-1"></a><span class="st">           p 13 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">) ...</span></span>
+<span id="cb66-74"><a href="kaist-model-code-for-recovery.html#cb66-74" aria-hidden="true" tabindex="-1"></a><span class="st">           size </span><span class="sc">{radial}</span><span class="st"> </span><span class="sc">{axial}</span><span class="st"> </span><span class="sc">{perimeter}</span><span class="st"> </span><span class="sc">{outer}</span><span class="st"> ...</span></span>
+<span id="cb66-75"><a href="kaist-model-code-for-recovery.html#cb66-75" aria-hidden="true" tabindex="-1"></a><span class="st">           rat 1 1 1 1.01 ...</span></span>
+<span id="cb66-76"><a href="kaist-model-code-for-recovery.html#cb66-76" aria-hidden="true" tabindex="-1"></a><span class="st">           fill</span></span>
+<span id="cb66-77"><a href="kaist-model-code-for-recovery.html#cb66-77" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb66-78"><a href="kaist-model-code-for-recovery.html#cb66-78" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;radial mesh number is &quot;</span>, _radial)</span>
+<span id="cb66-79"><a href="kaist-model-code-for-recovery.html#cb66-79" aria-hidden="true" tabindex="-1"></a>command <span class="op">=</span> command_zone.<span class="bu">format</span>(</span>
+<span id="cb66-80"><a href="kaist-model-code-for-recovery.html#cb66-80" aria-hidden="true" tabindex="-1"></a>B_footing <span class="op">=</span> _B_footing,</span>
+<span id="cb66-81"><a href="kaist-model-code-for-recovery.html#cb66-81" aria-hidden="true" tabindex="-1"></a>B_soil <span class="op">=</span> _B_soil,</span>
+<span id="cb66-82"><a href="kaist-model-code-for-recovery.html#cb66-82" aria-hidden="true" tabindex="-1"></a>D_soil <span class="op">=</span> _D_soil,</span>
+<span id="cb66-83"><a href="kaist-model-code-for-recovery.html#cb66-83" aria-hidden="true" tabindex="-1"></a>radial<span class="op">=</span>_radial,</span>
+<span id="cb66-84"><a href="kaist-model-code-for-recovery.html#cb66-84" aria-hidden="true" tabindex="-1"></a>axial <span class="op">=</span> _axial,</span>
+<span id="cb66-85"><a href="kaist-model-code-for-recovery.html#cb66-85" aria-hidden="true" tabindex="-1"></a>perimeter <span class="op">=</span> _perimeter,</span>
+<span id="cb66-86"><a href="kaist-model-code-for-recovery.html#cb66-86" aria-hidden="true" tabindex="-1"></a>outer <span class="op">=</span> _outer)</span>
+<span id="cb66-87"><a href="kaist-model-code-for-recovery.html#cb66-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-88"><a href="kaist-model-code-for-recovery.html#cb66-88" aria-hidden="true" tabindex="-1"></a>it.command(command)</span>
+<span id="cb66-89"><a href="kaist-model-code-for-recovery.html#cb66-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-90"><a href="kaist-model-code-for-recovery.html#cb66-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-91"><a href="kaist-model-code-for-recovery.html#cb66-91" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb66-92"><a href="kaist-model-code-for-recovery.html#cb66-92" aria-hidden="true" tabindex="-1"></a><span class="co">######## CONSTITUTIVE MODEL ############</span></span>
+<span id="cb66-93"><a href="kaist-model-code-for-recovery.html#cb66-93" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb66-94"><a href="kaist-model-code-for-recovery.html#cb66-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-95"><a href="kaist-model-code-for-recovery.html#cb66-95" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb66-96"><a href="kaist-model-code-for-recovery.html#cb66-96" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic range group &quot;Radial Tunnel1&quot;</span></span>
+<span id="cb66-97"><a href="kaist-model-code-for-recovery.html#cb66-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-98"><a href="kaist-model-code-for-recovery.html#cb66-98" aria-hidden="true" tabindex="-1"></a><span class="st">fish define fname(E_o,const)</span></span>
+<span id="cb66-99"><a href="kaist-model-code-for-recovery.html#cb66-99" aria-hidden="true" tabindex="-1"></a><span class="st">loop foreach pnt zone.list</span></span>
+<span id="cb66-100"><a href="kaist-model-code-for-recovery.html#cb66-100" aria-hidden="true" tabindex="-1"></a><span class="st">z_depth = zone.pos.y(pnt)</span></span>
+<span id="cb66-101"><a href="kaist-model-code-for-recovery.html#cb66-101" aria-hidden="true" tabindex="-1"></a><span class="st">E = E_o+const*math.sqrt(z_depth)</span></span>
+<span id="cb66-102"><a href="kaist-model-code-for-recovery.html#cb66-102" aria-hidden="true" tabindex="-1"></a><span class="st">zone.prop(pnt,&#39;young&#39;)=E</span></span>
+<span id="cb66-103"><a href="kaist-model-code-for-recovery.html#cb66-103" aria-hidden="true" tabindex="-1"></a><span class="st">end_loop</span></span>
+<span id="cb66-104"><a href="kaist-model-code-for-recovery.html#cb66-104" aria-hidden="true" tabindex="-1"></a><span class="st">end</span></span>
+<span id="cb66-105"><a href="kaist-model-code-for-recovery.html#cb66-105" aria-hidden="true" tabindex="-1"></a><span class="st">@fname(</span><span class="sc">{E_o_}</span><span class="st">,</span><span class="sc">{const_}</span><span class="st">)</span></span>
+<span id="cb66-106"><a href="kaist-model-code-for-recovery.html#cb66-106" aria-hidden="true" tabindex="-1"></a><span class="st">zone property poisson </span><span class="sc">{poisson_}</span><span class="st"> density </span><span class="sc">{density_soil}</span></span>
+<span id="cb66-107"><a href="kaist-model-code-for-recovery.html#cb66-107" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>.<span class="bu">format</span>(E_o_<span class="op">=</span>_E_o,const_<span class="op">=</span>_const,poisson_<span class="op">=</span>_poisson,density_soil<span class="op">=</span>_density_soil))</span>
+<span id="cb66-108"><a href="kaist-model-code-for-recovery.html#cb66-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-109"><a href="kaist-model-code-for-recovery.html#cb66-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-110"><a href="kaist-model-code-for-recovery.html#cb66-110" aria-hidden="true" tabindex="-1"></a><span class="co"># GROUP #</span></span>
+<span id="cb66-111"><a href="kaist-model-code-for-recovery.html#cb66-111" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> za.pos()</span>
+<span id="cb66-112"><a href="kaist-model-code-for-recovery.html#cb66-112" aria-hidden="true" tabindex="-1"></a>x,y,z <span class="op">=</span> p.T</span>
+<span id="cb66-113"><a href="kaist-model-code-for-recovery.html#cb66-113" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(it.zone.count(), <span class="st">&quot;zones in whole model&quot;</span>)</span>
+<span id="cb66-114"><a href="kaist-model-code-for-recovery.html#cb66-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-115"><a href="kaist-model-code-for-recovery.html#cb66-115" aria-hidden="true" tabindex="-1"></a>shaft <span class="op">=</span> <span class="bu">reduce</span>(np.logical_and, (np.sqrt(x<span class="op">**</span><span class="dv">2</span><span class="op">+</span>z<span class="op">**</span><span class="dv">2</span>)<span class="op">&lt;</span>_D_shaft, y<span class="op">&lt;</span>_H_shaft))</span>
+<span id="cb66-116"><a href="kaist-model-code-for-recovery.html#cb66-116" aria-hidden="true" tabindex="-1"></a>za.set_group(shaft, <span class="st">&quot;shaft&quot;</span>)</span>
+<span id="cb66-117"><a href="kaist-model-code-for-recovery.html#cb66-117" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(za.in_group(<span class="st">&quot;shaft&quot;</span>).<span class="bu">sum</span>(), <span class="st">&quot;zones in shaft group.&quot;</span>)</span>
+<span id="cb66-118"><a href="kaist-model-code-for-recovery.html#cb66-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-119"><a href="kaist-model-code-for-recovery.html#cb66-119" aria-hidden="true" tabindex="-1"></a>plate <span class="op">=</span> <span class="bu">reduce</span>(np.logical_and, (x<span class="op">&lt;</span>_B_footing,z<span class="op">&lt;</span>_B_footing, y<span class="op">&gt;</span>_H_shaft,y<span class="op">&lt;</span>_D_footing))</span>
+<span id="cb66-120"><a href="kaist-model-code-for-recovery.html#cb66-120" aria-hidden="true" tabindex="-1"></a>za.set_group(plate, <span class="st">&quot;plate&quot;</span>)</span>
+<span id="cb66-121"><a href="kaist-model-code-for-recovery.html#cb66-121" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(za.in_group(<span class="st">&quot;plate&quot;</span>).<span class="bu">sum</span>(), <span class="st">&quot;zones in plate group.&quot;</span>)</span>
+<span id="cb66-122"><a href="kaist-model-code-for-recovery.html#cb66-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-123"><a href="kaist-model-code-for-recovery.html#cb66-123" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb66-124"><a href="kaist-model-code-for-recovery.html#cb66-124" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic range group &#39;shaft&#39;</span></span>
+<span id="cb66-125"><a href="kaist-model-code-for-recovery.html#cb66-125" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic range group &#39;plate&#39;</span></span>
+<span id="cb66-126"><a href="kaist-model-code-for-recovery.html#cb66-126" aria-hidden="true" tabindex="-1"></a><span class="st">zone property bulk </span><span class="sc">{bulk_}</span><span class="st"> shear </span><span class="sc">{shear_}</span><span class="st"> density </span><span class="sc">{density_}</span><span class="st"> range group &#39;shaft&#39;</span></span>
+<span id="cb66-127"><a href="kaist-model-code-for-recovery.html#cb66-127" aria-hidden="true" tabindex="-1"></a><span class="st">zone property bulk </span><span class="sc">{bulk_}</span><span class="st"> shear </span><span class="sc">{shear_}</span><span class="st"> density </span><span class="sc">{density_}</span><span class="st"> range group &#39;plate&#39;</span></span>
+<span id="cb66-128"><a href="kaist-model-code-for-recovery.html#cb66-128" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>.<span class="bu">format</span>(bulk_<span class="op">=</span>_bulk,shear_<span class="op">=</span>_shear,density_<span class="op">=</span>_density_concrete))</span>
+<span id="cb66-129"><a href="kaist-model-code-for-recovery.html#cb66-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-130"><a href="kaist-model-code-for-recovery.html#cb66-130" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb66-131"><a href="kaist-model-code-for-recovery.html#cb66-131" aria-hidden="true" tabindex="-1"></a><span class="co">############# INTERFACE ################</span></span>
+<span id="cb66-132"><a href="kaist-model-code-for-recovery.html#cb66-132" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb66-133"><a href="kaist-model-code-for-recovery.html#cb66-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-134"><a href="kaist-model-code-for-recovery.html#cb66-134" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb66-135"><a href="kaist-model-code-for-recovery.html#cb66-135" aria-hidden="true" tabindex="-1"></a><span class="st">zone interface &#39;interface 1&#39; create by-face separate range group &#39;plate&#39; group &#39;Radial Tunnel1&#39;</span></span>
+<span id="cb66-136"><a href="kaist-model-code-for-recovery.html#cb66-136" aria-hidden="true" tabindex="-1"></a><span class="st">zone interface &#39;interface 1&#39; node property stiffness-normal </span><span class="sc">{stiff_norm_}</span><span class="st"> stiffness-shear </span><span class="sc">{stiff_shear_}</span><span class="st"> friction 35 cohesion 100</span></span>
+<span id="cb66-137"><a href="kaist-model-code-for-recovery.html#cb66-137" aria-hidden="true" tabindex="-1"></a><span class="st">zone interface &#39;interface 2&#39; create by-face separate range group &#39;shaft&#39; group &#39;Radial Tunnel1&#39;</span></span>
+<span id="cb66-138"><a href="kaist-model-code-for-recovery.html#cb66-138" aria-hidden="true" tabindex="-1"></a><span class="st">zone interface &#39;interface 2&#39; node property stiffness-normal </span><span class="sc">{stiff_norm_}</span><span class="st"> stiffness-shear </span><span class="sc">{stiff_shear_}</span><span class="st"> friction 35 cohesion 100</span></span>
+<span id="cb66-139"><a href="kaist-model-code-for-recovery.html#cb66-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-140"><a href="kaist-model-code-for-recovery.html#cb66-140" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>.<span class="bu">format</span>(stiff_norm_<span class="op">=</span>_stiff_norm, stiff_shear_<span class="op">=</span>_stiff_shear))</span>
+<span id="cb66-141"><a href="kaist-model-code-for-recovery.html#cb66-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-142"><a href="kaist-model-code-for-recovery.html#cb66-142" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;               ======== PASSED INTERFACE ========&quot;</span>)</span>
+<span id="cb66-143"><a href="kaist-model-code-for-recovery.html#cb66-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-144"><a href="kaist-model-code-for-recovery.html#cb66-144" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb66-145"><a href="kaist-model-code-for-recovery.html#cb66-145" aria-hidden="true" tabindex="-1"></a><span class="co">######## BOUNDARY CONDITIONS ###########</span></span>
+<span id="cb66-146"><a href="kaist-model-code-for-recovery.html#cb66-146" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb66-147"><a href="kaist-model-code-for-recovery.html#cb66-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-148"><a href="kaist-model-code-for-recovery.html#cb66-148" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb66-149"><a href="kaist-model-code-for-recovery.html#cb66-149" aria-hidden="true" tabindex="-1"></a><span class="st">zone face skin</span></span>
+<span id="cb66-150"><a href="kaist-model-code-for-recovery.html#cb66-150" aria-hidden="true" tabindex="-1"></a><span class="st">zone face apply velocity-normal 0 range group &#39;West6&#39; or &#39;West7&#39; or &#39;Bottom6&#39; or &#39;Bottom7&#39; or &#39;East6&#39; or &#39;Top6&#39;</span></span>
+<span id="cb66-151"><a href="kaist-model-code-for-recovery.html#cb66-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-152"><a href="kaist-model-code-for-recovery.html#cb66-152" aria-hidden="true" tabindex="-1"></a><span class="st">zone face apply velocity (0,0,0) range group &#39;North3&#39;</span></span>
+<span id="cb66-153"><a href="kaist-model-code-for-recovery.html#cb66-153" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span>
+<span id="cb66-154"><a href="kaist-model-code-for-recovery.html#cb66-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-155"><a href="kaist-model-code-for-recovery.html#cb66-155" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb66-156"><a href="kaist-model-code-for-recovery.html#cb66-156" aria-hidden="true" tabindex="-1"></a><span class="co">############# INITILIZE ################</span></span>
+<span id="cb66-157"><a href="kaist-model-code-for-recovery.html#cb66-157" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb66-158"><a href="kaist-model-code-for-recovery.html#cb66-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-159"><a href="kaist-model-code-for-recovery.html#cb66-159" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb66-160"><a href="kaist-model-code-for-recovery.html#cb66-160" aria-hidden="true" tabindex="-1"></a><span class="st">model gravity 0 </span><span class="sc">{gravity_}</span><span class="st"> 0</span></span>
+<span id="cb66-161"><a href="kaist-model-code-for-recovery.html#cb66-161" aria-hidden="true" tabindex="-1"></a><span class="st">zone initialize-stress ratio </span><span class="sc">{K_}</span></span>
+<span id="cb66-162"><a href="kaist-model-code-for-recovery.html#cb66-162" aria-hidden="true" tabindex="-1"></a><span class="st">zone interface &#39;interface 1&#39; node initialize-stresses</span></span>
+<span id="cb66-163"><a href="kaist-model-code-for-recovery.html#cb66-163" aria-hidden="true" tabindex="-1"></a><span class="st">zone interface &#39;interface 2&#39; node initialize-stresses</span></span>
+<span id="cb66-164"><a href="kaist-model-code-for-recovery.html#cb66-164" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>.<span class="bu">format</span>(gravity_<span class="op">=</span>_gravity, K_ <span class="op">=</span> _K))</span>
+<span id="cb66-165"><a href="kaist-model-code-for-recovery.html#cb66-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-166"><a href="kaist-model-code-for-recovery.html#cb66-166" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb66-167"><a href="kaist-model-code-for-recovery.html#cb66-167" aria-hidden="true" tabindex="-1"></a><span class="st">zone ratio local</span></span>
+<span id="cb66-168"><a href="kaist-model-code-for-recovery.html#cb66-168" aria-hidden="true" tabindex="-1"></a><span class="st">model solve ratio 1e-4</span></span>
+<span id="cb66-169"><a href="kaist-model-code-for-recovery.html#cb66-169" aria-hidden="true" tabindex="-1"></a><span class="st">model save &#39;initial&#39;</span></span>
+<span id="cb66-170"><a href="kaist-model-code-for-recovery.html#cb66-170" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span>
+<span id="cb66-171"><a href="kaist-model-code-for-recovery.html#cb66-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-172"><a href="kaist-model-code-for-recovery.html#cb66-172" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;               ======== PASSED INITIAL EQUILIBRIUM ========&quot;</span>)</span>
+<span id="cb66-173"><a href="kaist-model-code-for-recovery.html#cb66-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-174"><a href="kaist-model-code-for-recovery.html#cb66-174" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb66-175"><a href="kaist-model-code-for-recovery.html#cb66-175" aria-hidden="true" tabindex="-1"></a><span class="co">########## VERTICAL LOADING ############</span></span>
+<span id="cb66-176"><a href="kaist-model-code-for-recovery.html#cb66-176" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb66-177"><a href="kaist-model-code-for-recovery.html#cb66-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-178"><a href="kaist-model-code-for-recovery.html#cb66-178" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb66-179"><a href="kaist-model-code-for-recovery.html#cb66-179" aria-hidden="true" tabindex="-1"></a><span class="st">zone initialize state 0</span></span>
+<span id="cb66-180"><a href="kaist-model-code-for-recovery.html#cb66-180" aria-hidden="true" tabindex="-1"></a><span class="st">zone gridpoint initialize displacement (0,0,0)</span></span>
+<span id="cb66-181"><a href="kaist-model-code-for-recovery.html#cb66-181" aria-hidden="true" tabindex="-1"></a><span class="st">zone gridpoint initialize velocity     (0,0,0)</span></span>
+<span id="cb66-182"><a href="kaist-model-code-for-recovery.html#cb66-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-183"><a href="kaist-model-code-for-recovery.html#cb66-183" aria-hidden="true" tabindex="-1"></a><span class="st">table &#39;ramp&#39; add ([global.step],0) ([global.step+5000],1e-6) ...</span></span>
+<span id="cb66-184"><a href="kaist-model-code-for-recovery.html#cb66-184" aria-hidden="true" tabindex="-1"></a><span class="st">      ([global.step+10000],1e-6) ; Increase velocity applied to pile</span></span>
+<span id="cb66-185"><a href="kaist-model-code-for-recovery.html#cb66-185" aria-hidden="true" tabindex="-1"></a><span class="st">                                  ; over 5,000 steps</span></span>
+<span id="cb66-186"><a href="kaist-model-code-for-recovery.html#cb66-186" aria-hidden="true" tabindex="-1"></a><span class="st">                                 </span></span>
+<span id="cb66-187"><a href="kaist-model-code-for-recovery.html#cb66-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-188"><a href="kaist-model-code-for-recovery.html#cb66-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-189"><a href="kaist-model-code-for-recovery.html#cb66-189" aria-hidden="true" tabindex="-1"></a><span class="st">zone face apply velocity-normal 1e-5 range group &#39;North1&#39; or &#39;South2&#39;</span></span>
+<span id="cb66-190"><a href="kaist-model-code-for-recovery.html#cb66-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-191"><a href="kaist-model-code-for-recovery.html#cb66-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-192"><a href="kaist-model-code-for-recovery.html#cb66-192" aria-hidden="true" tabindex="-1"></a><span class="st">history interval 10</span></span>
+<span id="cb66-193"><a href="kaist-model-code-for-recovery.html#cb66-193" aria-hidden="true" tabindex="-1"></a><span class="st">zone history name &#39;disp&#39; displacement-y position (3,7,3)</span></span>
+<span id="cb66-194"><a href="kaist-model-code-for-recovery.html#cb66-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-195"><a href="kaist-model-code-for-recovery.html#cb66-195" aria-hidden="true" tabindex="-1"></a><span class="st">;=====================================================</span></span>
+<span id="cb66-196"><a href="kaist-model-code-for-recovery.html#cb66-196" aria-hidden="true" tabindex="-1"></a><span class="st">; find gridpoints at pile cap, store in map called cap</span></span>
+<span id="cb66-197"><a href="kaist-model-code-for-recovery.html#cb66-197" aria-hidden="true" tabindex="-1"></a><span class="st">fish define find_cap</span></span>
+<span id="cb66-198"><a href="kaist-model-code-for-recovery.html#cb66-198" aria-hidden="true" tabindex="-1"></a><span class="st">    global cap = map</span></span>
+<span id="cb66-199"><a href="kaist-model-code-for-recovery.html#cb66-199" aria-hidden="true" tabindex="-1"></a><span class="st">    loop foreach local gp gp.list</span></span>
+<span id="cb66-200"><a href="kaist-model-code-for-recovery.html#cb66-200" aria-hidden="true" tabindex="-1"></a><span class="st">        if gp.isgroup(gp,&#39;top&#39;) then</span></span>
+<span id="cb66-201"><a href="kaist-model-code-for-recovery.html#cb66-201" aria-hidden="true" tabindex="-1"></a><span class="st">            cap(gp.id(gp)) = gp</span></span>
+<span id="cb66-202"><a href="kaist-model-code-for-recovery.html#cb66-202" aria-hidden="true" tabindex="-1"></a><span class="st">        endif</span></span>
+<span id="cb66-203"><a href="kaist-model-code-for-recovery.html#cb66-203" aria-hidden="true" tabindex="-1"></a><span class="st">    endloop</span></span>
+<span id="cb66-204"><a href="kaist-model-code-for-recovery.html#cb66-204" aria-hidden="true" tabindex="-1"></a><span class="st">end</span></span>
+<span id="cb66-205"><a href="kaist-model-code-for-recovery.html#cb66-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-206"><a href="kaist-model-code-for-recovery.html#cb66-206" aria-hidden="true" tabindex="-1"></a><span class="st">fish history name &#39;cap&#39; @find_cap</span></span>
+<span id="cb66-207"><a href="kaist-model-code-for-recovery.html#cb66-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-208"><a href="kaist-model-code-for-recovery.html#cb66-208" aria-hidden="true" tabindex="-1"></a><span class="st">fish define vert_load</span></span>
+<span id="cb66-209"><a href="kaist-model-code-for-recovery.html#cb66-209" aria-hidden="true" tabindex="-1"></a><span class="st">    local yftot = 0.0</span></span>
+<span id="cb66-210"><a href="kaist-model-code-for-recovery.html#cb66-210" aria-hidden="true" tabindex="-1"></a><span class="st">    loop foreach gp cap</span></span>
+<span id="cb66-211"><a href="kaist-model-code-for-recovery.html#cb66-211" aria-hidden="true" tabindex="-1"></a><span class="st">        yftot = yftot + gp.force.unbal.y(gp)</span></span>
+<span id="cb66-212"><a href="kaist-model-code-for-recovery.html#cb66-212" aria-hidden="true" tabindex="-1"></a><span class="st">    end_loop</span></span>
+<span id="cb66-213"><a href="kaist-model-code-for-recovery.html#cb66-213" aria-hidden="true" tabindex="-1"></a><span class="st">    vert_load = yftot / (0.25*0.25*</span><span class="sc">{D_shaft_}</span><span class="st">*</span><span class="sc">{D_shaft_}</span><span class="st">*math.pi)</span></span>
+<span id="cb66-214"><a href="kaist-model-code-for-recovery.html#cb66-214" aria-hidden="true" tabindex="-1"></a><span class="st">end</span></span>
+<span id="cb66-215"><a href="kaist-model-code-for-recovery.html#cb66-215" aria-hidden="true" tabindex="-1"></a><span class="st">fish history name &#39;load&#39; @vert_load</span></span>
+<span id="cb66-216"><a href="kaist-model-code-for-recovery.html#cb66-216" aria-hidden="true" tabindex="-1"></a><span class="st">;=====================================================</span></span>
+<span id="cb66-217"><a href="kaist-model-code-for-recovery.html#cb66-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-218"><a href="kaist-model-code-for-recovery.html#cb66-218" aria-hidden="true" tabindex="-1"></a><span class="st">zone mechanical damping combined</span></span>
+<span id="cb66-219"><a href="kaist-model-code-for-recovery.html#cb66-219" aria-hidden="true" tabindex="-1"></a><span class="st">model largestrain true</span></span>
+<span id="cb66-220"><a href="kaist-model-code-for-recovery.html#cb66-220" aria-hidden="true" tabindex="-1"></a><span class="st">model step 10000</span></span>
+<span id="cb66-221"><a href="kaist-model-code-for-recovery.html#cb66-221" aria-hidden="true" tabindex="-1"></a><span class="st">model save &#39;vertical-loading&#39;</span></span>
+<span id="cb66-222"><a href="kaist-model-code-for-recovery.html#cb66-222" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>.<span class="bu">format</span>(D_shaft_<span class="op">=</span>_D_shaft))</span>
+<span id="cb66-223"><a href="kaist-model-code-for-recovery.html#cb66-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-224"><a href="kaist-model-code-for-recovery.html#cb66-224" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;               ======== PASSED VERTICAL LOADING ========&quot;</span>)</span>
+<span id="cb66-225"><a href="kaist-model-code-for-recovery.html#cb66-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-226"><a href="kaist-model-code-for-recovery.html#cb66-226" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb66-227"><a href="kaist-model-code-for-recovery.html#cb66-227" aria-hidden="true" tabindex="-1"></a><span class="co">################ PLOT ##################</span></span>
+<span id="cb66-228"><a href="kaist-model-code-for-recovery.html#cb66-228" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb66-229"><a href="kaist-model-code-for-recovery.html#cb66-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-230"><a href="kaist-model-code-for-recovery.html#cb66-230" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb66-231"><a href="kaist-model-code-for-recovery.html#cb66-231" aria-hidden="true" tabindex="-1"></a><span class="st">plot create</span></span>
+<span id="cb66-232"><a href="kaist-model-code-for-recovery.html#cb66-232" aria-hidden="true" tabindex="-1"></a><span class="st">plot item create zone label group</span></span>
+<span id="cb66-233"><a href="kaist-model-code-for-recovery.html#cb66-233" aria-hidden="true" tabindex="-1"></a><span class="st">plot create</span></span>
+<span id="cb66-234"><a href="kaist-model-code-for-recovery.html#cb66-234" aria-hidden="true" tabindex="-1"></a><span class="st">plot item create zone contour property name &#39;young&#39;</span></span>
+<span id="cb66-235"><a href="kaist-model-code-for-recovery.html#cb66-235" aria-hidden="true" tabindex="-1"></a><span class="st">plot create</span></span>
+<span id="cb66-236"><a href="kaist-model-code-for-recovery.html#cb66-236" aria-hidden="true" tabindex="-1"></a><span class="st">plot item create zone label density</span></span>
+<span id="cb66-237"><a href="kaist-model-code-for-recovery.html#cb66-237" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span>
+<span id="cb66-238"><a href="kaist-model-code-for-recovery.html#cb66-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-239"><a href="kaist-model-code-for-recovery.html#cb66-239" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;               ======== PASSED PLOT ========&quot;</span>)</span>
+<span id="cb66-240"><a href="kaist-model-code-for-recovery.html#cb66-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-241"><a href="kaist-model-code-for-recovery.html#cb66-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-242"><a href="kaist-model-code-for-recovery.html#cb66-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-243"><a href="kaist-model-code-for-recovery.html#cb66-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-244"><a href="kaist-model-code-for-recovery.html#cb66-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-245"><a href="kaist-model-code-for-recovery.html#cb66-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-246"><a href="kaist-model-code-for-recovery.html#cb66-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-247"><a href="kaist-model-code-for-recovery.html#cb66-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-248"><a href="kaist-model-code-for-recovery.html#cb66-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-249"><a href="kaist-model-code-for-recovery.html#cb66-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-250"><a href="kaist-model-code-for-recovery.html#cb66-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-251"><a href="kaist-model-code-for-recovery.html#cb66-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-252"><a href="kaist-model-code-for-recovery.html#cb66-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-253"><a href="kaist-model-code-for-recovery.html#cb66-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-254"><a href="kaist-model-code-for-recovery.html#cb66-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-255"><a href="kaist-model-code-for-recovery.html#cb66-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-256"><a href="kaist-model-code-for-recovery.html#cb66-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-257"><a href="kaist-model-code-for-recovery.html#cb66-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-258"><a href="kaist-model-code-for-recovery.html#cb66-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-259"><a href="kaist-model-code-for-recovery.html#cb66-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-260"><a href="kaist-model-code-for-recovery.html#cb66-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-261"><a href="kaist-model-code-for-recovery.html#cb66-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-262"><a href="kaist-model-code-for-recovery.html#cb66-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-263"><a href="kaist-model-code-for-recovery.html#cb66-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-264"><a href="kaist-model-code-for-recovery.html#cb66-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-265"><a href="kaist-model-code-for-recovery.html#cb66-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-266"><a href="kaist-model-code-for-recovery.html#cb66-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-267"><a href="kaist-model-code-for-recovery.html#cb66-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-268"><a href="kaist-model-code-for-recovery.html#cb66-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-269"><a href="kaist-model-code-for-recovery.html#cb66-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-270"><a href="kaist-model-code-for-recovery.html#cb66-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-271"><a href="kaist-model-code-for-recovery.html#cb66-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-272"><a href="kaist-model-code-for-recovery.html#cb66-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-273"><a href="kaist-model-code-for-recovery.html#cb66-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-274"><a href="kaist-model-code-for-recovery.html#cb66-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-275"><a href="kaist-model-code-for-recovery.html#cb66-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-276"><a href="kaist-model-code-for-recovery.html#cb66-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-277"><a href="kaist-model-code-for-recovery.html#cb66-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-278"><a href="kaist-model-code-for-recovery.html#cb66-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-279"><a href="kaist-model-code-for-recovery.html#cb66-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-280"><a href="kaist-model-code-for-recovery.html#cb66-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-281"><a href="kaist-model-code-for-recovery.html#cb66-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-282"><a href="kaist-model-code-for-recovery.html#cb66-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-283"><a href="kaist-model-code-for-recovery.html#cb66-283" aria-hidden="true" tabindex="-1"></a><span class="co">#; =========================================================</span></span>
+<span id="cb66-284"><a href="kaist-model-code-for-recovery.html#cb66-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-285"><a href="kaist-model-code-for-recovery.html#cb66-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-286"><a href="kaist-model-code-for-recovery.html#cb66-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-287"><a href="kaist-model-code-for-recovery.html#cb66-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-288"><a href="kaist-model-code-for-recovery.html#cb66-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-289"><a href="kaist-model-code-for-recovery.html#cb66-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-290"><a href="kaist-model-code-for-recovery.html#cb66-290" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-291"><a href="kaist-model-code-for-recovery.html#cb66-291" aria-hidden="true" tabindex="-1"></a><span class="co">#; find gridpoints at pile cap, store in map called cap</span></span>
+<span id="cb66-292"><a href="kaist-model-code-for-recovery.html#cb66-292" aria-hidden="true" tabindex="-1"></a><span class="co">#fish define find_cap</span></span>
+<span id="cb66-293"><a href="kaist-model-code-for-recovery.html#cb66-293" aria-hidden="true" tabindex="-1"></a><span class="co">#    global cap = map</span></span>
+<span id="cb66-294"><a href="kaist-model-code-for-recovery.html#cb66-294" aria-hidden="true" tabindex="-1"></a><span class="co">#    loop foreach local gp gp.list</span></span>
+<span id="cb66-295"><a href="kaist-model-code-for-recovery.html#cb66-295" aria-hidden="true" tabindex="-1"></a><span class="co">#        if gp.isgroup(gp,&#39;top&#39;) then</span></span>
+<span id="cb66-296"><a href="kaist-model-code-for-recovery.html#cb66-296" aria-hidden="true" tabindex="-1"></a><span class="co">#            cap(gp.id(gp)) = gp</span></span>
+<span id="cb66-297"><a href="kaist-model-code-for-recovery.html#cb66-297" aria-hidden="true" tabindex="-1"></a><span class="co">#        endif</span></span>
+<span id="cb66-298"><a href="kaist-model-code-for-recovery.html#cb66-298" aria-hidden="true" tabindex="-1"></a><span class="co">#    endloop</span></span>
+<span id="cb66-299"><a href="kaist-model-code-for-recovery.html#cb66-299" aria-hidden="true" tabindex="-1"></a><span class="co">#end</span></span>
+<span id="cb66-300"><a href="kaist-model-code-for-recovery.html#cb66-300" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-301"><a href="kaist-model-code-for-recovery.html#cb66-301" aria-hidden="true" tabindex="-1"></a><span class="co">#;fish history name &#39;cap&#39; @find_cap</span></span>
+<span id="cb66-302"><a href="kaist-model-code-for-recovery.html#cb66-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-303"><a href="kaist-model-code-for-recovery.html#cb66-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-304"><a href="kaist-model-code-for-recovery.html#cb66-304" aria-hidden="true" tabindex="-1"></a><span class="co">#fish define vert_load</span></span>
+<span id="cb66-305"><a href="kaist-model-code-for-recovery.html#cb66-305" aria-hidden="true" tabindex="-1"></a><span class="co">#    local yftot = 0.0</span></span>
+<span id="cb66-306"><a href="kaist-model-code-for-recovery.html#cb66-306" aria-hidden="true" tabindex="-1"></a><span class="co">#    loop foreach gp cap</span></span>
+<span id="cb66-307"><a href="kaist-model-code-for-recovery.html#cb66-307" aria-hidden="true" tabindex="-1"></a><span class="co">#        yftot = yftot + gp.force.unbal.y(gp)</span></span>
+<span id="cb66-308"><a href="kaist-model-code-for-recovery.html#cb66-308" aria-hidden="true" tabindex="-1"></a><span class="co">#    end_loop</span></span>
+<span id="cb66-309"><a href="kaist-model-code-for-recovery.html#cb66-309" aria-hidden="true" tabindex="-1"></a><span class="co">#    vert_load = yftot / (0.25*{D_shaft_}*{D_shaft_}*math.pi)</span></span>
+<span id="cb66-310"><a href="kaist-model-code-for-recovery.html#cb66-310" aria-hidden="true" tabindex="-1"></a><span class="co">#end</span></span>
+<span id="cb66-311"><a href="kaist-model-code-for-recovery.html#cb66-311" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-312"><a href="kaist-model-code-for-recovery.html#cb66-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-313"><a href="kaist-model-code-for-recovery.html#cb66-313" aria-hidden="true" tabindex="-1"></a><span class="co">#fish define tot_reac</span></span>
+<span id="cb66-314"><a href="kaist-model-code-for-recovery.html#cb66-314" aria-hidden="true" tabindex="-1"></a><span class="co">#    local total = 0.0</span></span>
+<span id="cb66-315"><a href="kaist-model-code-for-recovery.html#cb66-315" aria-hidden="true" tabindex="-1"></a><span class="co">#    loop foreach local key map.keys(shaft)</span></span>
+<span id="cb66-316"><a href="kaist-model-code-for-recovery.html#cb66-316" aria-hidden="true" tabindex="-1"></a><span class="co">#        local level = shaft(key)</span></span>
+<span id="cb66-317"><a href="kaist-model-code-for-recovery.html#cb66-317" aria-hidden="true" tabindex="-1"></a><span class="co">#        local accum = 0.0</span></span>
+<span id="cb66-318"><a href="kaist-model-code-for-recovery.html#cb66-318" aria-hidden="true" tabindex="-1"></a><span class="co">#        loop foreach local node level(&#39;nodes&#39;)</span></span>
+<span id="cb66-319"><a href="kaist-model-code-for-recovery.html#cb66-319" aria-hidden="true" tabindex="-1"></a><span class="co">#            local area = interface.node.area(node)</span></span>
+<span id="cb66-320"><a href="kaist-model-code-for-recovery.html#cb66-320" aria-hidden="true" tabindex="-1"></a><span class="co">#            local norm = zone.face.normal(inter.node.target.zone(node),inter.node.target.face(node))</span></span>
+<span id="cb66-321"><a href="kaist-model-code-for-recovery.html#cb66-321" aria-hidden="true" tabindex="-1"></a><span class="co">#            local ynstress = inter.node.stress.normal(node) * norm-&gt;y * -1.0</span></span>
+<span id="cb66-322"><a href="kaist-model-code-for-recovery.html#cb66-322" aria-hidden="true" tabindex="-1"></a><span class="co">#            local ysstress = inter.node.stress.shear.y(node)</span></span>
+<span id="cb66-323"><a href="kaist-model-code-for-recovery.html#cb66-323" aria-hidden="true" tabindex="-1"></a><span class="co">#            accum = accum + (ynstress + ysstress) *  area</span></span>
+<span id="cb66-324"><a href="kaist-model-code-for-recovery.html#cb66-324" aria-hidden="true" tabindex="-1"></a><span class="co">#        end_loop</span></span>
+<span id="cb66-325"><a href="kaist-model-code-for-recovery.html#cb66-325" aria-hidden="true" tabindex="-1"></a><span class="co">#        local ydis = gp.disp.y(level(&#39;gp&#39;))</span></span>
+<span id="cb66-326"><a href="kaist-model-code-for-recovery.html#cb66-326" aria-hidden="true" tabindex="-1"></a><span class="co">#        total = total + accum</span></span>
+<span id="cb66-327"><a href="kaist-model-code-for-recovery.html#cb66-327" aria-hidden="true" tabindex="-1"></a><span class="co">#        table(string(key),ydis) = accum/level(&#39;length&#39;)</span></span>
+<span id="cb66-328"><a href="kaist-model-code-for-recovery.html#cb66-328" aria-hidden="true" tabindex="-1"></a><span class="co">#    end_loop</span></span>
+<span id="cb66-329"><a href="kaist-model-code-for-recovery.html#cb66-329" aria-hidden="true" tabindex="-1"></a><span class="co">#    tot_reac = total</span></span>
+<span id="cb66-330"><a href="kaist-model-code-for-recovery.html#cb66-330" aria-hidden="true" tabindex="-1"></a><span class="co">#end</span></span>
+<span id="cb66-331"><a href="kaist-model-code-for-recovery.html#cb66-331" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-332"><a href="kaist-model-code-for-recovery.html#cb66-332" aria-hidden="true" tabindex="-1"></a><span class="co">#fish history name &#39;load&#39; @vert_load</span></span>
+<span id="cb66-333"><a href="kaist-model-code-for-recovery.html#cb66-333" aria-hidden="true" tabindex="-1"></a><span class="co">#fish history name &#39;tot_reac&#39; @tot_reac</span></span>
+<span id="cb66-334"><a href="kaist-model-code-for-recovery.html#cb66-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-335"><a href="kaist-model-code-for-recovery.html#cb66-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-336"><a href="kaist-model-code-for-recovery.html#cb66-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-337"><a href="kaist-model-code-for-recovery.html#cb66-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-338"><a href="kaist-model-code-for-recovery.html#cb66-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-339"><a href="kaist-model-code-for-recovery.html#cb66-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-340"><a href="kaist-model-code-for-recovery.html#cb66-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-341"><a href="kaist-model-code-for-recovery.html#cb66-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-342"><a href="kaist-model-code-for-recovery.html#cb66-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-343"><a href="kaist-model-code-for-recovery.html#cb66-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-344"><a href="kaist-model-code-for-recovery.html#cb66-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-345"><a href="kaist-model-code-for-recovery.html#cb66-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-346"><a href="kaist-model-code-for-recovery.html#cb66-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-347"><a href="kaist-model-code-for-recovery.html#cb66-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-348"><a href="kaist-model-code-for-recovery.html#cb66-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-349"><a href="kaist-model-code-for-recovery.html#cb66-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-350"><a href="kaist-model-code-for-recovery.html#cb66-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-351"><a href="kaist-model-code-for-recovery.html#cb66-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-352"><a href="kaist-model-code-for-recovery.html#cb66-352" aria-hidden="true" tabindex="-1"></a><span class="co">#; =========================================================</span></span>
+<span id="cb66-353"><a href="kaist-model-code-for-recovery.html#cb66-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-354"><a href="kaist-model-code-for-recovery.html#cb66-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-355"><a href="kaist-model-code-for-recovery.html#cb66-355" aria-hidden="true" tabindex="-1"></a><span class="co">#plot create</span></span>
+<span id="cb66-356"><a href="kaist-model-code-for-recovery.html#cb66-356" aria-hidden="true" tabindex="-1"></a><span class="co">#plot clear</span></span>
+<span id="cb66-357"><a href="kaist-model-code-for-recovery.html#cb66-357" aria-hidden="true" tabindex="-1"></a><span class="co">#plot active on</span></span>
+<span id="cb66-358"><a href="kaist-model-code-for-recovery.html#cb66-358" aria-hidden="true" tabindex="-1"></a><span class="co">#plot background &#39;white&#39;</span></span>
+<span id="cb66-359"><a href="kaist-model-code-for-recovery.html#cb66-359" aria-hidden="true" tabindex="-1"></a><span class="co">#plot outline active on width 2 color &#39;black&#39;</span></span>
+<span id="cb66-360"><a href="kaist-model-code-for-recovery.html#cb66-360" aria-hidden="true" tabindex="-1"></a><span class="co">#plot legend active on heading color &#39;black&#39; copyright color &#39;black&#39; ...</span></span>
+<span id="cb66-361"><a href="kaist-model-code-for-recovery.html#cb66-361" aria-hidden="true" tabindex="-1"></a><span class="co">#    placement left size 25,50 ...</span></span>
+<span id="cb66-362"><a href="kaist-model-code-for-recovery.html#cb66-362" aria-hidden="true" tabindex="-1"></a><span class="co">#    step active off ...</span></span>
+<span id="cb66-363"><a href="kaist-model-code-for-recovery.html#cb66-363" aria-hidden="true" tabindex="-1"></a><span class="co">#    time-real active off ...</span></span>
+<span id="cb66-364"><a href="kaist-model-code-for-recovery.html#cb66-364" aria-hidden="true" tabindex="-1"></a><span class="co">#    time-model active off ...</span></span>
+<span id="cb66-365"><a href="kaist-model-code-for-recovery.html#cb66-365" aria-hidden="true" tabindex="-1"></a><span class="co">#    title-customer active off ...</span></span>
+<span id="cb66-366"><a href="kaist-model-code-for-recovery.html#cb66-366" aria-hidden="true" tabindex="-1"></a><span class="co">#    view-info active off</span></span>
+<span id="cb66-367"><a href="kaist-model-code-for-recovery.html#cb66-367" aria-hidden="true" tabindex="-1"></a><span class="co">#plot title-job active off</span></span>
+<span id="cb66-368"><a href="kaist-model-code-for-recovery.html#cb66-368" aria-hidden="true" tabindex="-1"></a><span class="co">#plot title active off</span></span>
+<span id="cb66-369"><a href="kaist-model-code-for-recovery.html#cb66-369" aria-hidden="true" tabindex="-1"></a><span class="co">#    </span></span>
+<span id="cb66-370"><a href="kaist-model-code-for-recovery.html#cb66-370" aria-hidden="true" tabindex="-1"></a><span class="co">#plot item create axes active on ...</span></span>
+<span id="cb66-371"><a href="kaist-model-code-for-recovery.html#cb66-371" aria-hidden="true" tabindex="-1"></a><span class="co">#    axis-x color &#39;black&#39; draw-positive on draw-negative off label-positive &#39;X&#39; ...</span></span>
+<span id="cb66-372"><a href="kaist-model-code-for-recovery.html#cb66-372" aria-hidden="true" tabindex="-1"></a><span class="co">#    axis-y color &#39;black&#39; draw-positive on draw-negative off label-positive &#39;Y&#39; ...</span></span>
+<span id="cb66-373"><a href="kaist-model-code-for-recovery.html#cb66-373" aria-hidden="true" tabindex="-1"></a><span class="co">#    axis-z color &#39;black&#39; draw-positive on draw-negative off label-positive &#39;Z&#39; ...</span></span>
+<span id="cb66-374"><a href="kaist-model-code-for-recovery.html#cb66-374" aria-hidden="true" tabindex="-1"></a><span class="co">#    position (0,0,0) size 1 ...</span></span>
+<span id="cb66-375"><a href="kaist-model-code-for-recovery.html#cb66-375" aria-hidden="true" tabindex="-1"></a><span class="co">#    font size 10 family &#39;Arial&#39; style bold ...</span></span>
+<span id="cb66-376"><a href="kaist-model-code-for-recovery.html#cb66-376" aria-hidden="true" tabindex="-1"></a><span class="co">#    transparency 0 ...</span></span>
+<span id="cb66-377"><a href="kaist-model-code-for-recovery.html#cb66-377" aria-hidden="true" tabindex="-1"></a><span class="co">#    legend active off</span></span>
+<span id="cb66-378"><a href="kaist-model-code-for-recovery.html#cb66-378" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-379"><a href="kaist-model-code-for-recovery.html#cb66-379" aria-hidden="true" tabindex="-1"></a><span class="co">#plot item create zone active on ...</span></span>
+<span id="cb66-380"><a href="kaist-model-code-for-recovery.html#cb66-380" aria-hidden="true" tabindex="-1"></a><span class="co">#    contour Displacement ...</span></span>
+<span id="cb66-381"><a href="kaist-model-code-for-recovery.html#cb66-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-382"><a href="kaist-model-code-for-recovery.html#cb66-382" aria-hidden="true" tabindex="-1"></a><span class="co">#; =========================================================</span></span>
+<span id="cb66-383"><a href="kaist-model-code-for-recovery.html#cb66-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-384"><a href="kaist-model-code-for-recovery.html#cb66-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-385"><a href="kaist-model-code-for-recovery.html#cb66-385" aria-hidden="true" tabindex="-1"></a><span class="co">#zone.field.name = &#39;stress-yy&#39;</span></span>
+<span id="cb66-386"><a href="kaist-model-code-for-recovery.html#cb66-386" aria-hidden="true" tabindex="-1"></a><span class="co">#zone.field.method.name = &#39;poly&#39; ; Use polynomial fit extrapolation</span></span>
+<span id="cb66-387"><a href="kaist-model-code-for-recovery.html#cb66-387" aria-hidden="true" tabindex="-1"></a><span class="co">#global value1 = zone.field.get(0,_H_shaft,0) ; Return stress-xx</span></span>
+<span id="cb66-388"><a href="kaist-model-code-for-recovery.html#cb66-388" aria-hidden="true" tabindex="-1"></a><span class="co">#zone.field.name = &#39;stress-von-mises&#39; ; Reset the filed name directly to &#39;stress-von-mises&#39;</span></span>
+<span id="cb66-389"><a href="kaist-model-code-for-recovery.html#cb66-389" aria-hidden="true" tabindex="-1"></a><span class="co">#global value2 = zone.field.get(0,_H_shaft,0) ; Return stress-von-mises</span></span>
+<span id="cb66-390"><a href="kaist-model-code-for-recovery.html#cb66-390" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-391"><a href="kaist-model-code-for-recovery.html#cb66-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-392"><a href="kaist-model-code-for-recovery.html#cb66-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-393"><a href="kaist-model-code-for-recovery.html#cb66-393" aria-hidden="true" tabindex="-1"></a><span class="co">#; =========================================================</span></span>
+<span id="cb66-394"><a href="kaist-model-code-for-recovery.html#cb66-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-395"><a href="kaist-model-code-for-recovery.html#cb66-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-396"><a href="kaist-model-code-for-recovery.html#cb66-396" aria-hidden="true" tabindex="-1"></a><span class="co"># VERTICAL LOADING 1#</span></span>
+<span id="cb66-397"><a href="kaist-model-code-for-recovery.html#cb66-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-398"><a href="kaist-model-code-for-recovery.html#cb66-398" aria-hidden="true" tabindex="-1"></a><span class="co">#top = reduce(np.logical_and, (np.sqrt(x**2+z**2)&lt;_D_shaft, y==np.amin(y)))</span></span>
+<span id="cb66-399"><a href="kaist-model-code-for-recovery.html#cb66-399" aria-hidden="true" tabindex="-1"></a><span class="co">#za.set_group(top, &quot;top&quot;) # set the zones with shaft = true have &quot;shaft&quot; and &quot;geometry&quot;</span></span>
+<span id="cb66-400"><a href="kaist-model-code-for-recovery.html#cb66-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-401"><a href="kaist-model-code-for-recovery.html#cb66-401" aria-hidden="true" tabindex="-1"></a><span class="co">#it.command(&quot;&quot;&quot;</span></span>
+<span id="cb66-402"><a href="kaist-model-code-for-recovery.html#cb66-402" aria-hidden="true" tabindex="-1"></a><span class="co">#zone initialize state 0</span></span>
+<span id="cb66-403"><a href="kaist-model-code-for-recovery.html#cb66-403" aria-hidden="true" tabindex="-1"></a><span class="co">#zone gridpoint initialize displacement (0,0,0)</span></span>
+<span id="cb66-404"><a href="kaist-model-code-for-recovery.html#cb66-404" aria-hidden="true" tabindex="-1"></a><span class="co">#zone gridpoint initialize velocity     (0,0,0)</span></span>
+<span id="cb66-405"><a href="kaist-model-code-for-recovery.html#cb66-405" aria-hidden="true" tabindex="-1"></a><span class="co">#table &#39;ramp&#39; add ([global.step],0) ([global.step+30000],-5e-8) ...</span></span>
+<span id="cb66-406"><a href="kaist-model-code-for-recovery.html#cb66-406" aria-hidden="true" tabindex="-1"></a><span class="co">#      ([global.step+58000],-5e-8) ; Increase velocity applied to pile</span></span>
+<span id="cb66-407"><a href="kaist-model-code-for-recovery.html#cb66-407" aria-hidden="true" tabindex="-1"></a><span class="co">#                                  ; over 30,000 steps</span></span>
+<span id="cb66-408"><a href="kaist-model-code-for-recovery.html#cb66-408" aria-hidden="true" tabindex="-1"></a><span class="co">#zone face apply velocity-normal 1 table &#39;ramp&#39; range group &#39;top&#39;</span></span>
+<span id="cb66-409"><a href="kaist-model-code-for-recovery.html#cb66-409" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-410"><a href="kaist-model-code-for-recovery.html#cb66-410" aria-hidden="true" tabindex="-1"></a><span class="co">#history interval 250</span></span>
+<span id="cb66-411"><a href="kaist-model-code-for-recovery.html#cb66-411" aria-hidden="true" tabindex="-1"></a><span class="co">#zone history name &#39;disp&#39; displacement-y position (0,0,0)</span></span>
+<span id="cb66-412"><a href="kaist-model-code-for-recovery.html#cb66-412" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-413"><a href="kaist-model-code-for-recovery.html#cb66-413" aria-hidden="true" tabindex="-1"></a><span class="co">#; =========================================================</span></span>
+<span id="cb66-414"><a href="kaist-model-code-for-recovery.html#cb66-414" aria-hidden="true" tabindex="-1"></a><span class="co">#;  find gridpoints at pile cap, store in map called cap</span></span>
+<span id="cb66-415"><a href="kaist-model-code-for-recovery.html#cb66-415" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-416"><a href="kaist-model-code-for-recovery.html#cb66-416" aria-hidden="true" tabindex="-1"></a><span class="co">#fish define find_cap</span></span>
+<span id="cb66-417"><a href="kaist-model-code-for-recovery.html#cb66-417" aria-hidden="true" tabindex="-1"></a><span class="co">#    global cap = map</span></span>
+<span id="cb66-418"><a href="kaist-model-code-for-recovery.html#cb66-418" aria-hidden="true" tabindex="-1"></a><span class="co">#    loop foreach local gp gp.list</span></span>
+<span id="cb66-419"><a href="kaist-model-code-for-recovery.html#cb66-419" aria-hidden="true" tabindex="-1"></a><span class="co">#        if gp.isgroup(gp,&#39;top&#39;) then</span></span>
+<span id="cb66-420"><a href="kaist-model-code-for-recovery.html#cb66-420" aria-hidden="true" tabindex="-1"></a><span class="co">#            cap(gp.id(gp)) = gp</span></span>
+<span id="cb66-421"><a href="kaist-model-code-for-recovery.html#cb66-421" aria-hidden="true" tabindex="-1"></a><span class="co">#        endif</span></span>
+<span id="cb66-422"><a href="kaist-model-code-for-recovery.html#cb66-422" aria-hidden="true" tabindex="-1"></a><span class="co">#    endloop</span></span>
+<span id="cb66-423"><a href="kaist-model-code-for-recovery.html#cb66-423" aria-hidden="true" tabindex="-1"></a><span class="co">#end</span></span>
+<span id="cb66-424"><a href="kaist-model-code-for-recovery.html#cb66-424" aria-hidden="true" tabindex="-1"></a><span class="co">#@find_cap</span></span>
+<span id="cb66-425"><a href="kaist-model-code-for-recovery.html#cb66-425" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-426"><a href="kaist-model-code-for-recovery.html#cb66-426" aria-hidden="true" tabindex="-1"></a><span class="co">#; =========================================================</span></span>
+<span id="cb66-427"><a href="kaist-model-code-for-recovery.html#cb66-427" aria-hidden="true" tabindex="-1"></a><span class="co">#; monitor vertical loading at pile cap</span></span>
+<span id="cb66-428"><a href="kaist-model-code-for-recovery.html#cb66-428" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-429"><a href="kaist-model-code-for-recovery.html#cb66-429" aria-hidden="true" tabindex="-1"></a><span class="co">#fish define vert_load</span></span>
+<span id="cb66-430"><a href="kaist-model-code-for-recovery.html#cb66-430" aria-hidden="true" tabindex="-1"></a><span class="co">#    local yftot = 0.0</span></span>
+<span id="cb66-431"><a href="kaist-model-code-for-recovery.html#cb66-431" aria-hidden="true" tabindex="-1"></a><span class="co">#    loop foreach gp cap</span></span>
+<span id="cb66-432"><a href="kaist-model-code-for-recovery.html#cb66-432" aria-hidden="true" tabindex="-1"></a><span class="co">#        yftot = yftot + gp.force.unbal.y(gp)</span></span>
+<span id="cb66-433"><a href="kaist-model-code-for-recovery.html#cb66-433" aria-hidden="true" tabindex="-1"></a><span class="co">#    end_loop</span></span>
+<span id="cb66-434"><a href="kaist-model-code-for-recovery.html#cb66-434" aria-hidden="true" tabindex="-1"></a><span class="co">#    vert_load = yftot / (0.25*{1}*{1}*math.pi)</span></span>
+<span id="cb66-435"><a href="kaist-model-code-for-recovery.html#cb66-435" aria-hidden="true" tabindex="-1"></a><span class="co">#end</span></span>
+<span id="cb66-436"><a href="kaist-model-code-for-recovery.html#cb66-436" aria-hidden="true" tabindex="-1"></a><span class="co">#;call &#39;load&#39;</span></span>
+<span id="cb66-437"><a href="kaist-model-code-for-recovery.html#cb66-437" aria-hidden="true" tabindex="-1"></a><span class="co">#; =========================================================</span></span>
+<span id="cb66-438"><a href="kaist-model-code-for-recovery.html#cb66-438" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-439"><a href="kaist-model-code-for-recovery.html#cb66-439" aria-hidden="true" tabindex="-1"></a><span class="co">#fish history name &#39;load&#39; @vert_load</span></span>
+<span id="cb66-440"><a href="kaist-model-code-for-recovery.html#cb66-440" aria-hidden="true" tabindex="-1"></a><span class="co">#zone mechanical damping combined</span></span>
+<span id="cb66-441"><a href="kaist-model-code-for-recovery.html#cb66-441" aria-hidden="true" tabindex="-1"></a><span class="co">#model step 58000</span></span>
+<span id="cb66-442"><a href="kaist-model-code-for-recovery.html#cb66-442" aria-hidden="true" tabindex="-1"></a><span class="co">#model save &#39;vertical-loading&#39;</span></span>
+<span id="cb66-443"><a href="kaist-model-code-for-recovery.html#cb66-443" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;&quot;&quot;)</span></span>
+<span id="cb66-444"><a href="kaist-model-code-for-recovery.html#cb66-444" aria-hidden="true" tabindex="-1"></a><span class="co">#print(&quot;               ========       ======== Passed Vertical Loading 1 ========        ========&quot;)</span></span>
+<span id="cb66-445"><a href="kaist-model-code-for-recovery.html#cb66-445" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-446"><a href="kaist-model-code-for-recovery.html#cb66-446" aria-hidden="true" tabindex="-1"></a><span class="co">## VERTICAL LOADING 2#</span></span>
+<span id="cb66-447"><a href="kaist-model-code-for-recovery.html#cb66-447" aria-hidden="true" tabindex="-1"></a><span class="co">## =========================================================</span></span>
+<span id="cb66-448"><a href="kaist-model-code-for-recovery.html#cb66-448" aria-hidden="true" tabindex="-1"></a><span class="co">#it.command(&quot;&quot;&quot;</span></span>
+<span id="cb66-449"><a href="kaist-model-code-for-recovery.html#cb66-449" aria-hidden="true" tabindex="-1"></a><span class="co">#; vertical loading</span></span>
+<span id="cb66-450"><a href="kaist-model-code-for-recovery.html#cb66-450" aria-hidden="true" tabindex="-1"></a><span class="co">#model restore &#39;initial&#39;</span></span>
+<span id="cb66-451"><a href="kaist-model-code-for-recovery.html#cb66-451" aria-hidden="true" tabindex="-1"></a><span class="co">#zone initialize state 0</span></span>
+<span id="cb66-452"><a href="kaist-model-code-for-recovery.html#cb66-452" aria-hidden="true" tabindex="-1"></a><span class="co">#zone gridpoint initialize displacement (0,0,0)</span></span>
+<span id="cb66-453"><a href="kaist-model-code-for-recovery.html#cb66-453" aria-hidden="true" tabindex="-1"></a><span class="co">#zone gridpoint initialize velocity     (0,0,0)</span></span>
+<span id="cb66-454"><a href="kaist-model-code-for-recovery.html#cb66-454" aria-hidden="true" tabindex="-1"></a><span class="co">#zone face apply stress-yy [1.0e5/(math.pi*1*1)] range group &#39;top&#39;</span></span>
+<span id="cb66-455"><a href="kaist-model-code-for-recovery.html#cb66-455" aria-hidden="true" tabindex="-1"></a><span class="co">#model solve ratio 1e-4</span></span>
+<span id="cb66-456"><a href="kaist-model-code-for-recovery.html#cb66-456" aria-hidden="true" tabindex="-1"></a><span class="co">#model save &#39;vertical-load-end&#39;</span></span>
+<span id="cb66-457"><a href="kaist-model-code-for-recovery.html#cb66-457" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;&quot;&quot;)</span></span>
+<span id="cb66-458"><a href="kaist-model-code-for-recovery.html#cb66-458" aria-hidden="true" tabindex="-1"></a><span class="co">#print(&quot;               =======        ======== Passed Vertical Loading 2 ========        ========&quot;)</span></span>
+<span id="cb66-459"><a href="kaist-model-code-for-recovery.html#cb66-459" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-460"><a href="kaist-model-code-for-recovery.html#cb66-460" aria-hidden="true" tabindex="-1"></a><span class="co">## define make_pydata, output_structure, tot_reac #</span></span>
+<span id="cb66-461"><a href="kaist-model-code-for-recovery.html#cb66-461" aria-hidden="true" tabindex="-1"></a><span class="co">## =========================================================</span></span>
+<span id="cb66-462"><a href="kaist-model-code-for-recovery.html#cb66-462" aria-hidden="true" tabindex="-1"></a><span class="co">##;call &#39;p-y&#39; suppress ; Calculates p-y curve for pile, when tot_reac is called</span></span>
+<span id="cb66-463"><a href="kaist-model-code-for-recovery.html#cb66-463" aria-hidden="true" tabindex="-1"></a><span class="co">##; Calculate PY Curves at equidistant locations along pile</span></span>
+<span id="cb66-464"><a href="kaist-model-code-for-recovery.html#cb66-464" aria-hidden="true" tabindex="-1"></a><span class="co">##; Stored in map called pile, key = 1.0*y positions rounded to integer</span></span>
+<span id="cb66-465"><a href="kaist-model-code-for-recovery.html#cb66-465" aria-hidden="true" tabindex="-1"></a><span class="co">##;    value = map, key &#39;y&#39; = y-position</span></span>
+<span id="cb66-466"><a href="kaist-model-code-for-recovery.html#cb66-466" aria-hidden="true" tabindex="-1"></a><span class="co">##;                     &#39;length&#39; = length of ownership of this segment</span></span>
+<span id="cb66-467"><a href="kaist-model-code-for-recovery.html#cb66-467" aria-hidden="true" tabindex="-1"></a><span class="co">##;                     &#39;gp&#39; = Gridpoint nearest (0,y,0)</span></span>
+<span id="cb66-468"><a href="kaist-model-code-for-recovery.html#cb66-468" aria-hidden="true" tabindex="-1"></a><span class="co">##;                     &#39;nodes&#39; = map of interface nodes at that position, key order entered.</span></span>
+<span id="cb66-469"><a href="kaist-model-code-for-recovery.html#cb66-469" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-470"><a href="kaist-model-code-for-recovery.html#cb66-470" aria-hidden="true" tabindex="-1"></a><span class="co">#it.command(&quot;&quot;&quot;</span></span>
+<span id="cb66-471"><a href="kaist-model-code-for-recovery.html#cb66-471" aria-hidden="true" tabindex="-1"></a><span class="co">#fish define make_pydata</span></span>
+<span id="cb66-472"><a href="kaist-model-code-for-recovery.html#cb66-472" aria-hidden="true" tabindex="-1"></a><span class="co">#    global pile = map</span></span>
+<span id="cb66-473"><a href="kaist-model-code-for-recovery.html#cb66-473" aria-hidden="true" tabindex="-1"></a><span class="co">#    ; Build list of nodes</span></span>
+<span id="cb66-474"><a href="kaist-model-code-for-recovery.html#cb66-474" aria-hidden="true" tabindex="-1"></a><span class="co">#    loop foreach local ipnt inter.list</span></span>
+<span id="cb66-475"><a href="kaist-model-code-for-recovery.html#cb66-475" aria-hidden="true" tabindex="-1"></a><span class="co">#        loop foreach node inter.node.list(ipnt)</span></span>
+<span id="cb66-476"><a href="kaist-model-code-for-recovery.html#cb66-476" aria-hidden="true" tabindex="-1"></a><span class="co">#            local y = inter.node.pos.y(node)</span></span>
+<span id="cb66-477"><a href="kaist-model-code-for-recovery.html#cb66-477" aria-hidden="true" tabindex="-1"></a><span class="co">#            local key = math.round(inter.node.pos.y(node) * 1.0)</span></span>
+<span id="cb66-478"><a href="kaist-model-code-for-recovery.html#cb66-478" aria-hidden="true" tabindex="-1"></a><span class="co">#            if map.has(pile,key) == false then</span></span>
+<span id="cb66-479"><a href="kaist-model-code-for-recovery.html#cb66-479" aria-hidden="true" tabindex="-1"></a><span class="co">#                local level = map</span></span>
+<span id="cb66-480"><a href="kaist-model-code-for-recovery.html#cb66-480" aria-hidden="true" tabindex="-1"></a><span class="co">#                local nodes = map</span></span>
+<span id="cb66-481"><a href="kaist-model-code-for-recovery.html#cb66-481" aria-hidden="true" tabindex="-1"></a><span class="co">#                level(&#39;y&#39;) = y</span></span>
+<span id="cb66-482"><a href="kaist-model-code-for-recovery.html#cb66-482" aria-hidden="true" tabindex="-1"></a><span class="co">#                level(&#39;gp&#39;) = gp.near(0,y,0,&#39;pile&#39;)</span></span>
+<span id="cb66-483"><a href="kaist-model-code-for-recovery.html#cb66-483" aria-hidden="true" tabindex="-1"></a><span class="co">#                level(&#39;nodes&#39;) = nodes</span></span>
+<span id="cb66-484"><a href="kaist-model-code-for-recovery.html#cb66-484" aria-hidden="true" tabindex="-1"></a><span class="co">#                level(&#39;length&#39;) = 0.0</span></span>
+<span id="cb66-485"><a href="kaist-model-code-for-recovery.html#cb66-485" aria-hidden="true" tabindex="-1"></a><span class="co">#                pile(key) = level</span></span>
+<span id="cb66-486"><a href="kaist-model-code-for-recovery.html#cb66-486" aria-hidden="true" tabindex="-1"></a><span class="co">#            endif</span></span>
+<span id="cb66-487"><a href="kaist-model-code-for-recovery.html#cb66-487" aria-hidden="true" tabindex="-1"></a><span class="co">#            level = pile(key)</span></span>
+<span id="cb66-488"><a href="kaist-model-code-for-recovery.html#cb66-488" aria-hidden="true" tabindex="-1"></a><span class="co">#            nodes = level(&#39;nodes&#39;)</span></span>
+<span id="cb66-489"><a href="kaist-model-code-for-recovery.html#cb66-489" aria-hidden="true" tabindex="-1"></a><span class="co">#            nodes(map.size(nodes)) = node</span></span>
+<span id="cb66-490"><a href="kaist-model-code-for-recovery.html#cb66-490" aria-hidden="true" tabindex="-1"></a><span class="co">#            level(&#39;nodes&#39;) = nodes</span></span>
+<span id="cb66-491"><a href="kaist-model-code-for-recovery.html#cb66-491" aria-hidden="true" tabindex="-1"></a><span class="co">#            pile(key) = level</span></span>
+<span id="cb66-492"><a href="kaist-model-code-for-recovery.html#cb66-492" aria-hidden="true" tabindex="-1"></a><span class="co">#        end_loop</span></span>
+<span id="cb66-493"><a href="kaist-model-code-for-recovery.html#cb66-493" aria-hidden="true" tabindex="-1"></a><span class="co">#    end_loop</span></span>
+<span id="cb66-494"><a href="kaist-model-code-for-recovery.html#cb66-494" aria-hidden="true" tabindex="-1"></a><span class="co">#    ; Calculate length of ownership of each segment</span></span>
+<span id="cb66-495"><a href="kaist-model-code-for-recovery.html#cb66-495" aria-hidden="true" tabindex="-1"></a><span class="co">#    local prev_key = &#39;0&#39;</span></span>
+<span id="cb66-496"><a href="kaist-model-code-for-recovery.html#cb66-496" aria-hidden="true" tabindex="-1"></a><span class="co">#    loop foreach key map.keys(pile)</span></span>
+<span id="cb66-497"><a href="kaist-model-code-for-recovery.html#cb66-497" aria-hidden="true" tabindex="-1"></a><span class="co">#        if type.name(prev_key) == &#39;integer&#39; then</span></span>
+<span id="cb66-498"><a href="kaist-model-code-for-recovery.html#cb66-498" aria-hidden="true" tabindex="-1"></a><span class="co">#            local levelp = pile(prev_key)</span></span>
+<span id="cb66-499"><a href="kaist-model-code-for-recovery.html#cb66-499" aria-hidden="true" tabindex="-1"></a><span class="co">#            local leveln = pile(key)</span></span>
+<span id="cb66-500"><a href="kaist-model-code-for-recovery.html#cb66-500" aria-hidden="true" tabindex="-1"></a><span class="co">#            local dist = math.abs(gp.pos.y(levelp(&#39;gp&#39;)) - gp.pos.y(leveln(&#39;gp&#39;))) * 0.5</span></span>
+<span id="cb66-501"><a href="kaist-model-code-for-recovery.html#cb66-501" aria-hidden="true" tabindex="-1"></a><span class="co">#            levelp(&#39;length&#39;) = levelp(&#39;length&#39;) + dist</span></span>
+<span id="cb66-502"><a href="kaist-model-code-for-recovery.html#cb66-502" aria-hidden="true" tabindex="-1"></a><span class="co">#            leveln(&#39;length&#39;) = leveln(&#39;length&#39;) + dist</span></span>
+<span id="cb66-503"><a href="kaist-model-code-for-recovery.html#cb66-503" aria-hidden="true" tabindex="-1"></a><span class="co">#            pile(prev_key) = levelp</span></span>
+<span id="cb66-504"><a href="kaist-model-code-for-recovery.html#cb66-504" aria-hidden="true" tabindex="-1"></a><span class="co">#            pile(key) = leveln</span></span>
+<span id="cb66-505"><a href="kaist-model-code-for-recovery.html#cb66-505" aria-hidden="true" tabindex="-1"></a><span class="co">#        endif</span></span>
+<span id="cb66-506"><a href="kaist-model-code-for-recovery.html#cb66-506" aria-hidden="true" tabindex="-1"></a><span class="co">#        prev_key = key</span></span>
+<span id="cb66-507"><a href="kaist-model-code-for-recovery.html#cb66-507" aria-hidden="true" tabindex="-1"></a><span class="co">#    end_loop</span></span>
+<span id="cb66-508"><a href="kaist-model-code-for-recovery.html#cb66-508" aria-hidden="true" tabindex="-1"></a><span class="co">#end</span></span>
+<span id="cb66-509"><a href="kaist-model-code-for-recovery.html#cb66-509" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-510"><a href="kaist-model-code-for-recovery.html#cb66-510" aria-hidden="true" tabindex="-1"></a><span class="co">#; Output resulting data structure...</span></span>
+<span id="cb66-511"><a href="kaist-model-code-for-recovery.html#cb66-511" aria-hidden="true" tabindex="-1"></a><span class="co">#fish define output_structure</span></span>
+<span id="cb66-512"><a href="kaist-model-code-for-recovery.html#cb66-512" aria-hidden="true" tabindex="-1"></a><span class="co">#    loop foreach local level pile</span></span>
+<span id="cb66-513"><a href="kaist-model-code-for-recovery.html#cb66-513" aria-hidden="true" tabindex="-1"></a><span class="co">#        io.out(&#39;Y-Position &#39; + string(level(&#39;y&#39;)))</span></span>
+<span id="cb66-514"><a href="kaist-model-code-for-recovery.html#cb66-514" aria-hidden="true" tabindex="-1"></a><span class="co">#        io.out(&#39;Length &#39; + string(level(&#39;length&#39;)))</span></span>
+<span id="cb66-515"><a href="kaist-model-code-for-recovery.html#cb66-515" aria-hidden="true" tabindex="-1"></a><span class="co">#        io.out(&#39;GP &#39; + string(gp.id(level(&#39;gp&#39;))))</span></span>
+<span id="cb66-516"><a href="kaist-model-code-for-recovery.html#cb66-516" aria-hidden="true" tabindex="-1"></a><span class="co">#        local nodelist = &#39;&#39;</span></span>
+<span id="cb66-517"><a href="kaist-model-code-for-recovery.html#cb66-517" aria-hidden="true" tabindex="-1"></a><span class="co">#        loop foreach local node level(&#39;nodes&#39;)</span></span>
+<span id="cb66-518"><a href="kaist-model-code-for-recovery.html#cb66-518" aria-hidden="true" tabindex="-1"></a><span class="co">#            nodelist = nodelist + &#39; &#39; + string(interface.node.id(node))</span></span>
+<span id="cb66-519"><a href="kaist-model-code-for-recovery.html#cb66-519" aria-hidden="true" tabindex="-1"></a><span class="co">#        end_loop</span></span>
+<span id="cb66-520"><a href="kaist-model-code-for-recovery.html#cb66-520" aria-hidden="true" tabindex="-1"></a><span class="co">#        io.out(&#39;Nodes&#39;+nodelist)</span></span>
+<span id="cb66-521"><a href="kaist-model-code-for-recovery.html#cb66-521" aria-hidden="true" tabindex="-1"></a><span class="co">#    end_loop</span></span>
+<span id="cb66-522"><a href="kaist-model-code-for-recovery.html#cb66-522" aria-hidden="true" tabindex="-1"></a><span class="co">#end</span></span>
+<span id="cb66-523"><a href="kaist-model-code-for-recovery.html#cb66-523" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb66-524"><a href="kaist-model-code-for-recovery.html#cb66-524" aria-hidden="true" tabindex="-1"></a><span class="co">#fish define tot_reac</span></span>
+<span id="cb66-525"><a href="kaist-model-code-for-recovery.html#cb66-525" aria-hidden="true" tabindex="-1"></a><span class="co">#    local total = 0.0</span></span>
+<span id="cb66-526"><a href="kaist-model-code-for-recovery.html#cb66-526" aria-hidden="true" tabindex="-1"></a><span class="co">#    loop foreach local key map.keys(pile)</span></span>
+<span id="cb66-527"><a href="kaist-model-code-for-recovery.html#cb66-527" aria-hidden="true" tabindex="-1"></a><span class="co">#        local level = pile(key)</span></span>
+<span id="cb66-528"><a href="kaist-model-code-for-recovery.html#cb66-528" aria-hidden="true" tabindex="-1"></a><span class="co">#        local accum = 0.0</span></span>
+<span id="cb66-529"><a href="kaist-model-code-for-recovery.html#cb66-529" aria-hidden="true" tabindex="-1"></a><span class="co">#        loop foreach local node level(&#39;nodes&#39;)</span></span>
+<span id="cb66-530"><a href="kaist-model-code-for-recovery.html#cb66-530" aria-hidden="true" tabindex="-1"></a><span class="co">#            local area = 2.0 * interface.node.area(node)</span></span>
+<span id="cb66-531"><a href="kaist-model-code-for-recovery.html#cb66-531" aria-hidden="true" tabindex="-1"></a><span class="co">#            local norm = zone.face.normal(inter.node.target.zone(node),inter.node.target.face(node))</span></span>
+<span id="cb66-532"><a href="kaist-model-code-for-recovery.html#cb66-532" aria-hidden="true" tabindex="-1"></a><span class="co">#            local xnstress = inter.node.stress.normal(node) * norm-&gt;x * -1.0</span></span>
+<span id="cb66-533"><a href="kaist-model-code-for-recovery.html#cb66-533" aria-hidden="true" tabindex="-1"></a><span class="co">#            local xsstress = inter.node.stress.shear.x(node)</span></span>
+<span id="cb66-534"><a href="kaist-model-code-for-recovery.html#cb66-534" aria-hidden="true" tabindex="-1"></a><span class="co">#            accum = accum + (xnstress + xsstress) *  area</span></span>
+<span id="cb66-535"><a href="kaist-model-code-for-recovery.html#cb66-535" aria-hidden="true" tabindex="-1"></a><span class="co">#        end_loop</span></span>
+<span id="cb66-536"><a href="kaist-model-code-for-recovery.html#cb66-536" aria-hidden="true" tabindex="-1"></a><span class="co">#        local xdis = gp.disp.x(level(&#39;gp&#39;))</span></span>
+<span id="cb66-537"><a href="kaist-model-code-for-recovery.html#cb66-537" aria-hidden="true" tabindex="-1"></a><span class="co">#        total = total + accum</span></span>
+<span id="cb66-538"><a href="kaist-model-code-for-recovery.html#cb66-538" aria-hidden="true" tabindex="-1"></a><span class="co">#        table(string(key),xdis) = accum/level(&#39;length&#39;)</span></span>
+<span id="cb66-539"><a href="kaist-model-code-for-recovery.html#cb66-539" aria-hidden="true" tabindex="-1"></a><span class="co">#    end_loop</span></span>
+<span id="cb66-540"><a href="kaist-model-code-for-recovery.html#cb66-540" aria-hidden="true" tabindex="-1"></a><span class="co">#    tot_reac = total</span></span>
+<span id="cb66-541"><a href="kaist-model-code-for-recovery.html#cb66-541" aria-hidden="true" tabindex="-1"></a><span class="co">#end</span></span>
+<span id="cb66-542"><a href="kaist-model-code-for-recovery.html#cb66-542" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;&quot;&quot;)</span></span>
+<span id="cb66-543"><a href="kaist-model-code-for-recovery.html#cb66-543" aria-hidden="true" tabindex="-1"></a><span class="co">#print(&quot;               ======== PASSED DEFINING ALL FISH FUNCTIONS ========        ========&quot;)</span></span>
+<span id="cb66-544"><a href="kaist-model-code-for-recovery.html#cb66-544" aria-hidden="true" tabindex="-1"></a><span class="co">## GENERATE p-y data #</span></span>
+<span id="cb66-545"><a href="kaist-model-code-for-recovery.html#cb66-545" aria-hidden="true" tabindex="-1"></a><span class="co">## =========================================================</span></span>
+<span id="cb66-546"><a href="kaist-model-code-for-recovery.html#cb66-546" aria-hidden="true" tabindex="-1"></a><span class="co">#it.command(&quot;&quot;&quot;</span></span>
+<span id="cb66-547"><a href="kaist-model-code-for-recovery.html#cb66-547" aria-hidden="true" tabindex="-1"></a><span class="co">#@make_pydata        ; Generate p-y curve calculation data</span></span>
+<span id="cb66-548"><a href="kaist-model-code-for-recovery.html#cb66-548" aria-hidden="true" tabindex="-1"></a><span class="co">#@output_structure   ; Sanity check of p-y curve data</span></span>
+<span id="cb66-549"><a href="kaist-model-code-for-recovery.html#cb66-549" aria-hidden="true" tabindex="-1"></a><span class="co">#fish history name &#39;load&#39; @tot_reac</span></span>
+<span id="cb66-550"><a href="kaist-model-code-for-recovery.html#cb66-550" aria-hidden="true" tabindex="-1"></a><span class="co">#model step 416500</span></span>
+<span id="cb66-551"><a href="kaist-model-code-for-recovery.html#cb66-551" aria-hidden="true" tabindex="-1"></a><span class="co">#model save &#39;lateral-load&#39;</span></span>
+<span id="cb66-552"><a href="kaist-model-code-for-recovery.html#cb66-552" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;&quot;&quot;)</span></span>
+<span id="cb66-553"><a href="kaist-model-code-for-recovery.html#cb66-553" aria-hidden="true" tabindex="-1"></a><span class="co">#print(&quot;               ======== PASSED ALL SCRIPTS SUCCESSFULLY ========&quot;)</span></span>
+<span id="cb66-554"><a href="kaist-model-code-for-recovery.html#cb66-554" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-555"><a href="kaist-model-code-for-recovery.html#cb66-555" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-556"><a href="kaist-model-code-for-recovery.html#cb66-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-557"><a href="kaist-model-code-for-recovery.html#cb66-557" aria-hidden="true" tabindex="-1"></a><span class="co">#it.command(&quot;&quot;&quot;</span></span>
+<span id="cb66-558"><a href="kaist-model-code-for-recovery.html#cb66-558" aria-hidden="true" tabindex="-1"></a><span class="co">#zone cmodel assign strain-softening range group &quot;Radial Tunnel1&quot;</span></span>
+<span id="cb66-559"><a href="kaist-model-code-for-recovery.html#cb66-559" aria-hidden="true" tabindex="-1"></a><span class="co">#zone property density 2500 bulk 2e8 shear 1e8 range group &quot;Radial Tunnel1&quot;</span></span>
+<span id="cb66-560"><a href="kaist-model-code-for-recovery.html#cb66-560" aria-hidden="true" tabindex="-1"></a><span class="co">#zone property cohesion 2e6 friction 45 tension 2e5 dilation 10 range group &quot;Radial Tunnel1&quot;</span></span>
+<span id="cb66-561"><a href="kaist-model-code-for-recovery.html#cb66-561" aria-hidden="true" tabindex="-1"></a><span class="co">#zone property table-friction &#39;fri&#39; table-cohesion &#39;coh&#39; table-dilation &#39;dil&#39; range group &quot;Radial Tunnel1&quot;</span></span>
+<span id="cb66-562"><a href="kaist-model-code-for-recovery.html#cb66-562" aria-hidden="true" tabindex="-1"></a><span class="co">#table &#39;fri&#39; add (0, 45) (.05, 42) (.1, 40) (1, 40)</span></span>
+<span id="cb66-563"><a href="kaist-model-code-for-recovery.html#cb66-563" aria-hidden="true" tabindex="-1"></a><span class="co">#table &#39;coh&#39; add (0,2e6) (.05,1e6) (.1,5e5) (1,5e5)</span></span>
+<span id="cb66-564"><a href="kaist-model-code-for-recovery.html#cb66-564" aria-hidden="true" tabindex="-1"></a><span class="co">#table &#39;dil&#39; add (0, 10) (.05,  3) (.1,  0)</span></span>
+<span id="cb66-565"><a href="kaist-model-code-for-recovery.html#cb66-565" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;&quot;&quot;)</span></span>
+<span id="cb66-566"><a href="kaist-model-code-for-recovery.html#cb66-566" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-567"><a href="kaist-model-code-for-recovery.html#cb66-567" aria-hidden="true" tabindex="-1"></a><span class="co">#top = reduce(np.logical_and, (np.sqrt(x**2+z**2)&lt;_D_shaft, y&lt;=np.amin(y)))</span></span>
+<span id="cb66-568"><a href="kaist-model-code-for-recovery.html#cb66-568" aria-hidden="true" tabindex="-1"></a><span class="co">#za.set_group(top, &quot;top&quot;)</span></span>
+<span id="cb66-569"><a href="kaist-model-code-for-recovery.html#cb66-569" aria-hidden="true" tabindex="-1"></a><span class="co">#print(za.in_group(&quot;top&quot;).sum(), &quot;zones in top group.&quot;)</span></span></code></pre></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="command.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/kyeongsunkim/mynewtest01-how-to-use.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

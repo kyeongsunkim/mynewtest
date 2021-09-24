@@ -1916,438 +1916,6 @@ FISH functions to calculate bulk and shear moduli
 
 \newpage
 
-\hypertarget{code-block}{%
-\chapter{Code Block}\label{code-block}}
-
-\hypertarget{define-fish-functions}{%
-\section{Define Fish functions}\label{define-fish-functions}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# define make\_pydata, output\_structure, tot\_reac \#}
-\CommentTok{\# =========================================================}
-\CommentTok{\#;call \textquotesingle{}p{-}y\textquotesingle{} suppress ; Calculates p{-}y curve for pile, when tot\_reac is called}
-\CommentTok{\#; Calculate PY Curves at equidistant locations along pile}
-\CommentTok{\#; Stored in map called pile, key = 1.0*y positions rounded to integer}
-\CommentTok{\#;    value = map, key \textquotesingle{}y\textquotesingle{} = y{-}position}
-\CommentTok{\#;                     \textquotesingle{}length\textquotesingle{} = length of ownership of this segment}
-\CommentTok{\#;                     \textquotesingle{}gp\textquotesingle{} = Gridpoint nearest (0,y,0)}
-\CommentTok{\#;                     \textquotesingle{}nodes\textquotesingle{} = map of interface nodes at that position, key order entered.}
-\NormalTok{it.command(}\StringTok{"""}
-\StringTok{fish define make\_pydata}
-\StringTok{    global pile = map}
-\StringTok{    ; Build list of nodes}
-\StringTok{    loop foreach local ipnt inter.list}
-\StringTok{        loop foreach node inter.node.list(ipnt)}
-\StringTok{            local y = inter.node.pos.y(node)}
-\StringTok{            local key = math.round(inter.node.pos.y(node) * 1.0)}
-\StringTok{            if map.has(pile,key) == false then}
-\StringTok{                local level = map}
-\StringTok{                local nodes = map}
-\StringTok{                level(\textquotesingle{}y\textquotesingle{}) = y}
-\StringTok{                level(\textquotesingle{}gp\textquotesingle{}) = gp.near(0,y,0,\textquotesingle{}pile\textquotesingle{})}
-\StringTok{                level(\textquotesingle{}nodes\textquotesingle{}) = nodes}
-\StringTok{                level(\textquotesingle{}length\textquotesingle{}) = 0.0}
-\StringTok{                pile(key) = level}
-\StringTok{            endif}
-\StringTok{            level = pile(key)}
-\StringTok{            nodes = level(\textquotesingle{}nodes\textquotesingle{})}
-\StringTok{            nodes(map.size(nodes)) = node}
-\StringTok{            level(\textquotesingle{}nodes\textquotesingle{}) = nodes}
-\StringTok{            pile(key) = level}
-\StringTok{        end\_loop}
-\StringTok{    end\_loop}
-\StringTok{    ; Calculate length of ownership of each segment}
-\StringTok{    local prev\_key = \textquotesingle{}0\textquotesingle{}}
-\StringTok{    loop foreach key map.keys(pile)}
-\StringTok{        if type.name(prev\_key) == \textquotesingle{}integer\textquotesingle{} then}
-\StringTok{            local levelp = pile(prev\_key)}
-\StringTok{            local leveln = pile(key)}
-\StringTok{            local dist = math.abs(gp.pos.y(levelp(\textquotesingle{}gp\textquotesingle{})) {-} gp.pos.y(leveln(\textquotesingle{}gp\textquotesingle{}))) * 0.5}
-\StringTok{            levelp(\textquotesingle{}length\textquotesingle{}) = levelp(\textquotesingle{}length\textquotesingle{}) + dist}
-\StringTok{            leveln(\textquotesingle{}length\textquotesingle{}) = leveln(\textquotesingle{}length\textquotesingle{}) + dist}
-\StringTok{            pile(prev\_key) = levelp}
-\StringTok{            pile(key) = leveln}
-\StringTok{        endif}
-\StringTok{        prev\_key = key}
-\StringTok{    end\_loop}
-\StringTok{end}
-
-\StringTok{; Output resulting data structure...}
-\StringTok{fish define output\_structure}
-\StringTok{    loop foreach local level pile}
-\StringTok{        io.out(\textquotesingle{}Y{-}Position \textquotesingle{} + string(level(\textquotesingle{}y\textquotesingle{})))}
-\StringTok{        io.out(\textquotesingle{}Length \textquotesingle{} + string(level(\textquotesingle{}length\textquotesingle{})))}
-\StringTok{        io.out(\textquotesingle{}GP \textquotesingle{} + string(gp.id(level(\textquotesingle{}gp\textquotesingle{}))))}
-\StringTok{        local nodelist = \textquotesingle{}\textquotesingle{}}
-\StringTok{        loop foreach local node level(\textquotesingle{}nodes\textquotesingle{})}
-\StringTok{            nodelist = nodelist + \textquotesingle{} \textquotesingle{} + string(interface.node.id(node))}
-\StringTok{        end\_loop}
-\StringTok{        io.out(\textquotesingle{}Nodes\textquotesingle{}+nodelist)}
-\StringTok{    end\_loop}
-\StringTok{end}
-
-\StringTok{fish define tot\_reac}
-\StringTok{    local total = 0.0}
-\StringTok{    loop foreach local key map.keys(pile)}
-\StringTok{        local level = pile(key)}
-\StringTok{        local accum = 0.0}
-\StringTok{        loop foreach local node level(\textquotesingle{}nodes\textquotesingle{})}
-\StringTok{            local area = 2.0 * interface.node.area(node)}
-\StringTok{            local norm = zone.face.normal(inter.node.target.zone(node),inter.node.target.face(node))}
-\StringTok{            local xnstress = inter.node.stress.normal(node) * norm{-}\textgreater{}x * {-}1.0}
-\StringTok{            local xsstress = inter.node.stress.shear.x(node)}
-\StringTok{            accum = accum + (xnstress + xsstress) *  area}
-\StringTok{        end\_loop}
-\StringTok{        local xdis = gp.disp.x(level(\textquotesingle{}gp\textquotesingle{}))}
-\StringTok{        total = total + accum}
-\StringTok{        table(string(key),xdis) = accum/level(\textquotesingle{}length\textquotesingle{})}
-\StringTok{    end\_loop}
-\StringTok{    tot\_reac = total}
-\StringTok{end}
-\StringTok{"""}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED DEFINING ALL FISH FUNCTIONS ========        ========"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{some-code}{%
-\section{Some Code}\label{some-code}}
-
-Properties may be specified for each type of physical item, and will be
-inherited automatically by the associated component objects. For
-example, the command
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{struct cable }\BuiltInTok{property}\NormalTok{ grout}\OperatorTok{{-}}\NormalTok{friction}\OperatorTok{=}\FloatTok{30.0} \BuiltInTok{range} \BuiltInTok{id}\OperatorTok{=}\DecValTok{3}
-\end{Highlighting}
-\end{Shaded}
-
-will assign a grout friction angle of 30 degrees to all cable elements
-thar are part of the cable with an ID number of 3, whereas the command
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{struct cable }\BuiltInTok{property}\NormalTok{ grout}\OperatorTok{{-}}\NormalTok{friction}\OperatorTok{=}\FloatTok{30.0} \BuiltInTok{range}\NormalTok{ component}\OperatorTok{{-}}\BuiltInTok{id}\OperatorTok{=}\DecValTok{3}
-\end{Highlighting}
-\end{Shaded}
-
-will assign a grout friction angle of 30 degrees to the single cable
-element with a component-ID number of 3.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{" GROUPS AND MASK ARRAYS "}
-\NormalTok{it.command(}\StringTok{"zone group }\CharTok{\textbackslash{}"}\StringTok{lower}\CharTok{\textbackslash{}"}\StringTok{ range position{-}z 0 5"}\NormalTok{)}
-\NormalTok{za.in\_group(}\StringTok{"lower"}\NormalTok{)}
-\NormalTok{za.in\_group(}\StringTok{"lower"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in lower group."}
-\NormalTok{corner\_mask }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (x}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{, y}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{, z}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{))}
-\NormalTok{za.set\_group(corner\_mask, }\StringTok{"corner"}\NormalTok{, }\StringTok{"geometry"}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{ za.in\_group(}\StringTok{"corner"}\NormalTok{, }\StringTok{"geometry"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in corner group."}
-\CommentTok{" GRIDPOINTS ARRAY FUNCTIONS "}
-\NormalTok{gpos }\OperatorTok{=}\NormalTok{ gpa.pos()}
-\NormalTok{gx, gy, gz }\OperatorTok{=}\NormalTok{ gpos.T}
-\BuiltInTok{print}\NormalTok{ gz}
-\NormalTok{f }\OperatorTok{=}\NormalTok{ gpa.fixity()}
-\BuiltInTok{print}\NormalTok{ f}
-\NormalTok{f[:,][gz}\OperatorTok{==}\DecValTok{0}\NormalTok{] }\OperatorTok{=} \VariableTok{True}\NormalTok{, }\VariableTok{True}\NormalTok{, }\VariableTok{True}
-\BuiltInTok{print}\NormalTok{ f}
-\NormalTok{gpa.set\_fixity(f)}
-\NormalTok{top\_gridpoints }\OperatorTok{=}\NormalTok{ gz}\OperatorTok{==}\DecValTok{10}
-\NormalTok{radial\_distance }\OperatorTok{=}\NormalTok{ np.sqrt((gx}\OperatorTok{{-}}\DecValTok{5}\NormalTok{)}\OperatorTok{**}\DecValTok{2}\OperatorTok{+}\NormalTok{(gy}\OperatorTok{{-}}\DecValTok{5}\NormalTok{)}\OperatorTok{**}\DecValTok{2}\NormalTok{)}
-\NormalTok{central\_gridpoints }\OperatorTok{=}\NormalTok{ radial\_distance }\OperatorTok{\textless{}} \DecValTok{5}
-\NormalTok{mask }\OperatorTok{=}\NormalTok{ np.logical\_and(top\_gridpoints, central\_gridpoints)}
-\BuiltInTok{print} \StringTok{"boundary load applied to }\SpecialCharTok{\{\}}\StringTok{ gridpoints"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(mask.}\BuiltInTok{sum}\NormalTok{())}
-\NormalTok{fapp }\OperatorTok{=}\NormalTok{ gpa.force\_app()}
-\BuiltInTok{print}\NormalTok{ fapp}
-\NormalTok{fapp[:,}\DecValTok{2}\NormalTok{] }\OperatorTok{=}\NormalTok{ mask}\OperatorTok{*}\FloatTok{1e6}\OperatorTok{*}\NormalTok{(}\FloatTok{5.0}\OperatorTok{{-}}\NormalTok{radial\_distance)}\OperatorTok{/}\FloatTok{5.0}
-\NormalTok{gpa.set\_force\_app(fapp)}
-\BuiltInTok{print} \StringTok{"zone centroids: "}
-\BuiltInTok{print}\NormalTok{ za.pos()}
-\NormalTok{za.gridpoints()}
-\NormalTok{za.faces()}
-\NormalTok{za.ids()}
-\BuiltInTok{print}\NormalTok{ za.neighbors()}
-\CommentTok{" =================RESULTS=================== "}
-\NormalTok{it.command(}\StringTok{"model solve"}\NormalTok{)}
-\BuiltInTok{print} \StringTok{"gridpoint displacements:"}
-\BuiltInTok{print}\NormalTok{ gpa.disp()}
-\BuiltInTok{print} \StringTok{"gridpoint displacement magnitudes: "}
-\NormalTok{mag }\OperatorTok{=}\NormalTok{ np.linalg.norm(gpa.disp(), axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{ mag}
-\NormalTok{max\_index }\OperatorTok{=}\NormalTok{ np.argmax(mag)}
-\BuiltInTok{print} \StringTok{"Maximum displacement: }\SpecialCharTok{\{\}}\StringTok{ at location }\SpecialCharTok{\{\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(gpa.disp()[max\_index],}
-\NormalTok{                                              gpa.pos()[max\_index])}
-\BuiltInTok{print} \StringTok{"Vertical displacement along the vertical line x=5, y=5: from z=0 to z=10"}
-\BuiltInTok{print}\NormalTok{ gpa.disp()[np.logical\_and(gx}\OperatorTok{==}\DecValTok{5}\NormalTok{, gy}\OperatorTok{==}\DecValTok{5}\NormalTok{)][:,}\DecValTok{2}\NormalTok{]}
-\NormalTok{za.stress()}
-\NormalTok{za.stress\_flat()}
-\CommentTok{" =========REFERENCE EXAMPLES================ "}
-\CommentTok{""" Some Numpy Operation Examples}
-\CommentTok{np.array([1,2,3,4,5])}
-\CommentTok{np.linspace(0,1,15)}
-\CommentTok{np.zeros((4,4))}
-\CommentTok{a = np.linspace(0,1,15)}
-\CommentTok{b = np.ones\_like(a)}
-\CommentTok{np.sin(a)}
-\CommentTok{print a[0]}
-\CommentTok{a[0] = 20.2}
-\CommentTok{print a}
-\CommentTok{c = np.array(((1,2,3),(4,5,6),(7,8,9),(10,11,12)))}
-\CommentTok{print c}
-\CommentTok{c[0][0]}
-\CommentTok{c[:,0]}
-\CommentTok{"""}
-\CommentTok{""" SOME GRIDPOINTS EXAMPLES}
-\CommentTok{z = it.zone.near((5,5,5))}
-\CommentTok{print "central zone id: \{\}, position: \{\}".format(z.id(), z.pos())}
-
-\CommentTok{for gp in z.gridpoints():}
-\CommentTok{    print "gridpoint with id: \{\} at \{\}".format(gp.id(), gp.pos())}
-\CommentTok{"""}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{interface-1}{%
-\section{Interface}\label{interface-1}}
-
-Interfaces are most often created with the zone interface create by-face
-command:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{zone interface }\StringTok{\textquotesingle{}flt\textquotesingle{}}\NormalTok{ create by}\OperatorTok{{-}}\NormalTok{face separate }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\DecValTok{5}
-\NormalTok{zone interface }\StringTok{\textquotesingle{}flt\textquotesingle{}}\NormalTok{ node }\BuiltInTok{property}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1e8}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1e8}
-\end{Highlighting}
-\end{Shaded}
-
-This command creates an interface named flt by separating all zone faces
-found at z=5 and placing interface elements and nodes on one side.
-Contacts are found (and forces generated) by interface nodes coming into
-contact with zone surface faces that are not part of the interface
-itself.
-
-\begin{figure}[H]
-\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-74}
-\end{figure}
-
-Every reference to an interface uses a name (like the table command) to
-indicate which interface is being referred to
-
-Interfaces in FLAC3D are one-sided objects. Interface elements are (in
-general) created attached to zone surface faces, which in turn create
-interface nodes. All contact detection is between interface nodes and
-zone surface faces.
-
-Most commonly, interfaces need to be created starting with a mesh that
-is continuous. In that case, it is easiest to separate the mesh and
-create the interfaces all in one command using the separate keyword (as
-shown in the example above).
-
-The new-side-origin keyword can be used to determine which side of the
-separation interface elements are applied to. The side opposite the
-location of the origin will be selected. In the example above, to select
-the other side, change the command to
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{zone interface }\StringTok{\textquotesingle{}flt\textquotesingle{}}\NormalTok{ create by}\OperatorTok{{-}}\NormalTok{face separate new}\OperatorTok{{-}}\NormalTok{side}\OperatorTok{{-}}\NormalTok{origin (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{) ...}
-\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\DecValTok{5}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{penetration}{%
-\subsection{Penetration}\label{penetration}}
-
-the calculation of normal stress due to interface penetration is
-absolute instead of incremental. This means that moving a gridpoint
-relative to an interface in the normal direction will have an immediate
-effect on the normal stress calculated. This is not true of accumulated
-shear stress, which remains incremental.
-
-In small-strain mode, gridpoints do not actually move their location in
-response to accumulated velocities.
-
-small-displacement" field. is a vector field that is accumulated from
-the velocity field every step in small-strain mode only. For the
-purposes of calculating interface penetration, a gridpoint location is
-based on the current location plus the small-strain displacement. The
-smallstrain displacement may be initialized using the zone gridpoint
-initialize displacement-small command, and this is sometimes useful to
-reset the effective penetration of an interface after some grid motion.
-To initialize interface stresses without actually moving gridpoints, we
-introduce a normal stress increment that is added to the normal stress
-calculated from absolute penetration. It is this value that is set when
-the zone interface node initialize-stresses command is given. It can
-also be set explicitly using zone interface node
-stress-normal-increment.
-
-Spatial Variation and Randomness of Property Distribution
-
-Material properties can be specified to adjust or to vary as a function
-of grid position. In fact, a different property can be assigned to every
-zone in a FLAC3D model, regardless of model size. There are two commands
-avialable in FLAC3D to specfiy material properties. The first, zone
-property, allows multiple properties to be specified in a single
-command. This is convenient to completely specify properties in
-different regions, where that property does not vary within that region.
-The second can only specify one property at a time, but has optional
-keywords that allow the property value to be automatically varied in
-space. This is the zone property-distribution command. Among the
-available keywords are add, multiply, gradient, and vary, which can be
-used to provide fixed or linear variations of properties with position.
-For example, the following command provides a linear variation of
-cohesion in the x-direction:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{zone }\BuiltInTok{property}\OperatorTok{{-}}\NormalTok{distribution cohesion }\FloatTok{1e6}\NormalTok{ gradient (}\OperatorTok{{-}}\FloatTok{1e5}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-An initial profile of a property can also be assigned via FISH. With
-FLAC3D, it is also possible to study the influence of nonhomogeneity in
-a material. Any type of statistical property distribution can be
-introduced, as each element may have a unique property value. Two
-optional keywords are available to apply a random distribution of a
-selected property with the zone propertydistribution command. The
-keyword deviation-gaussian assumes a normal (Gaussian) distribution for
-the property, with a mean value, v, and standard deviation, s. The
-keyword deviation-uniform assumes a uniform distribution with mean
-value, v, and standard deviation, s. Be careful to ensure that
-properties do not acquire negative values if s is large. As an example,
-the following command would give a mean friction angle of 40° with a
-standard deviation of ±5\%: zone property-distribution friction 45
-deviation-gaussian 2 Use of the variation keywords in any command (not
-just for property variation) is defined in the topic Value Modifiers
-(Add, Multiply, Gradient, Vary).
-
-\hypertarget{kaist-model-1}{%
-\section{KAIST Model}\label{kaist-model-1}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ itasca }\ImportTok{as}\NormalTok{ it}
-\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
-\NormalTok{np.set\_printoptions(threshold}\OperatorTok{=}\DecValTok{20}\NormalTok{)}
-\NormalTok{it.command(}\StringTok{"python{-}reset{-}state false"}\NormalTok{)}
-\ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ zonearray }\ImportTok{as}\NormalTok{ za}
-\ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ gridpointarray }\ImportTok{as}\NormalTok{ gpa}
-
-\CommentTok{\# PARAMETERS \#}
-
-\NormalTok{\_D\_shaft }\OperatorTok{=} \DecValTok{1}
-\NormalTok{\_H\_shaft }\OperatorTok{=} \FloatTok{7.45}
-\NormalTok{\_T\_plate }\OperatorTok{=} \FloatTok{1.5}
-\NormalTok{\_B\_footing }\OperatorTok{=} \FloatTok{3.25}
-\NormalTok{\_D\_footing }\OperatorTok{=}\NormalTok{ \_H\_shaft }\OperatorTok{+}\NormalTok{ \_T\_plate}
-\NormalTok{\_B\_soil }\OperatorTok{=}\NormalTok{ \_B\_footing}\OperatorTok{*}\DecValTok{5}
-\NormalTok{\_D\_soil }\OperatorTok{=}\NormalTok{ \_D\_footing}\OperatorTok{+}\DecValTok{3}
-
-\NormalTok{\_radial }\OperatorTok{=} \DecValTok{50}
-\NormalTok{\_perimeter }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
-\NormalTok{\_axial }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
-\NormalTok{\_outer }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
-
-\NormalTok{\_bulk }\OperatorTok{=} \FloatTok{13.9e9}
-\NormalTok{\_shear }\OperatorTok{=} \FloatTok{10.4e9}
-
-\NormalTok{\_E\_o }\OperatorTok{=} \FloatTok{1e7}
-\NormalTok{\_const }\OperatorTok{=} \FloatTok{1e8}
-\NormalTok{\_poisson }\OperatorTok{=} \FloatTok{0.25}
-
-\CommentTok{\# ZONE \#}
-
-\NormalTok{command\_zone }\OperatorTok{=} \StringTok{"""}
-\StringTok{model new}
-\StringTok{z crea r{-}t p 0 (0,0,0) ...}
-\StringTok{           p 1 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,0) ... }
-\StringTok{           p 2 (0,}\SpecialCharTok{\{D\_soil\}}\StringTok{,0) ...}
-\StringTok{           p 3 (0,0,}\SpecialCharTok{\{B\_soil\}}\StringTok{) ...}
-\StringTok{           p 4 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,0) ...}
-\StringTok{           p 5 (0,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{) ...}
-\StringTok{           p 6 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,}\SpecialCharTok{\{B\_soil\}}\StringTok{) ...}
-\StringTok{           p 7 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{) ...}
-\StringTok{           p 8 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,0) ...}
-\StringTok{           p 9 (0,0,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
-\StringTok{           p 10 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,0) ...}
-\StringTok{           p 11 (0,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
-\StringTok{           p 12 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
-\StringTok{           p 13 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
-\StringTok{           size }\SpecialCharTok{\{radial\}}\StringTok{ }\SpecialCharTok{\{axial\}}\StringTok{ }\SpecialCharTok{\{perimeter\}}\StringTok{ }\SpecialCharTok{\{outer\}}\StringTok{ ...}
-\StringTok{           rat 1 1 1 1.01 ...}
-\StringTok{           fill}
-\StringTok{"""}
-
-\NormalTok{command }\OperatorTok{=}\NormalTok{ command\_zone.}\BuiltInTok{format}\NormalTok{(}
-\NormalTok{B\_footing }\OperatorTok{=}\NormalTok{ \_B\_footing,}
-\NormalTok{B\_soil }\OperatorTok{=}\NormalTok{ \_B\_soil,}
-\NormalTok{D\_soil }\OperatorTok{=}\NormalTok{ \_D\_soil,}
-\NormalTok{radial}\OperatorTok{=}\NormalTok{\_radial,}
-\NormalTok{axial }\OperatorTok{=}\NormalTok{ \_axial,}
-\NormalTok{perimeter }\OperatorTok{=}\NormalTok{ \_perimeter,}
-\NormalTok{outer }\OperatorTok{=}\NormalTok{ \_outer)}
-
-\NormalTok{it.command(command)}
-
-\CommentTok{\# GROUP \#}
-
-\NormalTok{p }\OperatorTok{=}\NormalTok{ za.pos()}
-\NormalTok{x,y,z }\OperatorTok{=}\NormalTok{ p.T}
-\BuiltInTok{print}\NormalTok{(it.zone.count(), }\StringTok{"zones in whole model"}\NormalTok{)}
-
-\NormalTok{shaft }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (np.sqrt(x}\OperatorTok{**}\DecValTok{2}\OperatorTok{+}\NormalTok{z}\OperatorTok{**}\DecValTok{2}\NormalTok{)}\OperatorTok{\textless{}}\NormalTok{\_D\_shaft, y}\OperatorTok{\textless{}}\NormalTok{\_H\_shaft))}
-\NormalTok{za.set\_group(shaft, }\StringTok{"shaft"}\NormalTok{) }\CommentTok{\# set the zones with shaft = true have "shaft" and "geometry"}
-\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"shaft"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in shaft group."}\NormalTok{) }\CommentTok{\#output how many zones are in the corner group}
-
-\NormalTok{plate }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (x}\OperatorTok{\textless{}}\NormalTok{\_B\_footing,z}\OperatorTok{\textless{}}\NormalTok{\_B\_footing, y}\OperatorTok{\textgreater{}}\NormalTok{\_H\_shaft,y}\OperatorTok{\textless{}}\NormalTok{\_D\_footing))}
-\NormalTok{za.set\_group(plate, }\StringTok{"plate"}\NormalTok{) }\CommentTok{\# set the zones with plate = true have "plate" and "geometry"}
-\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"plate"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in plate group."}\NormalTok{) }\CommentTok{\#output how many zones are in the corner group}
-
-\CommentTok{\# CONSTITUTIVE MODEL \#}
-
-\CommentTok{\#it.command("""}
-\CommentTok{\#zone cmodel assign strain{-}softening range group "Radial Tunnel1"}
-\CommentTok{\#zone property density 2500 bulk 2e8 shear 1e8 range group "Radial Tunnel1"}
-\CommentTok{\#zone property cohesion 2e6 friction 45 tension 2e5 dilation 10 range group "Radial Tunnel1"}
-\CommentTok{\#zone property table{-}friction \textquotesingle{}fri\textquotesingle{} table{-}cohesion \textquotesingle{}coh\textquotesingle{} table{-}dilation \textquotesingle{}dil\textquotesingle{} range group "Radial Tunnel1"}
-\CommentTok{\#table \textquotesingle{}fri\textquotesingle{} add (0, 45) (.05, 42) (.1, 40) (1, 40)}
-\CommentTok{\#table \textquotesingle{}coh\textquotesingle{} add (0,2e6) (.05,1e6) (.1,5e5) (1,5e5) }
-\CommentTok{\#table \textquotesingle{}dil\textquotesingle{} add (0, 10) (.05,  3) (.1,  0)}
-\CommentTok{\#""")}
-
-\NormalTok{it.command(}\StringTok{"""}
-\StringTok{zone cmodel assign elastic range group "Radial Tunnel1"}
-\StringTok{zone cmodel assign elastic range group \textquotesingle{}shaft\textquotesingle{}}
-\StringTok{zone cmodel assign elastic range group \textquotesingle{}plate\textquotesingle{}}
-
-\StringTok{fish define fname(E\_o,const)}
-\StringTok{loop foreach pnt zone.list}
-\StringTok{z\_depth = zone.pos.y(pnt)}
-\StringTok{E = E\_o+const*math.sqrt(z\_depth)}
-\StringTok{zone.prop(pnt,\textquotesingle{}young\textquotesingle{})=E}
-\StringTok{end\_loop}
-\StringTok{end}
-\StringTok{@fname(}\SpecialCharTok{\{E\_o\_\}}\StringTok{,}\SpecialCharTok{\{const\_\}}\StringTok{)}
-\StringTok{zone property poisson }\SpecialCharTok{\{poisson\_\}}
-\StringTok{plot item create zone contour property name \textquotesingle{}young\textquotesingle{}}
-\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(E\_o\_}\OperatorTok{=}\NormalTok{\_E\_o,const\_}\OperatorTok{=}\NormalTok{\_const,poisson\_}\OperatorTok{=}\NormalTok{\_poisson))}
-
-\NormalTok{it.command(}\StringTok{"""}
-\StringTok{zone property bulk }\SpecialCharTok{\{bulk\}}\StringTok{  shear }\SpecialCharTok{\{shear\}}\StringTok{ range group \textquotesingle{}shaft\textquotesingle{}}
-\StringTok{zone property bulk }\SpecialCharTok{\{bulk\}}\StringTok{  shear }\SpecialCharTok{\{shear\}}\StringTok{ range group \textquotesingle{}plate\textquotesingle{}}
-\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(bulk}\OperatorTok{=}\NormalTok{\_bulk,shear}\OperatorTok{=}\NormalTok{\_shear))}
-
-\CommentTok{\#soil = za.in\_group("Radial Tunnel1")}
-\CommentTok{\# list(gp.list)}
-\CommentTok{\# gp.isgroup(::gp.list,"North")}
-\CommentTok{\# gp.force.unbal(::ad)}
-\CommentTok{\# [ad = list(gp.list)(gp.isgroup(::gp.list,"North))]}
-\end{Highlighting}
-\end{Shaded}
-
-\newpage
-
 \hypertarget{theory}{%
 \chapter{Theory}\label{theory}}
 
@@ -2524,8 +2092,8 @@ location and specify two separate IDs. Forces and moments will not be
 transferred btw adjoining elements; instead, only forces wil be
 transmitted into surrounding zone at the common location.
 
-\hypertarget{interface-2}{%
-\section{Interface}\label{interface-2}}
+\hypertarget{interface-1}{%
+\section{Interface}\label{interface-1}}
 
 There are several instances in geomechanics in which it is desirable to
 represent planes on which sliding or separation can occur. For
@@ -2876,8 +2444,8 @@ specific problem.
 \hypertarget{command}{%
 \chapter{Command}\label{command}}
 
-\hypertarget{interface-3}{%
-\section{Interface}\label{interface-3}}
+\hypertarget{interface-2}{%
+\section{Interface}\label{interface-2}}
 
 \hypertarget{zone-face-group}{%
 \subsection{zone face group}\label{zone-face-group}}
@@ -3077,8 +2645,890 @@ By contrast, repeated uses of a group within a range will return the
 same objects each time. The group itself must be altered to return
 different objects.
 
-\hypertarget{pull-test}{%
-\chapter{Pull-Test}\label{pull-test}}
+\hypertarget{define-fish-functions}{%
+\section{Define Fish functions}\label{define-fish-functions}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# define make\_pydata, output\_structure, tot\_reac \#}
+\CommentTok{\# =========================================================}
+\CommentTok{\#;call \textquotesingle{}p{-}y\textquotesingle{} suppress ; Calculates p{-}y curve for pile, when tot\_reac is called}
+\CommentTok{\#; Calculate PY Curves at equidistant locations along pile}
+\CommentTok{\#; Stored in map called pile, key = 1.0*y positions rounded to integer}
+\CommentTok{\#;    value = map, key \textquotesingle{}y\textquotesingle{} = y{-}position}
+\CommentTok{\#;                     \textquotesingle{}length\textquotesingle{} = length of ownership of this segment}
+\CommentTok{\#;                     \textquotesingle{}gp\textquotesingle{} = Gridpoint nearest (0,y,0)}
+\CommentTok{\#;                     \textquotesingle{}nodes\textquotesingle{} = map of interface nodes at that position, key order entered.}
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{fish define make\_pydata}
+\StringTok{    global pile = map}
+\StringTok{    ; Build list of nodes}
+\StringTok{    loop foreach local ipnt inter.list}
+\StringTok{        loop foreach node inter.node.list(ipnt)}
+\StringTok{            local y = inter.node.pos.y(node)}
+\StringTok{            local key = math.round(inter.node.pos.y(node) * 1.0)}
+\StringTok{            if map.has(pile,key) == false then}
+\StringTok{                local level = map}
+\StringTok{                local nodes = map}
+\StringTok{                level(\textquotesingle{}y\textquotesingle{}) = y}
+\StringTok{                level(\textquotesingle{}gp\textquotesingle{}) = gp.near(0,y,0,\textquotesingle{}pile\textquotesingle{})}
+\StringTok{                level(\textquotesingle{}nodes\textquotesingle{}) = nodes}
+\StringTok{                level(\textquotesingle{}length\textquotesingle{}) = 0.0}
+\StringTok{                pile(key) = level}
+\StringTok{            endif}
+\StringTok{            level = pile(key)}
+\StringTok{            nodes = level(\textquotesingle{}nodes\textquotesingle{})}
+\StringTok{            nodes(map.size(nodes)) = node}
+\StringTok{            level(\textquotesingle{}nodes\textquotesingle{}) = nodes}
+\StringTok{            pile(key) = level}
+\StringTok{        end\_loop}
+\StringTok{    end\_loop}
+\StringTok{    ; Calculate length of ownership of each segment}
+\StringTok{    local prev\_key = \textquotesingle{}0\textquotesingle{}}
+\StringTok{    loop foreach key map.keys(pile)}
+\StringTok{        if type.name(prev\_key) == \textquotesingle{}integer\textquotesingle{} then}
+\StringTok{            local levelp = pile(prev\_key)}
+\StringTok{            local leveln = pile(key)}
+\StringTok{            local dist = math.abs(gp.pos.y(levelp(\textquotesingle{}gp\textquotesingle{})) {-} gp.pos.y(leveln(\textquotesingle{}gp\textquotesingle{}))) * 0.5}
+\StringTok{            levelp(\textquotesingle{}length\textquotesingle{}) = levelp(\textquotesingle{}length\textquotesingle{}) + dist}
+\StringTok{            leveln(\textquotesingle{}length\textquotesingle{}) = leveln(\textquotesingle{}length\textquotesingle{}) + dist}
+\StringTok{            pile(prev\_key) = levelp}
+\StringTok{            pile(key) = leveln}
+\StringTok{        endif}
+\StringTok{        prev\_key = key}
+\StringTok{    end\_loop}
+\StringTok{end}
+
+\StringTok{; Output resulting data structure...}
+\StringTok{fish define output\_structure}
+\StringTok{    loop foreach local level pile}
+\StringTok{        io.out(\textquotesingle{}Y{-}Position \textquotesingle{} + string(level(\textquotesingle{}y\textquotesingle{})))}
+\StringTok{        io.out(\textquotesingle{}Length \textquotesingle{} + string(level(\textquotesingle{}length\textquotesingle{})))}
+\StringTok{        io.out(\textquotesingle{}GP \textquotesingle{} + string(gp.id(level(\textquotesingle{}gp\textquotesingle{}))))}
+\StringTok{        local nodelist = \textquotesingle{}\textquotesingle{}}
+\StringTok{        loop foreach local node level(\textquotesingle{}nodes\textquotesingle{})}
+\StringTok{            nodelist = nodelist + \textquotesingle{} \textquotesingle{} + string(interface.node.id(node))}
+\StringTok{        end\_loop}
+\StringTok{        io.out(\textquotesingle{}Nodes\textquotesingle{}+nodelist)}
+\StringTok{    end\_loop}
+\StringTok{end}
+
+\StringTok{fish define tot\_reac}
+\StringTok{    local total = 0.0}
+\StringTok{    loop foreach local key map.keys(pile)}
+\StringTok{        local level = pile(key)}
+\StringTok{        local accum = 0.0}
+\StringTok{        loop foreach local node level(\textquotesingle{}nodes\textquotesingle{})}
+\StringTok{            local area = 2.0 * interface.node.area(node)}
+\StringTok{            local norm = zone.face.normal(inter.node.target.zone(node),inter.node.target.face(node))}
+\StringTok{            local xnstress = inter.node.stress.normal(node) * norm{-}\textgreater{}x * {-}1.0}
+\StringTok{            local xsstress = inter.node.stress.shear.x(node)}
+\StringTok{            accum = accum + (xnstress + xsstress) *  area}
+\StringTok{        end\_loop}
+\StringTok{        local xdis = gp.disp.x(level(\textquotesingle{}gp\textquotesingle{}))}
+\StringTok{        total = total + accum}
+\StringTok{        table(string(key),xdis) = accum/level(\textquotesingle{}length\textquotesingle{})}
+\StringTok{    end\_loop}
+\StringTok{    tot\_reac = total}
+\StringTok{end}
+\StringTok{"""}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED DEFINING ALL FISH FUNCTIONS ========        ========"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{some-code}{%
+\section{Some Code}\label{some-code}}
+
+Properties may be specified for each type of physical item, and will be
+inherited automatically by the associated component objects. For
+example, the command
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{struct cable }\BuiltInTok{property}\NormalTok{ grout}\OperatorTok{{-}}\NormalTok{friction}\OperatorTok{=}\FloatTok{30.0} \BuiltInTok{range} \BuiltInTok{id}\OperatorTok{=}\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+will assign a grout friction angle of 30 degrees to all cable elements
+thar are part of the cable with an ID number of 3, whereas the command
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{struct cable }\BuiltInTok{property}\NormalTok{ grout}\OperatorTok{{-}}\NormalTok{friction}\OperatorTok{=}\FloatTok{30.0} \BuiltInTok{range}\NormalTok{ component}\OperatorTok{{-}}\BuiltInTok{id}\OperatorTok{=}\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+will assign a grout friction angle of 30 degrees to the single cable
+element with a component-ID number of 3.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{" GROUPS AND MASK ARRAYS "}
+\NormalTok{it.command(}\StringTok{"zone group }\CharTok{\textbackslash{}"}\StringTok{lower}\CharTok{\textbackslash{}"}\StringTok{ range position{-}z 0 5"}\NormalTok{)}
+\NormalTok{za.in\_group(}\StringTok{"lower"}\NormalTok{)}
+\NormalTok{za.in\_group(}\StringTok{"lower"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in lower group."}
+\NormalTok{corner\_mask }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (x}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{, y}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{, z}\OperatorTok{\textless{}}\DecValTok{3}\NormalTok{))}
+\NormalTok{za.set\_group(corner\_mask, }\StringTok{"corner"}\NormalTok{, }\StringTok{"geometry"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{ za.in\_group(}\StringTok{"corner"}\NormalTok{, }\StringTok{"geometry"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in corner group."}
+\CommentTok{" GRIDPOINTS ARRAY FUNCTIONS "}
+\NormalTok{gpos }\OperatorTok{=}\NormalTok{ gpa.pos()}
+\NormalTok{gx, gy, gz }\OperatorTok{=}\NormalTok{ gpos.T}
+\BuiltInTok{print}\NormalTok{ gz}
+\NormalTok{f }\OperatorTok{=}\NormalTok{ gpa.fixity()}
+\BuiltInTok{print}\NormalTok{ f}
+\NormalTok{f[:,][gz}\OperatorTok{==}\DecValTok{0}\NormalTok{] }\OperatorTok{=} \VariableTok{True}\NormalTok{, }\VariableTok{True}\NormalTok{, }\VariableTok{True}
+\BuiltInTok{print}\NormalTok{ f}
+\NormalTok{gpa.set\_fixity(f)}
+\NormalTok{top\_gridpoints }\OperatorTok{=}\NormalTok{ gz}\OperatorTok{==}\DecValTok{10}
+\NormalTok{radial\_distance }\OperatorTok{=}\NormalTok{ np.sqrt((gx}\OperatorTok{{-}}\DecValTok{5}\NormalTok{)}\OperatorTok{**}\DecValTok{2}\OperatorTok{+}\NormalTok{(gy}\OperatorTok{{-}}\DecValTok{5}\NormalTok{)}\OperatorTok{**}\DecValTok{2}\NormalTok{)}
+\NormalTok{central\_gridpoints }\OperatorTok{=}\NormalTok{ radial\_distance }\OperatorTok{\textless{}} \DecValTok{5}
+\NormalTok{mask }\OperatorTok{=}\NormalTok{ np.logical\_and(top\_gridpoints, central\_gridpoints)}
+\BuiltInTok{print} \StringTok{"boundary load applied to }\SpecialCharTok{\{\}}\StringTok{ gridpoints"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(mask.}\BuiltInTok{sum}\NormalTok{())}
+\NormalTok{fapp }\OperatorTok{=}\NormalTok{ gpa.force\_app()}
+\BuiltInTok{print}\NormalTok{ fapp}
+\NormalTok{fapp[:,}\DecValTok{2}\NormalTok{] }\OperatorTok{=}\NormalTok{ mask}\OperatorTok{*}\FloatTok{1e6}\OperatorTok{*}\NormalTok{(}\FloatTok{5.0}\OperatorTok{{-}}\NormalTok{radial\_distance)}\OperatorTok{/}\FloatTok{5.0}
+\NormalTok{gpa.set\_force\_app(fapp)}
+\BuiltInTok{print} \StringTok{"zone centroids: "}
+\BuiltInTok{print}\NormalTok{ za.pos()}
+\NormalTok{za.gridpoints()}
+\NormalTok{za.faces()}
+\NormalTok{za.ids()}
+\BuiltInTok{print}\NormalTok{ za.neighbors()}
+\CommentTok{" =================RESULTS=================== "}
+\NormalTok{it.command(}\StringTok{"model solve"}\NormalTok{)}
+\BuiltInTok{print} \StringTok{"gridpoint displacements:"}
+\BuiltInTok{print}\NormalTok{ gpa.disp()}
+\BuiltInTok{print} \StringTok{"gridpoint displacement magnitudes: "}
+\NormalTok{mag }\OperatorTok{=}\NormalTok{ np.linalg.norm(gpa.disp(), axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{ mag}
+\NormalTok{max\_index }\OperatorTok{=}\NormalTok{ np.argmax(mag)}
+\BuiltInTok{print} \StringTok{"Maximum displacement: }\SpecialCharTok{\{\}}\StringTok{ at location }\SpecialCharTok{\{\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(gpa.disp()[max\_index],}
+\NormalTok{                                              gpa.pos()[max\_index])}
+\BuiltInTok{print} \StringTok{"Vertical displacement along the vertical line x=5, y=5: from z=0 to z=10"}
+\BuiltInTok{print}\NormalTok{ gpa.disp()[np.logical\_and(gx}\OperatorTok{==}\DecValTok{5}\NormalTok{, gy}\OperatorTok{==}\DecValTok{5}\NormalTok{)][:,}\DecValTok{2}\NormalTok{]}
+\NormalTok{za.stress()}
+\NormalTok{za.stress\_flat()}
+\CommentTok{" =========REFERENCE EXAMPLES================ "}
+\CommentTok{""" Some Numpy Operation Examples}
+\CommentTok{np.array([1,2,3,4,5])}
+\CommentTok{np.linspace(0,1,15)}
+\CommentTok{np.zeros((4,4))}
+\CommentTok{a = np.linspace(0,1,15)}
+\CommentTok{b = np.ones\_like(a)}
+\CommentTok{np.sin(a)}
+\CommentTok{print a[0]}
+\CommentTok{a[0] = 20.2}
+\CommentTok{print a}
+\CommentTok{c = np.array(((1,2,3),(4,5,6),(7,8,9),(10,11,12)))}
+\CommentTok{print c}
+\CommentTok{c[0][0]}
+\CommentTok{c[:,0]}
+\CommentTok{"""}
+\CommentTok{""" SOME GRIDPOINTS EXAMPLES}
+\CommentTok{z = it.zone.near((5,5,5))}
+\CommentTok{print "central zone id: \{\}, position: \{\}".format(z.id(), z.pos())}
+
+\CommentTok{for gp in z.gridpoints():}
+\CommentTok{    print "gridpoint with id: \{\} at \{\}".format(gp.id(), gp.pos())}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{interface-3}{%
+\section{Interface}\label{interface-3}}
+
+Interfaces are most often created with the zone interface create by-face
+command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zone interface }\StringTok{\textquotesingle{}flt\textquotesingle{}}\NormalTok{ create by}\OperatorTok{{-}}\NormalTok{face separate }\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\DecValTok{5}
+\NormalTok{zone interface }\StringTok{\textquotesingle{}flt\textquotesingle{}}\NormalTok{ node }\BuiltInTok{property}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{normal }\FloatTok{1e8}\NormalTok{ stiffness}\OperatorTok{{-}}\NormalTok{shear }\FloatTok{1e8}
+\end{Highlighting}
+\end{Shaded}
+
+This command creates an interface named flt by separating all zone faces
+found at z=5 and placing interface elements and nodes on one side.
+Contacts are found (and forces generated) by interface nodes coming into
+contact with zone surface faces that are not part of the interface
+itself.
+
+\begin{figure}[H]
+\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-89}
+\end{figure}
+
+Every reference to an interface uses a name (like the table command) to
+indicate which interface is being referred to
+
+Interfaces in FLAC3D are one-sided objects. Interface elements are (in
+general) created attached to zone surface faces, which in turn create
+interface nodes. All contact detection is between interface nodes and
+zone surface faces.
+
+Most commonly, interfaces need to be created starting with a mesh that
+is continuous. In that case, it is easiest to separate the mesh and
+create the interfaces all in one command using the separate keyword (as
+shown in the example above).
+
+The new-side-origin keyword can be used to determine which side of the
+separation interface elements are applied to. The side opposite the
+location of the origin will be selected. In the example above, to select
+the other side, change the command to
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zone interface }\StringTok{\textquotesingle{}flt\textquotesingle{}}\NormalTok{ create by}\OperatorTok{{-}}\NormalTok{face separate new}\OperatorTok{{-}}\NormalTok{side}\OperatorTok{{-}}\NormalTok{origin (}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{) ...}
+\BuiltInTok{range}\NormalTok{ position}\OperatorTok{{-}}\NormalTok{z }\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{penetration}{%
+\subsection{Penetration}\label{penetration}}
+
+the calculation of normal stress due to interface penetration is
+absolute instead of incremental. This means that moving a gridpoint
+relative to an interface in the normal direction will have an immediate
+effect on the normal stress calculated. This is not true of accumulated
+shear stress, which remains incremental.
+
+In small-strain mode, gridpoints do not actually move their location in
+response to accumulated velocities.
+
+small-displacement" field. is a vector field that is accumulated from
+the velocity field every step in small-strain mode only. For the
+purposes of calculating interface penetration, a gridpoint location is
+based on the current location plus the small-strain displacement. The
+smallstrain displacement may be initialized using the zone gridpoint
+initialize displacement-small command, and this is sometimes useful to
+reset the effective penetration of an interface after some grid motion.
+To initialize interface stresses without actually moving gridpoints, we
+introduce a normal stress increment that is added to the normal stress
+calculated from absolute penetration. It is this value that is set when
+the zone interface node initialize-stresses command is given. It can
+also be set explicitly using zone interface node
+stress-normal-increment.
+
+Spatial Variation and Randomness of Property Distribution
+
+Material properties can be specified to adjust or to vary as a function
+of grid position. In fact, a different property can be assigned to every
+zone in a FLAC3D model, regardless of model size. There are two commands
+avialable in FLAC3D to specfiy material properties. The first, zone
+property, allows multiple properties to be specified in a single
+command. This is convenient to completely specify properties in
+different regions, where that property does not vary within that region.
+The second can only specify one property at a time, but has optional
+keywords that allow the property value to be automatically varied in
+space. This is the zone property-distribution command. Among the
+available keywords are add, multiply, gradient, and vary, which can be
+used to provide fixed or linear variations of properties with position.
+For example, the following command provides a linear variation of
+cohesion in the x-direction:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zone }\BuiltInTok{property}\OperatorTok{{-}}\NormalTok{distribution cohesion }\FloatTok{1e6}\NormalTok{ gradient (}\OperatorTok{{-}}\FloatTok{1e5}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+An initial profile of a property can also be assigned via FISH. With
+FLAC3D, it is also possible to study the influence of nonhomogeneity in
+a material. Any type of statistical property distribution can be
+introduced, as each element may have a unique property value. Two
+optional keywords are available to apply a random distribution of a
+selected property with the zone propertydistribution command. The
+keyword deviation-gaussian assumes a normal (Gaussian) distribution for
+the property, with a mean value, v, and standard deviation, s. The
+keyword deviation-uniform assumes a uniform distribution with mean
+value, v, and standard deviation, s. Be careful to ensure that
+properties do not acquire negative values if s is large. As an example,
+the following command would give a mean friction angle of 40° with a
+standard deviation of ±5\%: zone property-distribution friction 45
+deviation-gaussian 2 Use of the variation keywords in any command (not
+just for property variation) is defined in the topic Value Modifiers
+(Add, Multiply, Gradient, Vary).
+
+\newpage
+
+\hypertarget{kaist-model-code-for-recovery}{%
+\chapter{KAIST Model Code for Recovery}\label{kaist-model-code-for-recovery}}
+
+\hypertarget{version-16}{%
+\section{version 16}\label{version-16}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ itasca }\ImportTok{as}\NormalTok{ it}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\NormalTok{np.set\_printoptions(threshold}\OperatorTok{=}\DecValTok{20}\NormalTok{)}
+\NormalTok{it.command(}\StringTok{"python{-}reset{-}state false"}\NormalTok{)}
+\ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ zonearray }\ImportTok{as}\NormalTok{ za}
+\ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ gridpointarray }\ImportTok{as}\NormalTok{ gpa}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{program threads 128}
+\StringTok{"""}\NormalTok{)}
+
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\# PARAMETERS \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\CommentTok{\# Mesh Details}
+\NormalTok{\_radial }\OperatorTok{=} \DecValTok{20}
+\NormalTok{\_perimeter }\OperatorTok{=}\NormalTok{ \_radial}
+\NormalTok{\_axial }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
+\NormalTok{\_outer }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{\_radial}
+
+\CommentTok{\# Physical Constants}
+\NormalTok{\_gravity }\OperatorTok{=} \FloatTok{9.80665}
+\NormalTok{\_K }\OperatorTok{=} \FloatTok{0.318}
+
+\CommentTok{\# Dimensions}
+\NormalTok{\_D\_shaft }\OperatorTok{=} \FloatTok{1.0}
+\NormalTok{\_H\_shaft }\OperatorTok{=} \FloatTok{7.45}
+\NormalTok{\_T\_plate }\OperatorTok{=} \FloatTok{1.5}
+\NormalTok{\_B\_footing }\OperatorTok{=} \FloatTok{3.25}
+\NormalTok{\_D\_footing }\OperatorTok{=}\NormalTok{ \_H\_shaft }\OperatorTok{+}\NormalTok{ \_T\_plate}
+\NormalTok{\_B\_soil }\OperatorTok{=}\NormalTok{ \_B\_footing}\OperatorTok{*}\DecValTok{5}
+\NormalTok{\_D\_soil }\OperatorTok{=}\NormalTok{ \_D\_footing}\OperatorTok{+}\DecValTok{3}
+
+\CommentTok{\# Concrete Properties}
+\NormalTok{\_bulk }\OperatorTok{=} \FloatTok{13.9e9}
+\NormalTok{\_shear }\OperatorTok{=} \FloatTok{10.4e9}
+\CommentTok{\#\_bulk = 13.9e9}
+\CommentTok{\#\_shear = 10.4e9}
+\NormalTok{\_density\_concrete }\OperatorTok{=} \DecValTok{2400}
+
+\CommentTok{\# Soil Properties}
+\NormalTok{\_E\_o }\OperatorTok{=} \FloatTok{80e6}
+\NormalTok{\_const }\OperatorTok{=} \FloatTok{10e6}
+\NormalTok{\_poisson }\OperatorTok{=} \FloatTok{0.25}
+\NormalTok{\_density\_soil }\OperatorTok{=} \DecValTok{1530}
+
+\CommentTok{\# Interface Properties}
+\NormalTok{\_stiff\_norm }\OperatorTok{=} \FloatTok{1e10}
+\NormalTok{\_stiff\_shear }\OperatorTok{=} \FloatTok{1e10}
+
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\# ZONES \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"       ((((((((((((((((======== NEW RUN ========)))))))))))))))"}\NormalTok{)}
+
+\NormalTok{command\_zone }\OperatorTok{=} \StringTok{"""}
+\StringTok{model new}
+\StringTok{z crea r{-}t p 0 (0,0,0) ...}
+\StringTok{           p 1 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,0) ...}
+\StringTok{           p 2 (0,}\SpecialCharTok{\{D\_soil\}}\StringTok{,0) ...}
+\StringTok{           p 3 (0,0,}\SpecialCharTok{\{B\_soil\}}\StringTok{) ...}
+\StringTok{           p 4 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,0) ...}
+\StringTok{           p 5 (0,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{) ...}
+\StringTok{           p 6 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,}\SpecialCharTok{\{B\_soil\}}\StringTok{) ...}
+\StringTok{           p 7 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{) ...}
+\StringTok{           p 8 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,0) ...}
+\StringTok{           p 9 (0,0,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
+\StringTok{           p 10 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,0) ...}
+\StringTok{           p 11 (0,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
+\StringTok{           p 12 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
+\StringTok{           p 13 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
+\StringTok{           size }\SpecialCharTok{\{radial\}}\StringTok{ }\SpecialCharTok{\{axial\}}\StringTok{ }\SpecialCharTok{\{perimeter\}}\StringTok{ }\SpecialCharTok{\{outer\}}\StringTok{ ...}
+\StringTok{           rat 1 1 1 1.01 ...}
+\StringTok{           fill}
+\StringTok{"""}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"radial mesh number is "}\NormalTok{, \_radial)}
+\NormalTok{command }\OperatorTok{=}\NormalTok{ command\_zone.}\BuiltInTok{format}\NormalTok{(}
+\NormalTok{B\_footing }\OperatorTok{=}\NormalTok{ \_B\_footing,}
+\NormalTok{B\_soil }\OperatorTok{=}\NormalTok{ \_B\_soil,}
+\NormalTok{D\_soil }\OperatorTok{=}\NormalTok{ \_D\_soil,}
+\NormalTok{radial}\OperatorTok{=}\NormalTok{\_radial,}
+\NormalTok{axial }\OperatorTok{=}\NormalTok{ \_axial,}
+\NormalTok{perimeter }\OperatorTok{=}\NormalTok{ \_perimeter,}
+\NormalTok{outer }\OperatorTok{=}\NormalTok{ \_outer)}
+
+\NormalTok{it.command(command)}
+
+
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\# CONSTITUTIVE MODEL \#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone cmodel assign elastic range group "Radial Tunnel1"}
+
+\StringTok{fish define fname(E\_o,const)}
+\StringTok{loop foreach pnt zone.list}
+\StringTok{z\_depth = zone.pos.y(pnt)}
+\StringTok{E = E\_o+const*math.sqrt(z\_depth)}
+\StringTok{zone.prop(pnt,\textquotesingle{}young\textquotesingle{})=E}
+\StringTok{end\_loop}
+\StringTok{end}
+\StringTok{@fname(}\SpecialCharTok{\{E\_o\_\}}\StringTok{,}\SpecialCharTok{\{const\_\}}\StringTok{)}
+\StringTok{zone property poisson }\SpecialCharTok{\{poisson\_\}}\StringTok{ density }\SpecialCharTok{\{density\_soil\}}
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(E\_o\_}\OperatorTok{=}\NormalTok{\_E\_o,const\_}\OperatorTok{=}\NormalTok{\_const,poisson\_}\OperatorTok{=}\NormalTok{\_poisson,density\_soil}\OperatorTok{=}\NormalTok{\_density\_soil))}
+
+
+\CommentTok{\# GROUP \#}
+\NormalTok{p }\OperatorTok{=}\NormalTok{ za.pos()}
+\NormalTok{x,y,z }\OperatorTok{=}\NormalTok{ p.T}
+\BuiltInTok{print}\NormalTok{(it.zone.count(), }\StringTok{"zones in whole model"}\NormalTok{)}
+
+\NormalTok{shaft }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (np.sqrt(x}\OperatorTok{**}\DecValTok{2}\OperatorTok{+}\NormalTok{z}\OperatorTok{**}\DecValTok{2}\NormalTok{)}\OperatorTok{\textless{}}\NormalTok{\_D\_shaft, y}\OperatorTok{\textless{}}\NormalTok{\_H\_shaft))}
+\NormalTok{za.set\_group(shaft, }\StringTok{"shaft"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"shaft"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in shaft group."}\NormalTok{)}
+
+\NormalTok{plate }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (x}\OperatorTok{\textless{}}\NormalTok{\_B\_footing,z}\OperatorTok{\textless{}}\NormalTok{\_B\_footing, y}\OperatorTok{\textgreater{}}\NormalTok{\_H\_shaft,y}\OperatorTok{\textless{}}\NormalTok{\_D\_footing))}
+\NormalTok{za.set\_group(plate, }\StringTok{"plate"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"plate"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in plate group."}\NormalTok{)}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone cmodel assign elastic range group \textquotesingle{}shaft\textquotesingle{}}
+\StringTok{zone cmodel assign elastic range group \textquotesingle{}plate\textquotesingle{}}
+\StringTok{zone property bulk }\SpecialCharTok{\{bulk\_\}}\StringTok{ shear }\SpecialCharTok{\{shear\_\}}\StringTok{ density }\SpecialCharTok{\{density\_\}}\StringTok{ range group \textquotesingle{}shaft\textquotesingle{}}
+\StringTok{zone property bulk }\SpecialCharTok{\{bulk\_\}}\StringTok{ shear }\SpecialCharTok{\{shear\_\}}\StringTok{ density }\SpecialCharTok{\{density\_\}}\StringTok{ range group \textquotesingle{}plate\textquotesingle{}}
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(bulk\_}\OperatorTok{=}\NormalTok{\_bulk,shear\_}\OperatorTok{=}\NormalTok{\_shear,density\_}\OperatorTok{=}\NormalTok{\_density\_concrete))}
+
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\# INTERFACE \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} create by{-}face separate range group \textquotesingle{}plate\textquotesingle{} group \textquotesingle{}Radial Tunnel1\textquotesingle{}}
+\StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} node property stiffness{-}normal }\SpecialCharTok{\{stiff\_norm\_\}}\StringTok{ stiffness{-}shear }\SpecialCharTok{\{stiff\_shear\_\}}\StringTok{ friction 35 cohesion 100}
+\StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} create by{-}face separate range group \textquotesingle{}shaft\textquotesingle{} group \textquotesingle{}Radial Tunnel1\textquotesingle{}}
+\StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} node property stiffness{-}normal }\SpecialCharTok{\{stiff\_norm\_\}}\StringTok{ stiffness{-}shear }\SpecialCharTok{\{stiff\_shear\_\}}\StringTok{ friction 35 cohesion 100}
+
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(stiff\_norm\_}\OperatorTok{=}\NormalTok{\_stiff\_norm, stiff\_shear\_}\OperatorTok{=}\NormalTok{\_stiff\_shear))}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED INTERFACE ========"}\NormalTok{)}
+
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\# BOUNDARY CONDITIONS \#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone face skin}
+\StringTok{zone face apply velocity{-}normal 0 range group \textquotesingle{}West6\textquotesingle{} or \textquotesingle{}West7\textquotesingle{} or \textquotesingle{}Bottom6\textquotesingle{} or \textquotesingle{}Bottom7\textquotesingle{} or \textquotesingle{}East6\textquotesingle{} or \textquotesingle{}Top6\textquotesingle{}}
+
+\StringTok{zone face apply velocity (0,0,0) range group \textquotesingle{}North3\textquotesingle{}}
+\StringTok{"""}\NormalTok{)}
+
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\# INITILIZE \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{model gravity 0 }\SpecialCharTok{\{gravity\_\}}\StringTok{ 0}
+\StringTok{zone initialize{-}stress ratio }\SpecialCharTok{\{K\_\}}
+\StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} node initialize{-}stresses}
+\StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} node initialize{-}stresses}
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(gravity\_}\OperatorTok{=}\NormalTok{\_gravity, K\_ }\OperatorTok{=}\NormalTok{ \_K))}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone ratio local}
+\StringTok{model solve ratio 1e{-}4}
+\StringTok{model save \textquotesingle{}initial\textquotesingle{}}
+\StringTok{"""}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED INITIAL EQUILIBRIUM ========"}\NormalTok{)}
+
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\# VERTICAL LOADING \#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone initialize state 0}
+\StringTok{zone gridpoint initialize displacement (0,0,0)}
+\StringTok{zone gridpoint initialize velocity     (0,0,0)}
+
+\StringTok{table \textquotesingle{}ramp\textquotesingle{} add ([global.step],0) ([global.step+5000],1e{-}6) ...}
+\StringTok{      ([global.step+10000],1e{-}6) ; Increase velocity applied to pile}
+\StringTok{                                  ; over 5,000 steps}
+\StringTok{                                 }
+
+
+\StringTok{zone face apply velocity{-}normal 1e{-}5 range group \textquotesingle{}North1\textquotesingle{} or \textquotesingle{}South2\textquotesingle{}}
+
+
+\StringTok{history interval 10}
+\StringTok{zone history name \textquotesingle{}disp\textquotesingle{} displacement{-}y position (3,7,3)}
+
+\StringTok{;=====================================================}
+\StringTok{; find gridpoints at pile cap, store in map called cap}
+\StringTok{fish define find\_cap}
+\StringTok{    global cap = map}
+\StringTok{    loop foreach local gp gp.list}
+\StringTok{        if gp.isgroup(gp,\textquotesingle{}top\textquotesingle{}) then}
+\StringTok{            cap(gp.id(gp)) = gp}
+\StringTok{        endif}
+\StringTok{    endloop}
+\StringTok{end}
+
+\StringTok{fish history name \textquotesingle{}cap\textquotesingle{} @find\_cap}
+
+\StringTok{fish define vert\_load}
+\StringTok{    local yftot = 0.0}
+\StringTok{    loop foreach gp cap}
+\StringTok{        yftot = yftot + gp.force.unbal.y(gp)}
+\StringTok{    end\_loop}
+\StringTok{    vert\_load = yftot / (0.25*0.25*}\SpecialCharTok{\{D\_shaft\_\}}\StringTok{*}\SpecialCharTok{\{D\_shaft\_\}}\StringTok{*math.pi)}
+\StringTok{end}
+\StringTok{fish history name \textquotesingle{}load\textquotesingle{} @vert\_load}
+\StringTok{;=====================================================}
+
+\StringTok{zone mechanical damping combined}
+\StringTok{model largestrain true}
+\StringTok{model step 10000}
+\StringTok{model save \textquotesingle{}vertical{-}loading\textquotesingle{}}
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(D\_shaft\_}\OperatorTok{=}\NormalTok{\_D\_shaft))}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED VERTICAL LOADING ========"}\NormalTok{)}
+
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\# PLOT \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{plot create}
+\StringTok{plot item create zone label group}
+\StringTok{plot create}
+\StringTok{plot item create zone contour property name \textquotesingle{}young\textquotesingle{}}
+\StringTok{plot create}
+\StringTok{plot item create zone label density}
+\StringTok{"""}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED PLOT ========"}\NormalTok{)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\CommentTok{\#; =========================================================}
+
+
+
+
+
+
+\CommentTok{\#}
+\CommentTok{\#; find gridpoints at pile cap, store in map called cap}
+\CommentTok{\#fish define find\_cap}
+\CommentTok{\#    global cap = map}
+\CommentTok{\#    loop foreach local gp gp.list}
+\CommentTok{\#        if gp.isgroup(gp,\textquotesingle{}top\textquotesingle{}) then}
+\CommentTok{\#            cap(gp.id(gp)) = gp}
+\CommentTok{\#        endif}
+\CommentTok{\#    endloop}
+\CommentTok{\#end}
+\CommentTok{\#}
+\CommentTok{\#;fish history name \textquotesingle{}cap\textquotesingle{} @find\_cap}
+
+
+\CommentTok{\#fish define vert\_load}
+\CommentTok{\#    local yftot = 0.0}
+\CommentTok{\#    loop foreach gp cap}
+\CommentTok{\#        yftot = yftot + gp.force.unbal.y(gp)}
+\CommentTok{\#    end\_loop}
+\CommentTok{\#    vert\_load = yftot / (0.25*\{D\_shaft\_\}*\{D\_shaft\_\}*math.pi)}
+\CommentTok{\#end}
+\CommentTok{\#}
+
+\CommentTok{\#fish define tot\_reac}
+\CommentTok{\#    local total = 0.0}
+\CommentTok{\#    loop foreach local key map.keys(shaft)}
+\CommentTok{\#        local level = shaft(key)}
+\CommentTok{\#        local accum = 0.0}
+\CommentTok{\#        loop foreach local node level(\textquotesingle{}nodes\textquotesingle{})}
+\CommentTok{\#            local area = interface.node.area(node)}
+\CommentTok{\#            local norm = zone.face.normal(inter.node.target.zone(node),inter.node.target.face(node))}
+\CommentTok{\#            local ynstress = inter.node.stress.normal(node) * norm{-}\textgreater{}y * {-}1.0}
+\CommentTok{\#            local ysstress = inter.node.stress.shear.y(node)}
+\CommentTok{\#            accum = accum + (ynstress + ysstress) *  area}
+\CommentTok{\#        end\_loop}
+\CommentTok{\#        local ydis = gp.disp.y(level(\textquotesingle{}gp\textquotesingle{}))}
+\CommentTok{\#        total = total + accum}
+\CommentTok{\#        table(string(key),ydis) = accum/level(\textquotesingle{}length\textquotesingle{})}
+\CommentTok{\#    end\_loop}
+\CommentTok{\#    tot\_reac = total}
+\CommentTok{\#end}
+\CommentTok{\#}
+\CommentTok{\#fish history name \textquotesingle{}load\textquotesingle{} @vert\_load}
+\CommentTok{\#fish history name \textquotesingle{}tot\_reac\textquotesingle{} @tot\_reac}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\CommentTok{\#; =========================================================}
+
+
+\CommentTok{\#plot create}
+\CommentTok{\#plot clear}
+\CommentTok{\#plot active on}
+\CommentTok{\#plot background \textquotesingle{}white\textquotesingle{}}
+\CommentTok{\#plot outline active on width 2 color \textquotesingle{}black\textquotesingle{}}
+\CommentTok{\#plot legend active on heading color \textquotesingle{}black\textquotesingle{} copyright color \textquotesingle{}black\textquotesingle{} ...}
+\CommentTok{\#    placement left size 25,50 ...}
+\CommentTok{\#    step active off ...}
+\CommentTok{\#    time{-}real active off ...}
+\CommentTok{\#    time{-}model active off ...}
+\CommentTok{\#    title{-}customer active off ...}
+\CommentTok{\#    view{-}info active off}
+\CommentTok{\#plot title{-}job active off}
+\CommentTok{\#plot title active off}
+\CommentTok{\#    }
+\CommentTok{\#plot item create axes active on ...}
+\CommentTok{\#    axis{-}x color \textquotesingle{}black\textquotesingle{} draw{-}positive on draw{-}negative off label{-}positive \textquotesingle{}X\textquotesingle{} ...}
+\CommentTok{\#    axis{-}y color \textquotesingle{}black\textquotesingle{} draw{-}positive on draw{-}negative off label{-}positive \textquotesingle{}Y\textquotesingle{} ...}
+\CommentTok{\#    axis{-}z color \textquotesingle{}black\textquotesingle{} draw{-}positive on draw{-}negative off label{-}positive \textquotesingle{}Z\textquotesingle{} ...}
+\CommentTok{\#    position (0,0,0) size 1 ...}
+\CommentTok{\#    font size 10 family \textquotesingle{}Arial\textquotesingle{} style bold ...}
+\CommentTok{\#    transparency 0 ...}
+\CommentTok{\#    legend active off}
+\CommentTok{\#}
+\CommentTok{\#plot item create zone active on ...}
+\CommentTok{\#    contour Displacement ...}
+
+\CommentTok{\#; =========================================================}
+
+
+\CommentTok{\#zone.field.name = \textquotesingle{}stress{-}yy\textquotesingle{}}
+\CommentTok{\#zone.field.method.name = \textquotesingle{}poly\textquotesingle{} ; Use polynomial fit extrapolation}
+\CommentTok{\#global value1 = zone.field.get(0,\_H\_shaft,0) ; Return stress{-}xx}
+\CommentTok{\#zone.field.name = \textquotesingle{}stress{-}von{-}mises\textquotesingle{} ; Reset the filed name directly to \textquotesingle{}stress{-}von{-}mises\textquotesingle{}}
+\CommentTok{\#global value2 = zone.field.get(0,\_H\_shaft,0) ; Return stress{-}von{-}mises}
+\CommentTok{\#}
+
+
+\CommentTok{\#; =========================================================}
+
+
+\CommentTok{\# VERTICAL LOADING 1\#}
+
+\CommentTok{\#top = reduce(np.logical\_and, (np.sqrt(x**2+z**2)\textless{}\_D\_shaft, y==np.amin(y)))}
+\CommentTok{\#za.set\_group(top, "top") \# set the zones with shaft = true have "shaft" and "geometry"}
+
+\CommentTok{\#it.command("""}
+\CommentTok{\#zone initialize state 0}
+\CommentTok{\#zone gridpoint initialize displacement (0,0,0)}
+\CommentTok{\#zone gridpoint initialize velocity     (0,0,0)}
+\CommentTok{\#table \textquotesingle{}ramp\textquotesingle{} add ([global.step],0) ([global.step+30000],{-}5e{-}8) ...}
+\CommentTok{\#      ([global.step+58000],{-}5e{-}8) ; Increase velocity applied to pile}
+\CommentTok{\#                                  ; over 30,000 steps}
+\CommentTok{\#zone face apply velocity{-}normal 1 table \textquotesingle{}ramp\textquotesingle{} range group \textquotesingle{}top\textquotesingle{}}
+\CommentTok{\#}
+\CommentTok{\#history interval 250}
+\CommentTok{\#zone history name \textquotesingle{}disp\textquotesingle{} displacement{-}y position (0,0,0)}
+\CommentTok{\#}
+\CommentTok{\#; =========================================================}
+\CommentTok{\#;  find gridpoints at pile cap, store in map called cap}
+\CommentTok{\#}
+\CommentTok{\#fish define find\_cap}
+\CommentTok{\#    global cap = map}
+\CommentTok{\#    loop foreach local gp gp.list}
+\CommentTok{\#        if gp.isgroup(gp,\textquotesingle{}top\textquotesingle{}) then}
+\CommentTok{\#            cap(gp.id(gp)) = gp}
+\CommentTok{\#        endif}
+\CommentTok{\#    endloop}
+\CommentTok{\#end}
+\CommentTok{\#@find\_cap}
+\CommentTok{\#}
+\CommentTok{\#; =========================================================}
+\CommentTok{\#; monitor vertical loading at pile cap}
+\CommentTok{\#}
+\CommentTok{\#fish define vert\_load}
+\CommentTok{\#    local yftot = 0.0}
+\CommentTok{\#    loop foreach gp cap}
+\CommentTok{\#        yftot = yftot + gp.force.unbal.y(gp)}
+\CommentTok{\#    end\_loop}
+\CommentTok{\#    vert\_load = yftot / (0.25*\{1\}*\{1\}*math.pi)}
+\CommentTok{\#end}
+\CommentTok{\#;call \textquotesingle{}load\textquotesingle{}}
+\CommentTok{\#; =========================================================}
+\CommentTok{\#}
+\CommentTok{\#fish history name \textquotesingle{}load\textquotesingle{} @vert\_load}
+\CommentTok{\#zone mechanical damping combined}
+\CommentTok{\#model step 58000}
+\CommentTok{\#model save \textquotesingle{}vertical{-}loading\textquotesingle{}}
+\CommentTok{\#""")}
+\CommentTok{\#print("               ========       ======== Passed Vertical Loading 1 ========        ========")}
+\CommentTok{\#}
+\CommentTok{\#\# VERTICAL LOADING 2\#}
+\CommentTok{\#\# =========================================================}
+\CommentTok{\#it.command("""}
+\CommentTok{\#; vertical loading}
+\CommentTok{\#model restore \textquotesingle{}initial\textquotesingle{}}
+\CommentTok{\#zone initialize state 0}
+\CommentTok{\#zone gridpoint initialize displacement (0,0,0)}
+\CommentTok{\#zone gridpoint initialize velocity     (0,0,0)}
+\CommentTok{\#zone face apply stress{-}yy [1.0e5/(math.pi*1*1)] range group \textquotesingle{}top\textquotesingle{}}
+\CommentTok{\#model solve ratio 1e{-}4}
+\CommentTok{\#model save \textquotesingle{}vertical{-}load{-}end\textquotesingle{}}
+\CommentTok{\#""")}
+\CommentTok{\#print("               =======        ======== Passed Vertical Loading 2 ========        ========")}
+\CommentTok{\#}
+\CommentTok{\#\# define make\_pydata, output\_structure, tot\_reac \#}
+\CommentTok{\#\# =========================================================}
+\CommentTok{\#\#;call \textquotesingle{}p{-}y\textquotesingle{} suppress ; Calculates p{-}y curve for pile, when tot\_reac is called}
+\CommentTok{\#\#; Calculate PY Curves at equidistant locations along pile}
+\CommentTok{\#\#; Stored in map called pile, key = 1.0*y positions rounded to integer}
+\CommentTok{\#\#;    value = map, key \textquotesingle{}y\textquotesingle{} = y{-}position}
+\CommentTok{\#\#;                     \textquotesingle{}length\textquotesingle{} = length of ownership of this segment}
+\CommentTok{\#\#;                     \textquotesingle{}gp\textquotesingle{} = Gridpoint nearest (0,y,0)}
+\CommentTok{\#\#;                     \textquotesingle{}nodes\textquotesingle{} = map of interface nodes at that position, key order entered.}
+\CommentTok{\#}
+\CommentTok{\#it.command("""}
+\CommentTok{\#fish define make\_pydata}
+\CommentTok{\#    global pile = map}
+\CommentTok{\#    ; Build list of nodes}
+\CommentTok{\#    loop foreach local ipnt inter.list}
+\CommentTok{\#        loop foreach node inter.node.list(ipnt)}
+\CommentTok{\#            local y = inter.node.pos.y(node)}
+\CommentTok{\#            local key = math.round(inter.node.pos.y(node) * 1.0)}
+\CommentTok{\#            if map.has(pile,key) == false then}
+\CommentTok{\#                local level = map}
+\CommentTok{\#                local nodes = map}
+\CommentTok{\#                level(\textquotesingle{}y\textquotesingle{}) = y}
+\CommentTok{\#                level(\textquotesingle{}gp\textquotesingle{}) = gp.near(0,y,0,\textquotesingle{}pile\textquotesingle{})}
+\CommentTok{\#                level(\textquotesingle{}nodes\textquotesingle{}) = nodes}
+\CommentTok{\#                level(\textquotesingle{}length\textquotesingle{}) = 0.0}
+\CommentTok{\#                pile(key) = level}
+\CommentTok{\#            endif}
+\CommentTok{\#            level = pile(key)}
+\CommentTok{\#            nodes = level(\textquotesingle{}nodes\textquotesingle{})}
+\CommentTok{\#            nodes(map.size(nodes)) = node}
+\CommentTok{\#            level(\textquotesingle{}nodes\textquotesingle{}) = nodes}
+\CommentTok{\#            pile(key) = level}
+\CommentTok{\#        end\_loop}
+\CommentTok{\#    end\_loop}
+\CommentTok{\#    ; Calculate length of ownership of each segment}
+\CommentTok{\#    local prev\_key = \textquotesingle{}0\textquotesingle{}}
+\CommentTok{\#    loop foreach key map.keys(pile)}
+\CommentTok{\#        if type.name(prev\_key) == \textquotesingle{}integer\textquotesingle{} then}
+\CommentTok{\#            local levelp = pile(prev\_key)}
+\CommentTok{\#            local leveln = pile(key)}
+\CommentTok{\#            local dist = math.abs(gp.pos.y(levelp(\textquotesingle{}gp\textquotesingle{})) {-} gp.pos.y(leveln(\textquotesingle{}gp\textquotesingle{}))) * 0.5}
+\CommentTok{\#            levelp(\textquotesingle{}length\textquotesingle{}) = levelp(\textquotesingle{}length\textquotesingle{}) + dist}
+\CommentTok{\#            leveln(\textquotesingle{}length\textquotesingle{}) = leveln(\textquotesingle{}length\textquotesingle{}) + dist}
+\CommentTok{\#            pile(prev\_key) = levelp}
+\CommentTok{\#            pile(key) = leveln}
+\CommentTok{\#        endif}
+\CommentTok{\#        prev\_key = key}
+\CommentTok{\#    end\_loop}
+\CommentTok{\#end}
+\CommentTok{\#}
+\CommentTok{\#; Output resulting data structure...}
+\CommentTok{\#fish define output\_structure}
+\CommentTok{\#    loop foreach local level pile}
+\CommentTok{\#        io.out(\textquotesingle{}Y{-}Position \textquotesingle{} + string(level(\textquotesingle{}y\textquotesingle{})))}
+\CommentTok{\#        io.out(\textquotesingle{}Length \textquotesingle{} + string(level(\textquotesingle{}length\textquotesingle{})))}
+\CommentTok{\#        io.out(\textquotesingle{}GP \textquotesingle{} + string(gp.id(level(\textquotesingle{}gp\textquotesingle{}))))}
+\CommentTok{\#        local nodelist = \textquotesingle{}\textquotesingle{}}
+\CommentTok{\#        loop foreach local node level(\textquotesingle{}nodes\textquotesingle{})}
+\CommentTok{\#            nodelist = nodelist + \textquotesingle{} \textquotesingle{} + string(interface.node.id(node))}
+\CommentTok{\#        end\_loop}
+\CommentTok{\#        io.out(\textquotesingle{}Nodes\textquotesingle{}+nodelist)}
+\CommentTok{\#    end\_loop}
+\CommentTok{\#end}
+\CommentTok{\#}
+\CommentTok{\#fish define tot\_reac}
+\CommentTok{\#    local total = 0.0}
+\CommentTok{\#    loop foreach local key map.keys(pile)}
+\CommentTok{\#        local level = pile(key)}
+\CommentTok{\#        local accum = 0.0}
+\CommentTok{\#        loop foreach local node level(\textquotesingle{}nodes\textquotesingle{})}
+\CommentTok{\#            local area = 2.0 * interface.node.area(node)}
+\CommentTok{\#            local norm = zone.face.normal(inter.node.target.zone(node),inter.node.target.face(node))}
+\CommentTok{\#            local xnstress = inter.node.stress.normal(node) * norm{-}\textgreater{}x * {-}1.0}
+\CommentTok{\#            local xsstress = inter.node.stress.shear.x(node)}
+\CommentTok{\#            accum = accum + (xnstress + xsstress) *  area}
+\CommentTok{\#        end\_loop}
+\CommentTok{\#        local xdis = gp.disp.x(level(\textquotesingle{}gp\textquotesingle{}))}
+\CommentTok{\#        total = total + accum}
+\CommentTok{\#        table(string(key),xdis) = accum/level(\textquotesingle{}length\textquotesingle{})}
+\CommentTok{\#    end\_loop}
+\CommentTok{\#    tot\_reac = total}
+\CommentTok{\#end}
+\CommentTok{\#""")}
+\CommentTok{\#print("               ======== PASSED DEFINING ALL FISH FUNCTIONS ========        ========")}
+\CommentTok{\#\# GENERATE p{-}y data \#}
+\CommentTok{\#\# =========================================================}
+\CommentTok{\#it.command("""}
+\CommentTok{\#@make\_pydata        ; Generate p{-}y curve calculation data}
+\CommentTok{\#@output\_structure   ; Sanity check of p{-}y curve data}
+\CommentTok{\#fish history name \textquotesingle{}load\textquotesingle{} @tot\_reac}
+\CommentTok{\#model step 416500}
+\CommentTok{\#model save \textquotesingle{}lateral{-}load\textquotesingle{}}
+\CommentTok{\#""")}
+\CommentTok{\#print("               ======== PASSED ALL SCRIPTS SUCCESSFULLY ========")}
+
+
+
+\CommentTok{\#it.command("""}
+\CommentTok{\#zone cmodel assign strain{-}softening range group "Radial Tunnel1"}
+\CommentTok{\#zone property density 2500 bulk 2e8 shear 1e8 range group "Radial Tunnel1"}
+\CommentTok{\#zone property cohesion 2e6 friction 45 tension 2e5 dilation 10 range group "Radial Tunnel1"}
+\CommentTok{\#zone property table{-}friction \textquotesingle{}fri\textquotesingle{} table{-}cohesion \textquotesingle{}coh\textquotesingle{} table{-}dilation \textquotesingle{}dil\textquotesingle{} range group "Radial Tunnel1"}
+\CommentTok{\#table \textquotesingle{}fri\textquotesingle{} add (0, 45) (.05, 42) (.1, 40) (1, 40)}
+\CommentTok{\#table \textquotesingle{}coh\textquotesingle{} add (0,2e6) (.05,1e6) (.1,5e5) (1,5e5)}
+\CommentTok{\#table \textquotesingle{}dil\textquotesingle{} add (0, 10) (.05,  3) (.1,  0)}
+\CommentTok{\#""")}
+
+\CommentTok{\#top = reduce(np.logical\_and, (np.sqrt(x**2+z**2)\textless{}\_D\_shaft, y\textless{}=np.amin(y)))}
+\CommentTok{\#za.set\_group(top, "top")}
+\CommentTok{\#print(za.in\_group("top").sum(), "zones in top group.")}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{simulation-of-pull-tests-for-fully-bonded-rock-reinforcement}{%
 \chapter{Simulation of Pull-Tests for Fully Bonded Rock Reinforcement}\label{simulation-of-pull-tests-for-fully-bonded-rock-reinforcement}}
