@@ -359,11 +359,219 @@ from so simple a beginning endless forms most beautiful and most
 wonderful have been, and are being, evolved.
 \qauthor{Charles Darwin(1809-1882)}\end{savequote}
 
-\hypertarget{kaist-model}{%
-\chapter{KAIST Model}\label{kaist-model}}
+\hypertarget{kaist-model-2}{%
+\chapter{KAIST Model 2}\label{kaist-model-2}}
 
 \hypertarget{initial-configuration}{%
 \section{Initial Configuration}\label{initial-configuration}}
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/boundary}
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/new_configuration}
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/blocks}
+
+\includegraphics[width=1\linewidth]{myfigureeeeee/blocks2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\# SI UNIT \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\# m, Pa, kg/m3, m/s2,   \#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"       ((((((((((((((((======== NEW RUN ========)))))))))))))))"}\NormalTok{)}
+
+\ImportTok{import}\NormalTok{ itasca }\ImportTok{as}\NormalTok{ it}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\NormalTok{np.set\_printoptions(threshold}\OperatorTok{=}\DecValTok{20}\NormalTok{)}
+\NormalTok{it.command(}\StringTok{"python{-}reset{-}state false"}\NormalTok{)}
+\ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ zonearray }\ImportTok{as}\NormalTok{ za}
+\ImportTok{from}\NormalTok{ itasca }\ImportTok{import}\NormalTok{ gridpointarray }\ImportTok{as}\NormalTok{ gpa}
+
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\# PARAMETERS \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\CommentTok{\# Mesh Details}
+\NormalTok{\_radial }\OperatorTok{=} \DecValTok{10}
+\NormalTok{\_perimeter }\OperatorTok{=}\NormalTok{ \_radial}
+\NormalTok{\_axial }\OperatorTok{=}\NormalTok{ \_radial}
+\NormalTok{\_outer }\OperatorTok{=}\NormalTok{ \_radial}
+
+\CommentTok{\# Physical Constants}
+\NormalTok{\_gravity }\OperatorTok{=} \FloatTok{9.80665}
+\NormalTok{\_K }\OperatorTok{=} \FloatTok{0.318}
+
+\CommentTok{\# Dimensions}
+\NormalTok{\_D\_shaft }\OperatorTok{=} \FloatTok{1.0}
+\NormalTok{\_H\_shaft }\OperatorTok{=} \FloatTok{7.45}
+\NormalTok{\_T\_plate }\OperatorTok{=} \FloatTok{1.5}
+\NormalTok{\_B\_footing }\OperatorTok{=} \FloatTok{3.25}
+\NormalTok{\_D\_footing }\OperatorTok{=}\NormalTok{ \_H\_shaft }\OperatorTok{+}\NormalTok{ \_T\_plate}
+\NormalTok{\_B\_soil }\OperatorTok{=}\NormalTok{ \_B\_footing}\OperatorTok{*}\DecValTok{5}
+\NormalTok{\_D\_soil }\OperatorTok{=}\NormalTok{ \_D\_footing}\OperatorTok{+}\DecValTok{3}
+
+\CommentTok{\# Concrete Properties}
+\NormalTok{\_bulk }\OperatorTok{=} \FloatTok{4.1667e10}
+\NormalTok{\_shear }\OperatorTok{=} \FloatTok{1.9231e10} 
+\NormalTok{\_density\_concrete }\OperatorTok{=} \DecValTok{2400}
+
+\CommentTok{\# Soil Properties}
+\NormalTok{\_E\_o }\OperatorTok{=} \FloatTok{80e6}
+\NormalTok{\_const }\OperatorTok{=} \FloatTok{1e6}
+\NormalTok{\_poisson }\OperatorTok{=} \FloatTok{0.3}
+\NormalTok{\_density\_soil }\OperatorTok{=} \DecValTok{1530}
+\NormalTok{\_cohesion }\OperatorTok{=} \DecValTok{10}
+\NormalTok{\_friction }\OperatorTok{=} \DecValTok{43}
+
+\CommentTok{\# Interface Properties}
+\NormalTok{\_stiff\_norm }\OperatorTok{=} \FloatTok{1e10}
+\NormalTok{\_stiff\_shear }\OperatorTok{=} \FloatTok{1e10}
+
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\# ZONES \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\NormalTok{command\_zone }\OperatorTok{=} \StringTok{"""}
+\StringTok{model new}
+\StringTok{z crea r{-}c p 0 (0,0,0) ...}
+\StringTok{           p 1 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,0) ...}
+\StringTok{           p 2 (0,0,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{           p 3 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,0) ...}
+\StringTok{           p 4 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{           p 5 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{           p 6 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,0) ...}
+\StringTok{           p 7 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{           p 8 (0,}\SpecialCharTok{\{D\_shaft\}}\StringTok{,0) ...}
+\StringTok{           p 9 (}\SpecialCharTok{\{D\_shaft\}}\StringTok{,0,0) ...}
+\StringTok{           p 10 (0,}\SpecialCharTok{\{D\_shaft\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{           p 11 (}\SpecialCharTok{\{D\_shaft\}}\StringTok{,0,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{           size }\SpecialCharTok{\{radial\}}\StringTok{ }\SpecialCharTok{\{axial\}}\StringTok{ 20 }\SpecialCharTok{\{outer\}}\StringTok{ ...}
+\StringTok{           rat 1 1 1 1 ...}
+\StringTok{           fill}
+\StringTok{           }
+\StringTok{z crea b p 0 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,0) ...}
+\StringTok{         p 1 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,0) ...}
+\StringTok{         p 2 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 3 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,0) ...}
+\StringTok{         p 4 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 5 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 6 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,0) ...}
+\StringTok{         p 7 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         size }\SpecialCharTok{\{radial\}}\StringTok{ }\SpecialCharTok{\{axial\}}\StringTok{ }\SpecialCharTok{\{outer\}}\StringTok{ ...}
+\StringTok{         rat 1 1 1.4 ;blue}
+
+\StringTok{z crea b p 0 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,0) ...}
+\StringTok{         p 1 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,0) ...}
+\StringTok{         p 2 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 3 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,0) ...}
+\StringTok{         p 4 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 5 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 6 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,0) ...}
+\StringTok{         p 7 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         size }\SpecialCharTok{\{radial\}}\StringTok{ }\SpecialCharTok{\{axial\}}\StringTok{ }\SpecialCharTok{\{outer\}}\StringTok{ ...}
+\StringTok{         rat 1.4 1 1.4}
+\StringTok{           }
+\StringTok{z crea b p 0 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,0) ...}
+\StringTok{         p 1 (0,}\SpecialCharTok{\{B\_soil\}}\StringTok{,0) ...}
+\StringTok{         p 2 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 3 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,0) ...}
+\StringTok{         p 4 (0,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 5 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 6 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,0) ...}
+\StringTok{         p 7 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         size }\SpecialCharTok{\{radial\}}\StringTok{ }\SpecialCharTok{\{axial\}}\StringTok{ }\SpecialCharTok{\{outer\}}\StringTok{ ...}
+\StringTok{         rat 1.4 1 1 ;purple}
+\StringTok{           }
+\StringTok{"""}
+\NormalTok{command }\OperatorTok{=}\NormalTok{ command\_zone.}\BuiltInTok{format}\NormalTok{(}
+\NormalTok{D\_shaft }\OperatorTok{=}\NormalTok{ \_D\_shaft,}
+\NormalTok{B\_footing }\OperatorTok{=}\NormalTok{ \_B\_footing,}
+\NormalTok{B\_soil }\OperatorTok{=}\NormalTok{ \_B\_soil,}
+\NormalTok{D\_soil }\OperatorTok{=}\NormalTok{ \_D\_soil,}
+\NormalTok{radial}\OperatorTok{=}\NormalTok{\_radial,}
+\NormalTok{axial }\OperatorTok{=}\NormalTok{ \_axial,}
+\NormalTok{perimeter }\OperatorTok{=}\NormalTok{ \_perimeter,}
+\NormalTok{outer }\OperatorTok{=}\NormalTok{ \_outer)}
+
+\NormalTok{it.command(command)}
+
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\# GROUPS \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\NormalTok{p }\OperatorTok{=}\NormalTok{ za.pos()}
+\NormalTok{x,y,z }\OperatorTok{=}\NormalTok{ p.T}
+
+\NormalTok{shaft }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (np.sqrt(x}\OperatorTok{**}\DecValTok{2}\OperatorTok{+}\NormalTok{y}\OperatorTok{**}\DecValTok{2}\NormalTok{)}\OperatorTok{\textless{}}\NormalTok{\_D\_shaft, z}\OperatorTok{\textless{}}\NormalTok{\_H\_shaft))}
+\NormalTok{plate }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (x}\OperatorTok{\textless{}}\NormalTok{\_B\_footing,y}\OperatorTok{\textless{}}\NormalTok{\_B\_footing, z}\OperatorTok{\textgreater{}}\NormalTok{\_H\_shaft,z}\OperatorTok{\textless{}}\NormalTok{\_D\_footing))}
+\NormalTok{za.set\_group(shaft, }\StringTok{"shaft"}\NormalTok{) }
+\NormalTok{za.set\_group(plate, }\StringTok{"plate"}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"radial mesh number is "}\NormalTok{, \_radial)}
+\BuiltInTok{print}\NormalTok{(it.zone.count(), }\StringTok{"zones in whole model"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"shaft"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{() }\OperatorTok{+}\NormalTok{ za.in\_group(}\StringTok{"plate"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in shaft+plate group."}\NormalTok{) }
+
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\# CONSTITUTIVE MODEL \#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\NormalTok{command\_zone }\OperatorTok{=} \StringTok{"""}
+\StringTok{zone cmodel assign mohr{-}coulomb range group ...}
+\StringTok{\textquotesingle{}Radial cylinder1\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}plate\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}shaft\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick2\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick3\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick4\textquotesingle{}}
+
+\StringTok{; assign soil properties}
+\StringTok{zone property young }\SpecialCharTok{\{E\_o\_\}}\StringTok{ ...}
+\StringTok{poisson }\SpecialCharTok{\{poisson\_\}}\StringTok{ ...}
+\StringTok{density }\SpecialCharTok{\{density\_soil\_\}}\StringTok{ ...}
+\StringTok{cohesion }\SpecialCharTok{\{cohesion\_\}}\StringTok{ ...}
+\StringTok{friction }\SpecialCharTok{\{friction\_\}}\StringTok{ ...}
+\StringTok{flag{-}brittle true}
+
+\StringTok{; let modulus depends on depth}
+\StringTok{fish define fname(E\_o,const)}
+\StringTok{loop foreach pnt zone.list}
+\StringTok{z\_depth = zone.pos.z(pnt)}
+\StringTok{E = E\_o+const*math.sqrt(z\_depth)}
+\StringTok{zone.prop(pnt,\textquotesingle{}young\textquotesingle{})=E}
+\StringTok{end\_loop}
+\StringTok{end}
+\StringTok{@fname(}\SpecialCharTok{\{E\_o\_\}}\StringTok{,}\SpecialCharTok{\{const\_\}}\StringTok{)}
+
+\StringTok{; assign concrete properties}
+\StringTok{zone cmodel assign elastic range group \textquotesingle{}shaft\textquotesingle{} or \textquotesingle{}plate\textquotesingle{}}
+\StringTok{zone property bulk }\SpecialCharTok{\{bulk\_\}}\StringTok{ ...}
+\StringTok{shear }\SpecialCharTok{\{shear\_\}}\StringTok{ ...}
+\StringTok{density }\SpecialCharTok{\{density\_\}}\StringTok{ range group \textquotesingle{}shaft\textquotesingle{} or \textquotesingle{}plate\textquotesingle{}}
+
+\StringTok{"""}
+\NormalTok{command }\OperatorTok{=}\NormalTok{ command\_zone.}\BuiltInTok{format}\NormalTok{(}
+\NormalTok{E\_o\_}\OperatorTok{=}\NormalTok{\_E\_o,}
+\NormalTok{const\_}\OperatorTok{=}\NormalTok{\_const,}
+\NormalTok{poisson\_}\OperatorTok{=}\NormalTok{\_poisson,}
+\NormalTok{density\_soil\_}\OperatorTok{=}\NormalTok{\_density\_soil,}
+\NormalTok{cohesion\_ }\OperatorTok{=}\NormalTok{ \_cohesion,}
+\NormalTok{friction\_ }\OperatorTok{=}\NormalTok{ \_friction,}
+\NormalTok{bulk\_}\OperatorTok{=}\NormalTok{\_bulk,}
+\NormalTok{shear\_}\OperatorTok{=}\NormalTok{\_shear,}
+\NormalTok{density\_}\OperatorTok{=}\NormalTok{\_density\_concrete)}
+
+\NormalTok{it.command(command)}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+\hypertarget{kaist-model}{%
+\chapter{KAIST Model}\label{kaist-model}}
+
+\hypertarget{initial-configuration-1}{%
+\section{Initial Configuration}\label{initial-configuration-1}}
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/boundary}
 
@@ -388,10 +596,10 @@ wonderful have been, and are being, evolved.
 
 \CommentTok{\# Physical Constants}
 \NormalTok{\_gravity }\OperatorTok{=} \FloatTok{9.80665}
-\NormalTok{\_K }\OperatorTok{=} \FloatTok{0.318}
+\NormalTok{\_K }\OperatorTok{=} \FloatTok{0.5}
 
 \CommentTok{\# Dimensions}
-\NormalTok{\_D\_shaft }\OperatorTok{=} \DecValTok{1}
+\NormalTok{\_D\_shaft }\OperatorTok{=} \FloatTok{1.0}
 \NormalTok{\_H\_shaft }\OperatorTok{=} \FloatTok{7.45}
 \NormalTok{\_T\_plate }\OperatorTok{=} \FloatTok{1.5}
 \NormalTok{\_B\_footing }\OperatorTok{=} \FloatTok{3.25}
@@ -400,21 +608,19 @@ wonderful have been, and are being, evolved.
 \NormalTok{\_D\_soil }\OperatorTok{=}\NormalTok{ \_D\_footing}\OperatorTok{+}\DecValTok{3}
 
 \CommentTok{\# Concrete Properties}
-\NormalTok{\_bulk }\OperatorTok{=} \FloatTok{13.9e9}
-\NormalTok{\_shear }\OperatorTok{=} \FloatTok{10.4e9}
+\NormalTok{\_bulk }\OperatorTok{=} \FloatTok{4.1667e10}
+\NormalTok{\_shear }\OperatorTok{=} \FloatTok{1.9231e10} \CommentTok{\#E\_star = 8.777e7}
 \NormalTok{\_density\_concrete }\OperatorTok{=} \DecValTok{2400}
 
 \CommentTok{\# Soil Properties}
 \NormalTok{\_E\_o }\OperatorTok{=} \FloatTok{80e6}
-\NormalTok{\_const }\OperatorTok{=} \FloatTok{1e7}
-\NormalTok{\_poisson }\OperatorTok{=} \FloatTok{0.25}
+\NormalTok{\_const }\OperatorTok{=} \FloatTok{1e6}
+\NormalTok{\_poisson }\OperatorTok{=} \FloatTok{0.3}
 \NormalTok{\_density\_soil }\OperatorTok{=} \DecValTok{1530}
-\NormalTok{\_friction }\OperatorTok{=} \DecValTok{35}
-\NormalTok{\_cohesion }\OperatorTok{=} \DecValTok{100}
 
 \CommentTok{\# Interface Properties}
-\NormalTok{\_stiff\_norm }\OperatorTok{=} \FloatTok{1e10}
-\NormalTok{\_stiff\_shear }\OperatorTok{=} \FloatTok{1e10}
+\NormalTok{\_stiff\_norm }\OperatorTok{=} \FloatTok{8.777e8}
+\NormalTok{\_stiff\_shear }\OperatorTok{=} \FloatTok{8.777e8}
 \end{Highlighting}
 \end{Shaded}
 
@@ -448,7 +654,7 @@ wonderful have been, and are being, evolved.
 \StringTok{           p 12 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
 \StringTok{           p 13 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{) ...}
 \StringTok{           size }\SpecialCharTok{\{radial\}}\StringTok{ }\SpecialCharTok{\{axial\}}\StringTok{ }\SpecialCharTok{\{perimeter\}}\StringTok{ }\SpecialCharTok{\{outer\}}\StringTok{ ...}
-\StringTok{           rat 1 1 1 1.01 ...}
+\StringTok{           rat 1 1 1 1.1 ...}
 \StringTok{           fill}
 \StringTok{"""}
 \NormalTok{command }\OperatorTok{=}\NormalTok{ command\_zone.}\BuiltInTok{format}\NormalTok{(}
@@ -620,9 +826,9 @@ Note tension cut-off is \(\sigma^{t} = min(\sigma^{t}, \frac{c}{tan\phi})\)
 
 \NormalTok{it.command(}\StringTok{"""}
 \StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} create by{-}face separate range group \textquotesingle{}plate\textquotesingle{} group \textquotesingle{}Radial Tunnel1\textquotesingle{}}
-\StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} node property stiffness{-}normal }\SpecialCharTok{\{stiff\_norm\_\}}\StringTok{ stiffness{-}shear }\SpecialCharTok{\{stiff\_shear\_\}}\StringTok{ friction 35 cohesion 100}
+\StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} node property stiffness{-}normal }\SpecialCharTok{\{stiff\_norm\_\}}\StringTok{ stiffness{-}shear }\SpecialCharTok{\{stiff\_shear\_\}}\StringTok{ friction 45 cohesion 10}
 \StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} create by{-}face separate range group \textquotesingle{}shaft\textquotesingle{} group \textquotesingle{}Radial Tunnel1\textquotesingle{}}
-\StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} node property stiffness{-}normal }\SpecialCharTok{\{stiff\_norm\_\}}\StringTok{ stiffness{-}shear }\SpecialCharTok{\{stiff\_shear\_\}}\StringTok{ friction 35 cohesion 100}
+\StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} node property stiffness{-}normal }\SpecialCharTok{\{stiff\_norm\_\}}\StringTok{ stiffness{-}shear }\SpecialCharTok{\{stiff\_shear\_\}}\StringTok{ friction 45 cohesion 10}
 
 \StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(stiff\_norm\_}\OperatorTok{=}\NormalTok{\_stiff\_norm, stiff\_shear\_}\OperatorTok{=}\NormalTok{\_stiff\_shear))}
 
@@ -1916,6 +2122,13 @@ FISH functions to calculate bulk and shear moduli
 
 \newpage
 
+\begin{savequote}
+Plasticity theory was developed by people who thought in terms of
+metals, and for about twenty years workers in soil mechanics have been
+looking at the theory, rather as outsiders, and asking whether it had
+anything to offer them
+\qauthor{(Peter Wroth 1973))}\end{savequote}
+
 \hypertarget{theory}{%
 \chapter{Theory}\label{theory}}
 
@@ -2854,7 +3067,7 @@ contact with zone surface faces that are not part of the interface
 itself.
 
 \begin{figure}[H]
-\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-89}
+\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-95}
 \end{figure}
 
 Every reference to an interface uses a name (like the table command) to
@@ -4471,185 +4684,6 @@ bolt.
 \end{Highlighting}
 \end{Shaded}
 
-\startappendices
-
-\hypertarget{reference-collective}{%
-\chapter{Reference Collective}\label{reference-collective}}
-
-\hypertarget{uplift-resistance-of-anchor}{%
-\subsection{Uplift Resistance of Anchor}\label{uplift-resistance-of-anchor}}
-
-\hypertarget{before-1968}{%
-\subsubsection{Before 1968}\label{before-1968}}
-
-\begin{itemize}
-\tightlist
-\item
-  Coulomb
-\item
-  Mohr
-\item
-  Kotter's equation
-\item
-  D.C. Drucker and W. Prager 1951
-\item
-  Balla 1961
-\item
-  Mors
-\item
-  Matsuo 1968
-\item
-  Vesic
-\end{itemize}
-
-\hypertarget{post-1968}{%
-\subsubsection{Post-1968}\label{post-1968}}
-
-\begin{itemize}
-\tightlist
-\item
-  Meyerhof, G.G., and Adams, J.I. 1968
-\item
-  Meyerhof, G.G. 1973
-\item
-  Das, B.M., and Seeley, G.R. 1975
-\item
-  Ovesen 1981
-\item
-  Walters 1982
-\item
-  Rowe, R.K., and Davis, H. 1982
-\item
-  Dickin, E.A., and Leung, C.F. 1983
-\item
-  Vermeer 1985
-\item
-  Murray, E.J., and Geddes, J.D. 1987
-\item
-  Dickin, E.A. 1988
-\item
-  Sutherland 1988
-\item
-  Kulhawy 1988
-\item
-  Koutsabeloulis, N.C., and Griffiths, D.V. 1989
-\item
-  Bouazza 1990
-\item
-  Tadatsugu Tanaka, and Toshinori Sakai 1993
-\end{itemize}
-
-\hypertarget{post-2000}{%
-\subsubsection{Post-2000}\label{post-2000}}
-
-\begin{itemize}
-\tightlist
-\item
-  Merifield, R.S., and Sloan, S.W. 2006
-\item
-  Cheuk, White, and Bolton 2008
-\item
-  Kumar 2008
-\item
-  V.B. Deshmukh 2011
-\item
-  Wu, Kouretzis, Suwal, Sloan 2019
-\item
-  Mary Schafer, Santana Phani Gopal Madabhushi 2019
-\end{itemize}
-
-\hypertarget{numerical-analysis}{%
-\subsection{Numerical Analysis}\label{numerical-analysis}}
-
-\begin{itemize}
-\tightlist
-\item
-  D.V. Griffiths 1993
-\item
-  Lyamin 2002
-\item
-  Krabbenhoft, Lyamin, Sloan 2006
-\item
-  J Kumar 2008
-\item
-  Bobet 2010
-\item
-  Ahmed M. Fahmy, John R. de Bruyn 2013
-\item
-  Chong Tang, Kim-Chuan Toh, Kok-Kwang Phoon, 2014
-\item
-  Arya Das, and Ashis Kumar Bera 2019
-\end{itemize}
-
-\hypertarget{standards}{%
-\subsection{Standards}\label{standards}}
-
-\begin{itemize}
-\tightlist
-\item
-  IEEE 2001
-\item
-  EPRI TR-105206 1995
-\item
-  DS 1110, DS 1111 2013
-\end{itemize}
-
-\hypertarget{textbook}{%
-\subsection{Textbook}\label{textbook}}
-
-\begin{itemize}
-\tightlist
-\item
-  R. Hill The Mathematical Theory of Plasticity 1950
-\item
-  W.F. Chen Limit Analysis and Soil Plasticity 1975
-\item
-  W.F. Chen Limit Analysis in Soil Mechanics 1990
-\item
-  David M. Potts, and Lidija Zdravkovic FSAFEM book 1, FEA in Geotechnical Engineering 1999
-\item
-  Das, B. M. Earth Anchors 2013
-\end{itemize}
-
-\hypertarget{ph.d-thesis}{%
-\subsection{Ph.D Thesis}\label{ph.d-thesis}}
-
-\begin{itemize}
-\tightlist
-\item
-  Charles Hughey Evans 1983
-\item
-  M.O. Fadl 1981
-\item
-  Peter Jay Bosscher 1981
-\item
-  Abdelmalek Bouazza 1990
-\item
-  D.V. Griffiths 1993
-\item
-  Ahmed Mohmed Ebid 2004
-\item
-  Shentang Wang 2006
-\item
-  Vivek Balwantrao Deshmukh 2010
-\item
-  Frederick Levy 2014
-\item
-  Jeremy Bleyer 2016
-\end{itemize}
-
-\hypertarget{awarded-lectures}{%
-\subsection{Awarded Lectures}\label{awarded-lectures}}
-
-\begin{itemize}
-\tightlist
-\item
-  Sloan
-\item
-  Houlsby
-\item
-  Sutherland
-\end{itemize}
 
 
 %%%%% REFERENCES

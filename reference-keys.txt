@@ -1,6 +1,8 @@
-fig:unnamed-chunk-89
-kaist-model
+fig:unnamed-chunk-95
+kaist-model-2
 initial-configuration
+kaist-model
+initial-configuration-1
 zones
 constitutive-model
 elastic-isotropic-model
@@ -90,13 +92,3 @@ penetration
 kaist-model-code-for-recovery
 version-16
 simulation-of-pull-tests-for-fully-bonded-rock-reinforcement
-reference-collective
-uplift-resistance-of-anchor
-before-1968
-post-1968
-post-2000
-numerical-analysis
-standards
-textbook
-ph.d-thesis
-awarded-lectures
