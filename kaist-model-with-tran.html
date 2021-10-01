@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1 KAIST Model with Tran | FLAC3D Gitbook</title>
+  <meta name="description" content="1 KAIST Model with Tran | FLAC3D Gitbook" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1 KAIST Model with Tran | FLAC3D Gitbook" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1 KAIST Model with Tran | FLAC3D Gitbook" />
+  
+  
+  
+
+<meta name="author" content="Kyeong Sun Kim" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="kaist-model.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="templates/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="1" data-path="kaist-model-with-tran.html"><a href="kaist-model-with-tran.html"><i class="fa fa-check"></i><b>1</b> KAIST Model with Tran</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="kaist-model-with-tran.html"><a href="kaist-model-with-tran.html#initial-configuration"><i class="fa fa-check"></i><b>1.1</b> Initial Configuration</a></li>
+<li class="chapter" data-level="1.2" data-path="kaist-model-with-tran.html"><a href="kaist-model-with-tran.html#code-block"><i class="fa fa-check"></i><b>1.2</b> Code Block</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="kaist-model.html"><a href="kaist-model.html"><i class="fa fa-check"></i><b>2</b> KAIST Model</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="kaist-model.html"><a href="kaist-model.html#initial-configuration-1"><i class="fa fa-check"></i><b>2.1</b> Initial Configuration</a></li>
+<li class="chapter" data-level="2.2" data-path="kaist-model.html"><a href="kaist-model.html#zones"><i class="fa fa-check"></i><b>2.2</b> Zones</a></li>
+<li class="chapter" data-level="2.3" data-path="kaist-model.html"><a href="kaist-model.html#constitutive-model"><i class="fa fa-check"></i><b>2.3</b> Constitutive Model</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="kaist-model.html"><a href="kaist-model.html#elastic-isotropic-model"><i class="fa fa-check"></i><b>2.3.1</b> Elastic (Isotropic) model</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="kaist-model.html"><a href="kaist-model.html#interface"><i class="fa fa-check"></i><b>2.4</b> Interface</a></li>
+<li class="chapter" data-level="2.5" data-path="kaist-model.html"><a href="kaist-model.html#boundary-conditions"><i class="fa fa-check"></i><b>2.5</b> Boundary Conditions</a></li>
+<li class="chapter" data-level="2.6" data-path="kaist-model.html"><a href="kaist-model.html#initial-equilibrium"><i class="fa fa-check"></i><b>2.6</b> Initial Equilibrium</a></li>
+<li class="chapter" data-level="2.7" data-path="kaist-model.html"><a href="kaist-model.html#vertical-loading"><i class="fa fa-check"></i><b>2.7</b> Vertical Loading</a></li>
+<li class="chapter" data-level="2.8" data-path="kaist-model.html"><a href="kaist-model.html#plot"><i class="fa fa-check"></i><b>2.8</b> Plot</a></li>
+<li class="chapter" data-level="2.9" data-path="kaist-model.html"><a href="kaist-model.html#results"><i class="fa fa-check"></i><b>2.9</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html"><i class="fa fa-check"></i><b>3</b> Axial Concrete Pile</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#problem-description"><i class="fa fa-check"></i><b>3.1</b> Problem Description</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#problem-statement"><i class="fa fa-check"></i><b>3.1.1</b> Problem Statement</a></li>
+<li class="chapter" data-level="3.1.2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#main-parameters"><i class="fa fa-check"></i><b>3.1.2</b> Main Parameters</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#modeling-procedure"><i class="fa fa-check"></i><b>3.2</b> Modeling Procedure</a></li>
+<li class="chapter" data-level="3.3" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#zones-1"><i class="fa fa-check"></i><b>3.3</b> Zones</a></li>
+<li class="chapter" data-level="3.4" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#groups"><i class="fa fa-check"></i><b>3.4</b> Groups</a></li>
+<li class="chapter" data-level="3.5" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#properties"><i class="fa fa-check"></i><b>3.5</b> Properties</a></li>
+<li class="chapter" data-level="3.6" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#b.c.-and-i.c."><i class="fa fa-check"></i><b>3.6</b> B.C. and I.C.</a></li>
+<li class="chapter" data-level="3.7" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#initial-equilibrium-1"><i class="fa fa-check"></i><b>3.7</b> Initial Equilibrium</a></li>
+<li class="chapter" data-level="3.8" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#alterations"><i class="fa fa-check"></i><b>3.8</b> Alterations</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#install-the-pile"><i class="fa fa-check"></i><b>3.8.1</b> install the pile</a></li>
+<li class="chapter" data-level="3.8.2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#vertical-loading-1"><i class="fa fa-check"></i><b>3.8.2</b> vertical loading</a></li>
+<li class="chapter" data-level="3.8.3" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#vertical-then-lateral-loading"><i class="fa fa-check"></i><b>3.8.3</b> vertical then lateral loading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pull-tests.html"><a href="pull-tests.html"><i class="fa fa-check"></i><b>4</b> Pull-Tests</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="pull-tests.html"><a href="pull-tests.html#problem-description-1"><i class="fa fa-check"></i><b>4.1</b> Problem Description</a></li>
+<li class="chapter" data-level="4.2" data-path="pull-tests.html"><a href="pull-tests.html#zones-2"><i class="fa fa-check"></i><b>4.2</b> Zones</a></li>
+<li class="chapter" data-level="4.3" data-path="pull-tests.html"><a href="pull-tests.html#properties-1"><i class="fa fa-check"></i><b>4.3</b> Properties</a></li>
+<li class="chapter" data-level="4.4" data-path="pull-tests.html"><a href="pull-tests.html#initial-equilibrium-2"><i class="fa fa-check"></i><b>4.4</b> Initial Equilibrium</a></li>
+<li class="chapter" data-level="4.5" data-path="pull-tests.html"><a href="pull-tests.html#alterations-1"><i class="fa fa-check"></i><b>4.5</b> Alterations</a></li>
+<li class="chapter" data-level="4.6" data-path="pull-tests.html"><a href="pull-tests.html#some-other-notes"><i class="fa fa-check"></i><b>4.6</b> Some other notes</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="grid.html"><a href="grid.html"><i class="fa fa-check"></i><b>5</b> Grid</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="grid.html"><a href="grid.html#primitive-shapes"><i class="fa fa-check"></i><b>5.1</b> Primitive Shapes</a></li>
+<li class="chapter" data-level="5.2" data-path="grid.html"><a href="grid.html#several-primitive-shapes-connected"><i class="fa fa-check"></i><b>5.2</b> several primitive shapes connected:</a></li>
+<li class="chapter" data-level="5.3" data-path="grid.html"><a href="grid.html#structural-element-operation"><i class="fa fa-check"></i><b>5.3</b> Structural Element Operation</a></li>
+<li class="chapter" data-level="5.4" data-path="grid.html"><a href="grid.html#densifying-grid-by-specifying-max-size-length"><i class="fa fa-check"></i><b>5.4</b> Densifying grid by specifying max size length</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="grid.html"><a href="grid.html#densify-a-grid-using-geometric-information"><i class="fa fa-check"></i><b>5.4.1</b> Densify a grid using geometric information</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html"><i class="fa fa-check"></i><b>6</b> Syntax and Grammar</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#zones-3"><i class="fa fa-check"></i><b>6.2</b> Zones</a></li>
+<li class="chapter" data-level="6.3" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#properties-2"><i class="fa fa-check"></i><b>6.3</b> Properties</a></li>
+<li class="chapter" data-level="6.4" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#gridpoints"><i class="fa fa-check"></i><b>6.4</b> Gridpoints</a></li>
+<li class="chapter" data-level="6.5" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#structural-elements"><i class="fa fa-check"></i><b>6.5</b> Structural Elements</a></li>
+<li class="chapter" data-level="6.6" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#extra-variables"><i class="fa fa-check"></i><b>6.6</b> Extra Variables</a></li>
+<li class="chapter" data-level="6.7" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#groups-and-b.c."><i class="fa fa-check"></i><b>6.7</b> Groups and B.C.</a></li>
+<li class="chapter" data-level="6.8" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#parameteric-studies"><i class="fa fa-check"></i><b>6.8</b> Parameteric Studies</a></li>
+<li class="chapter" data-level="6.9" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#results-1"><i class="fa fa-check"></i><b>6.9</b> Results</a>
+<ul>
+<li class="chapter" data-level="6.9.1" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#measuring-time-of-calculation"><i class="fa fa-check"></i><b>6.9.1</b> Measuring time of calculation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.10" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#setting-fish-variables"><i class="fa fa-check"></i><b>6.10</b> Setting FISH variables</a>
+<ul>
+<li class="chapter" data-level="6.10.1" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#issuing-command"><i class="fa fa-check"></i><b>6.10.1</b> Issuing Command</a></li>
+</ul></li>
+<li class="chapter" data-level="6.11" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#string"><i class="fa fa-check"></i><b>6.11</b> String</a></li>
+<li class="chapter" data-level="6.12" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#fish-syntax"><i class="fa fa-check"></i><b>6.12</b> Fish Syntax</a>
+<ul>
+<li class="chapter" data-level="6.12.1" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#use-of"><i class="fa fa-check"></i><b>6.12.1</b> Use of (…)</a></li>
+<li class="chapter" data-level="6.12.2" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#variable-types"><i class="fa fa-check"></i><b>6.12.2</b> Variable Types</a></li>
+<li class="chapter" data-level="6.12.3" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#traditional-for-loop-in-fish"><i class="fa fa-check"></i><b>6.12.3</b> Traditional for loop in FISH</a></li>
+<li class="chapter" data-level="6.12.4" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#if-else-endif-construct"><i class="fa fa-check"></i><b>6.12.4</b> if else endif construct</a></li>
+<li class="chapter" data-level="6.12.5" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#arrays-and-maps"><i class="fa fa-check"></i><b>6.12.5</b> Arrays and Maps</a></li>
+<li class="chapter" data-level="6.12.6" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#fish-function"><i class="fa fa-check"></i><b>6.12.6</b> Fish Function</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="theory.html"><a href="theory.html"><i class="fa fa-check"></i><b>7</b> Theory</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="theory.html"><a href="theory.html#structural-elements-1"><i class="fa fa-check"></i><b>7.1</b> Structural Elements</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="theory.html"><a href="theory.html#types-of-sel"><i class="fa fa-check"></i><b>7.1.1</b> Types of SEL</a></li>
+<li class="chapter" data-level="7.1.2" data-path="theory.html"><a href="theory.html#joining-sel-to-one-another"><i class="fa fa-check"></i><b>7.1.2</b> Joining SEL to one another</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="theory.html"><a href="theory.html#interface-1"><i class="fa fa-check"></i><b>7.2</b> Interface</a></li>
+<li class="chapter" data-level="7.3" data-path="theory.html"><a href="theory.html#formulation"><i class="fa fa-check"></i><b>7.3</b> Formulation</a></li>
+<li class="chapter" data-level="7.4" data-path="theory.html"><a href="theory.html#creation-of-interface-geometry"><i class="fa fa-check"></i><b>7.4</b> Creation of Interface Geometry</a></li>
+<li class="chapter" data-level="7.5" data-path="theory.html"><a href="theory.html#typical-properties"><i class="fa fa-check"></i><b>7.5</b> Typical Properties</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="theory.html"><a href="theory.html#shear-dilatancy"><i class="fa fa-check"></i><b>7.5.1</b> Shear Dilatancy</a></li>
+<li class="chapter" data-level="7.5.2" data-path="theory.html"><a href="theory.html#compression-test-on-strain-softening-material"><i class="fa fa-check"></i><b>7.5.2</b> Compression Test on strain-softening material</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="command.html"><a href="command.html"><i class="fa fa-check"></i><b>8</b> Command</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="command.html"><a href="command.html#interface-2"><i class="fa fa-check"></i><b>8.1</b> Interface</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="command.html"><a href="command.html#zone-face-group"><i class="fa fa-check"></i><b>8.1.1</b> zone face group</a></li>
+<li class="chapter" data-level="8.1.2" data-path="command.html"><a href="command.html#zone-face-skin"><i class="fa fa-check"></i><b>8.1.2</b> zone face skin</a></li>
+<li class="chapter" data-level="8.1.3" data-path="command.html"><a href="command.html#zone-separate"><i class="fa fa-check"></i><b>8.1.3</b> zone separate</a></li>
+<li class="chapter" data-level="8.1.4" data-path="command.html"><a href="command.html#zone-interface-create"><i class="fa fa-check"></i><b>8.1.4</b> zone interface create</a></li>
+<li class="chapter" data-level="8.1.5" data-path="command.html"><a href="command.html#range"><i class="fa fa-check"></i><b>8.1.5</b> range</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="command.html"><a href="command.html#define-fish-functions"><i class="fa fa-check"></i><b>8.2</b> Define Fish functions</a></li>
+<li class="chapter" data-level="8.3" data-path="command.html"><a href="command.html#some-code"><i class="fa fa-check"></i><b>8.3</b> Some Code</a></li>
+<li class="chapter" data-level="8.4" data-path="command.html"><a href="command.html#interface-3"><i class="fa fa-check"></i><b>8.4</b> Interface</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="command.html"><a href="command.html#penetration"><i class="fa fa-check"></i><b>8.4.1</b> Penetration</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="kaist-model-code-for-recovery.html"><a href="kaist-model-code-for-recovery.html"><i class="fa fa-check"></i><b>9</b> KAIST Model Code for Recovery</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="kaist-model-code-for-recovery.html"><a href="kaist-model-code-for-recovery.html#version-16"><i class="fa fa-check"></i><b>9.1</b> version 16</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"><a href="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"><i class="fa fa-check"></i><b>10</b> Simulation of Pull-Tests for Fully Bonded Rock Reinforcement</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><p><code>FLAC3D</code> Gitbook</p></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="kaist-model-with-tran" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> KAIST Model with Tran</h1>
+<div id="initial-configuration" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Initial Configuration</h2>
+<p><img src="myfigureeeeee/boundary.PNG" width="100%" /></p>
+<p><img src="myfigureeeeee/new_configuration.PNG" width="100%" /></p>
+<p><img src="myfigureeeeee/blocks.PNG" width="100%" /></p>
+<p><img src="myfigureeeeee/blocks2.PNG" width="100%" /></p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
+<img src="myfigureeeeee/coarse.PNG" alt="Coarse Mesh" width="100%" />
+<p class="caption">
+Figure 1.1: Coarse Mesh
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
+<img src="myfigureeeeee/fine.PNG" alt="Fine Mesh" width="100%" />
+<p class="caption">
+Figure 1.2: Fine Mesh
+</p>
+</div>
+</div>
+<div id="code-block" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Code Block</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="kaist-model-with-tran.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">############# SI UNIT ##################</span></span>
+<span id="cb1-2"><a href="kaist-model-with-tran.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">####### m, Pa, kg/m3, m/s2,   ##########</span></span>
+<span id="cb1-3"><a href="kaist-model-with-tran.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-4"><a href="kaist-model-with-tran.html#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="kaist-model-with-tran.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;       ((((((((((((((((======== NEW RUN ========)))))))))))))))&quot;</span>)</span>
+<span id="cb1-6"><a href="kaist-model-with-tran.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="kaist-model-with-tran.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itasca <span class="im">as</span> it</span>
+<span id="cb1-8"><a href="kaist-model-with-tran.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-9"><a href="kaist-model-with-tran.html#cb1-9" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(threshold<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb1-10"><a href="kaist-model-with-tran.html#cb1-10" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;python-reset-state false&quot;</span>)</span>
+<span id="cb1-11"><a href="kaist-model-with-tran.html#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> zonearray <span class="im">as</span> za</span>
+<span id="cb1-12"><a href="kaist-model-with-tran.html#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itasca <span class="im">import</span> gridpointarray <span class="im">as</span> gpa</span>
+<span id="cb1-13"><a href="kaist-model-with-tran.html#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="kaist-model-with-tran.html#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-15"><a href="kaist-model-with-tran.html#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">############ PARAMETERS ################</span></span>
+<span id="cb1-16"><a href="kaist-model-with-tran.html#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-17"><a href="kaist-model-with-tran.html#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="kaist-model-with-tran.html#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Mesh Details</span></span>
+<span id="cb1-19"><a href="kaist-model-with-tran.html#cb1-19" aria-hidden="true" tabindex="-1"></a>_radial <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb1-20"><a href="kaist-model-with-tran.html#cb1-20" aria-hidden="true" tabindex="-1"></a>_perimeter <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb1-21"><a href="kaist-model-with-tran.html#cb1-21" aria-hidden="true" tabindex="-1"></a>_axial <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb1-22"><a href="kaist-model-with-tran.html#cb1-22" aria-hidden="true" tabindex="-1"></a>_outer <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb1-23"><a href="kaist-model-with-tran.html#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="kaist-model-with-tran.html#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Physical Constants</span></span>
+<span id="cb1-25"><a href="kaist-model-with-tran.html#cb1-25" aria-hidden="true" tabindex="-1"></a>_gravity <span class="op">=</span> <span class="fl">9.80665</span></span>
+<span id="cb1-26"><a href="kaist-model-with-tran.html#cb1-26" aria-hidden="true" tabindex="-1"></a>_K <span class="op">=</span> <span class="fl">0.318</span> <span class="co"># 1-sin(\phi) (Jacky)</span></span>
+<span id="cb1-27"><a href="kaist-model-with-tran.html#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="kaist-model-with-tran.html#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Dimensions</span></span>
+<span id="cb1-29"><a href="kaist-model-with-tran.html#cb1-29" aria-hidden="true" tabindex="-1"></a>_D_shaft <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb1-30"><a href="kaist-model-with-tran.html#cb1-30" aria-hidden="true" tabindex="-1"></a>_H_shaft <span class="op">=</span> <span class="fl">7.45</span></span>
+<span id="cb1-31"><a href="kaist-model-with-tran.html#cb1-31" aria-hidden="true" tabindex="-1"></a>_T_plate <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb1-32"><a href="kaist-model-with-tran.html#cb1-32" aria-hidden="true" tabindex="-1"></a>_B_footing <span class="op">=</span> <span class="fl">3.25</span> <span class="op">+</span> <span class="fl">0.1</span></span>
+<span id="cb1-33"><a href="kaist-model-with-tran.html#cb1-33" aria-hidden="true" tabindex="-1"></a>_D_footing <span class="op">=</span> _H_shaft <span class="op">+</span> _T_plate</span>
+<span id="cb1-34"><a href="kaist-model-with-tran.html#cb1-34" aria-hidden="true" tabindex="-1"></a>_B_soil <span class="op">=</span> _B_footing<span class="op">*</span><span class="dv">5</span></span>
+<span id="cb1-35"><a href="kaist-model-with-tran.html#cb1-35" aria-hidden="true" tabindex="-1"></a>_D_soil <span class="op">=</span> _D_footing <span class="op">+</span> _B_footing<span class="op">*</span><span class="dv">5</span></span>
+<span id="cb1-36"><a href="kaist-model-with-tran.html#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="kaist-model-with-tran.html#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Concrete Properties</span></span>
+<span id="cb1-38"><a href="kaist-model-with-tran.html#cb1-38" aria-hidden="true" tabindex="-1"></a>_bulk <span class="op">=</span> <span class="fl">4.1667e10</span></span>
+<span id="cb1-39"><a href="kaist-model-with-tran.html#cb1-39" aria-hidden="true" tabindex="-1"></a>_shear <span class="op">=</span> <span class="fl">1.9231e10</span> </span>
+<span id="cb1-40"><a href="kaist-model-with-tran.html#cb1-40" aria-hidden="true" tabindex="-1"></a>_density_concrete <span class="op">=</span> <span class="dv">2400</span></span>
+<span id="cb1-41"><a href="kaist-model-with-tran.html#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="kaist-model-with-tran.html#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Soil Properties</span></span>
+<span id="cb1-43"><a href="kaist-model-with-tran.html#cb1-43" aria-hidden="true" tabindex="-1"></a>_E_o <span class="op">=</span> <span class="fl">80e6</span></span>
+<span id="cb1-44"><a href="kaist-model-with-tran.html#cb1-44" aria-hidden="true" tabindex="-1"></a>_const <span class="op">=</span> <span class="fl">1e6</span></span>
+<span id="cb1-45"><a href="kaist-model-with-tran.html#cb1-45" aria-hidden="true" tabindex="-1"></a>_poisson <span class="op">=</span> <span class="fl">0.3</span></span>
+<span id="cb1-46"><a href="kaist-model-with-tran.html#cb1-46" aria-hidden="true" tabindex="-1"></a>_density_soil <span class="op">=</span> <span class="dv">1530</span></span>
+<span id="cb1-47"><a href="kaist-model-with-tran.html#cb1-47" aria-hidden="true" tabindex="-1"></a>_cohesion <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb1-48"><a href="kaist-model-with-tran.html#cb1-48" aria-hidden="true" tabindex="-1"></a>_friction <span class="op">=</span> <span class="dv">47</span></span>
+<span id="cb1-49"><a href="kaist-model-with-tran.html#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="kaist-model-with-tran.html#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Interface Properties</span></span>
+<span id="cb1-51"><a href="kaist-model-with-tran.html#cb1-51" aria-hidden="true" tabindex="-1"></a>_stiff_norm <span class="op">=</span> <span class="fl">1e10</span></span>
+<span id="cb1-52"><a href="kaist-model-with-tran.html#cb1-52" aria-hidden="true" tabindex="-1"></a>_stiff_shear <span class="op">=</span> <span class="fl">1e10</span></span>
+<span id="cb1-53"><a href="kaist-model-with-tran.html#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="kaist-model-with-tran.html#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-55"><a href="kaist-model-with-tran.html#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co">############### ZONES ##################</span></span>
+<span id="cb1-56"><a href="kaist-model-with-tran.html#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-57"><a href="kaist-model-with-tran.html#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="kaist-model-with-tran.html#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="kaist-model-with-tran.html#cb1-59" aria-hidden="true" tabindex="-1"></a>command_zone <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb1-60"><a href="kaist-model-with-tran.html#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="kaist-model-with-tran.html#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="st">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span></span>
+<span id="cb1-62"><a href="kaist-model-with-tran.html#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="st">;;;;;;;;;;;;;;;;   Upper Plate    ;;;;;;;;;;;;;;;;;;;;;</span></span>
+<span id="cb1-63"><a href="kaist-model-with-tran.html#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="st">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span></span>
+<span id="cb1-64"><a href="kaist-model-with-tran.html#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="kaist-model-with-tran.html#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="st">model new</span></span>
+<span id="cb1-66"><a href="kaist-model-with-tran.html#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="st">z crea r-c p 0 (0,0,0) ...</span></span>
+<span id="cb1-67"><a href="kaist-model-with-tran.html#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="st">           p 1 (0,</span><span class="sc">{B_footing}</span><span class="st">,0) ...</span></span>
+<span id="cb1-68"><a href="kaist-model-with-tran.html#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="st">           p 2 (0,0,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-69"><a href="kaist-model-with-tran.html#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="st">           p 3 (</span><span class="sc">{B_footing}</span><span class="st">,0,0) ...</span></span>
+<span id="cb1-70"><a href="kaist-model-with-tran.html#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="st">           p 4 (0,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-71"><a href="kaist-model-with-tran.html#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="st">           p 5 (</span><span class="sc">{B_footing}</span><span class="st">,0,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-72"><a href="kaist-model-with-tran.html#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="st">           p 6 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,0) ...</span></span>
+<span id="cb1-73"><a href="kaist-model-with-tran.html#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="st">           p 7 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-74"><a href="kaist-model-with-tran.html#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="st">           p 8 (0,</span><span class="sc">{D_shaft}</span><span class="st">,0) ...</span></span>
+<span id="cb1-75"><a href="kaist-model-with-tran.html#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="st">           p 9 (</span><span class="sc">{D_shaft}</span><span class="st">,0,0) ...</span></span>
+<span id="cb1-76"><a href="kaist-model-with-tran.html#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="st">           p 10 (0,</span><span class="sc">{D_shaft}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-77"><a href="kaist-model-with-tran.html#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="st">           p 11 (</span><span class="sc">{D_shaft}</span><span class="st">,0,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-78"><a href="kaist-model-with-tran.html#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="st">           size </span><span class="sc">{radial}</span><span class="st"> 15 10 20 ...</span></span>
+<span id="cb1-79"><a href="kaist-model-with-tran.html#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="st">           rat 1 0.8 1 1 ...</span></span>
+<span id="cb1-80"><a href="kaist-model-with-tran.html#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="st">           fill</span></span>
+<span id="cb1-81"><a href="kaist-model-with-tran.html#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="st">           </span></span>
+<span id="cb1-82"><a href="kaist-model-with-tran.html#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="st">z crea b p 0 (</span><span class="sc">{B_footing}</span><span class="st">,0,0) ...</span></span>
+<span id="cb1-83"><a href="kaist-model-with-tran.html#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="st">         p 1 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,0) ...</span></span>
+<span id="cb1-84"><a href="kaist-model-with-tran.html#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="st">         p 2 (</span><span class="sc">{B_footing}</span><span class="st">,0,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-85"><a href="kaist-model-with-tran.html#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="st">         p 3 (</span><span class="sc">{B_soil}</span><span class="st">,0,0) ...</span></span>
+<span id="cb1-86"><a href="kaist-model-with-tran.html#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="st">         p 4 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-87"><a href="kaist-model-with-tran.html#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="st">         p 5 (</span><span class="sc">{B_soil}</span><span class="st">,0,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-88"><a href="kaist-model-with-tran.html#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="st">         p 6 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,0) ...</span></span>
+<span id="cb1-89"><a href="kaist-model-with-tran.html#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="st">         p 7 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-90"><a href="kaist-model-with-tran.html#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="st">         size </span><span class="sc">{radial}</span><span class="st"> 15 </span><span class="sc">{outer}</span><span class="st"> ...</span></span>
+<span id="cb1-91"><a href="kaist-model-with-tran.html#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="st">         rat 1 0.8 1.4 ;blue</span></span>
+<span id="cb1-92"><a href="kaist-model-with-tran.html#cb1-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-93"><a href="kaist-model-with-tran.html#cb1-93" aria-hidden="true" tabindex="-1"></a><span class="st">z crea b p 0 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,0) ...</span></span>
+<span id="cb1-94"><a href="kaist-model-with-tran.html#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="st">         p 1 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,0) ...</span></span>
+<span id="cb1-95"><a href="kaist-model-with-tran.html#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="st">         p 2 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-96"><a href="kaist-model-with-tran.html#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="st">         p 3 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,0) ...</span></span>
+<span id="cb1-97"><a href="kaist-model-with-tran.html#cb1-97" aria-hidden="true" tabindex="-1"></a><span class="st">         p 4 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-98"><a href="kaist-model-with-tran.html#cb1-98" aria-hidden="true" tabindex="-1"></a><span class="st">         p 5 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-99"><a href="kaist-model-with-tran.html#cb1-99" aria-hidden="true" tabindex="-1"></a><span class="st">         p 6 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,0) ...</span></span>
+<span id="cb1-100"><a href="kaist-model-with-tran.html#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="st">         p 7 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-101"><a href="kaist-model-with-tran.html#cb1-101" aria-hidden="true" tabindex="-1"></a><span class="st">         size </span><span class="sc">{radial}</span><span class="st"> 15 </span><span class="sc">{outer}</span><span class="st"> ...</span></span>
+<span id="cb1-102"><a href="kaist-model-with-tran.html#cb1-102" aria-hidden="true" tabindex="-1"></a><span class="st">         rat 1.4 0.8 1.4</span></span>
+<span id="cb1-103"><a href="kaist-model-with-tran.html#cb1-103" aria-hidden="true" tabindex="-1"></a><span class="st">           </span></span>
+<span id="cb1-104"><a href="kaist-model-with-tran.html#cb1-104" aria-hidden="true" tabindex="-1"></a><span class="st">z crea b p 0 (0,</span><span class="sc">{B_footing}</span><span class="st">,0) ...</span></span>
+<span id="cb1-105"><a href="kaist-model-with-tran.html#cb1-105" aria-hidden="true" tabindex="-1"></a><span class="st">         p 1 (0,</span><span class="sc">{B_soil}</span><span class="st">,0) ...</span></span>
+<span id="cb1-106"><a href="kaist-model-with-tran.html#cb1-106" aria-hidden="true" tabindex="-1"></a><span class="st">         p 2 (0,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-107"><a href="kaist-model-with-tran.html#cb1-107" aria-hidden="true" tabindex="-1"></a><span class="st">         p 3 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,0) ...</span></span>
+<span id="cb1-108"><a href="kaist-model-with-tran.html#cb1-108" aria-hidden="true" tabindex="-1"></a><span class="st">         p 4 (0,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-109"><a href="kaist-model-with-tran.html#cb1-109" aria-hidden="true" tabindex="-1"></a><span class="st">         p 5 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-110"><a href="kaist-model-with-tran.html#cb1-110" aria-hidden="true" tabindex="-1"></a><span class="st">         p 6 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,0) ...</span></span>
+<span id="cb1-111"><a href="kaist-model-with-tran.html#cb1-111" aria-hidden="true" tabindex="-1"></a><span class="st">         p 7 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-112"><a href="kaist-model-with-tran.html#cb1-112" aria-hidden="true" tabindex="-1"></a><span class="st">         size </span><span class="sc">{outer}</span><span class="st"> 15 </span><span class="sc">{radial}</span><span class="st"> ...</span></span>
+<span id="cb1-113"><a href="kaist-model-with-tran.html#cb1-113" aria-hidden="true" tabindex="-1"></a><span class="st">         rat 1.4 0.8 1 ;purple</span></span>
+<span id="cb1-114"><a href="kaist-model-with-tran.html#cb1-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-115"><a href="kaist-model-with-tran.html#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="st">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span></span>
+<span id="cb1-116"><a href="kaist-model-with-tran.html#cb1-116" aria-hidden="true" tabindex="-1"></a><span class="st">;;;;;;;;;;;;;;;;;;;;   Plate    ;;;;;;;;;;;;;;;;;;;;;;;</span></span>
+<span id="cb1-117"><a href="kaist-model-with-tran.html#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="st">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span></span>
+<span id="cb1-118"><a href="kaist-model-with-tran.html#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-119"><a href="kaist-model-with-tran.html#cb1-119" aria-hidden="true" tabindex="-1"></a><span class="st">z crea r-c p 0 (0,0,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-120"><a href="kaist-model-with-tran.html#cb1-120" aria-hidden="true" tabindex="-1"></a><span class="st">           p 1 (0,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-121"><a href="kaist-model-with-tran.html#cb1-121" aria-hidden="true" tabindex="-1"></a><span class="st">           p 2 (0,0,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-122"><a href="kaist-model-with-tran.html#cb1-122" aria-hidden="true" tabindex="-1"></a><span class="st">           p 3 (</span><span class="sc">{B_footing}</span><span class="st">,0,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-123"><a href="kaist-model-with-tran.html#cb1-123" aria-hidden="true" tabindex="-1"></a><span class="st">           p 4 (0,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-124"><a href="kaist-model-with-tran.html#cb1-124" aria-hidden="true" tabindex="-1"></a><span class="st">           p 5 (</span><span class="sc">{B_footing}</span><span class="st">,0,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-125"><a href="kaist-model-with-tran.html#cb1-125" aria-hidden="true" tabindex="-1"></a><span class="st">           p 6 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-126"><a href="kaist-model-with-tran.html#cb1-126" aria-hidden="true" tabindex="-1"></a><span class="st">           p 7 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-127"><a href="kaist-model-with-tran.html#cb1-127" aria-hidden="true" tabindex="-1"></a><span class="st">           p 8 (0,</span><span class="sc">{D_shaft}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-128"><a href="kaist-model-with-tran.html#cb1-128" aria-hidden="true" tabindex="-1"></a><span class="st">           p 9 (</span><span class="sc">{D_shaft}</span><span class="st">,0,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-129"><a href="kaist-model-with-tran.html#cb1-129" aria-hidden="true" tabindex="-1"></a><span class="st">           p 10 (0,</span><span class="sc">{D_shaft}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-130"><a href="kaist-model-with-tran.html#cb1-130" aria-hidden="true" tabindex="-1"></a><span class="st">           p 11 (</span><span class="sc">{D_shaft}</span><span class="st">,0,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-131"><a href="kaist-model-with-tran.html#cb1-131" aria-hidden="true" tabindex="-1"></a><span class="st">           size </span><span class="sc">{radial}</span><span class="st"> 4 10 20 ...</span></span>
+<span id="cb1-132"><a href="kaist-model-with-tran.html#cb1-132" aria-hidden="true" tabindex="-1"></a><span class="st">           rat 1 1 1 1 ...</span></span>
+<span id="cb1-133"><a href="kaist-model-with-tran.html#cb1-133" aria-hidden="true" tabindex="-1"></a><span class="st">           fill</span></span>
+<span id="cb1-134"><a href="kaist-model-with-tran.html#cb1-134" aria-hidden="true" tabindex="-1"></a><span class="st">           </span></span>
+<span id="cb1-135"><a href="kaist-model-with-tran.html#cb1-135" aria-hidden="true" tabindex="-1"></a><span class="st">z crea b p 0 (</span><span class="sc">{B_footing}</span><span class="st">,0,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-136"><a href="kaist-model-with-tran.html#cb1-136" aria-hidden="true" tabindex="-1"></a><span class="st">         p 1 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-137"><a href="kaist-model-with-tran.html#cb1-137" aria-hidden="true" tabindex="-1"></a><span class="st">         p 2 (</span><span class="sc">{B_footing}</span><span class="st">,0,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-138"><a href="kaist-model-with-tran.html#cb1-138" aria-hidden="true" tabindex="-1"></a><span class="st">         p 3 (</span><span class="sc">{B_soil}</span><span class="st">,0,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-139"><a href="kaist-model-with-tran.html#cb1-139" aria-hidden="true" tabindex="-1"></a><span class="st">         p 4 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-140"><a href="kaist-model-with-tran.html#cb1-140" aria-hidden="true" tabindex="-1"></a><span class="st">         p 5 (</span><span class="sc">{B_soil}</span><span class="st">,0,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-141"><a href="kaist-model-with-tran.html#cb1-141" aria-hidden="true" tabindex="-1"></a><span class="st">         p 6 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-142"><a href="kaist-model-with-tran.html#cb1-142" aria-hidden="true" tabindex="-1"></a><span class="st">         p 7 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-143"><a href="kaist-model-with-tran.html#cb1-143" aria-hidden="true" tabindex="-1"></a><span class="st">         size </span><span class="sc">{radial}</span><span class="st"> 4 </span><span class="sc">{outer}</span><span class="st"> ...</span></span>
+<span id="cb1-144"><a href="kaist-model-with-tran.html#cb1-144" aria-hidden="true" tabindex="-1"></a><span class="st">         rat 1 1 1.4 ;blue</span></span>
+<span id="cb1-145"><a href="kaist-model-with-tran.html#cb1-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-146"><a href="kaist-model-with-tran.html#cb1-146" aria-hidden="true" tabindex="-1"></a><span class="st">z crea b p 0 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-147"><a href="kaist-model-with-tran.html#cb1-147" aria-hidden="true" tabindex="-1"></a><span class="st">         p 1 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-148"><a href="kaist-model-with-tran.html#cb1-148" aria-hidden="true" tabindex="-1"></a><span class="st">         p 2 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-149"><a href="kaist-model-with-tran.html#cb1-149" aria-hidden="true" tabindex="-1"></a><span class="st">         p 3 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-150"><a href="kaist-model-with-tran.html#cb1-150" aria-hidden="true" tabindex="-1"></a><span class="st">         p 4 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-151"><a href="kaist-model-with-tran.html#cb1-151" aria-hidden="true" tabindex="-1"></a><span class="st">         p 5 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-152"><a href="kaist-model-with-tran.html#cb1-152" aria-hidden="true" tabindex="-1"></a><span class="st">         p 6 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-153"><a href="kaist-model-with-tran.html#cb1-153" aria-hidden="true" tabindex="-1"></a><span class="st">         p 7 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-154"><a href="kaist-model-with-tran.html#cb1-154" aria-hidden="true" tabindex="-1"></a><span class="st">         size </span><span class="sc">{radial}</span><span class="st"> 4 </span><span class="sc">{outer}</span><span class="st"> ...</span></span>
+<span id="cb1-155"><a href="kaist-model-with-tran.html#cb1-155" aria-hidden="true" tabindex="-1"></a><span class="st">         rat 1.4 1 1.4</span></span>
+<span id="cb1-156"><a href="kaist-model-with-tran.html#cb1-156" aria-hidden="true" tabindex="-1"></a><span class="st">           </span></span>
+<span id="cb1-157"><a href="kaist-model-with-tran.html#cb1-157" aria-hidden="true" tabindex="-1"></a><span class="st">z crea b p 0 (0,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-158"><a href="kaist-model-with-tran.html#cb1-158" aria-hidden="true" tabindex="-1"></a><span class="st">         p 1 (0,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-159"><a href="kaist-model-with-tran.html#cb1-159" aria-hidden="true" tabindex="-1"></a><span class="st">         p 2 (0,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-160"><a href="kaist-model-with-tran.html#cb1-160" aria-hidden="true" tabindex="-1"></a><span class="st">         p 3 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-161"><a href="kaist-model-with-tran.html#cb1-161" aria-hidden="true" tabindex="-1"></a><span class="st">         p 4 (0,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-162"><a href="kaist-model-with-tran.html#cb1-162" aria-hidden="true" tabindex="-1"></a><span class="st">         p 5 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-163"><a href="kaist-model-with-tran.html#cb1-163" aria-hidden="true" tabindex="-1"></a><span class="st">         p 6 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{H_shaft}</span><span class="st">) ...</span></span>
+<span id="cb1-164"><a href="kaist-model-with-tran.html#cb1-164" aria-hidden="true" tabindex="-1"></a><span class="st">         p 7 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-165"><a href="kaist-model-with-tran.html#cb1-165" aria-hidden="true" tabindex="-1"></a><span class="st">         size </span><span class="sc">{outer}</span><span class="st"> 4 </span><span class="sc">{radial}</span><span class="st"> ...</span></span>
+<span id="cb1-166"><a href="kaist-model-with-tran.html#cb1-166" aria-hidden="true" tabindex="-1"></a><span class="st">         rat 1.4 1 1 ;purple</span></span>
+<span id="cb1-167"><a href="kaist-model-with-tran.html#cb1-167" aria-hidden="true" tabindex="-1"></a><span class="st">         </span></span>
+<span id="cb1-168"><a href="kaist-model-with-tran.html#cb1-168" aria-hidden="true" tabindex="-1"></a><span class="st">         </span></span>
+<span id="cb1-169"><a href="kaist-model-with-tran.html#cb1-169" aria-hidden="true" tabindex="-1"></a><span class="st">         </span></span>
+<span id="cb1-170"><a href="kaist-model-with-tran.html#cb1-170" aria-hidden="true" tabindex="-1"></a><span class="st">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span></span>
+<span id="cb1-171"><a href="kaist-model-with-tran.html#cb1-171" aria-hidden="true" tabindex="-1"></a><span class="st">;;;;;;;;;;;;;;;   Down to Bottom    ;;;;;;;;;;;;;;;;;;;</span></span>
+<span id="cb1-172"><a href="kaist-model-with-tran.html#cb1-172" aria-hidden="true" tabindex="-1"></a><span class="st">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span></span>
+<span id="cb1-173"><a href="kaist-model-with-tran.html#cb1-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-174"><a href="kaist-model-with-tran.html#cb1-174" aria-hidden="true" tabindex="-1"></a><span class="st">z crea r-c p 0 (0,0,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-175"><a href="kaist-model-with-tran.html#cb1-175" aria-hidden="true" tabindex="-1"></a><span class="st">           p 1 (0,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-176"><a href="kaist-model-with-tran.html#cb1-176" aria-hidden="true" tabindex="-1"></a><span class="st">           p 2 (0,0,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-177"><a href="kaist-model-with-tran.html#cb1-177" aria-hidden="true" tabindex="-1"></a><span class="st">           p 3 (</span><span class="sc">{B_footing}</span><span class="st">,0,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-178"><a href="kaist-model-with-tran.html#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="st">           p 4 (0,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-179"><a href="kaist-model-with-tran.html#cb1-179" aria-hidden="true" tabindex="-1"></a><span class="st">           p 5 (</span><span class="sc">{B_footing}</span><span class="st">,0,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-180"><a href="kaist-model-with-tran.html#cb1-180" aria-hidden="true" tabindex="-1"></a><span class="st">           p 6 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-181"><a href="kaist-model-with-tran.html#cb1-181" aria-hidden="true" tabindex="-1"></a><span class="st">           p 7 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-182"><a href="kaist-model-with-tran.html#cb1-182" aria-hidden="true" tabindex="-1"></a><span class="st">           p 8 (0,</span><span class="sc">{D_shaft}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-183"><a href="kaist-model-with-tran.html#cb1-183" aria-hidden="true" tabindex="-1"></a><span class="st">           p 9 (</span><span class="sc">{D_shaft}</span><span class="st">,0,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-184"><a href="kaist-model-with-tran.html#cb1-184" aria-hidden="true" tabindex="-1"></a><span class="st">           p 10 (0,</span><span class="sc">{D_shaft}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-185"><a href="kaist-model-with-tran.html#cb1-185" aria-hidden="true" tabindex="-1"></a><span class="st">           p 11 (</span><span class="sc">{D_shaft}</span><span class="st">,0,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-186"><a href="kaist-model-with-tran.html#cb1-186" aria-hidden="true" tabindex="-1"></a><span class="st">           size </span><span class="sc">{radial}</span><span class="st"> 7 10 20 ...</span></span>
+<span id="cb1-187"><a href="kaist-model-with-tran.html#cb1-187" aria-hidden="true" tabindex="-1"></a><span class="st">           rat 1 1.4 1 1 ...</span></span>
+<span id="cb1-188"><a href="kaist-model-with-tran.html#cb1-188" aria-hidden="true" tabindex="-1"></a><span class="st">           fill</span></span>
+<span id="cb1-189"><a href="kaist-model-with-tran.html#cb1-189" aria-hidden="true" tabindex="-1"></a><span class="st">           </span></span>
+<span id="cb1-190"><a href="kaist-model-with-tran.html#cb1-190" aria-hidden="true" tabindex="-1"></a><span class="st">z crea b p 0 (</span><span class="sc">{B_footing}</span><span class="st">,0,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-191"><a href="kaist-model-with-tran.html#cb1-191" aria-hidden="true" tabindex="-1"></a><span class="st">         p 1 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-192"><a href="kaist-model-with-tran.html#cb1-192" aria-hidden="true" tabindex="-1"></a><span class="st">         p 2 (</span><span class="sc">{B_footing}</span><span class="st">,0,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-193"><a href="kaist-model-with-tran.html#cb1-193" aria-hidden="true" tabindex="-1"></a><span class="st">         p 3 (</span><span class="sc">{B_soil}</span><span class="st">,0,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-194"><a href="kaist-model-with-tran.html#cb1-194" aria-hidden="true" tabindex="-1"></a><span class="st">         p 4 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-195"><a href="kaist-model-with-tran.html#cb1-195" aria-hidden="true" tabindex="-1"></a><span class="st">         p 5 (</span><span class="sc">{B_soil}</span><span class="st">,0,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-196"><a href="kaist-model-with-tran.html#cb1-196" aria-hidden="true" tabindex="-1"></a><span class="st">         p 6 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-197"><a href="kaist-model-with-tran.html#cb1-197" aria-hidden="true" tabindex="-1"></a><span class="st">         p 7 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-198"><a href="kaist-model-with-tran.html#cb1-198" aria-hidden="true" tabindex="-1"></a><span class="st">         size </span><span class="sc">{radial}</span><span class="st"> 7 </span><span class="sc">{outer}</span><span class="st"> ...</span></span>
+<span id="cb1-199"><a href="kaist-model-with-tran.html#cb1-199" aria-hidden="true" tabindex="-1"></a><span class="st">         rat 1 1.4 1.4 ;blue</span></span>
+<span id="cb1-200"><a href="kaist-model-with-tran.html#cb1-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-201"><a href="kaist-model-with-tran.html#cb1-201" aria-hidden="true" tabindex="-1"></a><span class="st">z crea b p 0 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-202"><a href="kaist-model-with-tran.html#cb1-202" aria-hidden="true" tabindex="-1"></a><span class="st">         p 1 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-203"><a href="kaist-model-with-tran.html#cb1-203" aria-hidden="true" tabindex="-1"></a><span class="st">         p 2 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-204"><a href="kaist-model-with-tran.html#cb1-204" aria-hidden="true" tabindex="-1"></a><span class="st">         p 3 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-205"><a href="kaist-model-with-tran.html#cb1-205" aria-hidden="true" tabindex="-1"></a><span class="st">         p 4 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-206"><a href="kaist-model-with-tran.html#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="st">         p 5 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-207"><a href="kaist-model-with-tran.html#cb1-207" aria-hidden="true" tabindex="-1"></a><span class="st">         p 6 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-208"><a href="kaist-model-with-tran.html#cb1-208" aria-hidden="true" tabindex="-1"></a><span class="st">         p 7 (</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-209"><a href="kaist-model-with-tran.html#cb1-209" aria-hidden="true" tabindex="-1"></a><span class="st">         size </span><span class="sc">{radial}</span><span class="st"> 7 </span><span class="sc">{outer}</span><span class="st"> ...</span></span>
+<span id="cb1-210"><a href="kaist-model-with-tran.html#cb1-210" aria-hidden="true" tabindex="-1"></a><span class="st">         rat 1.4 1.4 1.4</span></span>
+<span id="cb1-211"><a href="kaist-model-with-tran.html#cb1-211" aria-hidden="true" tabindex="-1"></a><span class="st">           </span></span>
+<span id="cb1-212"><a href="kaist-model-with-tran.html#cb1-212" aria-hidden="true" tabindex="-1"></a><span class="st">z crea b p 0 (0,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-213"><a href="kaist-model-with-tran.html#cb1-213" aria-hidden="true" tabindex="-1"></a><span class="st">         p 1 (0,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-214"><a href="kaist-model-with-tran.html#cb1-214" aria-hidden="true" tabindex="-1"></a><span class="st">         p 2 (0,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-215"><a href="kaist-model-with-tran.html#cb1-215" aria-hidden="true" tabindex="-1"></a><span class="st">         p 3 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-216"><a href="kaist-model-with-tran.html#cb1-216" aria-hidden="true" tabindex="-1"></a><span class="st">         p 4 (0,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-217"><a href="kaist-model-with-tran.html#cb1-217" aria-hidden="true" tabindex="-1"></a><span class="st">         p 5 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-218"><a href="kaist-model-with-tran.html#cb1-218" aria-hidden="true" tabindex="-1"></a><span class="st">         p 6 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_footing}</span><span class="st">) ...</span></span>
+<span id="cb1-219"><a href="kaist-model-with-tran.html#cb1-219" aria-hidden="true" tabindex="-1"></a><span class="st">         p 7 (</span><span class="sc">{B_footing}</span><span class="st">,</span><span class="sc">{B_soil}</span><span class="st">,</span><span class="sc">{D_soil}</span><span class="st">) ...</span></span>
+<span id="cb1-220"><a href="kaist-model-with-tran.html#cb1-220" aria-hidden="true" tabindex="-1"></a><span class="st">         size </span><span class="sc">{outer}</span><span class="st"> 7 </span><span class="sc">{radial}</span><span class="st"> ...</span></span>
+<span id="cb1-221"><a href="kaist-model-with-tran.html#cb1-221" aria-hidden="true" tabindex="-1"></a><span class="st">         rat 1.4 1.4 1 ;purple</span></span>
+<span id="cb1-222"><a href="kaist-model-with-tran.html#cb1-222" aria-hidden="true" tabindex="-1"></a><span class="st">         </span></span>
+<span id="cb1-223"><a href="kaist-model-with-tran.html#cb1-223" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb1-224"><a href="kaist-model-with-tran.html#cb1-224" aria-hidden="true" tabindex="-1"></a>command <span class="op">=</span> command_zone.<span class="bu">format</span>(</span>
+<span id="cb1-225"><a href="kaist-model-with-tran.html#cb1-225" aria-hidden="true" tabindex="-1"></a>D_shaft <span class="op">=</span> _D_shaft,</span>
+<span id="cb1-226"><a href="kaist-model-with-tran.html#cb1-226" aria-hidden="true" tabindex="-1"></a>H_shaft <span class="op">=</span> _H_shaft,</span>
+<span id="cb1-227"><a href="kaist-model-with-tran.html#cb1-227" aria-hidden="true" tabindex="-1"></a>B_footing <span class="op">=</span> _B_footing,</span>
+<span id="cb1-228"><a href="kaist-model-with-tran.html#cb1-228" aria-hidden="true" tabindex="-1"></a>B_soil <span class="op">=</span> _B_soil,</span>
+<span id="cb1-229"><a href="kaist-model-with-tran.html#cb1-229" aria-hidden="true" tabindex="-1"></a>D_soil <span class="op">=</span> _D_soil,</span>
+<span id="cb1-230"><a href="kaist-model-with-tran.html#cb1-230" aria-hidden="true" tabindex="-1"></a>D_footing <span class="op">=</span> _D_footing,</span>
+<span id="cb1-231"><a href="kaist-model-with-tran.html#cb1-231" aria-hidden="true" tabindex="-1"></a>D_soil2 <span class="op">=</span> _D_soil2,</span>
+<span id="cb1-232"><a href="kaist-model-with-tran.html#cb1-232" aria-hidden="true" tabindex="-1"></a>radial<span class="op">=</span>_radial,</span>
+<span id="cb1-233"><a href="kaist-model-with-tran.html#cb1-233" aria-hidden="true" tabindex="-1"></a>axial <span class="op">=</span> _axial,</span>
+<span id="cb1-234"><a href="kaist-model-with-tran.html#cb1-234" aria-hidden="true" tabindex="-1"></a>perimeter <span class="op">=</span> _perimeter,</span>
+<span id="cb1-235"><a href="kaist-model-with-tran.html#cb1-235" aria-hidden="true" tabindex="-1"></a>outer <span class="op">=</span> _outer)</span>
+<span id="cb1-236"><a href="kaist-model-with-tran.html#cb1-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-237"><a href="kaist-model-with-tran.html#cb1-237" aria-hidden="true" tabindex="-1"></a>it.command(command)</span>
+<span id="cb1-238"><a href="kaist-model-with-tran.html#cb1-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-239"><a href="kaist-model-with-tran.html#cb1-239" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;               ======== PASSED ZONES ========&quot;</span>)</span>
+<span id="cb1-240"><a href="kaist-model-with-tran.html#cb1-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-241"><a href="kaist-model-with-tran.html#cb1-241" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-242"><a href="kaist-model-with-tran.html#cb1-242" aria-hidden="true" tabindex="-1"></a><span class="co">################ GROUPS ################</span></span>
+<span id="cb1-243"><a href="kaist-model-with-tran.html#cb1-243" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-244"><a href="kaist-model-with-tran.html#cb1-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-245"><a href="kaist-model-with-tran.html#cb1-245" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> za.pos()</span>
+<span id="cb1-246"><a href="kaist-model-with-tran.html#cb1-246" aria-hidden="true" tabindex="-1"></a>x,y,z <span class="op">=</span> p.T</span>
+<span id="cb1-247"><a href="kaist-model-with-tran.html#cb1-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-248"><a href="kaist-model-with-tran.html#cb1-248" aria-hidden="true" tabindex="-1"></a>shaft <span class="op">=</span> <span class="bu">reduce</span>(np.logical_and, (np.sqrt(x<span class="op">**</span><span class="dv">2</span><span class="op">+</span>y<span class="op">**</span><span class="dv">2</span>)<span class="op">&lt;</span>_D_shaft, z<span class="op">&lt;</span>_H_shaft))</span>
+<span id="cb1-249"><a href="kaist-model-with-tran.html#cb1-249" aria-hidden="true" tabindex="-1"></a>plate <span class="op">=</span> <span class="bu">reduce</span>(np.logical_and, (x<span class="op">&lt;</span>_B_footing,y<span class="op">&lt;</span>_B_footing, z<span class="op">&gt;</span>_H_shaft,z<span class="op">&lt;</span>_D_footing))</span>
+<span id="cb1-250"><a href="kaist-model-with-tran.html#cb1-250" aria-hidden="true" tabindex="-1"></a>za.set_group(shaft, <span class="st">&quot;shaft&quot;</span>) </span>
+<span id="cb1-251"><a href="kaist-model-with-tran.html#cb1-251" aria-hidden="true" tabindex="-1"></a>za.set_group(plate, <span class="st">&quot;plate&quot;</span>)</span>
+<span id="cb1-252"><a href="kaist-model-with-tran.html#cb1-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-253"><a href="kaist-model-with-tran.html#cb1-253" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;radial mesh number is &quot;</span>, _radial)</span>
+<span id="cb1-254"><a href="kaist-model-with-tran.html#cb1-254" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(it.zone.count(), <span class="st">&quot;zones in whole model&quot;</span>)</span>
+<span id="cb1-255"><a href="kaist-model-with-tran.html#cb1-255" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(za.in_group(<span class="st">&quot;shaft&quot;</span>).<span class="bu">sum</span>() <span class="op">+</span> za.in_group(<span class="st">&quot;plate&quot;</span>).<span class="bu">sum</span>(), <span class="st">&quot;zones in shaft+plate group.&quot;</span>) </span>
+<span id="cb1-256"><a href="kaist-model-with-tran.html#cb1-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-257"><a href="kaist-model-with-tran.html#cb1-257" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;               ======== PASSED GROUPS ========&quot;</span>)</span>
+<span id="cb1-258"><a href="kaist-model-with-tran.html#cb1-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-259"><a href="kaist-model-with-tran.html#cb1-259" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-260"><a href="kaist-model-with-tran.html#cb1-260" aria-hidden="true" tabindex="-1"></a><span class="co">######## CONSTITUTIVE MODEL ############</span></span>
+<span id="cb1-261"><a href="kaist-model-with-tran.html#cb1-261" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-262"><a href="kaist-model-with-tran.html#cb1-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-263"><a href="kaist-model-with-tran.html#cb1-263" aria-hidden="true" tabindex="-1"></a>command_zone <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb1-264"><a href="kaist-model-with-tran.html#cb1-264" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign mohr-coulomb range group ...</span></span>
+<span id="cb1-265"><a href="kaist-model-with-tran.html#cb1-265" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;Radial cylinder1&#39; or ...</span></span>
+<span id="cb1-266"><a href="kaist-model-with-tran.html#cb1-266" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;Radial cylinder9&#39; or ...</span></span>
+<span id="cb1-267"><a href="kaist-model-with-tran.html#cb1-267" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;plate&#39; or ...</span></span>
+<span id="cb1-268"><a href="kaist-model-with-tran.html#cb1-268" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;shaft&#39; or ...</span></span>
+<span id="cb1-269"><a href="kaist-model-with-tran.html#cb1-269" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick2&#39; or ...</span></span>
+<span id="cb1-270"><a href="kaist-model-with-tran.html#cb1-270" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick3&#39; or ...</span></span>
+<span id="cb1-271"><a href="kaist-model-with-tran.html#cb1-271" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick4&#39; or ...</span></span>
+<span id="cb1-272"><a href="kaist-model-with-tran.html#cb1-272" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick6&#39; or ...</span></span>
+<span id="cb1-273"><a href="kaist-model-with-tran.html#cb1-273" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick7&#39; or ...</span></span>
+<span id="cb1-274"><a href="kaist-model-with-tran.html#cb1-274" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick8&#39; or ...</span></span>
+<span id="cb1-275"><a href="kaist-model-with-tran.html#cb1-275" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick10&#39; or ...</span></span>
+<span id="cb1-276"><a href="kaist-model-with-tran.html#cb1-276" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick11&#39; or ...</span></span>
+<span id="cb1-277"><a href="kaist-model-with-tran.html#cb1-277" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick12&#39;</span></span>
+<span id="cb1-278"><a href="kaist-model-with-tran.html#cb1-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-279"><a href="kaist-model-with-tran.html#cb1-279" aria-hidden="true" tabindex="-1"></a><span class="st">; assign soil properties</span></span>
+<span id="cb1-280"><a href="kaist-model-with-tran.html#cb1-280" aria-hidden="true" tabindex="-1"></a><span class="st">zone property young </span><span class="sc">{E_o_}</span><span class="st"> ...</span></span>
+<span id="cb1-281"><a href="kaist-model-with-tran.html#cb1-281" aria-hidden="true" tabindex="-1"></a><span class="st">poisson </span><span class="sc">{poisson_}</span><span class="st"> ...</span></span>
+<span id="cb1-282"><a href="kaist-model-with-tran.html#cb1-282" aria-hidden="true" tabindex="-1"></a><span class="st">density </span><span class="sc">{density_soil_}</span><span class="st"> ...</span></span>
+<span id="cb1-283"><a href="kaist-model-with-tran.html#cb1-283" aria-hidden="true" tabindex="-1"></a><span class="st">cohesion </span><span class="sc">{cohesion_}</span><span class="st"> ...</span></span>
+<span id="cb1-284"><a href="kaist-model-with-tran.html#cb1-284" aria-hidden="true" tabindex="-1"></a><span class="st">friction </span><span class="sc">{friction_}</span><span class="st"> ...</span></span>
+<span id="cb1-285"><a href="kaist-model-with-tran.html#cb1-285" aria-hidden="true" tabindex="-1"></a><span class="st">flag-brittle true</span></span>
+<span id="cb1-286"><a href="kaist-model-with-tran.html#cb1-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-287"><a href="kaist-model-with-tran.html#cb1-287" aria-hidden="true" tabindex="-1"></a><span class="st">; let modulus depends on depth</span></span>
+<span id="cb1-288"><a href="kaist-model-with-tran.html#cb1-288" aria-hidden="true" tabindex="-1"></a><span class="st">fish define fname(E_o,const)</span></span>
+<span id="cb1-289"><a href="kaist-model-with-tran.html#cb1-289" aria-hidden="true" tabindex="-1"></a><span class="st">loop foreach pnt zone.list</span></span>
+<span id="cb1-290"><a href="kaist-model-with-tran.html#cb1-290" aria-hidden="true" tabindex="-1"></a><span class="st">z_depth = zone.pos.z(pnt)</span></span>
+<span id="cb1-291"><a href="kaist-model-with-tran.html#cb1-291" aria-hidden="true" tabindex="-1"></a><span class="st">E = E_o+const*math.sqrt(z_depth)</span></span>
+<span id="cb1-292"><a href="kaist-model-with-tran.html#cb1-292" aria-hidden="true" tabindex="-1"></a><span class="st">zone.prop(pnt,&#39;young&#39;)=E</span></span>
+<span id="cb1-293"><a href="kaist-model-with-tran.html#cb1-293" aria-hidden="true" tabindex="-1"></a><span class="st">end_loop</span></span>
+<span id="cb1-294"><a href="kaist-model-with-tran.html#cb1-294" aria-hidden="true" tabindex="-1"></a><span class="st">end</span></span>
+<span id="cb1-295"><a href="kaist-model-with-tran.html#cb1-295" aria-hidden="true" tabindex="-1"></a><span class="st">@fname(</span><span class="sc">{E_o_}</span><span class="st">,</span><span class="sc">{const_}</span><span class="st">)</span></span>
+<span id="cb1-296"><a href="kaist-model-with-tran.html#cb1-296" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb1-297"><a href="kaist-model-with-tran.html#cb1-297" aria-hidden="true" tabindex="-1"></a>command <span class="op">=</span> command_zone.<span class="bu">format</span>(</span>
+<span id="cb1-298"><a href="kaist-model-with-tran.html#cb1-298" aria-hidden="true" tabindex="-1"></a>E_o_<span class="op">=</span>_E_o,</span>
+<span id="cb1-299"><a href="kaist-model-with-tran.html#cb1-299" aria-hidden="true" tabindex="-1"></a>const_<span class="op">=</span>_const,</span>
+<span id="cb1-300"><a href="kaist-model-with-tran.html#cb1-300" aria-hidden="true" tabindex="-1"></a>poisson_<span class="op">=</span>_poisson,</span>
+<span id="cb1-301"><a href="kaist-model-with-tran.html#cb1-301" aria-hidden="true" tabindex="-1"></a>density_soil_<span class="op">=</span>_density_soil,</span>
+<span id="cb1-302"><a href="kaist-model-with-tran.html#cb1-302" aria-hidden="true" tabindex="-1"></a>cohesion_ <span class="op">=</span> _cohesion,</span>
+<span id="cb1-303"><a href="kaist-model-with-tran.html#cb1-303" aria-hidden="true" tabindex="-1"></a>friction_ <span class="op">=</span> _friction,</span>
+<span id="cb1-304"><a href="kaist-model-with-tran.html#cb1-304" aria-hidden="true" tabindex="-1"></a>bulk_<span class="op">=</span>_bulk,</span>
+<span id="cb1-305"><a href="kaist-model-with-tran.html#cb1-305" aria-hidden="true" tabindex="-1"></a>shear_<span class="op">=</span>_shear,</span>
+<span id="cb1-306"><a href="kaist-model-with-tran.html#cb1-306" aria-hidden="true" tabindex="-1"></a>density_<span class="op">=</span>_density_concrete)</span>
+<span id="cb1-307"><a href="kaist-model-with-tran.html#cb1-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-308"><a href="kaist-model-with-tran.html#cb1-308" aria-hidden="true" tabindex="-1"></a>it.command(command)</span>
+<span id="cb1-309"><a href="kaist-model-with-tran.html#cb1-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-310"><a href="kaist-model-with-tran.html#cb1-310" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;               ======== PASSED CONSTITUTIVE MODEL ========&quot;</span>)</span>
+<span id="cb1-311"><a href="kaist-model-with-tran.html#cb1-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-312"><a href="kaist-model-with-tran.html#cb1-312" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-313"><a href="kaist-model-with-tran.html#cb1-313" aria-hidden="true" tabindex="-1"></a><span class="co">############# INTERFACE ################</span></span>
+<span id="cb1-314"><a href="kaist-model-with-tran.html#cb1-314" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-315"><a href="kaist-model-with-tran.html#cb1-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-316"><a href="kaist-model-with-tran.html#cb1-316" aria-hidden="true" tabindex="-1"></a>command_zone <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb1-317"><a href="kaist-model-with-tran.html#cb1-317" aria-hidden="true" tabindex="-1"></a><span class="st">zone interface &#39;interface 1&#39; create by-face separate range group &#39;plate&#39; ...</span></span>
+<span id="cb1-318"><a href="kaist-model-with-tran.html#cb1-318" aria-hidden="true" tabindex="-1"></a><span class="st">group &#39;Radial cylinder1&#39; or ...</span></span>
+<span id="cb1-319"><a href="kaist-model-with-tran.html#cb1-319" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick2&#39; or ...</span></span>
+<span id="cb1-320"><a href="kaist-model-with-tran.html#cb1-320" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick3&#39; or ...</span></span>
+<span id="cb1-321"><a href="kaist-model-with-tran.html#cb1-321" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick4&#39; or ...</span></span>
+<span id="cb1-322"><a href="kaist-model-with-tran.html#cb1-322" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick6&#39; or ...</span></span>
+<span id="cb1-323"><a href="kaist-model-with-tran.html#cb1-323" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick7&#39; or ...</span></span>
+<span id="cb1-324"><a href="kaist-model-with-tran.html#cb1-324" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick8&#39; or ...</span></span>
+<span id="cb1-325"><a href="kaist-model-with-tran.html#cb1-325" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick10&#39; or ...</span></span>
+<span id="cb1-326"><a href="kaist-model-with-tran.html#cb1-326" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick11&#39; or ...</span></span>
+<span id="cb1-327"><a href="kaist-model-with-tran.html#cb1-327" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick12&#39;</span></span>
+<span id="cb1-328"><a href="kaist-model-with-tran.html#cb1-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-329"><a href="kaist-model-with-tran.html#cb1-329" aria-hidden="true" tabindex="-1"></a><span class="st">zone interface &#39;interface 2&#39; create by-face separate range group &#39;shaft&#39; ...</span></span>
+<span id="cb1-330"><a href="kaist-model-with-tran.html#cb1-330" aria-hidden="true" tabindex="-1"></a><span class="st">group &#39;Radial cylinder1&#39; or ...</span></span>
+<span id="cb1-331"><a href="kaist-model-with-tran.html#cb1-331" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick2&#39; or ...</span></span>
+<span id="cb1-332"><a href="kaist-model-with-tran.html#cb1-332" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick3&#39; or ...</span></span>
+<span id="cb1-333"><a href="kaist-model-with-tran.html#cb1-333" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick4&#39; or ...</span></span>
+<span id="cb1-334"><a href="kaist-model-with-tran.html#cb1-334" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick6&#39; or ...</span></span>
+<span id="cb1-335"><a href="kaist-model-with-tran.html#cb1-335" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick7&#39; or ...</span></span>
+<span id="cb1-336"><a href="kaist-model-with-tran.html#cb1-336" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick8&#39; or ...</span></span>
+<span id="cb1-337"><a href="kaist-model-with-tran.html#cb1-337" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick10&#39; or ...</span></span>
+<span id="cb1-338"><a href="kaist-model-with-tran.html#cb1-338" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick11&#39; or ...</span></span>
+<span id="cb1-339"><a href="kaist-model-with-tran.html#cb1-339" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;brick12&#39;</span></span>
+<span id="cb1-340"><a href="kaist-model-with-tran.html#cb1-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-341"><a href="kaist-model-with-tran.html#cb1-341" aria-hidden="true" tabindex="-1"></a><span class="st">zone interface &#39;interface 1&#39; node property ...</span></span>
+<span id="cb1-342"><a href="kaist-model-with-tran.html#cb1-342" aria-hidden="true" tabindex="-1"></a><span class="st">stiffness-normal </span><span class="sc">{stiff_norm_}</span><span class="st"> ...</span></span>
+<span id="cb1-343"><a href="kaist-model-with-tran.html#cb1-343" aria-hidden="true" tabindex="-1"></a><span class="st">stiffness-shear </span><span class="sc">{stiff_shear_}</span><span class="st"> ...</span></span>
+<span id="cb1-344"><a href="kaist-model-with-tran.html#cb1-344" aria-hidden="true" tabindex="-1"></a><span class="st">friction </span><span class="sc">{friction_}</span><span class="st"> ...</span></span>
+<span id="cb1-345"><a href="kaist-model-with-tran.html#cb1-345" aria-hidden="true" tabindex="-1"></a><span class="st">cohesion </span><span class="sc">{cohesion_}</span></span>
+<span id="cb1-346"><a href="kaist-model-with-tran.html#cb1-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-347"><a href="kaist-model-with-tran.html#cb1-347" aria-hidden="true" tabindex="-1"></a><span class="st">zone interface &#39;interface 2&#39; node property ...</span></span>
+<span id="cb1-348"><a href="kaist-model-with-tran.html#cb1-348" aria-hidden="true" tabindex="-1"></a><span class="st">stiffness-normal </span><span class="sc">{stiff_norm_}</span><span class="st"> ...</span></span>
+<span id="cb1-349"><a href="kaist-model-with-tran.html#cb1-349" aria-hidden="true" tabindex="-1"></a><span class="st">stiffness-shear </span><span class="sc">{stiff_shear_}</span><span class="st"> ...</span></span>
+<span id="cb1-350"><a href="kaist-model-with-tran.html#cb1-350" aria-hidden="true" tabindex="-1"></a><span class="st">friction </span><span class="sc">{friction_}</span><span class="st"> ...</span></span>
+<span id="cb1-351"><a href="kaist-model-with-tran.html#cb1-351" aria-hidden="true" tabindex="-1"></a><span class="st">cohesion </span><span class="sc">{cohesion_}</span></span>
+<span id="cb1-352"><a href="kaist-model-with-tran.html#cb1-352" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb1-353"><a href="kaist-model-with-tran.html#cb1-353" aria-hidden="true" tabindex="-1"></a>command <span class="op">=</span> command_zone.<span class="bu">format</span>(</span>
+<span id="cb1-354"><a href="kaist-model-with-tran.html#cb1-354" aria-hidden="true" tabindex="-1"></a>stiff_norm_<span class="op">=</span>_stiff_norm,</span>
+<span id="cb1-355"><a href="kaist-model-with-tran.html#cb1-355" aria-hidden="true" tabindex="-1"></a>stiff_shear_<span class="op">=</span>_stiff_shear,</span>
+<span id="cb1-356"><a href="kaist-model-with-tran.html#cb1-356" aria-hidden="true" tabindex="-1"></a>friction_ <span class="op">=</span> _friction,</span>
+<span id="cb1-357"><a href="kaist-model-with-tran.html#cb1-357" aria-hidden="true" tabindex="-1"></a>cohesion_ <span class="op">=</span> _cohesion)</span>
+<span id="cb1-358"><a href="kaist-model-with-tran.html#cb1-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-359"><a href="kaist-model-with-tran.html#cb1-359" aria-hidden="true" tabindex="-1"></a>it.command(command)</span>
+<span id="cb1-360"><a href="kaist-model-with-tran.html#cb1-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-361"><a href="kaist-model-with-tran.html#cb1-361" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;               ======== PASSED INTERFACE ========&quot;</span>)</span>
+<span id="cb1-362"><a href="kaist-model-with-tran.html#cb1-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-363"><a href="kaist-model-with-tran.html#cb1-363" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-364"><a href="kaist-model-with-tran.html#cb1-364" aria-hidden="true" tabindex="-1"></a><span class="co">######## BOUNDARY CONDITIONS ###########</span></span>
+<span id="cb1-365"><a href="kaist-model-with-tran.html#cb1-365" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-366"><a href="kaist-model-with-tran.html#cb1-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-367"><a href="kaist-model-with-tran.html#cb1-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-368"><a href="kaist-model-with-tran.html#cb1-368" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb1-369"><a href="kaist-model-with-tran.html#cb1-369" aria-hidden="true" tabindex="-1"></a><span class="st">zone face skin</span></span>
+<span id="cb1-370"><a href="kaist-model-with-tran.html#cb1-370" aria-hidden="true" tabindex="-1"></a><span class="st">;zone gridpoint fix velocity-x 0 ...</span></span>
+<span id="cb1-371"><a href="kaist-model-with-tran.html#cb1-371" aria-hidden="true" tabindex="-1"></a><span class="st">zone face apply velocity-normal 0 ...</span></span>
+<span id="cb1-372"><a href="kaist-model-with-tran.html#cb1-372" aria-hidden="true" tabindex="-1"></a><span class="st">range group &#39;West2&#39; or &#39;East3&#39;</span></span>
+<span id="cb1-373"><a href="kaist-model-with-tran.html#cb1-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-374"><a href="kaist-model-with-tran.html#cb1-374" aria-hidden="true" tabindex="-1"></a><span class="st">;zone gridpoint fix velocity-y 0 ...</span></span>
+<span id="cb1-375"><a href="kaist-model-with-tran.html#cb1-375" aria-hidden="true" tabindex="-1"></a><span class="st">zone face apply velocity-normal 0 ...</span></span>
+<span id="cb1-376"><a href="kaist-model-with-tran.html#cb1-376" aria-hidden="true" tabindex="-1"></a><span class="st">range group &#39;South3&#39; or &#39;North3&#39;</span></span>
+<span id="cb1-377"><a href="kaist-model-with-tran.html#cb1-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-378"><a href="kaist-model-with-tran.html#cb1-378" aria-hidden="true" tabindex="-1"></a><span class="st">zone gridpoint fix velocity (0,0,0) range group &#39;Top2&#39;</span></span>
+<span id="cb1-379"><a href="kaist-model-with-tran.html#cb1-379" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span>
+<span id="cb1-380"><a href="kaist-model-with-tran.html#cb1-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-381"><a href="kaist-model-with-tran.html#cb1-381" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;               ======== PASSED BOUNDARY CONDITIONS ========&quot;</span>)</span>
+<span id="cb1-382"><a href="kaist-model-with-tran.html#cb1-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-383"><a href="kaist-model-with-tran.html#cb1-383" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-384"><a href="kaist-model-with-tran.html#cb1-384" aria-hidden="true" tabindex="-1"></a><span class="co">############# INITILIZE ################</span></span>
+<span id="cb1-385"><a href="kaist-model-with-tran.html#cb1-385" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-386"><a href="kaist-model-with-tran.html#cb1-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-387"><a href="kaist-model-with-tran.html#cb1-387" aria-hidden="true" tabindex="-1"></a>it.command(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb1-388"><a href="kaist-model-with-tran.html#cb1-388" aria-hidden="true" tabindex="-1"></a><span class="st">model gravity 0 0 </span><span class="sc">{gravity_}</span></span>
+<span id="cb1-389"><a href="kaist-model-with-tran.html#cb1-389" aria-hidden="true" tabindex="-1"></a><span class="st">zone initialize-stress ratio </span><span class="sc">{K_}</span></span>
+<span id="cb1-390"><a href="kaist-model-with-tran.html#cb1-390" aria-hidden="true" tabindex="-1"></a><span class="st">zone interface &#39;interface 1&#39; node initialize-stresses</span></span>
+<span id="cb1-391"><a href="kaist-model-with-tran.html#cb1-391" aria-hidden="true" tabindex="-1"></a><span class="st">zone interface &#39;interface 2&#39; node initialize-stresses</span></span>
+<span id="cb1-392"><a href="kaist-model-with-tran.html#cb1-392" aria-hidden="true" tabindex="-1"></a><span class="st">zone ratio local</span></span>
+<span id="cb1-393"><a href="kaist-model-with-tran.html#cb1-393" aria-hidden="true" tabindex="-1"></a><span class="st">model solve ratio 1e-5</span></span>
+<span id="cb1-394"><a href="kaist-model-with-tran.html#cb1-394" aria-hidden="true" tabindex="-1"></a><span class="st">model save &#39;initialization&#39;</span></span>
+<span id="cb1-395"><a href="kaist-model-with-tran.html#cb1-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-396"><a href="kaist-model-with-tran.html#cb1-396" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>.<span class="bu">format</span>(gravity_<span class="op">=</span>_gravity, K_ <span class="op">=</span> _K))</span>
+<span id="cb1-397"><a href="kaist-model-with-tran.html#cb1-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-398"><a href="kaist-model-with-tran.html#cb1-398" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;               ======== PASSED INITIAL EQUILIBRIUM ========&quot;</span>)</span>
+<span id="cb1-399"><a href="kaist-model-with-tran.html#cb1-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-400"><a href="kaist-model-with-tran.html#cb1-400" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-401"><a href="kaist-model-with-tran.html#cb1-401" aria-hidden="true" tabindex="-1"></a><span class="co">########## VERTICAL LOADING ############</span></span>
+<span id="cb1-402"><a href="kaist-model-with-tran.html#cb1-402" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb1-403"><a href="kaist-model-with-tran.html#cb1-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-404"><a href="kaist-model-with-tran.html#cb1-404" aria-hidden="true" tabindex="-1"></a>top <span class="op">=</span> <span class="bu">reduce</span>(np.logical_and, (np.sqrt(x<span class="op">**</span><span class="dv">2</span><span class="op">+</span>y<span class="op">**</span><span class="dv">2</span>)<span class="op">&lt;</span>_D_shaft, z<span class="op">==</span>np.amin(z)))</span>
+<span id="cb1-405"><a href="kaist-model-with-tran.html#cb1-405" aria-hidden="true" tabindex="-1"></a>za.set_group(top, <span class="st">&quot;top&quot;</span>) </span>
+<span id="cb1-406"><a href="kaist-model-with-tran.html#cb1-406" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(za.in_group(<span class="st">&quot;top&quot;</span>).<span class="bu">sum</span>(), <span class="st">&quot;zones in top group.&quot;</span>) </span>
+<span id="cb1-407"><a href="kaist-model-with-tran.html#cb1-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-408"><a href="kaist-model-with-tran.html#cb1-408" aria-hidden="true" tabindex="-1"></a>command_zone <span class="op">=</span><span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb1-409"><a href="kaist-model-with-tran.html#cb1-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-410"><a href="kaist-model-with-tran.html#cb1-410" aria-hidden="true" tabindex="-1"></a><span class="st">; assign concrete properties</span></span>
+<span id="cb1-411"><a href="kaist-model-with-tran.html#cb1-411" aria-hidden="true" tabindex="-1"></a><span class="st">zone cmodel assign elastic range group &#39;shaft&#39; or &#39;plate&#39;</span></span>
+<span id="cb1-412"><a href="kaist-model-with-tran.html#cb1-412" aria-hidden="true" tabindex="-1"></a><span class="st">zone property bulk </span><span class="sc">{bulk_}</span><span class="st"> ...</span></span>
+<span id="cb1-413"><a href="kaist-model-with-tran.html#cb1-413" aria-hidden="true" tabindex="-1"></a><span class="st">shear </span><span class="sc">{shear_}</span><span class="st"> ...</span></span>
+<span id="cb1-414"><a href="kaist-model-with-tran.html#cb1-414" aria-hidden="true" tabindex="-1"></a><span class="st">density </span><span class="sc">{density_}</span><span class="st"> range group &#39;shaft&#39; or &#39;plate&#39;</span></span>
+<span id="cb1-415"><a href="kaist-model-with-tran.html#cb1-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-416"><a href="kaist-model-with-tran.html#cb1-416" aria-hidden="true" tabindex="-1"></a><span class="st">zone initialize state 0</span></span>
+<span id="cb1-417"><a href="kaist-model-with-tran.html#cb1-417" aria-hidden="true" tabindex="-1"></a><span class="st">zone gridpoint initialize displacement (0,0,0)</span></span>
+<span id="cb1-418"><a href="kaist-model-with-tran.html#cb1-418" aria-hidden="true" tabindex="-1"></a><span class="st">zone gridpoint initialize velocity     (0,0,0) </span></span>
+<span id="cb1-419"><a href="kaist-model-with-tran.html#cb1-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-420"><a href="kaist-model-with-tran.html#cb1-420" aria-hidden="true" tabindex="-1"></a><span class="st">; apply displacement to top</span></span>
+<span id="cb1-421"><a href="kaist-model-with-tran.html#cb1-421" aria-hidden="true" tabindex="-1"></a><span class="st">zone face apply velocity-normal 1e-5 range group &#39;top&#39;</span></span>
+<span id="cb1-422"><a href="kaist-model-with-tran.html#cb1-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-423"><a href="kaist-model-with-tran.html#cb1-423" aria-hidden="true" tabindex="-1"></a><span class="st">history interval 100</span></span>
+<span id="cb1-424"><a href="kaist-model-with-tran.html#cb1-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-425"><a href="kaist-model-with-tran.html#cb1-425" aria-hidden="true" tabindex="-1"></a><span class="st">zone history name &#39;disp&#39; displacement-y position (1,7.46,1)</span></span>
+<span id="cb1-426"><a href="kaist-model-with-tran.html#cb1-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-427"><a href="kaist-model-with-tran.html#cb1-427" aria-hidden="true" tabindex="-1"></a><span class="st">; find gridpoints of structure, store in map called cap</span></span>
+<span id="cb1-428"><a href="kaist-model-with-tran.html#cb1-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-429"><a href="kaist-model-with-tran.html#cb1-429" aria-hidden="true" tabindex="-1"></a><span class="st">fish define find_cap</span></span>
+<span id="cb1-430"><a href="kaist-model-with-tran.html#cb1-430" aria-hidden="true" tabindex="-1"></a><span class="st">    global cap = map</span></span>
+<span id="cb1-431"><a href="kaist-model-with-tran.html#cb1-431" aria-hidden="true" tabindex="-1"></a><span class="st">    loop foreach local zone zone.list</span></span>
+<span id="cb1-432"><a href="kaist-model-with-tran.html#cb1-432" aria-hidden="true" tabindex="-1"></a><span class="st">        if zone.isgroup(zone,&#39;topplate&#39;) then</span></span>
+<span id="cb1-433"><a href="kaist-model-with-tran.html#cb1-433" aria-hidden="true" tabindex="-1"></a><span class="st">            cap(zone.id(zone)) = zone</span></span>
+<span id="cb1-434"><a href="kaist-model-with-tran.html#cb1-434" aria-hidden="true" tabindex="-1"></a><span class="st">        endif</span></span>
+<span id="cb1-435"><a href="kaist-model-with-tran.html#cb1-435" aria-hidden="true" tabindex="-1"></a><span class="st">    endloop</span></span>
+<span id="cb1-436"><a href="kaist-model-with-tran.html#cb1-436" aria-hidden="true" tabindex="-1"></a><span class="st">end</span></span>
+<span id="cb1-437"><a href="kaist-model-with-tran.html#cb1-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-438"><a href="kaist-model-with-tran.html#cb1-438" aria-hidden="true" tabindex="-1"></a><span class="st">fish history name &#39;cap&#39; @find_cap</span></span>
+<span id="cb1-439"><a href="kaist-model-with-tran.html#cb1-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-440"><a href="kaist-model-with-tran.html#cb1-440" aria-hidden="true" tabindex="-1"></a><span class="st">fish define vert_load</span></span>
+<span id="cb1-441"><a href="kaist-model-with-tran.html#cb1-441" aria-hidden="true" tabindex="-1"></a><span class="st">    local yftot = 0.0</span></span>
+<span id="cb1-442"><a href="kaist-model-with-tran.html#cb1-442" aria-hidden="true" tabindex="-1"></a><span class="st">    loop foreach zone cap</span></span>
+<span id="cb1-443"><a href="kaist-model-with-tran.html#cb1-443" aria-hidden="true" tabindex="-1"></a><span class="st">        yftot = yftot + zone.stress.int(zone)</span></span>
+<span id="cb1-444"><a href="kaist-model-with-tran.html#cb1-444" aria-hidden="true" tabindex="-1"></a><span class="st">    end_loop</span></span>
+<span id="cb1-445"><a href="kaist-model-with-tran.html#cb1-445" aria-hidden="true" tabindex="-1"></a><span class="st">    vert_load = -yftot</span></span>
+<span id="cb1-446"><a href="kaist-model-with-tran.html#cb1-446" aria-hidden="true" tabindex="-1"></a><span class="st">end</span></span>
+<span id="cb1-447"><a href="kaist-model-with-tran.html#cb1-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-448"><a href="kaist-model-with-tran.html#cb1-448" aria-hidden="true" tabindex="-1"></a><span class="st">fish history name &#39;top_sum_stress&#39; @vert_load</span></span>
+<span id="cb1-449"><a href="kaist-model-with-tran.html#cb1-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-450"><a href="kaist-model-with-tran.html#cb1-450" aria-hidden="true" tabindex="-1"></a><span class="st">model largestrain true</span></span>
+<span id="cb1-451"><a href="kaist-model-with-tran.html#cb1-451" aria-hidden="true" tabindex="-1"></a><span class="st">model step 3000</span></span>
+<span id="cb1-452"><a href="kaist-model-with-tran.html#cb1-452" aria-hidden="true" tabindex="-1"></a><span class="st">model save &#39;vertical-loading&#39;</span></span>
+<span id="cb1-453"><a href="kaist-model-with-tran.html#cb1-453" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb1-454"><a href="kaist-model-with-tran.html#cb1-454" aria-hidden="true" tabindex="-1"></a>command <span class="op">=</span> command_zone.<span class="bu">format</span>(</span>
+<span id="cb1-455"><a href="kaist-model-with-tran.html#cb1-455" aria-hidden="true" tabindex="-1"></a>bulk_<span class="op">=</span>_bulk,</span>
+<span id="cb1-456"><a href="kaist-model-with-tran.html#cb1-456" aria-hidden="true" tabindex="-1"></a>shear_<span class="op">=</span>_shear,</span>
+<span id="cb1-457"><a href="kaist-model-with-tran.html#cb1-457" aria-hidden="true" tabindex="-1"></a>density_<span class="op">=</span>_density_concrete)</span>
+<span id="cb1-458"><a href="kaist-model-with-tran.html#cb1-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-459"><a href="kaist-model-with-tran.html#cb1-459" aria-hidden="true" tabindex="-1"></a>it.command(command)</span>
+<span id="cb1-460"><a href="kaist-model-with-tran.html#cb1-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-461"><a href="kaist-model-with-tran.html#cb1-461" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;               ======== PASSED VERTICAL LOADING ========&quot;</span>)</span></code></pre></div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="kaist-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/kyeongsunkim/mynewtest01-how-to-use.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

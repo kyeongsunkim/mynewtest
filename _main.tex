@@ -359,8 +359,8 @@ from so simple a beginning endless forms most beautiful and most
 wonderful have been, and are being, evolved.
 \qauthor{Charles Darwin(1809-1882)}\end{savequote}
 
-\hypertarget{kaist-model-2}{%
-\chapter{KAIST Model 2}\label{kaist-model-2}}
+\hypertarget{kaist-model-with-tran}{%
+\chapter{KAIST Model with Tran}\label{kaist-model-with-tran}}
 
 \hypertarget{initial-configuration}{%
 \section{Initial Configuration}\label{initial-configuration}}
@@ -372,6 +372,17 @@ wonderful have been, and are being, evolved.
 \includegraphics[width=1\linewidth]{myfigureeeeee/blocks}
 
 \includegraphics[width=1\linewidth]{myfigureeeeee/blocks2}
+
+\begin{figure}[H]
+\includegraphics[width=1\linewidth]{myfigureeeeee/coarse} \caption{Coarse Mesh}\label{fig:unnamed-chunk-6}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=1\linewidth]{myfigureeeeee/fine} \caption{Fine Mesh}\label{fig:unnamed-chunk-7}
+\end{figure}
+
+\hypertarget{code-block}{%
+\section{Code Block}\label{code-block}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -393,23 +404,23 @@ wonderful have been, and are being, evolved.
 \CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
 
 \CommentTok{\# Mesh Details}
-\NormalTok{\_radial }\OperatorTok{=} \DecValTok{10}
-\NormalTok{\_perimeter }\OperatorTok{=}\NormalTok{ \_radial}
-\NormalTok{\_axial }\OperatorTok{=}\NormalTok{ \_radial}
-\NormalTok{\_outer }\OperatorTok{=}\NormalTok{ \_radial}
+\NormalTok{\_radial }\OperatorTok{=} \DecValTok{5}
+\NormalTok{\_perimeter }\OperatorTok{=} \DecValTok{5}
+\NormalTok{\_axial }\OperatorTok{=} \DecValTok{10}
+\NormalTok{\_outer }\OperatorTok{=} \DecValTok{10}
 
 \CommentTok{\# Physical Constants}
 \NormalTok{\_gravity }\OperatorTok{=} \FloatTok{9.80665}
-\NormalTok{\_K }\OperatorTok{=} \FloatTok{0.318}
+\NormalTok{\_K }\OperatorTok{=} \FloatTok{0.318} \CommentTok{\# 1{-}sin(\textbackslash{}phi) (Jacky)}
 
 \CommentTok{\# Dimensions}
 \NormalTok{\_D\_shaft }\OperatorTok{=} \FloatTok{1.0}
 \NormalTok{\_H\_shaft }\OperatorTok{=} \FloatTok{7.45}
 \NormalTok{\_T\_plate }\OperatorTok{=} \FloatTok{1.5}
-\NormalTok{\_B\_footing }\OperatorTok{=} \FloatTok{3.25}
+\NormalTok{\_B\_footing }\OperatorTok{=} \FloatTok{3.25} \OperatorTok{+} \FloatTok{0.1}
 \NormalTok{\_D\_footing }\OperatorTok{=}\NormalTok{ \_H\_shaft }\OperatorTok{+}\NormalTok{ \_T\_plate}
 \NormalTok{\_B\_soil }\OperatorTok{=}\NormalTok{ \_B\_footing}\OperatorTok{*}\DecValTok{5}
-\NormalTok{\_D\_soil }\OperatorTok{=}\NormalTok{ \_D\_footing}\OperatorTok{+}\DecValTok{3}
+\NormalTok{\_D\_soil }\OperatorTok{=}\NormalTok{ \_D\_footing }\OperatorTok{+}\NormalTok{ \_B\_footing}\OperatorTok{*}\DecValTok{5}
 
 \CommentTok{\# Concrete Properties}
 \NormalTok{\_bulk }\OperatorTok{=} \FloatTok{4.1667e10}
@@ -422,7 +433,7 @@ wonderful have been, and are being, evolved.
 \NormalTok{\_poisson }\OperatorTok{=} \FloatTok{0.3}
 \NormalTok{\_density\_soil }\OperatorTok{=} \DecValTok{1530}
 \NormalTok{\_cohesion }\OperatorTok{=} \DecValTok{10}
-\NormalTok{\_friction }\OperatorTok{=} \DecValTok{43}
+\NormalTok{\_friction }\OperatorTok{=} \DecValTok{47}
 
 \CommentTok{\# Interface Properties}
 \NormalTok{\_stiff\_norm }\OperatorTok{=} \FloatTok{1e10}
@@ -432,69 +443,188 @@ wonderful have been, and are being, evolved.
 \CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\# ZONES \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
 \CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
 
+
 \NormalTok{command\_zone }\OperatorTok{=} \StringTok{"""}
+
+\StringTok{;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;}
+\StringTok{;;;;;;;;;;;;;;;;   Upper Plate    ;;;;;;;;;;;;;;;;;;;;;}
+\StringTok{;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;}
+
 \StringTok{model new}
 \StringTok{z crea r{-}c p 0 (0,0,0) ...}
 \StringTok{           p 1 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,0) ...}
-\StringTok{           p 2 (0,0,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{           p 2 (0,0,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
 \StringTok{           p 3 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,0) ...}
-\StringTok{           p 4 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
-\StringTok{           p 5 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{           p 4 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{           p 5 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
 \StringTok{           p 6 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,0) ...}
-\StringTok{           p 7 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{           p 7 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
 \StringTok{           p 8 (0,}\SpecialCharTok{\{D\_shaft\}}\StringTok{,0) ...}
 \StringTok{           p 9 (}\SpecialCharTok{\{D\_shaft\}}\StringTok{,0,0) ...}
-\StringTok{           p 10 (0,}\SpecialCharTok{\{D\_shaft\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
-\StringTok{           p 11 (}\SpecialCharTok{\{D\_shaft\}}\StringTok{,0,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
-\StringTok{           size }\SpecialCharTok{\{radial\}}\StringTok{ }\SpecialCharTok{\{axial\}}\StringTok{ 20 }\SpecialCharTok{\{outer\}}\StringTok{ ...}
-\StringTok{           rat 1 1 1 1 ...}
+\StringTok{           p 10 (0,}\SpecialCharTok{\{D\_shaft\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{           p 11 (}\SpecialCharTok{\{D\_shaft\}}\StringTok{,0,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{           size }\SpecialCharTok{\{radial\}}\StringTok{ 15 10 20 ...}
+\StringTok{           rat 1 0.8 1 1 ...}
 \StringTok{           fill}
 \StringTok{           }
 \StringTok{z crea b p 0 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,0) ...}
 \StringTok{         p 1 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,0) ...}
-\StringTok{         p 2 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 2 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
 \StringTok{         p 3 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,0) ...}
-\StringTok{         p 4 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
-\StringTok{         p 5 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 4 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         p 5 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
 \StringTok{         p 6 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,0) ...}
-\StringTok{         p 7 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
-\StringTok{         size }\SpecialCharTok{\{radial\}}\StringTok{ }\SpecialCharTok{\{axial\}}\StringTok{ }\SpecialCharTok{\{outer\}}\StringTok{ ...}
-\StringTok{         rat 1 1 1.4 ;blue}
+\StringTok{         p 7 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         size }\SpecialCharTok{\{radial\}}\StringTok{ 15 }\SpecialCharTok{\{outer\}}\StringTok{ ...}
+\StringTok{         rat 1 0.8 1.4 ;blue}
 
 \StringTok{z crea b p 0 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,0) ...}
 \StringTok{         p 1 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,0) ...}
-\StringTok{         p 2 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 2 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
 \StringTok{         p 3 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,0) ...}
-\StringTok{         p 4 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
-\StringTok{         p 5 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 4 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         p 5 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
 \StringTok{         p 6 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,0) ...}
-\StringTok{         p 7 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
-\StringTok{         size }\SpecialCharTok{\{radial\}}\StringTok{ }\SpecialCharTok{\{axial\}}\StringTok{ }\SpecialCharTok{\{outer\}}\StringTok{ ...}
-\StringTok{         rat 1.4 1 1.4}
+\StringTok{         p 7 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         size }\SpecialCharTok{\{radial\}}\StringTok{ 15 }\SpecialCharTok{\{outer\}}\StringTok{ ...}
+\StringTok{         rat 1.4 0.8 1.4}
 \StringTok{           }
 \StringTok{z crea b p 0 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,0) ...}
 \StringTok{         p 1 (0,}\SpecialCharTok{\{B\_soil\}}\StringTok{,0) ...}
-\StringTok{         p 2 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 2 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
 \StringTok{         p 3 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,0) ...}
+\StringTok{         p 4 (0,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         p 5 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         p 6 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,0) ...}
+\StringTok{         p 7 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         size }\SpecialCharTok{\{outer\}}\StringTok{ 15 }\SpecialCharTok{\{radial\}}\StringTok{ ...}
+\StringTok{         rat 1.4 0.8 1 ;purple}
+
+\StringTok{;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;}
+\StringTok{;;;;;;;;;;;;;;;;;;;;   Plate    ;;;;;;;;;;;;;;;;;;;;;;;}
+\StringTok{;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;}
+
+\StringTok{z crea r{-}c p 0 (0,0,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{           p 1 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{           p 2 (0,0,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{           p 3 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{           p 4 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{           p 5 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{           p 6 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{           p 7 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{           p 8 (0,}\SpecialCharTok{\{D\_shaft\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{           p 9 (}\SpecialCharTok{\{D\_shaft\}}\StringTok{,0,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{           p 10 (0,}\SpecialCharTok{\{D\_shaft\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{           p 11 (}\SpecialCharTok{\{D\_shaft\}}\StringTok{,0,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{           size }\SpecialCharTok{\{radial\}}\StringTok{ 4 10 20 ...}
+\StringTok{           rat 1 1 1 1 ...}
+\StringTok{           fill}
+\StringTok{           }
+\StringTok{z crea b p 0 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         p 1 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         p 2 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 3 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         p 4 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 5 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 6 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         p 7 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         size }\SpecialCharTok{\{radial\}}\StringTok{ 4 }\SpecialCharTok{\{outer\}}\StringTok{ ...}
+\StringTok{         rat 1 1 1.4 ;blue}
+
+\StringTok{z crea b p 0 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         p 1 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         p 2 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 3 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         p 4 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 5 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 6 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         p 7 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         size }\SpecialCharTok{\{radial\}}\StringTok{ 4 }\SpecialCharTok{\{outer\}}\StringTok{ ...}
+\StringTok{         rat 1.4 1 1.4}
+\StringTok{           }
+\StringTok{z crea b p 0 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         p 1 (0,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         p 2 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 3 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         p 4 (0,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 5 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 6 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{H\_shaft\}}\StringTok{) ...}
+\StringTok{         p 7 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         size }\SpecialCharTok{\{outer\}}\StringTok{ 4 }\SpecialCharTok{\{radial\}}\StringTok{ ...}
+\StringTok{         rat 1.4 1 1 ;purple}
+\StringTok{         }
+\StringTok{         }
+\StringTok{         }
+\StringTok{;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;}
+\StringTok{;;;;;;;;;;;;;;;   Down to Bottom    ;;;;;;;;;;;;;;;;;;;}
+\StringTok{;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;}
+
+\StringTok{z crea r{-}c p 0 (0,0,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{           p 1 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{           p 2 (0,0,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{           p 3 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{           p 4 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{           p 5 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{           p 6 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{           p 7 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{           p 8 (0,}\SpecialCharTok{\{D\_shaft\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{           p 9 (}\SpecialCharTok{\{D\_shaft\}}\StringTok{,0,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{           p 10 (0,}\SpecialCharTok{\{D\_shaft\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{           p 11 (}\SpecialCharTok{\{D\_shaft\}}\StringTok{,0,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{           size }\SpecialCharTok{\{radial\}}\StringTok{ 7 10 20 ...}
+\StringTok{           rat 1 1.4 1 1 ...}
+\StringTok{           fill}
+\StringTok{           }
+\StringTok{z crea b p 0 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 1 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 2 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,0,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 3 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 4 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 5 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,0,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 6 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 7 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         size }\SpecialCharTok{\{radial\}}\StringTok{ 7 }\SpecialCharTok{\{outer\}}\StringTok{ ...}
+\StringTok{         rat 1 1.4 1.4 ;blue}
+
+\StringTok{z crea b p 0 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 1 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 2 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 3 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 4 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 5 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 6 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 7 (}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         size }\SpecialCharTok{\{radial\}}\StringTok{ 7 }\SpecialCharTok{\{outer\}}\StringTok{ ...}
+\StringTok{         rat 1.4 1.4 1.4}
+\StringTok{           }
+\StringTok{z crea b p 0 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 1 (0,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
+\StringTok{         p 2 (0,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
+\StringTok{         p 3 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
 \StringTok{         p 4 (0,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
 \StringTok{         p 5 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
-\StringTok{         p 6 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,0) ...}
+\StringTok{         p 6 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_footing\}}\StringTok{) ...}
 \StringTok{         p 7 (}\SpecialCharTok{\{B\_footing\}}\StringTok{,}\SpecialCharTok{\{B\_soil\}}\StringTok{,}\SpecialCharTok{\{D\_soil\}}\StringTok{) ...}
-\StringTok{         size }\SpecialCharTok{\{radial\}}\StringTok{ }\SpecialCharTok{\{axial\}}\StringTok{ }\SpecialCharTok{\{outer\}}\StringTok{ ...}
-\StringTok{         rat 1.4 1 1 ;purple}
-\StringTok{           }
+\StringTok{         size }\SpecialCharTok{\{outer\}}\StringTok{ 7 }\SpecialCharTok{\{radial\}}\StringTok{ ...}
+\StringTok{         rat 1.4 1.4 1 ;purple}
+\StringTok{         }
 \StringTok{"""}
 \NormalTok{command }\OperatorTok{=}\NormalTok{ command\_zone.}\BuiltInTok{format}\NormalTok{(}
 \NormalTok{D\_shaft }\OperatorTok{=}\NormalTok{ \_D\_shaft,}
+\NormalTok{H\_shaft }\OperatorTok{=}\NormalTok{ \_H\_shaft,}
 \NormalTok{B\_footing }\OperatorTok{=}\NormalTok{ \_B\_footing,}
 \NormalTok{B\_soil }\OperatorTok{=}\NormalTok{ \_B\_soil,}
 \NormalTok{D\_soil }\OperatorTok{=}\NormalTok{ \_D\_soil,}
+\NormalTok{D\_footing }\OperatorTok{=}\NormalTok{ \_D\_footing,}
+\NormalTok{D\_soil2 }\OperatorTok{=}\NormalTok{ \_D\_soil2,}
 \NormalTok{radial}\OperatorTok{=}\NormalTok{\_radial,}
 \NormalTok{axial }\OperatorTok{=}\NormalTok{ \_axial,}
 \NormalTok{perimeter }\OperatorTok{=}\NormalTok{ \_perimeter,}
 \NormalTok{outer }\OperatorTok{=}\NormalTok{ \_outer)}
 
 \NormalTok{it.command(command)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED ZONES ========"}\NormalTok{)}
 
 \CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
 \CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\# GROUPS \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
@@ -512,6 +642,8 @@ wonderful have been, and are being, evolved.
 \BuiltInTok{print}\NormalTok{(it.zone.count(), }\StringTok{"zones in whole model"}\NormalTok{)}
 \BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"shaft"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{() }\OperatorTok{+}\NormalTok{ za.in\_group(}\StringTok{"plate"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in shaft+plate group."}\NormalTok{) }
 
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED GROUPS ========"}\NormalTok{)}
+
 \CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
 \CommentTok{\#\#\#\#\#\#\#\# CONSTITUTIVE MODEL \#\#\#\#\#\#\#\#\#\#\#\#}
 \CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
@@ -519,11 +651,18 @@ wonderful have been, and are being, evolved.
 \NormalTok{command\_zone }\OperatorTok{=} \StringTok{"""}
 \StringTok{zone cmodel assign mohr{-}coulomb range group ...}
 \StringTok{\textquotesingle{}Radial cylinder1\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}Radial cylinder9\textquotesingle{} or ...}
 \StringTok{\textquotesingle{}plate\textquotesingle{} or ...}
 \StringTok{\textquotesingle{}shaft\textquotesingle{} or ...}
 \StringTok{\textquotesingle{}brick2\textquotesingle{} or ...}
 \StringTok{\textquotesingle{}brick3\textquotesingle{} or ...}
-\StringTok{\textquotesingle{}brick4\textquotesingle{}}
+\StringTok{\textquotesingle{}brick4\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick6\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick7\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick8\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick10\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick11\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick12\textquotesingle{}}
 
 \StringTok{; assign soil properties}
 \StringTok{zone property young }\SpecialCharTok{\{E\_o\_\}}\StringTok{ ...}
@@ -542,13 +681,6 @@ wonderful have been, and are being, evolved.
 \StringTok{end\_loop}
 \StringTok{end}
 \StringTok{@fname(}\SpecialCharTok{\{E\_o\_\}}\StringTok{,}\SpecialCharTok{\{const\_\}}\StringTok{)}
-
-\StringTok{; assign concrete properties}
-\StringTok{zone cmodel assign elastic range group \textquotesingle{}shaft\textquotesingle{} or \textquotesingle{}plate\textquotesingle{}}
-\StringTok{zone property bulk }\SpecialCharTok{\{bulk\_\}}\StringTok{ ...}
-\StringTok{shear }\SpecialCharTok{\{shear\_\}}\StringTok{ ...}
-\StringTok{density }\SpecialCharTok{\{density\_\}}\StringTok{ range group \textquotesingle{}shaft\textquotesingle{} or \textquotesingle{}plate\textquotesingle{}}
-
 \StringTok{"""}
 \NormalTok{command }\OperatorTok{=}\NormalTok{ command\_zone.}\BuiltInTok{format}\NormalTok{(}
 \NormalTok{E\_o\_}\OperatorTok{=}\NormalTok{\_E\_o,}
@@ -562,6 +694,159 @@ wonderful have been, and are being, evolved.
 \NormalTok{density\_}\OperatorTok{=}\NormalTok{\_density\_concrete)}
 
 \NormalTok{it.command(command)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED CONSTITUTIVE MODEL ========"}\NormalTok{)}
+
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\# INTERFACE \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\NormalTok{command\_zone }\OperatorTok{=} \StringTok{"""}
+\StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} create by{-}face separate range group \textquotesingle{}plate\textquotesingle{} ...}
+\StringTok{group \textquotesingle{}Radial cylinder1\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick2\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick3\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick4\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick6\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick7\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick8\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick10\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick11\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick12\textquotesingle{}}
+
+\StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} create by{-}face separate range group \textquotesingle{}shaft\textquotesingle{} ...}
+\StringTok{group \textquotesingle{}Radial cylinder1\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick2\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick3\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick4\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick6\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick7\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick8\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick10\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick11\textquotesingle{} or ...}
+\StringTok{\textquotesingle{}brick12\textquotesingle{}}
+
+\StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} node property ...}
+\StringTok{stiffness{-}normal }\SpecialCharTok{\{stiff\_norm\_\}}\StringTok{ ...}
+\StringTok{stiffness{-}shear }\SpecialCharTok{\{stiff\_shear\_\}}\StringTok{ ...}
+\StringTok{friction }\SpecialCharTok{\{friction\_\}}\StringTok{ ...}
+\StringTok{cohesion }\SpecialCharTok{\{cohesion\_\}}
+
+\StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} node property ...}
+\StringTok{stiffness{-}normal }\SpecialCharTok{\{stiff\_norm\_\}}\StringTok{ ...}
+\StringTok{stiffness{-}shear }\SpecialCharTok{\{stiff\_shear\_\}}\StringTok{ ...}
+\StringTok{friction }\SpecialCharTok{\{friction\_\}}\StringTok{ ...}
+\StringTok{cohesion }\SpecialCharTok{\{cohesion\_\}}
+\StringTok{"""}
+\NormalTok{command }\OperatorTok{=}\NormalTok{ command\_zone.}\BuiltInTok{format}\NormalTok{(}
+\NormalTok{stiff\_norm\_}\OperatorTok{=}\NormalTok{\_stiff\_norm,}
+\NormalTok{stiff\_shear\_}\OperatorTok{=}\NormalTok{\_stiff\_shear,}
+\NormalTok{friction\_ }\OperatorTok{=}\NormalTok{ \_friction,}
+\NormalTok{cohesion\_ }\OperatorTok{=}\NormalTok{ \_cohesion)}
+
+\NormalTok{it.command(command)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED INTERFACE ========"}\NormalTok{)}
+
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\# BOUNDARY CONDITIONS \#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{zone face skin}
+\StringTok{;zone gridpoint fix velocity{-}x 0 ...}
+\StringTok{zone face apply velocity{-}normal 0 ...}
+\StringTok{range group \textquotesingle{}West2\textquotesingle{} or \textquotesingle{}East3\textquotesingle{}}
+
+\StringTok{;zone gridpoint fix velocity{-}y 0 ...}
+\StringTok{zone face apply velocity{-}normal 0 ...}
+\StringTok{range group \textquotesingle{}South3\textquotesingle{} or \textquotesingle{}North3\textquotesingle{}}
+
+\StringTok{zone gridpoint fix velocity (0,0,0) range group \textquotesingle{}Top2\textquotesingle{}}
+\StringTok{"""}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED BOUNDARY CONDITIONS ========"}\NormalTok{)}
+
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\# INITILIZE \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\NormalTok{it.command(}\StringTok{"""}
+\StringTok{model gravity 0 0 }\SpecialCharTok{\{gravity\_\}}
+\StringTok{zone initialize{-}stress ratio }\SpecialCharTok{\{K\_\}}
+\StringTok{zone interface \textquotesingle{}interface 1\textquotesingle{} node initialize{-}stresses}
+\StringTok{zone interface \textquotesingle{}interface 2\textquotesingle{} node initialize{-}stresses}
+\StringTok{zone ratio local}
+\StringTok{model solve ratio 1e{-}5}
+\StringTok{model save \textquotesingle{}initialization\textquotesingle{}}
+
+\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(gravity\_}\OperatorTok{=}\NormalTok{\_gravity, K\_ }\OperatorTok{=}\NormalTok{ \_K))}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED INITIAL EQUILIBRIUM ========"}\NormalTok{)}
+
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\# VERTICAL LOADING \#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+
+\NormalTok{top }\OperatorTok{=} \BuiltInTok{reduce}\NormalTok{(np.logical\_and, (np.sqrt(x}\OperatorTok{**}\DecValTok{2}\OperatorTok{+}\NormalTok{y}\OperatorTok{**}\DecValTok{2}\NormalTok{)}\OperatorTok{\textless{}}\NormalTok{\_D\_shaft, z}\OperatorTok{==}\NormalTok{np.amin(z)))}
+\NormalTok{za.set\_group(top, }\StringTok{"top"}\NormalTok{) }
+\BuiltInTok{print}\NormalTok{(za.in\_group(}\StringTok{"top"}\NormalTok{).}\BuiltInTok{sum}\NormalTok{(), }\StringTok{"zones in top group."}\NormalTok{) }
+
+\NormalTok{command\_zone }\OperatorTok{=}\StringTok{"""}
+
+\StringTok{; assign concrete properties}
+\StringTok{zone cmodel assign elastic range group \textquotesingle{}shaft\textquotesingle{} or \textquotesingle{}plate\textquotesingle{}}
+\StringTok{zone property bulk }\SpecialCharTok{\{bulk\_\}}\StringTok{ ...}
+\StringTok{shear }\SpecialCharTok{\{shear\_\}}\StringTok{ ...}
+\StringTok{density }\SpecialCharTok{\{density\_\}}\StringTok{ range group \textquotesingle{}shaft\textquotesingle{} or \textquotesingle{}plate\textquotesingle{}}
+
+\StringTok{zone initialize state 0}
+\StringTok{zone gridpoint initialize displacement (0,0,0)}
+\StringTok{zone gridpoint initialize velocity     (0,0,0) }
+
+\StringTok{; apply displacement to top}
+\StringTok{zone face apply velocity{-}normal 1e{-}5 range group \textquotesingle{}top\textquotesingle{}}
+
+\StringTok{history interval 100}
+
+\StringTok{zone history name \textquotesingle{}disp\textquotesingle{} displacement{-}y position (1,7.46,1)}
+
+\StringTok{; find gridpoints of structure, store in map called cap}
+
+\StringTok{fish define find\_cap}
+\StringTok{    global cap = map}
+\StringTok{    loop foreach local zone zone.list}
+\StringTok{        if zone.isgroup(zone,\textquotesingle{}topplate\textquotesingle{}) then}
+\StringTok{            cap(zone.id(zone)) = zone}
+\StringTok{        endif}
+\StringTok{    endloop}
+\StringTok{end}
+
+\StringTok{fish history name \textquotesingle{}cap\textquotesingle{} @find\_cap}
+
+\StringTok{fish define vert\_load}
+\StringTok{    local yftot = 0.0}
+\StringTok{    loop foreach zone cap}
+\StringTok{        yftot = yftot + zone.stress.int(zone)}
+\StringTok{    end\_loop}
+\StringTok{    vert\_load = {-}yftot}
+\StringTok{end}
+
+\StringTok{fish history name \textquotesingle{}top\_sum\_stress\textquotesingle{} @vert\_load}
+
+\StringTok{model largestrain true}
+\StringTok{model step 3000}
+\StringTok{model save \textquotesingle{}vertical{-}loading\textquotesingle{}}
+\StringTok{"""}
+\NormalTok{command }\OperatorTok{=}\NormalTok{ command\_zone.}\BuiltInTok{format}\NormalTok{(}
+\NormalTok{bulk\_}\OperatorTok{=}\NormalTok{\_bulk,}
+\NormalTok{shear\_}\OperatorTok{=}\NormalTok{\_shear,}
+\NormalTok{density\_}\OperatorTok{=}\NormalTok{\_density\_concrete)}
+
+\NormalTok{it.command(command)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"               ======== PASSED VERTICAL LOADING ========"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3067,7 +3352,7 @@ contact with zone surface faces that are not part of the interface
 itself.
 
 \begin{figure}[H]
-\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-95}
+\includegraphics[width=1\linewidth]{myfigureeeeee/k} \caption{Code chunk syntax}\label{fig:unnamed-chunk-97}
 \end{figure}
 
 Every reference to an interface uses a name (like the table command) to
