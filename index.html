@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>FLAC3D Gitbook</title>
-  <meta name="description" content="FLAC3D Gitbook" />
+  <title>Uplift Resistance of Anchor Plate Using Extended Mohr-Coulomb Model</title>
+  <meta name="description" content="Uplift Resistance of Anchor Plate Using Extended Mohr-Coulomb Model" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="FLAC3D Gitbook" />
+  <meta property="og:title" content="Uplift Resistance of Anchor Plate Using Extended Mohr-Coulomb Model" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="FLAC3D Gitbook" />
+  <meta name="twitter:title" content="Uplift Resistance of Anchor Plate Using Extended Mohr-Coulomb Model" />
   
   
   
@@ -31,7 +31,7 @@
   
   
 
-<link rel="next" href="kaist-model-with-tran.html"/>
+<link rel="next" href="constitutive-model.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,73 +52,8 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 
 <link rel="stylesheet" href="templates/style.css" type="text/css" />
@@ -135,132 +70,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
-<li class="chapter" data-level="1" data-path="kaist-model-with-tran.html"><a href="kaist-model-with-tran.html"><i class="fa fa-check"></i><b>1</b> KAIST Model with Tran</a>
+<li class="chapter" data-level="1" data-path="constitutive-model.html"><a href="constitutive-model.html"><i class="fa fa-check"></i><b>1</b> Constitutive Model</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="kaist-model-with-tran.html"><a href="kaist-model-with-tran.html#initial-configuration"><i class="fa fa-check"></i><b>1.1</b> Initial Configuration</a></li>
-<li class="chapter" data-level="1.2" data-path="kaist-model-with-tran.html"><a href="kaist-model-with-tran.html#code-block"><i class="fa fa-check"></i><b>1.2</b> Code Block</a></li>
+<li class="chapter" data-level="1.1" data-path="constitutive-model.html"><a href="constitutive-model.html#strainsoftening-stiffnesshardening-model"><i class="fa fa-check"></i><b>1.1</b> Strain—Softening Stiffness—Hardening Model</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="constitutive-model.html"><a href="constitutive-model.html#yield-function"><i class="fa fa-check"></i><b>1.1.1</b> Yield function</a></li>
+<li class="chapter" data-level="1.1.2" data-path="constitutive-model.html"><a href="constitutive-model.html#plastic-potential-function"><i class="fa fa-check"></i><b>1.1.2</b> Plastic potential function</a></li>
+<li class="chapter" data-level="1.1.3" data-path="constitutive-model.html"><a href="constitutive-model.html#hardening-function"><i class="fa fa-check"></i><b>1.1.3</b> Hardening function</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="kaist-model.html"><a href="kaist-model.html"><i class="fa fa-check"></i><b>2</b> KAIST Model</a>
+<li class="chapter" data-level="1.2" data-path="constitutive-model.html"><a href="constitutive-model.html#nonassociated-flow-rule-na"><i class="fa fa-check"></i><b>1.2</b> Nonassociated Flow Rule (NA)</a></li>
+<li class="chapter" data-level="1.3" data-path="constitutive-model.html"><a href="constitutive-model.html#extended-mohrcoulomb-model-emc"><i class="fa fa-check"></i><b>1.3</b> Extended Mohr—Coulomb Model (EMC)</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="kaist-model.html"><a href="kaist-model.html#initial-configuration-1"><i class="fa fa-check"></i><b>2.1</b> Initial Configuration</a></li>
-<li class="chapter" data-level="2.2" data-path="kaist-model.html"><a href="kaist-model.html#zones"><i class="fa fa-check"></i><b>2.2</b> Zones</a></li>
-<li class="chapter" data-level="2.3" data-path="kaist-model.html"><a href="kaist-model.html#constitutive-model"><i class="fa fa-check"></i><b>2.3</b> Constitutive Model</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="kaist-model.html"><a href="kaist-model.html#elastic-isotropic-model"><i class="fa fa-check"></i><b>2.3.1</b> Elastic (Isotropic) model</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="kaist-model.html"><a href="kaist-model.html#interface"><i class="fa fa-check"></i><b>2.4</b> Interface</a></li>
-<li class="chapter" data-level="2.5" data-path="kaist-model.html"><a href="kaist-model.html#boundary-conditions"><i class="fa fa-check"></i><b>2.5</b> Boundary Conditions</a></li>
-<li class="chapter" data-level="2.6" data-path="kaist-model.html"><a href="kaist-model.html#initial-equilibrium"><i class="fa fa-check"></i><b>2.6</b> Initial Equilibrium</a></li>
-<li class="chapter" data-level="2.7" data-path="kaist-model.html"><a href="kaist-model.html#vertical-loading"><i class="fa fa-check"></i><b>2.7</b> Vertical Loading</a></li>
-<li class="chapter" data-level="2.8" data-path="kaist-model.html"><a href="kaist-model.html#plot"><i class="fa fa-check"></i><b>2.8</b> Plot</a></li>
-<li class="chapter" data-level="2.9" data-path="kaist-model.html"><a href="kaist-model.html#results"><i class="fa fa-check"></i><b>2.9</b> Results</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html"><i class="fa fa-check"></i><b>3</b> Axial Concrete Pile</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#problem-description"><i class="fa fa-check"></i><b>3.1</b> Problem Description</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#problem-statement"><i class="fa fa-check"></i><b>3.1.1</b> Problem Statement</a></li>
-<li class="chapter" data-level="3.1.2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#main-parameters"><i class="fa fa-check"></i><b>3.1.2</b> Main Parameters</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#modeling-procedure"><i class="fa fa-check"></i><b>3.2</b> Modeling Procedure</a></li>
-<li class="chapter" data-level="3.3" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#zones-1"><i class="fa fa-check"></i><b>3.3</b> Zones</a></li>
-<li class="chapter" data-level="3.4" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#groups"><i class="fa fa-check"></i><b>3.4</b> Groups</a></li>
-<li class="chapter" data-level="3.5" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#properties"><i class="fa fa-check"></i><b>3.5</b> Properties</a></li>
-<li class="chapter" data-level="3.6" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#b.c.-and-i.c."><i class="fa fa-check"></i><b>3.6</b> B.C. and I.C.</a></li>
-<li class="chapter" data-level="3.7" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#initial-equilibrium-1"><i class="fa fa-check"></i><b>3.7</b> Initial Equilibrium</a></li>
-<li class="chapter" data-level="3.8" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#alterations"><i class="fa fa-check"></i><b>3.8</b> Alterations</a>
-<ul>
-<li class="chapter" data-level="3.8.1" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#install-the-pile"><i class="fa fa-check"></i><b>3.8.1</b> install the pile</a></li>
-<li class="chapter" data-level="3.8.2" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#vertical-loading-1"><i class="fa fa-check"></i><b>3.8.2</b> vertical loading</a></li>
-<li class="chapter" data-level="3.8.3" data-path="axial-concrete-pile.html"><a href="axial-concrete-pile.html#vertical-then-lateral-loading"><i class="fa fa-check"></i><b>3.8.3</b> vertical then lateral loading</a></li>
+<li class="chapter" data-level="1.3.1" data-path="constitutive-model.html"><a href="constitutive-model.html#comparison-between-associated-and-non-associated-flow-rule-in-plastic-model"><i class="fa fa-check"></i><b>1.3.1</b> Comparison between associated and non-associated flow rule in plastic model</a></li>
+<li class="chapter" data-level="1.3.2" data-path="constitutive-model.html"><a href="constitutive-model.html#yield-function-1"><i class="fa fa-check"></i><b>1.3.2</b> Yield function</a></li>
+<li class="chapter" data-level="1.3.3" data-path="constitutive-model.html"><a href="constitutive-model.html#plastic-potential-function-1"><i class="fa fa-check"></i><b>1.3.3</b> Plastic potential function</a></li>
+<li class="chapter" data-level="1.3.4" data-path="constitutive-model.html"><a href="constitutive-model.html#flow-rule"><i class="fa fa-check"></i><b>1.3.4</b> Flow rule</a></li>
+<li class="chapter" data-level="1.3.5" data-path="constitutive-model.html"><a href="constitutive-model.html#hardening"><i class="fa fa-check"></i><b>1.3.5</b> Hardening</a></li>
+<li class="chapter" data-level="1.3.6" data-path="constitutive-model.html"><a href="constitutive-model.html#soil-parameters"><i class="fa fa-check"></i><b>1.3.6</b> Soil Parameters</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="pull-tests.html"><a href="pull-tests.html"><i class="fa fa-check"></i><b>4</b> Pull-Tests</a>
+<li class="chapter" data-level="2" data-path="calibration.html"><a href="calibration.html"><i class="fa fa-check"></i><b>2</b> Calibration and Validation</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="pull-tests.html"><a href="pull-tests.html#problem-description-1"><i class="fa fa-check"></i><b>4.1</b> Problem Description</a></li>
-<li class="chapter" data-level="4.2" data-path="pull-tests.html"><a href="pull-tests.html#zones-2"><i class="fa fa-check"></i><b>4.2</b> Zones</a></li>
-<li class="chapter" data-level="4.3" data-path="pull-tests.html"><a href="pull-tests.html#properties-1"><i class="fa fa-check"></i><b>4.3</b> Properties</a></li>
-<li class="chapter" data-level="4.4" data-path="pull-tests.html"><a href="pull-tests.html#initial-equilibrium-2"><i class="fa fa-check"></i><b>4.4</b> Initial Equilibrium</a></li>
-<li class="chapter" data-level="4.5" data-path="pull-tests.html"><a href="pull-tests.html#alterations-1"><i class="fa fa-check"></i><b>4.5</b> Alterations</a></li>
-<li class="chapter" data-level="4.6" data-path="pull-tests.html"><a href="pull-tests.html#some-other-notes"><i class="fa fa-check"></i><b>4.6</b> Some other notes</a></li>
+<li class="chapter" data-level="2.1" data-path="calibration.html"><a href="calibration.html#drained-triaxial-test"><i class="fa fa-check"></i><b>2.1</b> Drained Triaxial Test</a></li>
+<li class="chapter" data-level="2.2" data-path="calibration.html"><a href="calibration.html#soil-parameters-1"><i class="fa fa-check"></i><b>2.2</b> Soil Parameters</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="calibration.html"><a href="calibration.html#strainsoftening-stiffnesshardening-model-1"><i class="fa fa-check"></i><b>2.2.1</b> Strain—Softening Stiffness—Hardening Model</a></li>
+<li class="chapter" data-level="2.2.2" data-path="calibration.html"><a href="calibration.html#nonassociated-flow-rule-na-1"><i class="fa fa-check"></i><b>2.2.2</b> Nonassociated Flow Rule (NA)</a></li>
+<li class="chapter" data-level="2.2.3" data-path="calibration.html"><a href="calibration.html#extended-mohrcoulomb-model-emc-1"><i class="fa fa-check"></i><b>2.2.3</b> Extended Mohr—Coulomb Model (EMC)</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="grid.html"><a href="grid.html"><i class="fa fa-check"></i><b>5</b> Grid</a>
+<li class="chapter" data-level="2.3" data-path="calibration.html"><a href="calibration.html#convergence-criteria"><i class="fa fa-check"></i><b>2.3</b> Convergence Criteria</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="grid.html"><a href="grid.html#primitive-shapes"><i class="fa fa-check"></i><b>5.1</b> Primitive Shapes</a></li>
-<li class="chapter" data-level="5.2" data-path="grid.html"><a href="grid.html#several-primitive-shapes-connected"><i class="fa fa-check"></i><b>5.2</b> several primitive shapes connected:</a></li>
-<li class="chapter" data-level="5.3" data-path="grid.html"><a href="grid.html#structural-element-operation"><i class="fa fa-check"></i><b>5.3</b> Structural Element Operation</a></li>
-<li class="chapter" data-level="5.4" data-path="grid.html"><a href="grid.html#densifying-grid-by-specifying-max-size-length"><i class="fa fa-check"></i><b>5.4</b> Densifying grid by specifying max size length</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="grid.html"><a href="grid.html#densify-a-grid-using-geometric-information"><i class="fa fa-check"></i><b>5.4.1</b> Densify a grid using geometric information</a></li>
+<li class="chapter" data-level="2.3.1" data-path="calibration.html"><a href="calibration.html#mesh-convergence"><i class="fa fa-check"></i><b>2.3.1</b> Mesh Convergence</a></li>
+<li class="chapter" data-level="2.3.2" data-path="calibration.html"><a href="calibration.html#boundary-convergence"><i class="fa fa-check"></i><b>2.3.2</b> Boundary Convergence</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html"><i class="fa fa-check"></i><b>6</b> Syntax and Grammar</a>
+<li class="chapter" data-level="3" data-path="result.html"><a href="result.html"><i class="fa fa-check"></i><b>3</b> Results</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
-<li class="chapter" data-level="6.2" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#zones-3"><i class="fa fa-check"></i><b>6.2</b> Zones</a></li>
-<li class="chapter" data-level="6.3" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#properties-2"><i class="fa fa-check"></i><b>6.3</b> Properties</a></li>
-<li class="chapter" data-level="6.4" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#gridpoints"><i class="fa fa-check"></i><b>6.4</b> Gridpoints</a></li>
-<li class="chapter" data-level="6.5" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#structural-elements"><i class="fa fa-check"></i><b>6.5</b> Structural Elements</a></li>
-<li class="chapter" data-level="6.6" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#extra-variables"><i class="fa fa-check"></i><b>6.6</b> Extra Variables</a></li>
-<li class="chapter" data-level="6.7" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#groups-and-b.c."><i class="fa fa-check"></i><b>6.7</b> Groups and B.C.</a></li>
-<li class="chapter" data-level="6.8" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#parameteric-studies"><i class="fa fa-check"></i><b>6.8</b> Parameteric Studies</a></li>
-<li class="chapter" data-level="6.9" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#results-1"><i class="fa fa-check"></i><b>6.9</b> Results</a>
+<li class="chapter" data-level="3.1" data-path="result.html"><a href="result.html#parametric-study"><i class="fa fa-check"></i><b>3.1</b> Parametric Study</a>
 <ul>
-<li class="chapter" data-level="6.9.1" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#measuring-time-of-calculation"><i class="fa fa-check"></i><b>6.9.1</b> Measuring time of calculation</a></li>
+<li class="chapter" data-level="3.1.1" data-path="result.html"><a href="result.html#effect-of-embedment-depth-ratio-fracdb"><i class="fa fa-check"></i><b>3.1.1</b> Effect of Embedment Depth Ratio <span class="math inline">\(\frac{D}{B}\)</span></a></li>
+<li class="chapter" data-level="3.1.2" data-path="result.html"><a href="result.html#effect-of-width-b"><i class="fa fa-check"></i><b>3.1.2</b> Effect of Width <span class="math inline">\(B\)</span></a></li>
+<li class="chapter" data-level="3.1.3" data-path="result.html"><a href="result.html#shear-dissipation"><i class="fa fa-check"></i><b>3.1.3</b> Shear Dissipation</a></li>
 </ul></li>
-<li class="chapter" data-level="6.10" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#setting-fish-variables"><i class="fa fa-check"></i><b>6.10</b> Setting FISH variables</a>
+<li class="chapter" data-level="3.2" data-path="result.html"><a href="result.html#comparison-with-previous-researchers"><i class="fa fa-check"></i><b>3.2</b> Comparison with Previous Researchers</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="comparison-with-centrifuge-experiment.html"><a href="comparison-with-centrifuge-experiment.html"><i class="fa fa-check"></i><b>4</b> Comparison with Centrifuge Experiment</a>
 <ul>
-<li class="chapter" data-level="6.10.1" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#issuing-command"><i class="fa fa-check"></i><b>6.10.1</b> Issuing Command</a></li>
+<li class="chapter" data-level="4.1" data-path="comparison-with-centrifuge-experiment.html"><a href="comparison-with-centrifuge-experiment.html#comparison-of-the-centrifuge-test-results-with-the-chosen-model"><i class="fa fa-check"></i><b>4.1</b> Comparison of the centrifuge test results with the chosen model</a></li>
+<li class="chapter" data-level="4.2" data-path="comparison-with-centrifuge-experiment.html"><a href="comparison-with-centrifuge-experiment.html#difference-with-the-anchor-theory"><i class="fa fa-check"></i><b>4.2</b> Difference with the anchor theory</a></li>
 </ul></li>
-<li class="chapter" data-level="6.11" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#string"><i class="fa fa-check"></i><b>6.11</b> String</a></li>
-<li class="chapter" data-level="6.12" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#fish-syntax"><i class="fa fa-check"></i><b>6.12</b> Fish Syntax</a>
-<ul>
-<li class="chapter" data-level="6.12.1" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#use-of"><i class="fa fa-check"></i><b>6.12.1</b> Use of (…)</a></li>
-<li class="chapter" data-level="6.12.2" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#variable-types"><i class="fa fa-check"></i><b>6.12.2</b> Variable Types</a></li>
-<li class="chapter" data-level="6.12.3" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#traditional-for-loop-in-fish"><i class="fa fa-check"></i><b>6.12.3</b> Traditional for loop in FISH</a></li>
-<li class="chapter" data-level="6.12.4" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#if-else-endif-construct"><i class="fa fa-check"></i><b>6.12.4</b> if else endif construct</a></li>
-<li class="chapter" data-level="6.12.5" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#arrays-and-maps"><i class="fa fa-check"></i><b>6.12.5</b> Arrays and Maps</a></li>
-<li class="chapter" data-level="6.12.6" data-path="syntax-and-grammar.html"><a href="syntax-and-grammar.html#fish-function"><i class="fa fa-check"></i><b>6.12.6</b> Fish Function</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="theory.html"><a href="theory.html"><i class="fa fa-check"></i><b>7</b> Theory</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="theory.html"><a href="theory.html#structural-elements-1"><i class="fa fa-check"></i><b>7.1</b> Structural Elements</a>
-<ul>
-<li class="chapter" data-level="7.1.1" data-path="theory.html"><a href="theory.html#types-of-sel"><i class="fa fa-check"></i><b>7.1.1</b> Types of SEL</a></li>
-<li class="chapter" data-level="7.1.2" data-path="theory.html"><a href="theory.html#joining-sel-to-one-another"><i class="fa fa-check"></i><b>7.1.2</b> Joining SEL to one another</a></li>
-</ul></li>
-<li class="chapter" data-level="7.2" data-path="theory.html"><a href="theory.html#interface-1"><i class="fa fa-check"></i><b>7.2</b> Interface</a></li>
-<li class="chapter" data-level="7.3" data-path="theory.html"><a href="theory.html#formulation"><i class="fa fa-check"></i><b>7.3</b> Formulation</a></li>
-<li class="chapter" data-level="7.4" data-path="theory.html"><a href="theory.html#creation-of-interface-geometry"><i class="fa fa-check"></i><b>7.4</b> Creation of Interface Geometry</a></li>
-<li class="chapter" data-level="7.5" data-path="theory.html"><a href="theory.html#typical-properties"><i class="fa fa-check"></i><b>7.5</b> Typical Properties</a>
-<ul>
-<li class="chapter" data-level="7.5.1" data-path="theory.html"><a href="theory.html#shear-dilatancy"><i class="fa fa-check"></i><b>7.5.1</b> Shear Dilatancy</a></li>
-<li class="chapter" data-level="7.5.2" data-path="theory.html"><a href="theory.html#compression-test-on-strain-softening-material"><i class="fa fa-check"></i><b>7.5.2</b> Compression Test on strain-softening material</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="command.html"><a href="command.html"><i class="fa fa-check"></i><b>8</b> Command</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="command.html"><a href="command.html#interface-2"><i class="fa fa-check"></i><b>8.1</b> Interface</a>
-<ul>
-<li class="chapter" data-level="8.1.1" data-path="command.html"><a href="command.html#zone-face-group"><i class="fa fa-check"></i><b>8.1.1</b> zone face group</a></li>
-<li class="chapter" data-level="8.1.2" data-path="command.html"><a href="command.html#zone-face-skin"><i class="fa fa-check"></i><b>8.1.2</b> zone face skin</a></li>
-<li class="chapter" data-level="8.1.3" data-path="command.html"><a href="command.html#zone-separate"><i class="fa fa-check"></i><b>8.1.3</b> zone separate</a></li>
-<li class="chapter" data-level="8.1.4" data-path="command.html"><a href="command.html#zone-interface-create"><i class="fa fa-check"></i><b>8.1.4</b> zone interface create</a></li>
-<li class="chapter" data-level="8.1.5" data-path="command.html"><a href="command.html#range"><i class="fa fa-check"></i><b>8.1.5</b> range</a></li>
-</ul></li>
-<li class="chapter" data-level="8.2" data-path="command.html"><a href="command.html#define-fish-functions"><i class="fa fa-check"></i><b>8.2</b> Define Fish functions</a></li>
-<li class="chapter" data-level="8.3" data-path="command.html"><a href="command.html#some-code"><i class="fa fa-check"></i><b>8.3</b> Some Code</a></li>
-<li class="chapter" data-level="8.4" data-path="command.html"><a href="command.html#interface-3"><i class="fa fa-check"></i><b>8.4</b> Interface</a>
-<ul>
-<li class="chapter" data-level="8.4.1" data-path="command.html"><a href="command.html#penetration"><i class="fa fa-check"></i><b>8.4.1</b> Penetration</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="kaist-model-code-for-recovery.html"><a href="kaist-model-code-for-recovery.html"><i class="fa fa-check"></i><b>9</b> KAIST Model Code for Recovery</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="kaist-model-code-for-recovery.html"><a href="kaist-model-code-for-recovery.html#version-16"><i class="fa fa-check"></i><b>9.1</b> version 16</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"><a href="simulation-of-pull-tests-for-fully-bonded-rock-reinforcement.html"><i class="fa fa-check"></i><b>10</b> Simulation of Pull-Tests for Fully Bonded Rock Reinforcement</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="list-of-loaddisplacement-curves.html"><a href="list-of-loaddisplacement-curves.html"><i class="fa fa-check"></i><b>A</b> List of Load—Displacement Curves</a></li>
+<li class="chapter" data-level="" data-path="references-references.html"><a href="references-references.html"><i class="fa fa-check"></i>(REFERENCES) References</a></li>
+<li class="chapter" data-level="B" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>B</b> REFERENCES</a></li>
 </ul>
 
       </nav>
@@ -270,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><p><code>FLAC3D</code> Gitbook</p></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><p>Uplift Resistance of Anchor Plate Using Extended Mohr-Coulomb Model</p></a>
           </h1>
         </div>
 
@@ -279,16 +141,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title"><p><code>FLAC3D</code> Gitbook</p></h1>
+<h1 class="title"><p>Uplift Resistance of Anchor Plate Using Extended Mohr-Coulomb Model</p></h1>
 <p class="author"><em>Kyeong Sun Kim</em></p>
 </div>
 <div id="welcome" class="section level1 unnumbered">
 <h1>Welcome</h1>
 <div class="row">
 <div class="col-sm-6">
-<p>to my <em>BS4</em> knit output from <code>FLAC3D</code><a href="https://github.com/kyeongsunkim/mynewtest">Gitbook</a> by <a href="https://rmarkdown.rstudio.com">R Markdown</a>, using <em>bookdown</em> <a href="https://www.rstudio.com/"><em>R package</em></a>.<br />
-<br />
-The purpose is to extend the capability of organizing the codes learnt from the <code>FLAC3D</code> Manual.<br />
+<p>to my <em>BS4</em> knit output from by <a href="https://rmarkdown.rstudio.com">R Markdown</a>, using <em>bookdown</em> <a href="https://www.rstudio.com/"><em>R package</em></a>.<br />
 <br />
 For <a href="_main.pdf"><em>PDF</em></a> file, <a href="_main.pdf"><em>download</em></a> the cover image below.<br />
 <br />
@@ -296,7 +156,7 @@ For <a href="_main.docx"><em>Word</em></a> file, click <a href="_main.docx"><em>
 </p>
 <div class="byline">
 <p>Kyeong Sun Kim<br />
-September 2021<br />
+November 2021<br />
 Seoul National University</p>
 </div>
 </div>
@@ -305,7 +165,12 @@ Seoul National University</p>
 </div>
 </div>
 
-<div style="page-break-after: always;"></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
+<img src="myfigureeeeee/paper%20outline.png" alt="Paper Outline" width="100%" />
+<p class="caption">
+Figure 0.1: Paper Outline
+</p>
+</div>
 </div>
             </section>
 
@@ -313,7 +178,7 @@ Seoul National University</p>
         </div>
       </div>
 
-<a href="kaist-model-with-tran.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="constitutive-model.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -345,8 +210,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/kyeongsunkim/mynewtestindex.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
